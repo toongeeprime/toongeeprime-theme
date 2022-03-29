@@ -1,0 +1,97 @@
+/**
+ *	ToongeePrime Theme Login Page CSS
+ *
+ *	@package WordPress
+ *	@since ToongeePrime Theme 1.0
+ */
+
+/**************************
+ *	General Things
+ **************************/
+#login h1 a,.login h1 a{
+	background-image:url('../images/login-logo.png')!important;
+}
+
+/* login button */
+/* retina login logo */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+#login h1 a,.login h1 a{
+	background-image:url('../images/login-logo-2.png')/*Should be 2x the size*/ no-repeat top center;}
+}
+
+body{
+	background-image:url('../images/login-bg.jpg');
+}
+
+
+#jetpack_protect_answer{
+	width:50px;
+}
+
+
+
+/**************************
+ *	Specific Things
+ **************************/
+a,.login label{font-size:15px;}
+
+#login h1 a,.login h1 a{
+	background:no-repeat center;
+	color:#fff;width:100%;height:100px;text-indent:-9999px;
+	overflow:hidden;padding-bottom:15px;display:block;
+}
+#login{
+	width:90%;max-width:450px;padding:25px;
+	background:rgba(255,255,255,0.9);
+	align-self:center;
+}
+.login form{
+	margin:0;padding:10px;border:0;
+	font-weight:normal;background:none;
+	box-shadow:none;
+}
+
+.login .button.wp-hide-pw{
+	height:55px;top:5px;
+}
+#login .button-primary{
+	font-size:16px;padding:1px 30px;border-radius:0;
+}
+
+.login form .forgetmenot{
+	float:none;margin:10px 0;
+}
+#login form p{margin-bottom:10px;}
+
+.login #backtoblog,.login #nav{
+	padding:0;text-align:center;
+}
+.login .privacy-policy-page-link{
+	margin:2.5em 0 1em;
+}
+body #login form .input{
+	font-family: "Montserrat","Arial",sans-serif;
+	border-radius:0;padding:10px 20px;
+	box-shadow:0 5px 5px rgba(0,0,0,0.1);transition:0.1s;
+	font-weight:200;width:100%;
+	margin-top:5px;
+	margin-right:6px;margin-bottom:16px;
+	border:1px solid #ddd;
+	background:#fff;outline:none;
+}
+body #login .input:hover,body #login .input:focus{
+	box-shadow:0 7px 12px rgba(0,0,0,0.2);
+}
+
+body{
+	background-color:#fff;display:grid;
+}
+
+
+@media(max-width:820px){
+#login h1 a,.login h1 a{background-size:contain;}
+}
+
+
