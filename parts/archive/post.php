@@ -9,6 +9,8 @@
 
 get_header();
 
+echo '<section id="archive_loop" class="grid">';
+
 	// Load posts loop
 	while ( have_posts() ) {
 
@@ -17,6 +19,8 @@ get_header();
 		prime2g_archive_loop();
 
 	}
+
+echo '</section>';
 
 	// Prev/next page navigation
 	prime2g_prev_next();

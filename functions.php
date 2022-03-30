@@ -14,6 +14,8 @@ define( 'PRIME2G_THEME', get_template_directory() . '/' );
 define( 'PRIME2G_PARTS', PRIME2G_THEME . 'parts/' );
 define( 'PRIME2G_SINGULAR', PRIME2G_PARTS . 'singular/' );
 define( 'PRIME2G_ARCHIVE', PRIME2G_PARTS . 'archive/' );
+define( 'CHILD2G_SINGULAR', get_stylesheet_directory() . '/parts/singular/' );
+define( 'CHILD2G_ARCHIVE', get_stylesheet_directory() . '/parts/archive/' );
 
 
 /**

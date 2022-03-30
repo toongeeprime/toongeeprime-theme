@@ -13,7 +13,7 @@ if ( is_singular() ) {
 
 	if ( have_posts() ) {
 
-		$file = PRIME2G_SINGULAR . get_post_type() . '.php';
+		$file	=	prime2g_singular_template();
 
 		if ( file_exists( $file ) ) {
 			require $file;
@@ -31,7 +31,7 @@ elseif ( is_archive() || is_home() ) {
 
 	if ( have_posts() ) {
 
-		$file = PRIME2G_ARCHIVE . get_post_type() . '.php';
+		$file	=	prime2g_archive_template();
 
 		if ( file_exists( $file ) ) {
 			require $file;
@@ -57,17 +57,13 @@ else {
 
 		// Load posts loop
 		while ( have_posts() ) {
-
 			the_post();
 			the_content();
-
 		}
 
 	}
 	else {
-
 		echo '<h3 style="text-align:center;margin:90px 30px;">Sorry, nothing to display here!</h3>';
-
 	}
 
 	prime2g_below_posts_widgets();

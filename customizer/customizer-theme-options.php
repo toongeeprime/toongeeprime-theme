@@ -217,6 +217,31 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	);
 
 
+	/**
+	 *	SHUT DOWN WEBSITE
+	 */
+	$wp_customize->add_setting(
+		'prime2g_website_shutdown',
+		array(
+			'type'				=>	'theme_mod',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_website_shutdown',
+		array(
+			'label'		=>	__( 'Shut Down Website?', 'toongeeprime-theme' ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_website_shutdown',
+			'section'	=>	'prime2g_theme_options_section',
+			'choices'	=>	array(
+				''	=>	__( '-- Website is live --', 'toongeeprime-theme' ),
+				'maintenance'	=>	__( 'Set to Maintenance Mode', 'toongeeprime-theme' ),
+				'coming_soon'	=>	__( 'Set to Coming Soon Mode', 'toongeeprime-theme' )
+			),
+		)
+	);
+
+
 }
 
 }

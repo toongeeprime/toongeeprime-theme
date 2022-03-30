@@ -17,3 +17,38 @@ function prime2g_removeSidebar() {
 
 }
 
+
+/**
+ *	Get Singular Template
+ */
+function prime2g_singular_template( $format = '' ) {
+
+	if ( is_child_theme() ) {
+		return CHILD2G_SINGULAR . get_post_type() . $format . '.php';
+	}
+	else {
+		return PRIME2G_SINGULAR . get_post_type() . $format . '.php';
+	}
+
+}
+
+
+
+/**
+ *	Get Archive Template
+ */
+function prime2g_archive_template( $format = '' ) {
+
+	if ( is_child_theme() ) {
+		return CHILD2G_ARCHIVE . get_post_type() . $format . '.php';
+	}
+	else {
+		return PRIME2G_ARCHIVE . get_post_type() . $format . '.php';
+	}
+
+}
+
+
+
+
+
