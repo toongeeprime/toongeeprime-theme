@@ -17,7 +17,7 @@ A WordPress theme with options for customization in the WordPress Customizer
 - Most functions are pluggable for easier development
 - Hooks to add contents to various parts of the theme
 
-**More details on the theme's hooks are in the theme's readme.txt file**
+***\*More details on the theme's hooks are in the theme's readme.txt file***
 
 
 ![screenshot](https://user-images.githubusercontent.com/39152476/160936850-e8efb85e-6853-4fe1-afbb-c0273a500a43.jpg)
