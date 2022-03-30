@@ -4,18 +4,18 @@ A WordPress theme with options for customization in the WordPress Customizer
 
 ### Customization options include:
 
-- Custom Background, header and footer colors
+- Custom Background, Header and Footer colors
 - Choose fonts (Google Fonts)
 - Site Width options
 - Display Sticky posts at Archives
 - A headlines section for the Posts Homepage
-
 
 ### Other theme features:
 
 - Font colors auto-adjust for readability
 - Most functions are pluggable for easier development
 - Hooks to add contents to various parts of the theme
+
 
 ***\*More details on the theme's hooks are in the theme's readme.txt file***
 
