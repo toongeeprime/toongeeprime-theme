@@ -13,7 +13,7 @@ A WordPress theme with options for customization in the WordPress Customizer
 - Main menu position
 - Breadcrumbs
 - Selected social media links, email, WhatsApp and phone numbers
-- Powered by text and link
+- 'Powered by' text and link
 - Basic coming soon or maintenance mode
 - and more
 
