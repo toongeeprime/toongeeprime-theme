@@ -7,12 +7,14 @@ A WordPress theme with options for customization in the WordPress Customizer
 - Custom Background, Header and Footer colors
 - Choose fonts (Google Fonts)
 - Site Width options
+- Add a dark theme logo
 - Display Sticky posts at Archives
 - A headlines section for the Posts Homepage
 
 ### Other theme features:
 
 - Font colors auto-adjust for readability
+- Dark theme logo is switched to when a dark background color is set
 - Most functions are pluggable for easier development
 - Hooks to add contents to various parts of the theme
 
