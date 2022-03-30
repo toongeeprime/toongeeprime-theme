@@ -18,7 +18,7 @@ if ( empty( get_theme_mod( 'prime2g_website_shutdown' ) ) ) return;
 
 	// Return conditions
 	if (
-		is_admin() || !is_user_logged_in() ||
+		is_admin() || is_user_logged_in() ||
 		in_array( $GLOBALS[ 'pagenow' ], array( 'wp-login.php', 'wp-register.php' ) )
 	 ) return;
 
