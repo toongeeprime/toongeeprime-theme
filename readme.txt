@@ -28,6 +28,9 @@ Hooked to wp_head:
 	prime2g_preload_webfonts()
 	toongeeprime_pingback_header()
 
+Hooked to wp_footer:
+	prime2g_toTop()
+
 Hooked to the_title:
 	prime2g_post_no_title()
 

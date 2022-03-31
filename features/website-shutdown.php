@@ -7,10 +7,6 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-
-/**
- *	Use basically by adding: add_action( 'init', 'prime2g_close_down_website' );
- */
 add_action( 'init', 'prime2g_close_down_website' );
 function prime2g_close_down_website() {
 

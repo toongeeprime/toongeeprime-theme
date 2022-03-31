@@ -60,7 +60,7 @@ function prime2g_preload_webfonts() {
 
 
 /**
- *	Theme Fonts
+ *	Theme (Google) Fonts
  */
 if ( ! function_exists( 'prime2g_theme_fonts' ) ) {
 function prime2g_theme_fonts() {
