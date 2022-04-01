@@ -4,7 +4,7 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-function primeElems( elems, clss = 'prime' ) {
+function prime2gElems( elems, clss = 'prime' ) {
 elems.forEach( activeAdd );
 	function activeAdd( el ) {
 		let ell = document.querySelector( el );
@@ -12,7 +12,7 @@ elems.forEach( activeAdd );
 	}
 }
 
-function prime_offElems( elems, clss = 'prime' ) {
+function prime2g_offElems( elems, clss = 'prime' ) {
 elems.forEach( clRemove );
 	function clRemove( el ) {
 		let ell = document.querySelector( el );
@@ -20,7 +20,7 @@ elems.forEach( clRemove );
 	}
 }
 
-function prime_toggElems( elems, clss = 'prime' ) {
+function prime2g_toggElems( elems, clss = 'prime' ) {
 elems.forEach( elTogg );
 	function elTogg( el ) {
 		let ell = document.querySelector( el );
@@ -30,7 +30,7 @@ elems.forEach( elTogg );
 
 
 // Element in viewport checker
-function prime_inViewport( el ) {
+function prime2g_inViewport( el ) {
 let rect = el.getBoundingClientRect();
 	return (
 		rect.top >= 0 && rect.left >= 0 &&
@@ -40,7 +40,7 @@ let rect = el.getBoundingClientRect();
 }
 
 
-function prime_gotoThis( selector ) {
+function prime2g_gotoThis( selector ) {
 let elmt = document.querySelector( selector );
 	elmt.scrollIntoView( true );
 }

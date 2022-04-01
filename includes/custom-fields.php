@@ -126,11 +126,11 @@ value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
 	<div class="meta-options prime2g_field">
 		<label for="page_width">Page Width</label>
 		<select id="page_width" class="prime2g_options" name="page_width">
-			<option value="default_width">Default Width</option>
-			<option value="width_960px" <?php if( get_post_meta( $pid, 'page_width', true ) == 'width_960px' ) echo 'selected'; ?>>Narrow</option>
-			<option value="width_1250px" <?php if( get_post_meta( $pid, 'page_width', true ) == 'width_1250px' ) echo 'selected'; ?>>Wide</option>
-			<option value="width_100vw" <?php if( get_post_meta( $pid, 'page_width', true ) == 'width_100vw' ) echo 'selected'; ?>>Full Width</option>
-			<option value="width_stretch" <?php if( get_post_meta( $pid, 'page_width', true ) == 'width_stretch' ) echo 'selected'; ?>>Stretched</option>
+			<option value="default_post_width">Default Width</option>
+			<option value="post_narrow" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_narrow' ) echo 'selected'; ?>>Narrow</option>
+			<option value="post_wide" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wide' ) echo 'selected'; ?>>Wide</option>
+			<option value="post_w100vw" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_w100vw' ) echo 'selected'; ?>>Full Width</option>
+			<option value="post_wstretch" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wstretch' ) echo 'selected'; ?>>Stretched</option>
 		</select>
 	</div>
 
@@ -139,13 +139,13 @@ value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
 }
 
 
-add_filter( 'body_class', 'akw_template_options_body_classes' );
+add_filter( 'body_class', 'akw_template_options_body_classes', 25 );
 function akw_template_options_body_classes( $classes ) {
 // Template vars
 $page_width	=	post_custom( 'page_width' );
 
 // Add Template Classes
-if( $page_width && is_singular() && $page_width != 'default_width' ) {
+if( $page_width && is_singular() ) {
 	$classes[] = $page_width;
 }
 

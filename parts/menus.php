@@ -20,7 +20,7 @@ function prime2g_main_menu( $id = 'main_nav' ) { ?>
 
 	<div id="menu_toggbar" class="menu_toggbar mobiles">
 		<div></div>
-		<div class="menu_togs prel" onclick="prime_toggElems( [ '.main_menu_wrap' ] );">
+		<div class="menu_togs prel" onclick="prime2g_toggElems( [ '.main_menu_wrap' ] );">
 			<span></span>
 			<span></span>
 			<span></span>

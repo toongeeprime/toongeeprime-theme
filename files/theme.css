@@ -46,27 +46,28 @@ body, html{
 	--button-text
 */
 }
-.width_960px{
-	--site-width:960px;
-}
-.width_1250{
-	--site-width:1250px;
-}
-.width_100vw, .width_stretch{
-	--site-width:100vw;
-}
-.width_stretch .right.sidebars, .width_stretch .site_main{
-	padding:0; margin:0;
-}
-.width_stretch .page-header{
-	padding:var(--med-pad) 0;
-}
 
-
-.width_960px{
+.width_960px, .post_narrow{
 	--min-pad: 1.5rem;
 	--max-pad: 4rem var(--min-pad);
 }
+
+.singular.post_narrow{
+	--site-width:960px;
+}
+.singular.post_wide{
+	--site-width:1250px;
+}
+.singular.post_w100vw, .singular.post_wstretch{
+	--site-width:100vw;
+}
+.post_wstretch .right.sidebars, .post_wstretch .site_main{
+	padding:0; margin:0;
+}
+.post_wstretch .page-header{
+	padding:var(--med-pad) 0;
+}
+
 
 
 /********* Standard Elements *********/

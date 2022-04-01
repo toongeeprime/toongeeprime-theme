@@ -11,6 +11,8 @@
 
 /**
  *		Add WP Comment Form
+ *
+ *	// if( comments_open() || get_comments_number() ) { comments_template(); }
  */
 add_action( 'prime2g_after_post', 'comment_form' );
 
