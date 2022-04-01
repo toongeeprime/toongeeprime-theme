@@ -29,7 +29,7 @@
 
 	<div id="contentWrap" class="wrapper">
 
-	<?php if ( 'content' == get_theme_mod( 'prime2g_title_location' ) ) prime2g_title_header( prime2g_title_header_classes() ); ?>
+	<?php if ( 'header' != get_theme_mod( 'prime2g_title_location' ) ) prime2g_title_header( prime2g_title_header_classes() ); ?>
 
 		<div id="content" class="site_content grid">
 

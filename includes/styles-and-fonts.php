@@ -29,8 +29,11 @@ add_action( 'wp_head', 'prime2g_preload_webfonts' );
 if ( ! function_exists( 'prime2g_preload_webfonts' ) ) {
 
 function prime2g_preload_webfonts() {
-	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font' );
-	$headings	=	get_theme_mod( 'prime2g_site_headings_font' );
+
+	$theStyles	=	new ToongeePrime_Styles();
+
+	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font', $theStyles->bodyFont );
+	$headings	=	get_theme_mod( 'prime2g_site_headings_font', $theStyles->headFont );
 	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings\">";
 }
 
@@ -79,5 +82,4 @@ return array(
 
 }
 }
-
 

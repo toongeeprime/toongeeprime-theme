@@ -417,7 +417,7 @@ if ( ! function_exists( 'prime2g_archive_description' ) ) {
 function prime2g_archive_description( $tag = 'p' ) {
 	$descr = get_the_archive_description();
 	if ( is_archive() && $descr ) {
-		echo '<div class="archive-description"><'. $tag .'>' . esc_html__( $descr ) . '</'. $tag .'></div>';
+		echo "<div class=\"archive-description\"><$tag>$descr</$tag></div>";
 	}
 }
 
@@ -535,9 +535,8 @@ $is_singular ? $hClass = ' entry-header' : $hClass = ' archive-header';
 		<?php
 		}
 		else {
-			if  ( ! empty( single_post_title( '', false ) ) ) { ?>
-			<?php
-			the_title( '<h1 class="entry-title">', '</h1>' );
+			if ( ! empty( single_post_title( '', false ) ) ) {
+				the_title( '<h1 class="entry-title">', '</h1>' );
 			}
 		}
 

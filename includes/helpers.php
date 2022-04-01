@@ -24,10 +24,17 @@ function prime2g_removeSidebar() {
 function prime2g_singular_template( $format = '' ) {
 
 	if ( is_child_theme() ) {
-		return CHILD2G_SINGULAR . get_post_type() . $format . '.php';
+		$file	=	CHILD2G_SINGULAR . get_post_type() . $format . '.php';
 	}
 	else {
-		return PRIME2G_SINGULAR . get_post_type() . $format . '.php';
+		$file	=	PRIME2G_SINGULAR . get_post_type() . $format . '.php';
+	}
+
+	if ( file_exists( $file ) ) {
+		require $file;
+	}
+	else {
+		require PRIME2G_SINGULAR . 'post.php';
 	}
 
 }
@@ -40,15 +47,18 @@ function prime2g_singular_template( $format = '' ) {
 function prime2g_archive_template( $format = '' ) {
 
 	if ( is_child_theme() ) {
-		return CHILD2G_ARCHIVE . get_post_type() . $format . '.php';
+		$file	=	CHILD2G_ARCHIVE . get_post_type() . $format . '.php';
 	}
 	else {
-		return PRIME2G_ARCHIVE . get_post_type() . $format . '.php';
+		$file	=	PRIME2G_ARCHIVE . get_post_type() . $format . '.php';
+	}
+
+	if ( file_exists( $file ) ) {
+		require $file;
+	}
+	else {
+		require PRIME2G_ARCHIVE . 'post.php';
 	}
 
 }
-
-
-
-
 

@@ -13,14 +13,7 @@ if ( is_singular() ) {
 
 	if ( have_posts() ) {
 
-		$file	=	prime2g_singular_template();
-
-		if ( file_exists( $file ) ) {
-			require $file;
-		}
-		else {
-			require PRIME2G_SINGULAR . 'post.php';
-		}
+		prime2g_singular_template();
 
 	}
 
@@ -31,14 +24,7 @@ elseif ( is_archive() || is_home() ) {
 
 	if ( have_posts() ) {
 
-		$file	=	prime2g_archive_template();
-
-		if ( file_exists( $file ) ) {
-			require $file;
-		}
-		else {
-			require PRIME2G_ARCHIVE . 'post.php';
-		}
+		prime2g_archive_template();
 
 	}
 	else {
