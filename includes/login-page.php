@@ -13,14 +13,6 @@ if ( ! function_exists( 'prime2g_login_enqueues' ) ) {
 
 function prime2g_login_enqueues() {
 
-    // Theme Styles
-	wp_enqueue_style(
-		'prime2g_resetcss',
-		get_theme_file_uri( '/files/reset.css' ),
-		array(),
-		wp_get_theme()->get( 'Version' )
-	);
-
 	wp_enqueue_style(
 		'prime2g_login_css',
 		get_theme_file_uri( '/files/login.css' ),

@@ -105,7 +105,7 @@ function prime2g_archive_loop( $excerpt = true, $size = 'large', $length = 25, $
 
 <article id="entry-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
 
-	<div>
+	<div class="entry_img">
 		<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 			<?php
 			if ( has_post_thumbnail() ) {

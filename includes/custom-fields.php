@@ -11,14 +11,14 @@
  *	HELPERS
  */
 
-if ( ! function_exists( 'prime2g_add_fields_to' ) ) {
-	function prime2g_add_fields_to( array $addTo = [ 'post', 'page' ] ) {
+if ( ! function_exists( 'prime2g_include_post_types' ) ) {
+	function prime2g_include_post_types( array $addTo = [ 'post', 'page' ] ) {
 		return $addTo;
 	}
 }
 
-if ( ! function_exists( 'prime2g_remove_fields_from' ) ) {
-	function prime2g_remove_fields_from( array $pTypes = [ 'page' ] ) {
+if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
+	function prime2g_exclude_post_types( array $pTypes = [ 'page' ] ) {
 		return ( ! in_array( get_post_type(), $pTypes ) );
 	}
 }
@@ -55,7 +55,7 @@ function prime2g_reg_fieldset_1() {
 		'prime2g_fieldsbox_1',
 		__( 'Subtitle', 'toongeeprime-theme' ),
 		'toongeeprime_cFields_callback',
-		prime2g_add_fields_to(),
+		prime2g_include_post_types(),
 		'side',
 		'high'
 	);
@@ -104,7 +104,7 @@ $pid = get_the_ID();
 		.hide{display:none;}
 	</style>
 
-<?php if ( prime2g_remove_fields_from() ) { ?>
+<?php if ( prime2g_exclude_post_types() ) { ?>
 
 	<div class="meta-options prime2g_field">
 		<label class="hide" for="post_subtitle">Post Subtitle</label>

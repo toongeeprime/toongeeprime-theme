@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CONDITIONS FOR ADDING STYLES TO THEME'S MAIN STYLESHEET
+ *	THEME'S STYLES AND FONTS
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
@@ -20,27 +20,6 @@ function prime2g_theme_root_styles() {
 
 }
 
-
-/*
-add_action( 'wp_enqueue_scripts', 'prime2g_add_theme_css_enqueues' );
-function prime2g_add_theme_css_enqueues() {
-	wp_add_inline_style(
-		'prime2g_css',
-		prime2g_theme_style_conditions()
-	);
-}
-
-function prime2g_theme_style_conditions() {
-
-	// CSS:
-	return "
-	body{
-		display:block;
-	}
-	";
-
-}
-*/
 
 
 /**

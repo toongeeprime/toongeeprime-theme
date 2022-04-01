@@ -16,7 +16,7 @@ function prime2g_reg_fieldset_2() {
 	'prime2g_fieldsbox_2',
 	__( 'Page Codes (Advanced)', 'toongeeprime-theme' ),
 	'toongeeprime_cFields_callback_2',
-	prime2g_add_fields_to(),
+	prime2g_include_post_types(),
 	'normal',
 	'high'
 );
