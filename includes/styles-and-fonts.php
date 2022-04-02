@@ -51,6 +51,8 @@ return array(
 		'Arimo'	=>	__( 'Arimo', 'toongeeprime-theme' ),
 		'Barlow+Condensed'	=>	__( 'Barlow Condensed', 'toongeeprime-theme' ),
 		'Cabin'	=>	__( 'Cabin', 'toongeeprime-theme' ),
+		'Cantarell'	=>	__( 'Cantarell', 'toongeeprime-theme' ),
+		'Cantata+One'	=>	__( 'Cantata One', 'toongeeprime-theme' ),
 		'Cherry+Swash'	=>	__( 'Cherry Swash', 'toongeeprime-theme' ),
 		'Comfortaa'	=>	__( 'Comfortaa', 'toongeeprime-theme' ),
 		'Cormorant+Garamond'	=>	__( 'Cormorant Garamond', 'toongeeprime-theme' ),
@@ -76,6 +78,7 @@ return array(
 		'Redressed'	=>	__( 'Redressed', 'toongeeprime-theme' ),
 		'Roboto'	=>	__( 'Roboto', 'toongeeprime-theme' ),
 		'Source+Serif+4'	=>	__( 'Source Serif 4', 'toongeeprime-theme' ),
+		'Source+Serif+Pro'	=>	__( 'Source Serif Pro', 'toongeeprime-theme' ),
 		'Spartan'	=>	__( 'Spartan', 'toongeeprime-theme' ),
 		'Tajawal'	=>	__( 'Tajawal', 'toongeeprime-theme' ),
 	);
