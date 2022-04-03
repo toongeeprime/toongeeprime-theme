@@ -492,7 +492,8 @@ a:hover, a:focus, table a:hover, table a:focus{
 
 .gallery{ margin:1.5rem auto; }
 .gallery-item{
-	display:inline-block; vertical-align:top; width:100%;
+	display:inline-block; vertical-align:top;
+	width:100%; margin:0;
 }
 .gallery-icon img{ margin:0 auto; }
 .gallery-caption{}
