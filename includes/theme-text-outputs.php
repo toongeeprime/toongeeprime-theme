@@ -16,7 +16,7 @@ add_action( 'prime2g_after_header', 'prime2g_breadcrumbs', 7 );
 if ( ! function_exists( 'prime2g_breadcrumbs' ) ) {
 function prime2g_breadcrumbs() {
 
-if ( is_front_page() || 'show' != get_theme_mod( 'prime2g_theme_breadcrumbs' ) ) return;
+if ( is_front_page() || empty( get_theme_mod( 'prime2g_theme_breadcrumbs' ) ) ) return;
 
 
 function prime2g_shopCrumb() {

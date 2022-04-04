@@ -119,25 +119,41 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 
 
 	/**
+	 *	Logo Beside Menu
+	 */
+	$wp_customize->add_setting(
+		'prime2g_logo_with_menu',
+		array(
+			'type'			=>	'theme_mod',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_logo_with_menu',
+		array(
+			'label'		=>	__( 'Show Logo by Main Menu', 'toongeeprime-theme' ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_logo_with_menu',
+			'section'	=>	'prime2g_theme_options_section'
+		)
+	);
+
+
+	/**
 	 *	BREADCRUMBS
 	 */
 	$wp_customize->add_setting(
 		'prime2g_theme_breadcrumbs',
 		array(
-			'type'				=>	'theme_mod',
-			'default'			=>	'show',
+			'type'			=>	'theme_mod',
 		)
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_breadcrumbs',
 		array(
-			'label'		=>	__( 'Show Breadcrumbs', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Show Breadcrumbs (Not on Homepage)', 'toongeeprime-theme' ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_theme_breadcrumbs',
-			'section'	=>	'prime2g_theme_options_section',
-			'choices'	=>	array(
-				'show'	=>	__( 'Yes', 'toongeeprime-theme' ),
-			),
+			'section'	=>	'prime2g_theme_options_section'
 		)
 	);
 
