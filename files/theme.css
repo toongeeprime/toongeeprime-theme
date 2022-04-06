@@ -91,7 +91,7 @@ input[type="button"], input[type="submit"], button, .button, .btn{
 	background-color:var(--button-bg); color:var(--button-text); cursor:pointer;
 	border:2px solid var(--button-bg); padding:1em 2em;
 }
-input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, .btn:hover{
+input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, .btn:hover, .button:focus, .btn:focus{
 	background-color:var(--button-text); color:var(--button-bg);
 }
 table{
@@ -613,7 +613,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 	display:block;
 }
 .fixed_main_menu .main_menu_wrap{
-	position:fixed; box-shadow:0 0 15px rgba(0,0,0,0.3);
+	position:fixed;
 	top:0; left:0; right:0;
 }
 .admin-bar.fixed_main_menu .main_menu_wrap{

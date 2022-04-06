@@ -43,6 +43,7 @@
 
 	</section><!-- #colophon -->
 
+	<?php prime2g_site_base_strip(); ?>
 	<?php echo prime2g_theme_mod_footer_credit(); ?>
 
 </div><!-- #footerWrap -->

@@ -104,3 +104,16 @@ echo '</footer>';
 
 }
 
+
+/**
+ *	Is set Before Footer Credit
+ */
+function prime2g_site_base_strip() {
+
+echo '<section id="site_base_strip">';
+	do_action( 'prime2g_site_base_strip' );
+echo '</section>';
+
+}
+
+

@@ -53,6 +53,7 @@ Hooked to comment_form_defaults:
 * prime2g_after_post
 * prime2g_archive_post_top
 * prime2g_archive_post_footer
+* prime2g_site_base_strip
 
 Hooked to prime2g_after_header:
 	prime2g_breadcrumbs(), 7 priority

@@ -18,7 +18,7 @@ $incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
 
 ?>
 
-<div id="<?php echo $id; ?>" class="main_menu_wrap <?php if ( $incLogo ) echo 'logo_with_menu'; ?>">
+<div id="<?php echo $id; ?>" class="main_menu_wrap<?php if ( $incLogo ) echo ' logo_with_menu'; ?>">
 
 	<?php if ( has_nav_menu( 'main-menu' ) ) { ?>
 
