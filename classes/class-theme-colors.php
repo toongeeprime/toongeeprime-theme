@@ -79,14 +79,13 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 		$ctLum		=	parent::the_hex_luminance( $ctColor );
 
 			if ( 127 > $bgLum ) {
-				$classes[]	=	'dark-theme';
+				$classes[]	=	'dark-background';
+			}
+			elseif ( 225 <= $bgLum ) {
+				$classes[]	=	'bright-background';
 			}
 			else {
-				$classes[]	=	'light-theme';
-			}
-
-			if ( 225 <= $bgLum ) {
-				$classes[]	=	'bright-background';
+				$classes[]	=	'light-background';
 			}
 
 			if ( 127 > $ctLum ) {

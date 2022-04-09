@@ -81,4 +81,10 @@ Hooked to prime2g_archive_post_footer:
 	prime2g_archive_postbase()
 
 
+== WooCommerce ==
+Hooked to woocommerce_after_single_product_summary:
+	prime2g_product_in_view()
+
+Removed:
+	woocommerce_breadcrumb
 

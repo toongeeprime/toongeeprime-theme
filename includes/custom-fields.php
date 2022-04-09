@@ -53,7 +53,7 @@ if ( ! function_exists( 'prime2g_add_meta_boxes' ) ) {
 function prime2g_reg_fieldset_1() {
 	add_meta_box(
 		'prime2g_fieldsbox_1',
-		__( 'Subtitle', 'toongeeprime-theme' ),
+		__( 'Custom Options', 'toongeeprime-theme' ),
 		'toongeeprime_cFields_callback',
 		prime2g_include_post_types(),
 		'side',

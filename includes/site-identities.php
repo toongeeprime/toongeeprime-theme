@@ -78,7 +78,7 @@ function prime2g_siteLogo() {
 $siteName	=	get_bloginfo( 'name' );
 
 	if (
-		in_array( 'dark-theme', ToongeePrime_Colors::theme_color_classes() )
+		in_array( 'dark-background', ToongeePrime_Colors::theme_color_classes() )
 		&& get_theme_mod( 'prime2g_dark_theme_logo' )
 	) {
 		$src = prime2g_get_dark_logo_url();

@@ -26,6 +26,7 @@ body, html{
 	--min-pad: 1.75rem;
 	--med-pad: 3rem;
 	--max-pad: 4.5rem;
+	--faint-bg: rgba(127,127,127,0.05);
 /**
  **	Theme-Set Variables: **
 	--brand-color
@@ -74,7 +75,7 @@ body, html{
 img{
 	max-width:100%; height:auto;
 }
-input:not([type="button"]):not([type="checkbox"]), select, textarea{
+input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), select, textarea{
 	padding:10px 15px; border:2px solid; width:100%;
 	line-height:1.5; max-width:100%;
 }
@@ -87,11 +88,11 @@ ul{
 .sub-menu{
 	padding-left:1rem;
 }
-input[type="button"], input[type="submit"], button, .button, .btn{
+input[type="button"], input[type="submit"], button, .button, a.button, .btn{
 	background-color:var(--button-bg); color:var(--button-text); cursor:pointer;
 	border:2px solid var(--button-bg); padding:1em 2em;
 }
-input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, .btn:hover, .button:focus, .btn:focus{
+input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, a.button:hover, .btn:hover, .button:focus, a.button:focus, .btn:focus{
 	background-color:var(--button-text); color:var(--button-bg);
 }
 table{
@@ -107,6 +108,7 @@ table a{
 }
 th{
 	background:var(--content-text); color:var(--content-background); padding:.75rem 0;
+	vertical-align:middle;
 }
 tr{
 	border-bottom:1px solid #bbb;
@@ -115,7 +117,7 @@ td{
 	padding:.5rem 0;
 }
 tr:nth-child(even){
-	background:rgba(0,0,0,0.1);
+	background:var(--faint-bg);
 }
 tr:nth-child(odd){
 	background:rgba(255,255,255,0.1);
@@ -174,6 +176,9 @@ iframe{
 }
 .slimscrollbar::-webkit-scrollbar-thumb:hover{
 	background:steelblue;
+}
+.clear{
+	clear:both; width:100%;
 }
 
 
@@ -390,6 +395,9 @@ a:hover, a:focus, table a:hover, table a:focus{
 .post_taxonomies a:hover, .post_taxonomies a:focus{
 	background:var(--content-text); color:var(--content-background);
 }
+#prime2g_before_post, #prime2g_after_post{
+	width:100%; clear:both;
+}
 
 /* Comments */
 .required-field-message{
@@ -567,12 +575,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 .site_content{
 	gap:0;
 }
-.has-sidebar .site_content{
-	grid-template-columns:2.5fr minmax(200px, 300px);
-}
-.has-sidebar.width_960px .site_content{
-	grid-template-columns:2.5fr 1fr;
-}
 .fixed_main_menu #container{
 	top:46px;
 }
@@ -648,9 +650,18 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 .home_headlines .display{
 	grid-template-columns:1fr 2fr 1fr;
 }
+.has-sidebar .site_content{
+	grid-template-columns:2.5fr 1fr;
+}
+.has-sidebar.width_960px .site_content{
+	grid-template-columns:2.5fr 1fr;
+}
 }
 
 @media(min-width:1101px) {
+.has-sidebar .site_content{
+	grid-template-columns:1fr minmax(200px, 300px);
+}
 #sitebasebar{
 	grid-template-columns:repeat(4, 1fr);
 }
@@ -713,6 +724,9 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 @media(max-width:782px) {
 .desktop, .tablets{
 	display:none!important;
+}
+tr{
+	display:grid;
 }
 }
 

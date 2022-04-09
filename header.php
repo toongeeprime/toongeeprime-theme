@@ -35,5 +35,5 @@
 
 			<div id="primary" class="primary_area">
 
-				<main id="main" class="site_main <?php if ( is_archive() ) echo 'grid'; ?>" role="main">
+				<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 

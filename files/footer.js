@@ -24,4 +24,3 @@ let primetoTop	=	document.querySelector( '#prime2g_toTop' );
 
 // Remove class to determine browser supports JavaScript
 document.body.classList.remove( 'no-js' );
-

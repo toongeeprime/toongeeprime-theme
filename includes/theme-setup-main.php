@@ -285,6 +285,29 @@ function toongeeprime_theme_setup() {
 			)
 		);
 
+
+		/**
+		 *	WooCommerce Support
+		 */
+		add_theme_support( 'woocommerce',
+			array(
+				'thumbnail_image_width'	=>	250,
+				'single_image_width'	=>	750,
+				'product_grid'			=>	array(
+					'default_rows'		=>	3,
+					'min_rows'			=>	2,
+					'max_rows'			=>	12,
+					'default_columns'	=>	4,
+					'min_columns'		=>	2,
+					'max_columns'		=>	6,
+				),
+			)
+		);
+		add_theme_support( 'wc-product-gallery-lightbox' );
+		add_theme_support( 'wc-product-gallery-zoom' );
+		add_theme_support( 'wc-product-gallery-slider' );
+
+
 		// Support responsive embedded content
 		add_theme_support( 'responsive-embeds' );
 
@@ -300,5 +323,4 @@ function toongeeprime_theme_setup() {
 }
 
 }
-
 

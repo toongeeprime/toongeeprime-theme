@@ -18,15 +18,14 @@ function prime2g_breadcrumbs() {
 
 if ( is_front_page() || empty( get_theme_mod( 'prime2g_theme_breadcrumbs' ) ) ) return;
 
-
 function prime2g_shopCrumb() {
 if ( ! class_exists( 'woocommerce' ) ) return;
-if ( ! is_woocommerce() || ! is_product() ) return;
+if ( ! is_woocommerce() ) return;
 
-	$shopTitle	=	get_theme_mod( 'prime2g_shop_page_title' );
-	if ( $shopTitle == '' ) $shopTitle = 'Products';
-
-	return '<span class="term"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="'. __( 'Shop Homepage', 'toongeeprime-theme' ) .'">'. __( $shopTitle, 'toongeeprime-theme' ) .'</a> &#187; </span>';
+	$shopTitle	=	__( get_theme_mod( 'prime2g_shop_page_title' ), 'toongeeprime-theme' );
+	// This has to remain because shop title would be empty if not set in customizer:
+	if ( $shopTitle == '' ) $shopTitle = __( 'Shop Homepage', 'toongeeprime-theme' );
+	return '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="' . $shopTitle . '">' . $shopTitle . '</a> &#187; </span>';
 }
 
 
@@ -64,7 +63,7 @@ if ( is_singular() ) {
 
 		if ( $termAncs ) {
 			foreach( array_reverse( $termAncs ) as $id ) {
-				$tName	=	get_term_by( 'term_id', $id, $term->taxonomy )->name;
+				$tName	=	__( get_term_by( 'term_id', $id, $term->taxonomy )->name, 'toongeeprime-theme' );
 				$crumbs	.=	'<span class="term"><a href="'. get_term_link( $id, $term->taxonomy ) .'" title="'. $tName .'">'. $tName .'</a> &#187; </span>';
 			}
 		}
@@ -81,6 +80,13 @@ if ( is_archive() || is_tax() ) {
 
 	$object		=	get_queried_object();
 
+	if ( $object->name == 'product' && function_exists( 'wc_get_page_id' ) ) {
+		$s_title	=	__( get_theme_mod( 'prime2g_shop_page_title' ), 'toongeeprime-theme' );
+		if ( $s_title == '' ) $s_title = __( 'Shop Homepage', 'toongeeprime-theme' );
+		$crumbs	.= '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="'. $s_title .'">'. $s_title .'</a></span>';
+		echo $crumbs;
+		return;
+	}
 	if ( $object ) {
 		$termAncs	=	get_ancestors( $object->term_id, $object->taxonomy );
 		$taxonomy	=	get_taxonomy( $object->taxonomy );
@@ -91,15 +97,19 @@ if ( is_archive() || is_tax() ) {
 	}
 
 	if ( $taxonomy ) {
-		$taxName	=	$taxonomy->labels->singular_name;
-		$crumbs	.=	'<span class="taxonomy">'. __( $taxName, 'toongeeprime-theme' ) .': </span>';
+		if ( ! function_exists( 'is_woocommerce' ) ||
+		function_exists( 'is_woocommerce' ) && ! is_woocommerce()
+		) {
+			$taxName	=	$taxonomy->labels->singular_name;
+			$crumbs	.=	'<span class="taxonomy">'. __( $taxName, 'toongeeprime-theme' ) .': </span>';
+		}
 	}
 
 	$crumbs	.=	prime2g_shopCrumb();
 
 	if ( $termAncs ) {
 		foreach( array_reverse( $termAncs ) as $id ) {
-			$tName	=	get_term_by( 'term_id', $id, $object->taxonomy )->name;
+			$tName	=	__( get_term_by( 'term_id', $id, $object->taxonomy )->name, 'toongeeprime-theme' );
 			$crumbs	.=	'<span class="term"><a href="'. get_term_link( $id, $object->taxonomy ) .'" title="'. $tName .'">'. $tName .'</a> &#187; </span>';
 		}
 	}
@@ -123,13 +133,13 @@ if ( is_404() ) {
 	$crumbs	.=	'<span class="entry_title" title="'. $title .'">'. $title .'</span>';
 }
 
-
 	$crumbs	.=	'</div>';
 
 echo $crumbs;
 
 }
 }
+
 
 
 /**
@@ -167,7 +177,7 @@ if ( ! function_exists( 'prime2g_postmeta_top' ) ) {
 
 function prime2g_postmeta_top() {
 
-if ( is_page() ) return;
+if ( is_page() || get_post_type() == 'product' ) return;
 
 	echo prime2g_posted_by();
 	prime2g_posted_on();
@@ -417,7 +427,7 @@ if ( ! function_exists( 'prime2g_archive_description' ) ) {
 function prime2g_archive_description( $tag = 'p' ) {
 	$descr = get_the_archive_description();
 	if ( is_archive() && $descr ) {
-		echo "<div class=\"archive-description\"><$tag>$descr</$tag></div>";
+		echo "<div class=\"archive-description\"><$tag>" . __( $descr, 'toongeeprime-theme' ) . "</$tag></div>";
 	}
 }
 
@@ -505,9 +515,9 @@ function prime2g_read_more_link() {
 add_filter( 'the_title', 'prime2g_post_no_title' );
 if ( ! function_exists( 'prime2g_post_no_title' ) ) {
 
-	function prime2g_post_no_title( $title ) {
-		return '' === $title ? esc_html_x( 'Not Titled', 'Added to posts and pages that are without titles', 'toongeeprime-theme' ) : $title;
-	}
+function prime2g_post_no_title( $title ) {
+	return '' === $title ? esc_html_x( 'Not Titled', 'Added to posts and pages that are without titles', 'toongeeprime-theme' ) : $title;
+}
 
 }
 
@@ -529,31 +539,45 @@ $is_singular ? $hClass = ' entry-header' : $hClass = ' archive-header';
 <?php
 
 	if ( $is_singular ) {
-
 		if ( is_front_page() ) { ?>
-			<h1 class="entry-title"><?php _e( 'Welcome to ', 'toongeeprime-theme' ) . bloginfo( 'name' ); ?></h1>
+			<h1 class="entry-title page-title title">
+				<?php _e( 'Welcome to ', 'toongeeprime-theme' ) . bloginfo( 'name' ); ?>
+			</h1>
 		<?php
 		}
 		else {
 			if ( ! empty( single_post_title( '', false ) ) ) {
-				the_title( '<h1 class="entry-title">', '</h1>' );
+				if ( function_exists( 'is_product' ) && is_product() ) {
+					$prod_class	=	' product_title';
+				}
+				else {
+					$prod_class	=	'';
+				}
+				the_title( "<h1 class=\"entry-title page-title title$prod_class\">", "</h1>" );
 			}
 		}
 
-		// Hook:
+		// Theme Hook:
 		prime2g_after_title();
-
 	}
 	elseif ( is_home() ) { ?>
-		<h1 class="entry-title"><?php _e( get_theme_mod( 'prime2g_posts_home_title', get_bloginfo( 'name' ) ), 'toongeeprime-theme' ); ?></h1>
+		<h1 class="entry-title page-title title"><?php _e( get_theme_mod( 'prime2g_posts_home_title', get_bloginfo( 'name' ) ), 'toongeeprime-theme' ); ?></h1>
 		<div class="archive-description"><p><?php _e( get_theme_mod( 'prime2g_posts_home_description', 'Posts Homepage' ), 'toongeeprime-theme' ); ?></p></div>
 	<?php
 	}
+	elseif ( function_exists( 'is_shop' ) && is_shop() ) {
+		$shopTitle	=	get_theme_mod( 'prime2g_shop_page_title' );
+		if ( $shopTitle == '' ) $shopTitle = 'Shop Homepage';
+	?>
+		<h1 class="entry-title woocommerce-products-header__title page-title title"><?php _e( $shopTitle, 'toongeeprime-theme' ); ?></h1>
+		<div class="archive-description"><p><?php _e( get_theme_mod( 'prime2g_shop_page_description', prime2g_woo_shop_description() ), 'toongeeprime-theme' ); ?></p></div>
+	<?php
+	}
 	elseif ( is_404() ) {
-		_e( '<h1 class="entry-title">Sorry, what you are looking for can\'t be found</h1>', 'toongeeprime-theme' );
+		_e( '<h1 class="entry-title page-title title">Sorry, what you are looking for can\'t be found</h1>', 'toongeeprime-theme' );
 	}
 	elseif ( is_search() ) { ?>
-		<h1 class="entry-title">
+		<h1 class="entry-title page-title title">
 			<?php
 			printf(
 				/* translators: %s: Search term */
@@ -565,7 +589,7 @@ $is_singular ? $hClass = ' entry-header' : $hClass = ' archive-header';
 	<?php
 	}
 	else {
-		the_archive_title( '<h1 class="entry-title">', '</h1>' );
+		the_archive_title( '<h1 class="entry-title page-title">', '</h1>' );
 		prime2g_archive_description();
 	}
 	?>

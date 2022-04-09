@@ -16,7 +16,7 @@ require_once PRIME2G_THEME . 'classes/classes-index.php';
  */
 $parts	=	[ 'menus', 'sidebars', 'in-loops', 'homepage' ];
 foreach( $parts as $part ) {
-	require_once PRIME2G_PARTS . $part . '.php';
+	require_once PRIME2G_PART . $part . '.php';
 }
 
 
