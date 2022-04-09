@@ -11,7 +11,8 @@ A WordPress theme with options for customization in the WordPress Customizer
 - Display Sticky posts at Archives
 - Headline Posts section for the Posts Homepage
 - Main menu position
-- Breadcrumbs
+- Breadcrumbs display
+- WooCommerce Shop Title and Description
 - Selected social media links, email, WhatsApp and phone numbers
 - 'Powered by' text and link
 - Basic coming soon or maintenance mode
