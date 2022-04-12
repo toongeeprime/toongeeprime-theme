@@ -415,6 +415,9 @@ a:hover, a:focus, table a:hover, table a:focus{
 .comment-list .children{
 	padding-left:15px;
 }
+#comments ol:not(.children) li{
+	margin-bottom:var(--min-pad);
+}
 .comment-body{
 	padding:10px 10px var(--min-pad);
 }
