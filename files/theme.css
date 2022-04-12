@@ -425,6 +425,9 @@ a.comment-reply-link:hover{
 	display:block; font-size:90%; font-style:italic;
 	color:tomato;
 }
+#reply-title small a{
+	display:block;width:max-content;
+}
 
 
 /********* ARCHIVES *********/
