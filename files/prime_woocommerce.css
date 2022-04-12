@@ -84,7 +84,7 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 /** MESSAGES **
 ********************/
 .woocommerce-message, .woocommerce-error, .woocommerce-info{
-	border-top:5px solid lightgreen;clear:both;margin-bottom:calc(2 * var(--min-pad));font-size:1.25rem;list-style:none;
+	border-top:5px solid lightgreen;clear:both;margin-bottom:calc(2 * var(--min-pad));font-size:1.2rem;list-style:none;
 	position:relative;background:var(--faint-bg);padding:10px 10px 10px calc(15px + var(--min-pad));
 }
 .woocommerce-error{border-color:tomato;}
@@ -93,7 +93,7 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 	float:right;clear:both;margin-top:0;
 }
 .woocommerce-message::after, .woocommerce-error::after, .woocommerce-info::after{
-	font-family:dashicons;content:"\f12a";position:absolute;left:10px;top:7px;color:lightgreen;font-size:25px;
+	font-family:dashicons;content:"\f12a";position:absolute;left:10px;top:5px;color:lightgreen;font-size:25px;
 }
 .woocommerce-error::after{
 	content:"\f153";color:tomato;
@@ -447,6 +447,17 @@ body:not(.has-sidebar) .woocommerce-MyAccount-content{
 }
 td.actions button:nth-child(2){
 	width:100%;
+}
+
+}
+
+@media(max-width:600px) {
+
+.woocommerce-notices-wrapper li{
+	display:flex;flex-direction:column-reverse;
+}
+.woocommerce-notices-wrapper li .button{
+	margin-top:10px;
 }
 
 }
