@@ -93,13 +93,13 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 	float:right;clear:both;margin-top:0;
 }
 .woocommerce-message::after, .woocommerce-error::after, .woocommerce-info::after{
-	font-family:dashicons;content: "\f12a";position:absolute;left:10px;top:7px;color:lightgreen;font-size:25px;
+	font-family:dashicons;content:"\f12a";position:absolute;left:10px;top:7px;color:lightgreen;font-size:25px;
 }
 .woocommerce-error::after{
-	content: "\f153";color:tomato;
+	content:"\f153";color:tomato;
 }
 .woocommerce-info::after{
-	content: "\f348";color:skyblue;
+	content:"\f348";color:skyblue;
 }
 
 
