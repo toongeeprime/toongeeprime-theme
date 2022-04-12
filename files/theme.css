@@ -409,6 +409,12 @@ a:hover, a:focus, table a:hover, table a:focus{
 .comment-list, .comment-list .children{
 	list-style:none;
 }
+.comment-list{
+	padding:0;
+}
+.comment-list .children{
+	padding-left:15px;
+}
 .comment-body{
 	padding:10px 10px var(--min-pad);
 }
