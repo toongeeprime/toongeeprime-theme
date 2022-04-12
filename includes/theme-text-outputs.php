@@ -179,8 +179,10 @@ function prime2g_postmeta_top() {
 
 if ( is_page() || get_post_type() == 'product' ) return;
 
+echo '<div class="authorship postmetas">';
 	echo prime2g_posted_by();
 	prime2g_posted_on();
+echo '</div>';
 
 }
 
