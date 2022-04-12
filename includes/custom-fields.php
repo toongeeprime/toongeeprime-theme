@@ -8,34 +8,16 @@
  */
 
 /**
- *	HELPERS
- */
-
-if ( ! function_exists( 'prime2g_include_post_types' ) ) {
-	function prime2g_include_post_types( array $addTo = [ 'post', 'page' ] ) {
-		return $addTo;
-	}
-}
-
-if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
-	function prime2g_exclude_post_types( array $pTypes = [ 'page' ] ) {
-		return ( ! in_array( get_post_type(), $pTypes ) );
-	}
-}
-/*****	Helpers End	*****/
-
-
-/**
  *	METABOXES
  */
 
 /**
  *	DISPLAY SUBTITLE
  */
-add_action( 'prime2g_after_title', 'post_subtitle' );
+add_action( 'prime2g_after_title', 'prime2g_post_subtitle' );
 
-if ( ! function_exists( 'post_subtitle' ) ) {
-function post_subtitle() {
+if ( ! function_exists( 'prime2g_post_subtitle' ) ) {
+function prime2g_post_subtitle() {
 
 $postSubtitle	=	post_custom( 'post_subtitle' );
 if ( $postSubtitle )

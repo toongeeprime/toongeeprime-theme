@@ -152,7 +152,7 @@ iframe{
 .grid{
 	display:grid; gap:var(--min-pad);
 }
-.flex, .archive.prev_next, .prev_next .nav-links{
+.flex{
 	display:flex; flex-wrap:wrap;
 }
 .shader{
@@ -177,7 +177,7 @@ iframe{
 .slimscrollbar::-webkit-scrollbar-thumb:hover{
 	background:steelblue;
 }
-.clear{
+.clear, .prev_next{
 	clear:both; width:100%;
 }
 
@@ -370,13 +370,16 @@ a:hover, a:focus, table a:hover, table a:focus{
 
 /********* POSTS *********/
 .prev_next{
-	margin:var(--min-pad) 0; width:100%;
+	margin:var(--min-pad) 0;
 }
-.prev_next .nav-links, .archive.prev_next{
-	justify-content:space-between;
+.nav-links div, .nav-previous, .nav-next{
+	width:45%;
 }
-.nav-links div{
-	width:49%;
+.nav-links div:first-child, #page .nav-previous{
+	float:left;
+}
+.nav-links div:last-child, .nav-next{
+	float:right;
 }
 .meta-nav{
 	font-size:85%; font-weight:600; margin-bottom:0;
@@ -400,6 +403,24 @@ a:hover, a:focus, table a:hover, table a:focus{
 }
 
 /* Comments */
+.comments-area{
+	padding-top:var(--min-pad);
+}
+.comment-list, .comment-list .children{
+	list-style:none;
+}
+.comment-body{
+	padding:10px 10px var(--min-pad);
+}
+a.comment-reply-link{
+	padding:5px 10px; background:var(--content-text); color:var(--content-background);
+}
+a.comment-reply-link:hover{
+	color:var(--content-text); background:var(--content-background);
+}
+.comment-metadata a{
+	border:0; font-size:90%;
+}
 .required-field-message{
 	display:block; font-size:90%; font-style:italic;
 	color:tomato;

@@ -24,7 +24,7 @@
 	wp_head();
 ?>
 <style>
-#respond{width:900px;max-width:90%;margin-left:auto;margin-right:auto;padding:var(--min-pad);}
+#comments{width:900px;max-width:90%;margin-left:auto;margin-right:auto;padding:var(--min-pad);}
 </style>
 </head>
 
@@ -41,7 +41,7 @@
 		<div class="entry-content">
 			<?php
 			the_content();
-			comment_form();
+			prime2g_comments();
 			?>
 		</div><!-- .entry-content -->
 	</article>

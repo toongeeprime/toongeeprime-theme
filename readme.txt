@@ -70,7 +70,7 @@ Hooked to prime2g_before_post:
 Hooked to prime2g_after_post:
 	prime2g_postmeta_bottom, 5 priority
 	prime2g_prev_next_post, 7 priority
-	comment_form
+	prime2g_comments
 	prime2g_below_posts_widgets(), 20 priority
 	prime2g_pageJS(), 50 priority
 

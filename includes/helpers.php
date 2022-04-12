@@ -62,3 +62,20 @@ function prime2g_archive_template( $format = '' ) {
 
 }
 
+
+
+/**
+ *	Include or exclude post types
+ */
+if ( ! function_exists( 'prime2g_include_post_types' ) ) {
+	function prime2g_include_post_types( array $addTo = [ 'post', 'page' ] ) {
+		return $addTo;
+	}
+}
+
+if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
+	function prime2g_exclude_post_types( array $pTypes = [ 'page' ] ) {
+		return ( ! in_array( get_post_type(), $pTypes ) );
+	}
+}
+

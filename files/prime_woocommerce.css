@@ -276,11 +276,11 @@ td.actions button:nth-child(2){
 td.actions button[aria-disabled="true"]{
 	cursor:not-allowed;opacity:0.7;
 }
-.woocommerce-terms-and-conditions-wrapper, .checkout_coupon{
+.checkout_coupon{
 	padding:20px;background:var(--faint-bg);
 }
-.woocommerce-terms-and-conditions-wrapper{
-	margin:var(--min-pad) 0;
+.woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text{
+	margin:var(--min-pad) 0;background:var(--faint-bg);text-align:left;
 }
 .checkout_coupon{
 	transition:margin 1s;margin:var(--min-pad) 0 calc(2 * var(--min-pad));
@@ -297,7 +297,7 @@ td.actions button[aria-disabled="true"]{
 .payment_methods label{
 	font-size:1.1rem;cursor:pointer;background:var(--faint-bg);padding:10px;
 }
-.payment_methods, .woocommerce-terms-and-conditions-wrapper{
+.payment_methods{
 	text-align:left;
 }
 .payment_box{

@@ -91,7 +91,7 @@ function prime2g_woo_wp_title( $title ) {
 function prime2g_do_woo_texts( $get ) {
 	if ( $get == 'shop title' ) {
 		$text	=	get_theme_mod( 'prime2g_shop_page_title' );
-		if ( $text == '' ) $text = 'Shop Homepage';
+		if ( empty( $text ) ) $text = 'Shop Homepage';
 	}
 return $text;
 }
