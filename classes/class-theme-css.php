@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-require PRIME2G_CLASSDIR . 'class-theme-styles.php';
+require_once PRIME2G_CLASSDIR . 'class-theme-styles.php';
 
 /**
  * This class is in charge of color customization via the Customizer.
