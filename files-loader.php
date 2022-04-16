@@ -7,8 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-require_once PRIME2G_THEME . 'features/features-index.php';
-require_once PRIME2G_THEME . 'classes/classes-index.php';
+require PRIME2G_THEME . 'features/features-index.php';
 
 
 /**
@@ -16,14 +15,14 @@ require_once PRIME2G_THEME . 'classes/classes-index.php';
  */
 $parts	=	[ 'menus', 'sidebars', 'in-loops', 'homepage' ];
 foreach( $parts as $part ) {
-	require_once PRIME2G_PART . $part . '.php';
+	require PRIME2G_PART . $part . '.php';
 }
 
 
 /**
  *	GET PHP FILES THROUGH DIRECTORIES ARRAY
  */
-$directories	=	[ 'includes', 'customizer' ];
+$directories	=	[ 'classes', 'includes', 'customizer' ];
 
 foreach( $directories as $dir ) {
 
@@ -33,7 +32,7 @@ foreach( $directories as $dir ) {
 	foreach( $files as $file ) {
 	$path	=	$folder . $file;
 
-		if ( ! is_dir( $path ) && pathinfo( $path )[ 'extension' ] == 'php' ) require_once $path;
+		if ( ! is_dir( $path ) && pathinfo( $path )[ 'extension' ] == 'php' ) require $path;
 	}
 
 }
@@ -42,5 +41,5 @@ foreach( $directories as $dir ) {
 /**
  *	UPDATER
  */
-require_once PRIME2G_THEME . 'update/updater-index.php';
+require PRIME2G_THEME . 'update/updater-index.php';
 

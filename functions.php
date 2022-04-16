@@ -11,6 +11,7 @@
  */
 define( 'PRIME2G_THEMEURL', get_template_directory_uri() . '/' );
 define( 'PRIME2G_THEME', get_template_directory() . '/' );
+define( 'PRIME2G_CLASSDIR', PRIME2G_THEME . 'classes/' );
 define( 'PRIME2G_PART', PRIME2G_THEME . 'parts/' );
 define( 'PRIME2G_SINGULAR', PRIME2G_PART . 'singular/' );
 define( 'PRIME2G_ARCHIVE', PRIME2G_PART . 'archive/' );
