@@ -7,17 +7,6 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-require_once PRIME2G_THEME . 'features/features-index.php';
-
-
-/**
- *	THEME PARTS
- */
-$parts	=	[ 'menus', 'sidebars', 'in-loops', 'homepage' ];
-foreach( $parts as $part ) {
-	require_once PRIME2G_PART . $part . '.php';
-}
-
 
 /**
  *	GET PHP FILES THROUGH DIRECTORIES ARRAY
@@ -36,6 +25,17 @@ foreach( $directories as $dir ) {
 	}
 
 }
+
+
+/**
+ *	THEME PARTS
+ */
+$parts	=	[ 'menus', 'sidebars', 'in-loops', 'homepage' ];
+foreach( $parts as $part ) {
+	require_once PRIME2G_PART . $part . '.php';
+}
+
+require_once PRIME2G_THEME . 'features/features-index.php';
 
 
 /**

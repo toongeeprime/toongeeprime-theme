@@ -65,7 +65,7 @@ body, html{
 .post_wstretch .right.sidebars, .post_wstretch .site_main{
 	padding:0; margin:0;
 }
-.post_wstretch .page-header{
+.post_wstretch .page_title{
 	padding:var(--med-pad) 0;
 }
 
@@ -128,7 +128,7 @@ td.pad{
 iframe{
 	max-width:100%;
 }
-.wrapper ::selection, #prime2g_after_header ::selection{
+.contentWrap ::selection, #prime2g_after_header ::selection{
 	background-color:var(--content-text); color:var(--content-background);
 }
 
@@ -136,6 +136,9 @@ iframe{
 /********* Custom Classes *********/
 .site_width{
 	margin:auto; max-width:var(--site-width);
+}
+.ext_stretch_hf .site_container, .ext_stretch_hf .footerWrap{
+	max-width:100vw;
 }
 .centered{
 	margin:auto; text-align:center; display:block;
@@ -159,7 +162,7 @@ iframe{
 	position:absolute; left:0; right:0;
 	top:0; bottom:0; background:rgba(0,0,0,0.5);
 }
-.hide{
+.hide, .logged-in .logged-out, .logged-out .logged-in{
 	display:none!important;
 }
 .oshadow{
@@ -191,7 +194,7 @@ body{
 h1, h2, h3{
 	font-family:var(--headings-font), 'Arial', sans-serif;
 }
-#contentWrap, #footer_topWidgets, #prime2g_after_header{
+#content, .contentWrap .page_title, .footer_topWidgets, #prime2g_after_header{
 	background-color:var(--content-background); color:var(--content-text);
 }
 .site_main{
@@ -209,11 +212,8 @@ a{
 a:hover, a:focus, table a:hover, table a:focus{
 	color:var(--brand-color); border-color:transparent;
 }
-.logo_link{
+#page .logo_link{
 	border:0;
-}
-.breadCrumbs{
-	padding:5px 15px;
 }
 
 
@@ -229,7 +229,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 .has-header-image #header{
 	min-height:40vh; display:grid; align-items:center;
 }
-.page-header{
+.page_title{
 	padding:var(--med-pad) var(--min-pad); text-align:center;
 }
 
@@ -308,6 +308,9 @@ a:hover, a:focus, table a:hover, table a:focus{
 }
 .collapsible-navs a:hover, .collapsible-navs a:focus{
 	color:var(--content-text); background:var(--content-background);
+}
+.logo_with_menu .custom-logo{
+	margin-top:5px;max-height:36px;
 }
 
 .menu_togs{
@@ -460,7 +463,7 @@ a.comment-reply-link:hover{
 	margin:0 0 20px;
 }
 .stickies, .home_headlines{
-	padding:var(--min-pad) var(--min-pad) 0;
+	padding:var(--min-pad) 0 0;
 }
 .stickies .thumbnail, .sides .thumbnail, .widget_posts .thumbnail{
 	min-height:150px;
@@ -757,9 +760,6 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 @media(max-width:782px) {
 .desktop, .tablets{
 	display:none!important;
-}
-tr{
-	display:grid;
 }
 }
 

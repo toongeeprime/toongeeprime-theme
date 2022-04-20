@@ -63,7 +63,7 @@ return array_combine( $ids, $names );
 			'settings'	=>	'prime2g_posts_home_description',
 			'section'	=>	'prime2g_theme_archives_section',
 			'input_attrs'	=>	array(
-				'placeholder'	=>	$siteTitle,
+				'placeholder'	=>	'Posts Homepage',
 			),
 			'active_callback'	=>	'is_home',
 		)
@@ -97,7 +97,7 @@ return array_combine( $ids, $names );
 		'prime2g_headlines_category',
 		array(
 			'type'				=>	'theme_mod',
-			'default'			=>	1,
+			'default'			=>	prime2g_categs_array()[1],
 		)
 	);
 	$wp_customize->add_control(

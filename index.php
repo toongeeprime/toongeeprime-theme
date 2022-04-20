@@ -12,9 +12,9 @@
 if ( is_singular() ) {
 
 	if ( have_posts() ) {
+		if ( get_post_meta( get_the_ID(), 'remove_sidebar', true ) == 'remove' ) prime2g_removeSidebar();
 
-		prime2g_singular_template();
-
+		prime2g_get_theme_template();
 	}
 
 }
@@ -23,9 +23,7 @@ if ( is_singular() ) {
 elseif ( is_archive() || is_home() ) {
 
 	if ( have_posts() ) {
-
-		prime2g_archive_template();
-
+		prime2g_get_theme_template( true );
 	}
 	else {
 		require PRIME2G_ARCHIVE . 'empty.php';

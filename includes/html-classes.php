@@ -34,8 +34,9 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'has-sidebar';
 	}
 
-	// Site's Width
+	// Site's Width and Extras
 		$classes[]	=	'width_' . get_theme_mod( 'prime2g_site_width' );
+		$classes[]	=	'ext_' . get_theme_mod( 'prime2g_site_style_extras' );
 
 	// If post title is in header
 	if ( 'header' == get_theme_mod( 'prime2g_title_location' ) ) {

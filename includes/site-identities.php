@@ -10,9 +10,9 @@
 /**
  *	The Site Title or Logo display
  */
-function prime2g_title_or_logo( $before = '<div class="page-header prel title_tagline_logo">', $after = '</div>' ) {
-
-if ( ! display_header_text() ) return;
+function prime2g_title_or_logo( $before = '<div class="page_title prel title_tagline_logo site_width">', $after = '</div>' )
+{
+	if ( ! display_header_text() ) return;
 
 $name		=	get_bloginfo( 'name' );
 $siteName	=	'<span title="' . $name . '">' . $name . '</span>';
@@ -102,3 +102,5 @@ $siteName	=	get_bloginfo( 'name' );
 return $logo;
 
 }
+
+

@@ -8,6 +8,8 @@
  */
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
 $hasHeader		=	has_header_image();
+$menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
+
 
 if ( $hasHeader ) {
 	if ( is_singular() && has_post_thumbnail() ) {
@@ -24,7 +26,7 @@ else {
 
 	prime2g_before_header();
 
-	if ( 'bottom' != get_theme_mod( 'prime2g_menu_position' ) ) prime2g_main_menu();
+	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
 
 ?>
 
@@ -45,7 +47,7 @@ else {
 
 <?php
 
-	if ( 'bottom' == get_theme_mod( 'prime2g_menu_position' ) ) prime2g_main_menu();
+	if ( 'bottom' == $menuPlace ) prime2g_main_menu();
 
 	prime2g_after_header();
 

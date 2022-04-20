@@ -12,52 +12,57 @@
  *	Sidebar is added throughout the theme via footer.php by prime2g_add_sidebar()
  */
 function prime2g_removeSidebar() {
-
 	function define_2gRMVSidebar(){}
-
 }
 
 
 /**
- *	Get Singular Template
+ *	Determine Template File To Run
  */
-function prime2g_singular_template( $format = '' ) {
-
-	if ( is_child_theme() ) {
-		$file	=	CHILD2G_SINGULAR . get_post_type() . $format . '.php';
-	}
-	else {
-		$file	=	PRIME2G_SINGULAR . get_post_type() . $format . '.php';
-	}
-
-	if ( file_exists( $file ) ) {
-		require $file;
-	}
-	else {
-		require PRIME2G_SINGULAR . 'post.php';
-	}
-
-}
-
-
+function prime2g_get_theme_template( $archive = false ) {
 
 /**
- *	Get Archive Template
+ *	See if query has post format
  */
-function prime2g_archive_template( $format = '' ) {
+$the_format	=	get_post_format();
+$format		=	$the_format ? '_' . $the_format : null;
 
-	if ( is_child_theme() ) {
-		$file	=	CHILD2G_ARCHIVE . get_post_type() . $format . '.php';
+
+	if ( $archive ) {
+	/**
+	 *	Run Template for Archive Queries
+	 */
+		$childfile	=	CHILD2G_ARCHIVE . get_post_type() . $format . '.php';
+		$parentfile	=	PRIME2G_ARCHIVE . get_post_type() . $format . '.php';
+
+		if ( is_child_theme() && file_exists( $childfile ) ) {
+			require $childfile;
+		}
+		elseif( file_exists( $parentfile ) ) {
+			require $parentfile;
+		}
+		else {
+			require PRIME2G_ARCHIVE . 'post.php';
+		}
+
 	}
 	else {
-		$file	=	PRIME2G_ARCHIVE . get_post_type() . $format . '.php';
-	}
+	/**
+	 *	Run Template for Singular Queries
+	 */
+		$childfile	=	CHILD2G_SINGULAR . get_post_type() . $format . '.php';
+		$parentfile	=	PRIME2G_SINGULAR . get_post_type() . $format . '.php';
 
-	if ( file_exists( $file ) ) {
-		require $file;
-	}
-	else {
-		require PRIME2G_ARCHIVE . 'post.php';
+		if ( is_child_theme() && file_exists( $childfile ) ) {
+			require $childfile;
+		}
+		elseif( file_exists( $parentfile ) ) {
+			require $parentfile;
+		}
+		else {
+			require PRIME2G_SINGULAR . 'post.php';
+		}
+
 	}
 
 }

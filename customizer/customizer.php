@@ -30,7 +30,6 @@ add_action( 'customize_register', 'prime2g_edit_customizer_defaults' );
 if ( ! function_exists( 'prime2g_edit_customizer_defaults' ) ) {
 
 function prime2g_edit_customizer_defaults( $wp_customize ) {
-
 	$wp_customize->remove_section( 'colors' );
 	$wp_customize->get_control( 'display_header_text' )->label = __( 'Display Site Title &amp; Tagline - if no Logo', 'toongeeprime-theme' );
 }

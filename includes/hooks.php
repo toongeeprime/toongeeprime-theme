@@ -41,7 +41,7 @@ echo '</section>';
  */
 function prime2g_after_header() {
 
-echo '<section id="prime2g_after_header">';
+echo '<section id="prime2g_after_header" class="site_width">';
 	do_action( 'prime2g_after_header' );
 echo '</section>';
 

@@ -532,11 +532,11 @@ function prime2g_post_no_title( $title ) {
 if ( ! function_exists( 'prime2g_title_header' ) ) {
 function prime2g_title_header( $header_classes = '' ) {
 
-$is_singular = is_singular();
-$is_singular ? $hClass = ' entry-header' : $hClass = ' archive-header';
+$is_singular	=	is_singular();
+$hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 ?>
 
-<div class="page-header prel<?php echo $header_classes . $hClass; ?>">
+<div class="page_title site_width prel<?php echo $header_classes . $hClass; ?>">
 
 <?php
 
@@ -596,7 +596,7 @@ $is_singular ? $hClass = ' entry-header' : $hClass = ' archive-header';
 	}
 	?>
 
-</div><!-- .page-header -->
+</div><!-- .page_title -->
 
 <?php
 }

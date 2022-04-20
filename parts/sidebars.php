@@ -49,7 +49,7 @@ if ( ! function_exists( 'prime2g_below_posts_widgets' ) ) {
 function prime2g_below_posts_widgets() {
 
 if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
-	<aside id="below_postsWidgets" class="asides site_width">
+	<aside id="below_postsWidgets" class="asides">
 		<div class="widgets-box grid">
 			<?php dynamic_sidebar( 'belowposts-widgets' ); ?>
 		</div>
@@ -96,7 +96,7 @@ function prime2g_footer_widgets() {
 if ( is_active_sidebar( 'footers' ) || is_active_sidebar( 'footers-2' ) ||
 is_active_sidebar( 'footers-3' ) || is_active_sidebar( 'footers-4' ) ) { ?>
 
-<aside id="sitebasebar" role="complementary" class="sidebars asides grid">
+<aside id="sitebasebar" role="complementary" class="sidebars asides grid site_width">
 
 	<div id="f-widgets1" class="footer-widgets">
 

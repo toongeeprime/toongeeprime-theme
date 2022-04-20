@@ -279,17 +279,17 @@ td.actions button[aria-disabled="true"]{
 .checkout_coupon{
 	padding:20px;background:var(--faint-bg);
 }
-.woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text{
-	margin:var(--min-pad) 0;background:var(--faint-bg);text-align:left;
+.woocommerce-privacy-policy-text{
+	margin:var(--min-pad) 0;padding:5px var(--min-pad);background:var(--faint-bg);text-align:left;
 }
 .checkout_coupon{
-	transition:margin 1s;margin:var(--min-pad) 0 calc(2 * var(--min-pad));
+	margin:calc(-2 * var(--min-pad)) 0 var(--min-pad);transition:0s;
 }
 .payment_methods{
 	list-style:none;margin:0;padding:0;
 }
 .payment_methods li{
-	margin:0 0 10px; border-top:5px solid transparent;
+	margin:0 0 10px;border-top:5px solid transparent;
 }
 .payment_methods li.prime_active{
 	border-color:skyblue;
@@ -449,6 +449,12 @@ td.actions button:nth-child(2){
 	width:100%;
 }
 
+}
+
+@media(max-width:782px) {
+.shop_table tr{
+	display:grid;
+}
 }
 
 @media(max-width:600px) {

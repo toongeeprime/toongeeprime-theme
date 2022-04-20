@@ -68,6 +68,30 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 
 
 	/**
+	 *	ADDITIONAL STYLING OPTIONS
+	 */
+	$wp_customize->add_setting(
+		'prime2g_site_style_extras',
+		array(
+			'type'				=>	'theme_mod',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_site_style_extras',
+		array(
+			'label'		=>	__( 'Extra Style Options', 'toongeeprime-theme' ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_site_style_extras',
+			'section'	=>	'prime2g_theme_options_section',
+			'choices'	=>	array(
+				''	=>	__( 'None', 'toongeeprime-theme' ),
+				'stretch_hf'	=>	__( 'Stretch Header &amp; Footer', 'toongeeprime-theme' ),
+			),
+		)
+	);
+
+
+	/**
 	 *	MAIN MENU OPTIONS
 	 */
 	$wp_customize->add_setting(

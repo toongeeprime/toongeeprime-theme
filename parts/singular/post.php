@@ -1,13 +1,11 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	SINGULAR POSTS & DEFAULT TEMPLATE
+ *	SINGLE POSTS & DEFAULT SINGULAR TEMPLATE
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-
-if ( get_post_meta( get_the_ID(), 'remove_sidebar', true ) == 'remove' ) prime2g_removeSidebar();
 
 get_header();
 
