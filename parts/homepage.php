@@ -7,11 +7,19 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-
 /**
  *	HEADLINES
  */
 add_action( 'prime2g_after_header', 'prime2g_home_headlines', 12 );
+
+if ( ! function_exists( 'prime2g_headlines_loop' ) ) {
+	function prime2g_headlines_loop() {
+		return prime2g_archive_loop( true, 'medium', 20, false, false );
+	}
+}
+
+
+
 if ( ! function_exists( 'prime2g_home_headlines' ) ) {
 
 function prime2g_home_headlines() {
@@ -22,10 +30,6 @@ if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
 	$cid	=	get_theme_mod( 'prime2g_headlines_category' );
 	$cat	=	get_category( $cid );
 	$slug	=	$cat->slug;
-
-function prime2g_headlines_loop() {
-	return prime2g_archive_loop( true, 'medium', 20, false, false );
-}
 
 	echo '<section class="home_headlines">';
 

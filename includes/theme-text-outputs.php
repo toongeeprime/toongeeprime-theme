@@ -20,12 +20,12 @@ if ( is_front_page() || empty( get_theme_mod( 'prime2g_theme_breadcrumbs' ) ) ) 
 
 function prime2g_shopCrumb() {
 if ( ! class_exists( 'woocommerce' ) ) return;
-if ( ! is_woocommerce() ) return;
-
-	$shopTitle	=	__( get_theme_mod( 'prime2g_shop_page_title' ), 'toongeeprime-theme' );
-	// This has to remain because shop title would be empty if not set in customizer:
-	if ( $shopTitle == '' ) $shopTitle = __( 'Shop Homepage', 'toongeeprime-theme' );
-	return '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="' . $shopTitle . '">' . $shopTitle . '</a> &#187; </span>';
+	if ( is_woocommerce() ) {
+		$shopTitle	=	__( get_theme_mod( 'prime2g_shop_page_title' ), 'toongeeprime-theme' );
+		// This must remain because shop title would be empty if not set in customizer:
+		if ( $shopTitle == '' ) $shopTitle	=	__( 'Shop Homepage', 'toongeeprime-theme' );
+		return '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="' . $shopTitle . '">' . $shopTitle . '</a> &#187; </span>';
+	}
 }
 
 
@@ -37,13 +37,15 @@ $crumbs	.=	$home;
 
 if ( is_singular() ) {
 
-	if ( get_post_taxonomies() ) {
+	$postTaxs	=	get_post_taxonomies();
+
+	if ( $postTaxs ) {
 		if ( class_exists( 'woocommerce' ) && is_product() ) {
-			$taxon_1	=	get_post_taxonomies()[2];
+			$taxon_1	=	$postTaxs[2];
 			$crumbs		.=	prime2g_shopCrumb();
 		}
 		else {
-			$taxon_1	=	get_post_taxonomies()[0];
+			$taxon_1	=	( $postTaxs[0] == 'post_tag' ) ? $postTaxs[1] : $postTaxs[0];
 		}
 
 		$taxonomy	=	get_taxonomy( $taxon_1 );
@@ -79,29 +81,22 @@ if ( is_singular() ) {
 if ( is_archive() || is_tax() ) {
 
 	$object		=	get_queried_object();
+	$termAncs	=	$object ? get_ancestors( $object->term_id, $object->taxonomy ) : null;
+	$taxonomy	=	$object ? get_taxonomy( $object->taxonomy ) : null;
 
-	if ( $object->name == 'product' && function_exists( 'wc_get_page_id' ) ) {
+	if ( $object && $object->name == 'product' && function_exists( 'wc_get_page_id' ) ) {
 		$s_title	=	__( get_theme_mod( 'prime2g_shop_page_title' ), 'toongeeprime-theme' );
 		if ( $s_title == '' ) $s_title = __( 'Shop Homepage', 'toongeeprime-theme' );
-		$crumbs	.= '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="'. $s_title .'">'. $s_title .'</a></span>';
+		$crumbs	.=	'<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="'. $s_title .'">'. $s_title .'</a></span>';
 		echo $crumbs;
 		return;
 	}
-	if ( $object ) {
-		$termAncs	=	get_ancestors( $object->term_id, $object->taxonomy );
-		$taxonomy	=	get_taxonomy( $object->taxonomy );
-	}
-	else {
-		$taxonomy	=	null;
-		$termAncs	=	null;
-	}
 
 	if ( $taxonomy ) {
-		if ( ! function_exists( 'is_woocommerce' ) ||
-		function_exists( 'is_woocommerce' ) && ! is_woocommerce()
-		) {
+	if ( ! function_exists( 'is_woocommerce' ) || function_exists( 'is_woocommerce' ) && ! is_woocommerce() )
+		{
 			$taxName	=	$taxonomy->labels->singular_name;
-			$crumbs	.=	'<span class="taxonomy">'. __( $taxName, 'toongeeprime-theme' ) .': </span>';
+			$crumbs		.=	'<span class="taxonomy">'. __( $taxName, 'toongeeprime-theme' ) .': </span>';
 		}
 	}
 

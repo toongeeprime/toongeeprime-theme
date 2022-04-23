@@ -18,40 +18,50 @@ function prime2g_removeSidebar() {
 
 /**
  *	Determine Template File To Run
+ *
+ *	This function is so that there doesn't have to be a long list of template files
+ *	in the theme's root directory as per WP template hierarchy.
+ *	Any unattended templates can use WP defaults, eg: author, 404, etc.
  */
 function prime2g_get_theme_template( $archive = false ) {
 
-/**
- *	See if query has post format
- */
-$the_format	=	get_post_format();
-$format		=	$the_format ? '_' . $the_format : null;
-
-
 	if ( $archive ) {
-	/**
-	 *	Run Template for Archive Queries
-	 */
-		$childfile	=	CHILD2G_ARCHIVE . get_post_type() . $format . '.php';
-		$parentfile	=	PRIME2G_ARCHIVE . get_post_type() . $format . '.php';
+		if ( is_category() || is_tag() || is_tax() ) {
+		// Filename format must be: taxonomy_slug.php or taxonomy.php
 
-		if ( is_child_theme() && file_exists( $childfile ) ) {
-			require $childfile;
-		}
-		elseif( file_exists( $parentfile ) ) {
-			require $parentfile;
-		}
-		else {
-			require PRIME2G_ARCHIVE . 'post.php';
-		}
+			$obj	=	get_queried_object();
+			$slug	=	'_' . $obj->slug;
+			$taxonomy	=	$obj->taxonomy;
+			$fileName	=	$taxonomy ?? null;
 
+			/**
+			 *	Run Template for Archive Queries
+			 */
+			$childfile_slug		=	CHILD2G_ARCHIVE . $fileName . $slug . '.php';
+			$childfile			=	CHILD2G_ARCHIVE . $fileName . '.php';
+			$parentfile_slug	=	PRIME2G_ARCHIVE . $fileName . $slug . '.php';
+			$parentfile			=	PRIME2G_ARCHIVE . $fileName . '.php';
+
+			if ( file_exists( $childfile_slug ) ) { require $childfile_slug; }
+			elseif( file_exists( $parentfile_slug ) ) { require $parentfile_slug; }
+
+			elseif ( file_exists( $childfile ) ) { require $childfile; }
+			elseif( file_exists( $parentfile ) ) { require $parentfile; }
+
+			else{ require PRIME2G_ARCHIVE . 'post.php'; }
+		}
 	}
 	else {
-	/**
-	 *	Run Template for Singular Queries
-	 */
-		$childfile	=	CHILD2G_SINGULAR . get_post_type() . $format . '.php';
-		$parentfile	=	PRIME2G_SINGULAR . get_post_type() . $format . '.php';
+		/**
+		 *	See if query has post format
+		 */
+		$the_format	=	get_post_format();
+		$extension	=	$the_format ? '_' . $the_format : null;
+		/**
+		 *	Run Template for Singular Queries
+		 */
+		$childfile	=	CHILD2G_SINGULAR . get_post_type() . $extension . '.php';
+		$parentfile	=	PRIME2G_SINGULAR . get_post_type() . $extension . '.php';
 
 		if ( is_child_theme() && file_exists( $childfile ) ) {
 			require $childfile;

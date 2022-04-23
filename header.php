@@ -33,7 +33,7 @@
 
 		<div id="content" class="site_content grid site_width">
 
-			<div id="primary" class="primary_area">
+			<article id="primary" class="primary_area">
 
 				<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 

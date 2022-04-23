@@ -9,7 +9,7 @@
 ?>
 
 			</main><!-- #main -->
-		</div><!-- #primary -->
+		</article><!-- #primary -->
 
 		<?php prime2g_sidebar(); ?>
 

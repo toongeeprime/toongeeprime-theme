@@ -75,10 +75,6 @@ body, html{
 img{
 	max-width:100%; height:auto;
 }
-input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), select, textarea{
-	padding:10px 15px; border:2px solid; width:100%;
-	line-height:1.5; max-width:100%;
-}
 hr{
 	background:var(--content-text); max-width:90%; margin:var(--min-pad) auto;
 }
@@ -94,6 +90,10 @@ input[type="button"], input[type="submit"], button, .button, a.button, .btn{
 }
 input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, a.button:hover, .btn:hover, .button:focus, a.button:focus, .btn:focus{
 	background-color:var(--button-text); color:var(--button-bg);
+}
+input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), select, textarea{
+	padding:10px 15px; width:100%; line-height:1.5;
+	max-width:100%;
 }
 table{
 	width:100%; max-width:100%; box-shadow:0 1px 3px rgba(0,0,0,0.2); border-collapse:collapse;
@@ -194,7 +194,7 @@ body{
 h1, h2, h3{
 	font-family:var(--headings-font), 'Arial', sans-serif;
 }
-#content, .contentWrap .page_title, .footer_topWidgets, #prime2g_after_header{
+.site_content, .contentWrap .page_title, .footer_topWidgets, #prime2g_after_header{
 	background-color:var(--content-background); color:var(--content-text);
 }
 .site_main{
@@ -710,7 +710,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 	top:46px;
 }
 .admin-bar #container{
-	top:0;
+	top:-4px;
 }
 /* MAIN MENU */
 .main_menu_wrap{
