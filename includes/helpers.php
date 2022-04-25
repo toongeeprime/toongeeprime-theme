@@ -25,7 +25,10 @@ function prime2g_removeSidebar() {
  */
 function prime2g_get_theme_template( $archive = false ) {
 
-	if ( $archive ) {
+	if ( is_home() ) {
+		require PRIME2G_ARCHIVE . 'post.php';
+	}
+	elseif ( $archive ) {
 		if ( is_category() || is_tag() || is_tax() ) {
 		// Filename format must be: taxonomy_slug.php or taxonomy.php
 

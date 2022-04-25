@@ -13,14 +13,14 @@ $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
 
 if ( $hasHeader ) {
 	if ( is_singular() && has_post_thumbnail() ) {
-		$headerUrl = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+		$headerUrl	=	get_the_post_thumbnail_url( get_the_ID(), 'full' );
 	}
 	else {
-		$headerUrl = get_header_image();
+		$headerUrl	=	get_header_image();
 	}
 }
 else {
-	$headerUrl = '';
+	$headerUrl	=	'';
 }
 
 

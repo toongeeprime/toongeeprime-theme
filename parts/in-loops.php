@@ -59,7 +59,7 @@ if ( is_page() ) return;
 $prevText	=	__( $prev, 'toongeeprime-theme' );
 $nextText	=	__( $next, 'toongeeprime-theme' );
 
-echo	get_the_post_navigation(
+	the_post_navigation(
 		array(
 			'prev_text'	=>	'<p class="meta-nav">'. $prevText .'</p><p class="post-title">%title</p>',
 			'next_text'	=>	'<p class="meta-nav">'. $nextText .'</p><p class="post-title">%title</p>',

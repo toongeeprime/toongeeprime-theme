@@ -175,5 +175,7 @@ a img.aligncenter{
 	width:auto; z-index:100000;
 	/* Above WP toolbar. */
 }
-
+div.mce-panel{
+	color:var(--content-text);
+}
 

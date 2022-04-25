@@ -84,14 +84,17 @@ ul{
 .sub-menu{
 	padding-left:1rem;
 }
-input[type="button"], input[type="submit"], button, .button, a.button, .btn{
+input[type="button"], input[type="submit"], button, .button, a.button, .btn,
+.wp-block-button__link, .wp-block-button button{
 	background-color:var(--button-bg); color:var(--button-text); cursor:pointer;
-	border:2px solid var(--button-bg); padding:1em 2em;
+	border:2px solid var(--button-bg); padding:1em 2em; border-radius:0;
+	font-family:;
 }
-input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, a.button:hover, .btn:hover, .button:focus, a.button:focus, .btn:focus{
+input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, a.button:hover, .btn:hover,
+.button:focus, a.button:focus, .btn:focus, .wp-block-button__link:hover, .wp-block-button__link:focus{
 	background-color:var(--button-text); color:var(--button-bg);
 }
-input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), select, textarea{
+input:not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="color"]), select, textarea{
 	padding:10px 15px; width:100%; line-height:1.5;
 	max-width:100%;
 }
@@ -164,6 +167,9 @@ iframe{
 }
 .hide, .logged-in .logged-out, .logged-out .logged-in{
 	display:none!important;
+}
+.hidden{
+	opacity:0; visibility:hidden;
 }
 .oshadow{
 	box-shadow:0 0 12px rgba(0,0,0,0.25);
@@ -404,6 +410,12 @@ a:hover, a:focus, table a:hover, table a:focus{
 #prime2g_before_post, #prime2g_after_post{
 	width:100%; clear:both;
 }
+.page_parts{
+	margin-top:var(--min-pad); text-align:center;
+}
+.page_parts a, .page_parts span{
+	display:inline-block; border-width:2px; margin-right:10px;
+}
 
 /* Comments */
 .comments-area{
@@ -476,6 +488,9 @@ a.comment-reply-link:hover{
 }
 .stickies p, .sides p, .widget_posts p{
 	margin:0;
+}
+.home_headlines .display{
+	align-items:start;
 }
 
 

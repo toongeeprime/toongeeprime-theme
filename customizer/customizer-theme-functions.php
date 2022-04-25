@@ -47,7 +47,7 @@ if ( $whatsapp ) {
 $contacts	.=	'</div>';
 
 if ( $address )
-	$contacts .= '<span class="address"><span class="dashicons dashicons-building"></span>' . __( $address, 'toongeeprime-theme' ) . '</span>';
+	$contacts .= '<span class="address" title="' . __( 'Our Address', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-building"></span>' . __( $address, 'toongeeprime-theme' ) . '</span>';
 
 $contacts	.=	'</div>';
 
