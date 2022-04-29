@@ -24,7 +24,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_control(
-		'prime2g_fb_url',
+		'prime2g_facebook_url',
 		array(
 			'label'		=>	__( 'Facebook Page Url', 'toongeeprime-theme' ),
 			'type'		=>	'url',
@@ -46,7 +46,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_control(
-		'prime2g_ig_url',
+		'prime2g_instagram_url',
 		array(
 			'label'		=>	__( 'Insagram Url', 'toongeeprime-theme' ),
 			'type'		=>	'url',
@@ -68,7 +68,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_control(
-		'prime2g_tw_url',
+		'prime2g_twitter_url',
 		array(
 			'label'		=>	__( 'Twitter Url', 'toongeeprime-theme' ),
 			'type'		=>	'url',
@@ -76,6 +76,28 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 			'section'	=>	'prime2g_socialmedia_links_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'https://www.twitter.com/akaweyonline',
+			),
+		)
+	);
+
+
+	$wp_customize->add_setting(
+		'prime2g_linkedin_url',
+		array(
+			'type'				=>	'theme_mod',
+			'transport'			=>	'refresh',
+			'sanitize_callback'	=>	'esc_url',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_linkedin_url',
+		array(
+			'label'		=>	__( 'LinkedIn Url', 'toongeeprime-theme' ),
+			'type'		=>	'url',
+			'settings'	=>	'prime2g_linkedin_url',
+			'section'	=>	'prime2g_socialmedia_links_section',
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'https://www.linkedin.com/akaweyonline',
 			),
 		)
 	);
@@ -90,7 +112,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_control(
-		'prime2g_ct_email',
+		'prime2g_contact_email',
 		array(
 			'label'		=>	__( 'Contact Email', 'toongeeprime-theme' ),
 			'type'		=>	'email',
@@ -135,7 +157,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_control(
-		'prime2g_ct_phone',
+		'prime2g_contact_phone',
 		array(
 			'label'		=>	__( 'Contact Phone Number', 'toongeeprime-theme' ),
 			'type'		=>	'phone',
@@ -159,7 +181,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 	$wp_customize->add_control(
-		'prime2g_wa_number',
+		'prime2g_whatsapp_number',
 		array(
 			'label'		=>	__( 'WhatsApp Number', 'toongeeprime-theme' ),
 			'type'		=>	'phone',

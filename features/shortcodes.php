@@ -29,7 +29,7 @@ ob_start();
 	<?php
 		prime2g_get_posts_query( "post", $count, 0, $order, "category", "NOT IN", "none",
 			function() use( &$words ) {
-				prime2g_archive_loop( true, 'medium', $words, false, false, 'h3' );
+				prime2g_archive_loop( 'medium', true, $words, false, false, 'h3' );
 			}
 		);
 	?>

@@ -2,14 +2,14 @@
 
 
 /**
- * Plugin Update Checker Library 4.5
- * http://w-shadow.com/
- * 
- * Copyright 2019 Janis Elsts
- * Released under the MIT license. See license.txt for details.
+ *	Theme Update Checker Library 4.5
+ *	http://w-shadow.com/
  *
- * Stripped to theme updater only!
- * Also removed third-party file hosting options
+ *	Copyright 2019 Janis Elsts
+ *	Released under the MIT license. See license.txt for details.
+ *
+ *	Stripped to theme updater only!
+ *	Also removed third-party file hosting options
  */
 
 require dirname( __FILE__ ) . '/Puc/Factory.php';

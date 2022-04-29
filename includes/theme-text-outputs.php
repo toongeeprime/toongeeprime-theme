@@ -74,7 +74,7 @@ if ( is_singular() ) {
 
 	}
 
-	$crumbs	.=	'<span class="entry_title" title="Title">'. get_the_title() .'</span>';
+	$crumbs	.=	'<span class="crumb_page_title" title="Title">'. get_the_title() .'</span>';
 
 }
 
@@ -109,23 +109,23 @@ if ( is_archive() || is_tax() ) {
 		}
 	}
 
-	$crumbs	.=	'<span class="entry_title" title="This Archive">' . get_the_archive_title() .'</span>';
+	$crumbs	.=	'<span class="crumb_page_title" title="This Archive">' . get_the_archive_title() .'</span>';
 
 }
 
 
 // DO NOT use get_the_title() for these:
 if ( is_home() ) {
-	$crumbs	.=	'<span class="entry_title" title="'. __( 'Homepage', 'toongeeprime-theme' ) .'">'. __( 'Posts', 'toongeeprime-theme' ) .'</span>';
+	$crumbs	.=	'<span class="crumb_page_title" title="'. __( 'Homepage', 'toongeeprime-theme' ) .'">'. __( 'Posts', 'toongeeprime-theme' ) .'</span>';
 }
 
 if ( is_search() ) {
-	$crumbs	.=	'<span class="entry_title" title="'. __( 'Search results', 'toongeeprime-theme' ) .'">'. __( 'Search results for "'. get_search_query() .'"', 'toongeeprime-theme' ) .'</span>';
+	$crumbs	.=	'<span class="crumb_page_title" title="'. __( 'Search results', 'toongeeprime-theme' ) .'">'. __( 'Search results for "'. get_search_query() .'"', 'toongeeprime-theme' ) .'</span>';
 }
 
 if ( is_404() ) {
 	$title	=	__( 'Nothing found', 'toongeeprime-theme' );
-	$crumbs	.=	'<span class="entry_title" title="'. $title .'">'. $title .'</span>';
+	$crumbs	.=	'<span class="crumb_page_title" title="'. $title .'">'. $title .'</span>';
 }
 
 	$crumbs	.=	'</div>';

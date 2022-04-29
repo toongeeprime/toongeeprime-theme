@@ -359,6 +359,9 @@ a:hover, a:focus, table a:hover, table a:focus{
 .sidebars{
 	font-size:95%;
 }
+#sidebar{
+	margin-bottom:var(--min-pad);
+}
 .asides .widget{
 	padding:1rem; border:1px solid #eee;
 }

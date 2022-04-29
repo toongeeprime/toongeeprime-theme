@@ -101,7 +101,7 @@ echo '</nav>';
  */
 if ( ! function_exists( 'prime2g_archive_loop' ) ) {
 
-function prime2g_archive_loop( $excerpt = true, $size = 'large', $length = 25, $metas = true, $footer = true, $tag = 'h2' ) { ?>
+function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) { ?>
 
 <article id="entry-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
 

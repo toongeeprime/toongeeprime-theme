@@ -9,6 +9,7 @@
  **
  *	THEME CONSTANTS
  */
+define( 'PRIME2G_VERSION', wp_get_theme( 'toongeeprime-theme' )->get( 'Version' ) );
 define( 'PRIME2G_THEMEURL', get_template_directory_uri() . '/' );
 define( 'PRIME2G_THEME', get_template_directory() . '/' );
 define( 'PRIME2G_CLASSDIR', PRIME2G_THEME . 'classes/' );
@@ -40,14 +41,14 @@ function prime2g_theme_enqueues() {
 		'prime2g_reset_and_wp_css',
 		get_theme_file_uri( '/files/reset-and-wp.css' ),
 		array(),
-		wp_get_theme()->get( 'Version' )
+		PRIME2G_VERSION
 	);
 
 	wp_register_style(
 		'prime2g_css',
 		get_theme_file_uri( '/files/theme.css' ),
 		array(),
-		wp_get_theme()->get( 'Version' )
+		PRIME2G_VERSION
 	);
 
     wp_enqueue_style( 'prime2g_css' );
@@ -58,7 +59,7 @@ function prime2g_theme_enqueues() {
 			'prime2g_woocommerce_css',
 			get_theme_file_uri( '/files/prime_woocommerce.css' ),
 			array( 'prime2g_css' ),
-			wp_get_theme()->get( 'Version' )
+			PRIME2G_VERSION
 		);
 	}
 
@@ -73,14 +74,14 @@ function prime2g_theme_enqueues() {
 		'prime2g_js',
 		get_theme_file_uri( '/files/theme.js' ),
 		array(),
-		wp_get_theme()->get( 'Version' )
+		PRIME2G_VERSION
 	);
 
 	wp_enqueue_script(
 		'prime2g_footer_js',
 		get_theme_file_uri( '/files/footer.js' ),
 		array( 'prime2g_js' ),
-		wp_get_theme()->get( 'Version' ),
+		PRIME2G_VERSION,
 		true // script in footer
 	);
 
@@ -95,6 +96,4 @@ endif;
 if ( class_exists( 'woocommerce' ) ) {
 	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
 }
-
-
 

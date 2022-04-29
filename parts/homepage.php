@@ -29,6 +29,7 @@ if ( ! is_home() ) return;
 if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
 	$cid	=	get_theme_mod( 'prime2g_headlines_category' );
 	$cat	=	get_category( $cid );
+	if ( $cat ) {
 	$slug	=	$cat->slug;
 
 	echo '<section class="home_headlines">';
@@ -57,6 +58,11 @@ if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
 
 		echo '</div>';
 	echo '</section>';
+	}
+	else {
+		echo '<h2>Select Category</h2>';
+	}
+
 }
 
 }

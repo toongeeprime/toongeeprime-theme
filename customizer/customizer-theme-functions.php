@@ -23,6 +23,7 @@ $email		=	get_theme_mod( 'prime2g_contact_email' );
 $address	=	get_theme_mod( 'prime2g_contact_address' );
 $phone		=	get_theme_mod( 'prime2g_contact_phone' );
 $whatsapp	=	get_theme_mod( 'prime2g_whatsapp_number' );
+$linkedIn	=	get_theme_mod( 'prime2g_linkedin_url' );
 
 $attrs	=	' target="_blank" rel="noopener noreferrer nofollow" title=';
 
@@ -35,14 +36,16 @@ if ( $instagram )
 	$contacts .= '<span class="sci ig"><a href="'. $instagram .'"'. $attrs .'"' . __( $siteName . ' on Instagram', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-instagram"></span></a></span>';
 if ( $twitter )
 	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on Twitter', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-twitter"></span></a></span>';
-if ( $email )
-	$contacts .= '<span class="sci em"><a href=mailto:"'. $email .'" title="' . __( 'Send us a mail', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-email"></span></a></span>';
-if ( $phone )
-	$contacts .= '<span class="sci ph"><a href=tel:"'. $phone .'" title="' . __( 'Call us', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-phone"></span></a></span>';
+if ( $linkedIn )
+	$contacts .= '<span class="sci li"><a href="'. $linkedIn .'" title="' . __( $siteName . ' on LinkedIn', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-linkedin"></span></a></span>';
 if ( $whatsapp ) {
 	$whatsapp	=	'https://wa.me/' . $whatsapp . '?text=Hello,%20I%20want%20to%20chat%20with%20' . $siteName;
 	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-whatsapp"></span></a></span>';
 }
+if ( $email )
+	$contacts .= '<span class="sci em"><a href=mailto:"'. $email .'" title="' . __( 'Send us a mail', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-email"></span></a></span>';
+if ( $phone )
+	$contacts .= '<span class="sci ph"><a href=tel:"'. $phone .'" title="' . __( 'Call us', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-phone"></span></a></span>';
 
 $contacts	.=	'</div>';
 
@@ -88,7 +91,7 @@ $footerCred	=	'<div class="site_footer_credits">';
 	}
 
 $footerCred	.=	'</div>';
-$footerCred	.=	'<span style="display:none!important;">Powered by <a href="https://akawey.com/" title="Powered by Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</span>';
+$footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padding-bottom:var(--min-pad);">Designed and developed by <a href="https://akawey.com/" title="Visit Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</p>';
 
 return $footerCred;
 }
