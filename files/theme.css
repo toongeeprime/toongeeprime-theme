@@ -76,7 +76,7 @@ img{
 	max-width:100%; height:auto;
 }
 hr{
-	background:var(--content-text); max-width:90%; margin:var(--min-pad) auto;
+	border-color:var(--content-text); max-width:90%; margin:var(--min-pad) auto;
 }
 ul{
 	list-style:square; padding-left:var(--min-pad); line-height:2;
@@ -651,7 +651,7 @@ a.comment-reply-link:hover{
 	display:inline-block; position:relative;
 }
 .collapsible-navs li a{
-	padding:7px 15px; margin:3px; display:inline-block;
+	padding:7px 15px; display:inline-block;
 }
 .sub-menu{
 	min-width:200px; max-width:250px;

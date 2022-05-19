@@ -8,8 +8,9 @@
  */
 ?>
 
-			</main><!-- #main -->
-		</article><!-- #primary -->
+		<?php if ( is_singular() ) echo '</article><!-- #primary -->'; ?>
+
+		</main><!-- #main -->
 
 		<?php prime2g_sidebar(); ?>
 
