@@ -48,6 +48,8 @@ if ( ! function_exists( 'prime2g_below_posts_widgets' ) ) {
 
 function prime2g_below_posts_widgets() {
 
+if ( function_exists( 'define_2gPlainPage' ) ) return;
+
 if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 	<aside id="below_postsWidgets" class="asides">
 		<div class="widgets-box grid">
@@ -70,6 +72,8 @@ if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 if ( ! function_exists( 'prime2g_footer_top_widgets' ) ) {
 
 function prime2g_footer_top_widgets() {
+
+if ( function_exists( 'define_2gPlainPage' ) ) return;
 
 if ( is_active_sidebar( 'footer-top' ) ) { ?>
 	<aside id="footer_topWidgets" class="footer_topWidgets asides site_width">

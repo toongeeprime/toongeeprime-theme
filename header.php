@@ -29,7 +29,13 @@
 
 	<div id="contentWrap" class="contentWrap">
 
-	<?php if ( 'header' != get_theme_mod( 'prime2g_title_location' ) ) prime2g_title_header( prime2g_title_header_classes() ); ?>
+	<?php
+	if ( 'header' != get_theme_mod( 'prime2g_title_location' ) ) {
+		if ( ! function_exists( 'define_2gRMVTitle' ) ) {
+			prime2g_title_header( prime2g_title_header_classes() );
+		}
+	}
+	?>
 
 		<div id="content" class="site_content grid site_width">
 

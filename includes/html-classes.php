@@ -34,6 +34,11 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'has-sidebar';
 	}
 
+	// Add a body class if title is unset
+	if ( function_exists( 'define_2gRMVTitle' ) ) {
+		$classes[]	=	'no_title';
+	}
+
 	// Site's Width and Extras
 		$classes[]	=	'width_' . get_theme_mod( 'prime2g_site_width' );
 		$classes[]	=	'ext_' . get_theme_mod( 'prime2g_site_style_extras' );

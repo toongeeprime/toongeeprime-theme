@@ -1,8 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	MORE CUSTOM FIELDS
- *	- for Blank Templates CSS, JS codes & Google Fonts
+ *	CSS, JS codes & Google Fonts
+ *	via CUSTOM FIELDS
+ *	- for enabled Templates
  */
 
 
@@ -87,7 +88,7 @@ function prime2g_pageCSS() {
 $style	=	post_custom( 'prime_page_css' );
 
 	if ( $style ) {
-		echo '<style type="text/css">' . $style . '</style>';
+		echo '<style id="prime2g_pageCSS" type="text/css">' . $style . '</style>';
 	}
 }
 
@@ -97,7 +98,7 @@ function prime2g_pageJS() {
 $script	=	post_custom( 'prime_page_js' );
 
 	if ( $script ) {
-		echo '<script type="text/javascript">' . $script . '</script>';
+		echo '<script id="prime2g_pageJS" type="text/javascript">' . $script . '</script>';
 	}
 }
 

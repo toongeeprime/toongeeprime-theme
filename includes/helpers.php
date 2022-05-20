@@ -9,10 +9,27 @@
 
 /**
  *	Use prime2g_removeSidebar() to remove the sidebar from a template
- *	Sidebar is added throughout the theme via footer.php by prime2g_add_sidebar()
+ *	Sidebar is added throughout the theme via footer.php by prime2g_sidebar()
  */
 function prime2g_removeSidebar() {
 	function define_2gRMVSidebar(){}
+}
+
+
+/**
+ *	Use prime2g_remove_title() to remove the title from a template
+ */
+function prime2g_remove_title() {
+	function define_2gRMVTitle(){}
+}
+
+
+/**
+ *	Use prime2g_is_plain_page() to declare a template as being plain
+ *	Thus, can be used to remove select features, widgets, etc.
+ */
+function prime2g_is_plain_page() {
+	function define_2gPlainPage(){}
 }
 
 

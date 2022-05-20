@@ -9,6 +9,27 @@
 
 
 /**
+ *	Link Pages
+ *	Not hooked because this needs to be just after post content before any other inserted features
+ */
+if ( ! function_exists( 'prime2g_link_pages' ) ) {
+
+function prime2g_link_pages() {
+	wp_link_pages(
+		array(
+			'before'	=>	'<div id="page_parts" class="page_parts clear"><p>Parts:',
+			'after'		=>	'</p></div>',
+			'link_before'	=>	' Part ',
+			// 'separator'		=>	'>> ',
+		)
+	);
+}
+
+}
+
+
+
+/**
  *	Breadcrumbs
  *	Hooked to prime2g_after_header
  */
@@ -145,7 +166,6 @@ add_action( 'prime2g_before_post', 'prime2g_edit_entry', 5 );
 if ( ! function_exists( 'prime2g_edit_entry' ) ) {
 
 function prime2g_edit_entry() {
-
 	edit_post_link(
 		sprintf(
 			/* translators: %s: Name of current post only visible to screen readers */
@@ -155,7 +175,6 @@ function prime2g_edit_entry() {
 		'<p class="edit-link edit-entry">',
 		'</p>'
 	);
-
 }
 
 }
@@ -596,4 +615,5 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
+
 
