@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-prime2g_removeSidebar();
+if ( ! function_exists( 'define_2gRMVSidebar' ) ) prime2g_removeSidebar();
 
 get_header();
 

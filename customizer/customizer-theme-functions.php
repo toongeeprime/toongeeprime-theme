@@ -23,6 +23,7 @@ $email		=	get_theme_mod( 'prime2g_contact_email' );
 $address	=	get_theme_mod( 'prime2g_contact_address' );
 $phone		=	get_theme_mod( 'prime2g_contact_phone' );
 $whatsapp	=	get_theme_mod( 'prime2g_whatsapp_number' );
+$youTube	=	get_theme_mod( 'prime2g_youtube_url' );
 $linkedIn	=	get_theme_mod( 'prime2g_linkedin_url' );
 
 $attrs	=	' target="_blank" rel="noopener noreferrer nofollow" title=';
@@ -36,8 +37,10 @@ if ( $instagram )
 	$contacts .= '<span class="sci ig"><a href="'. $instagram .'"'. $attrs .'"' . __( $siteName . ' on Instagram', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-instagram"></span></a></span>';
 if ( $twitter )
 	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on Twitter', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-twitter"></span></a></span>';
+if ( $youTube )
+	$contacts .= '<span class="sci yt"><a href="'. $youTube .'"'. $attrs .'"' . __( $siteName . ' on YouTube', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-youtube"></span></a></span>';
 if ( $linkedIn )
-	$contacts .= '<span class="sci li"><a href="'. $linkedIn .'" title="' . __( $siteName . ' on LinkedIn', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-linkedin"></span></a></span>';
+	$contacts .= '<span class="sci li"><a href="'. $linkedIn .'"'. $attrs .'"' . __( $siteName . ' on LinkedIn', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-linkedin"></span></a></span>';
 if ( $whatsapp ) {
 	$whatsapp	=	'https://wa.me/' . $whatsapp . '?text=Hello,%20I%20want%20to%20chat%20with%20' . $siteName;
 	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-whatsapp"></span></a></span>';

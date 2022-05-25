@@ -1,20 +1,37 @@
 Plugin Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
-Requires at least: 5.5
-Tested up to: 5.9
-Stable tag: 1.0
-Requires PHP: 7.0
+Requires at least: 5.9
+Tested up to: 6.0
+Stable tag: 1.0.3
+Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress theme with several options for customization and design flexibility.
+A WordPress theme with options for customization, design and development flexibility.
 
 
 == Description ==
 
 
 == Changelog ==
+
+= 1.0.3 =
+
+* Template selection process refactored
+
+= 1.0.25 =
+
+* Added Option to hide header in theme's custom templates
+* Added YouTube url to social media links in theme's Customizer options
+
+= 1.0.2 =
+
+* Added Empty Page template and accompanying edits
+
+= 1.0.1 =
+
+* Important Edits
 
 = 1.0 =
 

@@ -82,6 +82,27 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 
 	$wp_customize->add_setting(
+		'prime2g_youtube_url',
+		array(
+			'type'				=>	'theme_mod',
+			'transport'			=>	'refresh',
+			'sanitize_callback'	=>	'esc_url',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_youtube_url',
+		array(
+			'label'		=>	__( 'YouTube Url', 'toongeeprime-theme' ),
+			'type'		=>	'url',
+			'settings'	=>	'prime2g_youtube_url',
+			'section'	=>	'prime2g_socialmedia_links_section',
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'https://www.youtube.com/c/Akaweyline',
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
 		'prime2g_linkedin_url',
 		array(
 			'type'				=>	'theme_mod',

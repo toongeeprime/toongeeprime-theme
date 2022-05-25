@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-prime2g_removeSidebar();
+if ( ! function_exists( 'define_2gRMVSidebar' ) ) prime2g_removeSidebar();
 
 get_header();
 
@@ -48,7 +48,7 @@ if ( have_posts() ) { ?>
 }
 else {
 
-	echo '<h3 style="text-align:center;margin:90px 30px;">No results found for your search</h3>';
+	echo '<h3 style="text-align:center;margin:90px 30px;">' . __( 'No results found for your search', 'toongeeprime-theme' ) . '</h3>';
 	get_search_form();
 
 }

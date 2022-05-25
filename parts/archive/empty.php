@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-prime2g_removeSidebar();
+if ( ! function_exists( 'define_2gRMVSidebar' ) ) prime2g_removeSidebar();
 
 get_header();
 
@@ -16,7 +16,7 @@ get_header();
 	echo '<h3>Sorry, nothing to display here!</h3>';
 
 	if ( current_user_can( 'edit_posts' ) ) {
-		echo '<p><a href="'. esc_url( admin_url( 'post-new.php' ) ) .'" title="'. __( 'Add a new Post', 'toongeeprime-theme' ) .'">'. __( 'Why not add a new Post', 'toongeeprime-theme' ) .'</a>?</p>';
+		echo '<p><a href="'. esc_url( admin_url( 'post-new.php' ) ) .'" title="'. __( 'Add a new Post', 'toongeeprime-theme' ) .'">'. __( 'Why not add a new Post, here', 'toongeeprime-theme' ) .'</a>?</p>';
 	}
 
 	echo '</div>';

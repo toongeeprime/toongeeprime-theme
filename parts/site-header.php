@@ -9,11 +9,12 @@
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
 $hasHeader		=	has_header_image();
 $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
+$pid			=	get_the_ID();
 
 
 if ( $hasHeader ) {
 	if ( is_singular() && has_post_thumbnail() ) {
-		$headerUrl	=	get_the_post_thumbnail_url( get_the_ID(), 'full' );
+		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
 	}
 	else {
 		$headerUrl	=	get_header_image();
@@ -27,6 +28,8 @@ else {
 	prime2g_before_header();
 
 	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
+
+if ( post_custom( 'remove_header' ) !== 'remove' ) :
 
 ?>
 
@@ -47,8 +50,9 @@ else {
 
 <?php
 
+endif;
+
 	if ( 'bottom' == $menuPlace ) prime2g_main_menu();
 
 	prime2g_after_header();
-
 

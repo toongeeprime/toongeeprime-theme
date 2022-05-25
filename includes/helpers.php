@@ -47,7 +47,8 @@ function prime2g_get_theme_template( $archive = false ) {
 	}
 	elseif ( $archive ) {
 		if ( is_category() || is_tag() || is_tax() ) {
-		// Filename format must be: taxonomy_slug.php or taxonomy.php
+
+		# *Filename format must be: taxonomy_slug.php or taxonomy.php
 
 			$obj	=	get_queried_object();
 			$slug	=	'_' . $obj->slug;
@@ -56,42 +57,44 @@ function prime2g_get_theme_template( $archive = false ) {
 
 			/**
 			 *	Run Template for Archive Queries
+			 *	Pass template narrowing to Child theme
 			 */
 			$childfile_slug		=	CHILD2G_ARCHIVE . $fileName . $slug . '.php';
 			$childfile			=	CHILD2G_ARCHIVE . $fileName . '.php';
-			$parentfile_slug	=	PRIME2G_ARCHIVE . $fileName . $slug . '.php';
-			$parentfile			=	PRIME2G_ARCHIVE . $fileName . '.php';
 
 			if ( file_exists( $childfile_slug ) ) { require $childfile_slug; }
-			elseif( file_exists( $parentfile_slug ) ) { require $parentfile_slug; }
 
 			elseif ( file_exists( $childfile ) ) { require $childfile; }
-			elseif( file_exists( $parentfile ) ) { require $parentfile; }
 
-			else{ require PRIME2G_ARCHIVE . 'post.php'; }
+			else { require PRIME2G_ARCHIVE . 'post.php'; }
+		}
+		else {
+
+			$childfile		=	CHILD2G_ARCHIVE . 'post.php';
+			if ( file_exists( $childfile ) ) { require $childfile; }
+			else { require PRIME2G_ARCHIVE . 'post.php'; }
+
 		}
 	}
 	else {
 		/**
 		 *	See if query has post format
 		 */
-		$the_format	=	get_post_format();
-		$extension	=	$the_format ? '_' . $the_format : null;
+		$get_format	=	get_post_format();
+		$format		=	$get_format ? '_' . $get_format : null;
+
 		/**
 		 *	Run Template for Singular Queries
+		 *	Pass template narrowing to Child theme
 		 */
-		$childfile	=	CHILD2G_SINGULAR . get_post_type() . $extension . '.php';
-		$parentfile	=	PRIME2G_SINGULAR . get_post_type() . $extension . '.php';
+		$childformat	=	CHILD2G_SINGULAR . get_post_type() . $format . '.php';
+		$childfile		=	CHILD2G_SINGULAR . get_post_type() . '.php';
 
-		if ( is_child_theme() && file_exists( $childfile ) ) {
-			require $childfile;
-		}
-		elseif( file_exists( $parentfile ) ) {
-			require $parentfile;
-		}
-		else {
-			require PRIME2G_SINGULAR . 'post.php';
-		}
+		if ( file_exists( $childformat ) ) { require $childformat; }
+
+		elseif ( file_exists( $childfile ) ) { require $childfile; }
+
+		else { require PRIME2G_SINGULAR . 'post.php'; }
 
 	}
 

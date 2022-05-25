@@ -16,8 +16,9 @@ define( 'PRIME2G_CLASSDIR', PRIME2G_THEME . 'classes/' );
 define( 'PRIME2G_PART', PRIME2G_THEME . 'parts/' );
 define( 'PRIME2G_SINGULAR', PRIME2G_PART . 'singular/' );
 define( 'PRIME2G_ARCHIVE', PRIME2G_PART . 'archive/' );
-define( 'CHILD2G_SINGULAR', get_stylesheet_directory() . '/parts/singular/' );
-define( 'CHILD2G_ARCHIVE', get_stylesheet_directory() . '/parts/archive/' );
+define( 'CHILD2G_PART', get_stylesheet_directory() . '/parts/' );
+define( 'CHILD2G_SINGULAR', CHILD2G_PART . 'singular/' );
+define( 'CHILD2G_ARCHIVE', CHILD2G_PART . 'archive/' );
 
 
 /**
@@ -96,4 +97,3 @@ endif;
 if ( class_exists( 'woocommerce' ) ) {
 	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
 }
-

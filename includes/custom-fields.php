@@ -59,6 +59,7 @@ function prime2g_save_metas_1( $post_id ) {
 	$fields = [
 		'post_subtitle',
 		'remove_sidebar',
+		'remove_header',
 		'page_width',
 	];
 	foreach( $fields as $field ) {
@@ -98,6 +99,17 @@ value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
 <?php } ?>
 
 	<div class="meta-options prime2g_field">
+		<label for="page_width">Page Width</label>
+		<select id="page_width" class="prime2g_options" name="page_width">
+			<option value="default_post_width">Default Width</option>
+			<option value="post_narrow" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_narrow' ) echo 'selected'; ?>>Narrow</option>
+			<option value="post_wide" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wide' ) echo 'selected'; ?>>Wide</option>
+			<option value="post_w100vw" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_w100vw' ) echo 'selected'; ?>>Full Width</option>
+			<option value="post_wstretch" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wstretch' ) echo 'selected'; ?>>Stretched</option>
+		</select>
+	</div>
+
+	<div class="meta-options prime2g_field">
 		<label for="remove_sidebar">Remove Sidebar?</label>
 		<select id="remove_sidebar" class="prime2g_options" name="remove_sidebar">
 			<option>--- Keep Sidebar ---</option>
@@ -106,13 +118,10 @@ value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
 	</div>
 
 	<div class="meta-options prime2g_field">
-		<label for="page_width">Page Width</label>
-		<select id="page_width" class="prime2g_options" name="page_width">
-			<option value="default_post_width">Default Width</option>
-			<option value="post_narrow" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_narrow' ) echo 'selected'; ?>>Narrow</option>
-			<option value="post_wide" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wide' ) echo 'selected'; ?>>Wide</option>
-			<option value="post_w100vw" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_w100vw' ) echo 'selected'; ?>>Full Width</option>
-			<option value="post_wstretch" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wstretch' ) echo 'selected'; ?>>Stretched</option>
+		<label for="remove_header">Remove Header?</label>
+		<select id="remove_header" class="prime2g_options" name="remove_header">
+			<option>--- Keep Header ---</option>
+			<option value="remove" <?php if( get_post_meta( $pid, 'remove_header', true ) == 'remove' ) echo 'selected'; ?>>Remove Header</option>
 		</select>
 	</div>
 
