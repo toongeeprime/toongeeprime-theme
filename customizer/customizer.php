@@ -44,12 +44,12 @@ function prime2g_edit_customizer_defaults( $wp_customize ) {
  *	Let ALL ToongeePrime Theme sections fall under this panel
  */
 function prime2g_register_customizer_panel( $wp_customize ) {
-$description	=	'<p>Customize ToongeePrime Theme Options</p>';
+$description	=	'<p>Customize ' . PRIME2G_THEMENAME . ' Options</p>';
 
 	$wp_customize->add_panel(
 		'prime2g_customizer_panel',
 		array(
-			'title'			=>	__( 'ToongeePrime Theme', 'toongeeprime-theme' ),
+			'title'			=>	__( PRIME2G_THEMENAME, 'toongeeprime-theme' ),
 			'description'	=>	__( $description, 'toongeeprime-theme' ),
 			'priority'		=>	50,
 		)

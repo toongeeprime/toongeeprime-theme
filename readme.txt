@@ -1,10 +1,10 @@
 Plugin Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
-Requires at least: 5.9
+Requires at least: 5.8
 Tested up to: 6.0
-Stable tag: 1.0.3
-Requires PHP: 7.3
+Stable tag: 1.0.36
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,15 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.36 =
+
+* Marked PHP 7.4 compatible
+* Automate Customizer Panel naming for active Child Theme
+
+= 1.0.35 =
+
+* Added placeholder image possibility for posts without thumbnails in archives
 
 = 1.0.3 =
 

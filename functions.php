@@ -16,9 +16,7 @@ define( 'PRIME2G_CLASSDIR', PRIME2G_THEME . 'classes/' );
 define( 'PRIME2G_PART', PRIME2G_THEME . 'parts/' );
 define( 'PRIME2G_SINGULAR', PRIME2G_PART . 'singular/' );
 define( 'PRIME2G_ARCHIVE', PRIME2G_PART . 'archive/' );
-define( 'CHILD2G_PART', get_stylesheet_directory() . '/parts/' );
-define( 'CHILD2G_SINGULAR', CHILD2G_PART . 'singular/' );
-define( 'CHILD2G_ARCHIVE', CHILD2G_PART . 'archive/' );
+define( 'PRIME2G_THEMENAME', wp_get_theme()->get( 'Name' ) );
 
 
 /**

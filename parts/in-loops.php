@@ -114,7 +114,14 @@ function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $
 				echo ');"></div>';
 			}
 			else {
-				echo '<div class="thumbnail">'. get_the_title() .'</div>';
+				if ( child2g_has_placeholder() ) {
+					echo '<div class="thumbnail" style="background-image:url(';
+					child2g_placeholder_url();
+					echo ');"></div>';
+				}
+				else {
+					echo '<div class="thumbnail">'. get_the_title() .'</div>';
+				}
 			}
 			?>
 		</a>
@@ -160,7 +167,14 @@ echo '<a href="'. get_permalink( $id ) .'" title="'. $title .'">';
 		echo ');"></div>';
 	}
 	else {
-		echo '<div class="thumbnail">'. $title .'</div>';
+		if ( child2g_has_placeholder() ) {
+			echo '<div class="thumbnail" style="background-image:url(';
+			child2g_placeholder_url();
+			echo ');"></div>';
+		}
+		else {
+			echo '<div class="thumbnail">'. $title .'</div>';
+		}
 	}
 
 echo '</a></div><div class="entry_text">';
@@ -193,7 +207,14 @@ function prime2g_search_loop() { ?>
 				echo ');"></div>';
 			}
 			else {
-				echo '<div class="thumbnail">'. get_the_title() .'</div>';
+				if ( child2g_has_placeholder() ) {
+					echo '<div class="thumbnail" style="background-image:url(';
+					child2g_placeholder_url();
+					echo ');"></div>';
+				}
+				else {
+					echo '<div class="thumbnail">'. get_the_title() .'</div>';
+				}
 			}
 			?>
 		</a>
