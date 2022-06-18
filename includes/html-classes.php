@@ -9,7 +9,7 @@
 
 
 /**
- *	Add Classes to Post Title Header
+ *	Add Classes to Post Title Header.
  */
 function prime2g_title_header_classes() {
 
@@ -149,7 +149,6 @@ function prime2g_theme_html_classes() {
 	$addClass	=	ToongeePrime_Colors::theme_color_classes();
 
 echo 'class="'. implode( ' ', $addClass ) .'"';
-
 }
 
 

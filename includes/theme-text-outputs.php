@@ -70,6 +70,7 @@ if ( is_singular() ) {
 		}
 
 		$taxonomy	=	get_taxonomy( $taxon_1 );
+		if ( ! is_object( $taxonomy ) ) return;
 		$taxName	=	$taxonomy->labels->singular_name;
 
 		$term		=	wp_get_post_terms( get_the_ID(), $taxon_1 )[0];
@@ -166,10 +167,12 @@ add_action( 'prime2g_before_post', 'prime2g_edit_entry', 5 );
 if ( ! function_exists( 'prime2g_edit_entry' ) ) {
 
 function prime2g_edit_entry() {
+$pType	=	get_post_type();
+
 	edit_post_link(
 		sprintf(
 			/* translators: %s: Name of current post only visible to screen readers */
-			esc_html__( 'Edit this entry %s', 'toongeeprime-theme' ),
+			esc_html__( 'Edit this ' . $pType . ' %s', 'toongeeprime-theme' ),
 			'<span class="screen-reader-text">' . get_the_title() . '</span>'
 		),
 		'<p class="edit-link edit-entry">',
