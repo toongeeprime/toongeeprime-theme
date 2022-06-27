@@ -22,6 +22,10 @@ function prime2g_comments() {
 }
 
 
+/**
+ *		Add Edit post link to archive entries
+ */
+add_action( 'prime2g_archive_post_footer', 'prime2g_edit_entry', 5 );
 
 
 /**
