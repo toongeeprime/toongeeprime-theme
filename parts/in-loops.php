@@ -9,7 +9,7 @@
 
 
 /**
- *	Previous and Next Post
+ *	Showing Sticky Posts
  */
 add_action( 'prime2g_after_header', 'prime2g_show_sticky_posts' );
 if ( ! function_exists( 'prime2g_show_sticky_posts' ) ) {
@@ -41,6 +41,7 @@ if ( 'show' == get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || 
 
 }
 }
+
 
 
 /**

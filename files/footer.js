@@ -25,5 +25,17 @@ let primetoTop	=	document.querySelector( '#prime2g_toTop' ),
 
 
 
+/**
+ *	Close mobile menu by class "close_mobile_menu"
+ */
+document.querySelectorAll( '.close_mobile_menu' ).forEach( closeMenu );
+function closeMenu(el) {
+	(el).addEventListener( 'click', (el)=>{
+	document.querySelector( '.main_menu_wrap.prime' ).classList.remove( 'prime' );
+} )
+}
+
+
+
 // Remove class to determine browser supports JavaScript
 document.body.classList.remove( 'no-js' );
