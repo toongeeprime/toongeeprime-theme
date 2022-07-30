@@ -13,11 +13,19 @@ $pid			=	get_the_ID();
 
 
 if ( $hasHeader ) {
+$headerImage	=	get_header_image();
+$keep_header	=	( 'noreplace' == get_theme_mod( 'prime2g_thumb_replace_header' ) );
+
 	if ( is_singular() && has_post_thumbnail() ) {
-		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
+		if ( $keep_header ) {
+			$headerUrl	=	$headerImage;
+		}
+		else {
+			$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
+		}
 	}
 	else {
-		$headerUrl	=	get_header_image();
+		$headerUrl	=	$headerImage;
 	}
 }
 else {

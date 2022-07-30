@@ -13,14 +13,16 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 
 	$theStyles	=	new ToongeePrime_Styles();
 
-	// Dark Theme Logo
+	/**
+	 *	Dark Theme Logo
+	 */
 	$logo_url = '';
 
 	$wp_customize->add_setting(
 		'prime2g_dark_theme_logo',
 		array(
 			'type'				=>	'theme_mod',
-			// 'default'			=>	$logo_url,
+			// 'default'		=>	$logo_url,
 			'transport'			=>	'refresh',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
@@ -46,8 +48,8 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_site_width',
 		array(
-			'type'				=>	'theme_mod',
-			'default'			=>	$dWidth,
+			'type'		=>	'theme_mod',
+			'default'	=>	$dWidth,
 		)
 	);
 	$wp_customize->add_control(
@@ -68,37 +70,13 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 
 
 	/**
-	 *	ADDITIONAL STYLING OPTIONS
-	 */
-	$wp_customize->add_setting(
-		'prime2g_site_style_extras',
-		array(
-			'type'				=>	'theme_mod',
-		)
-	);
-	$wp_customize->add_control(
-		'prime2g_site_style_extras',
-		array(
-			'label'		=>	__( 'Extra Style Options', 'toongeeprime-theme' ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_site_style_extras',
-			'section'	=>	'prime2g_theme_options_section',
-			'choices'	=>	array(
-				''	=>	__( 'None', 'toongeeprime-theme' ),
-				'stretch_hf'	=>	__( 'Stretch Header &amp; Footer', 'toongeeprime-theme' ),
-			),
-		)
-	);
-
-
-	/**
-	 *	MAIN MENU OPTIONS
+	 *	MAIN MENU POSITION
 	 */
 	$wp_customize->add_setting(
 		'prime2g_menu_position',
 		array(
-			'type'				=>	'theme_mod',
-			'default'			=>	'top',
+			'type'		=>	'theme_mod',
+			'default'	=>	'top',
 		)
 	);
 	$wp_customize->add_control(
@@ -118,13 +96,37 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 
 
 	/**
+	 *	STYLING ADJUSTMENTS
+	 */
+	$wp_customize->add_setting(
+		'prime2g_site_style_extras',
+		array(
+			'type'		=>	'theme_mod',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_site_style_extras',
+		array(
+			'label'		=>	__( 'Extra Styling Adjustments', 'toongeeprime-theme' ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_site_style_extras',
+			'section'	=>	'prime2g_theme_options_section',
+			'choices'	=>	array(
+				''	=>	__( 'None', 'toongeeprime-theme' ),
+				'stretch_hf'	=>	__( 'Stretch Header &amp; Footer', 'toongeeprime-theme' ),
+			),
+		)
+	);
+
+
+	/**
 	 *	PAGE TITLE POSITION
 	 */
 	$wp_customize->add_setting(
 		'prime2g_title_location',
 		array(
-			'type'				=>	'theme_mod',
-			'default'			=>	'content',
+			'type'		=>	'theme_mod',
+			'default'	=>	'content',
 		)
 	);
 	$wp_customize->add_control(
@@ -148,7 +150,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_logo_with_menu',
 		array(
-			'type'			=>	'theme_mod',
+			'type'		=>	'theme_mod',
 		)
 	);
 	$wp_customize->add_control(
@@ -168,7 +170,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_theme_breadcrumbs',
 		array(
-			'type'			=>	'theme_mod',
+			'type'		=>	'theme_mod',
 		)
 	);
 	$wp_customize->add_control(
@@ -263,7 +265,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_website_shutdown',
 		array(
-			'type'				=>	'theme_mod',
+			'type'		=>	'theme_mod',
 		)
 	);
 	$wp_customize->add_control(

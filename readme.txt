@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.0.39
+Stable tag: 1.0.40
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,14 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.40 =
+
+* Added option to replace header image with post thumbnail. Default: replace.
+
+= 1.0.39.1 =
+
+* Added wrapping tags to some text
 
 = 1.0.39 =
 

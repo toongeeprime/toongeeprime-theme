@@ -53,7 +53,7 @@ if ( $phone )
 $contacts	.=	'</div>';
 
 if ( $address )
-	$contacts .= '<span class="address" title="' . __( 'Our Address', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-building"></span>' . __( $address, 'toongeeprime-theme' ) . '</span>';
+	$contacts .= '<span class="address" title="' . __( 'Our Address', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-building"></span><span class="contactAddress">' . __( $address, 'toongeeprime-theme' ) . '</span></span>';
 
 $contacts	.=	'</div>';
 
@@ -74,11 +74,11 @@ $power	=	get_theme_mod( 'prime2g_footer_credit_power' );
 $name	=	get_theme_mod( 'prime2g_footer_credit_name' );
 $url	=	get_theme_mod( 'prime2g_footer_credit_url' );
 $attrs	=	' target="_blank" rel="noopener noreferrer nofollow"';
-$cRight	=	' &copy; '. date( 'Y' );
+$cRight	=	'<span id="copyright_date"> &copy; ' . date( 'Y' ) . '</span>';
 
 $footerCred	=	'<div class="site_footer_credits">';
 
-	if ( $power ) {
+	if ( $name ) {
 		if( $url && $name ) {
 			$footerCred	.=	'<span title="Site Credits">' . $power . ' <a href="' . $url . '"' . $attrs . '>' . $name . '</a> '. $cRight .' </span>';
 		}

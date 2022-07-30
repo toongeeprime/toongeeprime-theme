@@ -28,8 +28,8 @@ let primetoTop	=	document.querySelector( '#prime2g_toTop' ),
 /**
  *	Close mobile menu by class "close_mobile_menu"
  */
-document.querySelectorAll( '.close_mobile_menu' ).forEach( closeMenu );
-function closeMenu(el) {
+document.querySelectorAll( '.close_mobile_menu' ).forEach( close_mMenu );
+function close_mMenu(el) {
 	(el).addEventListener( 'click', (el)=>{
 	document.querySelector( '.main_menu_wrap.prime' ).classList.remove( 'prime' );
 } )

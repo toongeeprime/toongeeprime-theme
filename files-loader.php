@@ -21,7 +21,7 @@ foreach( $directories as $dir ) {
 	foreach( $files as $file ) {
 	$path	=	$folder . $file;
 
-		if ( ! is_dir( $path ) && pathinfo( $path )[ 'extension' ] == 'php' ) require_once $path;
+		if ( is_file( $path ) && pathinfo( $path )[ 'extension' ] == 'php' ) require_once $path;
 	}
 
 }
