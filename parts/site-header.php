@@ -13,20 +13,14 @@ $pid			=	get_the_ID();
 
 
 if ( $hasHeader ) {
-$headerImage	=	get_header_image();
-$keep_header	=	( 'noreplace' == get_theme_mod( 'prime2g_thumb_replace_header' ) );
 
-	if ( is_singular() && has_post_thumbnail() ) {
-		if ( $keep_header ) {
-			$headerUrl	=	$headerImage;
-		}
-		else {
-			$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
-		}
+	if ( is_singular() && has_post_thumbnail() && ( '' == get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
+		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
 	}
 	else {
-		$headerUrl	=	$headerImage;
+		$headerUrl	=	get_header_image();
 	}
+
 }
 else {
 	$headerUrl	=	'';

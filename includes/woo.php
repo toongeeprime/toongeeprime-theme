@@ -15,7 +15,7 @@ if ( class_exists( 'woocommerce' ) ) :
 
 
 /**
- *	Remove WooCommerce breadcrumbs to use Theme's
+ *	Remove WooCommerce breadcrumbs - Theme's breadcrumbs being active
  */
 remove_action( 'woocommerce_before_main_content' , 'woocommerce_breadcrumb' , 20, 0 );
 

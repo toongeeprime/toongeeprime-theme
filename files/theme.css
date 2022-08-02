@@ -90,13 +90,13 @@ input, textarea{
 .dark-content input, .dark-content textarea{
 	border-color:rgba(255,255,255,0.5);
 }
-input[type="button"], input[type="submit"], button, .button, a.button, .btn,
+input[type="button"], input[type="submit"], input[type="password"], button, .button, a.button, .btn,
 .wp-block-button__link, .wp-block-button button{
 	background-color:var(--button-bg); color:var(--button-text); cursor:pointer;
 	border:2px solid var(--button-bg); padding:1em 2em; border-radius:0;
 	font-family:;
 }
-input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, a.button:hover, .btn:hover,
+input[type="button"]:hover, input[type="submit"]:hover, input[type="password"]:hover, button:hover, .button:hover, a.button:hover, .btn:hover,
 .button:focus, a.button:focus, .btn:focus, .wp-block-button__link:hover, .wp-block-button__link:focus{
 	background-color:var(--button-text); color:var(--button-bg);
 }
@@ -216,7 +216,7 @@ h1, h2, h3{
 	background-color:var(--content-background); color:var(--content-text);
 }
 .site_main{
-	min-height:75vh; padding:0 var(--min-pad) var(--med-pad);
+	min-height:75vh; padding:0 var(--min-pad) var(--med-pad); height:max-content;
 }
 .no_title .site_main{
 	min-height:0; padding:0;

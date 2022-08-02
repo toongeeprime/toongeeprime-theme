@@ -9,7 +9,7 @@
 
 
 /**
- *	DISPLAY POSTS IN WIDGET
+ *	DISPLAY POSTS SHORTCODE
  */
 add_shortcode( 'prime2g_display_posts', 'prime2g_posts_shortcode' );
 function prime2g_posts_shortcode( $atts ) {

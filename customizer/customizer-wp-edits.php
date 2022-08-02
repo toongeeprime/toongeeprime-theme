@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	Theme's Main Customizer WP Edits
+ *	Theme's Edits on WP's Customizer Options
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
@@ -24,13 +24,13 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_thumb_replace_header',
 		array(
-			'label'		=>	__( 'Replace Image with Post Thumbnail', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Replace Header Image', 'toongeeprime-theme' ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_thumb_replace_header',
 			'section'	=>	'header_image',
 			'choices'	=>	array(
-				''	=>	__( 'Replace Header Image', 'toongeeprime-theme' ),
-				'noreplace'	=>	__( 'Do Not Replace Header Image', 'toongeeprime-theme' )
+				''	=>	__( 'Replace Image with Post Thumbnail', 'toongeeprime-theme' ),
+				'retain'	=>	__( 'Retain Header Image', 'toongeeprime-theme' )
 			),
 		)
 	);

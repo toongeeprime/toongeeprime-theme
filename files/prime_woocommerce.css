@@ -6,8 +6,10 @@
  *	@since ToongeePrime Theme 1.0
  */
 
+.product{ position:relative; }
+
 /** GENERAL **
-********************/
+**************/
 #main .woocommerce input, #main .woocommerce select{
 	padding:12px 15px;
 }
@@ -37,11 +39,15 @@
 .form-submit input#submit, select.orderby{
 	width:auto;min-width:150px;
 }
+.onsale{
+	color:#fff;background:#c60000;padding:4px 15px 5px;box-shadow:0 3px 7px rgba(0,0,0,0.5);
+	position:absolute;z-index:1;transform:rotate(-15deg);letter-spacing:1px;font-weight:600;
+}
 
 
 
-/** COMMECTS/RATINGS **
-********************/
+/** COMMENTS/RATINGS **
+***********************/
 .star-rating, p.stars a{
 	font-family:dashicons;font-size:.857em;position:relative;overflow:hidden;border:0;
 	line-height:1;height:1em;display:block;float:none;width:5.4em;text-decoration:none;
@@ -82,7 +88,7 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 
 
 /** MESSAGES **
-********************/
+***************/
 .woocommerce-message, .woocommerce-error, .woocommerce-info{
 	border-top:5px solid lightgreen;clear:both;margin-bottom:calc(2 * var(--min-pad));font-size:1.2rem;list-style:none;
 	position:relative;background:var(--faint-bg);padding:10px 10px 10px calc(15px + var(--min-pad));
@@ -175,7 +181,7 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 	display:grid;overflow:hidden;position:relative;
 }
 .woocommerce-product-gallery__trigger{
-	position:absolute;top:20px;left:20px;z-index:+1;background:rgba(255,255,255,0.7);width:30px;height:30px;
+	position:absolute;top:20px;right:20px;z-index:+1;background:rgba(255,255,255,0.7);width:30px;height:30px;
 	border-radius:100%;display:grid;place-content:center;
 }
 .woocommerce-product-gallery__trigger:hover{

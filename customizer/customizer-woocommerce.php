@@ -39,7 +39,7 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 		'prime2g_shop_page_description',
 		array(
 			'type'				=>	'theme_mod',
-			'default'			=>	$descr,
+			'default'			=>	__( $descr, 'toongeeprime-theme' ),
 			'transport'			=>	'refresh',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
