@@ -118,7 +118,7 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 	width:auto;margin-top:var(--min-pad);
 }
 #page .quantity input{
-	padding:10px 0;text-align:center;
+	padding:10px 0;text-align:center;width:auto;
 }
 .select2-container{
 	color:#030303;
@@ -150,7 +150,7 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 }
 .woocommerce ul.products{
 	display:grid;gap:5%;list-style:none;
-	margin:var(--min-pad) 0;padding:0;
+	margin:var(--min-pad) 0 100px;padding:0;
 }
 .woocommerce-loop-product__title{
 	line-height:1.5;
@@ -237,7 +237,7 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 	border:1px solid var(--content-text);
 }
 #prime_item_in_view{
-	margin-top:var(--min-pad);
+	margin-top:var(--min-pad);padding:20px 0;
 }
 .related, .upsells{
 	margin:calc(2 * var(--min-pad)) 0 var(--min-pad);

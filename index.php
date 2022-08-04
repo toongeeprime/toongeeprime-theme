@@ -19,7 +19,6 @@ if ( is_singular() ) {
 
 }
 
-
 elseif ( is_archive() || is_home() ) {
 
 	if ( have_posts() ) {

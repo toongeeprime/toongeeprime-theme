@@ -49,7 +49,7 @@ function prime2g_woo_shop_description() {
  */
 add_action( 'woocommerce_after_single_product_summary', 'prime2g_product_in_view' );
 function prime2g_product_in_view() {
-	echo '<p id="prime_item_in_view">' . __( 'You are viewing "' . get_the_title() . '"', 'woocommerce' ) . '</p>';
+	echo '<p id="prime_item_in_view" class="clear">' . __( 'You are viewing "' . get_the_title() . '"', 'woocommerce' ) . '</p>';
 }
 
 
