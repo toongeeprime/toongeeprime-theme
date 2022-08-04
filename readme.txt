@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.0.40.1
+Stable tag: 1.0.40.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,11 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
-= 1.0.40.1 =
+= 1.0.40.5 =
+
+* Template detecting updates.
+
+= 1.0.40.2 =
 
 * CSS and other edits.
 

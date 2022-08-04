@@ -46,6 +46,9 @@ function prime2g_get_theme_template( $archive = false ) {
 		require PRIME2G_ARCHIVE . 'post.php';
 	}
 	elseif ( $archive ) {
+		$defaultArch		=	PRIME2G_ARCHIVE . 'post.php';
+		$defaultArch_child	=	CHILD2G_ARCHIVE . 'post.php';
+
 		if ( is_category() || is_tag() || is_tax() ) {
 
 		# *Filename format must be: taxonomy_slug.php or taxonomy.php
@@ -66,13 +69,15 @@ function prime2g_get_theme_template( $archive = false ) {
 
 			elseif ( file_exists( $childfile ) ) { require $childfile; }
 
-			else { require PRIME2G_ARCHIVE . 'post.php'; }
+			elseif ( file_exists( $defaultArch_child ) ) { require $defaultArch_child; }
+
+			else { require $defaultArch; }
+
 		}
 		else {
 
-			$childfile		=	CHILD2G_ARCHIVE . 'post.php';
-			if ( file_exists( $childfile ) ) { require $childfile; }
-			else { require PRIME2G_ARCHIVE . 'post.php'; }
+			if ( file_exists( $defaultArch_child ) ) { require $defaultArch_child; }
+			else { require $defaultArch; }
 
 		}
 	}
@@ -80,15 +85,16 @@ function prime2g_get_theme_template( $archive = false ) {
 		/**
 		 *	See if query has post format
 		 */
+		$getPType	=	get_post_type();
 		$get_format	=	get_post_format();
 		$format		=	$get_format ? '_' . $get_format : null;
 
 		/**
 		 *	Run Template for Singular Queries
-		 *	Pass template narrowing to Child theme
+		 *	Pass template narrowing only to Child theme
 		 */
-		$childformat	=	CHILD2G_SINGULAR . get_post_type() . $format . '.php';
-		$childfile		=	CHILD2G_SINGULAR . get_post_type() . '.php';
+		$childformat	=	CHILD2G_SINGULAR . $getPType . $format . '.php';
+		$childfile		=	CHILD2G_SINGULAR . $getPType . '.php';
 
 		if ( file_exists( $childformat ) ) { require $childformat; }
 
@@ -116,4 +122,5 @@ if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
 		return ( ! in_array( get_post_type(), $pTypes ) );
 	}
 }
+
 
