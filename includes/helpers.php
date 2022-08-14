@@ -53,15 +53,15 @@ function prime2g_get_theme_template( $archive = false ) {
 
 			$obj	=	get_queried_object();
 			$slug	=	'_' . $obj->slug;
-			$taxonomy	=	$obj->taxonomy;
-			$fileName	=	$taxonomy ?? null;
+			$taxon	=	$obj->taxonomy;
+			$taxonomy	=	$taxon ?? null;
 
 			/**
 			 *	Run Template for Archive Queries
 			 *	Pass template narrowing to Child theme
 			 */
-			$childfile_slug		=	CHILD2G_ARCHIVE . $fileName . $slug . '.php';
-			$childfile			=	CHILD2G_ARCHIVE . $fileName . '.php';
+			$childfile_slug		=	CHILD2G_ARCHIVE . $taxonomy . $slug . '.php';
+			$childfile			=	CHILD2G_ARCHIVE . $taxonomy . '.php';
 
 			if ( file_exists( $childfile_slug ) ) { require $childfile_slug; }
 
@@ -72,6 +72,7 @@ function prime2g_get_theme_template( $archive = false ) {
 			else { require $defaultArch; }
 
 		}
+		// elseif ( is_post_type_archive() ) {}
 		else {
 
 			if ( file_exists( $defaultArch_child ) ) { require $defaultArch_child; }
