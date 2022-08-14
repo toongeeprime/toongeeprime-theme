@@ -340,6 +340,16 @@ a:hover, a:focus, table a:hover, table a:focus{
 .logo_with_menu .custom-logo{
 	margin-top:5px;max-height:36px;
 }
+.current-menu-item a{
+	position:relative;
+}
+.current-menu-item a::after{
+	content:''; height:1px; background:var(--content-text);
+	left:0; right:0; bottom:0; position:absolute;
+}
+.current-menu-item .sub-menu a::after{
+	height:0;
+}
 
 .menu_togs{
 	width:50px; cursor:pointer;

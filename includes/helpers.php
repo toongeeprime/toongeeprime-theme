@@ -93,10 +93,13 @@ function prime2g_get_theme_template( $archive = false ) {
 		 */
 		$childformat	=	CHILD2G_SINGULAR . $pType . $format . '.php';
 		$childpType		=	CHILD2G_SINGULAR . $pType . '.php';
+		$childDefault	=	CHILD2G_SINGULAR . 'post.php';
 
 		if ( file_exists( $childformat ) ) { require $childformat; }
 
 		elseif ( file_exists( $childpType ) ) { require $childpType; }
+
+		elseif ( file_exists( $childDefault ) ) { require $childDefault; }
 
 		else { require PRIME2G_SINGULAR . 'post.php'; }
 
