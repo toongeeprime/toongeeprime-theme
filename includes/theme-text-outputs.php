@@ -167,12 +167,15 @@ add_action( 'prime2g_before_post', 'prime2g_edit_entry', 5 );
 if ( ! function_exists( 'prime2g_edit_entry' ) ) {
 
 function prime2g_edit_entry() {
-$pType	=	get_post_type();
+global $post;
+$pType	=	$post->post_type;
+$ptObj	=	get_post_type_object( $pType );
+$ptName	=	$ptObj->labels->singular_name;
 
 	edit_post_link(
 		sprintf(
 			/* translators: %s: Name of current post only visible to screen readers */
-			esc_html__( 'Edit this ' . $pType . ' %s', 'toongeeprime-theme' ),
+			esc_html__( 'Edit this ' . $ptName . ' %s', 'toongeeprime-theme' ),
 			'<span class="screen-reader-text">' . get_the_title() . '</span>'
 		),
 		'<p class="edit-link edit-entry">',

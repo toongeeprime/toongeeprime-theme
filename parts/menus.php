@@ -35,7 +35,7 @@ $incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
 		</div>
 	</div>
 
-		<nav class="main-menu collapsible-navs site-menus site_width" role="navigation" aria-label="<?php esc_attr_e( 'Main Menu', 'twentytwentyone' ); ?>">
+		<nav class="main-menu collapsible-navs site-menus site_width" role="navigation" aria-label="<?php esc_attr_e( 'Main Menu', 'toongeeprime-theme' ); ?>">
 			<?php
 			wp_nav_menu(
 				array(
@@ -47,7 +47,7 @@ $incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
 				)
 			);
 			?>
-		</nav><!-- #site-main-menu -->
+		</nav><!-- .main-menu -->
 	<?php
 	}
 	else {

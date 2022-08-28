@@ -51,7 +51,7 @@ function prime2g_below_posts_widgets() {
 if ( function_exists( 'define_2gPlainPage' ) ) return;
 
 if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
-	<aside id="below_postsWidgets" class="asides">
+	<aside id="below_postsWidgets" class="asides clear">
 		<div class="widgets-box grid">
 			<?php dynamic_sidebar( 'belowposts-widgets' ); ?>
 		</div>

@@ -208,6 +208,9 @@ code{
 .clear, .prev_next{
 	clear:both; width:100%;
 }
+.pointer{
+	cursor:pointer;
+}
 .breakall{
 	word-break:break-all;
 }
@@ -601,6 +604,9 @@ a.comment-reply-link:hover{
 
 
 /********** WP **********/
+#wpadminbar{
+	z-index:999998;
+}
 #signup-content{
 	max-width:700px; margin:auto;
 }
@@ -627,7 +633,15 @@ a.comment-reply-link:hover{
 .sticky{
 	
 }
-
+body .widget_eu_cookie_law_widget{
+	left:0; right:0; bottom:0;
+}
+body #eu-cookie-law{
+	padding:1rem;
+}
+#eu-cookie-law input[type="submit"]{
+	width:auto;
+}
 
 /**************************
 	RESPONSIVE STYLING

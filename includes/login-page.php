@@ -9,6 +9,7 @@
 
 
 add_action( 'login_enqueue_scripts', 'prime2g_login_enqueues', 15 );
+add_action( 'login_enqueue_scripts', 'prime2g_theme_root_styles', 12 );
 if ( ! function_exists( 'prime2g_login_enqueues' ) ) {
 
 function prime2g_login_enqueues() {
