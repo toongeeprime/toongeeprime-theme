@@ -358,7 +358,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	width:50px; cursor:pointer;
 }
 .menu_togs span{
-	width:80%; background:#000; height:4px;
+	width:80%; background:var(--header-text); height:4px;
 	position:absolute; top:calc(50% - 5%); right:calc(50% - 30%);
 }
 .menu_togs span:nth-child(1){
@@ -790,7 +790,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 	background:none;
 }
 .menu_toggbar{
-	position:fixed; background:#fff; padding:5px;
+	position:fixed; background:var(--header-background); padding:5px;
 	top:0; left:0; right:0;
 	height:46px; display:flex; align-items:center;
 	justify-content:space-between;
