@@ -67,10 +67,9 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'has-background-image';
 	}
 
-	// To entries with a featured image
+	// Singular Entries & Archives
 	if ( is_singular() ) {
 
-		// Add `singular` to singular entries and `hfeed` to archives
 		$classes[]	=	'singular';
 
 		// Default Header Removed
@@ -78,6 +77,7 @@ function prime2g_body_classes( $classes ) {
 			$classes[]	=	'header_removed';
 		}
 
+		// Of entries with a featured image
 		if ( has_post_thumbnail() ) {
 			$classes[]	=	'has-thumbnail';
 		} else {

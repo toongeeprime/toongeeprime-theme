@@ -800,8 +800,17 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 }
 .main-menu{
 	background:var(--content-text); right:var(--min-pad); position:fixed;
-	top:46px; left:0; bottom:0;
-	transition:0.4s; transform:translateX(-200%);
+	top:46px; left:0; bottom:0; padding-bottom:var(--min-pad);
+	transition:0.4s; transform:translateX(-200%); overflow-y:auto;
+}
+.main-menu::-webkit-scrollbar{
+	width:12px; background:silver;
+}
+.main-menu::-webkit-scrollbar-thumb{
+	background:var(--content-text); border-radius:10px;
+}
+.main-menu::-webkit-scrollbar-thumb:hover{
+	background:steelblue;
 }
 .prime .main-menu{
 	transform:translateX(0);
