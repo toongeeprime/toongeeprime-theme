@@ -51,9 +51,7 @@ function prime2g_save_metas_2( $post_id ) {
 /**
  *	Custom Fields Form
  */
-function toongeeprime_cFields_callback_2( $post ) {
-$pid	=	get_the_ID();
-?>
+function toongeeprime_cFields_callback_2( $post ) { ?>
 <div class="prime2g_box">
 	<style scoped>
 		#prime2g_fieldsbox_2{box-shadow:0px 3px 5px #ccc;}
@@ -63,14 +61,14 @@ $pid	=	get_the_ID();
     <div class="meta-options prime2g_field">
 		<label for="prime_page_css">CSS</label>
 <textarea id="prime_page_css" class="toongeeprime_admintextarea" name="prime_page_css" rows="5" placeholder="Do not include <style> tags">
-<?php echo esc_attr( get_post_meta( $pid, 'prime_page_css', true ) ); ?>
+<?php echo $post->prime_page_css; ?>
 </textarea>
 	</div>
 
 	<div class="meta-options prime2g_field">
 		<label for="prime_page_js">JavaScript</label>
 <textarea id="prime_page_js" class="toongeeprime_admintextarea" name="prime_page_js" rows="5" placeholder="Do not include <script> tags">
-<?php echo esc_attr( get_post_meta( $pid, 'prime_page_js', true ) ); ?>
+<?php echo $post->prime_page_js; ?>
 </textarea>
 	</div>
 </div>

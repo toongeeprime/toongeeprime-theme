@@ -186,8 +186,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 			'section'	=>	'prime2g_socialmedia_links_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'2348012345678',
-				'maxlength'		=>	'13',
-				'pattern'		=>	'[0-9]{13}',
+				'maxlength'		=>	'16',
+				// 'pattern'		=>	'[0-9]{16}',
 			),
 		)
 	);
@@ -210,8 +210,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 			'section'	=>	'prime2g_socialmedia_links_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'2348012345678',
-				'maxlength'		=>	'13',
-				'pattern'		=>	'[0-9]{13}',
+				'maxlength'		=>	'16',
+				// 'pattern'		=>	'[0-9]{16}',
 			),
 		)
 	);

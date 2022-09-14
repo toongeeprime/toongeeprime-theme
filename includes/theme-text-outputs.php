@@ -168,8 +168,12 @@ if ( ! function_exists( 'prime2g_edit_entry' ) ) {
 
 function prime2g_edit_entry() {
 global $post;
+if ( ! is_object( $post ) ) return;
+
 $pType	=	$post->post_type;
 $ptObj	=	get_post_type_object( $pType );
+if ( ! is_object( $ptObj ) ) return;
+
 $ptName	=	$ptObj->labels->singular_name;
 
 	edit_post_link(

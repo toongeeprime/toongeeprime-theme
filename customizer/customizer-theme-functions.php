@@ -46,9 +46,9 @@ if ( $whatsapp ) {
 	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-whatsapp"></span></a></span>';
 }
 if ( $email )
-	$contacts .= '<span class="sci em"><a href=mailto:"'. $email .'" title="' . __( 'Send us a mail', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-email"></span></a></span>';
+	$contacts .= '<span class="sci em"><a href="mailto:'. $email .'" title="' . __( 'Send us a mail', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-email"></span></a></span>';
 if ( $phone )
-	$contacts .= '<span class="sci ph"><a href=tel:"'. $phone .'" title="' . __( 'Call us', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-phone"></span></a></span>';
+	$contacts .= '<span class="sci ph"><a href="tel:+'. $phone .'" title="' . __( 'Call us', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-phone"></span></a></span>';
 
 $contacts	.=	'</div>';
 

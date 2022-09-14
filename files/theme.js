@@ -4,6 +4,9 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
+function p2getEl( el ) { return document.querySelector( el ); }
+function p2getAll( els ) { return document.querySelectorAll( els ); }
+
 function prime2gElems( elems, clss = 'prime' ) {
 elems.forEach( activeAdd );
 	function activeAdd( el ) {

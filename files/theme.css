@@ -110,6 +110,9 @@ input:not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type=
 input[disabled]{
 	cursor:not-allowed;
 }
+input[type="button"], input[type="submit"]{
+	width:auto;
+}
 table{
 	width:100%; max-width:100%; box-shadow:0 1px 3px rgba(0,0,0,0.2); border-collapse:collapse;
     border-spacing:0; text-align:center;
@@ -213,6 +216,9 @@ code{
 }
 .breakall{
 	word-break:break-all;
+}
+.white{
+	color:#fff;
 }
 
 
@@ -347,6 +353,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	position:relative;
 }
 .current-menu-item a::after{
+	/* This approach bypasses a border-radius */
 	content:''; height:1px; background:var(--content-text);
 	left:0; right:0; bottom:0; position:absolute;
 }
