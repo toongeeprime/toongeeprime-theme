@@ -6,15 +6,16 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
+
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
 $hasHeader		=	has_header_image();
 $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
 $pid			=	get_the_ID();
-
+$isSingular		=	is_singular();
 
 if ( $hasHeader ) {
 
-	if ( is_singular() && has_post_thumbnail() && ( '' == get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
+	if ( $isSingular && has_post_thumbnail() && ( '' == get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
 		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
 	}
 	else {
@@ -31,7 +32,7 @@ else {
 
 	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
 
-if ( post_custom( 'remove_header' ) !== 'remove' ) :
+if ( $isSingular && post_custom( 'remove_header' ) !== 'remove' ) :
 
 ?>
 

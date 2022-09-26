@@ -6,6 +6,8 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
+
+$isSingular	=	is_singular();
 ?>
 <!doctype html>
 <html <?php language_attributes(); prime2g_theme_html_classes(); ?>>
@@ -30,7 +32,7 @@
 	<div id="contentWrap" class="contentWrap">
 
 	<?php
-	if ( 'header' != get_theme_mod( 'prime2g_title_location' ) ) {
+	if ( $isSingular && 'header' != get_theme_mod( 'prime2g_title_location' ) ) {
 		if ( ! function_exists( 'define_2gRMVTitle' ) ) {
 			prime2g_title_header( prime2g_title_header_classes() );
 		}
@@ -41,5 +43,5 @@
 
 			<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 
-			<?php if ( is_singular() ) echo '<article id="primary" class="primary_area">'; ?>
+			<?php if ( $isSingular ) echo '<article id="primary" class="primary_area">'; ?>
 

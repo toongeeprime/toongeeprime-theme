@@ -36,7 +36,8 @@ $args	=	array(
 		wp_reset_postdata();
 	}
 	else {
-		echo __( 'No entries found for your request', 'toongeeprime-theme' );
+		if ( current_user_can( 'edit_others_posts' ) )
+			echo __( 'No entries found for your request', 'toongeeprime-theme' );
 	}
 
 }

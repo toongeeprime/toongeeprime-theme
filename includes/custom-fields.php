@@ -73,9 +73,7 @@ function prime2g_save_metas_1( $post_id ) {
 
 
 //Custom Fields Admin Form
-function toongeeprime_cFields_callback( $post ) {
-$pid = get_the_ID();
-?>
+function toongeeprime_cFields_callback( $post ) { ?>
 <div class="prime2g_box">
 
 	<style scoped>
@@ -92,7 +90,7 @@ $pid = get_the_ID();
 	<div class="meta-options prime2g_field">
 		<label class="hide" for="post_subtitle">Post Subtitle</label>
 <input id="post_subtitle" type="text" class="prime2g_admintext" name="post_subtitle" placeholder="A Subtitle for this Entry"
-value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
+value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 />
 	</div>
 
@@ -102,10 +100,10 @@ value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
 		<label for="page_width">Page Width</label>
 		<select id="page_width" class="prime2g_options" name="page_width">
 			<option value="default_post_width">Default Width</option>
-			<option value="post_narrow" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_narrow' ) echo 'selected'; ?>>Narrow</option>
-			<option value="post_wide" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wide' ) echo 'selected'; ?>>Wide</option>
-			<option value="post_w100vw" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_w100vw' ) echo 'selected'; ?>>Full Width</option>
-			<option value="post_wstretch" <?php if( get_post_meta( $pid, 'page_width', true ) == 'post_wstretch' ) echo 'selected'; ?>>Stretched</option>
+			<option value="post_narrow" <?php if ( $post->page_width == 'post_narrow' ) echo 'selected'; ?>>Narrow</option>
+			<option value="post_wide" <?php if ( $post->page_width == 'post_wide' ) echo 'selected'; ?>>Wide</option>
+			<option value="post_w100vw" <?php if ( $post->page_width == 'post_w100vw' ) echo 'selected'; ?>>Full Width</option>
+			<option value="post_wstretch" <?php if ( $post->page_width == 'post_wstretch' ) echo 'selected'; ?>>Stretched</option>
 		</select>
 	</div>
 
@@ -113,7 +111,7 @@ value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
 		<label for="remove_sidebar">Remove Sidebar?</label>
 		<select id="remove_sidebar" class="prime2g_options" name="remove_sidebar">
 			<option>--- Keep Sidebar ---</option>
-			<option value="remove" <?php if( get_post_meta( $pid, 'remove_sidebar', true ) == 'remove' ) echo 'selected'; ?>>Remove Sidebar</option>
+			<option value="remove" <?php if ( $post->remove_sidebar == 'remove' ) echo 'selected'; ?>>Remove Sidebar</option>
 		</select>
 	</div>
 
@@ -121,7 +119,7 @@ value="<?php echo esc_attr( get_post_meta( $pid, 'post_subtitle', true ) ); ?>"
 		<label for="remove_header">Remove Header?</label>
 		<select id="remove_header" class="prime2g_options" name="remove_header">
 			<option>--- Keep Header ---</option>
-			<option value="remove" <?php if( get_post_meta( $pid, 'remove_header', true ) == 'remove' ) echo 'selected'; ?>>Remove Header</option>
+			<option value="remove" <?php if ( $post->remove_header == 'remove' ) echo 'selected'; ?>>Remove Header</option>
 		</select>
 	</div>
 
