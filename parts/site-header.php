@@ -32,7 +32,7 @@ else {
 
 	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
 
-if ( $isSingular && post_custom( 'remove_header' ) !== 'remove' ) :
+if ( post_custom( 'remove_header' ) !== 'remove' ) :
 
 ?>
 

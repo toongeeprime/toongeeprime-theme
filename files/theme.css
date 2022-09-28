@@ -789,6 +789,9 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 #container{
 	top:46px;
 }
+#wpadminbar{
+	position:absolute;
+}
 .admin-bar #container{
 	top:-4px;
 }

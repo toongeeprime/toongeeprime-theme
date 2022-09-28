@@ -5,20 +5,29 @@
  *	@since ToongeePrime Theme 1.0
  */
 
+const	theBody	=	p2getEl( 'body' );
+
+
 /**
  *	Page-scrolling actions
  */
 window.addEventListener( "scroll", function() {
-let primetoTop	=	document.querySelector( '#prime2g_toTop' ),
-	theBody		=	document.querySelector( 'body' );
+let primetoTop	=	p2getEl( '#prime2g_toTop' ),
+	popEl		=	p2getAll( '.popEl' );
 
-	if( window.pageYOffset > 700 ) {
+	if ( window.pageYOffset > 700 ) {
 		primetoTop.classList.add( 'show' );
 		theBody.classList.add( 'pop' );
 	}
 	else {
 		primetoTop.classList.remove( 'show' );
 		theBody.classList.remove( 'pop' );
+	}
+
+	if ( popEl ) {
+		popEl.forEach( ( pop )=>{
+			if ( prime2g_inViewport( pop ) ) { pop.classList.add( 'inview' ); }
+		} );
 	}
 
 }, false );
@@ -28,10 +37,10 @@ let primetoTop	=	document.querySelector( '#prime2g_toTop' ),
 /**
  *	Close mobile menu by class "close_mobile_menu"
  */
-document.querySelectorAll( '.close_mobile_menu' ).forEach( close_mMenu );
+p2getAll( '.close_mobile_menu' ).forEach( close_mMenu );
 function close_mMenu(el) {
 	(el).addEventListener( 'click', (el)=>{
-	document.querySelector( '.main_menu_wrap.prime' ).classList.remove( 'prime' );
+	p2getEl( '.main_menu_wrap.prime' ).classList.remove( 'prime' );
 } )
 }
 
