@@ -62,10 +62,10 @@ function prime2g_theme_enqueues() {
 		);
 	}
 
-    // Theme Scripts
-	// jQuery
+    # Theme Scripts
+	# jQuery
 	wp_enqueue_script(
-		'add_jQuery_v360',
+		'prime2g_jQuery',
 		'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'
 	);
 
