@@ -32,8 +32,13 @@ $isSingular	=	is_singular();
 	<div id="contentWrap" class="contentWrap">
 
 	<?php
-	if ( $isSingular && 'header' != get_theme_mod( 'prime2g_title_location' ) ) {
-		if ( ! function_exists( 'define_2gRMVTitle' ) ) {
+	if ( 'header' != get_theme_mod( 'prime2g_title_location' ) ) {
+		if ( $isSingular ) {
+			if ( ! function_exists( 'define_2gRMVTitle' ) ) {
+				prime2g_title_header( prime2g_title_header_classes() );
+			}
+		}
+		else {
 			prime2g_title_header( prime2g_title_header_classes() );
 		}
 	}

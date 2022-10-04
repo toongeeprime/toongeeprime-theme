@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  *
  **
- *	THEME CONSTANTS
+ *	THEME CONSTANTS:
  */
 define( 'PRIME2G_VERSION', wp_get_theme( 'toongeeprime-theme' )->get( 'Version' ) );
 define( 'PRIME2G_THEMEURL', get_template_directory_uri() . '/' );
@@ -29,13 +29,13 @@ require_once 'files-loader.php';
  *	Add Files to the Queue
  */
 add_action( 'wp_enqueue_scripts', 'prime2g_theme_enqueues' );
-if ( ! function_exists( 'prime2g_theme_enqueues' ) ) :
+if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
 
-	// Add WP Dashicons
-	wp_enqueue_style( 'dashicons' );
+	# Add WP Dashicons
+	// wp_enqueue_style( 'dashicons' );
 
-    // Theme Styles
+    # Theme Styles
 	wp_enqueue_style(
 		'prime2g_reset_and_wp_css',
 		get_theme_file_uri( '/files/reset-and-wp.css' ),
@@ -52,7 +52,7 @@ function prime2g_theme_enqueues() {
 
     wp_enqueue_style( 'prime2g_css' );
 
-	// WooCommerce Styles
+	# WooCommerce Styles
 	if ( class_exists( 'woocommerce' ) ) {
 		wp_enqueue_style(
 			'prime2g_woocommerce_css',
@@ -81,11 +81,24 @@ function prime2g_theme_enqueues() {
 		get_theme_file_uri( '/files/footer.js' ),
 		array( 'prime2g_js' ),
 		PRIME2G_VERSION,
-		true // script in footer
+		true # script in footer
 	);
 
 }
-endif;
+}
+
+
+/**
+ *	Add Files to Footer Queue
+ */
+add_action( 'wp_footer', 'prime2g_footer_enqueues' );
+if ( ! function_exists( 'prime2g_footer_enqueues' ) ) {
+function prime2g_footer_enqueues() {
+
+    wp_enqueue_style( 'dashicons', '/wp-includes/css/dashicons.min.css' );
+
+}
+}
 
 
 
@@ -95,3 +108,7 @@ endif;
 if ( class_exists( 'woocommerce' ) ) {
 	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
 }
+
+
+
+

@@ -574,13 +574,13 @@ a.comment-reply-link:hover{
 
 
 /********* IN COMMON *********/
-.title_in_header .site_content, .the_post_taxonomies, .footer_topWidgets{
+.singular .title_in_header .site_content, .the_post_taxonomies, .footer_topWidgets{
 	padding-top:var(--min-pad);
 }
 .site_main .searchform, #respond{
 	margin-bottom:calc(2 * var(--min-pad));
 }
-.show{
+.show, .enter{
 	visibility:visible!important; opacity:1!important;
 }
 
@@ -649,6 +649,25 @@ body #eu-cookie-law{
 #eu-cookie-law input[type="submit"]{
 	width:auto;
 }
+
+
+/* Simple Animations */
+.inUp{
+	transform:translateY(50px); opacity:0;
+}
+.inDown{
+	transform:translateY(-50px); opacity:0;
+}
+.inRight{
+	transform:translateY(50px); opacity:0;
+}
+.inLeft{
+	transform:translateX(-50px); opacity:0;
+}
+.enter{
+	transform:translate(0)!important; transition:0.5s; transition-delay:0.2;
+}
+
 
 /**************************
 	RESPONSIVE STYLING

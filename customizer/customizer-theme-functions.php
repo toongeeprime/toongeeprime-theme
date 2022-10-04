@@ -94,7 +94,7 @@ $footerCred	=	'<div class="site_footer_credits">';
 	}
 
 $footerCred	.=	'</div>';
-$footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padding-bottom:var(--min-pad);">Designed and developed by <a href="https://akawey.com/" title="Visit Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</p>';
+$footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padding-bottom:var(--min-pad);margin:0;">Designed and developed by <a href="https://akawey.com/" title="Visit Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</p>';
 
 return $footerCred;
 }
