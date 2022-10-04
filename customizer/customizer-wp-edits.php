@@ -24,13 +24,13 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_thumb_replace_header',
 		array(
-			'label'		=>	__( 'Replace Header Image', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Replace Header Image', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_thumb_replace_header',
 			'section'	=>	'header_image',
 			'choices'	=>	array(
-				''	=>	__( 'Replace Image with Post Thumbnail', 'toongeeprime-theme' ),
-				'retain'	=>	__( 'Retain Header Image', 'toongeeprime-theme' )
+				''	=>	__( 'Replace Image with Post Thumbnail', PRIME2G_TEXTDOM ),
+				'retain'	=>	__( 'Retain Header Image', PRIME2G_TEXTDOM )
 			),
 		)
 	);

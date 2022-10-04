@@ -24,12 +24,12 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_shop_page_title',
 		array(
-			'label'		=>	__( 'Shop Page Title', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Shop Page Title', PRIME2G_TEXTDOM ),
 			'type'		=>	'text',
 			'settings'	=>	'prime2g_shop_page_title',
 			'section'	=>	'prime2g_woocommerce_edits_section',
 			'input_attrs'	=>	array(
-				'placeholder'	=>	__( 'Shop Homepage', 'toongeeprime-theme' ),
+				'placeholder'	=>	__( 'Shop Homepage', PRIME2G_TEXTDOM ),
 			),
 		)
 	);
@@ -39,7 +39,7 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 		'prime2g_shop_page_description',
 		array(
 			'type'				=>	'theme_mod',
-			'default'			=>	__( $descr, 'toongeeprime-theme' ),
+			'default'			=>	__( $descr, PRIME2G_TEXTDOM ),
 			'transport'			=>	'refresh',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
@@ -47,12 +47,12 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_shop_page_description',
 		array(
-			'label'		=>	__( 'Shop Page Description', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Shop Page Description', PRIME2G_TEXTDOM ),
 			'type'		=>	'text',
 			'settings'	=>	'prime2g_shop_page_description',
 			'section'	=>	'prime2g_woocommerce_edits_section',
 			'input_attrs'	=>	array(
-				'placeholder'	=>	__( $descr, 'toongeeprime-theme' ),
+				'placeholder'	=>	__( $descr, PRIME2G_TEXTDOM ),
 			),
 		)
 	);

@@ -57,8 +57,8 @@ function prime2g_prev_next_post( $empty = '', $prev = 'Previous Entry ', $next =
 
 if ( is_page() ) return;
 
-$prevText	=	__( $prev, 'toongeeprime-theme' );
-$nextText	=	__( $next, 'toongeeprime-theme' );
+$prevText	=	__( $prev, PRIME2G_TEXTDOM );
+$nextText	=	__( $next, PRIME2G_TEXTDOM );
 
 	the_post_navigation(
 		array(
@@ -82,8 +82,8 @@ if ( ! function_exists( 'prime2g_prev_next' ) ) {
 
 function prime2g_prev_next( $spepr = ' ', $prev = '&laquo; Previous Page', $next = 'Next Page &raquo;' ) {
 
-$prev	=	__( $prev, 'toongeeprime-theme' );
-$next	=	__( $next, 'toongeeprime-theme' );
+$prev	=	__( $prev, PRIME2G_TEXTDOM );
+$next	=	__( $next, PRIME2G_TEXTDOM );
 
 echo '<nav class="navigation archive prev_next">';
 

@@ -37,7 +37,7 @@ $args	=	array(
 	}
 	else {
 		if ( current_user_can( 'edit_others_posts' ) )
-			echo __( 'No entries found for your request', 'toongeeprime-theme' );
+			echo __( 'No entries found for your request', PRIME2G_TEXTDOM );
 	}
 
 }

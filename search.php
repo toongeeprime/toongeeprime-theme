@@ -23,7 +23,7 @@ if ( have_posts() ) { ?>
 					'We found %d result for your search.',
 					'We found %d results for your search.',
 					$found,
-					'toongeeprime-theme'
+					PRIME2G_TEXTDOM
 				)
 			),
 			$found
@@ -48,7 +48,7 @@ if ( have_posts() ) { ?>
 }
 else {
 
-	echo '<h3 style="text-align:center;margin:90px 30px;">' . __( 'No results found for your search', 'toongeeprime-theme' ) . '</h3>';
+	echo '<h3 style="text-align:center;margin:90px 30px;">' . __( 'No results found for your search', PRIME2G_TEXTDOM ) . '</h3>';
 	get_search_form();
 
 }

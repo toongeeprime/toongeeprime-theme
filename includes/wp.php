@@ -12,7 +12,7 @@
  */
 add_filter( 'admin_footer_text', 'prime2g_admin_footer_text' );
 function prime2g_admin_footer_text() {
-	_e( '<span id="prime2g_footer_credit">Site developed by <a href="https://akawey.com/" target="_blank">Akàwey Online</a> using the <a href="' . esc_url( home_url( '/' ) ) . '" target="_blank">' . esc_html( wp_get_theme() ) . '</a>.</span>', 'toongeeprime-theme' );
+	_e( '<span id="prime2g_footer_credit">Site developed by <a href="https://akawey.com/" target="_blank">Akàwey Online</a> using the <a href="' . esc_url( home_url( '/' ) ) . '" target="_blank">' . esc_html( wp_get_theme() ) . '</a>.</span>', PRIME2G_TEXTDOM );
 }
 
 

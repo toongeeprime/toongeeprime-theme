@@ -14,7 +14,7 @@ get_header();
 
 echo '<section class="nothing_found_div">';
 
-echo '<p class="nothing_found_info">'. esc_html__( 'Maybe try a search?', 'toongeeprime-theme' ) . '</p>';
+echo '<p class="nothing_found_info">'. esc_html__( 'Maybe try a search?', PRIME2G_TEXTDOM ) . '</p>';
 
 get_search_form();
 

@@ -15,7 +15,8 @@ add_action( 'customize_register', 'prime2g_register_customizer_panel' );
 add_action( 'customize_register', 'prime2g_customizer_sections' );
 add_action( 'customize_register', 'prime2g_customizer_theme_options' );
 add_action( 'customize_register', 'prime2g_customizer_theme_styles' );
-add_action( 'customize_register', 'prime2g_customizer_theme_archives' );
+add_action( 'customize_register', 'prime2g_customizer_home_and_archives' );
+add_action( 'customize_register', 'prime2g_customizer_front_page' );
 add_action( 'customize_register', 'prime2g_customizer_socialmedia_and_contacts' );
 add_action( 'customize_register', 'prime2g_customizer_wp_edits' );
 
@@ -32,7 +33,7 @@ if ( ! function_exists( 'prime2g_edit_customizer_defaults' ) ) {
 
 function prime2g_edit_customizer_defaults( $wp_customize ) {
 	$wp_customize->remove_section( 'colors' );
-	$wp_customize->get_control( 'display_header_text' )->label = __( 'Display Site Title &amp; Tagline - if no Logo', 'toongeeprime-theme' );
+	$wp_customize->get_control( 'display_header_text' )->label = __( 'Display Site Title &amp; Tagline - if no Logo', PRIME2G_TEXTDOM );
 }
 
 }
@@ -50,8 +51,8 @@ $description	=	'<p>Customize ' . PRIME2G_THEMENAME . ' Options</p>';
 	$wp_customize->add_panel(
 		'prime2g_customizer_panel',
 		array(
-			'title'			=>	__( PRIME2G_THEMENAME, 'toongeeprime-theme' ),
-			'description'	=>	__( $description, 'toongeeprime-theme' ),
+			'title'			=>	__( PRIME2G_THEMENAME, PRIME2G_TEXTDOM ),
+			'description'	=>	__( $description, PRIME2G_TEXTDOM ),
 			'priority'		=>	50,
 		)
 	);

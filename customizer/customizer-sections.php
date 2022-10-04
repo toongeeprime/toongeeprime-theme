@@ -17,9 +17,9 @@ function prime2g_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		'prime2g_theme_options_section',
 		array(
-			'title'			=>	__( 'Theme Options', 'toongeeprime-theme' ),
+			'title'			=>	__( 'Theme Options', PRIME2G_TEXTDOM ),
 			'panel'			=>	'prime2g_customizer_panel',
-			'description'	=>	__( 'Set theme options', 'toongeeprime-theme' ),
+			'description'	=>	__( 'Set Theme Options', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
 		)
 	);
@@ -27,19 +27,30 @@ function prime2g_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		'prime2g_theme_styles_section',
 		array(
-			'title'			=>	__( 'Theme Styles', 'toongeeprime-theme' ),
+			'title'			=>	__( 'Theme Styles', PRIME2G_TEXTDOM ),
 			'panel'			=>	'prime2g_customizer_panel',
-			'description'	=>	__( 'Colors &amp; Fonts', 'toongeeprime-theme' ),
+			'description'	=>	__( 'Colors &amp; Fonts', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_section(
+		'prime2g_theme_frontpage_section',
+		array(
+			'title'			=>	__( 'Front Page', PRIME2G_TEXTDOM ),
+			'panel'			=>	'prime2g_customizer_panel',
+			'description'	=>	__( 'The Front Page', PRIME2G_TEXTDOM ),
+			'capability'	=>	'edit_theme_options',
+			'active_callback'	=>	function(){ return ( is_front_page() ); },
 		)
 	);
 
 	$wp_customize->add_section(
 		'prime2g_theme_archives_section',
 		array(
-			'title'			=>	__( 'Posts Home &amp; Archives', 'toongeeprime-theme' ),
+			'title'			=>	__( 'Posts Home &amp; Archives', PRIME2G_TEXTDOM ),
 			'panel'			=>	'prime2g_customizer_panel',
-			'description'	=>	__( 'Theme Archives and Posts Homepage', 'toongeeprime-theme' ),
+			'description'	=>	__( 'Archives and Posts Homepage', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
 			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); },
 		)
@@ -48,9 +59,9 @@ function prime2g_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		'prime2g_socialmedia_links_section',
 		array(
-			'title'			=>	__( 'Social Media &amp; Contacts', 'toongeeprime-theme' ),
+			'title'			=>	__( 'Social Media &amp; Contacts', PRIME2G_TEXTDOM ),
 			'panel'			=>	'prime2g_customizer_panel',
-			'description'	=>	__( 'Add social media links and contact details', 'toongeeprime-theme' ),
+			'description'	=>	__( 'Social media links and contact details', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
 		)
 	);
@@ -61,9 +72,9 @@ if ( class_exists( 'woocommerce' ) ) {
 	$wp_customize->add_section(
 		'prime2g_woocommerce_edits_section',
 		array(
-			'title'			=>	__( 'WooCommerce Customizations', 'toongeeprime-theme' ),
+			'title'			=>	__( 'WooCommerce Customizations', PRIME2G_TEXTDOM ),
 			'panel'			=>	'prime2g_customizer_panel',
-			'description'	=>	__( 'Set WooCommerce Customizations', 'toongeeprime-theme' ),
+			'description'	=>	__( 'Set WooCommerce Customizations', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
 		)
 	);

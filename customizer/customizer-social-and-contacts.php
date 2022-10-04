@@ -26,7 +26,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_facebook_url',
 		array(
-			'label'		=>	__( 'Facebook Page Url', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Facebook Page Url', PRIME2G_TEXTDOM ),
 			'type'		=>	'url',
 			'settings'	=>	'prime2g_facebook_url',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -48,7 +48,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_instagram_url',
 		array(
-			'label'		=>	__( 'Insagram Url', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Insagram Url', PRIME2G_TEXTDOM ),
 			'type'		=>	'url',
 			'settings'	=>	'prime2g_instagram_url',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -70,7 +70,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_twitter_url',
 		array(
-			'label'		=>	__( 'Twitter Url', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Twitter Url', PRIME2G_TEXTDOM ),
 			'type'		=>	'url',
 			'settings'	=>	'prime2g_twitter_url',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -92,7 +92,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_youtube_url',
 		array(
-			'label'		=>	__( 'YouTube Url', 'toongeeprime-theme' ),
+			'label'		=>	__( 'YouTube Url', PRIME2G_TEXTDOM ),
 			'type'		=>	'url',
 			'settings'	=>	'prime2g_youtube_url',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -113,7 +113,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_linkedin_url',
 		array(
-			'label'		=>	__( 'LinkedIn Url', 'toongeeprime-theme' ),
+			'label'		=>	__( 'LinkedIn Url', PRIME2G_TEXTDOM ),
 			'type'		=>	'url',
 			'settings'	=>	'prime2g_linkedin_url',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -135,7 +135,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_contact_email',
 		array(
-			'label'		=>	__( 'Contact Email', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Contact Email', PRIME2G_TEXTDOM ),
 			'type'		=>	'email',
 			'settings'	=>	'prime2g_contact_email',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -157,7 +157,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_contact_address',
 		array(
-			'label'		=>	__( 'Contact Address', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Contact Address', PRIME2G_TEXTDOM ),
 			'type'		=>	'text',
 			'settings'	=>	'prime2g_contact_address',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -180,7 +180,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_contact_phone',
 		array(
-			'label'		=>	__( 'Contact Phone Number', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Contact Phone Number', PRIME2G_TEXTDOM ),
 			'type'		=>	'phone',
 			'settings'	=>	'prime2g_contact_phone',
 			'section'	=>	'prime2g_socialmedia_links_section',
@@ -204,7 +204,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_whatsapp_number',
 		array(
-			'label'		=>	__( 'WhatsApp Number', 'toongeeprime-theme' ),
+			'label'		=>	__( 'WhatsApp Number', PRIME2G_TEXTDOM ),
 			'type'		=>	'phone',
 			'settings'	=>	'prime2g_whatsapp_number',
 			'section'	=>	'prime2g_socialmedia_links_section',

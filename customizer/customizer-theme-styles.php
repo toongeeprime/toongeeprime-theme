@@ -41,7 +41,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_site_body_font',
 		array(
-			'label'		=>	__( 'Font for Site\'s Body', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Font for Site\'s Body', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_site_body_font',
 			'section'	=>	'prime2g_theme_styles_section',
@@ -60,7 +60,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_site_headings_font',
 		array(
-			'label'		=>	__( 'Font for Site\'s Text Headings', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Font for Site\'s Text Headings', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_site_headings_font',
 			'section'	=>	'prime2g_theme_styles_section',
@@ -84,7 +84,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		$wp_customize,
 		'prime2g_primary_brand_color',
 			array(
-				'label'		=>	__( 'Main Brand Color', 'toongeeprime-theme' ),
+				'label'		=>	__( 'Main Brand Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_styles_section',
 				'settings'	=>	'prime2g_primary_brand_color',
 			)
@@ -104,7 +104,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		$wp_customize,
 		'prime2g_secondary_brand_color',
 			array(
-				'label'		=>	__( 'Secondary Brand Color', 'toongeeprime-theme' ),
+				'label'		=>	__( 'Secondary Brand Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_styles_section',
 				'settings'	=>	'prime2g_secondary_brand_color',
 			)
@@ -124,7 +124,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		$wp_customize,
 		'prime2g_background_color',
 			array(
-				'label'		=>	__( 'Site Background Color', 'toongeeprime-theme' ),
+				'label'		=>	__( 'Site Background Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_styles_section',
 				'settings'	=>	'prime2g_background_color',
 			)
@@ -144,7 +144,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		$wp_customize,
 		'prime2g_header_background',
 			array(
-				'label'		=>	__( 'Header Background Color', 'toongeeprime-theme' ),
+				'label'		=>	__( 'Header Background Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_styles_section',
 				'settings'	=>	'prime2g_header_background',
 			)
@@ -164,7 +164,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		$wp_customize,
 		'prime2g_content_background',
 			array(
-				'label'		=>	__( 'Page Background Color', 'toongeeprime-theme' ),
+				'label'		=>	__( 'Page Background Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_styles_section',
 				'settings'	=>	'prime2g_content_background',
 			)
@@ -184,7 +184,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		$wp_customize,
 		'prime2g_footer_background',
 			array(
-				'label'		=>	__( 'Footer Background Color', 'toongeeprime-theme' ),
+				'label'		=>	__( 'Footer Background Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_styles_section',
 				'settings'	=>	'prime2g_footer_background',
 			)

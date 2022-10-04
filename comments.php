@@ -17,7 +17,7 @@ $comment_count = get_comments_number();
 	<?php if ( have_comments() ) { ?>
 		<h2 class="comments-title">
 			<?php if ( '1' === $comment_count ) { ?>
-				<?php esc_html_e( '1 comment', 'toongeeprime-theme' ); ?>
+				<?php esc_html_e( '1 comment', PRIME2G_TEXTDOM ); ?>
 			<?php
 			}
 			else {
@@ -25,7 +25,7 @@ $comment_count = get_comments_number();
 				<?php
 				printf(
 					/* translators: %s: Comment count number. */
-					esc_html( _nx( '%s comment', '%s comments', $comment_count, 'Comments title', 'toongeeprime-theme' ) ),
+					esc_html( _nx( '%s comment', '%s comments', $comment_count, 'Comments title', PRIME2G_TEXTDOM ) ),
 					esc_html( number_format_i18n( $comment_count ) )
 				);
 			}
@@ -48,7 +48,7 @@ $comment_count = get_comments_number();
 
 		<?php
 		if ( ! comments_open() ) { ?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'toongeeprime-theme' ); ?></p>
+			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', PRIME2G_TEXTDOM ); ?></p>
 		<?php
 		}
 	}

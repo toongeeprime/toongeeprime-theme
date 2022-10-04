@@ -25,7 +25,7 @@ $isSingular	=	is_singular();
 <div id="container" class="site_container site_width prel">
 
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'toongeeprime-theme' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', PRIME2G_TEXTDOM ); ?></a>
 
 	<?php get_template_part( 'parts/site-header' ); ?>
 

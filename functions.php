@@ -6,10 +6,13 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *
- **
- *	THEME CONSTANTS:
  */
-define( 'PRIME2G_VERSION', wp_get_theme( 'toongeeprime-theme' )->get( 'Version' ) );
+
+/**
+ *	THEME CONSTANTS
+ */
+define( 'PRIME2G_TEXTDOM', 'toongeeprime-theme' );
+define( 'PRIME2G_VERSION', wp_get_theme( PRIME2G_TEXTDOM )->get( 'Version' ) );
 define( 'PRIME2G_THEMEURL', get_template_directory_uri() . '/' );
 define( 'PRIME2G_THEME', get_template_directory() . '/' );
 define( 'PRIME2G_CLASSDIR', PRIME2G_THEME . 'classes/' );
@@ -33,7 +36,7 @@ if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
 
 	# Add WP Dashicons
-	// wp_enqueue_style( 'dashicons' );
+	# wp_enqueue_style( 'dashicons' );
 
     # Theme Styles
 	wp_enqueue_style(
@@ -108,7 +111,6 @@ function prime2g_footer_enqueues() {
 if ( class_exists( 'woocommerce' ) ) {
 	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
 }
-
 
 
 

@@ -35,7 +35,7 @@ $incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
 		</div>
 	</div>
 
-		<nav class="main-menu collapsible-navs site-menus site_width" role="navigation" aria-label="<?php esc_attr_e( 'Main Menu', 'toongeeprime-theme' ); ?>">
+		<nav class="main-menu collapsible-navs site-menus site_width" role="navigation" aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
 			<?php
 			wp_nav_menu(
 				array(
@@ -51,7 +51,7 @@ $incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
 	<?php
 	}
 	else {
-		if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Main Menu', 'toongeeprime-theme' );
+		if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Main Menu', PRIME2G_TEXTDOM );
 	}
 	?>
 
@@ -72,7 +72,7 @@ function prime2g_footer_menu( $id = '' ) { ?>
 
 <div id="<?php echo $id; ?>" class="footer_menu_wrap">
 	<?php if ( has_nav_menu( 'footer-menu' ) ) { ?>
-		<nav aria-label="<?php esc_attr_e( 'Footer Menu', 'toongeeprime-theme' ); ?>" class="footer-navigation">
+		<nav aria-label="<?php esc_attr_e( 'Footer Menu', PRIME2G_TEXTDOM ); ?>" class="footer-navigation">
 			<ul class="footer_menu_items">
 				<?php
 				wp_nav_menu(
@@ -92,7 +92,7 @@ function prime2g_footer_menu( $id = '' ) { ?>
 	<?php
 	}
 	else {
-		if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Footer Menu', 'toongeeprime-theme' );
+		if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Footer Menu', PRIME2G_TEXTDOM );
 	}
 	?>
 </div><!-- .site-menu-base -->

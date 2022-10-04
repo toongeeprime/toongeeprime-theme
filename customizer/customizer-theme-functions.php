@@ -32,28 +32,28 @@ $contacts	=	'<div class="socials_contacts">';
 $contacts	.=	'<div class="links">';
 
 if ( $facebook )
-	$contacts .= '<span class="sci fb"><a href="'. $facebook .'"'. $attrs .'"' . __( $siteName . ' on Facebook', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-facebook"></span></a></span>';
+	$contacts .= '<span class="sci fb"><a href="'. $facebook .'"'. $attrs .'"' . __( $siteName . ' on Facebook', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-facebook"></span></a></span>';
 if ( $instagram )
-	$contacts .= '<span class="sci ig"><a href="'. $instagram .'"'. $attrs .'"' . __( $siteName . ' on Instagram', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-instagram"></span></a></span>';
+	$contacts .= '<span class="sci ig"><a href="'. $instagram .'"'. $attrs .'"' . __( $siteName . ' on Instagram', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-instagram"></span></a></span>';
 if ( $twitter )
-	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on Twitter', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-twitter"></span></a></span>';
+	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on Twitter', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-twitter"></span></a></span>';
 if ( $youTube )
-	$contacts .= '<span class="sci yt"><a href="'. $youTube .'"'. $attrs .'"' . __( $siteName . ' on YouTube', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-youtube"></span></a></span>';
+	$contacts .= '<span class="sci yt"><a href="'. $youTube .'"'. $attrs .'"' . __( $siteName . ' on YouTube', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-youtube"></span></a></span>';
 if ( $linkedIn )
-	$contacts .= '<span class="sci li"><a href="'. $linkedIn .'"'. $attrs .'"' . __( $siteName . ' on LinkedIn', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-linkedin"></span></a></span>';
+	$contacts .= '<span class="sci li"><a href="'. $linkedIn .'"'. $attrs .'"' . __( $siteName . ' on LinkedIn', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-linkedin"></span></a></span>';
 if ( $whatsapp ) {
 	$whatsapp	=	'https://wa.me/' . $whatsapp . '?text=Hello,%20I%20want%20to%20chat%20with%20' . $siteName;
-	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-whatsapp"></span></a></span>';
+	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-whatsapp"></span></a></span>';
 }
 if ( $email )
-	$contacts .= '<span class="sci em"><a href="mailto:'. $email .'" title="' . __( 'Send us a mail', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-email"></span></a></span>';
+	$contacts .= '<span class="sci em"><a href="mailto:'. $email .'" title="' . __( 'Send us a mail', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-email"></span></a></span>';
 if ( $phone )
-	$contacts .= '<span class="sci ph"><a href="tel:+'. $phone .'" title="' . __( 'Call us', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-phone"></span></a></span>';
+	$contacts .= '<span class="sci ph"><a href="tel:+'. $phone .'" title="' . __( 'Call us', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-phone"></span></a></span>';
 
 $contacts	.=	'</div>';
 
 if ( $address )
-	$contacts .= '<span class="address" title="' . __( 'Our Address', 'toongeeprime-theme' ) . '"><span class="dashicons dashicons-building"></span><span class="contactAddress">' . __( $address, 'toongeeprime-theme' ) . '</span></span>';
+	$contacts .= '<span class="address" title="' . __( 'Our Address', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-building"></span><span class="contactAddress">' . __( $address, PRIME2G_TEXTDOM ) . '</span></span>';
 
 $contacts	.=	'</div>';
 
@@ -112,10 +112,10 @@ function prime2g_theme_mod_shop_title( $pre = '<h1 class="page-title">', $post =
 $shopTitle	=	get_theme_mod( 'prime2g_shop_page_title' );
 
 	if( $shopTitle ) {
-		$title	=	$pre . __( $shopTitle, 'toongeeprime-theme' ) . $post;
+		$title	=	$pre . __( $shopTitle, PRIME2G_TEXTDOM ) . $post;
 	}
 	else {
-		$title	=	$pre . __( 'Products', 'toongeeprime-theme' ) . $post;
+		$title	=	$pre . __( 'Products', PRIME2G_TEXTDOM ) . $post;
 	}
 
 return $title;

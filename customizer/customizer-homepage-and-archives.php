@@ -7,9 +7,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-if ( ! function_exists( 'prime2g_customizer_theme_archives' ) ) {
+if ( ! function_exists( 'prime2g_customizer_home_and_archives' ) ) {
 
-function prime2g_customizer_theme_archives( $wp_customize ) {
+function prime2g_customizer_home_and_archives( $wp_customize ) {
 
 function prime2g_categs_array() {
 $categs	=	get_categories();
@@ -36,7 +36,7 @@ return array_combine( $ids, $names );
 	$wp_customize->add_control(
 		'prime2g_posts_home_title',
 		array(
-			'label'		=>	__( 'Posts Homepage Title', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Posts Homepage Title', PRIME2G_TEXTDOM ),
 			'type'		=>	'text',
 			'settings'	=>	'prime2g_posts_home_title',
 			'section'	=>	'prime2g_theme_archives_section',
@@ -58,7 +58,7 @@ return array_combine( $ids, $names );
 	$wp_customize->add_control(
 		'prime2g_posts_home_description',
 		array(
-			'label'		=>	__( 'Posts Homepage Description', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Posts Homepage Description', PRIME2G_TEXTDOM ),
 			'type'		=>	'text',
 			'settings'	=>	'prime2g_posts_home_description',
 			'section'	=>	'prime2g_theme_archives_section',
@@ -82,12 +82,12 @@ return array_combine( $ids, $names );
 	$wp_customize->add_control(
 		'prime2g_theme_show_headlines',
 		array(
-			'label'		=>	__( 'Show Headlines Section?', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Show Headlines Section?', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_theme_show_headlines',
 			'section'	=>	'prime2g_theme_archives_section',
 			'choices'	=>	array(
-				'show'	=>	__( 'Yes', 'toongeeprime-theme' ),
+				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM ),
 			),
 			'active_callback'	=>	'is_home',
 		)
@@ -103,7 +103,7 @@ return array_combine( $ids, $names );
 	$wp_customize->add_control(
 		'prime2g_headlines_category',
 		array(
-			'label'		=>	__( 'Headlines Category', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Headlines Category', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_headlines_category',
 			'section'	=>	'prime2g_theme_archives_section',
@@ -126,13 +126,14 @@ return array_combine( $ids, $names );
 	$wp_customize->add_control(
 		'prime2g_theme_show_stickies',
 		array(
-			'label'		=>	__( 'Show Sticky Posts at the Top of Archives?', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Show Sticky Posts at the Top of Archives?', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_theme_show_stickies',
 			'section'	=>	'prime2g_theme_archives_section',
 			'choices'	=>	array(
-				'show'	=>	__( 'Yes', 'toongeeprime-theme' ),
+				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM ),
 			),
+			'active_callback'	=>	'is_home',
 		)
 	);
 
@@ -146,12 +147,13 @@ return array_combine( $ids, $names );
 	$wp_customize->add_control(
 		'prime2g_theme_sticky_heading',
 		array(
-			'label'		=>	__( 'Sticky Posts Heading', 'toongeeprime-theme' ),
+			'label'		=>	__( 'Sticky Posts Heading', PRIME2G_TEXTDOM ),
 			'settings'	=>	'prime2g_theme_sticky_heading',
 			'section'	=>	'prime2g_theme_archives_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'Featured Posts',
 			),
+			'active_callback'	=>	'is_home',
 		)
 	);
 

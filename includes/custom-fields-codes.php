@@ -15,7 +15,7 @@ if ( ! function_exists( 'prime2g_reg_fieldset_2' ) ) {
 function prime2g_reg_fieldset_2() {
 	add_meta_box(
 	'prime2g_fieldsbox_2',
-	__( 'Page Codes (Advanced)', 'toongeeprime-theme' ),
+	__( 'Page Codes (Advanced)', PRIME2G_TEXTDOM ),
 	'toongeeprime_cFields_callback_2',
 	prime2g_include_post_types(),
 	'normal',

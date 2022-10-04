@@ -50,8 +50,8 @@ add_theme_support(
 // Navigation Menus
 register_nav_menus(
 	array(
-		'main-menu'		=>	esc_html__( 'Main Menu', 'toongeeprime-theme' ),
-		'footer-menu'	=>	esc_html__( 'Footer menu', 'toongeeprime-theme' )
+		'main-menu'		=>	esc_html__( 'Main Menu', PRIME2G_TEXTDOM ),
+		'footer-menu'	=>	esc_html__( 'Footer menu', PRIME2G_TEXTDOM )
 	)
 );
 
@@ -62,9 +62,9 @@ add_action( 'widgets_init', 'prime2g_sidebars', 5 );
 function prime2g_sidebars() {
 register_sidebar(
 	array(
-		'name'          =>	__( 'Primary Sidebar', 'toongeeprime-theme' ),
+		'name'          =>	__( 'Primary Sidebar', PRIME2G_TEXTDOM ),
 		'id'            =>	'primary-sidebar',
-		'description'   =>	__( 'Site\'s Main Sidebar', 'toongeeprime-theme' ),
+		'description'   =>	__( 'Site\'s Main Sidebar', PRIME2G_TEXTDOM ),
 		'before_widget' =>	'<div id="%1$s" class="sidebarwidget %2$s"><div class="widget">',
 		'after_widget'  =>	'</div></div>',
 		'before_title'	=>	'<div class="w-headers"><h3 class="widget-title sidebar">',
@@ -73,9 +73,9 @@ register_sidebar(
 );
 register_sidebar(
 	array(
-		'name'          =>	__( 'Below Posts', 'toongeeprime-theme' ),
+		'name'          =>	__( 'Below Posts', PRIME2G_TEXTDOM ),
 		'id'            =>	'belowposts-widgets',
-		'description'   =>	__( 'Widgets below post entries', 'toongeeprime-theme' ),
+		'description'   =>	__( 'Widgets below post entries', PRIME2G_TEXTDOM ),
 		'before_widget' =>	'<div id="%1$s" class="belowpostwidget %2$s"><div class="widget">',
 		'after_widget'  =>	'</div></div>',
 		'before_title'  =>	'<div class="hide">',
@@ -84,9 +84,9 @@ register_sidebar(
 );
 register_sidebar(
 	array(
-		'name'          =>	__( 'Footer Top', 'toongeeprime-theme' ),
+		'name'          =>	__( 'Footer Top', PRIME2G_TEXTDOM ),
 		'id'            =>	'footer-top',
-		'description'   =>	__( 'Widgets at the top part of the website Footer', 'toongeeprime-theme' ),
+		'description'   =>	__( 'Widgets at the top part of the website Footer', PRIME2G_TEXTDOM ),
 		'before_widget' =>	'<div id="%1$s" class="footertop %2$s"><div class="widget">',
 		'after_widget'  =>	'</div></div>',
 		'before_title'  =>	'<div class="hide">',
@@ -95,7 +95,7 @@ register_sidebar(
 );
 register_sidebars( 4,
 	array(
-		'name'			=>	__( 'Footer Widgets %d', 'toongeeprime-theme' ),
+		'name'			=>	__( 'Footer Widgets %d', PRIME2G_TEXTDOM ),
 		'id'			=>	'footers',
 		'before_widget'	=>	'<div id="%1$s" class="footerwidget %2$s"><div id="%1$s" class="widget %2$s">',
 		'after_widget'	=>	'</div></div>',
