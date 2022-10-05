@@ -42,16 +42,16 @@ function prime2g_is_plain_page() {
  */
 function prime2g_get_theme_template( $archive = false ) {
 
+	if ( $archive ) {
+
 	$defaultArch		=	PRIME2G_ARCHIVE . 'post.php';
 	$defaultArch_child	=	CHILD2G_ARCHIVE . 'post.php';
-
-	if ( $archive ) {
+	$obj	=	get_queried_object();
 
 		if ( is_category() || is_tag() || is_tax() ) {
 
 		# *Filename format must be: taxonomy_slug.php or taxonomy.php
 
-			$obj	=	get_queried_object();
 			$slug	=	'_' . $obj->slug;
 			$taxon	=	$obj->taxonomy;
 			$taxonomy	=	$taxon ?? null;
@@ -72,7 +72,25 @@ function prime2g_get_theme_template( $archive = false ) {
 			else { require $defaultArch; }
 
 		}
-		// elseif ( is_post_type_archive() ) {}
+		elseif ( is_post_type_archive() ) {
+
+			# *Filename format must be: posttypename.php
+
+			$posttypename	=	$obj->name;
+
+			/**
+			 *	Run Template for Archive Queries
+			 *	Pass template narrowing to Child theme
+			 */
+			$child_filename		=	CHILD2G_ARCHIVE . $posttypename . '.php';
+
+			if ( file_exists( $child_filename ) ) { require $child_filename; }
+
+			elseif ( file_exists( $defaultArch_child ) ) { require $defaultArch_child; }
+
+			else { require $defaultArch; }
+
+		}
 		else {
 
 			if ( file_exists( $defaultArch_child ) ) { require $defaultArch_child; }

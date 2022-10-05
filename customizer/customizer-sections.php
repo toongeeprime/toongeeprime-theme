@@ -39,7 +39,7 @@ function prime2g_customizer_sections( $wp_customize ) {
 		array(
 			'title'			=>	__( 'Front Page', PRIME2G_TEXTDOM ),
 			'panel'			=>	'prime2g_customizer_panel',
-			'description'	=>	__( 'The Front Page', PRIME2G_TEXTDOM ),
+			'description'	=>	__( 'Customize The Front Page', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
 			'active_callback'	=>	function(){ return ( is_front_page() ); },
 		)

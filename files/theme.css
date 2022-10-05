@@ -659,7 +659,7 @@ body #eu-cookie-law{
 	transform:translateY(-50px); opacity:0;
 }
 .inRight{
-	transform:translateY(50px); opacity:0;
+	transform:translateX(50px); opacity:0;
 }
 .inLeft{
 	transform:translateX(-50px); opacity:0;
@@ -675,6 +675,14 @@ body #eu-cookie-law{
 @media(min-width:483px) {
 
 .stickies .grid{
+	grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(min-width:681px){
+
+.grid4{
 	grid-template-columns:1fr 1fr;
 }
 
@@ -696,6 +704,12 @@ body #eu-cookie-law{
 }
 .gallery-columns-5, .gallery-columns-9{
 	grid-template-columns:repeat(5, 1fr);
+}
+.grid2{
+	grid-template-columns:1fr 1fr;
+}
+.grid3{
+	grid-template-columns:1fr 1fr 1fr;
 }
 
 }
@@ -722,6 +736,9 @@ body #eu-cookie-law{
 }
 .gallery-columns-9{
 	grid-template-columns:repeat(9, 1fr);
+}
+.grid4{
+	grid-template-columns:repeat(4, 1fr);
 }
 
 
