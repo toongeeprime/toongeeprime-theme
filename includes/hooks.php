@@ -43,6 +43,19 @@ echo '</section>';
 /**
  *	Is set After the Site's Header
  */
+function prime2g_sub_header() {
+
+echo '<section id="prime2g_sub_header">';
+	do_action( 'prime2g_sub_header' );
+echo '</section>';
+
+}
+
+
+
+/**
+ *	Is set After the Sub Header Section Above
+ */
 function prime2g_after_header() {
 
 echo '<section id="prime2g_after_header" class="site_width">';

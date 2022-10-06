@@ -235,7 +235,7 @@ h1, h2, h3{
 	background-color:var(--content-background); color:var(--content-text);
 }
 .site_main{
-	min-height:75vh; padding:0 var(--min-pad) var(--med-pad); height:max-content;
+	min-height:75vh; padding:var(--min-pad) var(--min-pad) var(--med-pad); height:max-content;
 }
 .no_title .site_main{
 	min-height:0; padding:0;
@@ -325,12 +325,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 
 
 /* Main Menu */
-.main_menu_wrap, .collapsible-navs .sub-menu{
-	background:var(--content-text);
-}
-.main_menu_wrap a{
-	color:var(--content-background);
-}
 .main_menu_wrap{
 	z-index:99990; position:relative;
 }
@@ -743,6 +737,12 @@ body #eu-cookie-law{
 
 
 /* MAIN MENU */
+.main_menu_wrap, .collapsible-navs .sub-menu{
+	background:var(--content-text);
+}
+.main_menu_wrap a{
+	color:var(--content-background);
+}
 .collapsible-navs li{
 	display:inline-block; position:relative;
 }
@@ -828,6 +828,9 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 #wpadminbar{
 	position:absolute;
 }
+.site_main{
+	padding-top:var(--min-pad);
+}
 .admin-bar #container{
 	top:-4px;
 }
@@ -845,7 +848,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 	box-shadow:0 0 12px rgba(0,0,0,0.25);
 }
 .main-menu{
-	background:var(--content-text); right:var(--min-pad); position:fixed;
+	background:var(--content-background); right:var(--min-pad); position:fixed;
 	top:46px; left:0; bottom:0; padding-bottom:var(--min-pad);
 	transition:0.4s; transform:translateX(-200%); overflow-y:auto;
 }
@@ -870,14 +873,11 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 .collapsible-navs .sub-menu li:first-child{
 	border-top:1px solid #aaa;
 }
-.collapsible-navs a{
-	display:inline-block;
-}
-.collapsible-navs .sub-menu{
+.collapsible-navs .sub-menu a{
 	margin-left:var(--min-pad);
 }
 .collapsible-navs a{
-	border-left:3px solid transparent;
+	border-left:3px solid transparent; display:inline-block;
 }
 .collapsible-navs a:hover{
 	border-color:var(--content-background)

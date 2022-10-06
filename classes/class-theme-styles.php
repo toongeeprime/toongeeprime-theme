@@ -56,6 +56,8 @@ class ToongeePrime_Styles {
 
 			case 'headF' : $mod = get_theme_mod( 'prime2g_site_headings_font', $this->headFont ); break;
 
+			case 'headerattach' : $mod = get_theme_mod( 'prime2g_header_img_attachment', 'scroll' ); break;
+
 		}
 		return $mod;
 
@@ -104,7 +106,7 @@ class ToongeePrime_Styles {
 	 */
 	protected static function the_root_css() {
 
-		$styles	=	new self;
+	$styles	=	new self;
 
 	return "
 	--brand-color:". $styles->get_mod( 'brand' ) .";
@@ -116,6 +118,22 @@ class ToongeePrime_Styles {
 	--footer-background:". $styles->get_mod( 'footer' ) .";
 	--body-font:'". str_replace( "+", " ", $styles->get_mod( 'bodyF' ) ) ."';
 	--headings-font:'". str_replace( "+", " ", $styles->get_mod( 'headF' ) ) ."';
+	";
+
+	}
+
+
+	/**
+	 *	Generate other CSS
+	 *
+	 *	@static
+	 */
+	protected static function theme_css() {
+
+	$styles	=	new self;
+
+	return "
+	#header{background-attachment:". $styles->get_mod( 'headerattach' ) .";
 	";
 
 	}

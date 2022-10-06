@@ -12,6 +12,7 @@ $hasHeader		=	has_header_image();
 $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
 $pid			=	get_the_ID();
 $isSingular		=	is_singular();
+$keepHeader		=	( post_custom( 'remove_header' ) !== 'remove' );
 
 if ( $hasHeader ) {
 
@@ -32,7 +33,7 @@ else {
 
 	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
 
-if ( ! $isSingular || $isSingular && post_custom( 'remove_header' ) !== 'remove' ) :
+if ( ! $isSingular || $isSingular && $keepHeader ) :
 
 ?>
 
@@ -57,5 +58,9 @@ endif;
 
 	if ( 'bottom' == $menuPlace ) prime2g_main_menu();
 
-	prime2g_after_header();
+	if ( $keepHeader ) {
+		prime2g_sub_header();
+		prime2g_after_header();
+	}
+
 

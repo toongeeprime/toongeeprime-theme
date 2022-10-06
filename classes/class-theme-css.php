@@ -30,10 +30,11 @@ $root	.=	"
 $root	.=	parent::the_root_css();
 $root	.=	ToongeePrime_Colors::the_root_css();
 $root	.=
-"}
-</style>";
+"}";
+$root	.=	parent::theme_css();
+$root	.=	"</style>";
 
-	return $root;
+return $root;
 
 	}
 

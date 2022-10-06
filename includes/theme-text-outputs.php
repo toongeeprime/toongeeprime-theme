@@ -366,7 +366,7 @@ $dateUrl	=	esc_url( home_url( '/' . $year . '/' . $month . '/' . $day . '/' ) );
  */
 if ( ! function_exists( 'prime2g_post_taxonomies' ) ) {
 
-function prime2g_post_taxonomies( $taxonomy, $count = 'all', $text = 'Categories:', $class = 'post_categories' ) {
+function prime2g_post_taxonomies( $taxonomy, $count = '', $text = 'Categories:', $class = 'post_categories', $echo = true ) {
 
 $taxonomies	=	get_the_terms( get_the_ID(), $taxonomy );
 $before		=	'<span><a href="';
@@ -375,25 +375,28 @@ $after		=	'</a></span> ';
 
 if ( ! empty( $taxonomies ) ) {
 
-	echo '<div class="' . $class . ' post_taxonomies"><span class="taxo_heading">'. __( $text, PRIME2G_TEXTDOM ) . '</span> ';
+	$taxons	=	'<div class="' . $class . ' post_taxonomies"><span class="taxo_heading">'. __( $text, PRIME2G_TEXTDOM ) . '</span> ';
 
 	if( $count == 1 ) {
 
 		$cat	=	$taxonomies[0];
-		echo $before . esc_url( get_category_link( $cat->term_id ) ) . $mid . esc_html( $cat->name ) . $after;
+		$taxons	.=	$before . esc_url( get_category_link( $cat->term_id ) ) . $mid . esc_html( $cat->name ) . $after;
 		
 	}
 	else {
 
 		foreach( $taxonomies as $cat ) {
 
-			echo $before . esc_url( get_category_link( $cat->term_id ) ) . $mid . esc_html( $cat->name ) . $after;
+		$taxons	.=	$before . esc_url( get_category_link( $cat->term_id ) ) . $mid . esc_html( $cat->name ) . $after;
 
 		}
 
 	}
 
-	echo '</div>';
+	$taxons	.=	'</div>';
+
+if ( $echo ) echo $taxons;
+else return $taxons;
 
 }
 
