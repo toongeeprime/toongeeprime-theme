@@ -123,6 +123,48 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'prime2g_tiktok_url',
+		array(
+			'type'				=>	'theme_mod',
+			'transport'			=>	'refresh',
+			'sanitize_callback'	=>	'esc_url',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_tiktok_url',
+		array(
+			'label'		=>	__( 'TikTok Url', PRIME2G_TEXTDOM ),
+			'type'		=>	'url',
+			'settings'	=>	'prime2g_tiktok_url',
+			'section'	=>	'prime2g_socialmedia_links_section',
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'https://www.tiktok.com/@username',
+			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_telegram_url',
+		array(
+			'type'				=>	'theme_mod',
+			'transport'			=>	'refresh',
+			'sanitize_callback'	=>	'esc_url',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_telegram_url',
+		array(
+			'label'		=>	__( 'Telegram Url', PRIME2G_TEXTDOM ),
+			'type'		=>	'url',
+			'settings'	=>	'prime2g_telegram_url',
+			'section'	=>	'prime2g_socialmedia_links_section',
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'https://t.me/username',
+			),
+		)
+	);
+
 
 	$wp_customize->add_setting(
 		'prime2g_contact_email',

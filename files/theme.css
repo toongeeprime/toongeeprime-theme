@@ -160,7 +160,7 @@ code{
 
 /********* Custom Classes *********/
 .site_width{
-	margin:auto; max-width:var(--site-width);
+	margin:auto; max-width:var(--site-width); /* Don't use width:100% */
 }
 .ext_stretch_hf .site_container, .ext_stretch_hf .footerWrap{
 	max-width:100vw;
@@ -220,6 +220,16 @@ code{
 .white{
 	color:#fff;
 }
+.alignC{
+	align-items:center;
+}
+.brandcolor{
+	color:var(--brand-color);
+}
+.brandcolor2{
+	color:var(--brand-color-2);
+}
+
 
 
 
@@ -659,7 +669,14 @@ body #eu-cookie-law{
 	transform:translateX(-50px); opacity:0;
 }
 .enter{
-	transform:translate(0)!important; transition:0.5s; transition-delay:0.2;
+	transform:translate(0)!important; transition:0.5s; transition-delay:0.2s;
+}
+
+
+
+/* Bootstrap Icons */
+i.bi{
+	font-size:1rem; cursor:pointer;
 }
 
 

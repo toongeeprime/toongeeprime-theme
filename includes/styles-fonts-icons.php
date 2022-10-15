@@ -25,16 +25,20 @@ function prime2g_theme_root_styles() {
 /**
  *	Preload the Theme Fonts
  */
-add_action( 'wp_head', 'prime2g_preload_webfonts' );
-if ( ! function_exists( 'prime2g_preload_webfonts' ) ) {
+add_action( 'wp_footer', 'prime2g_load_fonts_and_icons' );
+if ( ! function_exists( 'prime2g_load_fonts_and_icons' ) ) {
 
-function prime2g_preload_webfonts() {
+function prime2g_load_fonts_and_icons() {
 
 	$theStyles	=	new ToongeePrime_Styles();
 
 	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font', $theStyles->bodyFont );
 	$headings	=	get_theme_mod( 'prime2g_site_headings_font', $theStyles->headFont );
 	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings\">";
+	// echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
+
+    wp_enqueue_style( 'bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css' );
+
 }
 
 }
@@ -48,39 +52,81 @@ if ( ! function_exists( 'prime2g_theme_fonts' ) ) {
 function prime2g_theme_fonts() {
 
 return array(
+		'Amita'		=>	'Amita',
 		'Arimo'		=>	'Arimo',
+		'Barlow'	=>	'Barlow',
 		'Barlow+Condensed'	=>	'Barlow Condensed',
+		'Bebas+Neue'		=>	'Bebas Neue',
+		'Bellefair'		=>	'Bellefair',
 		'Cabin'		=>	'Cabin',
 		'Cantarell'	=>	'Cantarell',
 		'Cantata+One'	=>	'Cantata One',
+		'Carter+One'	=>	'Carter One',
+		'Caveat'	=>	'Caveat',
+		'Charm'	=>	'Charm',
 		'Cherry+Swash'	=>	'Cherry Swash',
 		'Comfortaa'	=>	'Comfortaa',
+		'Comforter+Brush'	=>	'Comforter Brush',
+		'Coming+Soon'	=>	'Coming Soon',
 		'Cormorant+Garamond'	=>	'Cormorant Garamond',
+		'Cormorant+Infant'	=>	'Cormorant Infant',
+		'Crimson+Text'	=>	'Crimson Text',
+		'Dancing+Script'		=>	'Dancing Script',
+		'Delius'		=>	'Delius',
 		'Dosis'		=>	'Dosis',
 		'Fredoka'	=>	'Fredoka',
+		'Fuzzy+Bubbles'	=>	'Fuzzy Bubbles',
 		'Habibi'	=>	'Habibi',
+		'Inconsolata'	=>	'Inconsolata',
 		'Inria+Serif'	=>	'Inria Serif',
+		'Inspiration'	=>	'Inspiration',
+		'Inter'		=>	'Inter',
 		'Josefin+Sans'	=>	'Josefin Sans',
 		'Jost'		=>	'Jost',
+		'Just+Another+Hand'		=>	'Just Another Hand',
+		'Khula'		=>	'Khula',
+		'Krub'		=>	'Krub',
 		'Lato'		=>	'Lato',
 		'Lexend+Exa'	=>	'Lexend Exa',
-		'Montserrat'=>	'Montserrat',
+		'Lora'		=>	'Lora',
+		'Luckiest+Guy'	=>	'Luckiest Guy',
+		'Lustria'		=>	'Lustria',
+		'Mada'		=>	'Mada',
+		'Montserrat'	=>	'Montserrat',
 		'Nanum+Myeongjo'	=>	'Nanum Myeongjo',
 		'Noto+Sans'	=>	'Noto Sans',
 		'Noto+Sans+Display'	=>	'Noto Sans Display',
+		'Noto+Sans+Mono'	=>	'Noto Sans Mono',
+		'Nunito'	=>	'Nunito',
+		'Nunito+Sans'	=>	'Nunito Sans',
 		'Open+Sans'	=>	'Open Sans',
 		'Oswald'	=>	'Oswald',
 		'Overpass'	=>	'Overpass',
+		'Oxygen'	=>	'Oxygen',
 		'Playfair+Display'	=>	'Playfair Display',
 		'Poppins'	=>	'Poppins',
+		'Poiret+One'	=>	'Poiret One',
+		'PT+Mono'	=>	'PT Mono',
 		'Quicksand'	=>	'Quicksand',
+		'Quintessential'	=>	'Quintessential',
+		'Qwigley'	=>	'Qwigley',
+		'Raleway'	=>	'Raleway',
 		'Red+Hat+Display'	=>	'Red Hat Display',
 		'Redressed'	=>	'Redressed',
+		'Rochester'	=>	'Rochester',
 		'Roboto'	=>	'Roboto',
+		'Roboto+Mono'	=>	'Roboto Mono',
+		'Rubik+Dirt'	=>	'Rubik Dirt',
+		'Rubik+Maze'	=>	'Rubik Maze',
+		'Sofia'	=>	'Sofia',
+		'Source+Code+Pro'	=>	'Source Code Pro',
 		'Source+Serif+4'	=>	'Source Serif 4',
 		'Source+Serif+Pro'	=>	'Source Serif Pro',
 		'Spartan'	=>	'Spartan',
 		'Tajawal'	=>	'Tajawal',
+		'Trirong'	=>	'Trirong',
+		'Ubuntu'	=>	'Ubuntu',
+		'Work+Sans'	=>	'Work Sans',
 	);
 
 }

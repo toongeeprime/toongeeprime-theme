@@ -49,35 +49,36 @@
 /** COMMENTS/RATINGS **
 ***********************/
 .star-rating, p.stars a{
-	font-family:dashicons;font-size:.857em;position:relative;overflow:hidden;border:0;
-	line-height:1;height:1em;display:block;float:none;width:5.4em;text-decoration:none;
+	/* font-family:dashicons; */
+	font-family:bootstrap-icons;font-size:.857em;position:relative;overflow:hidden;border:0;
+	line-height:1;height:1em;display:block;float:none;width:5.4em;text-decoration:none;text-align:left;
 }
 p.stars a{
 	display:inline-block;width:1em;height:1em;text-indent:-999em;font-size:1em;
 }
 .star-rating::before{
-	float:left;color:#ccc;top:0;left:0;position:absolute;content:"\f155\f155\f155\f155\f155";
+	float:left;color:#ccc;top:0;left:0;position:absolute;content:"\F586\F586\F586\F586\F586";
 }
 .star-rating span{
 	float:left;top:0;left:0;overflow:hidden;padding-top:1.5em;position:absolute;
 }
 .star-rating span::before, p.stars a::before{
-	position:absolute;left:0;top:0;content:"\f155\f155\f155\f155\f155";color:gold;
+	position:absolute;left:0;top:0;content:"\F586\F586\F586\F586\F586";color:gold;
 }
 p.stars{
 	margin-top:0;
 }
 p.stars a::before{
-	content:"\f155";color:#ccc;display:block;text-indent:0;line-height:1;
+	content:"\F586";color:#ccc;display:block;text-indent:0;line-height:1;
 }
 p.stars.selected a::before, p.stars:hover a::before{
 	color:#000;
 }
 p.stars:hover a:hover::before, p.stars.selected a.active::before{
-	color:gold;content:"\f155";
+	color:gold;content:"\F586";
 }
 p.stars a:hover~a::before, p.stars.selected a.active~a::before{
-	content:"\f154";
+	content:"\F588";
 }
 .comment-form-rating label{
 	margin-top:var(--min-pad);
@@ -241,6 +242,10 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 }
 .related, .upsells{
 	margin:calc(2 * var(--min-pad)) 0 var(--min-pad);
+}
+
+.pswp{
+	z-index:99990;
 }
 
 

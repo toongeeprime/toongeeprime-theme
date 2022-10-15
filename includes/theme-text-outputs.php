@@ -242,10 +242,10 @@ echo '</div>';
 add_action( 'prime2g_archive_post_top', 'prime2g_archive_postmeta' );
 if ( ! function_exists( 'prime2g_archive_postmeta' ) ) {
 
-function prime2g_archive_postmeta() {
+function prime2g_archive_postmeta( $postObject ) {
 
 echo '<div class="the_metas">';
-	echo prime2g_posted_by( 'By', '' );
+	echo prime2g_posted_by( 'By', '', $postObject );
 	prime2g_posted_on();
 echo '</div>';
 
@@ -279,7 +279,7 @@ echo '</div>';
  */
 if ( ! function_exists( 'prime2g_posted_by' ) ) {
 
-function prime2g_posted_by( $text = 'Posted by', $more = 'More entries by' ) {
+function prime2g_posted_by( $text = 'Posted by', $more = 'More entries by', $postObject = null ) {
 
 /**
  *	Copied and edited get_the_author_posts_link() so texts can be optional
@@ -287,7 +287,10 @@ function prime2g_posted_by( $text = 'Posted by', $more = 'More entries by' ) {
  *	@https://developer.wordpress.org/reference/functions/get_the_author_posts_link/
  */
 global $post;
-$id		=	$post->post_author;
+
+if ( $postObject ) { $post = $postObject; }
+
+$id		=	(int) $post->post_author;
 
 $author	=	get_the_author_meta( 'display_name', $id );
 $slug	=	get_the_author_meta( 'user_nicename', $id );
@@ -470,11 +473,11 @@ function prime2g_archive_description( $tag = 'p' ) {
  */
 if ( ! function_exists( 'prime2g_post_excerpt' ) ) {
 
-function prime2g_post_excerpt( $length = 25 ) {
+function prime2g_post_excerpt( $length = 25, $post = null ) {
 
 	$excerpt_length = apply_filters( 'excerpt_length', $length );
 
-	$text = wp_trim_words( get_the_excerpt(), $excerpt_length, prime2g_read_more_excerpt_link() );
+	$text = wp_trim_words( get_the_excerpt( $post ), $excerpt_length, prime2g_read_more_excerpt_link() );
 
 	$text = apply_filters( 'get_the_excerpt', $text );
 
@@ -626,5 +629,4 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
-
 

@@ -91,19 +91,6 @@ function prime2g_theme_enqueues() {
 }
 
 
-/**
- *	Add Files to Footer Queue
- */
-add_action( 'wp_footer', 'prime2g_footer_enqueues' );
-if ( ! function_exists( 'prime2g_footer_enqueues' ) ) {
-function prime2g_footer_enqueues() {
-
-    wp_enqueue_style( 'dashicons', '/wp-includes/css/dashicons.min.css' );
-
-}
-}
-
-
 
 /**
  *	Removing Default WooCommerce styles
@@ -111,6 +98,7 @@ function prime2g_footer_enqueues() {
 if ( class_exists( 'woocommerce' ) ) {
 	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
 }
+
 
 
 

@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.0.42.11
+Stable tag: 1.0.43.00
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,25 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.43.00 =
+
+* Introduced deprecated file.
+* Deprecated query functions in favour of more concise new functions.
+* Extended prime2g_post_object_template() to allow excerpts.
+* Extended prime2g_posted_by() to pass in post object parameter.
+* Added Telegram and TikTok icons to Customizer.
+* More Google Fonts (75 total).
+* Deleted WP icons.
+* Other code updates and optimizations.
+
+= 1.0.42.51 =
+
+* CSS and various edits.
+
+= 1.0.42.50 =
+
+* Added Bootstrap icons via CSS... to delete WP icons later.
 
 = 1.0.42.11 =
 

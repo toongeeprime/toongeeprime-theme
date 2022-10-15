@@ -102,12 +102,15 @@ echo '</nav>';
  */
 if ( ! function_exists( 'prime2g_archive_loop' ) ) {
 
-function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) { ?>
+function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
+$title	=	get_the_title();
+$link	=	get_permalink();
+?>
 
 <article id="entry-<?php echo get_the_ID(); ?>" <?php post_class(); ?>>
 
 	<div class="entry_img">
-		<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+		<a href="<?php echo $link; ?>" title="<?php echo $title; ?>">
 			<?php
 			if ( has_post_thumbnail() ) {
 				echo '<div class="thumbnail" style="background-image:url(';
@@ -121,7 +124,7 @@ function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $
 					echo ');"></div>';
 				}
 				else {
-					echo '<div class="thumbnail">'. get_the_title() .'</div>';
+					echo '<div class="thumbnail">'. $title .'</div>';
 				}
 			}
 			?>
@@ -129,9 +132,9 @@ function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $
 	</div>
 	<div class="entry_text">
 		<?php
-		if ( $metas ) prime2g_archive_post_top();
+		if ( $metas ) prime2g_archive_post_top( null );
 
-		echo "<a href=\"". get_the_permalink() ."\" title=\"Read this entry\"><$tag class=\"entry_title\">". get_the_title() ."</$tag></a>";
+		echo "<a href=\"". $link ."\" title=\"Read this entry\"><$tag class=\"entry_title\">". $title ."</$tag></a>";
 
 		if ( $excerpt && ! is_attachment() ) echo prime2g_post_excerpt( $length );
 
@@ -153,18 +156,19 @@ function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $
  *	Post Object Template
  */
 if ( ! function_exists( 'prime2g_post_object_template' ) ) {
-function prime2g_post_object_template( $object, $size = 'large' ) {
+function prime2g_post_object_template( $object, $size = 'large', $excerpt = null, $length = 25, $metas = null ) {
 
 $id		=	$object->ID;
 $title	=	$object->post_title;
+$link	=	get_permalink( $id );
 
 echo '<article id="entry-'. $id .'" class="'. implode( ' ', get_post_class( '', $id ) ) .'">';
-echo '<div>';
-echo '<a href="'. get_permalink( $id ) .'" title="'. $title .'">';
+echo '<div class="entry_img">';
+echo '<a href="'. $link .'" title="'. $title .'">';
 
-	if ( get_the_post_thumbnail_url( $id ) ) {
+	if ( has_post_thumbnail( $object ) ) {
 		echo '<div class="thumbnail" style="background-image:url(';
-		echo get_the_post_thumbnail_url( $id, $size );
+		echo get_the_post_thumbnail_url( $object, $size );
 		echo ');"></div>';
 	}
 	else {
@@ -178,8 +182,11 @@ echo '<a href="'. get_permalink( $id ) .'" title="'. $title .'">';
 		}
 	}
 
-echo '</a></div><div class="entry_text">';
-echo '<a href="'. get_permalink( $id ) .'" title="Read this entry"><h2 class="entry_title">'. $title .'</h2></a>';
+echo '</a></div>';
+echo '<div class="entry_text">';
+if ( $metas ) prime2g_archive_post_top( $object );
+echo '<a href="'. $link .'" title="Read this entry"><h2 class="entry_title">'. $title .'</h2></a>';
+if ( $excerpt ) echo prime2g_post_excerpt( $length, $object );
 prime2g_archive_post_footer();
 echo '</div>';
 echo '</article>';
@@ -195,12 +202,15 @@ echo '</article>';
  */
 if ( ! function_exists( 'prime2g_search_loop' ) ) {
 
-function prime2g_search_loop() { ?>
+function prime2g_search_loop() {
+$title	=	get_the_title();
+$link	=	get_permalink();
+?>
 
 <article id="entry-<?php echo get_the_ID(); ?>" <?php post_class( 'search grid' ); ?>>
 
-	<div>
-		<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+	<div class="entry_img">
+		<a href="<?php echo $link; ?>" title="<?php echo $title; ?>">
 			<?php
 			if ( has_post_thumbnail() ) {
 				echo '<div class="thumbnail" style="background-image:url(';
@@ -214,7 +224,7 @@ function prime2g_search_loop() { ?>
 					echo ');"></div>';
 				}
 				else {
-					echo '<div class="thumbnail">'. get_the_title() .'</div>';
+					echo '<div class="thumbnail">'. $title .'</div>';
 				}
 			}
 			?>
@@ -222,7 +232,7 @@ function prime2g_search_loop() { ?>
 	</div>
 	<div class="entry_text">
 
-		<a href="<?php the_permalink(); ?>" title="Read this entry"><h3 class="search_result_title"><?php the_title(); ?></h3></a>
+		<a href="<?php echo $link; ?>" title="Read this entry"><h3 class="search_result_title"><?php echo $title; ?></h3></a>
 		<?php echo prime2g_post_excerpt(); ?>
 
 	</div>

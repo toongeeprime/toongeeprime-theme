@@ -13,7 +13,7 @@
  */
 if ( ! function_exists( 'prime2g_theme_mod_social_and_contacts' ) ) {
 
-function prime2g_theme_mod_social_and_contacts() {
+function prime2g_theme_mod_social_and_contacts( $incAddress = true ) {
 
 $siteName	=	esc_html( get_bloginfo( 'name' ) );
 $facebook	=	get_theme_mod( 'prime2g_facebook_url' );
@@ -25,6 +25,8 @@ $phone		=	get_theme_mod( 'prime2g_contact_phone' );
 $whatsapp	=	get_theme_mod( 'prime2g_whatsapp_number' );
 $youTube	=	get_theme_mod( 'prime2g_youtube_url' );
 $linkedIn	=	get_theme_mod( 'prime2g_linkedin_url' );
+$tiktok		=	get_theme_mod( 'prime2g_tiktok_url' );
+$telegram	=	get_theme_mod( 'prime2g_telegram_url' );
 
 $attrs	=	' target="_blank" rel="noopener noreferrer nofollow" title=';
 
@@ -32,28 +34,32 @@ $contacts	=	'<div class="socials_contacts">';
 $contacts	.=	'<div class="links">';
 
 if ( $facebook )
-	$contacts .= '<span class="sci fb"><a href="'. $facebook .'"'. $attrs .'"' . __( $siteName . ' on Facebook', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-facebook"></span></a></span>';
+	$contacts .= '<span class="sci fb"><a href="'. $facebook .'"'. $attrs .'"' . __( $siteName . ' on Facebook', PRIME2G_TEXTDOM ) . '"><i class="bi bi-facebook"></i></a></span>';
 if ( $instagram )
-	$contacts .= '<span class="sci ig"><a href="'. $instagram .'"'. $attrs .'"' . __( $siteName . ' on Instagram', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-instagram"></span></a></span>';
+	$contacts .= '<span class="sci ig"><a href="'. $instagram .'"'. $attrs .'"' . __( $siteName . ' on Instagram', PRIME2G_TEXTDOM ) . '"><i class="bi bi-instagram"></i></a></span>';
 if ( $twitter )
-	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on Twitter', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-twitter"></span></a></span>';
+	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on Twitter', PRIME2G_TEXTDOM ) . '"><i class="bi bi-twitter"></i></a></span>';
 if ( $youTube )
-	$contacts .= '<span class="sci yt"><a href="'. $youTube .'"'. $attrs .'"' . __( $siteName . ' on YouTube', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-youtube"></span></a></span>';
+	$contacts .= '<span class="sci yt"><a href="'. $youTube .'"'. $attrs .'"' . __( $siteName . ' on YouTube', PRIME2G_TEXTDOM ) . '"><i class="bi bi-youtube"></i></a></span>';
 if ( $linkedIn )
-	$contacts .= '<span class="sci li"><a href="'. $linkedIn .'"'. $attrs .'"' . __( $siteName . ' on LinkedIn', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-linkedin"></span></a></span>';
+	$contacts .= '<span class="sci li"><a href="'. $linkedIn .'"'. $attrs .'"' . __( $siteName . ' on LinkedIn', PRIME2G_TEXTDOM ) . '"><i class="bi bi-linkedin"></i></a></span>';
+if ( $tiktok )
+	$contacts .= '<span class="sci tt"><a href="'. $tiktok .'"'. $attrs .'"' . __( $siteName . ' on TikTok', PRIME2G_TEXTDOM ) . '"><i class="bi bi-tiktok"></i></a></span>';
+if ( $telegram )
+	$contacts .= '<span class="sci tg"><a href="'. $telegram .'"'. $attrs .'"' . __( $siteName . ' on Telegram', PRIME2G_TEXTDOM ) . '"><i class="bi bi-telegram"></i></a></span>';
 if ( $whatsapp ) {
 	$whatsapp	=	'https://wa.me/' . $whatsapp . '?text=Hello,%20I%20want%20to%20chat%20with%20' . $siteName;
-	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-whatsapp"></span></a></span>';
+	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', PRIME2G_TEXTDOM ) . '"><i class="bi bi-whatsapp"></i></a></span>';
 }
 if ( $email )
-	$contacts .= '<span class="sci em"><a href="mailto:'. $email .'" title="' . __( 'Send us a mail', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-email"></span></a></span>';
+	$contacts .= '<span class="sci em"><a href="mailto:'. $email .'" title="' . __( 'Send us a mail', PRIME2G_TEXTDOM ) . '"><i class="bi bi-envelope"></i></a></span>';
 if ( $phone )
-	$contacts .= '<span class="sci ph"><a href="tel:+'. $phone .'" title="' . __( 'Call us', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-phone"></span></a></span>';
+	$contacts .= '<span class="sci ph"><a href="tel:+'. $phone .'" title="' . __( 'Call us', PRIME2G_TEXTDOM ) . '"><i class="bi bi-telephone"></i></a></span>';
 
 $contacts	.=	'</div>';
 
-if ( $address )
-	$contacts .= '<span class="address" title="' . __( 'Our Address', PRIME2G_TEXTDOM ) . '"><span class="dashicons dashicons-building"></span><span class="contactAddress">' . __( $address, PRIME2G_TEXTDOM ) . '</span></span>';
+if ( $address && $incAddress )
+	$contacts .= '<span class="address" title="' . __( 'Our Address', PRIME2G_TEXTDOM ) . '"><i class="bi bi-building"></i><span class="contactAddress">' . __( $address, PRIME2G_TEXTDOM ) . '</span></span>';
 
 $contacts	.=	'</div>';
 
