@@ -8,9 +8,10 @@ function p2getEl( el ) { return document.querySelector( el ); }
 function p2getAll( els ) { return document.querySelectorAll( els ); }
 
 function prime2gElems( elems, clss = 'prime' ) {
-elems.forEach( activeAdd );
-	function activeAdd( el ) {
-		let ell = document.querySelector( el );
+elems.forEach( clssAdd );
+	function clssAdd( el ) {
+		event.preventDefault();
+		let ell = p2getEl( el );
 		ell.classList.add( clss );
 	}
 }
@@ -18,7 +19,8 @@ elems.forEach( activeAdd );
 function prime2g_offElems( elems, clss = 'prime' ) {
 elems.forEach( clRemove );
 	function clRemove( el ) {
-		let ell = document.querySelector( el );
+		event.preventDefault();
+		let ell = p2getEl( el );
 		ell.classList.remove( clss );
 	}
 }
@@ -26,7 +28,8 @@ elems.forEach( clRemove );
 function prime2g_toggElems( elems, clss = 'prime' ) {
 elems.forEach( elTogg );
 	function elTogg( el ) {
-		let ell = document.querySelector( el );
+		event.preventDefault();
+		let ell = p2getEl( el );
 		ell.classList.toggle( clss );
 	}
 }
@@ -44,7 +47,7 @@ let rect = el.getBoundingClientRect();
 
 
 function prime2g_gotoThis( selector ) {
-let elmt = document.querySelector( selector );
+let elmt = p2getEl( selector );
 	elmt.scrollIntoView( true );
 }
 

@@ -5,6 +5,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
+/**
+ *	Vars:
+ */
 const	theBody	=	p2getEl( 'body' );
 
 
@@ -33,7 +36,6 @@ let primetoTop	=	p2getEl( '#prime2g_toTop' ),
 }, false );
 
 
-
 /**
  *	Close mobile menu by class "close_mobile_menu"
  */
@@ -45,6 +47,7 @@ function close_mMenu(el) {
 }
 
 
-
 // Remove class to determine browser supports JavaScript
 document.body.classList.remove( 'no-js' );
+
+

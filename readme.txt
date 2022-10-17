@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.0.43.00
+Stable tag: 1.0.44.00
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,11 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.44.00 =
+
+* WooCommerce Mini-cart workings.
+* JS function with shortcode to add basic animation support.
 
 = 1.0.43.00 =
 
@@ -134,6 +139,7 @@ Hooked to comment_form_defaults:
 
 == Theme Hooks ==
 * prime2g_before_header
+* prime2g_sub_header
 * prime2g_after_header
 * prime2g_after_title
 * prime2g_before_post

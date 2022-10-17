@@ -11,7 +11,7 @@
 /**
  *	GET PHP FILES THROUGH DIRECTORIES ARRAY
  */
-$directories	=	[ 'classes', 'includes', 'customizer' ];
+$directories	=	[ 'classes', 'includes', 'customizer', 'features' ];
 
 foreach( $directories as $dir ) {
 
@@ -35,7 +35,6 @@ foreach( $parts as $part ) {
 	require_once PRIME2G_PART . $part . '.php';
 }
 
-require_once PRIME2G_THEME . 'features/features-index.php';
 
 
 /**

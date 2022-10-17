@@ -9,9 +9,33 @@
  */
 
 /**
- *	Only run scripts if WooCommerce is active
+ *	Run if WooCommerce active
  */
-if ( class_exists( 'woocommerce' ) ) :
+if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) :
+
+
+/**
+ *	Add to Cart Fragments
+ *
+ *	@since ToongeePrime Theme 1.0.44.00
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'prime2g_add_to_cart_fragments', 10, 1 );
+function prime2g_add_to_cart_fragments( $fragments ) {
+	global $woocommerce;
+	$count = $woocommerce->cart->cart_contents_count;
+	ob_start();
+
+	#	div and function to use in theme **preferably wrapped: ?>
+	<div class="widget_shopping_cart_content">
+		<?php woocommerce_mini_cart(); ?>
+	</div>
+
+<?php
+	$fragments[ 'span.cart_items_count' ]	=	'<span class="cart_items_count p-abso">' . $count . '</span>';
+	$fragments[ 'div.floatingcart' ]	=	ob_get_clean();
+
+return $fragments;
+}
 
 
 /**
@@ -118,6 +142,6 @@ return $translated_text;
 }
 
 
-endif;
 
+endif;
 
