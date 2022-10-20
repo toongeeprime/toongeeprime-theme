@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	Run if WooCommerce active
+ *	Run if WooCommerce is active
  */
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) :
 
@@ -29,8 +29,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) :
 */
 ?>
 
-<div class="floatingcart">
-<div class="infloatcart slimscrollbar">
+<div class="minicartdiv">
+<div class="in_minicart slimscrollbar">
 <h3 id="cart-heading" class="cart-title"><i class="fas fa-shopping-cart"></i>Your Cart</h3>
 
 <?php
@@ -73,7 +73,7 @@ if ( ! WC()->cart->is_empty() ) {
 					}
 					else { ?>
 					<div class="cart_item_grid">
-						<a class="cart_item_image" href="<?php echo esc_url( $product_permalink ); ?>">
+						<a class="cart_item_image" href="<?php echo esc_url( $product_permalink ); ?>" title="<?php echo $product_name; ?>">
 							<?php echo $thumbnail; ?>
 						</a>
 
@@ -110,7 +110,10 @@ if ( ! WC()->cart->is_empty() ) {
 	</p>
 
 	<?php do_action( 'woocommerce_widget_shopping_cart_before_buttons' ); ?>
-	<p class="woocommerce-mini-cart__buttons buttons"><?php do_action( 'woocommerce_widget_shopping_cart_buttons' ); ?></p>
+	<p class="woocommerce-mini-cart__buttons buttons">
+	<?php do_action( 'woocommerce_widget_shopping_cart_buttons' ); ?>
+	<a href="<?php echo wc_get_page_permalink( 'shop' ); ?>" class="button shop wc-forward"><?php _e( 'Shop', 'twentytwentyone' ) ?></a>
+	</p>
 	<?php do_action( 'woocommerce_widget_shopping_cart_after_buttons' ); ?>
 </div>
 

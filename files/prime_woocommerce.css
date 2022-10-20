@@ -173,6 +173,18 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 .columns-2, .columns-4{
 	grid-template-columns:1fr 1fr;
 }
+.product a.button{
+	position:relative;
+}
+.ajax_add_to_cart.loading:before, .ajax_add_to_cart.added:before{
+	font-family:bootstrap-icons;position:absolute;content:'\F116';left:35px;top:0;font-size:1.5rem;
+}
+.ajax_add_to_cart.loading:before{
+	animation:prime_spin infinite 1s;
+}
+.ajax_add_to_cart.added:before{
+	content:'\F633';
+}
 .woocommerce .sharedaddy{
 	margin-top:calc(5 * var(--min-pad));
 }
@@ -322,7 +334,6 @@ td.actions button[aria-disabled="true"]{
 .payment_box::before{
 	content:'';clip-path:polygon(0% 0%,100% 0%,0 100%);position:absolute;width:30px;height:30px;background:var(--faint-bg);top:-15px;left:15px;transform:rotate(45deg);
 }
-
 .woocommerce-table--order-details p{
 	margin:0;
 }
@@ -331,16 +342,16 @@ td.actions button[aria-disabled="true"]{
 /** MINI CART **
 ********************/
 /* Variations: */
-.floatingcart dl{
+.minicartdiv dl{
 	padding:10px;
 }
-.floatingcart dl,.floatingcart dt,.floatingcart dd{
+.minicartdiv dl,.minicartdiv dt,.minicartdiv dd{
 	margin:0;line-height:1;
 }
-.floatingcart dt{
+.minicartdiv dt{
 	font-weight:600;
 }
-.floatingcart dd{
+.minicartdiv dd{
 	margin-left:20px;
 }
 

@@ -163,10 +163,23 @@ echo $crumbs;
  *	Edit An Entry
  *	Hooked to prime2g_before_post
  */
-add_action( 'prime2g_before_post', 'prime2g_edit_entry', 5 );
+add_action( 'prime2g_before_post', 'prime2g_edit_entry', 5, 2 );
 if ( ! function_exists( 'prime2g_edit_entry' ) ) {
 
-function prime2g_edit_entry() {
+function prime2g_edit_entry( $par1, $par2 ) {
+$par1 = '<p class="edit-link edit-entry">';
+$par2 = '</p>';
+
+	echo prime2g_edit_entry_get( $par1, $par2 );
+
+}
+
+}
+
+
+if ( ! function_exists( 'prime2g_edit_entry_get' ) ) {
+
+function prime2g_edit_entry_get( $pre = '<p class="edit-link edit-entry">', $end = '</p>' ) {
 global $post;
 if ( ! is_object( $post ) ) return;
 
@@ -175,16 +188,17 @@ $ptObj	=	get_post_type_object( $pType );
 if ( ! is_object( $ptObj ) ) return;
 
 $ptName	=	$ptObj->labels->singular_name;
+$title	=	get_the_title();
+$url	=	get_edit_post_link( $post );
 
-	edit_post_link(
-		sprintf(
-			/* translators: %s: Name of current post only visible to screen readers */
-			esc_html__( 'Edit this ' . $ptName . ' %s', PRIME2G_TEXTDOM ),
-			'<span class="screen-reader-text">' . get_the_title() . '</span>'
-		),
-		'<p class="edit-link edit-entry">',
-		'</p>'
-	);
+$link	=	$pre;
+$link	.=	'<a href="' . $url . '" title="Edit">';
+$link	.=	__( 'Edit this ' . $ptName, PRIME2G_TEXTDOM );
+$link	.=	'<span class="screen-reader-text">' . $title . '</span>';
+$link	.=	'</a>';
+$link	.=	$end;
+
+return $link;
 }
 
 }
@@ -238,16 +252,20 @@ echo '</div>';
 /**
  *	Post meta at top of archive entries
  *	Hooked to prime2g_archive_post_top
+ *	Filter added and hooked @since ToongeePrime Theme 1.0.45.00
  */
-add_action( 'prime2g_archive_post_top', 'prime2g_archive_postmeta' );
+add_action( 'prime2g_archive_post_top', 'prime2g_archive_postmeta', 10, 2 );
 if ( ! function_exists( 'prime2g_archive_postmeta' ) ) {
 
-function prime2g_archive_postmeta( $postObject ) {
+function prime2g_archive_postmeta( $postObject = null, $echo = true ) {
 
-echo '<div class="the_metas">';
-	echo prime2g_posted_by( 'By', '', $postObject );
-	prime2g_posted_on();
-echo '</div>';
+$metas	=	'<div class="the_metas">';
+$metas	.=	prime2g_posted_by( 'By', '', $postObject );
+$metas	.=	prime2g_posted_on( ', on ', false );
+$metas	.=	'</div>';
+
+if ( $echo ) echo $metas;
+else return $metas;
 
 }
 
@@ -259,14 +277,17 @@ echo '</div>';
  *	Post meta at bottom of archive entries
  *	Hooked to prime2g_archive_post_footer
  */
-add_action( 'prime2g_archive_post_footer', 'prime2g_archive_postbase' );
+add_action( 'prime2g_archive_post_footer', 'prime2g_archive_postbase', 10, 1 );
 if ( ! function_exists( 'prime2g_archive_postbase' ) ) {
 
-function prime2g_archive_postbase() {
+function prime2g_archive_postbase( $echo = true ) {
 
-echo '<div class="entry_taxonomies">';
-	prime2g_post_taxonomies( 'category', '', '' );
-echo '</div>';
+$div	=	'<div class="entry_taxonomies">';
+$div	.=	prime2g_post_taxonomies( 'category', '', '', 'post_categories', false );
+$div	.=	'</div>';
+
+if ( $echo ) echo $div;
+else return $div;
 
 }
 
@@ -282,8 +303,6 @@ if ( ! function_exists( 'prime2g_posted_by' ) ) {
 function prime2g_posted_by( $text = 'Posted by', $more = 'More entries by', $postObject = null ) {
 
 /**
- *	Copied and edited get_the_author_posts_link() so texts can be optional
- *
  *	@https://developer.wordpress.org/reference/functions/get_the_author_posts_link/
  */
 global $post;
@@ -300,15 +319,11 @@ $more	=	__( $more, PRIME2G_TEXTDOM );
 
 // if ( ! is_object( $authordata ) ) { return ''; }
 
-	$link = sprintf(
-	'<span class="post_author vcard">' . $text . ' <a href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
-	esc_url( get_author_posts_url( $id, $slug ) ),
-		/* translators: %s: Author's display name. */
-		esc_attr( sprintf( __( $more . ' %s' ), $author ) ),
-		$author
-	);
+$href	=	esc_url( get_author_posts_url( $id, $slug ) );
 
-return apply_filters( 'the_author_posts_link', $link );
+$link	=	'<span class="post_author vcard">' . $text . ' <a href="' . $href . '" title="' . $more . ' ' . $author . '" rel="author">' . $author . '</a></span>';
+
+return apply_filters( 'get_the_author_posts_link', $link );
 
 }
 
@@ -321,11 +336,8 @@ return apply_filters( 'the_author_posts_link', $link );
  */
 if ( ! function_exists( 'prime2g_posted_on' ) ) {
 
-function prime2g_posted_on( $text = ', on' ) {
+function prime2g_posted_on( $text = ', on ', $echo = true ) {
 
-/**
- *	Copied WP's Twenty Twenty-One theme's twenty_twenty_one_posted_on() & edited
- */
 $text	=	__( $text, PRIME2G_TEXTDOM );
 $more	=	__( 'More entries posted on', PRIME2G_TEXTDOM );
 $date	=	get_the_date();
@@ -343,16 +355,15 @@ $dateUrl	=	esc_url( home_url( '/' . $year . '/' . $month . '/' . $day . '/' ) );
 
 	$time_string	=	sprintf(
 		$time_string,
-		esc_attr( $date ),
-		esc_html( $date )
+		esc_attr__( $date ),
+		esc_html__( $date )
 	);
-	echo '<span class="posted_on">';
-	printf(
-		/* translators: %s: Publish date. */
-		esc_html__( $text . ' %s', PRIME2G_TEXTDOM ),
-		'<a href="' . $dateUrl . '" title="'. $more . ' ' . $date .'">' . $time_string . '</a>' // phpcs:ignore WordPress.Security.EscapeOutput
-	);
-	echo '</span>';
+	$info	=	'<span class="posted_on">' . __( $text, PRIME2G_TEXTDOM );
+	$info	.=	'<a href="' . $dateUrl . '" title="'. $more . ' ' . $date .'">' . $time_string . '</a>';
+	$info	.=	'</span>';
+
+if ( $echo ) echo $info;
+else return $info;
 
 }
 
@@ -629,4 +640,6 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
+
+
 

@@ -12,7 +12,7 @@ function prime2g_wp_query( array $args, $get = 'posts' ) {
 $loop	=	new WP_Query( $args );
 if ( $get === 'posts' ) return $loop->posts;
 if ( $get === 'count' ) return $loop->found_posts;
-return $loop;
+return $loop; # $get == null
 }
 
 

@@ -16,37 +16,45 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.45.00 =
+
+* Added HTML slider 'frame' feature with JS and CSS shortcodes
+* Upgraded the function prime2g_posts_shortcode()
+* Added prime2g_get_archive_loop() to return template and prime2g_archive_loop() now echoes it
+* Added filter functions: prime2g_archive_post_top_filter_part() and prime2g_archive_post_footer_filter_part()
+* Added prime2g_edit_entry_get() and prime2g_edit_entry() echoes it
+
 = 1.0.44.00 =
 
-* WooCommerce Mini-cart workings.
-* JS function with shortcode to add basic animation support.
+* WooCommerce Mini-cart workings
+* JS function with shortcode to add basic animation support
 
 = 1.0.43.00 =
 
-* Introduced deprecated file.
-* Deprecated query functions in favour of more concise new functions.
-* Extended prime2g_post_object_template() to allow excerpts.
-* Extended prime2g_posted_by() to pass in post object parameter.
-* Added Telegram and TikTok icons to Customizer.
-* More Google Fonts (75 total).
-* Deleted WP icons.
-* Other code updates and optimizations.
+* Introduced deprecated file
+* Deprecated query functions in favour of more concise new functions
+* Extended prime2g_post_object_template() to allow excerpts
+* Extended prime2g_posted_by() to pass in post object parameter
+* Added Telegram and TikTok icons to Customizer
+* More Google Fonts (75 total)
+* Deleted WP icons
+* Other code updates and optimizations
 
 = 1.0.42.51 =
 
-* CSS and various edits.
+* CSS and various edits
 
 = 1.0.42.50 =
 
-* Added Bootstrap icons via CSS... to delete WP icons later.
+* Added Bootstrap icons via CSS... to delete WP icons later
 
 = 1.0.42.11 =
 
-* Header Image Attachment option in Customizer.
+* Header Image Attachment option in Customizer
 
 = 1.0.42.00 =
 
-* Detect Post Type Archive Template.
+* Detect Post Type Archive Template
 
 = 1.0.41.00 =
 
@@ -54,7 +62,7 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.40.971 =
 
-* Up to this update were Template detecting and CSS updates.
+* Up to this update were Template detecting and CSS updates
 
 = 1.0.40.2 =
 
@@ -62,7 +70,7 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.40 =
 
-* Added option to replace header image with post thumbnail. Default: replace.
+* Added option to replace header image with post thumbnail. Default: replace
 
 = 1.0.39.1 =
 
@@ -135,6 +143,12 @@ Hooked to the_content_more_link:
 Hooked to comment_form_defaults:
 	toongeeprime_comment_form_defaults()
 
+
+
+== Theme Filters ==
+@since version 1.0.45.00
+* prime2g_archive_post_top_filter
+* prime2g_archive_post_footer_filter
 
 
 == Theme Hooks ==

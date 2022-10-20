@@ -9,7 +9,7 @@
  */
 
 /**
- *	Only run scripts if WooCommerce is active
+ *	Run if WooCommerce is active
  */
 if ( class_exists( 'woocommerce' ) ) :
 

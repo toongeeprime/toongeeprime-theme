@@ -9,9 +9,9 @@
  */
 
 /**
- *	Run if WooCommerce active
+ *	Run if WooCommerce is active
  */
-if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) :
+if ( class_exists( 'woocommerce' ) ) :
 
 
 /**
@@ -32,7 +32,7 @@ function prime2g_add_to_cart_fragments( $fragments ) {
 
 <?php
 	$fragments[ 'span.cart_items_count' ]	=	'<span class="cart_items_count p-abso">' . $count . '</span>';
-	$fragments[ 'div.floatingcart' ]	=	ob_get_clean();
+	$fragments[ 'div.minicartdiv' ]	=	ob_get_clean();
 
 return $fragments;
 }

@@ -10,9 +10,9 @@
  */
 
 /**
- *		Add WP Comment Form
+ *	Add WP Comment Form
  *
- *	// if( comments_open() || get_comments_number() ) { comments_template(); }
+ *	# if( comments_open() || get_comments_number() ) { comments_template(); }
  */
 add_action( 'prime2g_after_post', 'prime2g_comments' );
 function prime2g_comments() {
@@ -83,8 +83,10 @@ echo '</section>';
  */
 function prime2g_before_post() {
 
+$par1 = $par2 = $par3 = '';
+
 echo '<section id="prime2g_before_post">';
-	do_action( 'prime2g_before_post' );
+	do_action( 'prime2g_before_post', $par1, $par2, $par3 );
 echo '</section>';
 
 }
@@ -103,7 +105,7 @@ echo '</section>';
 
 
 /**
- *	Is set Before Archive post title
+ *	Replaced with prime2g_archive_post_top_filter_part()
  */
 function prime2g_archive_post_top() {
 
@@ -115,7 +117,7 @@ echo '</section>';
 
 
 /**
- *	Is set at Footer of Archive post entries
+ *	Replaced with prime2g_archive_post_footer_filter_part()
  */
 function prime2g_archive_post_footer() {
 
@@ -138,5 +140,65 @@ echo '<section id="site_base_strip">';
 echo '</section>';
 
 }
+
+
+
+
+/**
+ *	Is set Before Archive post title
+ *	@since ToongeePrime Theme 1.0.45.00
+ */
+function prime2g_archive_post_top_filter_part() {
+
+$start	=	'';
+
+$div	=	'<section class="archive_post_top metas">';
+$div	.=	apply_filters( 'prime2g_archive_post_top_filter', $start );
+$div	.=	'</section>';
+
+return $div;
+
+}
+
+
+/**
+ *	Is set at Footer of Archive post entries
+ *	@since ToongeePrime Theme 1.0.45.00
+ */
+function prime2g_archive_post_footer_filter_part() {
+if ( is_attachment() ) return;
+
+$start	=	'';
+
+$div	=	'<footer class="archive_post_footer metas">';
+$div	.=	apply_filters( 'prime2g_archive_post_footer_filter', $start );
+$div	.=	'</footer>';
+
+return $div;
+
+}
+
+
+
+/**
+ *	FUNCTIONS HOOKED TO FILTERS
+ *	Filters added and hooked @since ToongeePrime Theme 1.0.45.00
+ */
+add_filter( 'prime2g_archive_post_top_filter', 'prime2g_archive_postmeta_hooked' );
+add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_edit_entry_get_hooked' );
+add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_archive_postbase_hooked', 5, 1 );
+
+function prime2g_archive_postmeta_hooked( $text ) {
+	return $text . prime2g_archive_postmeta( null, false );
+}
+
+function prime2g_edit_entry_get_hooked( $text ) {
+	return $text . prime2g_edit_entry_get();
+}
+
+function prime2g_archive_postbase_hooked( $text ) {
+	return $text . prime2g_archive_postbase( false );
+}
+
 
 
