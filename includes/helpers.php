@@ -16,6 +16,18 @@ function prime2g_removeSidebar() {
 }
 
 
+
+/**
+ *	If current user is post author
+ *	@since ToongeePrime Theme 1.0.45.00
+ */
+function prime2g_is_post_author( $post, $userID = null ) {
+	return ( $userID ) ? $post->post_author == $userID :
+	$post->post_author == get_current_user_id();
+}
+
+
+
 /**
  *	Use prime2g_remove_title() to remove the title from a template
  */

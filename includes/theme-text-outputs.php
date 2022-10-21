@@ -166,7 +166,7 @@ echo $crumbs;
 add_action( 'prime2g_before_post', 'prime2g_edit_entry', 5, 2 );
 if ( ! function_exists( 'prime2g_edit_entry' ) ) {
 
-function prime2g_edit_entry( $par1, $par2 ) {
+function prime2g_edit_entry( $par1 = '', $par2 = '' ) {
 $par1 = '<p class="edit-link edit-entry">';
 $par2 = '</p>';
 
@@ -182,6 +182,8 @@ if ( ! function_exists( 'prime2g_edit_entry_get' ) ) {
 function prime2g_edit_entry_get( $pre = '<p class="edit-link edit-entry">', $end = '</p>' ) {
 global $post;
 if ( ! is_object( $post ) ) return;
+
+if ( ! prime2g_is_post_author( $post ) ) return;
 
 $pType	=	$post->post_type;
 $ptObj	=	get_post_type_object( $pType );

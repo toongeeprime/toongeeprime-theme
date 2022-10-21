@@ -23,6 +23,7 @@ A WordPress theme with options for customization, design and development flexibi
 * Added prime2g_get_archive_loop() to return template and prime2g_archive_loop() now echoes it
 * Added filter functions: prime2g_archive_post_top_filter_part() and prime2g_archive_post_footer_filter_part()
 * Added prime2g_edit_entry_get() and prime2g_edit_entry() echoes it
+* Added prime2g_is_post_author()
 
 = 1.0.44.00 =
 
