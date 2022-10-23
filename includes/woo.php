@@ -15,8 +15,20 @@ if ( class_exists( 'woocommerce' ) ) :
 
 
 /**
+ *	Get WooCommerce Mini Cart: Buffered
+ *	@since ToongeePrime Theme 1.0.45.50
+ */
+
+function prime2g_get_woo_mini_cart() {
+
+include PRIME2G_THEME . 'woocommerce/cart/mini-cart-buffered.php';
+
+return $cart;
+}
+
+
+/**
  *	Add to Cart Fragments
- *
  *	@since ToongeePrime Theme 1.0.44.00
  */
 add_filter( 'woocommerce_add_to_cart_fragments', 'prime2g_add_to_cart_fragments', 10, 1 );

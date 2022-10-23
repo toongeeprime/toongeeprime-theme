@@ -257,7 +257,12 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 .related, .upsells{
 	margin:calc(2 * var(--min-pad)) 0 var(--min-pad);
 }
-
+.comment-form-cookies-consent{
+	clear:both;
+}
+.comment-form-cookies-consent label{
+	display:inline;
+}
 .pswp{
 	z-index:99990;
 }
@@ -419,6 +424,12 @@ td.actions button[aria-disabled="true"]{
 .woocommerce .entry-summary{
 	float:right;width:48%;
 }
+.woocommerce-Reviews .comment-form-email{
+	width:48%;margin-left:2%;margin-right:0;
+}
+.woocommerce-Reviews .comment-form-author{
+	width:48%;float:left;clear:both;margin-right:2%;
+}
 .woocommerce .coupon{
 	display:flex;justify-content:space-between;flex-wrap:wrap;align-items:baseline;
 }
@@ -512,3 +523,5 @@ td.actions button:nth-child(2){
 }
 
 }
+
+

@@ -8,7 +8,7 @@
 
 if ( ! function_exists( 'prime2g_taxonomies_with_archive_image' ) ) {
 function prime2g_taxonomies_with_archive_image() {
-		return [ 'post_tag', 'category', 'product_cat', 'product_tag' ];
+		return [ 'post_tag', 'category' ];
 	}
 }
 
@@ -24,7 +24,7 @@ function prime2g_get_term_archive_image_url( $size = 'large' ) {
 	$termID	=	$categ->cat_ID;
  */
 	$termID	=	get_queried_object_id();
-	$image_id	=	get_term_meta( $termID, 'taxon_image_id', true );
+	$image_id	=	get_term_meta( $termID, 'thumbnail_id', true );
 	return wp_get_attachment_image_url( $image_id, $size );
 }
 }
@@ -35,7 +35,7 @@ function prime2g_get_term_archive_image_url( $size = 'large' ) {
  */
 if ( ! function_exists( 'prime2g_get_term_image_url' ) ) {
 function prime2g_get_term_image_url( $termID, $size = 'large' ) {
-	$image_id	=	get_term_meta( $termID, 'taxon_image_id', true );
+	$image_id	=	get_term_meta( $termID, 'thumbnail_id', true );
 	return wp_get_attachment_image_url( $image_id, $size );
 }
 }

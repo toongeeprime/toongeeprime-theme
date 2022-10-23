@@ -185,8 +185,8 @@ return $div;
  *	Filters added and hooked @since ToongeePrime Theme 1.0.45.00
  */
 add_filter( 'prime2g_archive_post_top_filter', 'prime2g_archive_postmeta_hooked' );
-add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_edit_entry_get_hooked' );
-add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_archive_postbase_hooked', 5, 1 );
+add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_edit_entry_get_hooked', 5, 1 );
+add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_archive_postbase_hooked', 10 );
 
 function prime2g_archive_postmeta_hooked( $text ) {
 	return $text . prime2g_archive_postmeta( null, false );

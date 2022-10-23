@@ -41,7 +41,7 @@ function prime2g_customizer_sections( $wp_customize ) {
 			'panel'			=>	'prime2g_customizer_panel',
 			'description'	=>	__( 'Customize The Front Page', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
-			'active_callback'	=>	function(){ return ( is_front_page() ); },
+			'active_callback'	=>	'is_front_page',
 		)
 	);
 
@@ -76,6 +76,7 @@ if ( class_exists( 'woocommerce' ) ) {
 			'panel'			=>	'prime2g_customizer_panel',
 			'description'	=>	__( 'Set WooCommerce Customizations', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
+			// 'active_callback'	=>	'is_woocommerce',
 		)
 	);
 }

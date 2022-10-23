@@ -31,6 +31,7 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	__( 'Shop Homepage', PRIME2G_TEXTDOM ),
 			),
+			'active_callback'	=>	'is_shop',
 		)
 	);
 
@@ -54,6 +55,7 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	__( $descr, PRIME2G_TEXTDOM ),
 			),
+			'active_callback'	=>	'is_shop',
 		)
 	);
 

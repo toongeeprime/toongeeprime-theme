@@ -133,7 +133,7 @@ return array_combine( $ids, $names );
 			'choices'	=>	array(
 				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM ),
 			),
-			'active_callback'	=>	'is_home',
+			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); },
 		)
 	);
 
@@ -153,7 +153,7 @@ return array_combine( $ids, $names );
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'Featured Posts',
 			),
-			'active_callback'	=>	'is_home',
+			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); },
 		)
 	);
 

@@ -27,8 +27,8 @@ public function load_media() { wp_enqueue_media(); }
 
 public function add_taxon_image( $taxonomy ) { ?>
 <div class="form-field term-group">
-	<label for="taxon_image_id"><?php _e( 'Term Image', PRIME2G_TEXTDOM ); ?></label>
-	<input type="hidden" id="taxon_image_id" name="taxon_image_id" class="custom_media_url" value="">
+	<label for="thumbnail_id"><?php _e( 'Term Image', PRIME2G_TEXTDOM ); ?></label>
+	<input type="hidden" id="thumbnail_id" name="thumbnail_id" class="custom_media_url" value="">
 <div id="taxon-image-wrapper"></div>
 	<p>
 		<input type="button" class="button button-secondary akw_tax_media_button" id="akw_tax_media_button" name="akw_tax_media_button" value="<?php _e( 'Add Image', PRIME2G_TEXTDOM ); ?>" />
@@ -40,9 +40,9 @@ public function add_taxon_image( $taxonomy ) { ?>
 
 
 public function save_taxon_image( $term_id, $tt_id ) {
-	if ( isset( $_POST['taxon_image_id'] ) && '' !== $_POST['taxon_image_id'] ) {
-		$image	=	$_POST['taxon_image_id'];
-		add_term_meta( $term_id, 'taxon_image_id', $image, true );
+	if ( isset( $_POST['thumbnail_id'] ) && '' !== $_POST['thumbnail_id'] ) {
+		$image	=	$_POST['thumbnail_id'];
+		add_term_meta( $term_id, 'thumbnail_id', $image, true );
 	}
 }
 
@@ -50,11 +50,11 @@ public function save_taxon_image( $term_id, $tt_id ) {
 public function update_taxon_image( $term, $taxonomy ) { ?>
 <tr class="form-field term-group-wrap">
 	<th scope="row">
-		<label for="taxon_image_id"><?php _e( 'Term Image', PRIME2G_TEXTDOM ); ?></label>
+		<label for="thumbnail_id"><?php _e( 'Term Image', PRIME2G_TEXTDOM ); ?></label>
 	</th>
 <td>
-<?php $image_id	=	get_term_meta( $term->term_id, 'taxon_image_id', true ); ?>
-	<input type="hidden" id="taxon_image_id" name="taxon_image_id" value="<?php echo $image_id; ?>">
+<?php $image_id	=	get_term_meta( $term->term_id, 'thumbnail_id', true ); ?>
+	<input type="hidden" id="thumbnail_id" name="thumbnail_id" value="<?php echo $image_id; ?>">
 <div id="taxon-image-wrapper">
 	<?php if ( $image_id ) { echo wp_get_attachment_image( $image_id, 'thumbnail' ); } ?>
 </div>
@@ -69,11 +69,11 @@ public function update_taxon_image( $term, $taxonomy ) { ?>
 
 
 public function updated_taxon_image( $term_id, $tt_id ) {
-if ( isset( $_POST['taxon_image_id'] ) && '' !== $_POST['taxon_image_id'] ) {
-	$image	=	$_POST['taxon_image_id'];
-	update_term_meta( $term_id, 'taxon_image_id', $image );
+if ( isset( $_POST['thumbnail_id'] ) && '' !== $_POST['thumbnail_id'] ) {
+	$image	=	$_POST['thumbnail_id'];
+	update_term_meta( $term_id, 'thumbnail_id', $image );
 } else {
-	update_term_meta( $term_id, 'taxon_image_id', '' );
+	update_term_meta( $term_id, 'thumbnail_id', '' );
 }
 }
 
@@ -91,7 +91,7 @@ var button = $(button_id);
 _custom_media = true;
 	wp.media.editor.send.attachment = function(props, attachment){
 		if ( _custom_media ){
-			$('#taxon_image_id').val(attachment.id);
+			$('#thumbnail_id').val(attachment.id);
 			$('#taxon-image-wrapper').html('<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />');
 			$('#taxon-image-wrapper .custom_media_image').attr('src',attachment.url).css('display','block');
 		}
@@ -105,7 +105,7 @@ return false;
 }
 ct_media_upload('.akw_tax_media_button.button'); 
 $('body').on('click','.akw_tax_media_remove',function(){
-	$('#taxon_image_id').val('');
+	$('#thumbnail_id').val('');
 	$('#taxon-image-wrapper').html('<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />');
 });
 // Thanks: http://stackoverflow.com/questions/15281995/wordpress-create-taxon-ajax-response

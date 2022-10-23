@@ -1,5 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
+ob_start();
+
 /**
  * Mini-cart
  *
@@ -126,4 +128,6 @@ do_action( 'woocommerce_after_mini_cart' );
 </div>
 
 <?php
+
+$cart	=	ob_get_clean();
 

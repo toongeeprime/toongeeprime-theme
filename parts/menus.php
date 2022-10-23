@@ -77,13 +77,13 @@ function prime2g_footer_menu( $id = '' ) { ?>
 				<?php
 				wp_nav_menu(
 					array(
-						'theme_location' => 'footer-menu',
-						'items_wrap'     => '%3$s',
-						'container'      => false,
-						'depth'          => 1,
-						'link_before'    => '<span>',
-						'link_after'     => '</span>',
-						'fallback_cb'    => false,
+						'theme_location'	=>	'footer-menu',
+						'items_wrap'		=>	'%3$s',
+						'container'			=>	false,
+						'depth'				=>	1,
+						'link_before'		=>	'<span>',
+						'link_after'		=>	'</span>',
+						'fallback_cb'		=>	false,
 					)
 				);
 				?>
