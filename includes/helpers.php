@@ -18,6 +18,18 @@ function prime2g_removeSidebar() {
 
 
 /**
+ *	nonce verifier
+ *	@since ToongeePrime Theme 1.0.46.00
+ */
+function prime2g_verify_nonce( $nonceName ) {
+	if ( ! isset( $_REQUEST[ $nonceName ] ) || ! wp_verify_nonce( $_POST[ $nonceName ] ) ) {
+		wp_die( 'Security Fail!' );
+	}
+}
+
+
+
+/**
  *	If current user is post author
  *	@since ToongeePrime Theme 1.0.45.00
  */
@@ -62,7 +74,7 @@ function prime2g_get_theme_template( $archive = false ) {
 
 		if ( is_category() || is_tag() || is_tax() ) {
 
-		# *Filename format must be: taxonomy_slug.php or taxonomy.php
+		# *Template filename format: taxonomy_slug.php or taxonomy.php
 
 			$slug	=	'_' . $obj->slug;
 			$taxon	=	$obj->taxonomy;
@@ -86,7 +98,7 @@ function prime2g_get_theme_template( $archive = false ) {
 		}
 		elseif ( is_post_type_archive() ) {
 
-			# *Filename format must be: posttypename.php
+			# *Template filename format: posttypename.php
 
 			$posttypename	=	$obj->name;
 
@@ -121,6 +133,7 @@ function prime2g_get_theme_template( $archive = false ) {
 		/**
 		 *	Run Template for Singular Queries
 		 *	Pass template narrowing only to Child theme
+		 *	Template filename format: post_formatname.php or posttypename.php
 		 */
 		$childformat	=	CHILD2G_SINGULAR . $pType . $format . '.php';
 		$childpType		=	CHILD2G_SINGULAR . $pType . '.php';

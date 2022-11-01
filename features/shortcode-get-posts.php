@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  */
 /**
- *	DISPLAY POSTS SHORTCODE
+ *	SHORTCODE TO DISPLAY POSTS
  *	Function Upgraded
  *	@since ToongeePrime Theme 1.0.45.00
  */
@@ -23,6 +23,7 @@ $atts	=	shortcode_atts(
 		'taxonomy'	=>	'category',
 		'inornot'	=>	'NOT IN',
 		'terms'		=>	'uncategorized',
+		'looptemplate'	=>	null, # Added @since ToongeePrime Theme 1.0.46.00
 		),
 	$atts
 );
@@ -43,7 +44,6 @@ $args	=	array(
 			),
 		),
 );
-
 $loop	=	prime2g_wp_query( $args, null );
 
 if ( $loop->have_posts() ) {
@@ -52,8 +52,9 @@ $template	=	'<div class="widget_posts grid">';
 
 	while ( $loop->have_posts() ) {
 
-		$loop->the_post();
-		$template	.=	prime2g_get_archive_loop( 'medium', true, $words, false, false, 'h3' );
+	$loop->the_post();
+	$template	.=	( $looptemplate ) ?
+		$looptemplate() : prime2g_get_archive_loop( 'medium', true, $words, false, false, 'h3' );
 
 	}
 

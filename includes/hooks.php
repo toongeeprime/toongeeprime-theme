@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	THEME HOOKS
+ *	THEME ACTION HOOKS & FILTERS
  *
  *	Use add_action( 'function_name', 'callback' );
  *

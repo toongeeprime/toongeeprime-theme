@@ -11,10 +11,19 @@
  */
 add_shortcode( 'prime2g_animation_script', 'prime2g_animations_observer_shortcode' );
 function prime2g_animations_observer_shortcode( $atts ) {
-$atts	=	shortcode_atts( array( 'threshold'	=>	0.25 ), $atts );
+$atts	=	shortcode_atts( array( 'threshold'	=>	0.25, 'type' => 'vanilla' ), $atts );
 extract( $atts );
 
-add_action( 'wp_footer', function() use( &$threshold ) { prime2g_element_observerJS( $threshold ); }, 100 );
+add_action( 'wp_footer', function() use( $threshold, $type ) {
+	if ( $type == 'jquery' ) {
+		echo '<script id="prime2g_element_observerJQ">prime2g_element_observerJQ();';
+		echo prime2g_element_observerJQuery( $threshold );
+		echo '</script>';
+	}
+	else {
+		prime2g_element_observerJS( $threshold );
+	}
+}, 100 );
 }
 
 
@@ -64,6 +73,42 @@ function enterClassElements( animEls, prime2g_entryObserver ) {
 }
 </script>
 <?php
+}
+
+
+
+/**
+ *	USING JQUERY
+ *	@since ToongeePrime Theme 1.0.46.00
+ */
+function prime2g_element_observerJQuery( $threshold = 0.25 ) {
+$jq	=	'
+function prime2g_element_observerJQ() {
+	let jqObserverOptions = {
+		root: null,
+		rootMargin: \'0px\',
+		threshold: ';
+	$jq	.=	$threshold;
+	$jq	.=	'};
+
+	jqAllAnimElms	=	\'.inUp, .inDown, .inLeft, .inRight\';
+
+	const entries	=	Object.values( jQuery( jqAllAnimElms ).get() );
+	let jqEntryObserver	=	new IntersectionObserver( onIntersection, jqObserverOptions );
+
+	entries.forEach( ( el )=> { if ( !el ) return; jqEntryObserver.observe( el ); } );
+
+	function onIntersection( entries ) {
+		entries.forEach( entry => {
+			if ( entry.isIntersecting ) {
+				entry.target.classList.add( \'enter\' );
+				jqEntryObserver.unobserve( entry.target );
+			}
+		} );
+	}
+}';
+
+return $jq;
 }
 
 
