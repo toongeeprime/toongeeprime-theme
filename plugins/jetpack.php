@@ -27,9 +27,11 @@ function prime2g_moreJP_related_posts( $options ) {
  */
 add_action( 'wp', 'prime2g_removeJP_related_posts', 11 );
 function prime2g_removeJP_related_posts() {
-	$jprp		=	Jetpack_RelatedPosts::init();
-	$callback	=	array( $jprp, 'filter_add_target_to_dom' );
-	remove_filter( 'the_content', $callback, 40 );
+	if ( class_exists( 'Jetpack_RelatedPosts' ) ) { # retain
+		$jprp		=	Jetpack_RelatedPosts::init();
+		$callback	=	array( $jprp, 'filter_add_target_to_dom' );
+		remove_filter( 'the_content', $callback, 40 );
+	}
 }
 
 
