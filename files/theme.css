@@ -223,6 +223,9 @@ code{
 .alignC{
 	align-items:center;
 }
+.fixBG{
+	background-attachment:fixed;
+}
 .brandcolor{
 	color:var(--brand-color);
 }
@@ -543,6 +546,9 @@ a.comment-reply-link:hover{
 }
 .home_headlines .display{
 	align-items:start;
+}
+.infinite-scroll .archive.prev_next{
+	display:none;
 }
 
 

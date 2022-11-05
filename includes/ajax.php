@@ -12,10 +12,10 @@ function prime2g_ajax_head() { ?>
 <script type="text/javascript" id="prime2g_ajax_base">
 const prime2g_ajaxurl	=	"<?php echo admin_url( 'admin-ajax.php' ); ?>";
 
-function prime2g_run_ajax( formData, ajaxSuccess, ajaxError = '' ) {
+function prime2g_run_ajax( formData, ajaxSuccess, ajaxError = '', reqType = 'POST' ) {
 	jQuery.ajax( {
 		url: prime2g_ajaxurl,
-		type: 'POST',
+		type: reqType,
 		data: formData,
 		success: ajaxSuccess,
 		error: ajaxError,
@@ -24,7 +24,7 @@ function prime2g_run_ajax( formData, ajaxSuccess, ajaxError = '' ) {
 
 /*
 // Calling Sample:
-In var formData, action: 'callbackFunction'
+@ var formData, action:'callbackFunction'
 jQuery( document.body ).on( 'click', function() {
 	prime2g_run_ajax( formData, ajaxSuccess, ajaxError );
 } );
@@ -33,6 +33,4 @@ jQuery( document.body ).on( 'click', function() {
 </script>
 <?php
 }
-
-
 

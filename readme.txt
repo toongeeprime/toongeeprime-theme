@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.0.46.00
+Stable tag: 1.0.47.00
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,13 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.47.00 =
+
+* Added helper prime2g_get_country_by_code()
+* Created get-theme-template-file.php to separate prime2g_get_theme_template()
+* Created plugins folder to contain 3rd party plugins related functions
+* Added JetPack Infinite Scroll support
 
 = 1.0.46.00 =
 

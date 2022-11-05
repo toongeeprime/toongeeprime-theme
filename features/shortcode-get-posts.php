@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	THEME SHORTCODES
+ *	THEME SHORTCODE: GET POSTS
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0

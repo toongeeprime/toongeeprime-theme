@@ -18,12 +18,10 @@ if ( class_exists( 'woocommerce' ) ) :
  *	Get WooCommerce Mini Cart: Buffered
  *	@since ToongeePrime Theme 1.0.45.50
  */
-
 function prime2g_get_woo_mini_cart() {
 
-include PRIME2G_THEME . 'woocommerce/cart/mini-cart-buffered.php';
+	include PRIME2G_THEME . 'woocommerce/cart/mini-cart-buffered.php';
 
-return $cart;
 }
 
 
@@ -156,4 +154,3 @@ return $translated_text;
 
 
 endif;
-

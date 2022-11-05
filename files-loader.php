@@ -11,7 +11,7 @@
 /**
  *	GET PHP FILES THROUGH DIRECTORIES ARRAY
  */
-$directories	=	[ 'classes', 'includes', 'customizer', 'features' ];
+$directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'features' ];
 
 foreach( $directories as $dir ) {
 
