@@ -25,7 +25,7 @@ function prime2g_moreJP_related_posts( $options ) {
 /**
  *	Remove JetPack related posts to add them to theme
  */
-add_action( 'wp', 'prime2g_removeJP_related_posts', 11 );
+add_action( 'wp', 'prime2g_removeJP_related_posts', 20 );
 function prime2g_removeJP_related_posts() {
 	if ( class_exists( 'Jetpack_RelatedPosts' ) ) { # retain
 		$jprp		=	Jetpack_RelatedPosts::init();
@@ -37,12 +37,29 @@ function prime2g_removeJP_related_posts() {
 
 
 /**
+ *	Add JetPack related posts to theme
+ *	@since ToongeePrime Theme 1.0.48.00
+ */
+add_action( 'prime2g_after_post', 'prime2g_add_jp_related_posts', 8 );
+if ( ! function_exists( 'prime2g_add_jp_related_posts' ) ) {
+function prime2g_add_jp_related_posts() {
+	if ( class_exists( 'Jetpack_RelatedPosts' ) ) {
+		echo do_shortcode( '[[jetpack-related-posts]]' );
+	}
+}
+}
+
+
+
+/**
  *	JP Infifite Scroll Footer Credit
  */
 add_filter( 'infinite_scroll_credit', 'prime2g_infiniteScroll_credit' );
+if ( ! function_exists( 'prime2g_infiniteScroll_credit' ) ) {
 function prime2g_infiniteScroll_credit() {
 	$text	=	__( 'Designed &#38; Developed by <a href="' . esc_url( 'https://akawey.com/' ) . '" title="Visit Akàwey">Akàwey</a>', PRIME2G_TEXTDOM );
 return $text;
+}
 }
 
 
@@ -61,7 +78,7 @@ add_theme_support(
 	'infinite-scroll',
 	array(
 		'container'	=>	'archive_loop',
-		'wrapper'	=>	'infinite',
+		'wrapper'	=>	false,
 		'footer'	=>	false,
 		'render'	=>	'prime2g_infiniteScroll_render',
 		'posts_per_page'	=>	8,

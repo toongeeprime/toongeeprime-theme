@@ -58,6 +58,8 @@ class ToongeePrime_Styles {
 
 			case 'headerattach' : $mod = get_theme_mod( 'prime2g_header_img_attachment', 'scroll' ); break;
 
+			case 'headerimgsize' : $mod = get_theme_mod( 'prime2g_header_background_size', 'cover' ); break;
+
 		}
 		return $mod;
 
@@ -131,14 +133,15 @@ class ToongeePrime_Styles {
 	protected static function theme_css() {
 
 	$styles	=	new self;
+	$bgSize	=	$styles->get_mod( 'headerimgsize' );
+	$bgSize	=	( '' == $bgSize ) ? 'cover' : $bgSize;
 
-	return "
-	#header{background-attachment:". $styles->get_mod( 'headerattach' ) .";
-	";
+	return "#header{background-attachment:". $styles->get_mod( 'headerattach' ) .";background-size:". $bgSize .";}";
 
 	}
 
 }
 
 }
+
 

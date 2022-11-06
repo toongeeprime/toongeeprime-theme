@@ -61,6 +61,32 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 		)
 	);
 
+	/**
+	 *	Header Image Background Size
+	 */
+	$wp_customize->add_setting(
+		'prime2g_header_background_size',
+		array(
+			'type'		=>	'theme_mod',
+			'default'	=>	'',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_header_background_size',
+		array(
+			'label'		=>	__( 'Header Background Image Size', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_header_background_size',
+			'section'	=>	'header_image',
+			'choices'	=>	array(
+				''	=>	__( 'Cover Header Space', PRIME2G_TEXTDOM ),
+				'contain'	=>	__( 'Contain In Header', PRIME2G_TEXTDOM ),
+				'initial'	=>	__( 'Initial Image Size', PRIME2G_TEXTDOM )
+			),
+			'active_callback'	=>	'has_header_image',
+		)
+	);
+
 }
 
 }

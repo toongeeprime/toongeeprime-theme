@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.0.47.00
+Stable tag: 1.0.47.50
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.47.50 =
+
+* Header image size @ customizer
+* Edits and corrections
+* Added prime2g_add_jp_related_posts() to hook prime2g_after_post
 
 = 1.0.47.00 =
 
@@ -195,6 +201,7 @@ Hooked to prime2g_before_post:
 Hooked to prime2g_after_post:
 	prime2g_postmeta_bottom, 5 priority
 	prime2g_prev_next_post, 7 priority
+	prime2g_add_jp_related_posts, 8 priority
 	prime2g_comments
 	prime2g_below_posts_widgets(), 20 priority
 	prime2g_pageJS(), 50 priority

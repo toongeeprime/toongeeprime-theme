@@ -73,7 +73,7 @@ body, html{
 
 /********* Standard Elements *********/
 article{
-	height:max-content;
+	height:max-content; position:relative;
 }
 img{
 	max-width:100%; height:auto;
@@ -274,7 +274,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 /* Header */
 #header{
 	background-color:var(--header-background); color:var(--header-text); padding:var(--min-pad);
-	background-size:cover;
 }
 #header a{
 	color:var(--header-text);
@@ -366,6 +365,14 @@ a:hover, a:focus, table a:hover, table a:focus{
 }
 .current-menu-item .sub-menu a::after{
 	height:0;
+}
+
+.collapsible-navs .menu-item-has-children{
+	position:relative; padding-right:20px;
+}
+.collapsible-navs .menu-item-has-children::after{
+	position:absolute; font-family:bootstrap-icons; content:"\F282";
+	font-size:70%; right:10px; top:10px;
 }
 
 .menu_togs{
@@ -760,10 +767,10 @@ i.bi{
 
 /* MAIN MENU */
 .main_menu_wrap, .collapsible-navs .sub-menu{
-	background:var(--content-text);
+	background:var(--content-background);
 }
 .main_menu_wrap a{
-	color:var(--content-background);
+	color:var(--content-text);
 }
 .collapsible-navs li{
 	display:inline-block; position:relative;

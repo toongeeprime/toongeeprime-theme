@@ -14,6 +14,8 @@ $pid			=	get_the_ID();
 $isSingular		=	is_singular();
 $keepHeader		=	( post_custom( 'remove_header' ) !== 'remove' );
 
+$headerBackground	=	'';
+
 if ( $hasHeader ) {
 
 	if ( $isSingular && has_post_thumbnail() && ( '' == get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
@@ -23,9 +25,7 @@ if ( $hasHeader ) {
 		$headerUrl	=	get_header_image();
 	}
 
-}
-else {
-	$headerUrl	=	'';
+$headerBackground	=	'style="background-image:url(' . $headerUrl . ');"';
 }
 
 
@@ -37,18 +37,18 @@ if ( ! $isSingular || $isSingular && $keepHeader ) :
 
 ?>
 
-<header id="header" class="site_header prel" style="background-image:url(<?php echo $headerUrl; ?>);">
+<header id="header" class="site_header prel" <?php echo $headerBackground; ?>>
 
-	<?php if ( $hasHeader ) echo '<div class="shader"></div>'; ?>
+<?php
+	if ( $hasHeader ) echo '<div class="shader"></div>';
 
-	<?php
-		if ( $title_in_headr ) {
-			prime2g_title_header( prime2g_title_header_classes() );
-		}
-		else {
-			echo prime2g_title_or_logo();
-		}
-	?>
+	if ( $title_in_headr ) {
+		prime2g_title_header( prime2g_title_header_classes() );
+	}
+	else {
+		echo prime2g_title_or_logo();
+	}
+?>
 
 </header>
 

@@ -164,7 +164,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		$wp_customize,
 		'prime2g_content_background',
 			array(
-				'label'		=>	__( 'Page Background Color', PRIME2G_TEXTDOM ),
+				'label'		=>	__( 'Content Background Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_styles_section',
 				'settings'	=>	'prime2g_content_background',
 			)
