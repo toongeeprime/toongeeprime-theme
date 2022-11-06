@@ -44,7 +44,7 @@ add_action( 'prime2g_after_post', 'prime2g_add_jp_related_posts', 8 );
 if ( ! function_exists( 'prime2g_add_jp_related_posts' ) ) {
 function prime2g_add_jp_related_posts() {
 	if ( class_exists( 'Jetpack_RelatedPosts' ) ) {
-		echo do_shortcode( '[[jetpack-related-posts]]' );
+		echo do_shortcode( '[jetpack-related-posts]' );
 	}
 }
 }
