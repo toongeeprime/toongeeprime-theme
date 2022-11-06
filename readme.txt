@@ -1,9 +1,9 @@
 Plugin Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
-Requires at least: 5.9
-Tested up to: 6.0
-Stable tag: 1.0.47.50
+Requires at least: 6.0
+Tested up to: 6.1
+Stable tag: 1.0.48.00
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,11 +16,15 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
-= 1.0.47.50 =
+= 1.0.48.00 =
 
+* Tested on WP 6.1 requiring at least 6.0
 * Header image size @ customizer
-* Edits and corrections
+* Created extras folder @features
+* Introduced Extra Features section @ Customizer
+* Preloader feature at @ customizer
 * Added prime2g_add_jp_related_posts() to hook prime2g_after_post
+* Added prime2g_use_extras()
 
 = 1.0.47.00 =
 

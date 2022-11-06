@@ -68,7 +68,7 @@ return $text;
  *	JetPack Infifite Scroll workings
  *	https://jetpack.com/support/infinite-scroll/
  */
-if ( defined( 'PRIME2G_EXTRAS' ) ) {
+if ( prime2g_use_extras() ) {
 add_action( 'after_setup_theme', 'prime2g_set_jp_infiniteScroll', 11 );
 
 if ( ! function_exists( 'prime2g_set_jp_infiniteScroll' ) ) {

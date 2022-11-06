@@ -1,0 +1,41 @@
+<?php defined( 'ABSPATH' ) || exit;
+
+/**
+ *	Extra Theme Features for Customizer
+ *
+ *	@package WordPress
+ *	@since ToongeePrime Theme 1.0.48.00
+ */
+
+if ( ! function_exists( 'prime2g_customizer_theme_extras' ) ) {
+
+function prime2g_customizer_theme_extras( $wp_customize ) {
+
+	/**
+	 *	PAGE PRELOADER
+	 */
+	$wp_customize->add_setting(
+		'prime2g_use_page_preloader',
+		array(
+			'type'		=>	'theme_mod',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_use_page_preloader',
+		array(
+			'label'		=>	__( 'Page Preloader', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_use_page_preloader',
+			'section'	=>	'prime2g_theme_extras_section',
+			'choices'	=>	array(
+				''		=>	__( 'Preloader Off', PRIME2G_TEXTDOM ),
+				'on'	=>	__( 'Preloader On', PRIME2G_TEXTDOM ),
+				'use_logo'	=>	__( 'Preloader On: Use Site Logo', PRIME2G_TEXTDOM ),
+				'use_icon'	=>	__( 'Preloader On: Use Site Icon', PRIME2G_TEXTDOM ),
+			),
+		)
+	);
+
+}
+
+}

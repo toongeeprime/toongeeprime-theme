@@ -47,12 +47,12 @@ if ( $tiktok )
 	$contacts .= '<span class="sci tt"><a href="'. $tiktok .'"'. $attrs .'"' . __( $siteName . ' on TikTok', PRIME2G_TEXTDOM ) . '"><i class="bi bi-tiktok"></i></a></span>';
 if ( $telegram )
 	$contacts .= '<span class="sci tg"><a href="'. $telegram .'"'. $attrs .'"' . __( $siteName . ' on Telegram', PRIME2G_TEXTDOM ) . '"><i class="bi bi-telegram"></i></a></span>';
+if ( $email )
+	$contacts .= '<span class="sci em"><a href="mailto:'. $email .'" title="' . __( 'Send us a mail', PRIME2G_TEXTDOM ) . '"><i class="bi bi-envelope"></i></a></span>';
 if ( $whatsapp ) {
 	$whatsapp	=	'https://wa.me/' . $whatsapp . '?text=Hello,%20I%20want%20to%20chat%20with%20' . $siteName;
 	$contacts .= '<span class="sci wa"><a href="'. $whatsapp .'"'. $attrs .'"' . __( 'Chat with us on WhatsApp', PRIME2G_TEXTDOM ) . '"><i class="bi bi-whatsapp"></i></a></span>';
 }
-if ( $email )
-	$contacts .= '<span class="sci em"><a href="mailto:'. $email .'" title="' . __( 'Send us a mail', PRIME2G_TEXTDOM ) . '"><i class="bi bi-envelope"></i></a></span>';
 if ( $phone )
 	$contacts .= '<span class="sci ph"><a href="tel:+'. $phone .'" title="' . __( 'Call us', PRIME2G_TEXTDOM ) . '"><i class="bi bi-telephone"></i></a></span>';
 

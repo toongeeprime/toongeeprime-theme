@@ -19,7 +19,7 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 
 
 	/**
-	 *	Get luminance of given color and return #fff or #000 to make text readable
+	 *	Get luminance of given color and return hex to make text readable
 	 *
 	 *	Invert if NOT a light color
 	 */

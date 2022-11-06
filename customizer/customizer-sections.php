@@ -67,6 +67,21 @@ function prime2g_customizer_sections( $wp_customize ) {
 	);
 
 
+	/**
+	 *	Theme Extras
+	 *	@since ToongeePrime Theme 1.0.48.00
+	 */
+	$wp_customize->add_section(
+		'prime2g_theme_extras_section',
+		array(
+			'title'			=>	__( 'Extra Features', PRIME2G_TEXTDOM ),
+			'panel'			=>	'prime2g_customizer_panel',
+			'description'	=>	__( 'Extra features for the theme', PRIME2G_TEXTDOM ),
+			'capability'	=>	'edit_theme_options',
+			'active_callback'	=>	'prime2g_use_extras',
+		)
+	);
+
 
 if ( class_exists( 'woocommerce' ) ) {
 	$wp_customize->add_section(
