@@ -12,9 +12,9 @@ const	theBody	=	p2getEl( 'body' );
 
 
 /**
- *	Page-scrolling actions
+ *	Actions on Page-scroll
  */
-window.addEventListener( "scroll", function() {
+window.addEventListener( "scroll", ()=>{
 let primetoTop	=	p2getEl( '#prime2g_toTop' ),
 	popEl		=	p2getAll( '.popEl' );
 
@@ -49,5 +49,6 @@ function close_mMenu(el) {
 
 // Remove class to determine browser supports JavaScript
 document.body.classList.remove( 'no-js' );
+
 
 

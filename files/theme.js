@@ -67,3 +67,23 @@ document.addEventListener(
 }
 );
 
+
+
+/**
+ *	ToongeePrime Theme Footer JS
+ *	@since ToongeePrime Theme 1.0.48.10
+ */
+function prime2g_class_on_scroll( el, cls = 'pop', level = 200 ) {
+window.addEventListener( "scroll", ()=>{
+let elmt	=	p2getEl( el );
+
+	if ( window.pageYOffset > level ) {
+		elmt.classList.add( cls );
+	}
+	else {
+		elmt.classList.remove( cls );
+	}
+
+}, false );
+}
+
