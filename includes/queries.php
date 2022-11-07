@@ -16,6 +16,7 @@ return $loop; # $get == null
 }
 
 
+
 function prime2g_defaults_query( $count, $tax_slug, $taxonomy = 'category', $ptype = 'post' ) {
 $args	=	array(
 	'post_type'		=>	$ptype,
@@ -47,7 +48,7 @@ function prime2g_add_template_part( $slug, $section ) {
 $content	=	null;
 
 $args	=	array(
-	'post_type'		=>	'template_part',
+	'post_type'		=>	'prime_template_part',
 	'pagename'		=>	$slug,
 	'posts_per_page'	=>	1,
 	'tax_query' => array(
@@ -69,4 +70,5 @@ if ( $part->have_posts() ) {
 wp_reset_postdata();
 return $content;
 }
+
 

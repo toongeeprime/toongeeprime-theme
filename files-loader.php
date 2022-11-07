@@ -38,7 +38,15 @@ foreach( $parts as $part ) {
 
 
 /**
+ *	EXTRAS
+ */
+require_once PRIME2G_THEME . 'features/extras/index.php';
+
+
+
+/**
  *	UPDATER
  */
 require_once PRIME2G_THEME . 'update/updater-index.php';
+
 

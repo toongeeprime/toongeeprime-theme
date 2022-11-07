@@ -9,12 +9,8 @@
 
 if ( prime2g_use_extras() ) {
 
-$getExtra	=	PRIME2G_THEME . 'features/extras/';
-
-include_once $getExtra . 'preloader.php';
-
-
-
+include_once 'preloader.php';
+include_once 'taxonomy-image-field-class.php';
 
 }
 

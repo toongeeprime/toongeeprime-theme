@@ -74,7 +74,7 @@ p.stars a::before{
 	content:"\F586";color:#ccc;display:block;text-indent:0;line-height:1;
 }
 p.stars.selected a::before, p.stars:hover a::before{
-	color:#000;
+	color:var(--content-text);
 }
 p.stars:hover a:hover::before, p.stars.selected a.active::before{
 	color:gold;content:"\F586";
