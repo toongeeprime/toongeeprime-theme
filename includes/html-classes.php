@@ -53,6 +53,12 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'fixed_main_menu';
 	}
 
+	#	If Preloader feature is active
+	#	@since ToongeePrime Theme 1.0.48.50
+	if ( '' !== get_theme_mod( 'prime2g_use_page_preloader' ) ) {
+		$classes[]	=	'preloading';
+	}
+
 	// With or without a header image
 	if ( has_header_image() ) {
 		$classes[]	=	'has-header-image';

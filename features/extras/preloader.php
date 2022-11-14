@@ -45,7 +45,7 @@ function prime2g_page_preloaderCSS() {
 $css	=	'<style id="preloaderCSS">
 #prime2gPreloading{position:fixed;top:0;bottom:0;left:0;right:0;background:var(--content-background);display:grid;
 place-items:center;z-index:100000;transition:0.5s;}
-#itsLoading{border:15px solid var(--content-text);border-top:15px solid var(--brand-color);width:120px;height:120px;
+#itsLoading{border:10px solid var(--brand-color);border-top:10px solid var(--brand-color-2);width:120px;height:120px;
 border-radius:50%;animation:loading 1s linear infinite;}
 
 @keyframes loading {

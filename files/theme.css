@@ -97,7 +97,6 @@ input[type="button"], input[type="submit"], button, .button, a.button, .btn,
 .wp-block-button__link, .wp-block-button button{
 	background-color:var(--button-bg); color:var(--button-text); cursor:pointer;
 	border:2px solid var(--button-bg); padding:1em 2em; border-radius:0;
-	font-family:;
 }
 input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:hover, a.button:hover, .btn:hover,
 .button:focus, a.button:focus, .btn:focus, .wp-block-button__link:hover, .wp-block-button__link:focus{
@@ -368,7 +367,10 @@ a:hover, a:focus, table a:hover, table a:focus{
 }
 
 .collapsible-navs .menu-item-has-children{
-	position:relative; padding-right:20px;
+	position:relative;
+}
+.collapsible-navs .menu-item-has-children a{
+	padding-right:30px;
 }
 .collapsible-navs .menu-item-has-children::after{
 	position:absolute; font-family:bootstrap-icons; content:"\F282";
@@ -379,7 +381,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	width:50px; cursor:pointer;
 }
 .menu_togs span{
-	width:80%; background:var(--header-text); height:4px;
+	width:80%; background:var(--content-text); height:4px;
 	position:absolute; top:calc(50% - 5%); right:calc(50% - 30%);
 }
 .menu_togs span:nth-child(1){
@@ -666,6 +668,13 @@ body #eu-cookie-law{
 #eu-cookie-law input[type="submit"]{
 	width:auto;
 }
+.wp-caption{
+	background:var(--content-background);
+	border:2px solid var(--content-text);
+}
+figcaption{
+	color:var(--content-text);
+}
 
 
 /* Simple Animations */
@@ -868,7 +877,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 	background:none;
 }
 .menu_toggbar{
-	position:fixed; background:var(--header-background); padding:5px;
+	position:fixed; background:var(--content-background); padding:5px;
 	top:0; left:0; right:0;
 	height:46px; display:flex; align-items:center;
 	justify-content:space-between;

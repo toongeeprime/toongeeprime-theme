@@ -76,28 +76,33 @@ return $contacts;
 if ( ! function_exists( 'prime2g_theme_mod_footer_credit' ) ) {
 
 function prime2g_theme_mod_footer_credit() {
-$power	=	get_theme_mod( 'prime2g_footer_credit_power' );
-$name	=	get_theme_mod( 'prime2g_footer_credit_name' );
-$url	=	get_theme_mod( 'prime2g_footer_credit_url' );
+$power	=	get_theme_mod( 'prime2g_footer_credit_power', 'Powered by' );
+$name	=	get_theme_mod( 'prime2g_footer_credit_name', 'ToongeePrime Theme' );
+$url	=	get_theme_mod( 'prime2g_footer_credit_url', 'https://akawey.com/' );
+$append	=	get_theme_mod( 'prime2g_footer_credit_append', '' ); # @since ToongeePrime Theme 1.0.48.50
+
 $attrs	=	' target="_blank" rel="noopener noreferrer nofollow"';
-$cRight	=	'<span id="copyright_date"> &copy; ' . date( 'Y' ) . '</span>';
+$cRight	=	'<span id="copyright_date"> &copy; ' . date( 'Y' ) . '.</span> ';
 
 $footerCred	=	'<div class="site_footer_credits">';
 
 	if ( $name ) {
 		if( $url && $name ) {
-			$footerCred	.=	'<span title="Site Credits">' . $power . ' <a href="' . $url . '"' . $attrs . '>' . $name . '</a> '. $cRight .' </span>';
+			$footerCred	.=	'<span title="Site Credits">' . $power . ' <a href="' . $url . '"' . $attrs . '>' . $name . '</a> '. $cRight .'</span>';
 		}
 		elseif ( $name ) {
-			$footerCred	.=	'<span title="Site Credits">' . $power . ' ' . $name . $cRight .' </span>';
+			$footerCred	.=	'<span title="Site Credits">' . $power . ' ' . $name . $cRight .'</span>';
 		}
 		else {
-			$footerCred	.=	'<span title="Site Credits">' . $power . $cRight .' </span>';
+			$footerCred	.=	'<span title="Site Credits">' . $power . $cRight .'</span>';
 		}
 	}
 	else {
 		$footerCred	.=	'<span id="powered_by_credit" title="Site Credits">Powered by <a href="https://akawey.com/" title="ToongeePrime of Akàwey Online Enterprises" target="_blank" rel="noopener">ToongeePrime Theme</a>.' . $cRight . '</span>';
 	}
+
+	if ( '' !== $append )
+		$footerCred	.=	'<span id="appended_credit" title="Site Credits">' . $append . '</span>';
 
 $footerCred	.=	'</div>';
 $footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padding-bottom:var(--min-pad);margin:0;">Designed and developed by <a href="https://akawey.com/" title="Visit Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</p>';
@@ -128,5 +133,7 @@ return $title;
 }
 
 }
+
+
 
 

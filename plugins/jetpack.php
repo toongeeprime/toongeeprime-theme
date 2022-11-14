@@ -8,8 +8,7 @@
  *	@since ToongeePrime Theme 1.0.47.00
  */
 
-if ( is_plugin_active( 'jetpack/jetpack.php' ) ) :
-
+if ( class_exists( 'Jetpack' ) ) :
 
 /**
  *	Have 6 JetPack related posts

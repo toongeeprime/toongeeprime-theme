@@ -83,6 +83,21 @@ function prime2g_customizer_sections( $wp_customize ) {
 	);
 
 
+	/**
+	 *	Site Settings
+	 *	@since ToongeePrime Theme 1.0.48.50
+	 */
+	$wp_customize->add_section(
+		'prime2g_site_settings_section',
+		array(
+			'title'			=>	__( 'Site Settings', PRIME2G_TEXTDOM ),
+			'panel'			=>	'prime2g_customizer_panel',
+			'description'	=>	__( 'Settings affecting your site', PRIME2G_TEXTDOM ),
+			'capability'	=>	'edit_theme_options',
+		)
+	);
+
+
 if ( class_exists( 'woocommerce' ) ) {
 	$wp_customize->add_section(
 		'prime2g_woocommerce_edits_section',

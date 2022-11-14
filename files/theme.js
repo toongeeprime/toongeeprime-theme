@@ -45,18 +45,26 @@ let rect = el.getBoundingClientRect();
 	);
 }
 
+function prime2g_inViewport_get( elmt ) {
+el	=	p2getEl( elmt );
+let rect = el.getBoundingClientRect();
+	return (
+		rect.top >= 0 && rect.left >= 0 &&
+		rect.bottom	<=	( window.innerHeight || document.documentElement.clientHeight ) &&
+		rect.right	<=	( window.innerWidth || document.documentElement.clientWidth )
+	);
+}
+
 
 function prime2g_gotoThis( selector ) {
 let elmt = p2getEl( selector );
 	elmt.scrollIntoView( true );
 }
 
-
 // Remove classes on Esc key
 document.addEventListener(
 	'keyup', function( event ) {
 	if ( event.defaultPrevented ) { return; }
-
 	let key = event.key || event.keyCode;
 	if ( key === 'Escape' || key === 'Esc' || key === 27 ) {
 	let allElems = document.getElementsByClassName( 'prime' );
@@ -67,16 +75,12 @@ document.addEventListener(
 }
 );
 
-
-
 /**
- *	ToongeePrime Theme Footer JS
  *	@since ToongeePrime Theme 1.0.48.10
  */
 function prime2g_class_on_scroll( el, cls = 'pop', level = 200 ) {
 window.addEventListener( "scroll", ()=>{
 let elmt	=	p2getEl( el );
-
 	if ( window.pageYOffset > level ) {
 		elmt.classList.add( cls );
 	}
@@ -85,5 +89,28 @@ let elmt	=	p2getEl( el );
 	}
 
 }, false );
+}
+
+/**
+ *	Counter
+ *	@since ToongeePrime Theme 1.0.48.50
+ */
+function prime2g_count_to( speed = 100, clss = '.countEl' ) {
+const	countEls	=	p2getAll( clss );
+countEls.forEach( run =>{
+const runCount	=	()=>{
+	const value	=	+run.getAttribute( 'countto' );
+	const data	=	+run.innerText;
+	const result	=	value / speed;
+	if ( data < value ) {
+		run.innerText	=	Math.ceil( data + result );
+		setTimeout( runCount, speed );
+	}
+	else {
+		run.innerText	=	value;
+	}
+}
+runCount();
+} );
 }
 

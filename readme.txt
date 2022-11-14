@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.0
 Tested up to: 6.1
-Stable tag: 1.0.48.10
+Stable tag: 1.0.48.50
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,11 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.48.50 =
+
+* Added prime2g_customizer_site_settings() & theme_mod: prime2g_footer_credit_append
+* Added JS prime2g_count_to(), prime2g_inViewport_get()
 
 = 1.0.48.10 =
 

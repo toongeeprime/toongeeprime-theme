@@ -32,25 +32,6 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 	$themeFonts	=	prime2g_theme_fonts();
 
 	$wp_customize->add_setting(
-		'prime2g_site_body_font',
-		array(
-			'type'		=>	'theme_mod',
-			'default'	=>	$bodyFont,
-		)
-	);
-	$wp_customize->add_control(
-		'prime2g_site_body_font',
-		array(
-			'label'		=>	__( 'Font for Site\'s Body', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_site_body_font',
-			'section'	=>	'prime2g_theme_styles_section',
-			'choices'	=>	$themeFonts,
-		)
-	);
-
-
-	$wp_customize->add_setting(
 		'prime2g_site_headings_font',
 		array(
 			'type'		=>	'theme_mod',
@@ -63,6 +44,25 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 			'label'		=>	__( 'Font for Site\'s Text Headings', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_site_headings_font',
+			'section'	=>	'prime2g_theme_styles_section',
+			'choices'	=>	$themeFonts,
+		)
+	);
+
+
+	$wp_customize->add_setting(
+		'prime2g_site_body_font',
+		array(
+			'type'		=>	'theme_mod',
+			'default'	=>	$bodyFont,
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_site_body_font',
+		array(
+			'label'		=>	__( 'Font for Site\'s Body', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_site_body_font',
 			'section'	=>	'prime2g_theme_styles_section',
 			'choices'	=>	$themeFonts,
 		)

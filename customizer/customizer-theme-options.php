@@ -260,25 +260,26 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 
 
 	/**
-	 *	SHUT DOWN WEBSITE
+	 *	@since ToongeePrime Theme 1.0.48.50
 	 */
 	$wp_customize->add_setting(
-		'prime2g_website_shutdown',
+		'prime2g_footer_credit_append',
 		array(
-			'type'		=>	'theme_mod',
+			'type'				=>	'theme_mod',
+			'transport'			=>	'refresh',
+			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
 	$wp_customize->add_control(
-		'prime2g_website_shutdown',
+		'prime2g_footer_credit_append',
 		array(
-			'label'		=>	__( 'Shut Down Website?', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_website_shutdown',
+			'label'		=>	__( 'Append to credit', PRIME2G_TEXTDOM ),
+			'type'		=>	'text',
+			'settings'	=>	'prime2g_footer_credit_append',
 			'section'	=>	'prime2g_theme_options_section',
-			'choices'	=>	array(
-				''	=>	__( '-- Website is live --', PRIME2G_TEXTDOM ),
-				'maintenance'	=>	__( 'Set to Maintenance Mode', PRIME2G_TEXTDOM ),
-				'coming_soon'	=>	__( 'Set to Coming Soon Mode', PRIME2G_TEXTDOM )
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'All rights reserved.',
+				'maxlength'		=>	'125',
 			),
 		)
 	);
