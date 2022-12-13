@@ -157,7 +157,7 @@ code{
 }
 
 
-/********* Custom Classes *********/
+/********* Theme Classes *********/
 .site_width{
 	margin:auto; max-width:var(--site-width); /* Don't use width:100% */
 }
@@ -234,7 +234,6 @@ code{
 
 
 
-
 /********* Theme Styling Proper *********/
 body{
 	display:block; background-color:var(--body-background); color:var(--body-text);
@@ -264,7 +263,7 @@ a{
 a:hover, a:focus, table a:hover, table a:focus{
 	color:var(--brand-color); border-color:transparent;
 }
-#page .logo_link,#page .logo_link:hover,#page .logo_link:focus{
+#page .logo_link, #page .logo_link:hover, #page .logo_link:focus{
 	border:0; background:none;
 }
 
@@ -374,7 +373,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 }
 .collapsible-navs .menu-item-has-children::after{
 	position:absolute; font-family:bootstrap-icons; content:"\F282";
-	font-size:70%; right:10px; top:10px;
+	font-size:70%; right:10px; top:10px; color:var(--content-text);
 }
 
 .menu_togs{

@@ -31,3 +31,26 @@ function prime2g_widget_tag_cloud_args( $args ) {
 return $args;
 }
 
+
+
+/**
+ *	STOP WP HEARTBEAT
+ *	@since ToongeePrime Theme 1.0.49.00
+ */
+add_action( 'init', 'prime2g_stop_wp_heartbeat', 1 );
+add_action( 'admin_enqueue_scripts', 'prime2g_stop_wp_heartbeat' );
+if ( ! function_exists( 'prime2g_stop_wp_heartbeat' ) ) {
+
+function prime2g_stop_wp_heartbeat() {
+	if ( 'stop' === get_theme_mod( 'prime2g_stop_wp_heartbeat' ) ) {
+	global $pagenow;
+		if ( 'post.php' !== $pagenow && 'post-new.php' !== $pagenow ) {
+			wp_deregister_script( 'heartbeat' );
+			wp_register_script( 'heartbeat', false );
+		}
+	}
+}
+
+}
+
+

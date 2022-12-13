@@ -16,9 +16,9 @@ function prime2g_login_enqueues() {
 
 	wp_enqueue_style(
 		'prime2g_login_css',
-		get_theme_file_uri( '/files/login.css' ),
+		PRIME2G_THEMEURL . '/files/login.css',
 		array(),
-		wp_get_theme()->get( 'Version' )
+		PRIME2G_VERSION
 	);
 
 }

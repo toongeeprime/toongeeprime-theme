@@ -15,6 +15,7 @@ if ( ! function_exists( 'prime2g_main_menu' ) ) {
 function prime2g_main_menu( $id = 'main_nav' ) {
 
 $incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
+$theLogo	=	prime2g_siteLogo();
 
 ?>
 
@@ -22,11 +23,11 @@ $incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
 
 	<?php if ( has_nav_menu( 'main-menu' ) ) { ?>
 
-	<?php if ( ! wp_is_mobile() && $incLogo ) echo '<div class="desktop">' . prime2g_siteLogo() . '</div>'; ?>
+	<?php if ( ! wp_is_mobile() && $incLogo ) echo '<div class="desktop">' . $theLogo . '</div>'; ?>
 
 	<div id="menu_toggbar" class="menu_toggbar mobiles">
 		<div>
-			<?php if ( $incLogo ) echo prime2g_siteLogo(); ?>
+			<?php if ( $incLogo ) echo $theLogo; ?>
 		</div>
 		<div class="menu_togs prel" onclick="prime2g_toggElems( [ '.main_menu_wrap' ] );">
 			<span></span>

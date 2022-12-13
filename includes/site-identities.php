@@ -74,17 +74,22 @@ function prime2g_get_placeholder_url() {
  *
  *	Determine Dark theme logo or default custom logo
  */
-function prime2g_siteLogo() {
+function prime2g_siteLogo( $darklogo = false ) {
 $siteName	=	get_bloginfo( 'name' );
 
-	if (
-		in_array( 'dark-background', ToongeePrime_Colors::theme_color_classes() )
-		&& get_theme_mod( 'prime2g_dark_theme_logo' )
-	) {
-		$src = prime2g_get_dark_logo_url();
+	if ( ! $darklogo ) {
+		if (
+			in_array( 'dark-background', ToongeePrime_Colors::theme_color_classes() )
+			&& get_theme_mod( 'prime2g_dark_theme_logo' )
+		) {
+			$src = prime2g_get_dark_logo_url();
+		}
+		else {
+			$src = prime2g_get_custom_logo_url();
+		}
 	}
 	else {
-		$src = prime2g_get_custom_logo_url();
+		$src = prime2g_get_dark_logo_url();
 	}
 
 	$img	=	'<img src="' . $src . '" alt class="custom-logo" title="' . $siteName . '" />';

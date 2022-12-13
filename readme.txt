@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.0
 Tested up to: 6.1
-Stable tag: 1.0.48.50
+Stable tag: 1.0.49.00
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,19 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.49.00 =
+
+* Added JS prime2g_get_sibling()
+* Added previous/next functionality to html slider
+* Added $darklogo parameter to prime2g_siteLogo()
+* Added [prime2g_social_and_contacts]
+* Added [prime2g_add_template_part]
+* Bootstrap icons update
+* @ Customizer: 'prime2g_stop_wp_heartbeat'
+* Added prime2g_stop_wp_heartbeat()
+* Introduced Dark Theme Feature, & @ Customizer: 'prime2g_dark_theme_switch'
+* Introduced init directory, to offload functions.php
 
 = 1.0.48.50 =
 
@@ -29,10 +42,10 @@ A WordPress theme with options for customization, design and development flexibi
 = 1.0.48.00 =
 
 * Tested on WP 6.1 requiring at least 6.0
-* Header image size @ customizer
+* Header image size @ Customizer
 * Created extras folder @features
 * Introduced Extra Features section @ Customizer
-* Preloader feature at @ customizer
+* Preloader feature at @ Customizer
 * Added prime2g_add_jp_related_posts() to hook prime2g_after_post
 * Added prime2g_use_extras()
 
@@ -234,4 +247,5 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
+
 

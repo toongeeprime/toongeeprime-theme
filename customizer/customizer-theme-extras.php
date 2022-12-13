@@ -36,6 +36,31 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 		)
 	);
 
+
+	/**
+	 *	DARK THEME SWITCH
+	 *	@since ToongeePrime Theme 1.0.49.00
+	 */
+	$wp_customize->add_setting(
+		'prime2g_dark_theme_switch',
+		array(
+			'type'		=>	'theme_mod',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_dark_theme_switch',
+		array(
+			'label'		=>	__( 'Dark Theme Switch', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_dark_theme_switch',
+			'section'	=>	'prime2g_theme_extras_section',
+			'choices'	=>	array(
+				''		=>	__( 'Off', PRIME2G_TEXTDOM ),
+				'on'	=>	__( 'Activate Switch', PRIME2G_TEXTDOM ),
+			),
+		)
+	);
+
 }
 
 }

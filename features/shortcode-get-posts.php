@@ -23,11 +23,18 @@ $atts	=	shortcode_atts(
 		'taxonomy'	=>	'category',
 		'inornot'	=>	'NOT IN',
 		'terms'		=>	'uncategorized',
-		'looptemplate'	=>	null, # Added @since ToongeePrime Theme 1.0.46.00
+		'looptemplate'	=>	null, #	@since ToongeePrime Theme 1.0.46.00
 		),
 	$atts
 );
 extract( $atts );
+
+
+#	@since ToongeePrime Theme 1.0.49.00
+$termsArray	=	explode( ',', $terms );
+if ( count( $termsArray ) > 1 ) {
+	$terms	=	$termsArray;
+}
 
 
 $args	=	array(
@@ -44,6 +51,7 @@ $args	=	array(
 			),
 		),
 );
+
 $loop	=	prime2g_wp_query( $args, null );
 
 if ( $loop->have_posts() ) {

@@ -48,14 +48,18 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'title_in_header';
 	}
 
-	// If Main Menu is set to Fixed
-	if ( 'fixed' == get_theme_mod( 'prime2g_menu_position' ) ) {
+	// By Main Menu Position
+	$menuPosition	=	get_theme_mod( 'prime2g_menu_position' );
+	if ( 'fixed' == $menuPosition ) {
 		$classes[]	=	'fixed_main_menu';
+	}
+	if ( 'bottom' == $menuPosition ) {
+		$classes[]	=	'bottom_main_menu';
 	}
 
 	#	If Preloader feature is active
 	#	@since ToongeePrime Theme 1.0.48.50
-	if ( '' !== get_theme_mod( 'prime2g_use_page_preloader' ) ) {
+	if ( ! empty( get_theme_mod( 'prime2g_use_page_preloader' ) ) ) {
 		$classes[]	=	'preloading';
 	}
 

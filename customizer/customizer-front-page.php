@@ -34,7 +34,49 @@ function prime2g_customizer_front_page( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	__( 'Welcome to ' . $siteTitle, PRIME2G_TEXTDOM ),
 			),
-			'active_callback'	=>	'is_front_page',
+		)
+	);
+
+
+	/**
+	 *	HOMEPAGE HEADLINES
+	 */
+	$wp_customize->add_setting(
+		'prime2g_theme_show_headlines',
+		array(
+			'type'		=>	'theme_mod',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_theme_show_headlines',
+		array(
+			'label'		=>	__( 'Show Headlines Section?', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_theme_show_headlines',
+			'section'	=>	'prime2g_theme_archives_section',
+			'choices'	=>	array(
+				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM ),
+			),
+			'active_callback'	=>	'is_home',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_headlines_category',
+		array(
+			'type'				=>	'theme_mod',
+			'default'			=>	prime2g_categs_array()[1],
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_headlines_category',
+		array(
+			'label'		=>	__( 'Headlines Category', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_headlines_category',
+			'section'	=>	'prime2g_theme_archives_section',
+			'choices'	=>	prime2g_categs_array(),
+			'active_callback'	=>	'is_home',
 		)
 	);
 

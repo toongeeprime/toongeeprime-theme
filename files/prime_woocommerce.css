@@ -124,6 +124,9 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 #page .quantity input{
 	padding:10px 0;text-align:center;width:auto;
 }
+#page .woocommerce-cart-form input{
+	width:100%;
+}
 .select2-container{
 	color:#030303;
 }
@@ -193,6 +196,9 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 }
 .woocommerce-pagination a,.woocommerce-pagination span{
 	padding:5px 10px;margin:0 5px;
+}
+.woocommerce-pagination span.current{
+	border-bottom:2px solid;
 }
 .woocommerce .sharedaddy{
 	margin-top:calc(5 * var(--min-pad));
@@ -294,6 +300,9 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 .shop_table dt{
 	float:left;clear:both;margin-right:0.3rem;
 }
+.shop_table li::marker{
+	font-size:0;
+}
 .woocommerce-checkout-payment{
 	margin:var(--min-pad) 0;
 }
@@ -305,12 +314,6 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 }
 .cart-collaterals .woocommerce-loop-product__title{
 	font-size:90%;font-weight:600;
-}
-.wc-proceed-to-checkout a.checkout-button{
-	font-size:110%;min-width:350px;padding:15px;
-}
-.has_cross_sells .wc-proceed-to-checkout a.checkout-button{
-	width:100%;
 }
 td.actions button:nth-child(2){
 	float:right;clear:both;
@@ -503,12 +506,6 @@ body:not(.has-sidebar) .woocommerce-MyAccount-content{
 }
 #page .quantity input{
 	width:auto;
-}
-#page .coupon .input-text{
-	width:50%;float:left;
-}
-#page .coupon button{
-	width:48%;float:right;margin-top:0;
 }
 td.actions button:nth-child(2){
 	width:100%;

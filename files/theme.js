@@ -114,3 +114,36 @@ runCount();
 } );
 }
 
+
+
+/**
+ *	Counter
+ *	@since ToongeePrime Theme 1.0.49.00
+ */
+function prime2g_get_sibling( get, elem, sibClass = '' ) {
+
+	if ( get == 'previous' ) {
+		var sibling	=	elem.previousElementSibling;
+	}
+	if ( get == 'next' ) {
+		var sibling	=	elem.nextElementSibling;
+	}
+
+	// If no sibClass, return first sibling
+	if ( ! sibClass ) return sibling;
+
+	// If sibling matches sibClass, return; Else continue loop
+	while ( sibling ) {
+		if ( sibling.classList.contains( sibClass ) ) return sibling;
+
+		if ( get == 'previous' ) {
+			sibling	=	sibling.previousElementSibling;
+		}
+		if ( get == 'next' ) {
+			sibling	=	sibling.nextElementSibling;
+		}
+	}
+
+}
+
+

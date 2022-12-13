@@ -9,13 +9,15 @@
 /*
  *****	HTML SLIDER FRAME TEMPLATE	*****
 <section id="prime2g_posts_slider" class="prime2g_posts_slider">
-	<div class="prime2g_slides_wrap">
+	<div class="prime2g_slides_wrap prel">
 		<div class="prime2g_slides_box prel">
 
 		<!-- put all html blocks within here @ parent class: slidebox -->
 
 		</div>
 		<div id="sContrlz"></div>
+		<div class="psPrev pslide_pn"><span></span></div>
+		<div class="psNext pslide_pn"><span></span></div>
 		<div class="prel"><span class="ps_rzmr">Resume</span></div>
 	</div>
 </section><!-- #prime2g_posts_slider -->
@@ -35,14 +37,22 @@ function prime2g_auto_html_slider_frame_css() { ?>
 min-height:50vh;background-position:center;background-size:cover;}
 .prime2g_posts_slider .slidebox.lit{opacity:1;visibility:visible;}
 .prime2g_slides_box{display:grid;grid-template-columns:1fr;grid-template-rows:1fr;}
-.ps_rzmr{opacity:0;visibility:hidden;cursor:pointer;position:absolute;z-index:+10;top:-50px;right:0;
-color:#fff;background:#111;font-size:12px;padding:5px 10px;}
+.ps_rzmr{opacity:0;visibility:hidden;cursor:pointer;position:absolute;z-index:+10;top:-40px;right:0;
+color:#fff;background:#111;font-size:14px;padding:5px 15px;}
 .pause .ps_rzmr{opacity:1;visibility:visible;}
 
 #sContrlz{display:flex;justify-content:center;z-index:+1;margin-top:-40px;background:rgba(0,0,0,0.5);}
 .slCtrl{height:15px;width:15px;margin:9px;border-radius:15px;background:#ccc;cursor:pointer;}
 .slCtrl:hover{background:#000;}
 .slCtrl.lit{background:#f0b417;}
+
+.pslide_pn{position:absolute;bottom:25%;padding:50px 5px;opacity:0;background:rgba(0,0,0,0.5);}
+.psNext{right:0;}
+.prime2g_slides_wrap:hover .pslide_pn{opacity:1;}
+.pslide_pn span{position:relative;font-size:2.5rem;color:#fff;cursor:pointer;z-index:1;}
+.pslide_pn span::before{font-family:bootstrap-icons;}
+.psPrev span::before{content:"\F284";}
+.psNext span::before{content:"\F285";}
 </style>
 <?php
 }
@@ -60,25 +70,27 @@ add_action( 'wp_footer', function() use( &$timer ) { prime2g_auto_html_slider_fr
 
 function prime2g_auto_html_slider_frame_js( $timer = 4000 ) { ?>
 <script id="prime2g_html_sliderJS">
-const wrapr	=	document.getElementById( 'prime2g_posts_slider' ),
-	slCtrlr	=	document.getElementById( 'sContrlz' ),
+const wrapr	=	p2getEl( '#prime2g_posts_slider' ),
+	slCtrlr	=	p2getEl( '#sContrlz' ),
 	i_timer	=	<?php echo $timer; ?>;
 
-let slidez	=	document.querySelectorAll( '.prime2g_posts_slider .slidebox' ),
+let slidez	=	p2getAll( '.prime2g_posts_slider .slidebox' ),
 	slNum	=	slidez.length,
+	slNumIndex	=	slNum - 1;
 	sID		=	1;
 
 ctSpan	=	document.createElement( "span" );
 ctSpan.className += "slCtrl";
-for( cs = 0; cs < slNum; cs++ ) {
-slCtrlr.appendChild( ctSpan.cloneNode(true) );
+for ( cs = 0; cs < slNum; cs++ ) {
+	slCtrlr.appendChild( ctSpan.cloneNode(true) );
 }
 
-let slCtrlz	=	document.querySelectorAll( '.slCtrl' );
+let slCtrlz	=	p2getAll( '.slCtrl' );
 
 slidez.forEach( (s)=>{ s.classList.add( 'itm_' + sID++ ); } );
 slCtrlz.forEach( (ct)=>{
-	let slSID	=	( sID++ ) - slNum, tID	=	'itm_' + slSID;
+	let slSID	=	( sID++ ) - slNum,
+		tID	=	'itm_' + slSID;
 	ct.classList.add( tID );
 	prime2g_switch_slide( ct, tID );
 } );
@@ -86,56 +98,97 @@ slCtrlz.forEach( (ct)=>{
 prime2g_reset_slide();
 function prime2g_reset_slide() { slidez[0].classList.add( 'lit' ); slCtrlz[0].classList.add( 'lit' ); }
 
-// Auto-run Slider
-function prime2g_run_slides( arr ) {
-	arr.forEach( (ss)=>{
-		let sNxt	=	ss.nextElementSibling;
-		if ( sNxt && ( sNxt.classList.contains( 'slidebox' ) || sNxt.classList.contains( 'slCtrl' ) ) ) {
-			sNxt.classList.add( 'lit' );
-			ss.classList.remove( 'lit' );
-		}
-		else {
-			ss.classList.remove( 'lit' );
-			prime2g_reset_slide();
-		}
-	} );
-}
 
-function prime2g_remv_resume() {
-	slidez.forEach( (as)=>{ as.classList.remove( 'resume' ); } );
-	slCtrlz.forEach( (as)=>{ as.classList.remove( 'resume' ); } );
-}
-
-const prime2g_runInt	=	setInterval(
-()=>{
+// Run Slider:
+const prime2g_runInt	=	setInterval( ()=>{
 	if ( ! wrapr.classList.contains( 'pause' ) ) {
-		prime2g_run_slides( document.querySelectorAll( '#prime2g_posts_slider .lit' ) );
-		prime2g_remv_resume();
+		prime2g_htmlslide_prev_next( 'next' );
 	}
 },
 i_timer,
 );
 
 function prime2g_switch_slide( el, id ) {
-	el.addEventListener( 'click',
-	()=>{
-	let sibs	=	document.querySelectorAll( '.' + id );
-		slidez.forEach( (s)=>{ s.classList.remove( 'lit', 'resume' ); } );
-		slCtrlz.forEach( (s)=>{ s.classList.remove( 'lit', 'resume' ); } );
-		sibs.forEach( (sib)=>{ sib.classList.add( 'lit', 'resume' ); } );
+	el.addEventListener( 'click', ()=>{
+	let sibs	=	p2getAll( '.' + id );
+		slidez.forEach( (s)=>{ s.classList.remove( 'lit' ); } );
+		slCtrlz.forEach( (s)=>{ s.classList.remove( 'lit' ); } );
+		sibs.forEach( (sib)=>{ sib.classList.add( 'lit' ); } );
 		if ( el.classList.contains( 'lit' ) ) {
 			wrapr.classList.add( 'pause' );
 		}
 	} );
 }
 
-document.querySelectorAll( '.ps_rzmr' ).forEach( (sp)=>{
+p2getAll( '.ps_rzmr' ).forEach( (sp)=>{
 	sp.addEventListener( 'click', ()=>{
 		wrapr.classList.remove( 'pause' );
-	});
-});
+	} );
+} );
+
+
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.49.00
+ */
+let sp_prevs	=	p2getAll( '.psPrev span' ),
+	sp_nexts	=	p2getAll( '.psNext span' );
+
+if ( sp_prevs ) {
+sp_prevs.forEach( ( el )=>{
+	el.addEventListener( 'click', ()=>{
+		if ( ! wrapr.classList.contains( 'pause' ) ) { wrapr.classList.add( 'pause' ); }
+		prime2g_htmlslide_prev_next( 'previous' );
+	} );
+} );
+}
+
+if ( sp_nexts ) {
+	sp_nexts.forEach( ( el )=>{
+		el.addEventListener( 'click', ()=>{
+			if ( ! wrapr.classList.contains( 'pause' ) ) { wrapr.classList.add( 'pause' ); }
+			prime2g_htmlslide_prev_next( 'next' );
+		} );
+	} );
+}
+
+function prime2g_htmlslide_prev_next( direction ) {
+let litSlide	=	p2getEl( '.slidebox.lit' ),
+	litCntrl	=	p2getEl( '.slCtrl.lit' );
+
+	litSlide.classList.remove( 'lit' );
+	litCntrl.classList.remove( 'lit' );
+
+if ( direction == 'previous' ) {
+	prevSlide	=	prime2g_get_sibling( 'previous', litSlide, 'slidebox' );
+	prevCntrl	=	prime2g_get_sibling( 'previous', litCntrl, 'slCtrl' );
+
+	if ( prevSlide && prevCntrl ) {
+		prevSlide.classList.add( 'lit' );
+		prevCntrl.classList.add( 'lit' );
+	}
+	else {
+		slidez[ slNumIndex ].classList.add( 'lit' );
+		slCtrlz[ slNumIndex ].classList.add( 'lit' );
+	}
+}
+
+if ( direction == 'next' ) {
+	nxSlide	=	prime2g_get_sibling( 'next', litSlide, 'slidebox' );
+	nxCntrl	=	prime2g_get_sibling( 'next', litCntrl, 'slCtrl' );
+
+	if ( nxSlide && nxCntrl ) {
+		nxSlide.classList.add( 'lit' );
+		nxCntrl.classList.add( 'lit' );
+	}
+	else {
+		prime2g_reset_slide();
+	}
+}
+
+}
 </script>
 <?php
 }
-
 

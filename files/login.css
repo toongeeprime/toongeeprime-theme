@@ -14,7 +14,6 @@
 #jetpack_protect_answer{
 	min-width:80px;
 }
-/* login button */
 /* retina login logo */
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (min--moz-device-pixel-ratio: 1.5),
@@ -24,7 +23,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 body{
-	background-image:url('../images/login-bg.jpg');
+	background-color:var(--content-background);display:grid;background-image:url('../images/login-bg.jpg');
 }
 
 
@@ -34,15 +33,27 @@ body{
 
 
 
-/**************************
- *	Specific Things
- **************************/
-a,.login label{font-size:15px;}
+/****************************
+ *		Specifics			*
+ ***************************/
+#login button:not(.wp-hide-pw),#login input[type="submit"]{
+	background:var(--brand-color);border-color:var(--brand-color-2);
+	border-radius:0;
+}
+#login button:not(.wp-hide-pw):hover,#login input[type="submit"]:hover,#login input[type="submit"]:focus{
+	background:var(--brand-color-2);
+}
+a,.login label{
+	font-size:15px;color:var(--content-text);
+}
 
 #login h1 a,.login h1 a{
 	background:no-repeat center;
-	color:#fff;width:100%;height:100px;text-indent:-9999px;
+	color:var(--brand-color);width:100%;height:100px;text-indent:-9999px;
 	overflow:hidden;padding-bottom:15px;display:block;
+}
+#login h1 a:hover,#login h1 a:focus,.login h1 a:hover,.login h1 a:focus{
+	color:var(--brand-color-2);
 }
 #login{
 	width:90%;max-width:450px;padding:25px;
@@ -59,7 +70,7 @@ a,.login label{font-size:15px;}
 	height:55px;top:5px;
 }
 #login .button-primary{
-	font-size:16px;padding:1px 30px;border-radius:0;
+	font-size:16px;padding:1px 30px;
 }
 
 .login form .forgetmenot{
@@ -87,9 +98,6 @@ body #login .input:hover,body #login .input:focus{
 	box-shadow:0 7px 12px rgba(0,0,0,0.2);
 }
 
-body{
-	background-color:#fff;display:grid;
-}
 
 
 @media(max-width:820px){

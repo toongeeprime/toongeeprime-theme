@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	INCLUDE / REQUIRE THEME' FILES
+ *	LOAD THEME' FILES
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
@@ -9,7 +9,7 @@
 
 
 /**
- *	GET PHP FILES THROUGH DIRECTORIES ARRAY
+ *	GET 'PHP' FILES THROUGH DIRECTORIES ARRAY
  */
 $directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'features' ];
 
@@ -38,15 +38,9 @@ foreach( $parts as $part ) {
 
 
 /**
- *	EXTRAS
- */
-require_once PRIME2G_THEME . 'features/extras/index.php';
-
-
-
-/**
  *	UPDATER
  */
 require_once PRIME2G_THEME . 'update/updater-index.php';
+
 
 

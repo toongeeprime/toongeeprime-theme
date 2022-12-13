@@ -30,7 +30,7 @@ add_theme_support(
 
 // Custom Header
 $header_width	=	2000;
-$header_height	=	750;
+$header_height	=	900;
 add_theme_support(
 	'custom-header',
 	array(

@@ -61,6 +61,25 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 
 	}
 
+	/**
+	 *	Generate Dark Theme CSS :root variables
+	 *	@since ToongeePrime Theme 1.0.49.00
+	 *	@static
+	 */
+	public static function the_root_dark_css() {
+
+		$colr		=	new self;
+		$bg_color	=	$colr->get_mod( 'background' );
+		$cnt_color	=	$colr->get_mod( 'content' );
+
+	return "--body-text:". $colr->get_mod( 'background' ) .";
+	--body-background:". $colr->get_readable_color( $bg_color ) .";
+	--content-text:". $colr->get_mod( 'content' ) .";
+	--content-background:". $colr->get_readable_color( $cnt_color ) .";
+";
+
+	}
+
 
 	/**
 	 *	Set theme color classes
@@ -92,6 +111,10 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 
 			if ( 127 > $ctLum ) {
 				$classes[]	=	'dark-content';
+			}
+
+			if ( ( 127 > $bgLum ) && ( 127 > $ctLum ) ) {
+				$classes[]	=	'dark-theme';
 			}
 
 		return $classes;
