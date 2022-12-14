@@ -12,6 +12,8 @@ add_action( 'wp_footer', 'prime2g_dark_theme_switch' );
 function prime2g_dark_theme_switch() {
 
 if ( 'on' === get_theme_mod( 'prime2g_dark_theme_switch' ) ) {
+$domain	=	prime2g_get_site_domain();
+$domain	=	str_replace( '.', '', $domain );
 
 $switch	=	'<div id="prime2g_dt_switch">
 <style scoped>
@@ -29,11 +31,16 @@ background:var(--content-text);color:var(--content-background);display:grid;bord
 </div>
 
 <script>
-dtBody	=	p2getEl( "body" );
+let dtBody	=	p2getEl( "body" ),
+	dtState	=	"'.$domain.'" + "_DarkTheme";
+
+if ( window.localStorage.getItem( "prime2gDarkThemeStatus" ) ) {
+	window.localStorage.removeItem( "prime2gDarkThemeStatus" );
+}
 
 function prime2gDarkThemeMedia() {
 let	isDarkTheme		=	window.matchMedia( "( prefers-color-scheme: dark )" ).matches,
-	p2gDarkLCStore	=	window.localStorage.getItem( "prime2gDarkThemeStatus" );
+	p2gDarkLCStore	=	window.localStorage.getItem( dtState );
 
 	if ( "yes" === p2gDarkLCStore ) { isDarkTheme = true; }
 	else if ( "no" === p2gDarkLCStore ) { isDarkTheme = false; }
@@ -43,7 +50,7 @@ return isDarkTheme;
 
 
 // Set dark theme body class
-let p2gThemeIsDark	=	window.localStorage.getItem( "prime2gDarkThemeStatus" );
+let p2gThemeIsDark	=	window.localStorage.getItem( dtState );
 if ( p2gThemeIsDark == "yes" || prime2gDarkThemeMedia() == true ) {
 	dtBody.classList.add( "themeswitched_dark" );
 }
@@ -54,11 +61,11 @@ let p2gDThemeOn		=	p2getEl( "#prime2g_dt_switch .switchOn" ),
 
 p2gDThemeOn.addEventListener( "click", ()=>{
 	dtBody.classList.add( "themeswitched_dark" );
-	window.localStorage.setItem( "prime2gDarkThemeStatus", "yes" );
+	window.localStorage.setItem( dtState, "yes" );
 } );
 p2gDThemeOff.addEventListener( "click", ()=>{
 	dtBody.classList.remove( "themeswitched_dark" );
-	window.localStorage.setItem( "prime2gDarkThemeStatus", "no" );
+	window.localStorage.setItem( dtState, "no" );
 } );
 </script>
 </div>';

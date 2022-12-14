@@ -26,6 +26,7 @@ A WordPress theme with options for customization, design and development flexibi
 * Bootstrap icons update
 * @ Customizer: 'prime2g_stop_wp_heartbeat'
 * Added prime2g_stop_wp_heartbeat()
+* Added prime2g_get_site_domain()
 * Introduced Dark Theme Feature, & @ Customizer: 'prime2g_dark_theme_switch'
 * Introduced init directory, to offload functions.php
 

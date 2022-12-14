@@ -89,13 +89,25 @@ function prime2g_get_country_by_code( $code ) {
 
 
 
-
 /**
  *	If To Use Theme Extras
  *	@since ToongeePrime Theme 1.0.48.00
  */
 function prime2g_use_extras() {
 	return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true );
+}
+
+
+
+/**
+ *	Get Site' Domain name...
+ *	@since ToongeePrime Theme 1.0.49.00
+ */
+function prime2g_get_site_domain() {
+$url	=	get_bloginfo( 'url' );
+$url	=	parse_url( $url );
+$url	=	preg_replace( '/^www\./', '', $url['host'] );
+return $url;
 }
 
 
