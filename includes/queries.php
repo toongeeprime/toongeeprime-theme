@@ -82,13 +82,13 @@ return $content;
  *	@since ToongeePrime Theme 1.0.49.00
  */
 add_filter( 'user_can_richedit', function( $default ) {
-	global $post;
-	global $pagenow;
-
-	if ( $pagenow == 'post.php' ) {
-		if ( $post->post_type === 'prime_template_part')  return false;
-		return $default;
-	}
+global $post;
+	if ( $post->post_type === 'prime_template_part' ) return false;
+return $default;
 }
 );
+
+
+
+
 

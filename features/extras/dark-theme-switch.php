@@ -8,16 +8,16 @@
  */
 if ( ! function_exists( 'prime2g_dark_theme_switch' ) ) {
 
-add_action( 'wp_footer', 'prime2g_dark_theme_switch' );
+add_action( 'wp_body_open', 'prime2g_dark_theme_switch', 9 );
 function prime2g_dark_theme_switch() {
 
-if ( 'on' === get_theme_mod( 'prime2g_dark_theme_switch' ) ) {
+if ( '' !== get_theme_mod( 'prime2g_dark_theme_switch' ) ) {
 $domain	=	prime2g_get_site_domain();
 $domain	=	str_replace( '.', '', $domain );
 
 $switch	=	'<div id="prime2g_dt_switch">
 <style scoped>
-#prime2g_dt_switch{position:fixed;bottom:0;right:0;}
+#prime2g_dt_switch{position:fixed;bottom:0;right:0;z-index:+99999;}
 #prime2g_dt_switch .bi::before{place-items:center;width:30px;height:30px;border-radius:30px;margin:1rem;
 background:var(--content-text);color:var(--content-background);display:grid;border:1px solid;}
 .themeswitched_dark #prime2g_dt_switch .bi::before{color:var(--content-text);background:var(--content-background);}
@@ -32,11 +32,7 @@ background:var(--content-text);color:var(--content-background);display:grid;bord
 
 <script>
 let dtBody	=	p2getEl( "body" ),
-	dtState	=	"'.$domain.'" + "_DarkTheme";
-
-if ( window.localStorage.getItem( "prime2gDarkThemeStatus" ) ) {
-	window.localStorage.removeItem( "prime2gDarkThemeStatus" );
-}
+	dtState	=	"' . $domain . '" + "_DarkTheme";
 
 function prime2gDarkThemeMedia() {
 let	isDarkTheme		=	window.matchMedia( "( prefers-color-scheme: dark )" ).matches,
@@ -51,7 +47,7 @@ return isDarkTheme;
 
 // Set dark theme body class
 let p2gThemeIsDark	=	window.localStorage.getItem( dtState );
-if ( p2gThemeIsDark == "yes" || prime2gDarkThemeMedia() == true ) {
+if ( p2gThemeIsDark == "yes" || prime2gDarkThemeMedia() === true ) {
 	dtBody.classList.add( "themeswitched_dark" );
 }
 
@@ -63,6 +59,7 @@ p2gDThemeOn.addEventListener( "click", ()=>{
 	dtBody.classList.add( "themeswitched_dark" );
 	window.localStorage.setItem( dtState, "yes" );
 } );
+
 p2gDThemeOff.addEventListener( "click", ()=>{
 	dtBody.classList.remove( "themeswitched_dark" );
 	window.localStorage.setItem( dtState, "no" );

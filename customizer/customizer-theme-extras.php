@@ -57,6 +57,7 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 			'choices'	=>	array(
 				''		=>	__( 'Off', PRIME2G_TEXTDOM ),
 				'on'	=>	__( 'Activate Switch', PRIME2G_TEXTDOM ),
+				'on_dbody'	=>	__( 'Activate - Ensure Dark Body', PRIME2G_TEXTDOM ),
 			),
 		)
 	);
@@ -64,3 +65,5 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 }
 
 }
+
+

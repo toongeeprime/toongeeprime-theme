@@ -39,26 +39,17 @@ class ToongeePrime_Styles {
 		switch( $toGet ) {
 
 			case 'brand' : $mod = get_theme_mod( 'prime2g_primary_brand_color', $this->brandClr ); break;
-
 			case 'brand2' : $mod = get_theme_mod( 'prime2g_secondary_brand_color', $this->brandClr2 ); break;
-
 			case 'width' : $mod = get_theme_mod( 'prime2g_site_width', $this->siteWidth ); break;
-
 			case 'background' : $mod = get_theme_mod( 'prime2g_background_color', $this->siteBG ); break;
-
 			case 'header' : $mod = get_theme_mod( 'prime2g_header_background', $this->headerBG ); break;
-
 			case 'content' : $mod = get_theme_mod( 'prime2g_content_background', $this->contentBG ); break;
-
 			case 'footer' : $mod = get_theme_mod( 'prime2g_footer_background', $this->footerBG ); break;
-
 			case 'bodyF' : $mod = get_theme_mod( 'prime2g_site_body_font', $this->bodyFont ); break;
-
 			case 'headF' : $mod = get_theme_mod( 'prime2g_site_headings_font', $this->headFont ); break;
-
 			case 'headerattach' : $mod = get_theme_mod( 'prime2g_header_img_attachment', 'scroll' ); break;
-
 			case 'headerimgsize' : $mod = get_theme_mod( 'prime2g_header_background_size', 'cover' ); break;
+			case 'darktheme' : $mod = get_theme_mod( 'prime2g_dark_theme_switch' ); break;
 
 		}
 		return $mod;
@@ -143,5 +134,6 @@ class ToongeePrime_Styles {
 }
 
 }
+
 
 

@@ -71,11 +71,19 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 		$colr		=	new self;
 		$bg_color	=	$colr->get_mod( 'background' );
 		$cnt_color	=	$colr->get_mod( 'content' );
+		$dTheme		=	$colr->get_mod( 'darktheme' );
 
-	return "--body-text:". $colr->get_mod( 'background' ) .";
-	--body-background:". $colr->get_readable_color( $bg_color ) .";
-	--content-text:". $colr->get_mod( 'content' ) .";
+	$dBody	=	'';
+	if ( 'on_dbody' === $dTheme ) {
+		$dBody	=	"--body-text:#efefef;
+	--body-background:#030303;
+";
+	}
+	return "--content-text:". $colr->get_mod( 'content' ) .";
 	--content-background:". $colr->get_readable_color( $cnt_color ) .";
+	--body-text:". $colr->get_mod( 'background' ) .";
+	--body-background:". $colr->get_readable_color( $bg_color ) .";
+	$dBody
 ";
 
 	}
