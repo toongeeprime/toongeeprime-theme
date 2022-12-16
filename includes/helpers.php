@@ -21,8 +21,8 @@ function prime2g_removeSidebar() {
  *	nonce verifier
  *	@since ToongeePrime Theme 1.0.46.00
  */
-function prime2g_verify_nonce( $nonceName ) {
-	if ( ! isset( $_REQUEST[ $nonceName ] ) || ! wp_verify_nonce( $_POST[ $nonceName ] ) ) {
+function prime2g_verify_nonce( $nonceField = 'prime_ajaxnonce' ) {
+	if ( ! isset( $_REQUEST[ $nonceField ] ) || ! wp_verify_nonce( $_POST[ $nonceField ] ) ) {
 		wp_die( 'Security Fail!' );
 	}
 }

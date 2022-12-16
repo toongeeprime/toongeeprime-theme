@@ -2,16 +2,11 @@
 
 /**
  *	CLASS: THEME STYLES
+ *	Sets the stage for theme styles
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-
-
-/**
- * This class sets the stage for theme styles
- */
-
 if ( ! class_exists( 'ToongeePrime_Styles' ) ) {
 
 class ToongeePrime_Styles {
@@ -28,7 +23,7 @@ class ToongeePrime_Styles {
 	public $footerBG	=	'#030303';
 	public $siteWidth	=	'1100px';
 	public $bodyFont	=	'Open+Sans';
-	public $headFont	=	'Source+Serif+4';
+	public $headFont	=	'Oxygen';
 
 
 	/**
@@ -65,20 +60,20 @@ class ToongeePrime_Styles {
 	 */
 	public static function the_hex_luminance( $hex ) {
 
-		// Remove the "#" symbol from hex value
+		# Remove the "#" in hex value
 		$hex	=	ltrim( $hex, '#' );
 
-		// Make sure there are 6 digits for calculations
+		# Make sure there are 6 digits for calculations
 		if ( 3 === strlen( $hex ) ) {
 			$hex = substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) . substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) . substr( $hex, 2, 1 ) . substr( $hex, 2, 1 );
 		}
 
-		// Get R G B
+		# Get R G B
 		$red	=	hexdec( substr( $hex, 0, 2 ) );
 		$green	=	hexdec( substr( $hex, 2, 2 ) );
 		$blue	=	hexdec( substr( $hex, 4, 2 ) );
 
-		// Calculate the luminance
+		# Calculate the luminance
 		$lum	=	( 0.2126 * $red ) + ( 0.7152 * $green ) + ( 0.0722 * $blue );
 		return ( int ) round( $lum );
 	}
@@ -86,6 +81,8 @@ class ToongeePrime_Styles {
 
 	/**
 	 *	Determine Color is Light
+	 *
+	 *	@static
 	 */
 	public static function is_light_color( $hex ) {
 		return ( 127 <= self::the_hex_luminance( $hex ) );
@@ -94,23 +91,19 @@ class ToongeePrime_Styles {
 
 	/**
 	 *	Generate CSS :root variables
-	 *
-	 *	@static
 	 */
-	protected static function the_root_css() {
-
-	$styles	=	new self;
+	protected function the_root_css() {
 
 	return "
-	--brand-color:". $styles->get_mod( 'brand' ) .";
-	--brand-color-2:". $styles->get_mod( 'brand2' ) .";
-	--site-width:". $styles->get_mod( 'width' ) .";
-	--body-background:". $styles->get_mod( 'background' ) .";
-	--header-background:". $styles->get_mod( 'header' ) .";
-	--content-background:". $styles->get_mod( 'content' ) .";
-	--footer-background:". $styles->get_mod( 'footer' ) .";
-	--body-font:'". str_replace( "+", " ", $styles->get_mod( 'bodyF' ) ) ."';
-	--headings-font:'". str_replace( "+", " ", $styles->get_mod( 'headF' ) ) ."';
+	--brand-color:". $this->get_mod( 'brand' ) .";
+	--brand-color-2:". $this->get_mod( 'brand2' ) .";
+	--site-width:". $this->get_mod( 'width' ) .";
+	--body-background:". $this->get_mod( 'background' ) .";
+	--header-background:". $this->get_mod( 'header' ) .";
+	--content-background:". $this->get_mod( 'content' ) .";
+	--footer-background:". $this->get_mod( 'footer' ) .";
+	--body-font:'". str_replace( "+", " ", $this->get_mod( 'bodyF' ) ) ."';
+	--headings-font:'". str_replace( "+", " ", $this->get_mod( 'headF' ) ) ."';
 	";
 
 	}
@@ -118,22 +111,18 @@ class ToongeePrime_Styles {
 
 	/**
 	 *	Generate other CSS
-	 *
-	 *	@static
 	 */
-	protected static function theme_css() {
+	protected function theme_css() {
 
-	$styles	=	new self;
-	$bgSize	=	$styles->get_mod( 'headerimgsize' );
+	$bgSize	=	$this->get_mod( 'headerimgsize' );
 	$bgSize	=	( '' == $bgSize ) ? 'cover' : $bgSize;
 
-	return "#header{background-attachment:". $styles->get_mod( 'headerattach' ) .";background-size:". $bgSize .";}";
+	return "#header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:". $bgSize .";}";
 
 	}
 
 }
 
 }
-
 
 

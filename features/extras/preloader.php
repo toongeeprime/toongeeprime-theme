@@ -63,12 +63,15 @@ if ( ! function_exists( 'prime2g_page_preloaderJS' ) ) {
 function prime2g_page_preloaderJS() {
 $js	=	'<script id="preloaderJS">
 function prime2g_clearPreloader() {
-	let p2Prloadr	=	document.querySelector( "#prime2gPreloading" );
+	let p2Prloadr	=	p2getEl( "#prime2gPreloading" );
 setTimeout( ()=>{
 	p2Prloadr.style.opacity		=	"0";
 	p2Prloadr.style.visibility	=	"hidden";
+}, 500 );
+setTimeout( ()=>{
+	p2Prloadr.remove();
+	p2getEl( "body" ).classList.add( "preloaded" );
 }, 1000 );
-setTimeout( ()=>{ p2Prloadr.remove(); }, 1500 );
 }
 
 window.addEventListener( "load", prime2g_clearPreloader );
@@ -77,3 +80,5 @@ window.addEventListener( "load", prime2g_clearPreloader );
 return $js;
 }
 }
+
+

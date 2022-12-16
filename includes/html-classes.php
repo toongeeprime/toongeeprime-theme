@@ -161,8 +161,6 @@ return $classes;
  */
 function prime2g_theme_html_classes() {
 
-	$addClass	=	array();
-
 	$addClass	=	ToongeePrime_Colors::theme_color_classes();
 
 echo 'class="'. implode( ' ', $addClass ) .'"';

@@ -11,7 +11,7 @@
 /**
  *	GET 'PHP' FILES THROUGH DIRECTORIES ARRAY
  */
-$directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'features' ];
+$directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'ajax', 'features' ];
 
 foreach( $directories as $dir ) {
 
@@ -41,6 +41,4 @@ foreach( $parts as $part ) {
  *	UPDATER
  */
 require_once PRIME2G_THEME . 'update/updater-index.php';
-
-
 

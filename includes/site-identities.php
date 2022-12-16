@@ -24,8 +24,8 @@ else {
 	$title	=	'<a href="'. get_home_url() .'">'. $siteName .'</a>';
 }
 
-	// Add optional html tags
-	// Opening
+	# Add optional html tags
+	# Opening
 	$show	=	$before;
 
 	if ( has_custom_logo() ) {
@@ -40,7 +40,7 @@ else {
 
 	}
 
-	// Include closing html tags
+	# Include closing html tags
 	$show	.=	$after;
 
 return $show;
@@ -73,14 +73,15 @@ function prime2g_get_placeholder_url() {
  *	Theme logo
  *
  *	Determine Dark theme logo or default custom logo
+ *
+ *	@ 1.0.49.00 : added $darklogo
+ *	@ 1.0.49.05 : added $getSrc
  */
-function prime2g_siteLogo( $darklogo = false ) {
-$siteName	=	get_bloginfo( 'name' );
+function prime2g_siteLogo( $darklogo = false, $getSrc = false ) {
 
 	if ( ! $darklogo ) {
-		if (
+		if ( get_theme_mod( 'prime2g_dark_theme_logo' ) &&
 			in_array( 'dark-background', ToongeePrime_Colors::theme_color_classes() )
-			&& get_theme_mod( 'prime2g_dark_theme_logo' )
 		) {
 			$src = prime2g_get_dark_logo_url();
 		}
@@ -92,9 +93,13 @@ $siteName	=	get_bloginfo( 'name' );
 		$src = prime2g_get_dark_logo_url();
 	}
 
+	if ( $getSrc ) return $src;
+
+	$siteName	=	get_bloginfo( 'name' );
+
 	$img	=	'<img src="' . $src . '" alt class="custom-logo" title="' . $siteName . '" />';
 
-	// Link logo to homepage from all other pages
+	# Link logo to homepage from all other pages
 	if ( ! is_front_page() ) {
 		$logo	=	'<a class="logo_link" href="'. esc_url( home_url() ) .'">';
 		$logo	.=	$img;
@@ -107,5 +112,4 @@ $siteName	=	get_bloginfo( 'name' );
 return $logo;
 
 }
-
 

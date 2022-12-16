@@ -2,20 +2,16 @@
 
 /**
  *	CLASS: THEME ROOT CSS
+ *	Outputting to the Theme
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-
-require_once PRIME2G_CLASSDIR . 'class-theme-styles.php';
-
-/**
- * This class is in charge of color customization via the Customizer.
- */
+require_once PRIME2G_CLASSDIR . 'class-theme-colors.php';
 
 if ( ! class_exists( 'ToongeePrime_ThemeCSS' ) ) {
 
-class ToongeePrime_ThemeCSS extends ToongeePrime_Styles {
+class ToongeePrime_ThemeCSS extends ToongeePrime_Colors {
 
 	/**
 	 *	Return :root CSS
@@ -24,18 +20,21 @@ class ToongeePrime_ThemeCSS extends ToongeePrime_Styles {
 	 */
 	public static function root_css() {
 
+	$styles	=	new ToongeePrime_Styles();
+	$colors	=	new ToongeePrime_Colors();
+
 $root	=	"<style id=\"prime2g_root_css\">";
 $root	.=	"
 :root{";
-$root	.=	parent::the_root_css();
-$root	.=	ToongeePrime_Colors::the_root_css();
+$root	.=	$styles->the_root_css();
+$root	.=	$colors->the_root_css();
 $root	.=
 "}
 body.themeswitched_dark{";
-$root	.=	ToongeePrime_Colors::the_root_dark_css();
+$root	.=	$colors->the_root_dark_css();
 $root	.=
 "}";
-$root	.=	parent::theme_css();
+$root	.=	$styles->theme_css();
 $root	.=	"</style>";
 
 return $root;

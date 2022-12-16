@@ -9,10 +9,6 @@
 
 require_once PRIME2G_CLASSDIR . 'class-theme-styles.php';
 
-/**
- * This class is in charge of color customization via the Customizer
- */
-
 if ( ! class_exists( 'ToongeePrime_Colors' ) ) {
 
 class ToongeePrime_Colors extends ToongeePrime_Styles {
@@ -37,26 +33,23 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 
 	/**
 	 *	Generate CSS :root variables
-	 *
-	 *	@static
 	 */
-	public static function the_root_css() {
+	protected function the_root_css() {
 
-		$colr		=	new self;
-		$brand		=	$colr->get_mod( 'brand' );
-		$brand2		=	$colr->get_mod( 'brand2' );
-		$bg_color	=	$colr->get_mod( 'background' );
-		$hdr_color	=	$colr->get_mod( 'header' );
-		$cnt_color	=	$colr->get_mod( 'content' );
-		$ftr_color	=	$colr->get_mod( 'footer' );
+		$brand		=	$this->get_mod( 'brand' );
+		$brand2		=	$this->get_mod( 'brand2' );
+		$bg_color	=	$this->get_mod( 'background' );
+		$hdr_color	=	$this->get_mod( 'header' );
+		$cnt_color	=	$this->get_mod( 'content' );
+		$ftr_color	=	$this->get_mod( 'footer' );
 
-	return "--body-text:". $colr->get_readable_color( $bg_color ) .";
-	--header-text:". $colr->get_readable_color( $hdr_color ) .";
-	--content-text:". $colr->get_readable_color( $cnt_color ) .";
-	--footer-text:". $colr->get_readable_color( $ftr_color ) .";
-	--headline-color:". $colr->get_readable_color( $bg_color ) .";
+	return "--body-text:". $this->get_readable_color( $bg_color ) .";
+	--header-text:". $this->get_readable_color( $hdr_color ) .";
+	--content-text:". $this->get_readable_color( $cnt_color ) .";
+	--footer-text:". $this->get_readable_color( $ftr_color ) .";
+	--headline-color:". $this->get_readable_color( $bg_color ) .";
 	--button-bg:". $brand .";
-	--button-text:". $colr->get_readable_color( $brand ) .";
+	--button-text:". $this->get_readable_color( $brand ) .";
 ";
 
 	}
@@ -64,25 +57,27 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	/**
 	 *	Generate Dark Theme CSS :root variables
 	 *	@since ToongeePrime Theme 1.0.49.00
-	 *	@static
 	 */
-	public static function the_root_dark_css() {
+	protected function the_root_dark_css() {
 
-		$colr		=	new self;
-		$bg_color	=	$colr->get_mod( 'background' );
-		$cnt_color	=	$colr->get_mod( 'content' );
-		$dTheme		=	$colr->get_mod( 'darktheme' );
+		$bg_color	=	$this->get_mod( 'background' );
+		$cnt_color	=	$this->get_mod( 'content' );
+		$dTheme		=	$this->get_mod( 'darktheme' );
 
 	$dBody	=	'';
 	if ( 'on_dbody' === $dTheme ) {
 		$dBody	=	"--body-text:#efefef;
 	--body-background:#030303;
+	--header-text:#efefef;
+	--header-background:#000;
+	--footer-text:#efefef;
+	--footer-background:#000;
 ";
 	}
-	return "--content-text:". $colr->get_mod( 'content' ) .";
-	--content-background:". $colr->get_readable_color( $cnt_color ) .";
-	--body-text:". $colr->get_mod( 'background' ) .";
-	--body-background:". $colr->get_readable_color( $bg_color ) .";
+	return "--content-text:". $this->get_mod( 'content' ) .";
+	--content-background:". $this->get_readable_color( $cnt_color ) .";
+	--body-text:". $this->get_mod( 'background' ) .";
+	--body-background:". $this->get_readable_color( $bg_color ) .";
 	$dBody
 ";
 
@@ -95,10 +90,9 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	 *	Used in <html> element via prime2g_theme_html_classes()
 	 *	@static
 	 */
-	public static function theme_color_classes( array $classes = null ) {
+	public static function theme_color_classes() {
 
-		if ( ! $classes )
-			$classes	=	array();
+		$classes	=	[];
 
 		$color		=	new self;
 		$bgColor	=	$color->get_mod( 'background' );
@@ -132,4 +126,5 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 }
 
 }
+
 

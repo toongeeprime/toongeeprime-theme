@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.0
 Tested up to: 6.1
-Stable tag: 1.0.49.00
+Stable tag: 1.0.49.05
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,14 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.49.05 =
+
+* Dark Theme Updates
+* Introduced ajax directory
+* Added $getSrc parameter to prime2g_siteLogo()
+* Add "preloaded" class when preloader is active & page is fully loaded
+* Reworked theme Classes
 
 = 1.0.49.00 =
 
