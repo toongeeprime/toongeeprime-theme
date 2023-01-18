@@ -117,6 +117,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$bgcolor,
+			'transport'		=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_hex_color',
 		)
 	);
@@ -137,6 +138,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$headerbg,
+			// 'transport'		=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_hex_color',
 		)
 	);
@@ -157,6 +159,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$contentbg,
+			// 'transport'		=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_hex_color',
 		)
 	);
@@ -177,6 +180,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$footerbg,
+			// 'transport'		=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_hex_color',
 		)
 	);
@@ -195,5 +199,3 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 }
 
 }
-
-

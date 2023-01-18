@@ -43,6 +43,11 @@ function toongeeprime_theme_setup() {
 	$theStyles	=	new ToongeePrime_Styles();
 
 		/**
+		 *	@since ToongeePrime Theme Theme 1.0.50.00
+		 */
+		add_theme_support( 'customize-selective-refresh-widgets' );
+
+		/**
 		 *	Make theme available for translation
 		 *	Translations can be filed in the /languages/ directory
 		 */

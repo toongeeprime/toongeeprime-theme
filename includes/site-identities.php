@@ -10,7 +10,7 @@
 /**
  *	The Site Title or Logo display
  */
-function prime2g_title_or_logo( $before = '<div class="page_title prel title_tagline_logo site_width">', $after = '</div>' )
+function prime2g_title_or_logo( $before = '<div class="page_title prel title_tagline_logo site_width">', $after = '</div>', $darklogo = false )
 {
 	if ( ! display_header_text() ) return;
 
@@ -30,7 +30,7 @@ else {
 
 	if ( has_custom_logo() ) {
 
-		$show	.=	prime2g_siteLogo();
+		$show	.=	prime2g_siteLogo( $darklogo );
 
 	}
 	else {
@@ -70,7 +70,7 @@ function prime2g_get_placeholder_url() {
 
 
 /**
- *	Theme logo
+ *	Theme' logo
  *
  *	Determine Dark theme logo or default custom logo
  *
@@ -79,7 +79,13 @@ function prime2g_get_placeholder_url() {
  */
 function prime2g_siteLogo( $darklogo = false, $getSrc = false ) {
 
-	if ( ! $darklogo ) {
+	if ( $darklogo ) {
+		if ( get_theme_mod( 'prime2g_dark_theme_logo' ) )
+			$src = prime2g_get_dark_logo_url();
+		else
+			$src = prime2g_get_custom_logo_url();
+	}
+	else {
 		if ( get_theme_mod( 'prime2g_dark_theme_logo' ) &&
 			in_array( 'dark-background', ToongeePrime_Colors::theme_color_classes() )
 		) {
@@ -88,9 +94,6 @@ function prime2g_siteLogo( $darklogo = false, $getSrc = false ) {
 		else {
 			$src = prime2g_get_custom_logo_url();
 		}
-	}
-	else {
-		$src = prime2g_get_dark_logo_url();
 	}
 
 	if ( $getSrc ) return $src;
@@ -112,4 +115,3 @@ function prime2g_siteLogo( $darklogo = false, $getSrc = false ) {
 return $logo;
 
 }
-

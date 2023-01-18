@@ -26,17 +26,18 @@ return prime2g_theme_mod_social_and_contacts( $address );
 
 
 /**
- *	Get a Template Part
+ *	Insert a Template Part
+ *	@since ToongeePrime Theme 1.0.50.00
  */
-add_shortcode( 'prime2g_add_template_part', 'prime2g_add_template_part_shortcode' );
-function prime2g_add_template_part_shortcode( $atts ) {
-$atts	=	shortcode_atts( array( 'slug'	=>	'hello', 'section'	=>	'header' ), $atts );
+add_shortcode( 'prime_insert_template_part', 'prime2g_insert_template_part_shortcode' );
+function prime2g_insert_template_part_shortcode( $atts ) {
+$atts	=	shortcode_atts( array( 'id'	=>	'1' ), $atts );
 extract( $atts );
 
-$part	=	prime2g_add_template_part( $slug, $section, false );
+$part	=	prime2g_insert_template_part( $id, false );
 
 if ( ! $part ) {
-	return __( 'Requested Template Part Does Not Exist', PRIME2G_TEXTDOM );
+	return __( 'Invalid Template Part', PRIME2G_TEXTDOM );
 }
 
 return $part;

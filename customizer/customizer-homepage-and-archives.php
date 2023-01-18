@@ -11,15 +11,6 @@ if ( ! function_exists( 'prime2g_customizer_home_and_archives' ) ) {
 
 function prime2g_customizer_home_and_archives( $wp_customize ) {
 
-function prime2g_categs_array() {
-$categs	=	get_categories();
-$ids	=	array_column( $categs, 'term_id' );
-$names	=	array_column( $categs, 'name' );
-
-return array_combine( $ids, $names );
-}
-
-
 	/**
 	 *	POSTS HOME TITLE
 	 */
@@ -27,9 +18,9 @@ return array_combine( $ids, $names );
 	$wp_customize->add_setting(
 		'prime2g_posts_home_title',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
-			'default'			=>	$siteTitle,
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
+			'default'	=>	$siteTitle,
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -47,11 +38,13 @@ return array_combine( $ids, $names );
 		)
 	);
 
+
 	$wp_customize->add_setting(
 		'prime2g_posts_home_description',
 		array(
-			'type'				=>	'theme_mod',
-			'default'			=>	'Posts Homepage',
+			'type'		=>	'theme_mod',
+			'default'	=>	'Posts Homepage',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -73,12 +66,7 @@ return array_combine( $ids, $names );
 	/**
 	 *	HEADER STICKY POSTS
 	 */
-	$wp_customize->add_setting(
-		'prime2g_theme_show_stickies',
-		array(
-			'type'		=>	'theme_mod',
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_theme_show_stickies', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
 		'prime2g_theme_show_stickies',
 		array(
@@ -93,10 +81,12 @@ return array_combine( $ids, $names );
 		)
 	);
 
+
 	$wp_customize->add_setting(
 		'prime2g_theme_sticky_heading',
 		array(
-			'type'				=>	'theme_mod',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -109,7 +99,7 @@ return array_combine( $ids, $names );
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'Featured Posts',
 			),
-			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); },
+			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); }
 		)
 	);
 

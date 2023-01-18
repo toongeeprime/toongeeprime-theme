@@ -4,11 +4,13 @@
  *	VIEWPORT ENTRY OBSERVER FOR ANIMATIONS
  *
  *	@since ToongeePrime Theme 1.0.44.00
+ *	Added inAction class @since ToongeePrime Theme 1.0.50.00 for custom animations
  */
 
 /**
  *	Use Shortcode to add scripts
  */
+
 add_shortcode( 'prime2g_animation_script', 'prime2g_animations_observer_shortcode' );
 function prime2g_animations_observer_shortcode( $atts ) {
 $atts	=	shortcode_atts(
@@ -36,7 +38,8 @@ function prime2g_element_observerJS( $threshold = 0.25 ) { ?>
 let inUps	=	p2getAll( '.inUp' ),
 	inDwns	=	p2getAll( '.inDown' ),
 	inLfts	=	p2getAll( '.inLeft' ),
-	inRgts	=	p2getAll( '.inRight' );
+	inRgts	=	p2getAll( '.inRight' ),
+	inActs	=	p2getAll( '.inAction' );
 
 let observerOptions = {
 	root: null,
@@ -44,7 +47,7 @@ let observerOptions = {
 	threshold: <?php echo $threshold; ?>
 }
 
-let allAnimElems	=	[ inUps, inDwns, inLfts, inRgts ];
+let allAnimElems	=	[ inUps, inDwns, inLfts, inRgts, inActs ];
 
 run_prime_animations( allAnimElems );
 
@@ -94,7 +97,7 @@ function prime2g_element_observerJQ() {
 	$jq	.=	$threshold;
 	$jq	.=	'};
 
-	jqAllAnimElms	=	\'.inUp, .inDown, .inLeft, .inRight\';
+	jqAllAnimElms	=	\'.inUp, .inDown, .inLeft, .inRight, .inAction\';
 
 	const entries	=	Object.values( jQuery( jqAllAnimElms ).get() );
 	let jqEntryObserver	=	new IntersectionObserver( onIntersection, jqObserverOptions );

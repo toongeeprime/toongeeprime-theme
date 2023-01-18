@@ -15,9 +15,9 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_shop_page_title',
 		array(
-			'type'				=>	'theme_mod',
-			'default'			=>	'Shop Homepage',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'default'	=>	'Shop Homepage',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -35,13 +35,14 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 		)
 	);
 
+
 	$descr	=	prime2g_woo_shop_description();
 	$wp_customize->add_setting(
 		'prime2g_shop_page_description',
 		array(
-			'type'				=>	'theme_mod',
-			'default'			=>	__( $descr, PRIME2G_TEXTDOM ),
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'default'	=>	__( $descr, PRIME2G_TEXTDOM ),
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -55,7 +56,7 @@ function prime2g_customizer_woocommerce_edits( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	__( $descr, PRIME2G_TEXTDOM ),
 			),
-			'active_callback'	=>	'is_shop',
+			'active_callback'	=>	'is_shop'
 		)
 	);
 

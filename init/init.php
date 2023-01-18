@@ -4,7 +4,7 @@
  *	START THEME
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.49.00
+ *	File created @since ToongeePrime Theme 1.0.49.00
  */
 
 /**

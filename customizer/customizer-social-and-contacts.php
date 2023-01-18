@@ -13,13 +13,29 @@
 
 function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
-// Social Media Settings & Controls:
+	/**
+	 *	Selective refresh added @since ToongeePrime Theme Theme 1.0.50.00
+	 */
+	$wp_customize->selective_refresh->add_partial(
+		'prime2g_facebook_url',
+		array(
+			'selector'		=>	'#footerWrap .socials_contacts',
+			'settings'		=>	[ 'prime2g_facebook_url', 'prime2g_instagram_url',
+			'prime2g_twitter_url', 'prime2g_youtube_url', 'prime2g_linkedin_url',
+			'prime2g_tiktok_url', 'prime2g_telegram_url', 'prime2g_contact_email',
+			'prime2g_contact_phone', 'prime2g_whatsapp_number' ],
+			'container_inclusive'	=>	false,
+			'render_callback'		=>	'prime2g_theme_mod_social_and_contacts',
+			'fallback_refresh'		=>	true,
+		)
+	);
+
+	// Social Media Settings & Controls:
 	$wp_customize->add_setting(
 		'prime2g_facebook_url',
 		array(
-			'type'				=>	'theme_mod',
-			// 'default'			=>	$fb_url,
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -40,8 +56,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_instagram_url',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -62,8 +78,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_twitter_url',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -84,8 +100,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_youtube_url',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -102,11 +118,12 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 
+
 	$wp_customize->add_setting(
 		'prime2g_linkedin_url',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -123,11 +140,12 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 
+
 	$wp_customize->add_setting(
 		'prime2g_tiktok_url',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -144,11 +162,12 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 
+
 	$wp_customize->add_setting(
 		'prime2g_telegram_url',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -169,8 +188,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_contact_email',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_email',
 		)
 	);
@@ -191,8 +210,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_contact_address',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -214,8 +233,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_contact_phone',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -238,8 +257,8 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_whatsapp_number',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);

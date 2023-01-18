@@ -5,6 +5,7 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
+ *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49.00
  */
 
 

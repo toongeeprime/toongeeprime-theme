@@ -36,6 +36,7 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 		)
 	);
 
+
 	/**
 	 *	Header Image Attachment
 	 */
@@ -54,12 +55,13 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 			'settings'	=>	'prime2g_header_img_attachment',
 			'section'	=>	'header_image',
 			'choices'	=>	array(
-				''	=>	__( 'Scroll Header Image', PRIME2G_TEXTDOM ),
+				''		=>	__( 'Scroll Header Image', PRIME2G_TEXTDOM ),
 				'fixed'	=>	__( 'Fix Header Image', PRIME2G_TEXTDOM )
 			),
 			'active_callback'	=>	'has_header_image',
 		)
 	);
+
 
 	/**
 	 *	Header Image Background Size

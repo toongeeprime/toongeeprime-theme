@@ -42,3 +42,63 @@ $args	=	array(
 }
 
 
+
+
+/**
+ *	ADD PART TO TEMPLATE
+ *	@since ToongeePrime Theme 1.0.48.10
+ *	Deprecated @since ToongeePrime Theme 1.0.50.00
+ */
+function prime2g_add_template_part( $slug, $section, $echo = true ){
+$content	=	null;
+
+$args	=	array(
+	'post_type'		=>	'prime_template_part',
+	'pagename'		=>	$slug,
+	'posts_per_page'	=>	1,
+	'tax_query' => array(
+		array(
+			'taxonomy'	=>	'template_section',
+			'field'		=>	'slug',
+			'terms'		=>	$section,
+		),
+	),
+);
+
+$part	=	new WP_Query( $args );
+
+if ( $part->have_posts() ) {
+	$part->the_post();
+	if ( $echo ) {
+		$content	=	the_content();
+	}
+	else {
+		$content	=	get_the_content();
+	}
+}
+
+wp_reset_postdata();
+return $content;
+}
+
+
+/**
+ *	Get a Template Part
+ *	Deprecated @since ToongeePrime Theme 1.0.50.00
+ */
+add_shortcode( 'prime2g_add_template_part', 'prime2g_add_template_part_shortcode' );
+function prime2g_add_template_part_shortcode( $atts ) {
+$atts	=	shortcode_atts( array( 'slug'	=>	'hello', 'section'	=>	'header' ), $atts );
+extract( $atts );
+
+$part	=	prime2g_add_template_part( $slug, $section, false );
+
+if ( ! $part ) {
+	return __( 'Requested Template Part Does Not Exist', PRIME2G_TEXTDOM );
+}
+
+return $part;
+
+}
+
+

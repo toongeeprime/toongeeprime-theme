@@ -14,12 +14,7 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 	/**
 	 *	PAGE PRELOADER
 	 */
-	$wp_customize->add_setting(
-		'prime2g_use_page_preloader',
-		array(
-			'type'		=>	'theme_mod',
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_use_page_preloader', array( 'type' => 'theme_mod', ) );
 	$wp_customize->add_control(
 		'prime2g_use_page_preloader',
 		array(
@@ -41,12 +36,7 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 	 *	DARK THEME SWITCH
 	 *	@since ToongeePrime Theme 1.0.49.00
 	 */
-	$wp_customize->add_setting(
-		'prime2g_dark_theme_switch',
-		array(
-			'type'		=>	'theme_mod',
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_dark_theme_switch', array( 'type' => 'theme_mod', ) );
 	$wp_customize->add_control(
 		'prime2g_dark_theme_switch',
 		array(
@@ -62,8 +52,30 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 		)
 	);
 
-}
+
+	/**
+	 *	ADD "TEMPLATE PARTS" CUSTOM POST TYPE
+	 *	@since ToongeePrime Theme 1.0.50.00
+	 */
+	$wp_customize->add_setting(
+		'prime2g_cpt_template_parts',
+		array(
+			'type'		=>	'theme_mod',
+			'transport'		=>	'postMessage', # no refresh
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_cpt_template_parts',
+		array(
+			'label'		=>	__( 'Add Template Parts to Theme', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_cpt_template_parts',
+			'section'	=>	'prime2g_theme_extras_section',
+		)
+	);
+
 
 }
 
+}
 

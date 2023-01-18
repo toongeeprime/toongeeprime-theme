@@ -3,18 +3,36 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.0
 Tested up to: 6.1
-Stable tag: 1.0.49.05
+Stable tag: 1.0.50.00
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress theme with options for customization, design and development flexibility.
+A WordPress theme with options for customization, design and development flexibility
 
 
 == Description ==
 
 
 == Changelog ==
+
+= 1.0.50.00 =
+MAJOR UPDATE
+* @ includes: custom-post-types.php, custom-taxonomies.php & custom-admin-menu-actions.php
+* @ customizer: Adding of Custom Post Types in Theme Extras
+* Deprecated prime2g_add_template_part() & shortcode, in favour of new prime2g_insert_template_part() + shortcode
+* Removed ajaxing in Dark Theme Switching
+* Reworked prime2g_wp_query() & [prime2g_display_posts] to support caching
+* Added $text and $length args to prime2g_read_more_excerpt_link() and associated functions
+* Added $post arg to prime2g_archive_post_top_filter_part()
+* Created prime2g_get_archive_loop_post_object()
+* prime2g_categs_array() now prime2g_categs_and_ids_array() & moved to helpers.php from customizer-front-page.php
+* Added prime2g_posttypes_names_array()
+* Added News Reel feature and Customizer settings
+* Added prime2g_customizer_media_features()
+* Added admin_enqueue_scripts, customize_controls_enqueue_scripts & customize_preview_init
+* Added customizer.js & customizer-preview.js
+* add_theme_support( 'customize-selective-refresh-widgets' )
 
 = 1.0.49.05 =
 
@@ -215,6 +233,7 @@ Hooked to comment_form_defaults:
 * prime2g_before_header
 * prime2g_sub_header
 * prime2g_after_header
+* prime2g_before_title since 1.0.50.00
 * prime2g_after_title
 * prime2g_before_post
 * prime2g_after_post
@@ -223,36 +242,36 @@ Hooked to comment_form_defaults:
 * prime2g_site_base_strip
 
 Hooked to prime2g_after_header:
-	prime2g_breadcrumbs(), 7 priority
-	prime2g_show_sticky_posts()
-	prime2g_home_headlines(), 12 priority
+	prime2g_breadcrumbs, 7 priority
+	prime2g_show_sticky_posts
+	prime2g_home_headlines, 12 priority
 
 Hooked to prime2g_after_title:
-	prime2g_postmeta_top()
+	prime2g_postmeta_top
 
 Hooked to prime2g_before_post:
-	prime2g_pageCSS(), 2 priority
-	prime2g_edit_entry(), 5 priority
+	prime2g_pageCSS, 2 priority
+	prime2g_edit_entry, 5 priority
 
 Hooked to prime2g_after_post:
 	prime2g_postmeta_bottom, 5 priority
 	prime2g_prev_next_post, 7 priority
 	prime2g_add_jp_related_posts, 8 priority
 	prime2g_comments
-	prime2g_below_posts_widgets(), 20 priority
-	prime2g_pageJS(), 50 priority
+	prime2g_below_posts_widgets, 20 priority
+	prime2g_pageJS, 50 priority
 
 Hooked to prime2g_archive_post_top:
-	prime2g_archive_postmeta()
+	prime2g_archive_postmeta
 
 Hooked to prime2g_archive_post_footer:
-	prime2g_edit_entry(), 5 priority
-	prime2g_archive_postbase()
+	prime2g_edit_entry, 5 priority
+	prime2g_archive_postbase
 
 
 == WooCommerce ==
 Hooked to woocommerce_after_single_product_summary:
-	prime2g_product_in_view()
+	prime2g_product_in_view
 
 Removed:
 	woocommerce_breadcrumb

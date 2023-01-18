@@ -14,7 +14,7 @@
 if ( ! function_exists( 'prime2g_main_menu' ) ) {
 function prime2g_main_menu( $id = 'main_nav' ) {
 
-$incLogo	=	( ! empty( get_theme_mod( 'prime2g_logo_with_menu' ) ) );
+$incLogo	=	get_theme_mod( 'prime2g_logo_with_menu' );
 $theLogo	=	prime2g_siteLogo();
 
 ?>

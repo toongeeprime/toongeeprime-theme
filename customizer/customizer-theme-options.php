@@ -16,14 +16,10 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	/**
 	 *	Dark Theme Logo
 	 */
-	$logo_url = '';
-
 	$wp_customize->add_setting(
 		'prime2g_dark_theme_logo',
 		array(
-			'type'				=>	'theme_mod',
-			// 'default'		=>	$logo_url,
-			'transport'			=>	'refresh',
+			'type'			=>	'theme_mod',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -98,12 +94,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	/**
 	 *	STYLING ADJUSTMENTS
 	 */
-	$wp_customize->add_setting(
-		'prime2g_site_style_extras',
-		array(
-			'type'		=>	'theme_mod',
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_site_style_extras', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
 		'prime2g_site_style_extras',
 		array(
@@ -147,12 +138,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	/**
 	 *	Logo Beside Menu
 	 */
-	$wp_customize->add_setting(
-		'prime2g_logo_with_menu',
-		array(
-			'type'		=>	'theme_mod',
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_logo_with_menu', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
 		'prime2g_logo_with_menu',
 		array(
@@ -167,12 +153,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	/**
 	 *	BREADCRUMBS
 	 */
-	$wp_customize->add_setting(
-		'prime2g_theme_breadcrumbs',
-		array(
-			'type'		=>	'theme_mod',
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_theme_breadcrumbs', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
 		'prime2g_theme_breadcrumbs',
 		array(
@@ -190,9 +171,9 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_footer_credit_power',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
-			'default'			=>	'Powered by',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
+			'default'	=>	'Powered by',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -214,9 +195,9 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_footer_credit_name',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
-			'default'			=>	'ToongeePrime Theme',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
+			'default'	=>	'ToongeePrime Theme',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -238,9 +219,9 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_footer_credit_url',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
-			'default'			=>	'https://akawey.com/',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
+			'default'	=>	'https://akawey.com/',
 			'sanitize_callback'	=>	'esc_url',
 		)
 	);
@@ -265,8 +246,8 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_footer_credit_append',
 		array(
-			'type'				=>	'theme_mod',
-			'transport'			=>	'refresh',
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);

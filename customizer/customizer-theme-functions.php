@@ -88,21 +88,22 @@ $footerCred	=	'<div class="site_footer_credits">';
 
 	if ( $name ) {
 		if( $url && $name ) {
-			$footerCred	.=	'<span title="Site Credits">' . $power . ' <a href="' . $url . '"' . $attrs . '>' . $name . '</a> '. $cRight .'</span>';
+			$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span> <a href="' . $url . '"' . $attrs . '>' . $name . '</a> '. $cRight .'</span>';
 		}
 		elseif ( $name ) {
-			$footerCred	.=	'<span title="Site Credits">' . $power . ' ' . $name . $cRight .'</span>';
+			$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span> ' . $name . $cRight .'</span>';
 		}
 		else {
-			$footerCred	.=	'<span title="Site Credits">' . $power . $cRight .'</span>';
+			$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span>' . $cRight .'</span>';
 		}
 	}
 	else {
 		$footerCred	.=	'<span id="powered_by_credit" title="Site Credits">Powered by <a href="https://akawey.com/" title="ToongeePrime of Akàwey Online Enterprises" target="_blank" rel="noopener">ToongeePrime Theme</a>.' . $cRight . '</span>';
 	}
 
-	if ( '' !== $append )
-		$footerCred	.=	'<span id="appended_credit" title="Site Credits">' . $append . '</span>';
+	$footerCred	.=	'<span id="appended_credit" title="Site Credits">';
+	if ( '' !== $append ) { $footerCred	.=	$append; }
+	$footerCred	.=	'</span>';
 
 $footerCred	.=	'</div>';
 $footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padding-bottom:var(--min-pad);margin:0;">Designed and developed by <a href="https://akawey.com/" title="Visit Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</p>';

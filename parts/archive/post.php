@@ -9,7 +9,7 @@
 
 get_header();
 
-echo '<section id="archive_loop" class="grid">';
+echo '<section id="archive_loop" class="grid prel">';
 
 	// Load posts loop
 	while ( have_posts() ) {

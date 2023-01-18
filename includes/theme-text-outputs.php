@@ -179,8 +179,13 @@ $par2 = '</p>';
 
 if ( ! function_exists( 'prime2g_edit_entry_get' ) ) {
 
-function prime2g_edit_entry_get( $pre = '<p class="edit-link edit-entry">', $end = '</p>' ) {
-global $post;
+function prime2g_edit_entry_get( $pre = '<p class="edit-link edit-entry">', $end = '</p>', $postObject = null ) {
+
+$post	=	$postObject;
+
+if ( $postObject === null )
+	global $post;
+
 if ( ! is_object( $post ) ) return;
 
 if ( ! prime2g_is_post_author( $post ) ) return;
@@ -486,11 +491,11 @@ function prime2g_archive_description( $tag = 'p' ) {
  */
 if ( ! function_exists( 'prime2g_post_excerpt' ) ) {
 
-function prime2g_post_excerpt( $length = 25, $post = null ) {
+function prime2g_post_excerpt( $length = 25, $post = null, $readmore = '&hellip; Keep reading' ) {
 
 	$excerpt_length = apply_filters( 'excerpt_length', $length );
 
-	$text = wp_trim_words( get_the_excerpt( $post ), $excerpt_length, prime2g_read_more_excerpt_link() );
+	$text = wp_trim_words( get_the_excerpt( $post ), $excerpt_length, prime2g_read_more_excerpt_link( $readmore, $length ) );
 
 	$text = apply_filters( 'get_the_excerpt', $text );
 
@@ -523,13 +528,14 @@ return $readMore;
 
 /**
  *	Filter the excerpt more link
+ *	Added $text and $length @since ToongeePrime Theme 1.0.50.00
  */
 add_filter( 'excerpt_more', 'prime2g_read_more_excerpt_link' );
 if ( ! function_exists( 'prime2g_read_more_excerpt_link' ) ) {
 
-function prime2g_read_more_excerpt_link() {
-	if ( ! is_admin() ) {
-		return '&hellip; <a class="more-link" href="' . esc_url( get_permalink() ) . '" title="' . get_the_title() . '">' . prime2g_read_more_text( 'Keep reading' ) . '</a>';
+function prime2g_read_more_excerpt_link( $text = '&hellip; Keep reading', $length = 25 ) {
+	if ( ! is_admin() && $length != 0 ) {
+		return ' <a class="more-link" href="' . esc_url( get_permalink() ) . '" title="' . get_the_title() . '">' . __( $text, PRIME2G_TEXTDOM ) . '</a>';
 	}
 }
 
@@ -544,9 +550,9 @@ function prime2g_read_more_excerpt_link() {
 add_filter( 'the_content_more_link', 'prime2g_read_more_link' );
 if ( ! function_exists( 'prime2g_read_more_link' ) ) {
 
-function prime2g_read_more_link() {
+function prime2g_read_more_link( $text = 'Read more' ) {
 	if ( ! is_admin() ) {
-		return '<div class="more-link-container"><a class="more-link" href="' . esc_url( get_permalink() ) . '#more-' . esc_attr( get_the_ID() ) . '">' . prime2g_read_more_text() . '</a></div>';
+		return '<div class="more-link-container"><a class="more-link" href="' . esc_url( get_permalink() ) . '#more-' . esc_attr( get_the_ID() ) . '">' . prime2g_read_more_text( $text ) . '</a></div>';
 	}
 }
 
@@ -584,6 +590,10 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 
 	if ( $is_singular ) {
+
+		#	Theme Hook @since ToongeePrime Theme 1.0.50.00:
+		prime2g_before_title();
+
 		if ( is_front_page() ) { ?>
 		<h1 class="entry-title page-title title">
 	<?php _e( get_theme_mod( 'prime2g_front_page_title', 'Welcome to ' . get_bloginfo( 'name' ) ), PRIME2G_TEXTDOM ); ?>
@@ -600,7 +610,7 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 			}
 		}
 
-		# Theme Hook:
+		#	Theme Hook:
 		prime2g_after_title();
 	}
 	elseif ( is_home() ) { ?>

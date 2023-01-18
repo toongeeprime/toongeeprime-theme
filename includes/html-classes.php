@@ -23,6 +23,7 @@ return $classes;
 /**
  *	Body Classes
  */
+
 add_filter( 'body_class', 'prime2g_body_classes' );
 function prime2g_body_classes( $classes ) {
 
@@ -77,21 +78,28 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'has-background-image';
 	}
 
-	// Singular Entries & Archives
+	# Singular Entries & Archives
 	if ( is_singular() ) {
 
 		$classes[]	=	'singular';
 
-		// Default Header Removed
-		if ( post_custom( 'remove_header' ) == 'remove' ) {
-			$classes[]	=	'header_removed';
-		}
-
-		// Of entries with a featured image
+		# Has featured image?
 		if ( has_post_thumbnail() ) {
 			$classes[]	=	'has-thumbnail';
-		} else {
+		}
+		else {
 			$classes[]	=	'no-thumbnail';
+		}
+
+		# Page width
+		$page_width	=	post_custom( 'page_width' );
+		if ( $page_width ) {
+			$classes[]	=	$page_width;
+		}
+
+		# Default Header Removed
+		if ( post_custom( 'remove_header' ) == 'remove' ) {
+			$classes[]	=	'header_removed';
 		}
 
 	}

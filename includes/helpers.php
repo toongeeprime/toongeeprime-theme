@@ -112,3 +112,60 @@ return $url;
 
 
 
+/**
+ *	@package WordPress
+ *	@since ToongeePrime Theme Theme 1.0.50.00
+ */
+function prime2g_categs_and_ids_array() {
+$categsArray	=	wp_cache_get( 'prime2g_categs_array' );
+
+	if ( false !== $categsArray ) {
+		return $categsArray;
+	}
+	else {
+		$categs	=	get_categories();
+		$ids	=	array_column( $categs, 'term_id' );
+		$names	=	array_column( $categs, 'name' );
+
+		$categsArray	=	array_combine( $ids, $names );
+
+		wp_cache_set( 'prime2g_categs_array', $categsArray, '', PRIME2G_CACHE_EXPIRES );
+
+		return $categsArray;
+	}
+
+}
+
+
+
+/**
+ *	@package WordPress
+ *	@since ToongeePrime Theme Theme 1.0.50.00
+ */
+function prime2g_posttypes_names_array() {
+$posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
+
+	if ( false !== $posttypesArray ) {
+		return $posttypesArray;
+	}
+	else {
+
+		$args	=	array( 'public' => true );
+		$post_types	=	get_post_types( $args, 'objects' );
+		$slugs = $names = [];
+
+		foreach ( $post_types as $post_type ) {
+			if ( ! isset( $post_type ) ) continue;
+			$slugs[]	=	$post_type->name;
+			$names[]	=	$post_type->labels->name;
+		}
+
+		$posttypesArray	=	array_combine( $slugs, $names );
+
+		wp_cache_set( 'prime2g_posttypes_array', $posttypesArray, '', PRIME2G_CACHE_EXPIRES );
+
+		return $posttypesArray;
+	}
+
+}
+

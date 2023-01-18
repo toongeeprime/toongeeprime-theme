@@ -28,7 +28,7 @@ body{
 
 
 #jetpack_protect_answer{
-	width:50px;
+	min-width:100px;
 }
 
 

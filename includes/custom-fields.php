@@ -128,17 +128,45 @@ value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 }
 
 
-add_filter( 'body_class', 'akw_template_options_body_classes', 25 );
-function akw_template_options_body_classes( $classes ) {
-// Template vars
-$page_width	=	post_custom( 'page_width' );
 
-// Add Template Classes
-if( $page_width && is_singular() ) {
-	$classes[] = $page_width;
+
+
+
+/**
+ *	FOR THEME'S TEMPLATE PARTS
+ *	@since ToongeePrime Theme 1.0.50.00
+ */
+add_action( 'add_meta_boxes', 'prime2g_template_part_boxes' );
+function prime2g_template_part_boxes() {
+	add_meta_box(
+		'prime2g_fieldsbox_2',
+		__( 'Shortcode', PRIME2G_TEXTDOM ),
+		'prime2g_template_part_box',
+		'prime_template_parts',
+		'side',
+		'high'
+	);
 }
 
-return $classes;
+function prime2g_template_part_box( $post ) {
+if ( $post->post_status === 'publish' ) { ?>
+
+	<div class="meta-options">
+		<h3>Use this shortcode:</h3>
+		<p>[prime_insert_template_part id="<?php echo get_the_ID(); ?>"]</p>
+	</div>
+
+<?php
+}
+else { ?>
+
+	<div class="meta-options">
+		<h4>Publish this Part to get the shortcode</h4>
+	</div>
+
+<?php
+}
+
 }
 
 

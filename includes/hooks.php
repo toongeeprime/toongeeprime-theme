@@ -67,6 +67,20 @@ echo '</section>';
 
 
 /**
+ *	Is set Before Single entry Titles
+ *	@since ToongeePrime Theme 1.0.50.00
+ */
+function prime2g_before_title() {
+
+echo '<section id="prime2g_before_title">';
+	do_action( 'prime2g_before_title' );
+echo '</section>';
+
+}
+
+
+
+/**
  *	Is set After Single entry Titles
  */
 function prime2g_after_title() {
@@ -147,13 +161,14 @@ echo '</section>';
 /**
  *	Is set Before Archive post title
  *	@since ToongeePrime Theme 1.0.45.00
+ *	Added $post ToongeePrime Theme 1.0.50.00
  */
-function prime2g_archive_post_top_filter_part() {
+function prime2g_archive_post_top_filter_part( $post = null ) {
 
 $start	=	'';
 
 $div	=	'<section class="archive_post_top metas">';
-$div	.=	apply_filters( 'prime2g_archive_post_top_filter', $start );
+$div	.=	apply_filters( 'prime2g_archive_post_top_filter', $start, $post );
 $div	.=	'</section>';
 
 return $div;
@@ -184,12 +199,12 @@ return $div;
  *	FUNCTIONS HOOKED TO FILTERS
  *	Filters added and hooked @since ToongeePrime Theme 1.0.45.00
  */
-add_filter( 'prime2g_archive_post_top_filter', 'prime2g_archive_postmeta_hooked' );
+add_filter( 'prime2g_archive_post_top_filter', 'prime2g_archive_postmeta_hooked', 10, 2 );
 add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_edit_entry_get_hooked', 5, 1 );
 add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_archive_postbase_hooked', 10 );
 
-function prime2g_archive_postmeta_hooked( $text ) {
-	return $text . prime2g_archive_postmeta( null, false );
+function prime2g_archive_postmeta_hooked( $text, $post ) {
+	return $text . prime2g_archive_postmeta( $post, false );
 }
 
 function prime2g_edit_entry_get_hooked( $text ) {

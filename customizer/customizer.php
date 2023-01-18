@@ -8,6 +8,7 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
+
 /**
  * Register Theme Customizer Functions
  */
@@ -19,6 +20,7 @@ add_action( 'customize_register', 'prime2g_customizer_theme_styles' );
 add_action( 'customize_register', 'prime2g_customizer_home_and_archives' );
 add_action( 'customize_register', 'prime2g_customizer_front_page' );
 add_action( 'customize_register', 'prime2g_customizer_socialmedia_and_contacts' );
+add_action( 'customize_register', 'prime2g_customizer_media_features' );
 add_action( 'customize_register', 'prime2g_customizer_theme_extras' );
 add_action( 'customize_register', 'prime2g_customizer_wp_edits' );
 
@@ -60,4 +62,6 @@ $description	=	'<p>Customize ' . PRIME2G_THEMENAME . ' Options</p>';
 	);
 
 }
+
+
 

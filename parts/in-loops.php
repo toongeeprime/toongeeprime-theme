@@ -11,6 +11,7 @@
 /**
  *	Showing Sticky Posts
  */
+
 add_action( 'prime2g_after_header', 'prime2g_show_sticky_posts' );
 if ( ! function_exists( 'prime2g_show_sticky_posts' ) ) {
 function prime2g_show_sticky_posts() {
@@ -19,12 +20,12 @@ function prime2g_show_sticky_posts() {
 if ( 'show' == get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_category() ) ) {
 
 	// Get sticky posts
-	$stickies = get_posts( array( 'include' => get_option( 'sticky_posts' ) ) );
+	$stickies	=	get_posts( array( 'include' => get_option( 'sticky_posts' ) ) );
 
 	echo '<section id="stickies" class="stickies">';
 
 	// The Heading
-	echo '<h1 class="sticky_heading">' . get_theme_mod( 'prime2g_theme_sticky_heading' ) . '</h1>';
+	echo '<h1 class="sticky_heading">' . get_theme_mod( 'prime2g_theme_sticky_heading', 'Featured Posts' ) . '</h1>';
 
 		echo '<div class="grid prel">';
 
@@ -259,6 +260,106 @@ $entry	.=	'</article>';
 
 return $entry;
 
+}
+
+}
+
+
+
+
+/**
+ *	Archive Post Template by post object
+ *	@since ToongeePrime Theme 1.0.50.00
+ */
+if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
+
+function prime2g_get_archive_loop_post_object( array $args ) {
+
+$post	=	null;
+$size	=	'large';
+$excerpt=	true;
+$length	=	25;
+$metas	=	true;
+$footer	=	false;
+$tag	=	'h2';
+$readmore	=	'Read more';
+
+extract( $args );
+
+$title	=	$post->post_title;
+$link	=	get_permalink( $post );
+
+$entry	=	'<article id="entry-' . $post->ID . '" class="' . implode( ' ', get_post_class( '', $post ) ) . '">';
+$entry	.=	'<div class="entry_img">';
+$entry	.=	'<a href="' . $link . '" title="' . $title . '">';
+
+if ( has_post_thumbnail( $post ) ) {
+	$entry	.=	'<div class="thumbnail" style="background-image:url(';
+	$entry	.=	get_the_post_thumbnail_url( $post, $size );
+	$entry	.=	');"></div>';
+}
+else {
+	if ( child2g_has_placeholder() ) {
+		$entry	.=	'<div class="thumbnail" style="background-image:url(';
+		$entry	.=	child2g_placeholder_url( true );
+		$entry	.=	');"></div>';
+	}
+	else {
+		$entry	.=	'<div class="thumbnail">'. $title .'</div>';
+	}
+}
+
+$entry	.=	'</a>';
+$entry	.=	'</div>';
+$entry	.=	'<div class="entry_text">';
+
+if ( $metas )
+	$entry	.=	prime2g_archive_post_top_filter_part( $post );
+
+$entry	.=	'<a href="' . $link . '" title="Read this entry"><' . $tag . ' class="entry_title">' . $title . '</' . $tag . '></a>';
+
+if ( $excerpt && ! is_attachment( $post->ID ) )
+	$entry	.=	prime2g_post_excerpt( $length, $post, $readmore );
+
+if ( $footer )
+	$entry	.=	prime2g_archive_post_footer_filter_part();
+
+	$entry	.=	prime2g_edit_entry_get( '<p class="edit-link edit-entry">', '</p>', $post );
+
+$entry	.=	'</div>';
+$entry	.=	'</article>';
+
+return $entry;
+
+}
+
+}
+
+
+
+
+/**
+ *	Entry Titles-only Template
+ *	@since ToongeePrime Theme 1.0.50.00
+ */
+if ( ! function_exists( 'prime2g_entry_titles_template' ) ) {
+
+function prime2g_entry_titles_template( array $args ) {
+$post	=	null;
+$tag	=	'h3';
+$class	=	'entry';
+$class2	=	'entry_title';
+
+extract( $args );
+
+$title	=	$post->post_title;
+$link	=	get_permalink( $post );
+
+$div	=	'<div class="'. $class .'">
+<a href="'. $link .'" title="'. $title .'"><'. $tag .' class="'. $class2 .'">'. $title .'</'. $tag .'></a>
+</div>';
+
+return $div;
 }
 
 }

@@ -67,12 +67,12 @@ return $text;
  *	JetPack Infifite Scroll workings
  *	https://jetpack.com/support/infinite-scroll/
  */
-if ( prime2g_use_extras() ) {
 add_action( 'after_setup_theme', 'prime2g_set_jp_infiniteScroll', 11 );
-
 if ( ! function_exists( 'prime2g_set_jp_infiniteScroll' ) ) {
 
 function prime2g_set_jp_infiniteScroll() {
+if ( prime2g_use_extras() ) {
+
 add_theme_support(
 	'infinite-scroll',
 	array(
@@ -80,11 +80,9 @@ add_theme_support(
 		'wrapper'	=>	false,
 		'footer'	=>	false,
 		'render'	=>	'prime2g_infiniteScroll_render',
-		'posts_per_page'	=>	8,
+		'posts_per_page'	=>	prime2g_jp_infiniteScroll_count(),
 	)
 );
-}
-
 }
 
 function prime2g_infiniteScroll_render() {
@@ -95,6 +93,25 @@ if ( function_exists( 'is_shop' ) && is_woocommerce() ) return;
 	}
 }
 }
+
+}
+
+
+/**
+ *	@since ToongeePrime Theme Theme 1.0.50.00
+ */
+add_filter( 'infinite_scroll_settings', 'prime2g_infinite_scroll_settings' );
+function prime2g_infinite_scroll_settings( $args ) {
+if ( is_array( $args ) )
+	$args[ 'posts_per_page' ]	=	prime2g_jp_infiniteScroll_count();
+return $args;
+}
+
+
+if ( ! function_exists( 'prime2g_jp_infiniteScroll_count' ) ) {
+	function prime2g_jp_infiniteScroll_count() { return 8; }
+}
+
 
 
 

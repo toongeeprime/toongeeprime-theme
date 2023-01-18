@@ -1,27 +1,74 @@
 /**
  *	ToongeePrime Customizer JS
  *
+ *	https://developer.wordpress.org/themes/customize-api/the-customizer-javascript-api
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0
+ *	@since ToongeePrime Theme 1.0.50.00
  */
 
+( function( $, api ) {
+	'use strict';
 
-( function( $ ) {
+api( 'prime2g_theme_news_reel', function( value ) {
+value.bind( function( newval ) {
+	let nrPostType	=	$( '#customize-control-prime2g_theme_news_reel_post_type' ),
+		nrTitle		=	$( '#customize-control-prime2g_theme_news_reel_title' ),
+		nrCategory	=	$( '#customize-control-prime2g_theme_news_reel_category' ),
+		nrTaxonomy	=	$( '#customize-control-prime2g_theme_news_reel_taxonomy' ),
+		nrTaxTerm	=	$( '#customize-control-prime2g_theme_news_reel_tax_term_id' ),
+		nrCount		=	$( '#customize-control-prime2g_theme_news_reel_posts_count' ),
+		nrWidth		=	$( '#customize-control-prime2g_news_reel_width' );
+
+	nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 ); nrCategory.slideUp( 180 );
+
+	if ( newval ) {
+		nrPostType.slideDown( 180 ); nrTitle.slideDown( 180 );
+		nrCount.slideDown( 180 ); nrWidth.slideDown( 180 );
+	}
+	else {
+		nrPostType.slideUp( 180 ); nrTitle.slideUp( 180 );
+		nrCount.slideUp( 180 ); nrWidth.slideUp( 180 );
+		$( '#_customize-input-prime2g_theme_news_reel_post_type' ).val( 'non-existent' );
+	}
+} );
+} );
 
 
-	wp.customize( 'prime2g_content_background', function( value ) {
-		value.bind( function( newval ) {
-			$( '#contentWrap' ).css( 'background-color', newval );
-		} );
+api( 'prime2g_theme_news_reel_post_type', function( value ) {
+value.bind( function( newval ) {
+	let nrTaxonomy	=	$( '#customize-control-prime2g_theme_news_reel_taxonomy' ),
+		nrTaxTerm	=	$( '#customize-control-prime2g_theme_news_reel_tax_term_id' ),
+		nrCount		=	$( '#customize-control-prime2g_theme_news_reel_posts_count' ),
+		nrCategory	=	$( '#customize-control-prime2g_theme_news_reel_category' );
+
+	if ( newval == 'post' ) {
+		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 );
+		nrCategory.slideDown( 180 ); nrCount.slideDown( 180 );
+	}
+	else if ( newval == 'page' ) {
+		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 );
+		nrCategory.slideUp( 180 ); nrCount.slideDown( 180 );
+	}
+	else {
+		nrTaxonomy.slideDown( 180 ); nrTaxTerm.slideDown( 180 );
+		nrCategory.slideUp( 180 ); nrCount.slideDown( 180 );
+	}
+} );
+} );
+
+
+wp.customize.bind( 'ready', function() {
+wp.customize.previewer.bind( 'ready', function( message ) {
+
+	let nrTitleInput	=	$( "#_customize-input-prime2g_theme_news_reel_title" );
+	nrTitleInput.keyup( function() {
+		let new_val	=	nrTitleInput.val();
+		$( '#customize-preview iframe' ).contents().find( '#newsreelHeading' ).html( new_val );
 	} );
 
+} );
+} );
 
-	wp.customize( 'prime2g_posts_home_title', function( value ) {
-		value.bind( function( newval ) {
-			$( 'h1.entry-title' ).html( newval );
-		} );
-	} );
+} )( jQuery, wp.customize );
 
-
-} )( jQuery );
 
