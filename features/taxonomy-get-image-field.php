@@ -15,6 +15,7 @@ function prime2g_taxonomies_with_archive_image() {
 
 /**
  *	Get Term Image Url: in archive page
+ *	Use in archive page templates to reduce querying by this much
  */
 if ( ! function_exists( 'prime2g_get_term_archive_image_url' ) ) {
 function prime2g_get_term_archive_image_url( $size = 'large' ) {
@@ -23,9 +24,9 @@ function prime2g_get_term_archive_image_url( $size = 'large' ) {
 	$categ	=	get_category( get_query_var( 'cat' ) );
 	$termID	=	$categ->cat_ID;
  */
-if ( ! prime2g_use_extras() ) return;
+if ( ! prime2g_use_extras() ) return null;
 
-	$termID	=	get_queried_object_id();
+	$termID		=	get_queried_object_id();
 	$image_id	=	get_term_meta( $termID, 'thumbnail_id', true );
 	return wp_get_attachment_image_url( $image_id, $size );
 }
@@ -37,10 +38,11 @@ if ( ! prime2g_use_extras() ) return;
  */
 if ( ! function_exists( 'prime2g_get_term_image_url' ) ) {
 function prime2g_get_term_image_url( $termID, $size = 'large' ) {
-if ( ! prime2g_use_extras() ) return;
+if ( ! prime2g_use_extras() ) return null;
 
 	$image_id	=	get_term_meta( $termID, 'thumbnail_id', true );
 	return wp_get_attachment_image_url( $image_id, $size );
 }
 }
+
 

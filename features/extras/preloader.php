@@ -8,7 +8,7 @@
  *	@since ToongeePrime Theme 1.0.48.00
  */
 
-add_action( 'wp_body_open', 'prime2g_page_preloader' );
+add_action( 'template_redirect', 'prime2g_page_preloader' );
 if ( ! function_exists( 'prime2g_page_preloader' ) ) {
 
 function prime2g_page_preloader() {

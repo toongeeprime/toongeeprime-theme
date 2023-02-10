@@ -54,3 +54,21 @@ function prime2g_stop_wp_heartbeat() {
 }
 
 
+
+/**
+ *	DISABLE WP AUTOP
+ *	@since ToongeePrime Theme 1.0.51.00
+ */
+add_filter( 'the_content', 'prime2g_disable_wpautop', 0 );
+function prime2g_disable_wpautop( $content ) {
+global $post;
+
+	if ( $post->disable_autop === 'disable' ) {
+		remove_filter( 'the_content', 'wpautop' );
+		remove_filter( 'the_excerpt', 'wpautop' );
+	}
+
+return $content;
+}
+
+

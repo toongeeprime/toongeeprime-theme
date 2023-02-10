@@ -37,9 +37,11 @@ background:var(--content-text);color:var(--content-background);display:grid;bord
 <script id="prime2g_darkTheme_js">
 let dtBody		=	p2getEl( "body" ),
 	llogoUrl	=	"'. prime2g_get_custom_logo_url() .'",
-	dlogoUrl	=	"'. prime2g_siteLogo( true, true ) .'",
+	darklogoUrl	=	"'. prime2g_siteLogo( true, true ) .'",
 	locDLogoUrl	=	"' . $domain . '" + "_DTLogoUrl",
 	locDTState	=	"' . $domain . '" + "_DarkTheme";
+
+dlogoUrl	=	darklogoUrl ? darklogoUrl : llogoUrl;
 
 function prime2gDarkThemeMedia() {
 let	isDarkTheme		=	window.matchMedia( "( prefers-color-scheme: dark )" ).matches,

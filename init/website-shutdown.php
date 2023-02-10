@@ -7,11 +7,11 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-add_action( 'init', 'prime2g_close_down_website' );
+add_action( 'wp_loaded', 'prime2g_close_down_website' );
+
 function prime2g_close_down_website() {
 
 $shutDown	=	get_theme_mod( 'prime2g_website_shutdown' );
-
 if ( empty( $shutDown ) ) return;
 
 	// Return conditions

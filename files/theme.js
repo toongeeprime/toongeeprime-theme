@@ -147,3 +147,23 @@ function prime2g_get_sibling( get, elem, sibClass = '' ) {
 }
 
 
+/**
+ *	Detect Mobile or TouchScreen Devices
+ *	@since ToongeePrime Theme 1.0.51.00
+ */
+function prime2g_isMobile() { return ( 'ontouchstart' in document.documentElement ); }
+
+function prime2g_isTouchDevice() {
+	try { document.createEvent( "TouchEvent" ); return true; }
+	catch(e) { return false; }
+}
+
+function prime2g_screenIsSmaller( screenSize = 481 ) {
+
+let windowWidth = window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth;
+return ( windowWidth < screenSize );
+
+}
+
+
+

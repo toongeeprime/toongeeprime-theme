@@ -39,6 +39,7 @@ if ( $useCache ) {
 	}
 	else {
 		$loop	=	new WP_Query( $args );
+		wp_reset_postdata();
 		wp_cache_set( $cacheName, $loop, '', PRIME2G_CACHE_EXPIRES );
 	}
 
@@ -46,6 +47,7 @@ if ( $useCache ) {
 else {
 
 	$loop	=	new WP_Query( $args );
+	wp_reset_postdata();
 	if ( $cacheIt ) wp_cache_set( $cacheName, $loop, '', PRIME2G_CACHE_EXPIRES );
 
 }
@@ -55,6 +57,7 @@ if ( $get === 'count' ) return $loop->found_posts;
 
 return $loop; # $get == null
 }
+
 
 
 

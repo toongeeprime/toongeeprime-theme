@@ -687,7 +687,10 @@ figcaption{
 	transform:translateX(-50px); opacity:0;
 }
 .enter{
-	transform:translate(0)!important; transition:0.5s; transition-delay:0.2s;
+	transition:0.5s; transition-delay:0.2s;
+}
+#page .enter{
+	transform:translate(0);
 }
 
 
@@ -725,7 +728,7 @@ i.bi{
 	min-height:150px;
 }
 .site_main .searchform div{
-	display:grid; grid-template-columns:3fr 1fr; align-items:center;
+	display:grid; grid-template-columns:3fr 1fr;
 }
 .stickies .grid{
 	grid-template-columns:repeat(4, 1fr);

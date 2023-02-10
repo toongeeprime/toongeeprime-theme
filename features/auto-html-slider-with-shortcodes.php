@@ -24,10 +24,7 @@
  */
 
 
-add_shortcode( 'prime2g_slider_css', 'prime2g_auto_html_slider_frame_css_shortcode' );
-function prime2g_auto_html_slider_frame_css_shortcode() {
-add_action( 'wp_footer', 'prime2g_auto_html_slider_frame_css' );
-}
+add_shortcode( 'prime2g_slider_css', 'prime2g_auto_html_slider_frame_css' );
 
 function prime2g_auto_html_slider_frame_css() { ?>
 <style id="prime2g_html_sliderCSS">

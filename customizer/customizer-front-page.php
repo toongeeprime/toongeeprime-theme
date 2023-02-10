@@ -34,6 +34,7 @@ function prime2g_customizer_front_page( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	__( 'Welcome to ' . $siteTitle, PRIME2G_TEXTDOM ),
 			),
+			'active_callback'	=>	function() { return ( is_front_page() && ! is_home() ); },
 		)
 	);
 

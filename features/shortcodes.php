@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	MINI THEME FEATURES
+ *	SHORTCODES
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.49.00
@@ -44,4 +44,41 @@ return $part;
 
 }
 
+
+
+/**
+ *	In-post Redirection
+ *	@since ToongeePrime Theme 1.0.51.00
+ */
+add_shortcode( 'prime_redirect_to', 'prime2g_redirect_shortcode' );
+function prime2g_redirect_shortcode( $atts ) {
+$home		=	get_home_url();
+$loggedin	=	is_user_logged_in();
+
+$atts	=	shortcode_atts(
+	array(
+	'url'	=>	$home,
+	'users'	=>	'',
+	), $atts
+);
+extract( $atts );
+
+// Leave echo, not return:
+if ( $users == 'logged out' ) {
+	if ( ! $loggedin ) {
+		echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
+	}
+}
+
+if ( $users == 'logged in' ) {
+	if ( $loggedin ) {
+		echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
+	}
+}
+
+if ( $users == '' ) {
+	echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
+}
+
+}
 

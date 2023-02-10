@@ -8,6 +8,7 @@
  *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49.00
  */
 
+require_once 'website-shutdown.php';
 
 /**
  *	GET 'PHP' FILES THROUGH DIRECTORIES ARRAY

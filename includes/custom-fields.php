@@ -61,6 +61,7 @@ function prime2g_save_metas_1( $post_id ) {
 		'remove_sidebar',
 		'remove_header',
 		'page_width',
+		'disable_autop',
 	];
 	foreach( $fields as $field ) {
 		if ( array_key_exists( $field, $_POST ) ) {
@@ -83,6 +84,9 @@ function toongeeprime_cFields_callback( $post ) { ?>
 		.prime2g_field{display:contents;}
 		.prime2g_box label{font-weight:bold;}
 		.hide{display:none;}
+		.checkboxes{display:flex;gap:5px;}
+		.checkboxes label{font-weight:normal;margin-top:-6px;}
+		.hr{border-bottom:1px solid;margin:15px 0;display:block;}
 	</style>
 
 <?php if ( prime2g_exclude_post_types() ) { ?>
@@ -120,6 +124,17 @@ value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 		<select id="remove_header" class="prime2g_options" name="remove_header">
 			<option>--- Keep Header ---</option>
 			<option value="remove" <?php if ( $post->remove_header == 'remove' ) echo 'selected'; ?>>Remove Header</option>
+		</select>
+	</div>
+
+
+<hr class="hr" />
+
+	<div class="meta-options prime2g_field">
+		<label for="disable_autop">Content Auto P (Advanced)</label>
+		<select id="disable_autop" class="prime2g_options" name="disable_autop">
+			<option>--- Leave Active ---</option>
+			<option value="disable" <?php if ( $post->disable_autop == 'disable' ) echo 'selected'; ?>>Disable</option>
 		</select>
 	</div>
 
@@ -168,5 +183,3 @@ else { ?>
 }
 
 }
-
-

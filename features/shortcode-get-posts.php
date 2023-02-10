@@ -104,8 +104,6 @@ if ( $cache_it || $use_cache ) {
 		}
 	}
 
-	wp_reset_postdata();
-
 	}
 	else {
 		if ( current_user_can( 'edit_posts' ) )
@@ -127,8 +125,6 @@ else {
 
 	}
 
-	wp_reset_postdata();
-
 	}
 	else {
 		if ( current_user_can( 'edit_posts' ) )
@@ -142,5 +138,4 @@ $template	.=	'</div>';
 return $template;
 
 }
-
 
