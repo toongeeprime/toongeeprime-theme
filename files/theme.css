@@ -190,13 +190,19 @@ code{
 	box-shadow:0 0 12px rgba(0,0,0,0.25);
 }
 .slimscrollbar{
-	overflow-y:auto;
+	overflow:hidden; overflow-y:auto;
+}
+.scrollX{
+	overflow:hidden; overflow-x:auto;
 }
 .slimscrollbar::-webkit-scrollbar{
-	width:12px; background:silver;
+	width:10px; height:5px; background:silver;
 }
 .slimscrollbar::-webkit-scrollbar-thumb{
 	background:var(--content-text); border-radius:10px;
+}
+.slimscrollbar::-webkit-scrollbar:hover{
+	background:#909090;
 }
 .slimscrollbar::-webkit-scrollbar-thumb:hover{
 	background:steelblue;
