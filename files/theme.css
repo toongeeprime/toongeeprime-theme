@@ -69,8 +69,6 @@ body, html{
 	padding:var(--med-pad) 0;
 }
 
-
-
 /********* Standard Elements *********/
 article{
 	height:max-content; position:relative;
@@ -149,7 +147,6 @@ code{
 	background-color:#eee; border:1px solid #999; display:block;
 	padding:var(--min-pad); color:#000;
 }
-
 
 /********* Theme Classes *********/
 .site_width{
@@ -231,8 +228,9 @@ code{
 .brandcolor2{
 	color:var(--brand-color-2);
 }
-
-
+.acaps{
+	text-transform:uppercase;
+}
 
 /********* Theme Styling Proper *********/
 body{
@@ -252,7 +250,6 @@ h1, h2, h3{
 	min-height:0; padding:0;
 }
 
-
 /********* Texts *********/
 a{
 	text-decoration:none; color:var(--content-text);
@@ -266,7 +263,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 #page .logo_link, #page .logo_link:hover, #page .logo_link:focus{
 	border:0; background:none;
 }
-
 
 /********* Parts *********/
 /* Header */
@@ -332,7 +328,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 #prime2g_toTop p:hover{
 	color:var(--content-background); background:var(--content-text);
 }
-
 
 /* Main Menu */
 .main_menu_wrap{
@@ -402,7 +397,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 	opacity:0; transform:scale(0);
 }
 
-
 /* Footer Menu */
 .footer-navigation ul{
 	text-align:center; padding:0;
@@ -410,7 +404,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 .footer-navigation li{
 	list-style:none; display:inline-block; margin:5px 10px;
 }
-
 
 /* Sidebars */
 .sidebars{
@@ -435,7 +428,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 .right li{
 	border-bottom:1px solid #ddd; padding:10px 0;
 }
-
 
 /********* POSTS *********/
 .prev_next{
@@ -513,7 +505,6 @@ a.comment-reply-link:hover{
 	display:block;width:max-content;
 }
 
-
 /********* ARCHIVES *********/
 #archive_loop{
 	height:max-content;
@@ -562,7 +553,6 @@ a.comment-reply-link:hover{
 	display:inline-block;
 }
 
-
 /* 404 */
 .nothing_found_info{
 	text-align:center;
@@ -573,7 +563,6 @@ a.comment-reply-link:hover{
 .nothing_found_div p, .nothing_found_div #searchform{
 	padding:var(--min-pad) 1rem;
 }
-
 
 /* SEARCH */
 .search.grid .thumbnail{
@@ -593,7 +582,6 @@ a.comment-reply-link:hover{
 	max-width:600px; margin:auto;
 }
 
-
 /********* IN COMMON *********/
 .singular .title_in_header .site_content, .the_post_taxonomies, .footer_topWidgets{
 	padding-top:var(--min-pad);
@@ -604,7 +592,6 @@ a.comment-reply-link:hover{
 .show, .enter{
 	visibility:visible!important; opacity:1!important;
 }
-
 
 /******** WP Galleries ********/
 .gallery-columns-1, .gallery-columns-2, .gallery-columns-3, .gallery-columns-4, .gallery-columns-5,
@@ -629,7 +616,6 @@ a.comment-reply-link:hover{
 }
 .gallery-icon img{ margin:0 auto; }
 .gallery-caption{}
-
 
 /********** WP **********/
 #wpadminbar{
@@ -678,7 +664,6 @@ figcaption{
 	color:var(--content-text);
 }
 
-
 /* Simple Animations */
 .inUp{
 	transform:translateY(50px); opacity:0;
@@ -699,12 +684,10 @@ figcaption{
 	transform:translate(0);
 }
 
-
 /* Bootstrap Icons */
 i.bi{
 	font-size:1rem; cursor:pointer;
 }
-
 
 /**************************
 	RESPONSIVE STYLING
@@ -777,7 +760,6 @@ i.bi{
 .grid4{
 	grid-template-columns:repeat(4, 1fr);
 }
-
 
 /* MAIN MENU */
 .main_menu_wrap, .collapsible-navs .sub-menu{
@@ -933,7 +915,6 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 
 }
 
-
 /* ANIMATIONS */
 @keyframes prime_spin {
 from{
@@ -943,4 +924,3 @@ to{
 	transform:rotate(360deg);
 }
 }
-
