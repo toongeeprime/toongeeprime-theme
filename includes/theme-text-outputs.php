@@ -7,7 +7,6 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-
 /**
  *	Link Pages
  *	Not hooked because this needs to be just after post content before any other inserted features
@@ -66,13 +65,20 @@ if ( is_singular() ) {
 			$crumbs		.=	prime2g_shopCrumb();
 		}
 		else {
-			$taxon_1	=	( $postTaxs[0] == 'post_tag' ) ? $postTaxs[1] : $postTaxs[0];
+			if ( $postTaxs[1] == 'post_format' ) {
+				$taxon_1	=	$postTaxs[2];
+			}
+			elseif ( $postTaxs[0] == 'post_tag' ) {
+				$taxon_1	=	$postTaxs[1];
+			}
+			else {
+				$taxon_1	=	$postTaxs[0];
+			}
 		}
 
 		$taxonomy	=	get_taxonomy( $taxon_1 );
 		if ( ! is_object( $taxonomy ) ) return;
 		$taxName	=	$taxonomy->labels->singular_name;
-
 		$term		=	wp_get_post_terms( get_the_ID(), $taxon_1 )[0];
 		$termurl	=	get_term_link( $term->term_id, $term->taxonomy );
 		$termAncs	=	get_ancestors( $term->term_id, $term->taxonomy );
@@ -103,6 +109,9 @@ if ( is_singular() ) {
 if ( is_archive() || is_tax() ) {
 
 	$object		=	get_queried_object();
+
+	if ( ! $object instanceof WP_Term ) return;
+
 	$termAncs	=	$object ? get_ancestors( $object->term_id, $object->taxonomy ) : null;
 	$taxonomy	=	$object ? get_taxonomy( $object->taxonomy ) : null;
 
@@ -652,6 +661,3 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
-
-
-

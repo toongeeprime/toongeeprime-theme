@@ -8,8 +8,8 @@
 
 if ( ! function_exists( 'prime2g_taxonomies_with_archive_image' ) ) {
 function prime2g_taxonomies_with_archive_image() {
-		return [ 'post_tag', 'category' ];
-	}
+	return [ 'post_tag', 'category' ];
+}
 }
 
 

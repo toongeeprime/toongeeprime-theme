@@ -181,7 +181,7 @@ code{
 	display:none!important;
 }
 .hidden{
-	opacity:0; visibility:hidden;
+	opacity:0; visibility:hidden; z-index:0;
 }
 .oshadow{
 	box-shadow:0 0 12px rgba(0,0,0,0.25);

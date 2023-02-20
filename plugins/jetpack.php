@@ -11,11 +11,11 @@
 if ( class_exists( 'Jetpack' ) ) :
 
 /**
- *	Have 6 JetPack related posts
+ *	Set JetPack related posts count
  */
 add_filter( 'jetpack_relatedposts_filter_options', 'prime2g_moreJP_related_posts' );
 function prime2g_moreJP_related_posts( $options ) {
-	$options[ 'size' ]	=	6;
+	$options[ 'size' ]	=	prime2g_jp_infiniteScroll_count();
 	return $options;
 }
 

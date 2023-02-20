@@ -75,17 +75,10 @@ else {
 
 #	Send contents to footer:
 add_shortcode( 'prime_send_to_footer', 'prime2g_send_content_to_footer' );
-
-function prime2g_send_to_footer( $contents ) {
-	add_action( 'wp_footer', function() use( $contents ) { echo $contents; } );
-}
-
-
 function prime2g_send_content_to_footer( $atts, $content, $tag ) {
 
 $contents	=	do_shortcode( $content );
 
-prime2g_send_to_footer( $contents );
-
+add_action( 'wp_footer', function() use( $contents ) { echo $contents; } );
 }
 

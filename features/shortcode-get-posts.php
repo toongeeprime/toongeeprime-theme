@@ -98,7 +98,11 @@ if ( $cache_it || $use_cache ) {
 			$template	.=	'';
 		}
 		else {
-			$postArgs	=	[ 'post' => $loop[ $p ], 'length' => $words, 'readmore' => $read_more ];
+			$postArgs	=	[
+				'post'	=>	$loop[ $p ],
+				'length'	=>	$words,
+				'readmore'	=>	$read_more,
+			];
 			$template	.=	( $looptemplate ) ? $looptemplate() :
 				prime2g_get_archive_loop_post_object( $postArgs );
 		}
