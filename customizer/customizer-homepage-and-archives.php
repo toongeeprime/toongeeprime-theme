@@ -103,6 +103,43 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 		)
 	);
 
+	/**
+	 *	STICKY POSTS' POST TYPE & COUNT
+	 *	@since ToongeePrime Theme 1.0.51
+	 */
+	$wp_customize->add_setting( 'prime2g_theme_stickies_post_type', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_control(
+		'prime2g_theme_stickies_post_type',
+		array(
+			'label'		=>	__( 'Stickies\' Post Type', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_theme_stickies_post_type',
+			'section'	=>	'prime2g_theme_archives_section',
+			'choices'	=>	prime2g_posttypes_names_array(),
+		)
+	);
+
+	$wp_customize->add_setting(
+	'prime2g_theme_stickies_count', array( 'type' => 'theme_mod','default'	=>	'4' )
+	);
+	$wp_customize->add_control(
+		'prime2g_theme_stickies_count',
+		array(
+			'label'		=>	__( 'How many Stickies?', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_theme_stickies_count',
+			'section'	=>	'prime2g_theme_archives_section',
+			'choices'	=>	[
+				'2'	=>	'2',
+				'3'	=>	'3',
+				'4'	=>	'4',
+				'6'	=>	'6',
+				'8'	=>	'8',
+				'9'	=>	'9'
+			],
+		)
+	);
+
 }
 
 }

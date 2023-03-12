@@ -24,11 +24,17 @@ function prime2g_get_term_archive_image_url( $size = 'large' ) {
 	$categ	=	get_category( get_query_var( 'cat' ) );
 	$termID	=	$categ->cat_ID;
  */
-if ( ! prime2g_use_extras() ) return null;
+if ( ! prime2g_use_extras() ) {
+	return get_header_image();
+}
 
 	$termID		=	get_queried_object_id();
 	$image_id	=	get_term_meta( $termID, 'thumbnail_id', true );
-	return wp_get_attachment_image_url( $image_id, $size );
+	$imageUrl	=	wp_get_attachment_image_url( $image_id, $size );
+	if ( $imageUrl )
+		return $imageUrl;
+	else
+		return get_header_image();
 }
 }
 
@@ -38,11 +44,16 @@ if ( ! prime2g_use_extras() ) return null;
  */
 if ( ! function_exists( 'prime2g_get_term_image_url' ) ) {
 function prime2g_get_term_image_url( $termID, $size = 'large' ) {
-if ( ! prime2g_use_extras() ) return null;
+if ( ! prime2g_use_extras() ) {
+	return get_header_image();
+}
 
 	$image_id	=	get_term_meta( $termID, 'thumbnail_id', true );
-	return wp_get_attachment_image_url( $image_id, $size );
+	$imageUrl	=	wp_get_attachment_image_url( $image_id, $size );
+	if ( $imageUrl )
+		return $imageUrl;
+	else
+		return get_header_image();
 }
 }
-
 

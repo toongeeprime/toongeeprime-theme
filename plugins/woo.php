@@ -31,8 +31,7 @@ function prime2g_get_woo_mini_cart() {
  */
 add_filter( 'woocommerce_add_to_cart_fragments', 'prime2g_add_to_cart_fragments', 10, 1 );
 function prime2g_add_to_cart_fragments( $fragments ) {
-	global $woocommerce;
-	$count = $woocommerce->cart->cart_contents_count;
+	$count	=	WC()->cart->get_cart_contents_count();
 	ob_start();
 
 	#	div and function to use in theme **preferably wrapped: ?>

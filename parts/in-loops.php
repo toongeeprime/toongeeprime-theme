@@ -7,36 +7,49 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-
 /**
  *	Showing Sticky Posts
+ *	Reworked @since ToongeePrime Theme 1.0.51
  */
 
 add_action( 'prime2g_after_header', 'prime2g_show_sticky_posts' );
 if ( ! function_exists( 'prime2g_show_sticky_posts' ) ) {
 function prime2g_show_sticky_posts() {
 
-// if sticky posts are to be shown
+# if sticky posts are to be shown
 if ( 'show' == get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_category() ) ) {
 
-	// Get sticky posts
-	$stickies	=	get_posts( array( 'include' => get_option( 'sticky_posts' ) ) );
+	# Get sticky posts
+	$posttype	=	get_theme_mod( 'prime2g_theme_stickies_post_type', 'post' );
+	$count		=	get_theme_mod( 'prime2g_theme_stickies_count', '4' );
+
+	$args	=	array(
+		'post_type'			=>	$posttype,
+		'posts_per_page'	=>	$count,
+		'post__in'			=>	get_option( 'sticky_posts' ),
+		'ignore_sticky_posts'	=>	1,
+	);
+	$stickies	=	new WP_Query( $args );
+	$posts		=	$stickies->posts;
+
+	if ( $stickies->have_posts() ) {
+	$numClass	=	( in_array( $count, [ '3', '6', '9' ] ) ) ? ' by3' : '';
 
 	echo '<section id="stickies" class="stickies">';
 
-	// The Heading
+	# The Heading
 	echo '<h1 class="sticky_heading">' . get_theme_mod( 'prime2g_theme_sticky_heading', 'Featured Posts' ) . '</h1>';
 
-		echo '<div class="grid prel">';
+		echo '<div class="grid prel'. $numClass .'">';
 
-		// Show only 4 posts
-		for( $count=0; $count <= 3; $count++ ) {
-			if ( array_key_exists( $count, $stickies ) )
-				prime2g_post_object_template( $stickies[$count], 'medium' );
-		}
+			foreach ( $posts as $post ) {
+				prime2g_post_object_template( $post, 'medium' );
+			}
 
 		echo '</div>';
 	echo '</section>';
+
+	}
 
 }
 
@@ -283,13 +296,14 @@ $metas	=	true;
 $footer	=	false;
 $tag	=	'h2';
 $readmore	=	'Read more';
+$entryClasses	=	'';
 
 extract( $args );
 
 $title	=	$post->post_title;
 $link	=	get_permalink( $post );
 
-$entry	=	'<article id="entry-' . $post->ID . '" class="' . implode( ' ', get_post_class( '', $post ) ) . '">';
+$entry	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( '', $post ) ) . '">';
 $entry	.=	'<div class="entry_img">';
 $entry	.=	'<a href="' . $link . '" title="' . $title . '">';
 

@@ -597,11 +597,11 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <div class="page_title site_width prel<?php echo $header_classes . $hClass; ?>">
 
 <?php
+	#	Theme Hook @since ToongeePrime Theme 1.0.50.00:
+	#	Moved outside $is_singular 1.0.51.00:
+	prime2g_before_title();
 
 	if ( $is_singular ) {
-
-		#	Theme Hook @since ToongeePrime Theme 1.0.50.00:
-		prime2g_before_title();
 
 		if ( is_front_page() ) { ?>
 		<h1 class="entry-title page-title title">

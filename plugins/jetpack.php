@@ -15,7 +15,7 @@ if ( class_exists( 'Jetpack' ) ) :
  */
 add_filter( 'jetpack_relatedposts_filter_options', 'prime2g_moreJP_related_posts' );
 function prime2g_moreJP_related_posts( $options ) {
-	$options[ 'size' ]	=	prime2g_jp_infiniteScroll_count();
+	$options[ 'size' ]	=	prime2g_jp_relatedposts_count();
 	return $options;
 }
 
@@ -110,6 +110,13 @@ return $args;
 
 if ( ! function_exists( 'prime2g_jp_infiniteScroll_count' ) ) {
 	function prime2g_jp_infiniteScroll_count() { return 8; }
+}
+
+/**
+ *	@since ToongeePrime Theme Theme 1.0.51
+ */
+if ( ! function_exists( 'prime2g_jp_relatedPosts_count' ) ) {
+	function prime2g_jp_relatedPosts_count() { return 6; }
 }
 
 
