@@ -1,9 +1,9 @@
 Plugin Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
-Requires at least: 6.0
+Requires at least: 6.1
 Tested up to: 6.1
-Stable tag: 1.0.50.90
+Stable tag: 1.0.51.00
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,12 +16,14 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
-= 1.0.50.90 ==> 1.0.51.00 =
+= 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()
 * Feature: multi-html-slider-with-shortcodes.php
 * Extras: multi-frame-posts-slider.php
 * WP: prime2g_disable_wpautop() with custom field
 * Shortcode: [prime_redirect_to], [prime_show_content_to]
+* Reworked prime2g_show_sticky_posts()
+* wp_title() removed from header
 
 = 1.0.50.00 =
 MAJOR UPDATE
@@ -282,5 +284,4 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
-
 
