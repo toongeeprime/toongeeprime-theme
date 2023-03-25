@@ -1,7 +1,7 @@
 Plugin Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
-Requires at least: 6.1
+Requires at least: 6.0
 Tested up to: 6.1
 Stable tag: 1.0.51.00
 Requires PHP: 7.4

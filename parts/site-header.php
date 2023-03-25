@@ -21,6 +21,9 @@ if ( $hasHeader ) {
 	if ( $isSingular && has_post_thumbnail() && ( '' == get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
 		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
 	}
+	elseif ( is_category() || is_tag() || is_tax() ) {
+		$headerUrl	=	prime2g_get_term_archive_image_url( 'full' );
+	}
 	else {
 		$headerUrl	=	get_header_image();
 	}

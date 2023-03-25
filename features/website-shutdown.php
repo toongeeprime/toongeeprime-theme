@@ -39,7 +39,7 @@ wp_head();
 
 echo '
 <style id="coming-soon-style">
-body{place-content:center;text-align:center;min-height:100vh;padding:var(--min-pad);
+body{display:grid;place-content:center;text-align:center;min-height:100vh;padding:var(--min-pad);
 background-size:cover;background-position:center;background-image:url('. get_background_image() .');}
 </style>
 </head>';
@@ -48,7 +48,7 @@ background-size:cover;background-position:center;background-image:url('. get_bac
 	if ( current_user_can( 'edit_theme_options' ) && empty( get_background_image() ) )
 		echo '<p style="position:fixed;top:0;left:0;">* You can add a background image in Customizer</p>';
 
-	echo '<body class="coming_soon grid">';
+	echo '<body class="coming_soon">';
 
 	prime2g_close_down_template( $shutDown );
 

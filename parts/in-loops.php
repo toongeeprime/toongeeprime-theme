@@ -17,7 +17,7 @@ if ( ! function_exists( 'prime2g_show_sticky_posts' ) ) {
 function prime2g_show_sticky_posts() {
 
 # if sticky posts are to be shown
-if ( 'show' == get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_category() ) ) {
+if ( 'show' == get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_category() || is_tag() || is_tax() ) ) {
 
 	# Get sticky posts
 	$posttype	=	get_theme_mod( 'prime2g_theme_stickies_post_type', 'post' );

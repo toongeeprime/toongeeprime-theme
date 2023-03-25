@@ -13,8 +13,9 @@ function prime2g_customizer_site_settings( $wp_customize ) {
 
 	/**
 	 *	SHUT DOWN WEBSITE
+	 *	Setting 'type' changed to 'option' @ 1.0.52.00
 	 */
-	$wp_customize->add_setting( 'prime2g_website_shutdown', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting( 'prime2g_website_shutdown', array( 'type' => 'option' ) );
 	$wp_customize->add_control(
 		'prime2g_website_shutdown',
 		array(
