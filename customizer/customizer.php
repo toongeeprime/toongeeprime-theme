@@ -17,12 +17,13 @@ add_action( 'customize_register', 'prime2g_customizer_sections' );
 add_action( 'customize_register', 'prime2g_customizer_site_settings' );
 add_action( 'customize_register', 'prime2g_customizer_theme_options' );
 add_action( 'customize_register', 'prime2g_customizer_theme_styles' );
+add_action( 'customize_register', 'prime2g_customizer_theme_fonts' );
 add_action( 'customize_register', 'prime2g_customizer_home_and_archives' );
 add_action( 'customize_register', 'prime2g_customizer_front_page' );
 add_action( 'customize_register', 'prime2g_customizer_socialmedia_and_contacts' );
 add_action( 'customize_register', 'prime2g_customizer_media_features' );
 add_action( 'customize_register', 'prime2g_customizer_theme_extras' );
-add_action( 'customize_register', 'prime2g_customizer_wp_edits' );
+add_action( 'customize_register', 'prime2g_customizer_wp_header_image' );
 
 if ( class_exists( 'woocommerce' ) ) {
 	add_action( 'customize_register', 'prime2g_customizer_woocommerce_edits' );

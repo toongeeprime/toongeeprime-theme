@@ -35,9 +35,9 @@ function prime2g_load_fonts_and_icons() {
 	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font', $theStyles->bodyFont );
 	$headings	=	get_theme_mod( 'prime2g_site_headings_font', $theStyles->headFont );
 	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800\">";
-	// echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
 
-    wp_enqueue_style( 'bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css' );
+	# echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
+	wp_enqueue_style( 'bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css' );
 
 }
 
@@ -56,14 +56,14 @@ return array(
 		'Arimo'		=>	'Arimo',
 		'Barlow'	=>	'Barlow',
 		'Barlow+Condensed'	=>	'Barlow Condensed',
-		'Bebas+Neue'		=>	'Bebas Neue',
-		'Bellefair'		=>	'Bellefair',
+		'Bebas+Neue'=>	'Bebas Neue',
+		'Bellefair'	=>	'Bellefair',
 		'Cabin'		=>	'Cabin',
 		'Cantarell'	=>	'Cantarell',
 		'Cantata+One'	=>	'Cantata One',
-		'Carter+One'	=>	'Carter One',
+		'Carter+One'=>	'Carter One',
 		'Caveat'	=>	'Caveat',
-		'Charm'	=>	'Charm',
+		'Charm'		=>	'Charm',
 		'Cherry+Swash'	=>	'Cherry Swash',
 		'Comfortaa'	=>	'Comfortaa',
 		'Comforter+Brush'	=>	'Comforter Brush',
@@ -72,8 +72,10 @@ return array(
 		'Cormorant+Infant'	=>	'Cormorant Infant',
 		'Crimson+Text'	=>	'Crimson Text',
 		'Dancing+Script'		=>	'Dancing Script',
-		'Delius'		=>	'Delius',
+		'Delius'	=>	'Delius',
+		'DM+Sans'	=>	'DM Sans',
 		'Dosis'		=>	'Dosis',
+		'Fahkwang'	=>	'Fahkwang',
 		'Fredoka'	=>	'Fredoka',
 		'Fuzzy+Bubbles'	=>	'Fuzzy Bubbles',
 		'Habibi'	=>	'Habibi',
@@ -87,13 +89,15 @@ return array(
 		'Khula'		=>	'Khula',
 		'Krub'		=>	'Krub',
 		'Lato'		=>	'Lato',
-		'Lexend+Exa'	=>	'Lexend Exa',
+		'Lexend+Exa'=>	'Lexend Exa',
 		'Lora'		=>	'Lora',
 		'Luckiest+Guy'	=>	'Luckiest Guy',
-		'Lustria'		=>	'Lustria',
+		'Lustria'	=>	'Lustria',
 		'Mada'		=>	'Mada',
-		'Montserrat'	=>	'Montserrat',
-		// 'Mulish'	=>	'Mulish',
+		'Marcellus'	=>	'Marcellus',
+		'Merriweather'	=>	'Merriweather',
+		'Montserrat'=>	'Montserrat',
+		'Mulish'	=>	'Mulish',
 		'Nanum+Myeongjo'	=>	'Nanum Myeongjo',
 		'Noto+Sans'	=>	'Noto Sans',
 		'Noto+Sans+Display'	=>	'Noto Sans Display',
@@ -106,8 +110,9 @@ return array(
 		'Oxygen'	=>	'Oxygen',
 		'Playfair+Display'	=>	'Playfair Display',
 		'Poppins'	=>	'Poppins',
-		'Poiret+One'	=>	'Poiret One',
+		'Poiret+One'=>	'Poiret One',
 		'PT+Mono'	=>	'PT Mono',
+		'PT+Sans'	=>	'PT Sans',
 		'Quicksand'	=>	'Quicksand',
 		'Quintessential'	=>	'Quintessential',
 		'Qwigley'	=>	'Qwigley',
@@ -117,17 +122,21 @@ return array(
 		'Roboto'	=>	'Roboto',
 		'Roboto+Mono'	=>	'Roboto Mono',
 		'Rochester'	=>	'Rochester',
-		'Rubik+Dirt'	=>	'Rubik Dirt',
-		'Rubik+Maze'	=>	'Rubik Maze',
-		'Sofia'	=>	'Sofia',
+		'Rubik+Dirt'=>	'Rubik Dirt',
+		'Rubik+Maze'=>	'Rubik Maze',
+		'Sofia'		=>	'Sofia',
 		'Source+Code+Pro'	=>	'Source Code Pro',
+		'Source+Sans+Pro'	=>	'Source Sans Pro',
 		'Source+Serif+4'	=>	'Source Serif 4',
 		'Source+Serif+Pro'	=>	'Source Serif Pro',
 		'Spartan'	=>	'Spartan',
+		'Syne'		=>	'Syne',
 		'Tajawal'	=>	'Tajawal',
 		'Trirong'	=>	'Trirong',
 		'Ubuntu'	=>	'Ubuntu',
 		'Work+Sans'	=>	'Work Sans',
+		'Yeseva+One'=>	'Yeseva One',
+		'Zen+Dots'	=>	'Zen Dots',
 	);
 
 }

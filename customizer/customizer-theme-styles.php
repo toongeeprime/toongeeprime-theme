@@ -15,7 +15,7 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 
 
 	/**
-	 *	THEME DEFAULT STYLE VALUES:
+	 *	DEFAULT STYLE VALUES:
 	 */
 	$brandClr	=	$theStyles->brandClr;
 	$brandClr2	=	$theStyles->brandClr2;
@@ -23,51 +23,6 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 	$headerbg	=	$theStyles->headerBG;
 	$contentbg	=	$theStyles->contentBG;
 	$footerbg	=	$theStyles->footerBG;
-	$bodyFont	=	$theStyles->bodyFont;
-	$headFont	=	$theStyles->headFont;
-
-	/**
-	 *	FONTS
-	 */
-	$themeFonts	=	prime2g_theme_fonts();
-
-	$wp_customize->add_setting(
-		'prime2g_site_headings_font',
-		array(
-			'type'		=>	'theme_mod',
-			'default'	=>	$headFont,
-		)
-	);
-	$wp_customize->add_control(
-		'prime2g_site_headings_font',
-		array(
-			'label'		=>	__( 'Font for Site\'s Text Headings', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_site_headings_font',
-			'section'	=>	'prime2g_theme_styles_section',
-			'choices'	=>	$themeFonts,
-		)
-	);
-
-
-	$wp_customize->add_setting(
-		'prime2g_site_body_font',
-		array(
-			'type'		=>	'theme_mod',
-			'default'	=>	$bodyFont,
-		)
-	);
-	$wp_customize->add_control(
-		'prime2g_site_body_font',
-		array(
-			'label'		=>	__( 'Font for Site\'s Body', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_site_body_font',
-			'section'	=>	'prime2g_theme_styles_section',
-			'choices'	=>	$themeFonts,
-		)
-	);
-
 
 	/**
 	 *	COLOURS
@@ -138,7 +93,6 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$headerbg,
-			// 'transport'		=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_hex_color',
 		)
 	);
@@ -159,7 +113,6 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$contentbg,
-			// 'transport'		=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_hex_color',
 		)
 	);
@@ -180,7 +133,6 @@ function prime2g_customizer_theme_styles( $wp_customize ) {
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$footerbg,
-			// 'transport'		=>	'postMessage',
 			'sanitize_callback'	=>	'sanitize_hex_color',
 		)
 	);

@@ -7,9 +7,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-if ( ! function_exists( 'prime2g_customizer_wp_edits' ) ) {
+if ( ! function_exists( 'prime2g_customizer_wp_header_image' ) ) {
 
-function prime2g_customizer_wp_edits( $wp_customize ) {
+function prime2g_customizer_wp_header_image( $wp_customize ) {
 
 	/**
 	 *	Replace Header Image with Post Thumbnail
@@ -44,7 +44,8 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 		'prime2g_header_img_attachment',
 		array(
 			'type'		=>	'theme_mod',
-			'default'	=>	'',
+			'transport'	=>	'postMessage',
+			'default'	=>	'scroll',
 		)
 	);
 	$wp_customize->add_control(
@@ -55,7 +56,7 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 			'settings'	=>	'prime2g_header_img_attachment',
 			'section'	=>	'header_image',
 			'choices'	=>	array(
-				''		=>	__( 'Scroll Header Image', PRIME2G_TEXTDOM ),
+				'scroll'		=>	__( 'Scroll Header Image', PRIME2G_TEXTDOM ),
 				'fixed'	=>	__( 'Fix Header Image', PRIME2G_TEXTDOM )
 			),
 			'active_callback'	=>	'has_header_image',
@@ -70,6 +71,7 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 		'prime2g_header_background_size',
 		array(
 			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
 			'default'	=>	'',
 		)
 	);
@@ -86,6 +88,33 @@ function prime2g_customizer_wp_edits( $wp_customize ) {
 				'initial'	=>	__( 'Initial Image Size', PRIME2G_TEXTDOM )
 			),
 			'active_callback'	=>	'has_header_image',
+		)
+	);
+
+
+	/**
+	 *	Header Height
+	 *	@since ToongeePrime Theme 1.55.00
+	 */
+	$wp_customize->add_setting(
+		'prime2g_theme_header_height',
+		array(
+			'type'		=>	'theme_mod',
+			'transport'	=>	'postMessage',
+			'default'	=>	'10',
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_theme_header_height',
+		array(
+			'label'		=>	__( 'Header Height (VH)', PRIME2G_TEXTDOM ),
+			'type'		=>	'number',
+			'settings'	=>	'prime2g_theme_header_height',
+			'section'	=>	'header_image',
+			'input_attrs'	=>	array(
+				'min'		=>	'10',
+				'max'		=>	'100',
+			),
 		)
 	);
 

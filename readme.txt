@@ -1,8 +1,8 @@
 Plugin Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
-Requires at least: 6.0
-Tested up to: 6.1
+Requires at least: 6.1
+Tested up to: 6.2
 Stable tag: 1.0.51.00
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -15,6 +15,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.55.00 -- in progress =
+* 85 Google Fonts
+* @ customizer: Theme Fonts Section.
+* @ customizer: Alt Fonts Fallbacks.
+* @ customizer: Header Height Controls, added render-site-header-part.php
 
 = 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()

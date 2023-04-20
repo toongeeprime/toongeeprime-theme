@@ -8,7 +8,6 @@ jQuery( document ).ready( function( $ ) {
 
 /*if ( 'undefined' === typeof wp || ! wp.customize || ! wp.customize.selectiveRefresh ) return;*/
 
-
 	wp.customize( 'prime2g_header_background', function( value ) {
 		value.bind( function( newval ) { $( '#header' ).css( 'background-color', newval ); } );
 	} );
@@ -54,6 +53,23 @@ jQuery( document ).ready( function( $ ) {
 	} );
 	wp.customize( 'prime2g_contact_address', function( value ) {
 		value.bind( function( newval ) { $( '#footerWrap .socials_contacts .address' ).html( '<i class="bi bi-building"></i>'+newval ); } );
+	} );
+
+	/* @since ToongeePrime Theme 1.0.55.00 */
+	wp.customize( 'prime2g_header_img_attachment', function( value ) {
+		value.bind( function( newval ) { $( '#header.site_header' ).css( 'background-attachment', newval ); } );
+	} );
+	wp.customize( 'prime2g_header_background_size', function( value ) {
+		value.bind( function( newval ) { $( '#header.site_header' ).css( 'background-size', newval ); } );
+	} );
+	wp.customize( 'prime2g_theme_header_height', function( value ) {
+		value.bind( function( newval ) { $( '#header.site_header' ).css( 'min-height', newval+'vh' ); } );
+	} );
+	wp.customize( 'prime2g_post_title_font_size', function( value ) {
+		value.bind( function( newval ) { $( '.singular .entry-title' ).css( 'font-size', newval+'rem' ); } );
+	} );
+	wp.customize( 'prime2g_archive_title_font_size', function( value ) {
+		value.bind( function( newval ) { $( 'body:not(.singular) .entry-title' ).css( 'font-size', newval+'rem' ); } );
 	} );
 
 } );

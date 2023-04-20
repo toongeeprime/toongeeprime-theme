@@ -23,7 +23,10 @@ class ToongeePrime_Styles {
 	public $footerBG	=	'#030303';
 	public $siteWidth	=	'1100px';
 	public $bodyFont	=	'Open+Sans';
+	public $bodyAltFont	=	'Arial, Helvetica, sans-serif';
 	public $headFont	=	'Oxygen';
+	public $headingsAltFont	=	'Times New Roman, Times, serif';
+	public $headHeight		=	'10';
 
 
 	/**
@@ -38,13 +41,18 @@ class ToongeePrime_Styles {
 			case 'width' : $mod = get_theme_mod( 'prime2g_site_width', $this->siteWidth ); break;
 			case 'background' : $mod = get_theme_mod( 'prime2g_background_color', $this->siteBG ); break;
 			case 'header' : $mod = get_theme_mod( 'prime2g_header_background', $this->headerBG ); break;
+			case 'h_height' : $mod = get_theme_mod( 'prime2g_theme_header_height' ); break;		# No default for backwards compat
 			case 'content' : $mod = get_theme_mod( 'prime2g_content_background', $this->contentBG ); break;
 			case 'footer' : $mod = get_theme_mod( 'prime2g_footer_background', $this->footerBG ); break;
 			case 'bodyF' : $mod = get_theme_mod( 'prime2g_site_body_font', $this->bodyFont ); break;
+			case 'b_AltFont' : $mod = get_theme_mod( 'prime2g_body_fallback_fonts', $this->bodyAltFont ); break;
 			case 'headF' : $mod = get_theme_mod( 'prime2g_site_headings_font', $this->headFont ); break;
+			case 'h_AltFont' : $mod = get_theme_mod( 'prime2g_headings_fallback_fonts', $this->headingsAltFont ); break;
 			case 'headerattach' : $mod = get_theme_mod( 'prime2g_header_img_attachment', 'scroll' ); break;
 			case 'headerimgsize' : $mod = get_theme_mod( 'prime2g_header_background_size', 'cover' ); break;
 			case 'darktheme' : $mod = get_theme_mod( 'prime2g_dark_theme_switch' ); break;
+			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size' ); break;
+			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size' ); break;
 
 		}
 		return $mod;
@@ -102,8 +110,8 @@ class ToongeePrime_Styles {
 	--header-background:". $this->get_mod( 'header' ) .";
 	--content-background:". $this->get_mod( 'content' ) .";
 	--footer-background:". $this->get_mod( 'footer' ) .";
-	--body-font:'". str_replace( "+", " ", $this->get_mod( 'bodyF' ) ) ."';
-	--headings-font:'". str_replace( "+", " ", $this->get_mod( 'headF' ) ) ."';
+	--body-font:'". str_replace( "+", " ", $this->get_mod( 'bodyF' ) ) ."', ". $this->get_mod( 'b_AltFont' ) .";
+	--headings-font:'". str_replace( "+", " ", $this->get_mod( 'headF' ) ) ."', ". $this->get_mod( 'h_AltFont' ) .";
 	";
 
 	}
@@ -116,8 +124,14 @@ class ToongeePrime_Styles {
 
 	$bgSize	=	$this->get_mod( 'headerimgsize' );
 	$bgSize	=	( '' == $bgSize ) ? 'cover' : $bgSize;
+	$hHeight	=	$this->get_mod( 'h_height' );
+	$hHeight	=	( '' == $hHeight ) ? '' : $hHeight . 'vh';
 
-	return "#header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:". $bgSize .";}";
+	return "
+	#header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:". $bgSize .";min-height:". $hHeight .";}
+	.singular .entry-title{font-size:". $this->get_mod( 'post_titleSize' ) ."rem;}
+	body:not(.singular) .entry-title{font-size:". $this->get_mod( 'arch_titleSize' ) ."rem;}
+	";
 
 	}
 

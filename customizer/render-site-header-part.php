@@ -1,16 +1,17 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	SITE HEADER
+ *	RENDER SITE HEADER (*FOR CUSTOMIZER)
  *
- *	@package WordPress
- *	@since ToongeePrime Theme 1.0
- *	Added div.title_wrap @since ToongeePrime Theme 1.55.00
+ *	@since ToongeePrime Theme 1.55.00
  */
+
+if ( ! function_exists( 'prime2g_render_header' ) ) {
+
+function prime2g_render_header() {
 
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
 $hasHeader		=	has_header_image();
-$menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
 $pid			=	get_the_ID();
 $isSingular		=	is_singular();
 $keepHeader		=	( post_custom( 'remove_header' ) !== 'remove' );
@@ -32,12 +33,7 @@ if ( $hasHeader ) {
 $headerBackground	=	'style="background-image:url(' . $headerUrl . ');"';
 }
 
-
-	prime2g_before_header();
-
-	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
-
-if ( ! $isSingular || $isSingular && $keepHeader ) :
+if ( ! $isSingular || $isSingular && $keepHeader ) {
 
 ?>
 
@@ -64,13 +60,10 @@ if ( ! $isSingular || $isSingular && $keepHeader ) :
 
 <?php
 
-endif;
+}
 
-	if ( 'bottom' == $menuPlace ) prime2g_main_menu();
+}
 
-	if ( $keepHeader ) {
-		prime2g_sub_header();
-		prime2g_after_header();
-	}
+}
 
 

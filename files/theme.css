@@ -235,10 +235,10 @@ code{
 /********* Theme Styling Proper *********/
 body{
 	display:block; background-color:var(--body-background); color:var(--body-text);
-	font-family:var(--body-font), 'Arial', sans-serif;
+	font-family:var(--body-font);
 }
 h1, h2, h3{
-	font-family:var(--headings-font), 'Arial', sans-serif;
+	font-family:var(--headings-font);
 }
 .site_content, .contentWrap .page_title, .footer_topWidgets, #prime2g_after_header{
 	background-color:var(--content-background); color:var(--content-text);
@@ -268,12 +268,10 @@ a:hover, a:focus, table a:hover, table a:focus{
 /* Header */
 #header{
 	background-color:var(--header-background); color:var(--header-text); padding:var(--min-pad);
+	display:grid; align-items:center;
 }
 #header a{
 	color:var(--header-text);
-}
-.has-header-image #header{
-	min-height:40vh; display:grid; align-items:center;
 }
 .page_title{
 	padding:var(--med-pad) var(--min-pad); text-align:center;

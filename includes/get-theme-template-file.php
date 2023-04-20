@@ -1,15 +1,13 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	HELPER FUNCTIONS
+ *	DETERMINE TEMPLATE FILE TO RUN
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *	Separated from helpers.php @includes: @since ToongeePrime Theme 1.0.47.00
  *
  **
- *	Determine Template File To Run
- *
  *	This function is so that there doesn't have to be a long list of template files
  *	in the theme's root directory as per WP template hierarchy.
  *	Any unattended templates can use WP defaults, eg: author, 404, etc.

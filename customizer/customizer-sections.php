@@ -34,6 +34,20 @@ function prime2g_customizer_sections( $wp_customize ) {
 		)
 	);
 
+	/**
+	 *	Theme Fonts
+	 *	@since ToongeePrime Theme 1.0.55.00
+	 */
+	$wp_customize->add_section(
+		'prime2g_theme_fonts_section',
+		array(
+			'title'		=>	__( 'Theme Fonts', PRIME2G_TEXTDOM ),
+			'panel'		=>	'prime2g_customizer_panel',
+			'description'	=>	__( 'Theme Fonts Settings', PRIME2G_TEXTDOM ),
+			'capability'	=>	'edit_theme_options',
+		)
+	);
+
 	$wp_customize->add_section(
 		'prime2g_theme_frontpage_section',
 		array(
@@ -66,7 +80,6 @@ function prime2g_customizer_sections( $wp_customize ) {
 		)
 	);
 
-
 	/**
 	 *	Media Features
 	 *	@since ToongeePrime Theme 1.0.50.00
@@ -80,7 +93,6 @@ function prime2g_customizer_sections( $wp_customize ) {
 			'capability'	=>	'edit_theme_options',
 		)
 	);
-
 
 	/**
 	 *	Theme Extras
@@ -97,7 +109,6 @@ function prime2g_customizer_sections( $wp_customize ) {
 		)
 	);
 
-
 if ( class_exists( 'woocommerce' ) ) {
 	$wp_customize->add_section(
 		'prime2g_woocommerce_edits_section',
@@ -109,7 +120,6 @@ if ( class_exists( 'woocommerce' ) ) {
 		)
 	);
 }
-
 
 	/**
 	 *	Site Settings
