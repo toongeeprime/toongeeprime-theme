@@ -21,3 +21,4 @@ define( 'PRIME2G_THEMENAME', wp_get_theme()->get( 'Name' ) );
 
 
 define( 'PRIME2G_CACHE_EXPIRES', 30 * MINUTE_IN_SECONDS );
+define( 'PRIME2G_POSTSCACHE', 'prime2g_posts_cache' ); #	@since version 1.0.55.00

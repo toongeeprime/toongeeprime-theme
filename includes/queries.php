@@ -32,7 +32,7 @@ if ( is_array( $options ) ) {
 
 if ( $useCache ) {
 
-	$cached	=	wp_cache_get( $cacheName );
+	$cached	=	wp_cache_get( $cacheName, PRIME2G_POSTSCACHE );
 
 	if ( false !== $cached ) {
 		$loop	=	$cached;
@@ -40,7 +40,7 @@ if ( $useCache ) {
 	else {
 		$loop	=	new WP_Query( $args );
 		wp_reset_postdata();
-		wp_cache_set( $cacheName, $loop, '', PRIME2G_CACHE_EXPIRES );
+		wp_cache_set( $cacheName, $loop, PRIME2G_POSTSCACHE, PRIME2G_CACHE_EXPIRES );
 	}
 
 }
@@ -48,7 +48,7 @@ else {
 
 	$loop	=	new WP_Query( $args );
 	wp_reset_postdata();
-	if ( $cacheIt ) wp_cache_set( $cacheName, $loop, '', PRIME2G_CACHE_EXPIRES );
+	if ( $cacheIt ) wp_cache_set( $cacheName, $loop, PRIME2G_POSTSCACHE, PRIME2G_CACHE_EXPIRES );
 
 }
 

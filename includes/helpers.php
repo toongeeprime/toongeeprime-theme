@@ -22,8 +22,8 @@ function prime2g_removeSidebar() {
  *	@since ToongeePrime Theme 1.0.46.00
  */
 function prime2g_verify_nonce( $nonceField = 'prime_ajaxnonce' ) {
-	if ( ! isset( $_REQUEST[ $nonceField ] ) || ! wp_verify_nonce( $_POST[ $nonceField ] ) ) {
-		wp_die( 'Security Fail!' );
+	if ( ! isset( $_REQUEST[ '_prime-nonce' ] ) || ! wp_verify_nonce( $_POST[ '_prime-nonce' ], $nonceField ) ) {
+		$msg = akawey_message( 'security_fail', 'warning' ); wp_die( $msg );
 	}
 }
 
@@ -113,7 +113,6 @@ return $url;
 
 
 /**
- *	@package WordPress
  *	@since ToongeePrime Theme Theme 1.0.50.00
  */
 function prime2g_categs_and_ids_array() {
@@ -139,8 +138,7 @@ $categsArray	=	wp_cache_get( 'prime2g_categs_array' );
 
 
 /**
- *	@package WordPress
- *	@since ToongeePrime Theme Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50.00
  */
 function prime2g_posttypes_names_array() {
 $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
@@ -166,6 +164,27 @@ $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
 
 		return $posttypesArray;
 	}
+
+}
+
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.55.00
+ */
+function prime2g_get_postsdata_array( array $get, array $args, array $options ) {
+
+$index	=	$value	=	'';	# $get
+extract( $get );
+
+$getPosts	=	prime2g_wp_query( $args, $options );
+
+foreach ( $getPosts as $post ) {
+	$indexes[]	=	$post->$index;
+	$values[]	=	$post->$value;
+}
+
+return array_combine( $indexes, $values );
 
 }
 

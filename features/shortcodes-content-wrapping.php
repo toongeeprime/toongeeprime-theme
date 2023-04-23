@@ -61,7 +61,7 @@ if ( $hasID ) return $output;
 
 
 elseif ( ! empty( $capability ) ) {
-	if ( current_user_can( $capability ) ) return $output;
+	if ( user_can( $current_user, $capability ) ) return $output;
 }
 
 
@@ -72,13 +72,25 @@ else {
 }
 
 
+/**
+ *	ADD IN-POST CONTENT TO THEME PARTS
+ *	@since ToongeePrime Theme 1.0.55.00
+ */
+add_shortcode( 'prime_add_to_theme', 'prime2g_add_content_to_theme' );
+function prime2g_add_content_to_theme( $atts, $content, $tag ) {
 
-#	Send contents to footer:
-add_shortcode( 'prime_send_to_footer', 'prime2g_send_content_to_footer' );
-function prime2g_send_content_to_footer( $atts, $content, $tag ) {
+$atts	=	shortcode_atts( array( 'place' => 'after post', 'priority' => '10' ), $atts );
+extract( $atts );
 
-$contents	=	do_shortcode( $content );
+$output	=	do_shortcode( $content );
 
-add_action( 'wp_footer', function() use( $contents ) { echo $contents; } );
+#	Add by theme/WP hooks
+#	Currently working hooks:
+$hook	=	$place;
+if ( $place == 'after post' ) $hook	=	'prime2g_after_post';
+if ( $place == 'base' ) $hook	=	'prime2g_site_base_strip';
+if ( $place == 'footer' ) $hook	=	'wp_footer';
+
+add_action( $hook, function() use( $output ) { echo $output; }, (int) $priority );
 }
 

@@ -77,6 +77,8 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 			'choices'	=>	array(
 				'Arial, Helvetica, sans-serif'	=>	__( 'Arial, Helvetica, sans-serif', PRIME2G_TEXTDOM ),
 				'Geneva, Verdana, sans-serif'	=>	__( 'Geneva, Verdana, sans-serif', PRIME2G_TEXTDOM ),
+				'Times New Roman, Times, serif'	=>	__( 'Times New Roman, Times, serif', PRIME2G_TEXTDOM ),
+				'Garamond, serif'	=>	__( 'Garamond, serif', PRIME2G_TEXTDOM ),
 			),
 		)
 	);
@@ -96,6 +98,8 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 			'settings'	=>	'prime2g_headings_fallback_fonts',
 			'section'	=>	'prime2g_theme_fonts_section',
 			'choices'	=>	array(
+				'Arial, Helvetica, sans-serif'	=>	__( 'Arial, Helvetica, sans-serif', PRIME2G_TEXTDOM ),
+				'Geneva, Verdana, sans-serif'	=>	__( 'Geneva, Verdana, sans-serif', PRIME2G_TEXTDOM ),
 				'Times New Roman, Times, serif'	=>	__( 'Times New Roman, Times, serif', PRIME2G_TEXTDOM ),
 				'Garamond, serif'	=>	__( 'Garamond, serif', PRIME2G_TEXTDOM ),
 			),
@@ -118,7 +122,8 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 			'section'	=>	'prime2g_theme_fonts_section',
 			'input_attrs'	=>	array(
 				'min'		=>	'1',
-				'max'		=>	'100',
+				'max'		=>	'10',
+				'step'		=>	'0.1',
 			),
 			'active_callback'	=>	function() { return ( is_singular() ); },
 		)
@@ -140,7 +145,8 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 			'section'	=>	'prime2g_theme_fonts_section',
 			'input_attrs'	=>	array(
 				'min'		=>	'1',
-				'max'		=>	'100',
+				'max'		=>	'10',
+				'step'		=>	'0.1',
 			),
 			'active_callback'	=>	function() { return ( ! is_singular() ); },
 		)

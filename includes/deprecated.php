@@ -43,7 +43,6 @@ $args	=	array(
 
 
 
-
 /**
  *	ADD PART TO TEMPLATE
  *	@since ToongeePrime Theme 1.0.48.10
@@ -82,6 +81,7 @@ return $content;
 }
 
 
+
 /**
  *	Get a Template Part
  *	Deprecated @since ToongeePrime Theme 1.0.50.00
@@ -100,5 +100,20 @@ if ( ! $part ) {
 return $part;
 
 }
+
+
+
+/**
+ *	Deprecated @since ToongeePrime Theme 1.0.55.00
+ */
+#	Send contents to footer:
+add_shortcode( 'prime_send_to_footer', 'prime2g_send_content_to_footer' );
+function prime2g_send_content_to_footer( $atts, $content, $tag ) {
+
+$contents	=	do_shortcode( $content );
+
+add_action( 'wp_footer', function() use( $contents ) { echo $contents; } );
+}
+
 
 

@@ -20,7 +20,6 @@ body, html{
 	padding:0; margin:0; max-width:100vw;
 	word-break:break-word;
 }
-
 :root{
 	--med-margin: 2.5rem;
 	--min-pad: 1.75rem;
@@ -29,22 +28,25 @@ body, html{
 	--faint-bg: rgba(127,127,127,0.05);
 /**
  **	Theme-Set Variables: **
-	--brand-color
-	--brand-color-2
-	--site-width
-	--body-background
-	--header-background
-	--content-background
-	--footer-background
-	--body-font
-	--headings-font
-	--body-text
-	--header-text
-	--content-text
-	--footer-text
-	--headline-color
-	--button-bg
-	--button-text
+--brand-color
+--brand-color-2
+--site-width
+--body-background
+--header-background
+--content-background
+--footer-background
+--body-font
+--headings-font
+--body-text
+--header-text
+--content-text
+--footer-text
+--headline-color
+--button-bg
+--button-text
+@version 1.0.55:
+--post-titlesize
+--arch-titlesize
 */
 }
 
@@ -206,6 +208,9 @@ code{
 }
 .clear, .prev_next{
 	clear:both; width:100%;
+}
+.clear:after{
+	content:''; display:block; clear:both;
 }
 .pointer{
 	cursor:pointer;
@@ -912,11 +917,6 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 
 /* ANIMATIONS */
 @keyframes prime_spin {
-from{
-	transform:rotate(0deg);
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
 }
-to{
-	transform:rotate(360deg);
-}
-}
-

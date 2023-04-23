@@ -26,7 +26,6 @@ class ToongeePrime_Styles {
 	public $bodyAltFont	=	'Arial, Helvetica, sans-serif';
 	public $headFont	=	'Oxygen';
 	public $headingsAltFont	=	'Times New Roman, Times, serif';
-	public $headHeight		=	'10';
 
 
 	/**
@@ -112,6 +111,8 @@ class ToongeePrime_Styles {
 	--footer-background:". $this->get_mod( 'footer' ) .";
 	--body-font:'". str_replace( "+", " ", $this->get_mod( 'bodyF' ) ) ."', ". $this->get_mod( 'b_AltFont' ) .";
 	--headings-font:'". str_replace( "+", " ", $this->get_mod( 'headF' ) ) ."', ". $this->get_mod( 'h_AltFont' ) .";
+	--post-titlesize:". $this->get_mod( 'post_titleSize' ) ."rem;
+	--arch-titlesize:". $this->get_mod( 'arch_titleSize' ) ."rem;
 	";
 
 	}
@@ -129,8 +130,16 @@ class ToongeePrime_Styles {
 
 	return "
 	#header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:". $bgSize .";min-height:". $hHeight .";}
-	.singular .entry-title{font-size:". $this->get_mod( 'post_titleSize' ) ."rem;}
-	body:not(.singular) .entry-title{font-size:". $this->get_mod( 'arch_titleSize' ) ."rem;}
+	.singular .entry-title{font-size:var(--post-titlesize);}
+	body:not(.singular) .entry-title{font-size:var(--arch-titlesize);}
+	@media(max-width:821px){
+	.singular .entry-title{font-size:calc(var(--post-titlesize)*0.8);}
+	body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.8);}
+	}
+	@media(max-width:601px){
+	.singular .entry-title{font-size:calc(var(--post-titlesize)*0.7);}
+	body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.7);}
+	}
 	";
 
 	}
