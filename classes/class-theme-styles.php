@@ -50,8 +50,8 @@ class ToongeePrime_Styles {
 			case 'headerattach' : $mod = get_theme_mod( 'prime2g_header_img_attachment', 'scroll' ); break;
 			case 'headerimgsize' : $mod = get_theme_mod( 'prime2g_header_background_size', 'cover' ); break;
 			case 'darktheme' : $mod = get_theme_mod( 'prime2g_dark_theme_switch' ); break;
-			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size' ); break;
-			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size' ); break;
+			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size', '2.5' ); break;
+			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size', '3' ); break;
 
 		}
 		return $mod;

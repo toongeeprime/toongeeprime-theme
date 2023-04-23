@@ -16,11 +16,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
-= 1.0.55.00 -- in progress =
+= 1.0.55.00... In progress =
 * 85 Google Fonts
-* @ customizer: Theme Fonts Section.
-* @ customizer: Alt Fonts Fallbacks.
+* @ customizer: Theme Fonts Section and Settings
+* @ customizer: Alt Fonts Fallbacks
 * @ customizer: Header Height Controls, added render-site-header-part.php
+* @ customizer: Site shutdown: added options to use a page as display
 
 = 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()

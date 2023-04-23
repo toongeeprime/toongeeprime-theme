@@ -110,7 +110,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 		'prime2g_post_title_font_size',
 		array(
 			'type' => 'theme_mod', 'transport' => 'postMessage',
-			'sanitize_callback' => 'sanitize_text_field'
+			'default' => '2.5', 'sanitize_callback' => 'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -125,7 +125,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 				'max'		=>	'10',
 				'step'		=>	'0.1',
 			),
-			'active_callback'	=>	function() { return ( is_singular() ); },
+			'active_callback'	=>	function() { return ( is_singular() ); } # leave as is
 		)
 	);
 
@@ -133,7 +133,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 		'prime2g_archive_title_font_size',
 		array(
 			'type' => 'theme_mod', 'transport' => 'postMessage',
-			'sanitize_callback' => 'sanitize_text_field'
+			'default' => '3', 'sanitize_callback' => 'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -148,7 +148,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 				'max'		=>	'10',
 				'step'		=>	'0.1',
 			),
-			'active_callback'	=>	function() { return ( ! is_singular() ); },
+			'active_callback'	=>	'is_archive'
 		)
 	);
 
