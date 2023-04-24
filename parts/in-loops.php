@@ -248,6 +248,8 @@ $entry	.=	'<a href="' . $link . '" title="Read this entry"><' . $tag . ' class="
 if ( $excerpt && ! is_attachment() )
 	$entry	.=	prime2g_post_excerpt( $length );
 
+	$entry	.=	prime2g_edit_entry_get( '<p class="edit-link edit-entry">', '</p>' );
+
 if ( $footer )
 	$entry	.=	prime2g_archive_post_footer_filter_part();
 
@@ -273,7 +275,7 @@ $ftimg	=	'<a href="' . $link . '" title="' . $title . '">';
 
 if ( has_post_thumbnail() ) {
 	$ftimg	.=	'<div class="thumbnail" style="background-image:url(';
-	$ftimg	.=	get_the_post_thumbnail_url( $title, $size, $link );
+	$ftimg	.=	get_the_post_thumbnail_url( null, $size );
 	$ftimg	.=	');"></div>';
 }
 else {
@@ -305,7 +307,6 @@ return $ftimg;
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
 
 function prime2g_get_archive_loop_post_object( array $args ) {
-
 $post	=	null;
 $size	=	'large';
 $excerpt=	true;

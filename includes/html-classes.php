@@ -7,9 +7,8 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-
 /**
- *	Add Classes to Post Title Header.
+ *	Add Classes to Post Title Header
  */
 function prime2g_title_header_classes() {
 
@@ -23,33 +22,32 @@ return $classes;
 /**
  *	Body Classes
  */
-
 add_filter( 'body_class', 'prime2g_body_classes' );
 function prime2g_body_classes( $classes ) {
 
-	// Helps detect if JS is enabled or not
+	# Helps detect if JS is enabled or not
 	$classes[]	=	'no-js';
 
-	// Add a body class if sidebar is set
+	# Add a body class if sidebar is set
 	if ( ! function_exists( 'define_2gRMVSidebar' ) && get_post_type() != 'product' ) {
 		$classes[]	=	'has-sidebar';
 	}
 
-	// Add a body class if title is unset
+	# Add a body class if title is unset
 	if ( function_exists( 'define_2gRMVTitle' ) ) {
 		$classes[]	=	'no_title';
 	}
 
-	// Site's Width and Extras
+	# Site's Width and Extras
 		$classes[]	=	'width_' . get_theme_mod( 'prime2g_site_width' );
 		$classes[]	=	'ext_' . get_theme_mod( 'prime2g_site_style_extras' );
 
-	// If post title is in header
+	# If post title is in header
 	if ( 'header' == get_theme_mod( 'prime2g_title_location' ) ) {
 		$classes[]	=	'title_in_header';
 	}
 
-	// By Main Menu Position
+	# By Main Menu Position
 	$menuPosition	=	get_theme_mod( 'prime2g_menu_position' );
 	if ( 'fixed' == $menuPosition ) {
 		$classes[]	=	'fixed_main_menu';
@@ -58,13 +56,13 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'bottom_main_menu';
 	}
 
-	#	If Preloader feature is active
-	#	@since ToongeePrime Theme 1.0.48.50
+	# If Preloader feature is active
+	# @since ToongeePrime Theme 1.0.48.50
 	if ( ! empty( get_theme_mod( 'prime2g_use_page_preloader' ) ) ) {
 		$classes[]	=	'preloading';
 	}
 
-	// With or without a header image
+	# With or without a header image
 	if ( has_header_image() ) {
 		$classes[]	=	'has-header-image';
 	}
@@ -72,8 +70,8 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'no-header-image';
 	}
 
-	// When there's a custom background image
-	// WP has `custom-background`
+	# When there's a custom background image
+	# WP has `custom-background`
 	if ( get_background_image() ) {
 		$classes[]	=	'has-background-image';
 	}
@@ -107,12 +105,12 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'hfeed';
 	}
 
-	// Sites with more than 1 published author
+	# Sites with more than 1 published author
 	if ( is_multi_author() ) {
 		$classes[]	=	'multi-authors';
 	}
 
-	// Device class
+	# Device class
 	if ( wp_is_mobile() ) {
 		$classes[]	=	'is-mobile';
 	}
@@ -120,8 +118,8 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'is-desktop';
 	}
 
-	// WP has `logged-in` class
-	// Logged in user's role else logged out
+	# WP has `logged-in` class
+	# Logged in user's role else logged out
 	if ( is_user_logged_in() ) {
 		global $current_user;
 		$user_roles	=	$current_user->roles;
@@ -131,7 +129,7 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'logged-out';
 	}
 
-	// WooCommerce product category as class(es)
+	# WooCommerce product category as class(es)
 	if ( function_exists( 'is_product' ) && is_product() ) {
 			$categs	=	get_the_terms( get_the_ID(), 'product_cat' );
 			foreach ( $categs as $cat ) {

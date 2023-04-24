@@ -127,4 +127,3 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 
 }
 
-
