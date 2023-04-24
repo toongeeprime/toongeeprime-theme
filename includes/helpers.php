@@ -12,7 +12,7 @@
  *	Sidebar is added throughout the theme via footer.php by prime2g_sidebar()
  */
 function prime2g_removeSidebar() {
-	function define_2gRMVSidebar(){}
+	if ( ! function_exists( 'define_2gRMVSidebar' ) ) { function define_2gRMVSidebar(){} }
 }
 
 
@@ -148,7 +148,7 @@ $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
 	}
 	else {
 
-		$args	=	array( 'public' => true );
+		$args	=	array( 'public' => true, 'publicly_queryable' => true );
 		$post_types	=	get_post_types( $args, 'objects' );
 		$slugs = $names = [];
 

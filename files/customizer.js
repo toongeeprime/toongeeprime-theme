@@ -3,8 +3,25 @@
  *
  *	https://developer.wordpress.org/themes/customize-api/the-customizer-javascript-api
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+jQuery( document ).ready( function() {
+
+setTimeout( ()=>{
+let useGFonts	=	jQuery( '#_customize-input-prime2g_use_theme_google_fonts' );
+
+if ( useGFonts && useGFonts.is( ":checked" ) ) {
+	jQuery( '#customize-control-prime2g_site_headings_font' ).css( 'display', 'block' );
+	jQuery( '#customize-control-prime2g_site_body_font' ).css( 'display', 'block' );
+}
+}, 1000 );
+
+} );
+
 
 ( function( $, api ) {
 	'use strict';
@@ -56,7 +73,7 @@ value.bind( function( newval ) {
 } );
 
 /**
- *	@since ToongeePrime Theme 1.0.55.00
+ *	@since ToongeePrime Theme 1.0.55
  */
 api( 'prime2g_website_shutdown', function( value ) {
 value.bind( function( newval ) {
@@ -75,9 +92,20 @@ value.bind( function( newval ) {
 
 api( 'prime2g_shutdown_display', function( value ) {
 value.bind( function( newval ) {
-	let sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
 
+	let sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
 	if ( newval != '' ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
+
+} );
+} );
+
+api( 'prime2g_use_theme_google_fonts', function( value ) {
+value.bind( function( newval ) {
+	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),
+		bFont	=	$( '#customize-control-prime2g_site_body_font' );
+
+	if ( newval != '' ) { hFont.slideDown( 180 ); bFont.slideDown( 180 ); }
+	else { hFont.slideUp( 180 ); bFont.slideUp( 180 ); }
 
 } );
 } );
@@ -96,4 +124,3 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 } );
 
 } )( jQuery, wp.customize );
-

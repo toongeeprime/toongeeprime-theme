@@ -32,10 +32,10 @@ add_action( 'save_post', 'prime2g_save_metas_2' );
 if ( ! function_exists( 'prime2g_save_metas_2' ) ) {
 function prime2g_save_metas_2( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( $parent_id = wp_is_post_revision( $post_id ) ) {
-		$post_id = $parent_id;
+	if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
+		$post_id	=	$parent_id;
 	}
-	$fields = [
+	$fields	=	[
 		'prime_page_css',
 		'prime_page_js',
 	];
@@ -52,7 +52,7 @@ function prime2g_save_metas_2( $post_id ) {
  *	Custom Fields Form
  */
 function toongeeprime_cFields_callback_2( $post ) { ?>
-<div class="prime2g_box">
+<div class="prime2g_meta_box">
 	<style scoped>
 		#prime2g_fieldsbox_2{box-shadow:0px 3px 5px #ccc;}
 		#prime2g_fieldsbox_2:hover{box-shadow:0px 3px 5px #aaa;}

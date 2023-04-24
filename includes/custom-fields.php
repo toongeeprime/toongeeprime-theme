@@ -8,18 +8,17 @@
  */
 
 /**
- *	METABOXES
- */
-
-/**
  *	DISPLAY SUBTITLE
  */
 add_action( 'prime2g_after_title', 'prime2g_post_subtitle' );
 
 if ( ! function_exists( 'prime2g_post_subtitle' ) ) {
-function prime2g_post_subtitle() {
+function prime2g_post_subtitle( $post = null ) {
+if ( ! $post instanceof WP_Post ) {
+global $post;
+}
 
-$postSubtitle	=	post_custom( 'post_subtitle' );
+$postSubtitle	=	$post->post_subtitle;
 if ( $postSubtitle )
 	echo "<h3 class=\"post-subtitle\">$postSubtitle</h3>";
 
@@ -28,6 +27,7 @@ if ( $postSubtitle )
 
 
 /**
+ *	METABOXES
  *	Fields Set 1
  */
 add_action( 'add_meta_boxes', 'prime2g_reg_fieldset_1' );
@@ -36,7 +36,7 @@ function prime2g_reg_fieldset_1() {
 	add_meta_box(
 		'prime2g_fieldsbox_1',
 		__( 'Page Options', PRIME2G_TEXTDOM ),
-		'toongeeprime_cFields_callback',
+		'prime2g_cFields_metadivs',
 		prime2g_include_post_types(),
 		'side',
 		'high'
@@ -53,10 +53,10 @@ add_action( 'save_post', 'prime2g_save_metas_1' );
 if ( ! function_exists( 'prime2g_save_metas_1' ) ) {
 function prime2g_save_metas_1( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( $parent_id = wp_is_post_revision( $post_id ) ) {
-		$post_id = $parent_id;
+	if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
+		$post_id	=	$parent_id;
 	}
-	$fields = [
+	$fields	=	[
 		'post_subtitle',
 		'remove_sidebar',
 		'remove_header',
@@ -74,15 +74,16 @@ function prime2g_save_metas_1( $post_id ) {
 
 
 //Custom Fields Admin Form
-function toongeeprime_cFields_callback( $post ) { ?>
-<div class="prime2g_box">
+function prime2g_cFields_metadivs( $post ) { ?>
+<div class="prime2g_meta_box">
 
 	<style scoped>
 		#prime2g_fieldsbox_1{box-shadow:0px 3px 5px #ccc;}
 		#prime2g_fieldsbox_1:hover{box-shadow:0px 3px 5px #aaa;}
-		.prime2g_box{display:grid;gap:10px;}
+		.prime2g_meta_box{display:grid;gap:10px;}
+		.prime2g_meta_box input,.prime2g_meta_box select,.prime2g_meta_box textarea{border-radius:0;}
 		.prime2g_field{display:contents;}
-		.prime2g_box label{font-weight:bold;}
+		.prime2g_meta_box label{font-weight:bold;}
 		.hide{display:none;}
 		.checkboxes{display:flex;gap:5px;}
 		.checkboxes label{font-weight:normal;margin-top:-6px;}
@@ -92,7 +93,7 @@ function toongeeprime_cFields_callback( $post ) { ?>
 <?php if ( prime2g_exclude_post_types() ) { ?>
 
 	<div class="meta-options prime2g_field">
-		<label class="hide" for="post_subtitle">Post Subtitle</label>
+		<label for="post_subtitle">Post Subtitle</label>
 <input id="post_subtitle" type="text" class="prime2g_admintext" name="post_subtitle" placeholder="A Subtitle for this Entry"
 value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 />
@@ -156,14 +157,16 @@ function prime2g_template_part_boxes() {
 	add_meta_box(
 		'prime2g_fieldsbox_2',
 		__( 'Shortcode', PRIME2G_TEXTDOM ),
-		'prime2g_template_part_box',
+		'prime2g_cFields_metadivs2',
 		'prime_template_parts',
 		'side',
 		'high'
 	);
 }
 
-function prime2g_template_part_box( $post ) {
+function prime2g_cFields_metadivs2( $post ) {
+
+if ( $post->post_type == 'prime_template_parts' ) {
 if ( $post->post_status === 'publish' ) { ?>
 
 	<div class="meta-options">
@@ -174,12 +177,10 @@ if ( $post->post_status === 'publish' ) { ?>
 <?php
 }
 else { ?>
-
-	<div class="meta-options">
-		<h4>Publish this Part to get the shortcode</h4>
-	</div>
-
+	<div class="meta-options"> <h4>Publish this Part to get the shortcode</h4> </div>
 <?php
 }
+}
 
 }
+

@@ -4,7 +4,7 @@
  *	NEWS REEL
  *
  *	@package WordPress
- *	@since ToongeePrime Theme Theme 1.0.50.00
+ *	@since ToongeePrime Theme Theme 1.0.50
  */
 
 function prime2g_theme_newsreel_active() { return get_theme_mod( 'prime2g_theme_news_reel' ); }

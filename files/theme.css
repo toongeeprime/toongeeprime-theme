@@ -139,6 +139,12 @@ td.pad{
 iframe{
 	max-width:100%;
 }
+.prime2g_embedded_media iframe{
+	width:100%;
+}
+.video iframe{
+	min-height:60vh;
+}
 .contentWrap ::selection, #prime2g_after_header ::selection{
 	background-color:var(--content-text); color:var(--content-background);
 }

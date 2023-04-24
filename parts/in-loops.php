@@ -38,7 +38,7 @@ if ( 'show' == get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || 
 	echo '<section id="stickies" class="stickies">';
 
 	# The Heading
-	echo '<h1 class="sticky_heading">' . get_theme_mod( 'prime2g_theme_sticky_heading', 'Featured Posts' ) . '</h1>';
+	echo '<h1 class="sticky_heading">' . get_theme_mod( 'prime2g_theme_sticky_heading' ) . '</h1>';
 
 		echo '<div class="grid prel'. $numClass .'">';
 
@@ -123,7 +123,6 @@ function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $
 }
 
 }
-
 
 
 
@@ -223,7 +222,7 @@ $link	=	get_permalink();
 
 
 /**
- *	copy of prime2g_archive_loop()
+ *	Core of prime2g_archive_loop()
  *	Archive Post Entry Template: returned
  *	@since ToongeePrime Theme 1.0.45.00
  */
@@ -235,25 +234,9 @@ $link	=	get_permalink();
 
 $entry	=	'<article id="entry-' . get_the_ID() . '" class="' . implode( ' ', get_post_class() ) . '">';
 $entry	.=	'<div class="entry_img">';
-$entry	.=	'<a href="' . $link . '" title="' . $title . '">';
 
-if ( has_post_thumbnail() ) {
-	$entry	.=	'<div class="thumbnail" style="background-image:url(';
-	$entry	.=	get_the_post_thumbnail_url( null, $size );
-	$entry	.=	');"></div>';
-}
-else {
-	if ( child2g_has_placeholder() ) {
-		$entry	.=	'<div class="thumbnail" style="background-image:url(';
-		$entry	.=	child2g_placeholder_url( true );
-		$entry	.=	');"></div>';
-	}
-	else {
-		$entry	.=	'<div class="thumbnail">'. $title .'</div>';
-	}
-}
+$entry	.=	prime2g_ft_image_in_loop( $title, $size, $link );
 
-$entry	.=	'</a>';
 $entry	.=	'</div>';
 $entry	.=	'<div class="entry_text">';
 
@@ -279,10 +262,45 @@ return $entry;
 
 
 
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( ! function_exists( 'prime2g_ft_image_in_loop' ) ) {
+
+function prime2g_ft_image_in_loop( string $title, string $size, string $link, object $post = null ) {
+
+$ftimg	=	'<a href="' . $link . '" title="' . $title . '">';
+
+if ( has_post_thumbnail() ) {
+	$ftimg	.=	'<div class="thumbnail" style="background-image:url(';
+	$ftimg	.=	get_the_post_thumbnail_url( $title, $size, $link );
+	$ftimg	.=	');"></div>';
+}
+else {
+	if ( child2g_has_placeholder() ) {
+		$ftimg	.=	'<div class="thumbnail" style="background-image:url(';
+		$ftimg	.=	child2g_placeholder_url( true );
+		$ftimg	.=	');"></div>';
+	}
+	else {
+		$ftimg	.=	'<div class="thumbnail">'. $title .'</div>';
+	}
+}
+
+$ftimg	.=	'</a>';
+
+return $ftimg;
+}
+
+}
+
+
+
 
 /**
  *	Archive Post Template by post object
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
+ *	Media field @since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
 
@@ -297,33 +315,22 @@ $footer	=	false;
 $tag	=	'h2';
 $readmore	=	'Read more';
 $entryClasses	=	'';
+$switch_img_vid	=	false;
 
 extract( $args );
+
+if ( ! $post ) { global $post; }
+
+if ( $switch_img_vid && prime2g_post_has_media_field( $post ) ) {
 
 $title	=	$post->post_title;
 $link	=	get_permalink( $post );
 
 $entry	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( '', $post ) ) . '">';
 $entry	.=	'<div class="entry_img">';
-$entry	.=	'<a href="' . $link . '" title="' . $title . '">';
 
-if ( has_post_thumbnail( $post ) ) {
-	$entry	.=	'<div class="thumbnail" style="background-image:url(';
-	$entry	.=	get_the_post_thumbnail_url( $post, $size );
-	$entry	.=	');"></div>';
-}
-else {
-	if ( child2g_has_placeholder() ) {
-		$entry	.=	'<div class="thumbnail" style="background-image:url(';
-		$entry	.=	child2g_placeholder_url( true );
-		$entry	.=	');"></div>';
-	}
-	else {
-		$entry	.=	'<div class="thumbnail">'. $title .'</div>';
-	}
-}
+$entry	.=	prime2g_get_post_media_embed( '', $post );
 
-$entry	.=	'</a>';
 $entry	.=	'</div>';
 $entry	.=	'<div class="entry_text">';
 
@@ -342,6 +349,11 @@ if ( $footer )
 
 $entry	.=	'</div>';
 $entry	.=	'</article>';
+
+}
+else {
+	$entry	=	prime2g_get_archive_loop( $size, $excerpt, $length, $metas, $footer, $tag );
+}
 
 return $entry;
 

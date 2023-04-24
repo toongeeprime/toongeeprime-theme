@@ -32,7 +32,6 @@ class ToongeePrime_Styles {
 	 *	Get from get_theme_mod()
 	 */
 	public function get_mod( $toGet ) {
-
 		switch( $toGet ) {
 
 			case 'brand' : $mod = get_theme_mod( 'prime2g_primary_brand_color', $this->brandClr ); break;
@@ -43,6 +42,7 @@ class ToongeePrime_Styles {
 			case 'h_height' : $mod = get_theme_mod( 'prime2g_theme_header_height' ); break;		# No default for backwards compat
 			case 'content' : $mod = get_theme_mod( 'prime2g_content_background', $this->contentBG ); break;
 			case 'footer' : $mod = get_theme_mod( 'prime2g_footer_background', $this->footerBG ); break;
+			case 'use_gFonts' : $mod = get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ); break;
 			case 'bodyF' : $mod = get_theme_mod( 'prime2g_site_body_font', $this->bodyFont ); break;
 			case 'b_AltFont' : $mod = get_theme_mod( 'prime2g_body_fallback_fonts', $this->bodyAltFont ); break;
 			case 'headF' : $mod = get_theme_mod( 'prime2g_site_headings_font', $this->headFont ); break;
@@ -54,8 +54,7 @@ class ToongeePrime_Styles {
 			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size', '3' ); break;
 
 		}
-		return $mod;
-
+	return $mod;
 	}
 
 
@@ -100,6 +99,9 @@ class ToongeePrime_Styles {
 	 *	Generate CSS :root variables
 	 */
 	protected function the_root_css() {
+	$useGFonts	=	$this->get_mod( 'use_gFonts' );
+	$bodyGFont	=	$useGFonts ? str_replace( "+", " ", $this->get_mod( 'bodyF' ) ) : '';
+	$headGFont	=	$useGFonts ? str_replace( "+", " ", $this->get_mod( 'headF' ) ) : '';
 
 	return "
 	--brand-color:". $this->get_mod( 'brand' ) .";
@@ -109,8 +111,8 @@ class ToongeePrime_Styles {
 	--header-background:". $this->get_mod( 'header' ) .";
 	--content-background:". $this->get_mod( 'content' ) .";
 	--footer-background:". $this->get_mod( 'footer' ) .";
-	--body-font:'". str_replace( "+", " ", $this->get_mod( 'bodyF' ) ) ."', ". $this->get_mod( 'b_AltFont' ) .";
-	--headings-font:'". str_replace( "+", " ", $this->get_mod( 'headF' ) ) ."', ". $this->get_mod( 'h_AltFont' ) .";
+	--body-font:'". $bodyGFont ."', ". $this->get_mod( 'b_AltFont' ) .";
+	--headings-font:'". $headGFont ."', ". $this->get_mod( 'h_AltFont' ) .";
 	--post-titlesize:". $this->get_mod( 'post_titleSize' ) ."rem;
 	--arch-titlesize:". $this->get_mod( 'arch_titleSize' ) ."rem;
 	";
@@ -147,5 +149,4 @@ class ToongeePrime_Styles {
 }
 
 }
-
 

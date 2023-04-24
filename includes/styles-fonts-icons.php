@@ -6,20 +6,26 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
+
 /**
  *	Print Root CSS Styles
  */
 add_action( 'wp_head', 'prime2g_theme_root_styles', 3 );
 if ( ! function_exists( 'prime2g_theme_root_styles' ) ) {
-
 function prime2g_theme_root_styles() {
 
 	echo ToongeePrime_ThemeCSS::root_css();
 
 }
-
 }
 
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+function prime2g_use_google_fonts() {
+	return get_theme_mod( 'prime2g_use_theme_google_fonts', '1' );
+}
 
 
 /**
@@ -30,12 +36,13 @@ if ( ! function_exists( 'prime2g_load_fonts_and_icons' ) ) {
 
 function prime2g_load_fonts_and_icons() {
 
+if ( prime2g_use_google_fonts() ) {
 	$theStyles	=	new ToongeePrime_Styles();
 
 	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font', $theStyles->bodyFont );
 	$headings	=	get_theme_mod( 'prime2g_site_headings_font', $theStyles->headFont );
 	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800\">";
-
+}
 	# echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
 	wp_enqueue_style( 'bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css' );
 

@@ -9,6 +9,12 @@
 
 get_header();
 
+$switchFtImageVideo	=	( get_theme_mod( 'prime2g_enable_video_features' ) && get_theme_mod( 'prime2g_replace_ftimage_with_video' ) );
+
+$options	=	[
+	'switch_img_vid' => $switchFtImageVideo
+];
+
 echo '<section id="archive_loop" class="grid prel">';
 
 	// Load posts loop
@@ -16,7 +22,7 @@ echo '<section id="archive_loop" class="grid prel">';
 
 		the_post();
 
-		prime2g_archive_loop();
+	echo prime2g_get_archive_loop_post_object( $options );
 
 	}
 

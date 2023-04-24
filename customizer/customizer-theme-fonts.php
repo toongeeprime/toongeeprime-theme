@@ -4,18 +4,37 @@
  *	Theme's Fonts Customizer
  *
  *	@package WordPress
- *	Separated function @since ToongeePrime Theme 1.55.00
+ *	Separated function @since ToongeePrime Theme 1.0.55
  */
 
 if ( ! function_exists( 'prime2g_customizer_theme_fonts' ) ) {
 
 function prime2g_customizer_theme_fonts( $wp_customize ) {
 
-	$theStyles	=	new ToongeePrime_Styles();
+	/**
+	 *	USE GOOGLE FONTS?
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting(
+		'prime2g_use_theme_google_fonts',
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '1' )
+	);
+	$wp_customize->add_control(
+		'prime2g_use_theme_google_fonts',
+		array(
+			'label'		=>	__( 'Use Google Fonts?', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_use_theme_google_fonts',
+			'section'	=>	'prime2g_theme_fonts_section'
+		)
+	);
+
 
 	/**
 	 *	DEFAULT FONT STYLE VALUES:
 	 */
+	$theStyles	=	new ToongeePrime_Styles();
+
 	$bodyFont	=	$theStyles->bodyFont;
 	$b_AltFont	=	$theStyles->bodyAltFont;
 	$headFont	=	$theStyles->headFont;
@@ -38,6 +57,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 			'settings'	=>	'prime2g_site_headings_font',
 			'section'	=>	'prime2g_theme_fonts_section',
 			'choices'	=>	$themeFonts,
+			'active_callback'	=>	'prime2g_use_google_fonts'
 		)
 	);
 
@@ -53,12 +73,13 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 			'settings'	=>	'prime2g_site_body_font',
 			'section'	=>	'prime2g_theme_fonts_section',
 			'choices'	=>	$themeFonts,
+			'active_callback'	=>	'prime2g_use_google_fonts'
 		)
 	);
 
 	/**
 	 *	FALLBACK FONTS
-	 *	@since ToongeePrime Theme 1.0.55.00
+	 *	@since ToongeePrime Theme 1.0.55
 	 */
 	$wp_customize->add_setting(
 		'prime2g_body_fallback_fonts',
@@ -125,7 +146,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 				'max'		=>	'10',
 				'step'		=>	'0.1',
 			),
-			'active_callback'	=>	function() { return ( is_singular() ); } # leave as is
+		'active_callback'	=>	function() { return ( is_singular() ); } # leave as is
 		)
 	);
 
@@ -148,7 +169,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 				'max'		=>	'10',
 				'step'		=>	'0.1',
 			),
-			'active_callback'	=>	'is_archive'
+		'active_callback'	=>	'is_archive'
 		)
 	);
 

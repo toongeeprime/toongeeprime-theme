@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.1
 Tested up to: 6.2
-Stable tag: 1.0.51.00
+Stable tag: 1.0.55
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,11 +17,14 @@ A WordPress theme with options for customization, design and development flexibi
 == Changelog ==
 
 = 1.0.55.00... In progress =
+Several updates across the theme
 * 85 Google Fonts
-* @ customizer: Theme Fonts Section and Settings
+* @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks
 * @ customizer: Header Height Controls, added render-site-header-part.php
 * @ customizer: Site shutdown: added options to use a page as display
+* @ customizer: Video Features
+* Video Features: fields, templates and functions
 
 = 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()

@@ -107,7 +107,13 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 	 *	STICKY POSTS' POST TYPE & COUNT
 	 *	@since ToongeePrime Theme 1.0.51
 	 */
-	$wp_customize->add_setting( 'prime2g_theme_stickies_post_type', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+	'prime2g_theme_stickies_post_type',
+		array(
+			'type'	=>	'theme_mod',
+			'default'	=>	'post'
+		)
+	);
 	$wp_customize->add_control(
 		'prime2g_theme_stickies_post_type',
 		array(
