@@ -7,13 +7,13 @@
  *	@since ToongeePrime Theme Theme 1.0.55
  */
 
+function p2gvfactive() { return get_theme_mod( 'prime2g_enable_video_features' ); }
+
 if ( ! function_exists( 'prime2g_theme_video_features' ) ) {
 
 function prime2g_theme_video_features( $wp_customize ) {
 
 if ( ! prime2g_use_extras() ) return;
-
-function p2gvfactive() { return get_theme_mod( 'prime2g_enable_video_features' ); }
 
 	$wp_customize->add_setting( 'prime2g_enable_video_features', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
@@ -41,7 +41,7 @@ function p2gvfactive() { return get_theme_mod( 'prime2g_enable_video_features' )
 			'label'		=>	__( 'Video features in Post Types (Separate post type slugs with comma)', PRIME2G_TEXTDOM ),
 			'settings'	=>	'prime2g_videos_for_posttypes',
 			'section'	=>	'prime2g_media_features_section',
-			'active_callback'	=>	function() { return ( p2gvfactive() && is_singular() ); },
+			'active_callback'	=>	'p2gvfactive',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'post, page',
 			),
@@ -77,7 +77,7 @@ function p2gvfactive() { return get_theme_mod( 'prime2g_enable_video_features' )
 	$wp_customize->add_control(
 		'prime2g_replace_ftimage_with_video',
 		array(
-			'label'		=>	__( 'Replace Image with Video', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Replace Post Image with Video (Archives)', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_replace_ftimage_with_video',
 			'section'	=>	'prime2g_media_features_section',

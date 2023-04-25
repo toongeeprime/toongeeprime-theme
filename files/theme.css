@@ -428,8 +428,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	padding:0; border:0;
 }
 .widget-title, .comment-reply-title{
-	text-transform:uppercase; margin:0 0 1rem; border-bottom:1px solid;
-	padding-bottom:1rem;
+	margin:0 0 1rem; border-bottom:1px solid; padding-bottom:1rem;
 }
 .right ul{
 	list-style:none; padding:0;

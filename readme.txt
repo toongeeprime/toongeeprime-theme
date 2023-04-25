@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.1
 Tested up to: 6.2
-Stable tag: 1.0.55
+Stable tag: 1.0.53
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -23,8 +23,10 @@ Several updates across the theme
 * @ customizer: Alt Fonts Fallbacks
 * @ customizer: Header Height Controls, added render-site-header-part.php
 * @ customizer: Site shutdown: added options to use a page as display
+* @ customizer: Archive columns
 * @ customizer: Video Features
 * Video Features: fields, templates and functions
+* @ includes: Added adjust-templates.php
 
 = 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()

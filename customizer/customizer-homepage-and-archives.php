@@ -12,6 +12,21 @@ if ( ! function_exists( 'prime2g_customizer_home_and_archives' ) ) {
 function prime2g_customizer_home_and_archives( $wp_customize ) {
 
 	/**
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_archives', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_control(
+		'prime2g_remove_sidebar_in_archives',
+		array(
+			'label'		=>	__( 'Remove Sidebar in Archives?', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_remove_sidebar_in_archives',
+			'section'	=>	'prime2g_theme_archives_section',
+			'active_callback'	=>	'is_archive',
+		)
+	);
+
+	/**
 	 *	POSTS HOME TITLE
 	 */
 	$siteTitle	=	get_bloginfo( 'name' );
@@ -38,7 +53,6 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 		)
 	);
 
-
 	$wp_customize->add_setting(
 		'prime2g_posts_home_description',
 		array(
@@ -62,6 +76,25 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 		)
 	);
 
+	/**
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting( 'prime2g_archive_post_columns_num', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_control(
+		'prime2g_archive_post_columns_num',
+		array(
+			'label'		=>	__( 'Archive Post Columns', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_archive_post_columns_num',
+			'section'	=>	'prime2g_theme_archives_section',
+			'choices'	=>	[
+				''		=>	'1',
+				'grid2'	=>	'2',
+				'grid3'	=>	'3',
+				'grid4'	=>	'4'
+			],
+		)
+	);
 
 	/**
 	 *	HEADER STICKY POSTS
@@ -80,7 +113,6 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); },
 		)
 	);
-
 
 	$wp_customize->add_setting(
 		'prime2g_theme_sticky_heading',
@@ -109,10 +141,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 	 */
 	$wp_customize->add_setting(
 	'prime2g_theme_stickies_post_type',
-		array(
-			'type'	=>	'theme_mod',
-			'default'	=>	'post'
-		)
+		array( 'type'	=>	'theme_mod', 'default'	=>	'post' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_stickies_post_type',
@@ -136,12 +165,9 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'settings'	=>	'prime2g_theme_stickies_count',
 			'section'	=>	'prime2g_theme_archives_section',
 			'choices'	=>	[
-				'2'	=>	'2',
-				'3'	=>	'3',
-				'4'	=>	'4',
-				'6'	=>	'6',
-				'8'	=>	'8',
-				'9'	=>	'9'
+				'2'	=>	'2', '3'	=>	'3',
+				'4'	=>	'4', '6'	=>	'6',
+				'8'	=>	'8', '9'	=>	'9'
 			],
 		)
 	);
