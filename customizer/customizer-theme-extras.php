@@ -31,10 +31,9 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 		)
 	);
 
-
 	/**
 	 *	DARK THEME SWITCH
-	 *	@since ToongeePrime Theme 1.0.49.00
+	 *	@since ToongeePrime Theme 1.0.49
 	 */
 	$wp_customize->add_setting( 'prime2g_dark_theme_switch', array( 'type' => 'theme_mod', ) );
 	$wp_customize->add_control(
@@ -52,17 +51,13 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 		)
 	);
 
-
 	/**
 	 *	ADD "TEMPLATE PARTS" CUSTOM POST TYPE
-	 *	@since ToongeePrime Theme 1.0.50.00
+	 *	@since ToongeePrime Theme 1.0.50
 	 */
 	$wp_customize->add_setting(
 		'prime2g_cpt_template_parts',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'		=>	'postMessage', # no refresh
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
 	);
 	$wp_customize->add_control(
 		'prime2g_cpt_template_parts',
@@ -74,6 +69,23 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 		)
 	);
 
+	/**
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting(
+		'prime2g_template_parts_richedit',
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
+	);
+	$wp_customize->add_control(
+		'prime2g_template_parts_richedit',
+		array(
+			'label'		=>	__( 'Rich Edit Template Parts?', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_template_parts_richedit',
+			'section'	=>	'prime2g_theme_extras_section',
+			'active_callback'	=>	function() { return get_theme_mod( 'prime2g_cpt_template_parts' ); },
+		)
+	);
 
 }
 

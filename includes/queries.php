@@ -5,8 +5,8 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Updated since ToongeePrime Theme 1.0.43.00
- *	Since ToongeePrime Theme 1.0.50.00: $get argument changed to $options
+ *	Updated since ToongeePrime Theme 1.0.43
+ *	Since ToongeePrime Theme 1.0.50: $get argument changed to $options
  */
 
 function prime2g_wp_query( array $args, $options = 'posts' ) {
@@ -88,8 +88,10 @@ add_filter( 'user_can_richedit', function( $default ) {
 global $post;
 if ( ! is_object( $post ) ) return $default;
 
+if ( ! get_theme_mod( 'prime2g_template_parts_richedit' ) ) {
 	if ( $post->post_type === 'prime_template_part' ||
 	$post->post_type === 'prime_template_parts' ) return false;
+}
 
 return $default;
 }
@@ -99,8 +101,8 @@ return $default;
 
 /**
  *	INSERT TEMPLATE PART
- *	Uses Theme "Template Parts" Post Type
- *	@since ToongeePrime Theme 1.0.50.00
+ *	Gets Theme "Template Parts" Post Type
+ *	@since ToongeePrime Theme 1.0.50
  */
 function prime2g_insert_template_part( $id, bool $echo = true ) {
 $part	=	null;

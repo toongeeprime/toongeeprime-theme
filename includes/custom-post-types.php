@@ -53,7 +53,7 @@ $args	=	array(
 	'query_var'			=>	false,
 	'capability_type'	=>	'page',
 	'show_in_rest'		=>	true,
-	'insert_into_item'		=>	_x( 'Insert into this Template Part', 'Insert this item', PRIME2G_TEXTDOM ),
+	'insert_into_item'		=>	_x( 'Insert into this Template Part', 'prime_template_parts', PRIME2G_TEXTDOM ),
 );
 
 register_post_type( 'prime_template_parts', $args );

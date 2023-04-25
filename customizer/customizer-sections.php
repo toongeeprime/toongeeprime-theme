@@ -25,11 +25,11 @@ function prime2g_customizer_sections( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
-		'prime2g_theme_styles_section',
+		'prime2g_theme_colors_section',		# Renamed from styles_section @1.0.55
 		array(
-			'title'		=>	__( 'Theme Styles', PRIME2G_TEXTDOM ),
+			'title'		=>	__( 'Theme Colors', PRIME2G_TEXTDOM ),
 			'panel'		=>	'prime2g_customizer_panel',
-			'description'	=>	__( 'Colors &amp; Fonts', PRIME2G_TEXTDOM ),
+			'description'	=>	__( 'Theme Colors Settings', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
 		)
 	);

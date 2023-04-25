@@ -224,7 +224,7 @@ $link	=	get_permalink();
 /**
  *	Core of prime2g_archive_loop()
  *	Archive Post Entry Template: returned
- *	@since ToongeePrime Theme 1.0.45.00
+ *	@since ToongeePrime Theme 1.0.45
  */
 if ( ! function_exists( 'prime2g_get_archive_loop' ) ) {
 
@@ -302,7 +302,7 @@ return $ftimg;
 /**
  *	Archive Post Template by post object
  *	@since ToongeePrime Theme 1.0.50
- *	Media field @since ToongeePrime Theme 1.0.55
+ *	Media field logic @since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
 
@@ -367,7 +367,7 @@ return $entry;
 
 /**
  *	Entry Titles-only Template
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 if ( ! function_exists( 'prime2g_entry_titles_template' ) ) {
 

@@ -93,19 +93,31 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
-register_sidebars( 4,
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+$cols	=	4;
+$num	=	' %d';
+$name	=	'Footer Widgets';
+$fname	=	$name . $num;
+if ( prime2g_use_extra_settings() ) {
+	$cols	=	(int) get_theme_mod( 'prime2g_footer_columns_num', '4' );
+	$name	=	( $cols > 1 ) ? $fname : $name;
+}
+register_sidebars( $cols,
 	array(
-		'name'			=>	__( 'Footer Widgets %d', PRIME2G_TEXTDOM ),
+		'name'			=>	__( $name, PRIME2G_TEXTDOM ),
 		'id'			=>	'footers',
-		'before_widget'	=>	'<div id="%1$s" class="footerwidget %2$s"><div id="%1$s" class="widget %2$s">',
+		'before_widget'	=>	'<div id="%1$s" class="footerwidget %2$s"><div class="widget">',
 		'after_widget'	=>	'</div></div>',
 		'before_title'	=>	'<div class="w-headers"><h3 class="widget-title footer">',
 		'after_title'	=>	'</h3></div>'
 	)
 );
-}
 
 }
 
+}
 }
 

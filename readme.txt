@@ -21,11 +21,11 @@ Several updates across the theme
 * 85 Google Fonts
 * @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks
-* @ customizer: Header Height Controls, added render-site-header-part.php
+* @ customizer: Header Height Controls, added re-render-site-parts.php
 * @ customizer: Site shutdown: added options to use a page as display
 * @ customizer: Archive columns
-* @ customizer: Video Features
-* Video Features: fields, templates and functions
+* @ customizer: Video Features with Video Features: fields, templates and functions
+* @ customizer: Footer columns with accompanying setups
 * @ includes: Added adjust-templates.php
 
 = 1.0.51.00 =

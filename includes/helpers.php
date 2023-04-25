@@ -19,7 +19,7 @@ function prime2g_removeSidebar() {
 
 /**
  *	nonce verifier
- *	@since ToongeePrime Theme 1.0.46.00
+ *	@since ToongeePrime Theme 1.0.46
  */
 function prime2g_verify_nonce( $nonceField = 'prime_ajaxnonce' ) {
 	if ( ! isset( $_REQUEST[ '_prime-nonce' ] ) || ! wp_verify_nonce( $_POST[ '_prime-nonce' ], $nonceField ) ) {
@@ -31,7 +31,7 @@ function prime2g_verify_nonce( $nonceField = 'prime_ajaxnonce' ) {
 
 /**
  *	If current user is post author
- *	@since ToongeePrime Theme 1.0.45.00
+ *	@since ToongeePrime Theme 1.0.45
  */
 function prime2g_is_post_author( $post, $userID = null ) {
 	return ( $userID ) ? $post->post_author == $userID :
@@ -91,7 +91,7 @@ function prime2g_get_country_by_code( $code ) {
 
 /**
  *	If To Use Theme Extras
- *	@since ToongeePrime Theme 1.0.48.00
+ *	@since ToongeePrime Theme 1.0.48
  */
 function prime2g_use_extras() {
 	return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true );
@@ -100,8 +100,18 @@ function prime2g_use_extras() {
 
 
 /**
- *	Get Site' Domain name...
- *	@since ToongeePrime Theme 1.0.49.00
+ *	As per extra settings that could break older versions
+ *	@since ToongeePrime Theme 1.0.55
+ */
+function prime2g_use_extra_settings() {
+	return ( defined( 'PRIME2G_EXTRA_SETTINGS' ) && PRIME2G_EXTRA_SETTINGS === true );
+}
+
+
+
+/**
+ *	Get Site' Domain name
+ *	@since ToongeePrime Theme 1.0.49
  */
 function prime2g_get_site_domain() {
 $url	=	get_bloginfo( 'url' );
@@ -113,7 +123,7 @@ return $url;
 
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.50.00
+ *	@since ToongeePrime Theme Theme 1.0.50
  */
 function prime2g_categs_and_ids_array() {
 $categsArray	=	wp_cache_get( 'prime2g_categs_array' );
@@ -138,7 +148,7 @@ $categsArray	=	wp_cache_get( 'prime2g_categs_array' );
 
 
 /**
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 function prime2g_posttypes_names_array() {
 $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
@@ -170,7 +180,7 @@ $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
 
 
 /**
- *	@since ToongeePrime Theme 1.0.55.00
+ *	@since ToongeePrime Theme 1.0.55
  */
 function prime2g_get_postsdata_array( array $get, array $args, array $options ) {
 

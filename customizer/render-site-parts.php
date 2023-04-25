@@ -1,11 +1,12 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	RENDER SITE HEADER (*FOR CUSTOMIZER)
+ *	RENDER SITE PARTS
  *
- *	@since ToongeePrime Theme 1.55.00
+ *	@since ToongeePrime Theme 1.55
  */
 
+#	Must exclude menus for customizer preview rendering
 if ( ! function_exists( 'prime2g_render_header' ) ) {
 
 function prime2g_render_header() {
@@ -65,5 +66,4 @@ if ( ! $isSingular || $isSingular && $keepHeader ) {
 }
 
 }
-
 

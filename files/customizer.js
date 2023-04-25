@@ -81,12 +81,11 @@ value.bind( function( newval ) {
 		sddSelect	=	$( '#_customize-input-prime2g_shutdown_display' ),
 		sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
 
-	if ( newval != '' ) {
+	if ( newval ) {
 		sdDisplay.slideDown( 180 );
 		if ( sddSelect.val() ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
 	}
 	else { sdDisplay.slideUp( 180 ); sdPageID.slideUp( 180 ); }
-
 } );
 } );
 
@@ -94,8 +93,15 @@ api( 'prime2g_shutdown_display', function( value ) {
 value.bind( function( newval ) {
 
 	let sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
-	if ( newval != '' ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
+	if ( newval ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
+} );
+} );
 
+api( 'prime2g_cpt_template_parts', function( value ) {
+value.bind( function( newval ) {
+
+	let tpRich	=	$( '#customize-control-prime2g_template_parts_richedit' );
+	if ( newval ) tpRich.slideDown( 180 ); else tpRich.slideUp( 180 );
 } );
 } );
 
@@ -104,12 +110,13 @@ value.bind( function( newval ) {
 	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),
 		bFont	=	$( '#customize-control-prime2g_site_body_font' );
 
-	if ( newval != '' ) { hFont.slideDown( 180 ); bFont.slideDown( 180 ); }
+	if ( newval ) { hFont.slideDown( 180 ); bFont.slideDown( 180 ); }
 	else { hFont.slideUp( 180 ); bFont.slideUp( 180 ); }
-
 } );
 } );
-
+/**
+ *	@since ToongeePrime Theme 1.0.55 END
+ */
 
 wp.customize.bind( 'ready', function() {
 wp.customize.previewer.bind( 'ready', function( message ) {
@@ -119,7 +126,6 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 		let new_val	=	nrTitleInput.val();
 		$( '#customize-preview iframe' ).contents().find( '#newsreelHeading' ).html( new_val );
 	} );
-
 } );
 } );
 

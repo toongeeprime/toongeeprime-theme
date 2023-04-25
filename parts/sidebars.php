@@ -41,7 +41,7 @@ if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
 
 
 /**
- *	WIDGETS SET UNDER POSTS
+ *	WIDGETS SET AFTER POSTS
  */
 add_action( 'prime2g_after_post', 'prime2g_below_posts_widgets', 20 );
 if ( ! function_exists( 'prime2g_below_posts_widgets' ) ) {
@@ -92,55 +92,43 @@ if ( is_active_sidebar( 'footer-top' ) ) { ?>
 
 /**
  *	FOOTER WIDGETS
+ *	Updated for customizer columns @since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_footer_widgets' ) ) {
 
 function prime2g_footer_widgets() {
 
-if ( is_active_sidebar( 'footers' ) || is_active_sidebar( 'footers-2' ) ||
-is_active_sidebar( 'footers-3' ) || is_active_sidebar( 'footers-4' ) ) { ?>
+$cols	=	4;
+$wID	=	'';
+if ( prime2g_use_extra_settings() ) {
+	$cols	=	(int) get_theme_mod( 'prime2g_footer_columns_num', '4' );
+}
 
-<aside id="sitebasebar" role="complementary" class="sidebars asides grid site_width">
+for ( $n = 1; $n <= $cols; $n++ ) {
+if ( $n > 1 ) $wID	=	'-' . $n;
+	$hasactive	=	is_active_sidebar( 'footers'. $wID ); break;
+}
 
-	<div id="f-widgets1" class="footer-widgets">
+if ( $hasactive ) { ?>
 
-		<?php if ( is_active_sidebar( 'footers' ) ) { ?>
-			<div class="widgets-box grid">
-				<?php dynamic_sidebar( 'footers' ); ?>
-			</div>
-		<?php } ?>
+<aside id="sitebasebar" role="complementary" class="sidebars asides grid grid<?php echo $cols; ?> site_width footer">
 
-	</div>
+<?php
+for ( $n = 1; $n <= $cols; $n++ ) {
+if ( $n > 1 ) $wID	=	'-' . $n;
 
-	<div id="f-widgets2" class="footer-widgets">
+echo	'<div id="f-widgets'. $n .'" class="footer-widgets">';
 
-		<?php if ( is_active_sidebar( 'footers-2' ) ) { ?>
-			<div class="widgets-box grid">
-				<?php dynamic_sidebar( 'footers-2' ); ?>
-			</div>
-		<?php } ?>
+	if ( is_active_sidebar( 'footers' . $wID ) ) {
+	echo '<div class="widgets-box grid">';
+		dynamic_sidebar( 'footers' . $wID );
+	echo '</div>';
+	}
 
-	</div>
+echo	'</div>';
 
-	<div id="f-widgets3" class="footer-widgets">
-
-		<?php if ( is_active_sidebar( 'footers-3' ) ) { ?>
-			<div class="widgets-box grid">
-				<?php dynamic_sidebar( 'footers-3' ); ?>
-			</div>
-		<?php } ?>
-
-	</div>
-
-	<div id="f-widgets4" class="footer-widgets">
-
-		<?php if ( is_active_sidebar( 'footers-4' ) ) { ?>
-			<div class="widgets-box grid">
-				<?php dynamic_sidebar( 'footers-4' ); ?>
-			</div>
-		<?php } ?>
-
-	</div>
+}
+?>
 
 </aside><!-- .widget-area -->
 <?php

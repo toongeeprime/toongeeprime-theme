@@ -18,13 +18,11 @@ $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 
 	/**
 	 *	SHUT DOWN WEBSITE
-	 *	Setting 'type' changed to 'option' @ 1.0.52.00
+	 *	Setting 'type' changed to 'option' @ 1.0.52
 	 */
 	$wp_customize->add_setting( 'prime2g_website_shutdown',
-		array(
-			'type'	=>	'theme_mod',
-			'transport'	=>	'postMessage'
-		) );
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
+	);
 	$wp_customize->add_control(
 		'prime2g_website_shutdown',
 		array(
@@ -42,15 +40,13 @@ $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 
 	/**
 	 *	SHUTDOWN DISPLAY
-	 *	@since ToongeePrime Theme @ 1.0.55.00
+	 *	@since ToongeePrime Theme @ 1.0.55
 	 */
 	function prime2g_c_siteNotSD() { return ( ! empty( get_theme_mod( 'prime2g_website_shutdown' ) ) ); }
 
 	$wp_customize->add_setting( 'prime2g_shutdown_display',
-		array(
-			'type'	=>	'theme_mod',
-			'transport'	=>	'postMessage'
-		) );
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
+	);
 	$wp_customize->add_control(
 		'prime2g_shutdown_display',
 		array(
@@ -67,10 +63,8 @@ $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 	);
 
 	$wp_customize->add_setting( 'prime2g_shutdown_page_id',
-		array(
-			'type'	=>	'theme_mod',
-			'transport'	=>	'postMessage'
-		) );
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
+	);
 	$wp_customize->add_control(
 		'prime2g_shutdown_page_id',
 		array(
@@ -87,13 +81,11 @@ $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 
 	/**
 	 *	STOP WP HEARTBEAT
-	 *	@since ToongeePrime Theme 1.0.49.00
+	 *	@since ToongeePrime Theme 1.0.49
 	 */
 	$wp_customize->add_setting( 'prime2g_stop_wp_heartbeat',
-		array(
-			'type'	=>	'theme_mod',
-			'transport'	=>	'postMessage'
-		) );
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
+	);
 	$wp_customize->add_control(
 		'prime2g_stop_wp_heartbeat',
 		array(

@@ -27,8 +27,8 @@ function prime2g_toTop() { ?>
 
 /**
  *	Search form based on WP Blocks
- *	@since ToongeePrime Theme 1.0.49.00
- *	Added get_search_query() and pluggable, @since ToongeePrime Theme 1.0.51.00
+ *	@since ToongeePrime Theme 1.0.49
+ *	Added get_search_query() and pluggable, @since ToongeePrime Theme 1.0.51
  */
 if ( ! function_exists( 'prime2g_wp_block_search_form' ) ) {
 function prime2g_wp_block_search_form( $echo = true, $label = 'Search', $buttontext = null ) {
