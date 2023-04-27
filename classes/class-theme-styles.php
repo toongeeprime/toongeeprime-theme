@@ -52,7 +52,7 @@ class ToongeePrime_Styles {
 			case 'darktheme' : $mod = get_theme_mod( 'prime2g_dark_theme_switch' ); break;
 			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size', '2.5' ); break;
 			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size', '3' ); break;
-			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '1' ); break;
+			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '15' ); break;
 
 		}
 	return $mod;

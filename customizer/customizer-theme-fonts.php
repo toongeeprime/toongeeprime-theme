@@ -174,7 +174,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 		'prime2g_body_text_font_size',
 		array(
 			'type' => 'theme_mod', 'transport' => 'postMessage',
-			'default' => '12', 'sanitize_callback' => 'sanitize_text_field'
+			'default' => '15', 'sanitize_callback' => 'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
