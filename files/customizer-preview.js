@@ -2,10 +2,9 @@
  *	ToongeePrime Customizer JS
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 jQuery( document ).ready( function( $ ) {
-
 /*if ( 'undefined' === typeof wp || ! wp.customize || ! wp.customize.selectiveRefresh ) return;*/
 
 	wp.customize( 'prime2g_header_background', function( value ) {
@@ -55,7 +54,7 @@ jQuery( document ).ready( function( $ ) {
 		value.bind( function( newval ) { $( '#footerWrap .socials_contacts .address' ).html( '<i class="bi bi-building"></i>'+newval ); } );
 	} );
 
-	/* @since ToongeePrime Theme 1.0.55.00 */
+	/* @since ToongeePrime Theme 1.0.55 */
 	wp.customize( 'prime2g_header_img_attachment', function( value ) {
 		value.bind( function( newval ) { $( '#header.site_header' ).css( 'background-attachment', newval ); } );
 	} );
@@ -71,5 +70,7 @@ jQuery( document ).ready( function( $ ) {
 	wp.customize( 'prime2g_archive_title_font_size', function( value ) {
 		value.bind( function( newval ) { $( 'body:not(.singular) .entry-title' ).css( 'font-size', newval+'rem' ); } );
 	} );
-
+	wp.customize( 'prime2g_body_text_font_size', function( value ) {
+		value.bind( function( newval ) { $( 'body' ).css( 'font-size', newval+'px' ); } );
+	} );
 } );

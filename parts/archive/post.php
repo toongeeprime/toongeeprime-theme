@@ -5,12 +5,12 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Added Video logic & Columns @since ToongeePrime Theme 1.0.55
+ *	Added Video & Columns logic @since ToongeePrime Theme 1.0.55
  */
 
 get_header();
 
-$cols	=	( get_theme_mod( 'prime2g_archive_post_columns_num' ) );
+$cols	=	get_theme_mod( 'prime2g_archive_post_columns_num' );
 $switchFtImageVideo	=	( get_theme_mod( 'prime2g_enable_video_features' ) && get_theme_mod( 'prime2g_replace_ftimage_with_video' ) );
 
 $options	=	[
@@ -19,7 +19,7 @@ $options	=	[
 
 echo '<section id="archive_loop" class="grid '. $cols .' prel">';
 
-	// Load posts loop
+	# Load posts loop
 	while ( have_posts() ) {
 
 		the_post();
@@ -30,7 +30,7 @@ echo '<section id="archive_loop" class="grid '. $cols .' prel">';
 
 echo '</section>';
 
-	// Prev/next page navigation
+	# Prev/next page navigation
 	prime2g_prev_next();
 
 get_footer();

@@ -215,7 +215,7 @@ code{
 .clear, .prev_next{
 	clear:both; width:100%;
 }
-.clear:after{
+.clear:before,.clear:after{
 	content:''; display:block; clear:both;
 }
 .pointer{

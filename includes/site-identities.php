@@ -28,16 +28,10 @@ else {
 	# Opening
 	$show	=	$before;
 
-	if ( has_custom_logo() ) {
-
-		$show	.=	prime2g_siteLogo( $darklogo );
-
-	}
+	if ( has_custom_logo() ) { $show	.=	prime2g_siteLogo( $darklogo ); }
 	else {
-
 		$show	.=	'<h1>'. $title .'</h1>';
 		$show	.=	'<p id="site_description">'. get_bloginfo( 'description' ) .'</p>';
-
 	}
 
 	# Include closing html tags
@@ -74,7 +68,7 @@ function prime2g_get_placeholder_url() {
  *
  *	Determine Dark theme logo or default custom logo
  *
- *	@ 1.0.49.00 : added $darklogo
+ *	@ 1.0.49 : added $darklogo
  *	@ 1.0.49.05 : added $getSrc
  */
 function prime2g_siteLogo( $darklogo = false, $getSrc = false ) {

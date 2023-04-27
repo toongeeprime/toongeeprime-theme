@@ -40,9 +40,6 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 	$headFont	=	$theStyles->headFont;
 	$h_AltFont	=	$theStyles->headingsAltFont;
 
-	/**
-	 *	FONTS
-	 */
 	$themeFonts	=	prime2g_theme_fonts();
 
 	$wp_customize->add_setting(
@@ -170,6 +167,28 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 				'step'		=>	'0.1',
 			),
 		'active_callback'	=>	'is_archive'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_body_text_font_size',
+		array(
+			'type' => 'theme_mod', 'transport' => 'postMessage',
+			'default' => '12', 'sanitize_callback' => 'sanitize_text_field'
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_body_text_font_size',
+		array(
+			'label'		=>	__( 'Body Text Font Size', PRIME2G_TEXTDOM ),
+			'type'		=>	'number',
+			'settings'	=>	'prime2g_body_text_font_size',
+			'section'	=>	'prime2g_theme_fonts_section',
+			'input_attrs'	=>	array(
+				'min'		=>	'10',
+				'max'		=>	'50',
+				'step'		=>	'0.2',
+			)
 		)
 	);
 

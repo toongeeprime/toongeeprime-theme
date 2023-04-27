@@ -4,7 +4,7 @@
  *	SHORTCODES
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 
 /**
@@ -24,10 +24,9 @@ return prime2g_theme_mod_social_and_contacts( $address );
 }
 
 
-
 /**
  *	Insert a Template Part
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 add_shortcode( 'prime_insert_template_part', 'prime2g_insert_template_part_shortcode' );
 function prime2g_insert_template_part_shortcode( $atts ) {
@@ -45,10 +44,25 @@ return $part;
 }
 
 
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ *	Considered for Template Parts
+ */
+add_shortcode( 'prime_site_logo', 'prime2g_sitelogo_shortcode' );
+function prime2g_sitelogo_shortcode( $atts ) {
+$atts	=	shortcode_atts( array( 'dark_logo' => '', 'source' => '' ), $atts );
+extract( $atts );
+
+$darkLogo	=	( $dark_logo == 'yes' ) ? true : false;
+$src	=	( $source == 'yes' ) ? true : false;
+
+return prime2g_siteLogo( $darkLogo, $src );
+}
+
 
 /**
  *	In-post Redirection
- *	@since ToongeePrime Theme 1.0.51.00
+ *	@since ToongeePrime Theme 1.0.51
  */
 add_shortcode( 'prime_redirect_to', 'prime2g_redirect_shortcode' );
 function prime2g_redirect_shortcode( $atts ) {
