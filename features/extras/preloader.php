@@ -8,7 +8,7 @@
  *	@since ToongeePrime Theme 1.0.48.00
  */
 
-add_action( 'template_redirect', 'prime2g_page_preloader' );
+add_action( 'wp_body_open', 'prime2g_page_preloader' );
 if ( ! function_exists( 'prime2g_page_preloader' ) ) {
 
 function prime2g_page_preloader() {
@@ -42,7 +42,7 @@ echo $preloader;
 
 if ( ! function_exists( 'prime2g_page_preloaderCSS' ) ) {
 function prime2g_page_preloaderCSS() {
-$css	=	'<style id="preloaderCSS">
+$css	=	'<style id="preloaderCSS" scoped>
 #prime2gPreloading{position:fixed;top:0;bottom:0;left:0;right:0;background:var(--content-background);display:grid;
 place-items:center;z-index:100000;transition:0.5s;}
 #itsLoading{border:10px solid var(--brand-color);border-top:10px solid var(--brand-color-2);width:120px;height:120px;

@@ -298,9 +298,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 .site_footer, .colophon{
 	padding:var(--min-pad);
 }
-.site_footer{
-	padding-bottom:0;
-}
 .colophon{
 	text-align:center;
 }

@@ -7,10 +7,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-$isSingular	=	is_singular();
-?>
-<!doctype html>
-<html <?php language_attributes(); prime2g_theme_html_classes(); ?>>
+$isSingular	=	is_singular(); ?>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?> <?php prime2g_theme_html_classes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
