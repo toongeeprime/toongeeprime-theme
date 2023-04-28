@@ -23,17 +23,15 @@ class ToongeePrime_Styles {
 	public $footerBG	=	'#030303';
 	public $siteWidth	=	'1100px';
 	public $bodyFont	=	'Open+Sans';
-	public $bodyAltFont	=	'Arial, Helvetica, sans-serif';
+	public $bodyAltFont	=	'Arial, Helvetica, sans-serif'; # 1.0.55
 	public $headFont	=	'Oxygen';
-	public $headingsAltFont	=	'Times New Roman, Times, serif';
-
+	public $headingsAltFont	=	'Times New Roman, Times, serif'; # 1.0.55
 
 	/**
 	 *	Get from get_theme_mod()
 	 */
 	public function get_mod( $toGet ) {
 		switch( $toGet ) {
-
 			case 'brand' : $mod = get_theme_mod( 'prime2g_primary_brand_color', $this->brandClr ); break;
 			case 'brand2' : $mod = get_theme_mod( 'prime2g_secondary_brand_color', $this->brandClr2 ); break;
 			case 'width' : $mod = get_theme_mod( 'prime2g_site_width', $this->siteWidth ); break;
@@ -50,14 +48,12 @@ class ToongeePrime_Styles {
 			case 'headerattach' : $mod = get_theme_mod( 'prime2g_header_img_attachment', 'scroll' ); break;
 			case 'headerimgsize' : $mod = get_theme_mod( 'prime2g_header_background_size', 'cover' ); break;
 			case 'darktheme' : $mod = get_theme_mod( 'prime2g_dark_theme_switch' ); break;
-			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size', '2.5' ); break;
-			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size', '3' ); break;
-			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '15' ); break;
-
+			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size', '2.5' ); break; # 1.0.55
+			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size', '3' ); break; # 1.0.55
+			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '15' ); break; # 1.0.55
 		}
 	return $mod;
 	}
-
 
 	/**
 	 *	Get luminance from a HEX color
@@ -66,7 +62,6 @@ class ToongeePrime_Styles {
 	 *	@return int Returns a number (0-255)
 	 */
 	public static function the_hex_luminance( $hex ) {
-
 		# Remove the "#" in hex value
 		$hex	=	ltrim( $hex, '#' );
 
@@ -85,7 +80,6 @@ class ToongeePrime_Styles {
 		return ( int ) round( $lum );
 	}
 
-
 	/**
 	 *	Determine Color is Light
 	 *
@@ -94,7 +88,6 @@ class ToongeePrime_Styles {
 	public static function is_light_color( $hex ) {
 		return ( 127 <= self::the_hex_luminance( $hex ) );
 	}
-
 
 	/**
 	 *	Generate CSS :root variables
@@ -117,15 +110,12 @@ class ToongeePrime_Styles {
 	--post-titlesize:". $this->get_mod( 'post_titleSize' ) ."rem;
 	--arch-titlesize:". $this->get_mod( 'arch_titleSize' ) ."rem;
 	";
-
 	}
-
 
 	/**
 	 *	Generate other CSS
 	 */
 	protected function theme_css() {
-
 	$bodyFS	=	$this->get_mod( 'bodyFontSize' ) . 'px';
 	$bgSize	=	$this->get_mod( 'headerimgsize' );
 	$bgSize	=	( '' == $bgSize ) ? 'cover' : $bgSize;
@@ -142,11 +132,10 @@ class ToongeePrime_Styles {
 	body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.8);}
 	}
 	@media(max-width:601px){
-	.singular .entry-title{font-size:calc(var(--post-titlesize)*0.7);}
-	body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.7);}
+	.singular .entry-title{font-size:calc(var(--post-titlesize)*0.55);}
+	body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.55);}
 	}
 	";
-
 	}
 
 }

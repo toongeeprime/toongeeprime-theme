@@ -61,6 +61,26 @@ return prime2g_siteLogo( $darkLogo, $src );
 
 
 /**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+add_shortcode( 'prime_site_title_and_description', 'prime2g_title_and_description_shortcode' );
+function prime2g_title_and_description_shortcode( $atts ) {
+$atts	=	shortcode_atts( array( 'description' => 'yes', 'class' => '' ), $atts );
+extract( $atts );
+
+$desc	=	( $description == 'yes' ) ? true : false;
+$name	=	get_bloginfo( 'name' );
+
+$title	=	"<div class=\"page_title prel site_width {$class}\">";
+$title	.=	"<h1><span title=\"{$name}\">{$name}</span></h1>";
+$title	.=	$desc ? '<p id="site_description">'. get_bloginfo( 'description' ) .'</p>' : '';
+$title	.=	"</div>";
+
+return $title;
+}
+
+
+/**
  *	In-post Redirection
  *	@since ToongeePrime Theme 1.0.51
  */
@@ -69,12 +89,7 @@ function prime2g_redirect_shortcode( $atts ) {
 $home		=	get_home_url();
 $loggedin	=	is_user_logged_in();
 
-$atts	=	shortcode_atts(
-	array(
-	'url'	=>	$home,
-	'users'	=>	'',
-	), $atts
-);
+$atts	=	shortcode_atts( array( 'url' => $home, 'users' => '' ), $atts );
 extract( $atts );
 
 // Leave echo, not return:
@@ -95,4 +110,5 @@ if ( $users == '' ) {
 }
 
 }
+
 

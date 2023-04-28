@@ -38,7 +38,7 @@ let rect = el.getBoundingClientRect();
 
 function prime2g_inViewport_get( elmt ) {
 el	=	p2getEl( elmt );
-let rect = el.getBoundingClientRect();
+let rect	=	el.getBoundingClientRect();
 	return (
 		rect.top >= 0 && rect.left >= 0 &&
 		rect.bottom	<=	( window.innerHeight || document.documentElement.clientHeight ) &&
@@ -48,7 +48,7 @@ let rect = el.getBoundingClientRect();
 
 
 function prime2g_gotoThis( selector ) {
-let elmt = p2getEl( selector );
+let elmt	=	p2getEl( selector );
 	elmt.scrollIntoView( true );
 }
 
@@ -72,12 +72,8 @@ document.addEventListener(
 function prime2g_class_on_scroll( el, cls = 'pop', level = 200 ) {
 window.addEventListener( "scroll", ()=>{
 let elmt	=	p2getEl( el );
-	if ( window.pageYOffset > level ) {
-		elmt.classList.add( cls );
-	}
-	else {
-		elmt.classList.remove( cls );
-	}
+	if ( window.pageYOffset > level ) { elmt.classList.add( cls ); }
+	else { elmt.classList.remove( cls ); }
 
 }, false );
 }
@@ -106,19 +102,14 @@ runCount();
 }
 
 
-
 /**
  *	Counter
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 function prime2g_get_sibling( get, elem, sibClass = '' ) {
 
-	if ( get == 'previous' ) {
-		var sibling	=	elem.previousElementSibling;
-	}
-	if ( get == 'next' ) {
-		var sibling	=	elem.nextElementSibling;
-	}
+	if ( get == 'previous' ) { var sibling	=	elem.previousElementSibling; }
+	if ( get == 'next' ) { var sibling	=	elem.nextElementSibling; }
 
 	// If no sibClass, return first sibling
 	if ( ! sibClass ) return sibling;
@@ -127,12 +118,8 @@ function prime2g_get_sibling( get, elem, sibClass = '' ) {
 	while ( sibling ) {
 		if ( sibling.classList.contains( sibClass ) ) return sibling;
 
-		if ( get == 'previous' ) {
-			sibling	=	sibling.previousElementSibling;
-		}
-		if ( get == 'next' ) {
-			sibling	=	sibling.nextElementSibling;
-		}
+		if ( get == 'previous' ) { sibling	=	sibling.previousElementSibling; }
+		if ( get == 'next' ) { sibling	=	sibling.nextElementSibling; }
 	}
 
 }
@@ -140,7 +127,7 @@ function prime2g_get_sibling( get, elem, sibClass = '' ) {
 
 /**
  *	Detect Mobile or TouchScreen Devices
- *	@since ToongeePrime Theme 1.0.51.00
+ *	@since ToongeePrime Theme 1.0.51
  */
 function prime2g_isMobile() { return ( 'ontouchstart' in document.documentElement ); }
 
@@ -155,6 +142,4 @@ let windowWidth = window.screen.width < window.outerWidth ? window.screen.width 
 return ( windowWidth < screenSize );
 
 }
-
-
 

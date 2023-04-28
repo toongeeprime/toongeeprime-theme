@@ -27,6 +27,7 @@ Several updates across the theme
 * @ customizer: Video Features with Video Features: fields, templates and functions
 * @ customizer: Footer columns with accompanying setups
 * @ includes: Added adjust-templates.php
+* Shortcodes: prime_site_logo, prime_site_title_and_description
 
 = 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()
@@ -296,4 +297,3 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
-
