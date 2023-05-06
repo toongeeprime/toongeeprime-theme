@@ -520,7 +520,7 @@ a.comment-reply-link:hover{
 	background-color:var(--content-text); display:grid; place-content:center;
 }
 .the_metas{
-	font-size:90%; margin-top:10px;
+	font-size:90%;
 }
 .the_metas a{
 	border:0;

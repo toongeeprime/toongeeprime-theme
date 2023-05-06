@@ -35,7 +35,7 @@
 	<section id="colophon" class="colophon prel" role="contentinfo">
 
 	<?php
-	if ( get_theme_mod( 'prime2g_theme_add_footer_logo' ) ) {
+	if ( get_theme_mod( 'prime2g_theme_add_footer_logo', '1' ) ) {
 		echo prime2g_title_or_logo( '<div class="footer_logo prel title_tagline_logo">', '</div>' );
 	}
 	?>

@@ -5,7 +5,7 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Added div.title_wrap @since ToongeePrime Theme 1.55.00
+ *	Added div.title_wrap @since ToongeePrime Theme 1.0.55
  */
 
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );

@@ -79,7 +79,7 @@ function prime2g_theme_mod_footer_credit() {
 
 $footerCred	=	'';
 
-if ( get_theme_mod( 'prime2g_theme_add_footer_credits' ) ) {
+if ( get_theme_mod( 'prime2g_theme_add_footer_credits', '1' ) ) {
 	$footerCred	.=	prime2g_theme_footer_credit();
 }
 

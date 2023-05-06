@@ -157,7 +157,7 @@ if ( ! $removeSidebar && $post->post_type !== 'page'
 
 /**
  *	FOR THEME'S TEMPLATE PARTS
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 add_action( 'add_meta_boxes', 'prime2g_template_part_boxes' );
 function prime2g_template_part_boxes() {
@@ -190,4 +190,5 @@ else { ?>
 }
 
 }
+
 
