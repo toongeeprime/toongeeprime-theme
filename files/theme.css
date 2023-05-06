@@ -157,8 +157,11 @@ code{
 }
 
 /********* Theme Classes *********/
-.site_width{
+.site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
 	margin:auto; max-width:var(--site-width); /* Don't use width:100% */
+}
+.ext_stretch_head .site_container,.ext_stretch_foot .site_container,.ext_stretch_foot .footerWrap{
+	max-width:100vw;
 }
 .ext_stretch_hf .site_container, .ext_stretch_hf .footerWrap{
 	max-width:100vw;

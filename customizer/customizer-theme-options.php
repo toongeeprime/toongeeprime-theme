@@ -95,8 +95,10 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 			'section'	=>	'prime2g_theme_options_section',
 			'choices'	=>	array(
 				''	=>	__( 'None', PRIME2G_TEXTDOM ),
+				'stretch_head'	=>	__( 'Stretch Header', PRIME2G_TEXTDOM ),
+				'stretch_foot'	=>	__( 'Stretch Footer', PRIME2G_TEXTDOM ),
 				'stretch_hf'	=>	__( 'Stretch Header &amp; Footer', PRIME2G_TEXTDOM )
-			),
+			)
 		)
 	);
 
