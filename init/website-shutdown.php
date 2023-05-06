@@ -23,7 +23,7 @@ if ( empty( $shutDown ) ) return;
 
 /**
  *	SHUTDOWN PAGE
- *	@since ToongeePrime Theme @ 1.0.55.00
+ *	@since ToongeePrime Theme @ 1.0.55
  */
 $usePage	=	get_theme_mod( 'prime2g_shutdown_display' );
 if ( 'use_page' === $usePage ) {
@@ -79,7 +79,7 @@ background-size:cover;background-position:center;background-image:url('. get_bac
 </style>
 </head>';
 
-	# Run Close-down:
+	# Run Close-down
 	if ( current_user_can( 'edit_theme_options' ) && empty( get_background_image() ) )
 		echo '<p style="position:fixed;top:0;left:0;">* You can add a background image in Customizer</p>';
 
@@ -98,7 +98,7 @@ background-size:cover;background-position:center;background-image:url('. get_bac
 
 
 /**
- *	Closed Website Page Template:
+ *	Closed Website Page Template
  */
 if ( ! function_exists( 'prime2g_close_down_template' ) ) {
 function prime2g_close_down_template( $shutDown ) {
@@ -109,10 +109,8 @@ $headline	=	'maintenance' == $shutDown ?
 $msg	=	'maintenance' == $shutDown ? 'We will be back soon.' : 'Thank you for checking in.';
 
 	echo '<main id="message">';
-	echo '<h1>'. $headline .'</h1>';
-	echo '<h3>'. $msg .'</h3>';
+	echo '<h1>'. __( $headline, PRIME2G_TEXTDOM ) .'</h1>';
+	echo '<h3>'. __( $msg, PRIME2G_TEXTDOM ) .'</h3>';
 	echo '</main>';
 }
 }
-
-

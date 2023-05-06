@@ -19,7 +19,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	$wp_customize->add_setting(
 		'prime2g_dark_theme_logo',
 		array(
-			'type'			=>	'theme_mod',
+			'type'	=>	'theme_mod',
 			'sanitize_callback'	=>	'sanitize_text_field',
 		)
 	);
@@ -55,7 +55,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 				'1100px'	=>	__( 'Default', PRIME2G_TEXTDOM ),
 				'960px'		=>	__( 'Narrow', PRIME2G_TEXTDOM ),
 				'1250px'	=>	__( 'Wide', PRIME2G_TEXTDOM ),
-				'100vw'		=>	__( 'Full Width', PRIME2G_TEXTDOM ),
+				'100vw'		=>	__( 'Full Width', PRIME2G_TEXTDOM )
 			),
 		)
 	);
@@ -95,8 +95,28 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 			'section'	=>	'prime2g_theme_options_section',
 			'choices'	=>	array(
 				''	=>	__( 'None', PRIME2G_TEXTDOM ),
-				'stretch_hf'	=>	__( 'Stretch Header &amp; Footer', PRIME2G_TEXTDOM ),
+				'stretch_hf'	=>	__( 'Stretch Header &amp; Footer', PRIME2G_TEXTDOM )
 			),
+		)
+	);
+
+	/**
+	 *	SIDEBAR IN SINGULAR
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_singular', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_control(
+		'prime2g_remove_sidebar_in_singular',
+		array(
+			'label'		=>	__( 'Remove Sidebar in Single Entries', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_remove_sidebar_in_singular',
+			'section'	=>	'prime2g_theme_options_section',
+			'choices'	=>	array(
+				''	=>	__( 'Keep Sidebar', PRIME2G_TEXTDOM ),
+				'posts'	=>	__( 'Remove but Exclude Pages', PRIME2G_TEXTDOM ),
+				'and_pages'	=>	__( 'Also Remove in Pages', PRIME2G_TEXTDOM )
+			)
 		)
 	);
 
@@ -149,21 +169,61 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 		)
 	);
 
-if ( prime2g_use_extra_settings() ) {
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+	$wp_customize->add_setting( 'prime2g_theme_add_footer_menu',
+		array( 'type' => 'theme_mod', 'default' => 1 )
+	);
+	$wp_customize->add_control(
+		'prime2g_theme_add_footer_menu',
+		array(
+			'label'		=>	__( 'Footer Menu', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_theme_add_footer_menu',
+			'section'	=>	'prime2g_theme_options_section'
+		)
+	);
+
+	$wp_customize->add_setting( 'prime2g_theme_add_footer_credits',
+		array( 'type' => 'theme_mod', 'default' => 1 )
+	);
+	$wp_customize->add_control(
+		'prime2g_theme_add_footer_credits',
+		array(
+			'label'		=>	__( 'Footer Credits', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_theme_add_footer_credits',
+			'section'	=>	'prime2g_theme_options_section'
+		)
+	);
+
+if ( CHILD2G_VERSION >= '2.0' ) {
+
+	$wp_customize->add_setting( 'prime2g_theme_add_footer_logo',
+		array( 'type' => 'theme_mod', 'default' => 1 )
+	);
+	$wp_customize->add_control(
+		'prime2g_theme_add_footer_logo',
+		array(
+			'label'		=>	__( 'Footer Logo', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_theme_add_footer_logo',
+			'section'	=>	'prime2g_theme_options_section'
+		)
+	);
 
 	/**
 	 *	FOOTER COLUMNS
-	 *	@since ToongeePrime Theme 1.0.55
 	 */
-
 	$wp_customize->selective_refresh->add_partial(
 		'prime2g_footer_columns_num',
 		array(
-			'selector'		=>	'#sitebasebar',
-			'settings'		=>	'prime2g_footer_columns_num',
+			'selector'	=>	'#sitebasebar',
+			'settings'	=>	'prime2g_footer_columns_num',
 			'container_inclusive'	=>	true,
 			'render_callback'		=>	'prime2g_footer_widgets',
-			'fallback_refresh'		=>	false,
+			'fallback_refresh'		=>	false
 		)
 	);
 
@@ -191,6 +251,7 @@ if ( prime2g_use_extra_settings() ) {
 	);
 
 }
+#	@since ToongeePrime Theme 1.0.55 end	#
 
 	/**
 	 *	FOOTER CREDITS
@@ -201,7 +262,7 @@ if ( prime2g_use_extra_settings() ) {
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
 			'default'	=>	'Powered by',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -213,7 +274,7 @@ if ( prime2g_use_extra_settings() ) {
 			'section'	=>	'prime2g_theme_options_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'Powered by',
-				'maxlength'		=>	'125',
+				'maxlength'		=>	'125'
 			),
 		)
 	);
@@ -224,7 +285,7 @@ if ( prime2g_use_extra_settings() ) {
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
 			'default'	=>	'ToongeePrime Theme',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -236,7 +297,7 @@ if ( prime2g_use_extra_settings() ) {
 			'section'	=>	'prime2g_theme_options_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'ToongeePrime Theme',
-				'maxlength'		=>	'125',
+				'maxlength'		=>	'125'
 			),
 		)
 	);
@@ -259,7 +320,7 @@ if ( prime2g_use_extra_settings() ) {
 			'section'	=>	'prime2g_theme_options_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'https://akawey.com/',
-				'maxlength'		=>	'125',
+				'maxlength'		=>	'125'
 			),
 		)
 	);
@@ -272,7 +333,7 @@ if ( prime2g_use_extra_settings() ) {
 		array(
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -284,7 +345,7 @@ if ( prime2g_use_extra_settings() ) {
 			'section'	=>	'prime2g_theme_options_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'All rights reserved.',
-				'maxlength'		=>	'125',
+				'maxlength'		=>	'125'
 			),
 		)
 	);

@@ -69,7 +69,8 @@ $theLogo	=	prime2g_siteLogo();
  *	Footer Menu
  */
 if ( ! function_exists( 'prime2g_footer_menu' ) ) {
-function prime2g_footer_menu( $id = '' ) { ?>
+function prime2g_footer_menu( $id = 'sitefooter_menu' ) {
+if ( get_theme_mod( 'prime2g_theme_add_footer_menu' ) )	{ ?>
 
 <div id="<?php echo $id; ?>" class="footer_menu_wrap">
 	<?php if ( has_nav_menu( 'footer-menu' ) ) { ?>
@@ -99,6 +100,7 @@ function prime2g_footer_menu( $id = '' ) { ?>
 </div><!-- .site-menu-base -->
 
 <?php
+}
 }
 }
 

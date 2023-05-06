@@ -130,7 +130,7 @@ if ( $parts->have_posts() ) {
 		if ( $echo )
 			$part	=	the_content();
 		else
-			$part	=	get_the_content();
+			$part	=	do_shortcode( get_the_content() );
 	}
 
 }

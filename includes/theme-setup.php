@@ -101,7 +101,7 @@ $cols	=	4;
 $num	=	' %d';
 $name	=	'Footer Widgets';
 $fname	=	$name . $num;
-if ( prime2g_use_extra_settings() ) {
+if ( CHILD2G_VERSION >= '2.0' ) {
 	$cols	=	(int) get_theme_mod( 'prime2g_footer_columns_num', '4' );
 	$name	=	( $cols > 1 ) ? $fname : $name;
 }

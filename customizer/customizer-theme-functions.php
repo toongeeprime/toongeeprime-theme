@@ -76,6 +76,29 @@ return $contacts;
 if ( ! function_exists( 'prime2g_theme_mod_footer_credit' ) ) {
 
 function prime2g_theme_mod_footer_credit() {
+
+$footerCred	=	'';
+
+if ( get_theme_mod( 'prime2g_theme_add_footer_credits' ) ) {
+	$footerCred	.=	prime2g_theme_footer_credit();
+}
+
+$footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padding-bottom:var(--min-pad);margin:0;">Designed and developed by <a href="https://akawey.com/" title="Visit Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</p>';
+
+return $footerCred;
+}
+
+}
+
+
+/**
+ *	Split from prime2g_theme_mod_footer_credit() for Customizer control & shortcode
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( ! function_exists( 'prime2g_theme_footer_credit' ) ) {
+
+function prime2g_theme_footer_credit() {
+
 $power	=	get_theme_mod( 'prime2g_footer_credit_power', 'Powered by' );
 $name	=	get_theme_mod( 'prime2g_footer_credit_name', 'ToongeePrime Theme' );
 $url	=	get_theme_mod( 'prime2g_footer_credit_url', 'https://akawey.com/' );
@@ -106,7 +129,6 @@ $footerCred	=	'<div class="site_footer_credits">';
 	$footerCred	.=	'</span>';
 
 $footerCred	.=	'</div>';
-$footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padding-bottom:var(--min-pad);margin:0;">Designed and developed by <a href="https://akawey.com/" title="Visit Akàwey Online Enterprises" target="_blank" rel="noopener">Akàwey Online Enterprises</a>.</p>';
 
 return $footerCred;
 }
@@ -123,7 +145,7 @@ if ( ! function_exists( 'prime2g_theme_mod_shop_title' ) ) {
 function prime2g_theme_mod_shop_title( $pre = '<h1 class="page-title">', $post = '</h1>' ) {
 $shopTitle	=	get_theme_mod( 'prime2g_shop_page_title' );
 
-	if( $shopTitle ) {
+	if ( $shopTitle ) {
 		$title	=	$pre . __( $shopTitle, PRIME2G_TEXTDOM ) . $post;
 	}
 	else {
@@ -134,7 +156,4 @@ return $title;
 }
 
 }
-
-
-
 

@@ -3,10 +3,11 @@
 /**
  *	RENDER SITE PARTS
  *
- *	@since ToongeePrime Theme 1.55
+ *	Copy of parts/site-header.php
+ *	@since ToongeePrime Theme 1.0.55
  */
 
-#	Must exclude menus for customizer preview rendering
+#	Excludes menus for customizer preview rendering
 if ( ! function_exists( 'prime2g_render_header' ) ) {
 
 function prime2g_render_header() {
@@ -66,4 +67,3 @@ if ( ! $isSingular || $isSingular && $keepHeader ) {
 }
 
 }
-

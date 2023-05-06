@@ -112,6 +112,11 @@ value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 		</select>
 	</div>
 
+<?php
+$removeSidebar	=	get_theme_mod( 'prime2g_remove_sidebar_in_singular' );
+if ( ! $removeSidebar && $post->post_type !== 'page'
+	|| $post->post_type === 'page' && 'and_pages' !== $removeSidebar ) { ?>
+
 	<div class="meta-options prime2g_field">
 		<label for="remove_sidebar">Remove Sidebar?</label>
 		<select id="remove_sidebar" class="prime2g_options" name="remove_sidebar">
@@ -119,6 +124,8 @@ value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 			<option value="remove" <?php if ( $post->remove_sidebar == 'remove' ) echo 'selected'; ?>>Remove Sidebar</option>
 		</select>
 	</div>
+
+<?php } ?>
 
 	<div class="meta-options prime2g_field">
 		<label for="remove_header">Remove Header?</label>

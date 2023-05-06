@@ -5,7 +5,7 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49.00
+ *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49
  */
 
 require_once 'website-shutdown.php';
@@ -32,7 +32,7 @@ foreach( $directories as $dir ) {
 /**
  *	THEME PARTS
  */
-$parts	=	[ 'menus', 'sidebars', 'in-loops', 'homepage' ];
+$parts	=	[ 'adjust-templates', 'menus', 'sidebars', 'in-loops', 'homepage' ];
 foreach( $parts as $part ) {
 	require_once PRIME2G_PART . $part . '.php';
 }

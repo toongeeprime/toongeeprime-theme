@@ -7,8 +7,6 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-
-
 /**
  *	MAIN SIDEBAR
  */
@@ -39,7 +37,6 @@ if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
 }
 
 
-
 /**
  *	WIDGETS SET AFTER POSTS
  */
@@ -62,7 +59,6 @@ if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 }
 
 }
-
 
 
 /**
@@ -89,7 +85,6 @@ if ( is_active_sidebar( 'footer-top' ) ) { ?>
 }
 
 
-
 /**
  *	FOOTER WIDGETS
  *	Updated for customizer columns @since ToongeePrime Theme 1.0.55
@@ -100,7 +95,7 @@ function prime2g_footer_widgets() {
 
 $cols	=	4;
 $wID	=	'';
-if ( prime2g_use_extra_settings() ) {
+if ( CHILD2G_VERSION >= '2.0' ) {
 	$cols	=	(int) get_theme_mod( 'prime2g_footer_columns_num', '4' );
 }
 
@@ -119,9 +114,9 @@ if ( $n > 1 ) $wID	=	'-' . $n;
 
 echo	'<div id="f-widgets'. $n .'" class="footer-widgets">';
 
-	if ( is_active_sidebar( 'footers' . $wID ) ) {
+	if ( is_active_sidebar( "footers{$wID}" ) ) {
 	echo '<div class="widgets-box grid">';
-		dynamic_sidebar( 'footers' . $wID );
+		dynamic_sidebar( "footers{$wID}" );
 	echo '</div>';
 	}
 
@@ -130,7 +125,7 @@ echo	'</div>';
 }
 ?>
 
-</aside><!-- .widget-area -->
+</aside>
 <?php
 }
 

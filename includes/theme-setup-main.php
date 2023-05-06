@@ -43,7 +43,7 @@ function toongeeprime_theme_setup() {
 	$theStyles	=	new ToongeePrime_Styles();
 
 		/**
-		 *	@since ToongeePrime Theme Theme 1.0.50.00
+		 *	@since ToongeePrime Theme Theme 1.0.50
 		 */
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
@@ -81,17 +81,7 @@ function toongeeprime_theme_setup() {
 		 */
 		add_theme_support(
 			'post-formats',
-			array(
-				'link',
-				'aside',
-				'gallery',
-				'image',
-				'quote',
-				'status',
-				'video',
-				'audio',
-				'chat',
-			)
+			array( 'link', 'aside', 'gallery', 'image', 'quote', 'status', 'video', 'audio', 'chat', )
 		);
 
 		/**
@@ -106,16 +96,8 @@ function toongeeprime_theme_setup() {
 		 *	Switch default core markup for search form, comment form, and comments to output valid HTML5
 		 */
 		add_theme_support(
-			'html5',
-			array(
-				'comment-form',
-				'comment-list',
-				'gallery',
-				'caption',
-				'style',
-				'script',
-				'navigation-widgets',
-			)
+		'html5',
+		array( 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' )
 		);
 
 		// Support selective refresh for widgets

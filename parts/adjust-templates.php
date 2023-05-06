@@ -23,7 +23,12 @@ if ( ! empty( prime2g_get_post_media_embed() ) ) {
 
 global $post;
 
-if ( $post->remove_sidebar === 'remove' ) prime2g_removeSidebar();
+$removeSidebar	=	get_theme_mod( 'prime2g_remove_sidebar_in_singular', '' );
+
+if ( $post->remove_sidebar === 'remove' || 'and_pages' === $removeSidebar ||
+	! is_page() && ( 'posts' === $removeSidebar )
+	)
+	prime2g_removeSidebar();
 
 }
 

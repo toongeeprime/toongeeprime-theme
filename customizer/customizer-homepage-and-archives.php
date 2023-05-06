@@ -21,8 +21,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'label'		=>	__( 'Remove Sidebar in Archives?', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_remove_sidebar_in_archives',
-			'section'	=>	'prime2g_theme_archives_section',
-			'active_callback'	=>	'is_archive',
+			'section'	=>	'prime2g_theme_archives_section'
 		)
 	);
 
@@ -36,7 +35,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
 			'default'	=>	$siteTitle,
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -49,7 +48,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	$siteTitle,
 			),
-			'active_callback'	=>	'is_home',
+			'active_callback'	=>	'is_home'
 		)
 	);
 
@@ -59,7 +58,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'type'		=>	'theme_mod',
 			'default'	=>	'Posts Homepage',
 			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -109,8 +108,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'section'	=>	'prime2g_theme_archives_section',
 			'choices'	=>	array(
 				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM ),
-			),
-			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); },
+			)
 		)
 	);
 
@@ -130,8 +128,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'section'	=>	'prime2g_theme_archives_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'Featured Posts',
-			),
-			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); }
+			)
 		)
 	);
 

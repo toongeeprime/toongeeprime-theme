@@ -222,7 +222,7 @@ $link	=	get_permalink();
 
 
 /**
- *	Core of prime2g_archive_loop()
+ *	Split from prime2g_archive_loop()
  *	Archive Post Entry Template: returned
  *	@since ToongeePrime Theme 1.0.45
  */

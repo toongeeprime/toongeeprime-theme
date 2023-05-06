@@ -34,7 +34,11 @@
 
 	<section id="colophon" class="colophon prel" role="contentinfo">
 
-		<?php echo prime2g_title_or_logo( '<footer class="footer_logo prel title_tagline_logo">', '</footer>' ); ?>
+	<?php
+	if ( get_theme_mod( 'prime2g_theme_add_footer_logo' ) ) {
+		echo prime2g_title_or_logo( '<div class="footer_logo prel title_tagline_logo">', '</div>' );
+	}
+	?>
 
 		<div class="site-info">
 

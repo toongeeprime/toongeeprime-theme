@@ -81,6 +81,12 @@ return $title;
 
 
 /**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+add_shortcode( 'prime_site_footer_credits', 'prime2g_theme_footer_credit' );
+
+
+/**
  *	In-post Redirection
  *	@since ToongeePrime Theme 1.0.51
  */

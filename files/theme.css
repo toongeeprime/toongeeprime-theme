@@ -265,9 +265,6 @@ h1, h2, h3{
 a{
 	text-decoration:none; color:var(--content-text);
 }
-.primary_area a, table a{
-	border-bottom:1px solid;
-}
 a:hover, a:focus, table a:hover, table a:focus{
 	color:var(--brand-color); border-color:transparent;
 }
@@ -460,7 +457,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 }
 .post_taxonomies a{
 	display:inline-block; padding:0 5px; margin:2.5px;
-	text-transform:uppercase; border:1px solid;
+	text-transform:uppercase;
 }
 .post_taxonomies a:hover, .post_taxonomies a:focus{
 	background:var(--content-text); color:var(--content-background);
@@ -504,7 +501,7 @@ a.comment-reply-link:hover{
 	border:0; font-size:90%;
 }
 .required-field-message{
-	display:block; font-size:90%; font-style:italic;
+	display:block; font-size:80%; font-style:italic;
 	color:tomato;
 }
 #reply-title small a{

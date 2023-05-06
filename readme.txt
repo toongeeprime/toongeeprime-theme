@@ -26,7 +26,8 @@ Several updates across the theme
 * @ customizer: Archive columns
 * @ customizer: Video Features with Video Features: fields, templates and functions
 * @ customizer: Footer columns with accompanying setups
-* @ includes: Added adjust-templates.php
+* @ customizer: Remove sidebar controls (Archives / Singular)
+* @ parts: Added adjust-templates.php
 * Shortcodes: prime_site_logo, prime_site_title_and_description
 
 = 1.0.51.00 =

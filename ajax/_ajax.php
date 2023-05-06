@@ -9,7 +9,7 @@
 
 add_action( 'wp_head', 'prime2g_ajax_head', 3 );
 function prime2g_ajax_head() { ?>
-<script type="text/javascript" id="prime2g_ajax_base">
+<script id="prime2g_ajax_base">
 const prime2g_ajaxurl	=	"<?php echo admin_url( 'admin-ajax.php' ); ?>";
 
 function prime2g_run_ajax( formData, ajaxSuccess, ajaxError = '', reqType = 'POST' ) {

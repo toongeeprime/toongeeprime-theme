@@ -10,7 +10,7 @@
 
 /**
  *	START THEME
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 require_once 'init/init.php';
 

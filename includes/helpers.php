@@ -100,16 +100,6 @@ function prime2g_use_extras() {
 
 
 /**
- *	As per extra settings that could break older versions
- *	@since ToongeePrime Theme 1.0.55
- */
-function prime2g_use_extra_settings() {
-	return ( defined( 'PRIME2G_EXTRA_SETTINGS' ) && PRIME2G_EXTRA_SETTINGS === true );
-}
-
-
-
-/**
  *	Get Site' Domain name
  *	@since ToongeePrime Theme 1.0.49
  */
