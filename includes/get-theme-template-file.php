@@ -5,7 +5,7 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Separated from helpers.php @includes: @since ToongeePrime Theme 1.0.47.00
+ *	Separated from helpers.php @includes: @since ToongeePrime Theme 1.0.47
  *
  **
  *	This function is so that there doesn't have to be a long list of template files

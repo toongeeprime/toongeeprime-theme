@@ -37,7 +37,7 @@ if ( $post->remove_sidebar === 'remove' || 'and_pages' === $removeSidebar ||
 /**
  *	Archive Templates
  */
-if ( is_archive() ) {
+if ( is_home() || is_archive() ) {
 
 if ( get_theme_mod( 'prime2g_remove_sidebar_in_archives', '0' ) ) prime2g_removeSidebar();
 

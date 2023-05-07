@@ -856,9 +856,6 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 #wpadminbar{
 	position:absolute;
 }
-.site_main{
-	padding-top:var(--min-pad);
-}
 .admin-bar #container{
 	top:-4px;
 }

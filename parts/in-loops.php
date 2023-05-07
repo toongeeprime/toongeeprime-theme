@@ -327,7 +327,7 @@ if ( $switch_img_vid && prime2g_post_has_media_field( $post ) ) {
 $title	=	$post->post_title;
 $link	=	get_permalink( $post );
 
-$entry	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( '', $post ) ) . '">';
+$entry	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( $entryClasses, $post ) ) . '">';
 $entry	.=	'<div class="entry_img">';
 
 $entry	.=	prime2g_get_post_media_embed( '', $post );

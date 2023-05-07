@@ -323,7 +323,7 @@ function prime2g_posted_by( $text = 'Posted by', $more = 'More entries by', $pos
  */
 global $post;
 
-if ( $postObject ) { $post = $postObject; }
+$post	=	$postObject ?: $post;
 
 $id		=	(int) $post->post_author;
 
@@ -537,7 +537,7 @@ return $readMore;
 
 /**
  *	Filter the excerpt more link
- *	Added $text and $length @since ToongeePrime Theme 1.0.50.00
+ *	Added $text and $length @since ToongeePrime Theme 1.0.50
  */
 add_filter( 'excerpt_more', 'prime2g_read_more_excerpt_link' );
 if ( ! function_exists( 'prime2g_read_more_excerpt_link' ) ) {
@@ -590,6 +590,8 @@ function prime2g_post_no_title( $title ) {
 if ( ! function_exists( 'prime2g_title_header' ) ) {
 function prime2g_title_header( $header_classes = '' ) {
 
+if ( function_exists( 'define_2gRMVTitle' ) ) return;
+
 $is_singular	=	is_singular();
 $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 ?>
@@ -597,8 +599,8 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <div class="page_title site_width prel<?php echo $header_classes . $hClass; ?>">
 
 <?php
-	#	Theme Hook @since ToongeePrime Theme 1.0.50.00:
-	#	Moved outside $is_singular 1.0.51.00:
+	#	Theme Hook @since ToongeePrime Theme 1.0.50:
+	#	Moved outside $is_singular 1.0.51:
 	prime2g_before_title();
 
 	if ( $is_singular ) {
@@ -661,3 +663,7 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
+
+
+
+
