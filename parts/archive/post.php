@@ -17,7 +17,7 @@ $options	=	[
 	'switch_img_vid' => $switchFtImageVideo
 ];
 
-echo '<section id="archive_loop" class="grid '. $cols .' prel">';
+echo '<section id="archive_loop" class="posts_loop grid '. $cols .' prel">';
 
 	# Load posts loop
 	while ( have_posts() ) {

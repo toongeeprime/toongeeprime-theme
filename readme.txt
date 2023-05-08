@@ -28,6 +28,7 @@ Several updates across the theme
 * @ customizer: Footer columns with accompanying setups
 * @ customizer: Remove sidebar controls (Archives / Singular)
 * @ parts: Added adjust-templates.php
+* @ js: Added insertAfter
 * Shortcodes: prime_site_logo, prime_site_title_and_description
 
 = 1.0.51.00 =

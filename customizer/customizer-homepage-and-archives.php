@@ -11,9 +11,9 @@ if ( ! function_exists( 'prime2g_customizer_home_and_archives' ) ) {
 
 function prime2g_customizer_home_and_archives( $wp_customize ) {
 
-	/**
-	 *	@since ToongeePrime Theme 1.0.55
-	 */
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
 	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_archives', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
 		'prime2g_remove_sidebar_in_archives',
@@ -24,6 +24,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'section'	=>	'prime2g_theme_archives_section'
 		)
 	);
+#	@since ToongeePrime Theme 1.0.55 end
 
 	/**
 	 *	POSTS HOME TITLE
@@ -71,13 +72,13 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'Posts Homepage',
 			),
-			'active_callback'	=>	'is_home',
+			'active_callback'	=>	'is_home'
 		)
 	);
 
-	/**
-	 *	@since ToongeePrime Theme 1.0.55
-	 */
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
 	$wp_customize->add_setting( 'prime2g_archive_post_columns_num', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
 		'prime2g_archive_post_columns_num',
@@ -95,6 +96,28 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'prime2g_loop_post_image_height',
+		array(
+			'type' => 'theme_mod', 'transport' => 'postMessage',
+			'default' => '17', 'sanitize_callback' => 'sanitize_text_field'
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_loop_post_image_height',
+		array(
+			'label'		=>	__( 'Post Featured Image Height', PRIME2G_TEXTDOM ),
+			'type'		=>	'number',
+			'settings'	=>	'prime2g_loop_post_image_height',
+			'section'	=>	'prime2g_theme_archives_section',
+			'input_attrs'	=>	array(
+				'min'		=>	'5',
+				'max'		=>	'50'
+			)
+		)
+	);
+#	@since ToongeePrime Theme 1.0.55 end
+
 	/**
 	 *	HEADER STICKY POSTS
 	 */
@@ -107,7 +130,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'settings'	=>	'prime2g_theme_show_stickies',
 			'section'	=>	'prime2g_theme_archives_section',
 			'choices'	=>	array(
-				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM ),
+				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM )
 			)
 		)
 	);
@@ -117,7 +140,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 		array(
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -127,7 +150,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'settings'	=>	'prime2g_theme_sticky_heading',
 			'section'	=>	'prime2g_theme_archives_section',
 			'input_attrs'	=>	array(
-				'placeholder'	=>	'Featured Posts',
+				'placeholder'	=>	'Featured Posts'
 			)
 		)
 	);
@@ -147,7 +170,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_theme_stickies_post_type',
 			'section'	=>	'prime2g_theme_archives_section',
-			'choices'	=>	prime2g_posttypes_names_array(),
+			'choices'	=>	prime2g_posttypes_names_array()
 		)
 	);
 
@@ -166,7 +189,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 				'4'	=>	'4', '6'	=>	'6',
 				'8'	=>	'8', '9'	=>	'9',
 				'12'=>	'12', '15'	=>	'15',
-				'16'=>	'16', '20'	=>	'20',
+				'16'=>	'16', '20'	=>	'20'
 			],
 		)
 	);

@@ -142,9 +142,6 @@ iframe{
 .prime2g_embedded_media iframe{
 	width:100%;
 }
-.video iframe{
-	min-height:60vh;
-}
 .contentWrap ::selection, #prime2g_after_header ::selection{
 	background-color:var(--content-text); color:var(--content-background);
 }
@@ -516,7 +513,7 @@ a.comment-reply-link:hover{
 	height:max-content;
 }
 .entry .thumbnail{
-	min-height:250px; background-size:cover; background-position:center;
+	background-size:cover; background-position:center;
 	background-color:var(--content-text); display:grid; place-content:center;
 }
 .the_metas{
@@ -538,7 +535,7 @@ a.comment-reply-link:hover{
 	padding:var(--min-pad) 0 0;
 }
 .stickies .thumbnail, .sides .thumbnail, .widget_posts .thumbnail{
-	min-height:150px;
+	height:150px;
 }
 .stickies .grid{
 	grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
@@ -656,9 +653,7 @@ a.comment-reply-link:hover{
 #wp-comment-cookies-consent{
 	width:auto;
 }
-.sticky{
-	
-}
+.sticky{}
 body .widget_eu_cookie_law_widget{
 	left:0; right:0; bottom:0;
 }
@@ -767,7 +762,7 @@ i.bi{
 	display:inline-block; position:relative;
 }
 .collapsible-navs li a{
-	padding:7px 15px; display:inline-block;
+	display:inline-block;
 }
 .sub-menu{
 	min-width:200px; max-width:250px;

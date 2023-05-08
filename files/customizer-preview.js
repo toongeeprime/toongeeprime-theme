@@ -73,4 +73,10 @@ jQuery( document ).ready( function( $ ) {
 	wp.customize( 'prime2g_body_text_font_size', function( value ) {
 		value.bind( function( newval ) { $( 'body' ).css( 'font-size', newval+'px' ); } );
 	} );
+	wp.customize( 'prime2g_loop_post_image_height', function( value ) {
+		value.bind( function( newval ) {
+			$( '.posts_loop .thumbnail' ).css( 'height', newval+'em' );
+			$( '#archive_loop .video iframe' ).css( 'height', newval+'em' );
+		} );
+	} );
 } );

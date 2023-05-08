@@ -187,7 +187,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 			'input_attrs'	=>	array(
 				'min'		=>	'10',
 				'max'		=>	'50',
-				'step'		=>	'0.2',
+				'step'		=>	'0.1',
 			)
 		)
 	);

@@ -143,3 +143,9 @@ return ( windowWidth < screenSize );
 
 }
 
+/**
+ *	Leave name so it can easily be removed if ever JS makes it inbuilt
+ *	@since ToongeePrime Theme 1.0.55
+ */
+function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newNode, refNode.nextSibling ); }
+

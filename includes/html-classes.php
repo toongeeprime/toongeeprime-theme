@@ -62,6 +62,12 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'preloading';
 	}
 
+	# If Video features active
+	# @since ToongeePrime Theme 1.0.55
+	if ( ! empty( get_theme_mod( 'prime2g_enable_video_features' ) ) ) {
+		$classes[]	=	'video_site';
+	}
+
 	# With or without a header image
 	if ( has_header_image() ) {
 		$classes[]	=	'has-header-image';

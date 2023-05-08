@@ -94,7 +94,7 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
 
 	/**
 	 *	Header Height
-	 *	@since ToongeePrime Theme 1.55.00
+	 *	@since ToongeePrime Theme 1.0.55
 	 */
 	$wp_customize->add_setting(
 		'prime2g_theme_header_height',

@@ -25,7 +25,8 @@ class ToongeePrime_Styles {
 	public $bodyFont	=	'Open+Sans';
 	public $bodyAltFont	=	'Arial, Helvetica, sans-serif'; # 1.0.55
 	public $headFont	=	'Oxygen';
-	public $headingsAltFont	=	'Times New Roman, Times, serif'; # 1.0.55
+	public $headingsAltFont	=	'Geneva, Verdana, sans-serif'; # 1.0.55
+	public $arch_ftImgHeight	=	'17'; # 1.0.55
 
 	/**
 	 *	Get from get_theme_mod()
@@ -51,6 +52,7 @@ class ToongeePrime_Styles {
 			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size', '2.5' ); break; # 1.0.55
 			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size', '3' ); break; # 1.0.55
 			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '15' ); break; # 1.0.55
+			case 'ftImgHeight' : $mod = get_theme_mod( 'prime2g_loop_post_image_height', $this->arch_ftImgHeight ); break; # 1.0.55
 		}
 	return $mod;
 	}
@@ -86,7 +88,7 @@ class ToongeePrime_Styles {
 	 *	@static
 	 */
 	public static function is_light_color( $hex ) {
-		return ( 127 <= self::the_hex_luminance( $hex ) );
+	return ( 127 <= self::the_hex_luminance( $hex ) );
 	}
 
 	/**
@@ -121,11 +123,14 @@ class ToongeePrime_Styles {
 	$bgSize	=	( '' == $bgSize ) ? 'cover' : $bgSize;
 	$hHeight	=	$this->get_mod( 'h_height' );
 	$hHeight	=	( '' == $hHeight ) ? '' : $hHeight . 'vh';
+	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:' . $this->get_mod( 'ftImgHeight' ) . 'em;}';
+	$fImgCSS	=	( ! is_singular() ) ? $fImgCSS : '';
 
 	return "
 	#header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:{$bgSize};min-height:{$hHeight};}
 	.singular .entry-title{font-size:var(--post-titlesize);}
 	body{font-size:{$bodyFS};}
+	{$fImgCSS}
 	body:not(.singular) .entry-title{font-size:var(--arch-titlesize);}
 	@media(max-width:821px){
 	.singular .entry-title{font-size:calc(var(--post-titlesize)*0.8);}
