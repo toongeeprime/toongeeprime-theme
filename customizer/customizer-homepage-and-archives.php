@@ -96,6 +96,21 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting( 'prime2g_archive_pagination_type', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_control(
+		'prime2g_archive_pagination_type',
+		array(
+			'label'		=>	__( 'Pagination Type', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_archive_pagination_type',
+			'section'	=>	'prime2g_theme_archives_section',
+			'choices'	=>	[
+				''		=>	'Previous/Next',
+				'numbers'	=>	'Numbers'
+			],
+		)
+	);
+
 	$wp_customize->add_setting(
 		'prime2g_loop_post_image_height',
 		array(

@@ -1,8 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	SETTING UP THE THEME
- *	Sets the custom logo and custom header dimensions, nav menus and widget areas
+ *	SETTING UP THEME PROPERTIES
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
@@ -12,7 +11,7 @@ add_action( 'after_setup_theme', 'toongeeprime_theme_setup2' );
 if ( ! function_exists( 'toongeeprime_theme_setup2' ) ) {
 
 function toongeeprime_theme_setup2() {
-// Custom Logo
+#	Custom Logo
 $logo_width		=	250;
 $logo_height	=	200;
 add_theme_support(
@@ -28,7 +27,7 @@ add_theme_support(
 );
 
 
-// Custom Header
+#	Custom Header
 $header_width	=	2000;
 $header_height	=	900;
 add_theme_support(
@@ -40,14 +39,14 @@ add_theme_support(
 		'height'				=>	$header_height,
 		'flex-height'			=>	true,
 		'flex-width'			=>	true,
-		// 'video'					=>	true,
-		// 'video-active-callback'	=>	'is_front_page'
+		# 'video'					=>	true,
+		# 'video-active-callback'	=>	'is_front_page'
 	)
 );
 
 
 
-// Navigation Menus
+#	Navigation Menus
 register_nav_menus(
 	array(
 		'main-menu'		=>	esc_html__( 'Main Menu', PRIME2G_TEXTDOM ),
@@ -57,7 +56,7 @@ register_nav_menus(
 
 
 
-//	SIDEBARS
+#	SIDEBARS
 add_action( 'widgets_init', 'prime2g_sidebars', 5 );
 function prime2g_sidebars() {
 register_sidebar(

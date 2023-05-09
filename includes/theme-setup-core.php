@@ -43,7 +43,7 @@ function toongeeprime_theme_setup() {
 	$theStyles	=	new ToongeePrime_Styles();
 
 		/**
-		 *	@since ToongeePrime Theme Theme 1.0.50
+		 *	@since ToongeePrime Theme 1.0.50
 		 */
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
@@ -55,7 +55,7 @@ function toongeeprime_theme_setup() {
 
 		add_theme_support( 'title-tag' );
 
-		// Add default posts and comments RSS feed links to head
+		# Add default posts and comments RSS feed links to head
 		add_theme_support( 'automatic-feed-links' );
 
 		/**
@@ -100,16 +100,16 @@ function toongeeprime_theme_setup() {
 		array( 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' )
 		);
 
-		// Support selective refresh for widgets
+		# Support selective refresh for widgets
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
-		// Support Block Styles
+		# Support Block Styles
 		add_theme_support( 'wp-block-styles' );
 
-		// Support full and wide align images
+		# Support full and wide align images
 		add_theme_support( 'align-wide' );
 
-		// Add custom editor font sizes
+		# Add custom editor font sizes
 		add_theme_support(
 			'editor-font-sizes',
 			array(
@@ -158,7 +158,7 @@ function toongeeprime_theme_setup() {
 			)
 		);
 
-		// Editor color palette
+		# Editor color palette
 		$black     = '#000000';
 		$dark_gray = '#28303D';
 		$gray      = '#39414D';
@@ -295,18 +295,17 @@ function toongeeprime_theme_setup() {
 		add_theme_support( 'wc-product-gallery-slider' );
 
 
-		// Support responsive embedded content
+		# Support responsive embedded content
 		add_theme_support( 'responsive-embeds' );
 
-		// Support custom line height controls
+		# Support custom line height controls
 		add_theme_support( 'custom-line-height' );
 
-		// Support experimental link color control
+		# Support experimental link color control
 		add_theme_support( 'experimental-link-color' );
 
-		// Support experimental cover block spacing
+		# Support experimental cover block spacing
 		add_theme_support( 'custom-spacing' );
-
 }
 
 }

@@ -62,7 +62,6 @@ add_action( 'prime2g_after_post', 'prime2g_prev_next_post', 7, 3 );
 if ( ! function_exists( 'prime2g_prev_next_post' ) ) {
 
 // Empty argument was added coz somehow, it reads from the second var
-
 function prime2g_prev_next_post( $empty = '', $prev = 'Previous Entry ', $next = 'Next Entry ', $taxonomy = 'category' )
 {
 
@@ -81,7 +80,6 @@ $nextText	=	__( $next, PRIME2G_TEXTDOM );
 	);
 
 }
-
 }
 
 
@@ -90,20 +88,23 @@ $nextText	=	__( $next, PRIME2G_TEXTDOM );
  *	Previous and Next Archive Page
  */
 if ( ! function_exists( 'prime2g_prev_next' ) ) {
-
 function prime2g_prev_next( $spepr = ' ', $prev = '&laquo; Previous Page', $next = 'Next Page &raquo;' ) {
+
+if ( get_theme_mod( 'prime2g_archive_pagination_type' ) === 'numbers' ) {	# @since ToongeePrime Theme 1.0.55
+	global $wp_query;
+	prime2g_pagination_nums( $wp_query );
+}
+else {
 
 $prev	=	__( $prev, PRIME2G_TEXTDOM );
 $next	=	__( $next, PRIME2G_TEXTDOM );
-
 echo '<nav class="navigation archive prev_next">';
-
 	posts_nav_link( $spepr, '<p class="nav-previous">' . $prev . '</p>', '<p class="nav-next">' . $next . '</p>' );
-
 echo '</nav>';
 
 }
 
+}
 }
 
 
@@ -112,13 +113,11 @@ echo '</nav>';
  *	Archive Post Entry Template
  */
 if ( ! function_exists( 'prime2g_archive_loop' ) ) {
-
 function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
 
 	echo prime2g_get_archive_loop( $size, $excerpt, $length, $metas, $footer, $tag );
 
 }
-
 }
 
 
@@ -172,7 +171,6 @@ echo '</article>';
  *	Search Results Entry Template
  */
 if ( ! function_exists( 'prime2g_search_loop' ) ) {
-
 function prime2g_search_loop() {
 $title	=	get_the_title();
 $link	=	get_permalink();
@@ -212,7 +210,6 @@ $link	=	get_permalink();
 
 <?php
 }
-
 }
 
 
@@ -224,7 +221,6 @@ $link	=	get_permalink();
  *	@since ToongeePrime Theme 1.0.45
  */
 if ( ! function_exists( 'prime2g_get_archive_loop' ) ) {
-
 function prime2g_get_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
 $title	=	get_the_title();
 $link	=	get_permalink();
@@ -256,7 +252,6 @@ $entry	.=	'</article>';
 return $entry;
 
 }
-
 }
 
 
@@ -265,7 +260,6 @@ return $entry;
  *	@since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_ft_image_in_loop' ) ) {
-
 function prime2g_ft_image_in_loop( string $title, string $size, string $link, object $post = null ) {
 
 $ftimg	=	'<a href="' . $link . '" title="' . $title . '">';
@@ -290,7 +284,6 @@ $ftimg	.=	'</a>';
 
 return $ftimg;
 }
-
 }
 
 
@@ -302,7 +295,6 @@ return $ftimg;
  *	Media field logic @since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
-
 function prime2g_get_archive_loop_post_object( array $args ) {
 $post	=	null;
 $size	=	'large';
@@ -356,7 +348,6 @@ else {
 return $entry;
 
 }
-
 }
 
 
@@ -367,7 +358,6 @@ return $entry;
  *	@since ToongeePrime Theme 1.0.50
  */
 if ( ! function_exists( 'prime2g_entry_titles_template' ) ) {
-
 function prime2g_entry_titles_template( array $args ) {
 $post	=	null;
 $tag	=	'h3';
@@ -385,5 +375,5 @@ $div	=	'<div class="'. $class .'">
 
 return $div;
 }
-
 }
+

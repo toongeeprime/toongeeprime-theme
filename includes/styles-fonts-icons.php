@@ -41,7 +41,7 @@ if ( prime2g_use_google_fonts() ) {
 
 	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font', $theStyles->bodyFont );
 	$headings	=	get_theme_mod( 'prime2g_site_headings_font', $theStyles->headFont );
-	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800\">";
+	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800&display=swap\">";
 }
 	# echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
 	wp_enqueue_style( 'bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css' );

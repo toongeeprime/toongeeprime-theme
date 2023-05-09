@@ -4,7 +4,7 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *
- *	* Limit to 3 properties per line in this file
+ *	*Limit to 3 properties per line in this file
  */
 
 /********************
@@ -242,6 +242,9 @@ code{
 .acaps{
 	text-transform:uppercase;
 }
+.has-icons{
+	font-family:"bootstrap-icons";
+}
 
 /********* Theme Styling Proper *********/
 body{
@@ -435,6 +438,9 @@ a:hover, a:focus, table a:hover, table a:focus{
 /********* POSTS *********/
 .prev_next{
 	margin:var(--min-pad) 0;
+}
+.numbers.prev_next{
+	display:flex; gap:20px;
 }
 .nav-links div, .nav-previous, .nav-next{
 	width:45%;
@@ -910,3 +916,4 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
+
