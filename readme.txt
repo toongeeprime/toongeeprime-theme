@@ -31,6 +31,7 @@ Several updates across the theme
 * @ customizer: Archive Pagination Type
 * @ parts: Added adjust-templates.php
 * @ js: Added insertAfter
+* @ Hooks: prime2g_before_head, prime2g_before_body
 * Work Custom logo width and height attributes
 * Shortcodes: prime_site_logo, prime_site_title_and_description
 

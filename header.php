@@ -10,6 +10,9 @@
 $isSingular	=	is_singular(); ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> <?php prime2g_theme_html_classes(); ?>>
+
+<?php do_action( 'prime2g_before_head' ); ?>
+
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />

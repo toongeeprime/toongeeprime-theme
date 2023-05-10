@@ -27,6 +27,12 @@ add_action( 'prime2g_archive_post_footer', 'prime2g_edit_entry', 5 );
 
 
 /**
+ *	@since ToongeePrime Theme 1.0.55:
+ *	prime2g_before_head, prime2g_before_body
+ */
+ 
+
+/**
  *	Is set Before the Site's Header
  */
 function prime2g_before_header() {
@@ -50,7 +56,6 @@ echo '</section>';
 }
 
 
-
 /**
  *	Is set After the Sub Header Section Above
  */
@@ -63,10 +68,9 @@ echo '</section>';
 }
 
 
-
 /**
  *	Is set Before Single entry Titles
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 function prime2g_before_title() {
 
@@ -75,7 +79,6 @@ echo '<section id="prime2g_before_title">';
 echo '</section>';
 
 }
-
 
 
 /**
@@ -154,12 +157,10 @@ echo '</section>';
 }
 
 
-
-
 /**
  *	Is set Before Archive post title
- *	@since ToongeePrime Theme 1.0.45.00
- *	Added $post ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.45
+ *	Added $post ToongeePrime Theme 1.0.50
  */
 function prime2g_archive_post_top_filter_part( $post = null ) {
 
@@ -176,7 +177,7 @@ return $div;
 
 /**
  *	Is set at Footer of Archive post entries
- *	@since ToongeePrime Theme 1.0.45.00
+ *	@since ToongeePrime Theme 1.0.45
  */
 function prime2g_archive_post_footer_filter_part() {
 if ( is_attachment() ) return;
@@ -192,10 +193,9 @@ return $div;
 }
 
 
-
 /**
  *	FUNCTIONS HOOKED TO FILTERS
- *	Filters added and hooked @since ToongeePrime Theme 1.0.45.00
+ *	Filters added and hooked @since ToongeePrime Theme 1.0.45
  */
 add_filter( 'prime2g_archive_post_top_filter', 'prime2g_archive_postmeta_hooked', 10, 2 );
 add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_edit_entry_get_hooked', 5, 1 );
@@ -212,6 +212,3 @@ function prime2g_edit_entry_get_hooked( $text ) {
 function prime2g_archive_postbase_hooked( $text ) {
 	return $text . prime2g_archive_postbase( false );
 }
-
-
-

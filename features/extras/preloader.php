@@ -5,10 +5,10 @@
  *	Includes CSS and JS functions
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.48.00
+ *	@since ToongeePrime Theme 1.0.48
  */
 
-add_action( 'wp_body_open', 'prime2g_page_preloader' );
+add_action( 'prime2g_before_head', 'prime2g_page_preloader', 0 );
 if ( ! function_exists( 'prime2g_page_preloader' ) ) {
 
 function prime2g_page_preloader() {
@@ -40,6 +40,7 @@ echo $preloader;
 }
 
 
+
 if ( ! function_exists( 'prime2g_page_preloaderCSS' ) ) {
 function prime2g_page_preloaderCSS() {
 $css	=	'<style id="preloaderCSS" scoped>
@@ -63,15 +64,9 @@ if ( ! function_exists( 'prime2g_page_preloaderJS' ) ) {
 function prime2g_page_preloaderJS() {
 $js	=	'<script id="preloaderJS">
 function prime2g_clearPreloader() {
-	let p2Prloadr	=	p2getEl( "#prime2gPreloading" );
-setTimeout( ()=>{
-	p2Prloadr.style.opacity		=	"0";
-	p2Prloadr.style.visibility	=	"hidden";
-}, 500 );
-setTimeout( ()=>{
-	p2Prloadr.remove();
-	p2getEl( "body" ).classList.add( "preloaded" );
-}, 1000 );
+let p2Prloadr	=	p2getEl( "#prime2gPreloading" );
+setTimeout( ()=>{ p2Prloadr.style.opacity = "0"; p2Prloadr.style.visibility = "hidden"; }, 500 );
+setTimeout( ()=>{ p2Prloadr.remove(); p2getEl( "body" ).classList.add( "preloaded" ); }, 1000 );
 }
 
 window.addEventListener( "load", prime2g_clearPreloader );
@@ -80,5 +75,6 @@ window.addEventListener( "load", prime2g_clearPreloader );
 return $js;
 }
 }
+
 
 
