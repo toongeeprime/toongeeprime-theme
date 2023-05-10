@@ -70,31 +70,44 @@ function prime2g_get_placeholder_url() {
  *
  *	@ 1.0.49 : added $darklogo
  *	@ 1.0.49.05 : added $getSrc
+ *	@ 1.0.55 : calc and set attrs height & width
  */
 function prime2g_siteLogo( $darklogo = false, $getSrc = false ) {
 
 	if ( $darklogo ) {
-		if ( get_theme_mod( 'prime2g_dark_theme_logo' ) )
-			$src = prime2g_get_dark_logo_url();
-		else
-			$src = prime2g_get_custom_logo_url();
-	}
-	else {
-		if ( get_theme_mod( 'prime2g_dark_theme_logo' ) &&
-			in_array( 'dark-background', ToongeePrime_Colors::theme_color_classes() )
-		) {
-			$src = prime2g_get_dark_logo_url();
+		$iid	=	get_theme_mod( 'prime2g_dark_theme_logo' );
+		if ( $iid ) {
+			$src	=	prime2g_get_dark_logo_url();
 		}
 		else {
-			$src = prime2g_get_custom_logo_url();
+			$src	=	prime2g_get_custom_logo_url();
+			$iid	=	get_theme_mod( 'custom_logo' );
+		}
+	}
+	else {
+		$iid	=	get_theme_mod( 'prime2g_dark_theme_logo' );
+		if ( $iid && in_array( 'dark-background', ToongeePrime_Colors::theme_color_classes() ) ) {
+			$src	=	prime2g_get_dark_logo_url();
+		}
+		else {
+			$src	=	prime2g_get_custom_logo_url();
+			$iid	=	get_theme_mod( 'custom_logo' );
 		}
 	}
 
-	if ( $getSrc ) return $src;
+if ( $getSrc ) return $src;
 
 	$siteName	=	get_bloginfo( 'name' );
+	$logoHeight	=	get_theme_mod( 'prime2g_theme_logo_height', '100' );	# @ Theme 1.0.55
+	$imgsrcs	=	wp_get_attachment_image_src( $iid, 'full' );
+	$width	=	$height	=	'';
+	if ( $imgsrcs ) {
+		$width		=	(int) $imgsrcs[1];
+		$height		=	(int) $imgsrcs[2];
+		$width		=	( $width / $height ) * (int) $logoHeight;
+	}
 
-	$img	=	'<img src="' . $src . '" alt class="custom-logo" title="' . $siteName . '" />';
+	$img	=	'<img src="' . $src . '" alt class="custom-logo" title="' . $siteName . '" width="'. $width .'" height="'. $logoHeight .'" />';
 
 	# Link logo to homepage from all other pages
 	if ( ! is_front_page() ) {
@@ -107,5 +120,5 @@ function prime2g_siteLogo( $darklogo = false, $getSrc = false ) {
 	}
 
 return $logo;
-
 }
+

@@ -24,6 +24,7 @@ add_action( 'customize_register', 'prime2g_customizer_socialmedia_and_contacts' 
 add_action( 'customize_register', 'prime2g_customizer_media_features' );
 add_action( 'customize_register', 'prime2g_customizer_theme_extras' );
 add_action( 'customize_register', 'prime2g_customizer_wp_header_image' );
+add_action( 'customize_register', 'prime2g_customizer_misc_wp_settings' );
 
 if ( class_exists( 'woocommerce' ) ) {
 	add_action( 'customize_register', 'prime2g_customizer_woocommerce_edits' );
@@ -33,16 +34,15 @@ if ( class_exists( 'woocommerce' ) ) {
 /**
  *	Editing Customizer Defaults
  */
-add_action( 'customize_register', 'prime2g_edit_customizer_defaults' );
-if ( ! function_exists( 'prime2g_edit_customizer_defaults' ) ) {
+add_action( 'customize_register', 'prime2g_edit_customizer_wp_defaults' );
+if ( ! function_exists( 'prime2g_edit_customizer_wp_defaults' ) ) {
 
-function prime2g_edit_customizer_defaults( $wp_customize ) {
+function prime2g_edit_customizer_wp_defaults( $wp_customize ) {
 	$wp_customize->remove_section( 'colors' );
-	$wp_customize->get_control( 'display_header_text' )->label = __( 'Display Site Title &amp; Tagline - if no Logo', PRIME2G_TEXTDOM );
+	$wp_customize->get_control( 'display_header_text' )->label	=	__( 'Display Site Title &amp; Tagline - if no Logo', PRIME2G_TEXTDOM );
 }
 
 }
-
 
 
 /**
@@ -63,6 +63,4 @@ $description	=	'<p>Customize ' . PRIME2G_THEMENAME . ' Options</p>';
 	);
 
 }
-
-
 
