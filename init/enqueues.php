@@ -10,7 +10,6 @@
 add_action( 'wp_enqueue_scripts', 'prime2g_theme_enqueues' );
 if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
-
     # Theme Styles
 	wp_enqueue_style(
 		'prime2g_reset_and_wp_css',
@@ -61,7 +60,6 @@ function prime2g_theme_enqueues() {
 		PRIME2G_VERSION,
 		true # script in footer
 	);
-
 }
 }
 
@@ -80,7 +78,6 @@ if ( class_exists( 'woocommerce' ) ) {
 add_action( 'admin_enqueue_scripts', 'prime2g_admin_enqueues' );
 if ( ! function_exists( 'prime2g_admin_enqueues' ) ) {
 function prime2g_admin_enqueues() {
-
 	wp_register_script(
 		'prime2g_js',
 		get_theme_file_uri( '/files/theme.js' ),
@@ -89,7 +86,6 @@ function prime2g_admin_enqueues() {
 	);
 
 	wp_enqueue_script( 'prime2g_js' );
-
 }
 }
 
@@ -100,7 +96,6 @@ function prime2g_admin_enqueues() {
 add_action( 'customize_controls_enqueue_scripts', 'prime2g_customizer_enqueues' );
 add_action( 'customize_preview_init', 'prime2g_customizer_preview_enqueues' );
 function prime2g_customizer_enqueues() {
-
     wp_enqueue_script(
 		'prime2g_customizer_js',
 		get_theme_file_uri( '/files/customizer.js' ),
@@ -108,11 +103,9 @@ function prime2g_customizer_enqueues() {
 		PRIME2G_VERSION,
 		true
 	);
-
 }
 
 function prime2g_customizer_preview_enqueues() {
-
     wp_enqueue_script(
 		'prime2g_customizer_preview_js',
 		get_theme_file_uri( '/files/customizer-preview.js' ),
@@ -120,7 +113,6 @@ function prime2g_customizer_preview_enqueues() {
 		PRIME2G_VERSION,
 		true
 	);
-
 }
 
 

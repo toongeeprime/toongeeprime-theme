@@ -352,7 +352,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	color:var(--content-text); background:var(--content-background);
 }
 .logo_with_menu .custom-logo{
-	margin-top:5px;max-height:36px;
+	margin-top:5px;
 }
 .current-menu-item a{
 	position:relative;
@@ -660,6 +660,9 @@ a.comment-reply-link:hover{
 	width:auto;
 }
 .sticky{}
+.stickies .sticky{
+	width:300px;
+}
 body .widget_eu_cookie_law_widget{
 	left:0; right:0; bottom:0;
 }

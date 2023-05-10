@@ -7,6 +7,10 @@
 jQuery( document ).ready( function( $ ) {
 /*if ( 'undefined' === typeof wp || ! wp.customize || ! wp.customize.selectiveRefresh ) return;*/
 
+$( '.custom-logo' ).attr( 'width', '' );
+$( '.custom-logo' ).attr( 'height', '' );
+$( '.custom-logo' ).css( 'width', 'auto' );
+
 	wp.customize( 'prime2g_header_background', function( value ) {
 		value.bind( function( newval ) { $( '#header' ).css( 'background-color', newval ); } );
 	} );
@@ -78,5 +82,8 @@ jQuery( document ).ready( function( $ ) {
 			$( '.posts_loop .thumbnail' ).css( 'height', newval+'em' );
 			$( '#archive_loop .video iframe' ).css( 'height', newval+'em' );
 		} );
+	} );
+	wp.customize( 'prime2g_theme_logo_height', function( value ) {
+		value.bind( function( newval ) { $( '.custom-logo' ).css( 'height', newval+'px' ); } );
 	} );
 } );

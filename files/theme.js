@@ -72,9 +72,10 @@ document.addEventListener(
 function prime2g_class_on_scroll( el, cls = 'pop', level = 200 ) {
 window.addEventListener( "scroll", ()=>{
 let elmt	=	p2getEl( el );
+if ( elmt ) {
 	if ( window.pageYOffset > level ) { elmt.classList.add( cls ); }
 	else { elmt.classList.remove( cls ); }
-
+}
 }, false );
 }
 

@@ -16,6 +16,8 @@ $isSingular	=	is_singular(); ?>
 	<?php wp_head(); ?>
 </head>
 
+<?php do_action( 'prime2g_before_body' ); ?>
+
 <body <?php body_class( 'body' ); ?>>
 
 <?php wp_body_open(); ?>

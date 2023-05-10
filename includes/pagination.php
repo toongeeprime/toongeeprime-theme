@@ -30,7 +30,7 @@ $paged	=	( get_query_var( $paged ) ) ?: 1;
 
 if ( ! $max_page ) $max_page	=	$the_query->max_num_pages;
 
-	$div	=	'<div id="pagination-wrap" class="pagination"><nav class="navigation archive prev_next">' .	
+	$div	=	'<div id="pagination-wrap" class="pagination"><nav class="numbers navigation archive prev_next">' .	
 	paginate_links( array(
 		# 'base'		=>	htmlspecialchars_decode( str_replace( $big, '%#%', get_pagenum_link( $big ) ) ),
 		# 'format'	=>	'?page=%#%', // '%#%' is the page number
