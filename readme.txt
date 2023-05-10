@@ -31,6 +31,7 @@ Several updates across the theme
 * @ customizer: Archive Pagination Type
 * @ parts: Added adjust-templates.php
 * @ js: Added insertAfter
+* Work Custom logo width and height attributes
 * Shortcodes: prime_site_logo, prime_site_title_and_description
 
 = 1.0.51.00 =
