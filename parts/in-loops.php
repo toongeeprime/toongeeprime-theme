@@ -366,6 +366,8 @@ $class2	=	'entry_title';
 
 extract( $args );
 
+if ( ! $post ) { global $post; }
+
 $title	=	$post->post_title;
 $link	=	get_permalink( $post );
 

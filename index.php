@@ -19,7 +19,10 @@ elseif ( is_archive() || is_home() ) {
 
 	if ( have_posts() ) { prime2g_get_theme_template( true ); }
 
-	else { require PRIME2G_ARCHIVE . 'empty.php'; }
+	else {
+		if ( file_exists( CHILD2G_ARCHIVE . 'empty.php' ) ) require CHILD2G_ARCHIVE . 'empty.php';
+		else require PRIME2G_ARCHIVE . 'empty.php';
+	}
 
 }
 

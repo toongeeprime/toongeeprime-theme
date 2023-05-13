@@ -3,8 +3,8 @@
 /**
  *	VIEWPORT ENTRY OBSERVER FOR ANIMATIONS
  *
- *	@since ToongeePrime Theme 1.0.44.00
- *	Added inAction class @since ToongeePrime Theme 1.0.50.00 for custom animations
+ *	@since ToongeePrime Theme 1.0.44
+ *	Added inAction class @since ToongeePrime Theme 1.0.50 for custom animations
  */
 
 /**
@@ -85,7 +85,7 @@ function enterClassElements( animEls, prime2g_entryObserver ) {
 /**
  *	USING JQUERY
  *	NOT wrapped in <script> tags
- *	@since ToongeePrime Theme 1.0.46.00
+ *	@since ToongeePrime Theme 1.0.46
  */
 function prime2g_element_observerJQuery( $threshold = 0.25 ) {
 $jq	=	'

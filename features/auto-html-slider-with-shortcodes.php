@@ -3,7 +3,7 @@
 /**
  *	HTML SLIDER FRAME SCRIPTS
  *
- *	@since ToongeePrime Theme 1.0.44.00
+ *	@since ToongeePrime Theme 1.0.44
  */
 
 /*
@@ -127,7 +127,7 @@ p2getAll( '.ps_rzmr' ).forEach( (sp)=>{
 
 
 /**
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 let sp_prevs	=	p2getAll( '.psPrev span' ),
 	sp_nexts	=	p2getAll( '.psNext span' );

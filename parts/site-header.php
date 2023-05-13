@@ -68,9 +68,7 @@ endif;
 
 	if ( 'bottom' == $menuPlace ) prime2g_main_menu();
 
-	if ( $keepHeader ) {
-		prime2g_sub_header();
-		prime2g_after_header();
-	}
+	prime2g_sub_header();
 
+	if ( $keepHeader ) { prime2g_after_header(); }
 

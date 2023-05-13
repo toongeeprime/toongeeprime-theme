@@ -32,7 +32,7 @@ function prime2g_link_pages() {
  *	Breadcrumbs
  *	Hooked to prime2g_after_header
  */
-add_action( 'prime2g_after_header', 'prime2g_breadcrumbs', 7 );
+add_action( 'prime2g_after_header', 'prime2g_breadcrumbs', 5 );
 if ( ! function_exists( 'prime2g_breadcrumbs' ) ) {
 function prime2g_breadcrumbs() {
 
@@ -226,7 +226,7 @@ return $link;
  *	Post meta at top of entries
  *	Hooked to prime2g_after_title
  */
-add_action( 'prime2g_after_title', 'prime2g_postmeta_top' );
+add_action( 'prime2g_after_title', 'prime2g_postmeta_top', 5 );
 if ( ! function_exists( 'prime2g_postmeta_top' ) ) {
 
 function prime2g_postmeta_top() {
@@ -268,9 +268,9 @@ echo '</div>';
 /**
  *	Post meta at top of archive entries
  *	Hooked to prime2g_archive_post_top
- *	Filter added and hooked @since ToongeePrime Theme 1.0.45.00
+ *	Filter added and hooked @since ToongeePrime Theme 1.0.45
  */
-add_action( 'prime2g_archive_post_top', 'prime2g_archive_postmeta', 10, 2 );
+add_action( 'prime2g_archive_post_top', 'prime2g_archive_postmeta', 5, 2 );
 if ( ! function_exists( 'prime2g_archive_postmeta' ) ) {
 
 function prime2g_archive_postmeta( $postObject = null, $echo = true ) {
@@ -620,9 +620,6 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 				the_title( "<h1 class=\"entry-title page-title title$prod_class\">", "</h1>" );
 			}
 		}
-
-		#	Theme Hook:
-		prime2g_after_title();
 	}
 	elseif ( is_home() ) { ?>
 		<h1 class="entry-title page-title title"><?php _e( get_theme_mod( 'prime2g_posts_home_title', get_bloginfo( 'name' ) ), PRIME2G_TEXTDOM ); ?></h1>
@@ -656,14 +653,11 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 		the_archive_title( '<h1 class="entry-title page-title">', '</h1>' );
 		prime2g_archive_description();
 	}
+	#	Theme Hook:
+	prime2g_after_title();
 	?>
 
 </div><!-- .page_title -->
-
 <?php
 }
 }
-
-
-
-

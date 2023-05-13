@@ -567,6 +567,9 @@ a.comment-reply-link:hover{
 #page #infinite-handle span{
 	display:inline-block;
 }
+.pagination .page-numbers{
+	line-height:1;
+}
 
 /* 404 */
 .nothing_found_info{
