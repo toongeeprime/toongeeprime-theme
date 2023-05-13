@@ -26,11 +26,6 @@ function prime2g_comments() {
 add_action( 'prime2g_archive_post_footer', 'prime2g_edit_entry', 5 );
 
 
-/**
- *	@since ToongeePrime Theme 1.0.55:
- *	prime2g_before_head, prime2g_before_body
- */
- 
 
 /**
  *	Is set Before the Site's Header
@@ -116,6 +111,17 @@ echo '<section id="prime2g_after_post">';
 	do_action( 'prime2g_after_post' );
 echo '</section>';
 
+}
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.55 direct hooks: prime2g_before_head, prime2g_before_body
+ *	And:
+ */
+function prime2g_after_archive_title() {
+echo '<section id="prime2g_after_archive_title">';
+	do_action( 'prime2g_after_archive_title' );
+echo '</section>';
 }
 
 
