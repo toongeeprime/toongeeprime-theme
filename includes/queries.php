@@ -82,7 +82,7 @@ return prime2g_wp_query( $args );
 
 /**
  *	Disable WP Rich Text Editor for 'prime_template_part' post type *hardcoded
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 add_filter( 'user_can_richedit', function( $default ) {
 global $post;

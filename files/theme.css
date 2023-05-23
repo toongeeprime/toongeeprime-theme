@@ -103,7 +103,7 @@ input[type="button"]:hover, input[type="submit"]:hover, button:hover, .button:ho
 input[disabled]{
 	cursor:not-allowed;
 }
-input[type="button"], input[type="submit"], input[type="checkbox"], input[type="radio"], input[type="color"]{
+body .site input[type="button"], input[type="submit"], input[type="checkbox"], input[type="radio"], input[type="color"]{
 	width:auto;
 }
 table{
@@ -894,7 +894,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 	background:steelblue;
 }
 .prime .main-menu{
-	transform:translateX(0);
+	transform:translate(0);
 }
 .collapsible-navs li{
 	border-bottom:1px solid #aaa;

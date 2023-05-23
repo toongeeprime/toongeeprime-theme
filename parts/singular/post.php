@@ -9,16 +9,16 @@
 
 get_header();
 
-		the_post();
+	the_post();
 
-		// Hook:
-		prime2g_before_post();
+	// Hook:
+	prime2g_before_post();
 
-		the_content();
+	the_content();
 
-		prime2g_link_pages();
+	prime2g_link_pages();
 
-		// Hook:
-		prime2g_after_post();
+	// Hook:
+	prime2g_after_post();
 
 get_footer();

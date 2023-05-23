@@ -547,6 +547,21 @@ function prime2g_post_no_title( $title ) {
 }
 
 
+/**
+ *	HOOK TITLE TO THEME
+ *	@since ToongeePrime Theme 1.0.55
+ */
+add_action( 'prime2g_page_title_hook', 'prime2g_hook_the_page_title', 10, 1 );
+if ( ! function_exists( 'prime2g_hook_the_page_title' ) ) {
+function prime2g_hook_the_page_title( $title_in_headr ) {
+	if ( $title_in_headr ) {
+		prime2g_title_header( prime2g_title_header_classes() );
+	}
+	else {
+		echo prime2g_title_or_logo();
+	}
+}
+}
 
 
 /**

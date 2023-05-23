@@ -77,6 +77,9 @@ $( '.custom-logo' ).css( 'width', 'auto' );
 	wp.customize( 'prime2g_body_text_font_size', function( value ) {
 		value.bind( function( newval ) { $( 'body' ).css( 'font-size', newval+'px' ); } );
 	} );
+	wp.customize( 'prime2g_page_titles_font_weight', function( value ) {
+		value.bind( function( newval ) { $( 'h1.page-title' ).css( 'font-weight', newval ); } );
+	} );
 	wp.customize( 'prime2g_loop_post_image_height', function( value ) {
 		value.bind( function( newval ) {
 			$( '.posts_loop .thumbnail' ).css( 'height', newval+'em' );

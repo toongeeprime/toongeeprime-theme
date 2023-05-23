@@ -50,12 +50,7 @@ if ( ! $isSingular || $isSingular && $keepHeader ) :
 	
 	echo '<div class="site_width title_wrap grid prel">';
 
-	if ( $title_in_headr ) {
-		prime2g_title_header( prime2g_title_header_classes() );
-	}
-	else {
-		echo prime2g_title_or_logo();
-	}
+	do_action( 'prime2g_page_title_hook', $title_in_headr );
 
 	echo '</div>';
 ?>

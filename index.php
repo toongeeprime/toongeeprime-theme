@@ -20,7 +20,7 @@ elseif ( is_archive() || is_home() ) {
 	if ( have_posts() ) { prime2g_get_theme_template( true ); }
 
 	else {
-		if ( file_exists( CHILD2G_ARCHIVE . 'empty.php' ) ) require CHILD2G_ARCHIVE . 'empty.php';
+		if ( file_exists( CHILD2G_ARCHIVE . 'empty.php' ) ) require CHILD2G_ARCHIVE . 'empty.php';	#	@since ToongeePrime Theme 1.0.55
 		else require PRIME2G_ARCHIVE . 'empty.php';
 	}
 

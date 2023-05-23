@@ -21,6 +21,7 @@ Several updates across the theme
 * 85 Google Fonts
 * @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks
+* @ customizer: Page Titles Font Weight
 * @ customizer: Header Height Controls, added re-render-site-parts.php
 * @ customizer: Site shutdown: added options to use a page as display
 * @ customizer: Archive columns
@@ -32,6 +33,7 @@ Several updates across the theme
 * @ parts: Added adjust-templates.php
 * @ js: Added insertAfter
 * @ Hooks: prime2g_before_head, prime2g_before_body
+* @ Features: Multislide capability added to HTML Slider
 * Work Custom logo width and height attributes
 * Shortcodes: prime_site_logo, prime_site_title_and_description
 

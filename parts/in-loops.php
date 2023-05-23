@@ -225,10 +225,31 @@ function prime2g_get_archive_loop( $size = 'large', $excerpt = true, $length = 2
 $title	=	get_the_title();
 $link	=	get_permalink();
 
+#	@since ToongeePrime Theme 1.0.55
+global $post;
+
+if ( is_array( $size ) ) {	# Leave var name for backwards compatibility
+
+$imgSize	=	'large';
+$excerpt	=	true;
+$length		=	25;
+$metas		=	true;
+$footer		=	true;
+$tag		=	'h2';
+$readmore	=	' - Read more';
+
+extract( $size );
+}
+else {
+	$imgSize	=	$size;
+	$readmore	=	'... Keep reading';
+}
+#	@since ToongeePrime Theme 1.0.55 end
+
 $entry	=	'<article id="entry-' . get_the_ID() . '" class="' . implode( ' ', get_post_class() ) . '">';
 $entry	.=	'<div class="entry_img">';
 
-$entry	.=	prime2g_ft_image_in_loop( $title, $size, $link );
+$entry	.=	prime2g_ft_image_in_loop( $title, $imgSize, $link );
 
 $entry	.=	'</div>';
 $entry	.=	'<div class="entry_text">';
@@ -239,7 +260,7 @@ if ( $metas )
 $entry	.=	'<a href="' . $link . '" title="Read this entry"><' . $tag . ' class="entry_title">' . $title . '</' . $tag . '></a>';
 
 if ( $excerpt && ! is_attachment() )
-	$entry	.=	prime2g_post_excerpt( $length );
+	$entry	.=	prime2g_post_excerpt( $length, $post, $readmore );
 
 	$entry	.=	prime2g_edit_entry_get( '<p class="edit-link edit-entry">', '</p>' );
 
@@ -303,7 +324,7 @@ $length	=	25;
 $metas	=	true;
 $footer	=	false;
 $tag	=	'h2';
-$readmore	=	'Read more';
+$readmore	=	' - Read more';
 $entryClasses	=	'';
 $switch_img_vid	=	false;
 
@@ -342,7 +363,11 @@ $entry	.=	'</article>';
 
 }
 else {
-	$entry	=	prime2g_get_archive_loop( $size, $excerpt, $length, $metas, $footer, $tag );
+$data	=	[
+	'imgSize' => $size, 'excerpt' => $excerpt, 'length' => $length,
+	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'readmore' => $readmore
+];
+	$entry	=	prime2g_get_archive_loop( $data );
 }
 
 return $entry;

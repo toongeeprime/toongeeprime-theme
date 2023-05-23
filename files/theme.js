@@ -8,21 +8,15 @@ function p2getEl( el ) { return document.querySelector( el ); }
 function p2getAll( els ) { return document.querySelectorAll( els ); }
 
 function prime2gElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{
-		event.preventDefault(); p2getEl( el ).classList.add( clss );
-	} );
+elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.add( clss ); } );
 }
 
 function prime2g_offElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{
-		event.preventDefault(); p2getEl( el ).classList.remove( clss );
-	} );
+elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.remove( clss ); } );
 }
 
 function prime2g_toggElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{
-		event.preventDefault(); p2getEl( el ).classList.toggle( clss );
-	} );
+elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.toggle( clss ); } );
 }
 
 

@@ -111,9 +111,7 @@ if ( $getSrc ) return $src;
 
 	# Link logo to homepage from all other pages
 	if ( ! is_front_page() ) {
-		$logo	=	'<a class="logo_link" href="'. esc_url( home_url() ) .'">';
-		$logo	.=	$img;
-		$logo	.=	'</a>';
+		$logo	=	'<a class="logo_link" href="'. esc_url( home_url() ) .'">' . $img . '</a>';
 	}
 	else {
 		$logo	=	$img;

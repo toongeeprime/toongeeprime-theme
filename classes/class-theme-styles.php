@@ -26,7 +26,8 @@ class ToongeePrime_Styles {
 	public $bodyAltFont	=	'Arial, Helvetica, sans-serif'; # 1.0.55
 	public $headFont	=	'Oxygen';
 	public $headingsAltFont	=	'Geneva, Verdana, sans-serif'; # 1.0.55
-	public $arch_ftImgHeight	=	'17'; # 1.0.55
+	public $titlesF_Weight	=	'500'; # 1.0.55
+	public $arch_ftImgHeight=	'17'; # 1.0.55
 
 	/**
 	 *	Get from get_theme_mod()
@@ -51,6 +52,7 @@ class ToongeePrime_Styles {
 			case 'darktheme' : $mod = get_theme_mod( 'prime2g_dark_theme_switch' ); break;
 			case 'post_titleSize' : $mod = get_theme_mod( 'prime2g_post_title_font_size', '2.5' ); break; # 1.0.55
 			case 'arch_titleSize' : $mod = get_theme_mod( 'prime2g_archive_title_font_size', '3' ); break; # 1.0.55
+			case 'titlesWeight' : $mod = get_theme_mod( 'prime2g_page_titles_font_weight', $this->titlesF_Weight ); break; # 1.0.55
 			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '15' ); break; # 1.0.55
 			case 'ftImgHeight' : $mod = get_theme_mod( 'prime2g_loop_post_image_height', $this->arch_ftImgHeight ); break; # 1.0.55
 		}
@@ -120,7 +122,8 @@ class ToongeePrime_Styles {
 	protected function theme_css() {
 	$bodyFS	=	$this->get_mod( 'bodyFontSize' ) . 'px';
 	$bgSize	=	$this->get_mod( 'headerimgsize' );
-	$bgSize	=	( '' == $bgSize ) ? 'cover' : $bgSize;
+	$t_weight	=	$this->get_mod( 'titlesWeight' );
+	$bgSize		=	( '' == $bgSize ) ? 'cover' : $bgSize;
 	$hHeight	=	$this->get_mod( 'h_height' );
 	$hHeight	=	( '' == $hHeight ) ? '' : $hHeight . 'vh';
 	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:' . $this->get_mod( 'ftImgHeight' ) . 'em;}';
@@ -128,6 +131,7 @@ class ToongeePrime_Styles {
 
 	return "
 	#header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:{$bgSize};min-height:{$hHeight};}
+	h1.page-title{font-weight:{$t_weight};}
 	.singular .entry-title{font-size:var(--post-titlesize);}
 	body{font-size:{$bodyFS};}
 	{$fImgCSS}

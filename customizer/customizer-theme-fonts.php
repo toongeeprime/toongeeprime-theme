@@ -39,6 +39,7 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 	$b_AltFont	=	$theStyles->bodyAltFont;
 	$headFont	=	$theStyles->headFont;
 	$h_AltFont	=	$theStyles->headingsAltFont;
+	$t_FWeight	=	$theStyles->titlesF_Weight;
 
 	$themeFonts	=	prime2g_theme_fonts();
 
@@ -167,6 +168,28 @@ function prime2g_customizer_theme_fonts( $wp_customize ) {
 				'step'		=>	'0.1',
 			),
 		'active_callback'	=>	'is_archive'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_page_titles_font_weight',
+		array(
+			'type' => 'theme_mod', 'transport' => 'postMessage',
+			'default' => $t_FWeight, 'sanitize_callback' => 'sanitize_text_field'
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_page_titles_font_weight',
+		array(
+			'label'		=>	__( 'Page Titles Font Weight', PRIME2G_TEXTDOM ),
+			'type'		=>	'number',
+			'settings'	=>	'prime2g_page_titles_font_weight',
+			'section'	=>	'prime2g_theme_fonts_section',
+			'input_attrs'	=>	array(
+				'min'		=>	'300',
+				'max'		=>	'800',
+				'step'		=>	'100',
+			)
 		)
 	);
 
