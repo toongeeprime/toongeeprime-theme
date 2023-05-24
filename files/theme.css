@@ -27,7 +27,7 @@ body, html{
 	--max-pad: 4.5rem;
 	--faint-bg: rgba(127,127,127,0.05);
 /**
- **	Theme-Set Variables: **
+**	Theme-Set Variables **
 --brand-color
 --brand-color-2
 --site-width
@@ -807,14 +807,8 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 .logo_with_menu .main-menu{
 	margin:auto var(--min-pad);
 }
-.singular .mainsidebar{
+.mainsidebar{
 	margin-top:var(--min-pad);
-}
-body:not(.left_sidebar) .mainsidebar{
-	padding-right:var(--min-pad);
-}
-.left_sidebar .mainsidebar{
-	padding-left:var(--min-pad);
 }
 .comment-form-email{
 	width:48%; float:left; margin-right:2%;
@@ -918,4 +912,3 @@ body:not(.left_sidebar) .mainsidebar{
 from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
-

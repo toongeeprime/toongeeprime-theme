@@ -32,6 +32,7 @@ Several updates across the theme
 * Pagination by numbers
 * @ customizer: Archive Pagination Type
 * @ parts: Added adjust-templates.php
+* @ includes: Added conditional-css.php
 * @ js: Added insertAfter
 * @ Hooks: prime2g_before_head, prime2g_before_body
 * @ Features: Multislide capability added to HTML Slider

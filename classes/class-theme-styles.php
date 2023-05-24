@@ -130,43 +130,24 @@ class ToongeePrime_Styles {
 	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:' . $this->get_mod( 'ftImgHeight' ) . 'em;}';
 	$fImgCSS	=	( ! is_singular() ) ? $fImgCSS : '';
 
-	$sbarPlace	=	$this->get_mod( 'sidebarPosition' );
-	$sb901	=	'.has-sidebar .site_content,.has-sidebar.width_960px .site_content{grid-template-columns:2.5fr 1fr;}';
-	$sb1101	=	'.has-sidebar .site_content{grid-template-columns:1fr minmax(200px, 300px);}';
-	if ( $sbarPlace === 'left' ) {
-		$sb901	=	'#main{grid-area:sbMain;}
-		#sidebar{grid-area:sbSide;}
-		.has-sidebar .site_content,.has-sidebar.width_960px .site_content{grid-template-columns:1fr 2.5fr;grid-template-areas:\'sbSide sbMain\';}
-		';
-		$sb1101	=	'.has-sidebar .site_content{grid-template-columns:minmax(200px, 300px) 1fr;}';
-	}
-
-
 	return "
 #header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:{$bgSize};min-height:{$hHeight};}
 h1.page-title{font-weight:{$t_weight};}
 .singular .entry-title{font-size:var(--post-titlesize);}
+body:not(.singular) .entry-title{font-size:var(--arch-titlesize);}
 body{font-size:{$bodyFS};}
 {$fImgCSS}
-body:not(.singular) .entry-title{font-size:var(--arch-titlesize);}
 
 @media(max-width:821px){
 .singular .entry-title{font-size:calc(var(--post-titlesize)*0.8);}
 body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.8);}
 }
 
-@media(min-width:901px){
-{$sb901}
-}
-@media(min-width:1101px){
-{$sb1101}
-}
-
 @media(max-width:601px){
 .singular .entry-title{font-size:calc(var(--post-titlesize)*0.55);}
 body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.55);}
 }
-	";
+";
 	}
 
 }
