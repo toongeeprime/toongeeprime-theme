@@ -28,6 +28,7 @@ Several updates across the theme
 * @ customizer: Video Features with Video Features: fields, templates and functions
 * @ customizer: Footer columns with accompanying setups
 * @ customizer: Remove sidebar controls (Archives / Singular)
+* @ customizer: Left/Right sidebar
 * Pagination by numbers
 * @ customizer: Archive Pagination Type
 * @ parts: Added adjust-templates.php

@@ -106,6 +106,21 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	 *	SIDEBAR IN SINGULAR
 	 *	@since ToongeePrime Theme 1.0.55
 	 */
+	$wp_customize->add_setting( 'prime2g_sidebar_position', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_control(
+		'prime2g_sidebar_position',
+		array(
+			'label'		=>	__( 'Sidebar Position (Sitewide)', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_sidebar_position',
+			'section'	=>	'prime2g_theme_options_section',
+			'choices'	=>	[
+				''		=>	'Right',
+				'left'	=>	'Left',
+			],
+		)
+	);
+
 	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_singular', array( 'type' => 'theme_mod' ) );
 	$wp_customize->add_control(
 		'prime2g_remove_sidebar_in_singular',

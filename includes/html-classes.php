@@ -67,6 +67,9 @@ function prime2g_body_classes( $classes ) {
 	if ( ! empty( get_theme_mod( 'prime2g_enable_video_features' ) ) ) {
 		$classes[]	=	'video_site';
 	}
+	if ( get_theme_mod( 'prime2g_sidebar_position' ) === 'left' ) {
+		$classes[]	=	'left_sidebar';
+	}
 
 	# With or without a header image
 	if ( has_header_image() ) {

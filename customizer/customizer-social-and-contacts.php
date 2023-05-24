@@ -14,7 +14,7 @@
 function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	/**
-	 *	Selective refresh added @since ToongeePrime Theme Theme 1.0.50.00
+	 *	Selective refresh added @since ToongeePrime Theme Theme 1.0.50
 	 */
 	$wp_customize->selective_refresh->add_partial(
 		'prime2g_facebook_url',

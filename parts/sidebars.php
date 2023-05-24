@@ -21,7 +21,7 @@ if ( function_exists( 'define_2gRMVSidebar' ) ) return;
 
 if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
 
-<aside id="sidebar" role="complementary" class="right sidebars asides">
+<aside id="sidebar" role="complementary" class="right mainsidebar sidebars asides">
 	<div id="primary_side" class="widgets-box grid">
 
 	<?php dynamic_sidebar( 'primary-sidebar' ); ?>
