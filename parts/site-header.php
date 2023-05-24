@@ -6,10 +6,11 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *	Added div.title_wrap @since ToongeePrime Theme 1.0.55
+ *	Support Header video @since ToongeePrime Theme 1.0.55
  */
 
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
-$hasHeader		=	has_header_image();
+$hasHeader		=	has_custom_header();
 $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
 $pid			=	get_the_ID();
 $isSingular		=	is_singular();
@@ -47,10 +48,11 @@ if ( ! $isSingular || $isSingular && $keepHeader ) :
 	if ( $hasHeader ) {
 		echo '<div class="shader"></div>';
 	}
-	
+
 	echo '<div class="site_width title_wrap grid prel">';
 
-	do_action( 'prime2g_page_title_hook', $title_in_headr );
+if ( has_header_video() && is_header_video_active() ) { the_custom_header_markup(); }
+else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
 
 	echo '</div>';
 ?>

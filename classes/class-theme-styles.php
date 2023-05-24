@@ -55,7 +55,6 @@ class ToongeePrime_Styles {
 			case 'titlesWeight' : $mod = get_theme_mod( 'prime2g_page_titles_font_weight', $this->titlesF_Weight ); break; # 1.0.55
 			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '15' ); break; # 1.0.55
 			case 'ftImgHeight' : $mod = get_theme_mod( 'prime2g_loop_post_image_height', $this->arch_ftImgHeight ); break; # 1.0.55
-			case 'sidebarPosition' : $mod = get_theme_mod( 'prime2g_sidebar_position' ); break; # 1.0.55
 		}
 	return $mod;
 	}
@@ -153,4 +152,3 @@ body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.55);}
 }
 
 }
-

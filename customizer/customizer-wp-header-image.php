@@ -10,6 +10,34 @@
 if ( ! function_exists( 'prime2g_customizer_wp_header_image' ) ) {
 
 function prime2g_customizer_wp_header_image( $wp_customize ) {
+
+/**
+ *	WP Header Video Settings Filter
+ *	@since ToongeePrime Theme 1.0.55
+ */
+	$wp_customize->add_setting(
+		'prime2g_video_header_placements', array( 'type' => 'theme_mod', 'default' => 'is_front_page' )
+	);
+	$wp_customize->add_control(
+		'prime2g_video_header_placements',
+		array(
+			'type'		=>	'select',
+			'label'		=>	__( 'Video Header Placement (Overlap Image)', PRIME2G_TEXTDOM ),
+			'settings'	=>	'prime2g_video_header_placements',
+			'section'	=>	'header_image',
+			'active_callback'	=>	'prime2g_video_features_active',
+			'choices'	=>	array(
+				'is_front_page'=>	__( 'Front Page Only', PRIME2G_TEXTDOM ),
+				'is_archive'	=>	__( 'Archives Only', PRIME2G_TEXTDOM ),
+				'prime2g_video_header_front_and_archives'	=>	__( 'Front Page &amp; Archives', PRIME2G_TEXTDOM ),
+				'is_singular'	=>	__( 'On All Single Entries', PRIME2G_TEXTDOM ),
+				'prime2g_video_header_use_postvideo'	=>	__( 'Single Entries: Post Video Only', PRIME2G_TEXTDOM ),
+				''	=>	__( 'Show Sitewide', PRIME2G_TEXTDOM ),
+			),
+		)
+	);
+
+
 	/**
 	 *	Replace Header Image with Post Thumbnail
 	 */

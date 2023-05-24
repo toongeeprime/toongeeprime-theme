@@ -26,6 +26,9 @@ add_theme_support(
 	)
 );
 
+#	@since ToongeePrime Theme 1.0.55:
+$enableVideo	=	prime2g_video_features_active() ?: false;
+$videoActive	=	get_theme_mod( 'prime2g_video_header_placements', 'is_front_page' );
 
 #	Custom Header
 $header_width	=	2000;
@@ -39,8 +42,8 @@ add_theme_support(
 		'height'				=>	$header_height,
 		'flex-height'			=>	true,
 		'flex-width'			=>	true,
-		# 'video'					=>	true,
-		# 'video-active-callback'	=>	'is_front_page'
+		'video'					=>	$enableVideo,
+		'video-active-callback'	=>	$videoActive
 	)
 );
 

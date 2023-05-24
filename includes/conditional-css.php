@@ -26,7 +26,10 @@ $sidebar901	=
 $sidebar1101	=	'.has-sidebar .site_content{grid-template-columns:minmax(200px, 300px) 1fr;}';
 }
 
-$css	=	'<style id="prime2g_conditional_css">';
+$css	=	'<style id="prime2g_conditional_css">
+#wp-custom-header img,#wp-custom-header-video-button{display:none;}
+.video_header #header{padding:0;}
+.video_header #header iframe{min-height:90vh;}';
 
 $css	.=
 "@media(min-width:821px){
@@ -43,5 +46,4 @@ $css	.=	'</style>';
 
 echo $css;
 }
-
 
