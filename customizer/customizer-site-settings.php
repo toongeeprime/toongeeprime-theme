@@ -50,7 +50,7 @@ $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 	$wp_customize->add_control(
 		'prime2g_shutdown_display',
 		array(
-			'label'		=>	__( 'Shutdown Display', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Shutdown Display (To display a page, homepage must be set to *Static)', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_shutdown_display',
 			'section'	=>	'prime2g_site_settings_section',

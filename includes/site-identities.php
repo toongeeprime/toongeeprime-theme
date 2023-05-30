@@ -107,7 +107,7 @@ if ( $getSrc ) return $src;
 		$width		=	( $width / $height ) * (int) $logoHeight;
 	}
 
-	$img	=	'<img src="' . $src . '" alt class="custom-logo" title="' . $siteName . '" width="'. $width .'" height="'. $logoHeight .'" />';
+	$img	=	'<img src="' . $src . '" alt class="custom-logo" title="' . $siteName . '" width="'. ceil( $width ) .'px" height="'. $logoHeight .'px" />';
 
 	# Link logo to homepage from all other pages
 	if ( ! is_front_page() ) {

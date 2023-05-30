@@ -220,7 +220,7 @@ return $link;
  *	Post meta at top of entries
  *	Hooked to prime2g_after_title
  */
-add_action( 'prime2g_after_title', 'prime2g_postmeta_top', 5 );
+add_action( 'prime2g_after_title', 'prime2g_postmeta_top', 4 );
 if ( ! function_exists( 'prime2g_postmeta_top' ) ) {
 function prime2g_postmeta_top() {
 
@@ -239,7 +239,7 @@ echo '</div>';
  *	Post meta at bottom of entries
  *	Hooked to prime2g_after_post
  */
-add_action( 'prime2g_after_post', 'prime2g_postmeta_bottom', 5 );
+add_action( 'prime2g_after_post', 'prime2g_postmeta_bottom', 7 );
 if ( ! function_exists( 'prime2g_postmeta_bottom' ) ) {
 function prime2g_postmeta_bottom() {
 

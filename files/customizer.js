@@ -91,7 +91,6 @@ value.bind( function( newval ) {
 
 api( 'prime2g_shutdown_display', function( value ) {
 value.bind( function( newval ) {
-
 	let sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
 	if ( newval ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
 } );
@@ -99,7 +98,6 @@ value.bind( function( newval ) {
 
 api( 'prime2g_cpt_template_parts', function( value ) {
 value.bind( function( newval ) {
-
 	let tpRich	=	$( '#customize-control-prime2g_template_parts_richedit' );
 	if ( newval ) tpRich.slideDown( 180 ); else tpRich.slideUp( 180 );
 } );
@@ -120,7 +118,6 @@ value.bind( function( newval ) {
 
 wp.customize.bind( 'ready', function() {
 wp.customize.previewer.bind( 'ready', function( message ) {
-
 	let nrTitleInput	=	$( "#_customize-input-prime2g_theme_news_reel_title" );
 	nrTitleInput.keyup( function() {
 		let new_val	=	nrTitleInput.val();

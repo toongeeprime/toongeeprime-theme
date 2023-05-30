@@ -70,7 +70,7 @@ function prime2g_body_classes( $classes ) {
 	if ( get_theme_mod( 'prime2g_sidebar_position' ) === 'left' ) {
 		$classes[]	=	'left_sidebar';
 	}
-	if ( is_header_video_active() ) {
+	if ( is_header_video_active() || 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) {
 		$classes[]	=	'video_header';
 	}
 
@@ -177,11 +177,15 @@ return $classes;
 /**
  *	HTML Classes
  */
-function prime2g_theme_html_classes() {
+function prime2g_theme_html_classes( $echo = true ) {
 
 	$addClass	=	ToongeePrime_Colors::theme_color_classes();
 
-echo 'class="'. implode( ' ', $addClass ) .'"';
+if ( $echo ) {
+	echo 'class="'. implode( ' ', $addClass ) .'"';
+} else {
+	return 'class="'. implode( ' ', $addClass ) .'"';
+}
 }
 
 

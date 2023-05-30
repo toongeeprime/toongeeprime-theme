@@ -19,22 +19,20 @@ if ( class_exists( 'woocommerce' ) ) :
  *	@since ToongeePrime Theme 1.0.45.50
  */
 function prime2g_get_woo_mini_cart() {
-
 	include PRIME2G_THEME . 'woocommerce/cart/mini-cart-buffered.php';
-
 }
 
 
 /**
  *	Add to Cart Fragments
- *	@since ToongeePrime Theme 1.0.44.00
+ *	@since ToongeePrime Theme 1.0.44
  */
 add_filter( 'woocommerce_add_to_cart_fragments', 'prime2g_add_to_cart_fragments', 10, 1 );
 function prime2g_add_to_cart_fragments( $fragments ) {
 	$count	=	WC()->cart->get_cart_contents_count();
-	ob_start();
+	ob_start(); ?>
 
-	#	div and function to use in theme **preferably wrapped: ?>
+	<!-- div and function to use in theme **preferably wrapped: -->
 	<div class="widget_shopping_cart_content">
 		<?php woocommerce_mini_cart(); ?>
 	</div>
@@ -48,7 +46,7 @@ return $fragments;
 
 
 /**
- *	Remove WooCommerce breadcrumbs - Theme's breadcrumbs being active
+ *	Remove WooCommerce breadcrumbs for Theme's
  */
 remove_action( 'woocommerce_before_main_content' , 'woocommerce_breadcrumb' , 20, 0 );
 
@@ -72,7 +70,7 @@ function prime2g_remove_woo_page_title( $page_title ) { return ''; }
  *	Default Shop Description
  */
 function prime2g_woo_shop_description() {
-	return 'This is where you can browse products in this store.';
+	return __( 'This is where you can browse products in this store.', 'woocommerce' );
 }
 
 
@@ -92,11 +90,9 @@ function prime2g_product_in_view() {
 add_filter( 'body_class', 'prime2g_woo_body_classes' );
 if ( ! function_exists( 'prime2g_woo_body_classes' ) ) {
 function prime2g_woo_body_classes( $classes ) {
-
 	if ( is_cart() && ( WC()->cart->get_cross_sells() ) ) {
 		$classes[]	=	'has_cross_sells';
 	}
-
 return $classes;
 }
 }
@@ -107,14 +103,12 @@ return $classes;
  */
 add_filter( 'wp_title', 'prime2g_woo_wp_title' );
 function prime2g_woo_wp_title( $title ) {
-
 	if ( is_shop() ) {
 		return get_theme_mod( 'prime2g_shop_page_title', 'Shop Homepage' ) . ' | ';
 	}
 	else {
 		return $title;
 	}
-
 }
 
 
@@ -151,5 +145,5 @@ return $translated_text;
 }
 
 
-
 endif;
+

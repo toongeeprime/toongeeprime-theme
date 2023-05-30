@@ -20,10 +20,6 @@ if ( ! function_exists( 'prime2g_header_video_settings' ) ) {
 function prime2g_header_video_settings( $settings ) {
 
 $video_url	=	get_header_video_url();
-global $post;
-if ( get_theme_mod( 'prime2g_video_header_placements' ) === 'prime2g_video_header_use_postvideo' ) {
-	$video_url	=	$post->video_url;
-}
 
 $height		=	wp_is_mobile() ? 280 : 500;
 

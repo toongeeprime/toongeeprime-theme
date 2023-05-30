@@ -14,11 +14,10 @@ function prime2g_close_down_website() {
 $shutDown	=	get_theme_mod( 'prime2g_website_shutdown' );
 if ( empty( $shutDown ) ) return;
 
-	# Return conditions
-	if (
-		is_admin() || is_user_logged_in() ||
-		in_array( $GLOBALS[ 'pagenow' ], array( 'wp-login.php', 'wp-register.php' ) )
-	 ) return;
+#	Other return conditions
+if ( is_admin() || is_user_logged_in() ||
+	in_array( $GLOBALS[ 'pagenow' ], array( 'wp-login.php', 'wp-register.php' ) )
+) return;
 
 
 /**
@@ -28,9 +27,11 @@ if ( empty( $shutDown ) ) return;
 $usePage	=	get_theme_mod( 'prime2g_shutdown_display' );
 if ( 'use_page' === $usePage ) {
 
-if ( ! is_singular() ) { wp_safe_redirect( home_url() ); exit; }
+if ( is_archive() && ! is_home() || is_singular() && ! is_front_page() ) {
+	wp_safe_redirect( home_url() ); exit;
+}
 
-$pageID	=	get_theme_mod( 'prime2g_shutdown_page_id' );
+$pageID	=	(int) get_theme_mod( 'prime2g_shutdown_page_id' );
 
 $page	=	new WP_Query( [ 'page_id' => $pageID ] );
 
@@ -57,42 +58,40 @@ exit;
 }
 
 
-$title	=	( 'maintenance' == $shutDown ) ? 'Website is Under Maintenance!' : 'Coming Soon!';
+$title	=	( 'maintenance' === $shutDown ) ? 'Website is Under Maintenance!' : 'Coming Soon!';
 
-echo '<!DOCTYPE html><html lang="en">
-		<head>
-		<meta charset="' . get_bloginfo( 'charset' ) . '" />
-        <title>' . $title . ' - ' . get_bloginfo( 'name' ) . '</title>
-		<!-- Open Graph -->
-		<meta property="og:url" content="' . get_home_url() . '" />
-		<meta property="og:type" content="website" />
-		<!-- Twitter Card -->
-		<meta name="twitter:card" content="summary" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />';
+echo '<!DOCTYPE html><html '. get_language_attributes() .' '. prime2g_theme_html_classes( false ) .'>
+<head>
+	<meta charset="' . get_bloginfo( 'charset' ) . '" />
+	<title>' . $title . ' - ' . get_bloginfo( 'name' ) . '</title>
+	<!-- Open Graph -->
+	<meta property="og:url" content="' . get_home_url() . '" />
+	<meta property="og:type" content="website" />
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />';
 
 wp_head();
 
-echo '
-<style id="coming-soon-style">
+echo '<style id="coming-soon-style">
 body{display:grid;place-content:center;text-align:center;min-height:100vh;padding:var(--min-pad);
 background-size:cover;background-position:center;background-image:url('. get_background_image() .');}
 </style>
 </head>';
 
 	# Run Close-down
+	echo '<body class="coming_soon '. implode( ' ', get_body_class() ) .'">';
+
 	if ( current_user_can( 'edit_theme_options' ) && empty( get_background_image() ) )
 		echo '<p style="position:fixed;top:0;left:0;">* You can add a background image in Customizer</p>';
-
-	echo '<body class="coming_soon">';
 
 	prime2g_close_down_template( $shutDown );
 
 	wp_footer();
 
-	echo '</body>';
+	echo '</body></html>';
 
 	exit;
-
 }
 
 

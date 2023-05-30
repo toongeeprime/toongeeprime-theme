@@ -5,7 +5,7 @@
  *
  *	@package WordPress
  *	@package JetPack
- *	@since ToongeePrime Theme 1.0.47.00
+ *	@since ToongeePrime Theme 1.0.47
  */
 
 if ( class_exists( 'Jetpack' ) ) :
@@ -37,7 +37,7 @@ function prime2g_removeJP_related_posts() {
 
 /**
  *	Add JetPack related posts to theme
- *	@since ToongeePrime Theme 1.0.48.00
+ *	@since ToongeePrime Theme 1.0.48
  */
 add_action( 'prime2g_after_post', 'prime2g_add_jp_related_posts', 8 );
 if ( ! function_exists( 'prime2g_add_jp_related_posts' ) ) {
@@ -98,7 +98,7 @@ if ( function_exists( 'is_shop' ) && is_woocommerce() ) return;
 
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.50.00
+ *	@since ToongeePrime Theme Theme 1.0.50
  */
 add_filter( 'infinite_scroll_settings', 'prime2g_infinite_scroll_settings' );
 function prime2g_infinite_scroll_settings( $args ) {

@@ -4,7 +4,7 @@
  *	DEPRECATED FUNCTIONS
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.43.00
+ *	@since ToongeePrime Theme 1.0.43
  */
 function prime2g_get_posts_query( $posttype, $count, $offset, $orderby, $taxonomy, $inornot, $tax_slug, $template ) {
 
@@ -46,7 +46,7 @@ $args	=	array(
 /**
  *	ADD PART TO TEMPLATE
  *	@since ToongeePrime Theme 1.0.48.10
- *	Deprecated @since ToongeePrime Theme 1.0.50.00
+ *	Deprecated @since ToongeePrime Theme 1.0.50
  */
 function prime2g_add_template_part( $slug, $section, $echo = true ){
 $content	=	null;
@@ -84,7 +84,7 @@ return $content;
 
 /**
  *	Get a Template Part
- *	Deprecated @since ToongeePrime Theme 1.0.50.00
+ *	Deprecated @since ToongeePrime Theme 1.0.50
  */
 add_shortcode( 'prime2g_add_template_part', 'prime2g_add_template_part_shortcode' );
 function prime2g_add_template_part_shortcode( $atts ) {
@@ -104,7 +104,7 @@ return $part;
 
 
 /**
- *	Deprecated @since ToongeePrime Theme 1.0.55.00
+ *	Deprecated @since ToongeePrime Theme 1.0.55
  */
 #	Send contents to footer:
 add_shortcode( 'prime_send_to_footer', 'prime2g_send_content_to_footer' );

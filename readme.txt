@@ -23,17 +23,17 @@ Several updates across the theme
 * @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks
 * @ customizer: Page Titles Font Weight
-* @ customizer: Header Height Controls, added re-render-site-parts.php
+* @ customizer: Header Height Controls, added render-site-parts.php
 * @ customizer: Site shutdown: added options to use a page as display
 * @ customizer: Archive columns
-* @ customizer: Video Features with Video Features: fields, templates and functions
+* @ customizer: Video Features with fields, templates and functions
 * @ customizer: Footer columns with accompanying setups
 * @ customizer: Remove sidebar controls (Archives / Singular)
 * @ customizer: Left/Right sidebar
 * Pagination by numbers
 * @ customizer: Archive Pagination Type
-* @ parts: Added adjust-templates.php
-* @ includes: Added conditional-css.php
+* @ parts: Added adjust-templates.php for conditional adjustments
+* @ includes: Added css.php & js.php
 * @ js: Added insertAfter
 * @ Hooks: prime2g_before_head, prime2g_before_body
 * @ Features: Multislide capability added to HTML Slider

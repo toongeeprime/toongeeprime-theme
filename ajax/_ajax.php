@@ -4,7 +4,7 @@
  *	THEME'S AJAX BASE
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.46.00
+ *	@since ToongeePrime Theme 1.0.46
  */
 
 add_action( 'wp_head', 'prime2g_ajax_head', 3 );

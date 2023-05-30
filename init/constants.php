@@ -5,7 +5,7 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49.00
+ *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49
  */
 
 define( 'PRIME2G_TEXTDOM', 'toongeeprime-theme' );
@@ -21,4 +21,4 @@ define( 'PRIME2G_THEMENAME', wp_get_theme()->get( 'Name' ) );
 
 
 define( 'PRIME2G_CACHE_EXPIRES', 30 * MINUTE_IN_SECONDS );
-define( 'PRIME2G_POSTSCACHE', 'prime2g_posts_cache' ); #	@since version 1.0.55.00
+define( 'PRIME2G_POSTSCACHE', 'prime2g_posts_cache' ); #	@since version 1.0.55

@@ -65,10 +65,11 @@ if ( ! prime2g_use_extras() ) return;
 			'section'	=>	'prime2g_media_features_section',
 			'active_callback'	=>	function() { return ( p2gvfactive() && is_singular() ); },
 			'choices'	=>	array(
-				'prime2g_before_title'	=>	__( 'Before Post Title', PRIME2G_TEXTDOM ),
+				'prime2g_before_title'	=>	__( 'Before Post Title', PRIME2G_TEXTDOM ),	# values === hook names
 				'prime2g_after_title'	=>	__( 'After Post Title', PRIME2G_TEXTDOM ),
 				'prime2g_before_post'	=>	__( 'Before Post Content', PRIME2G_TEXTDOM ),
 				'prime2g_after_post'	=>	__( 'After Post Content', PRIME2G_TEXTDOM ),
+				'replace_header'	=>	__( 'Replace Header', PRIME2G_TEXTDOM ),	# values !== hook name
 			),
 		)
 	);

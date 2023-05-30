@@ -9,12 +9,14 @@
  *	Support Header video @since ToongeePrime Theme 1.0.55
  */
 
+global $post;	# 1.0.55
+
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
 $hasHeader		=	has_custom_header();
 $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
 $pid			=	get_the_ID();
 $isSingular		=	is_singular();
-$keepHeader		=	( post_custom( 'remove_header' ) !== 'remove' );
+$keepHeader		=	$isSingular ? ( $post->remove_header !== 'remove' ) : true;
 
 $headerBackground	=	'';
 
@@ -38,9 +40,7 @@ $headerBackground	=	'style="background-image:url(' . $headerUrl . ');"';
 
 	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
 
-if ( ! $isSingular || $isSingular && $keepHeader ) :
-
-?>
+if ( ! $isSingular || $isSingular && $keepHeader ) { ?>
 
 <header id="header" class="site_header prel" <?php echo $headerBackground; ?>>
 
@@ -51,7 +51,11 @@ if ( ! $isSingular || $isSingular && $keepHeader ) :
 
 	echo '<div class="site_width title_wrap grid prel">';
 
-if ( has_header_video() && is_header_video_active() ) { the_custom_header_markup(); }
+if ( $isSingular && $post->video_url &&
+( 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) ) {
+	echo prime2g_get_post_media_embed();
+}
+elseif ( has_header_video() && is_header_video_active() ) { the_custom_header_markup(); }
 else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
 
 	echo '</div>';
@@ -60,8 +64,7 @@ else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
 </header>
 
 <?php
-
-endif;
+}
 
 	if ( 'bottom' == $menuPlace ) prime2g_main_menu();
 
