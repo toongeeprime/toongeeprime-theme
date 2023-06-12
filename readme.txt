@@ -30,13 +30,15 @@ Several updates across the theme
 * @ customizer: Footer columns with accompanying setups
 * @ customizer: Remove sidebar controls (Archives / Singular)
 * @ customizer: Left/Right sidebar
-* Pagination by numbers
 * @ customizer: Archive Pagination Type
+* @ customizer: Option: Place Menu over header
+* @ customizer: Option: Page title over header video
 * @ parts: Added adjust-templates.php for conditional adjustments
 * @ includes: Added css.php & js.php
 * @ js: Added insertAfter
 * @ Hooks: prime2g_before_head, prime2g_before_body
 * @ Features: Multislide capability added to HTML Slider
+* Pagination by numbers
 * Work Custom logo width and height attributes
 * Shortcodes: prime_site_logo, prime_site_title_and_description
 

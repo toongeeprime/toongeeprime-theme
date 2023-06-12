@@ -137,10 +137,7 @@ td.pad{
 	background:none;
 }
 iframe{
-	max-width:100%;
-}
-.prime2g_embedded_media iframe{
-	width:100%;
+	max-width:100%; width:100%;
 }
 .contentWrap ::selection, #prime2g_after_header ::selection{
 	background-color:var(--content-text); color:var(--content-background);
@@ -744,9 +741,6 @@ i.bi{
 .site_content{
 	gap:0;
 }
-.fixed_main_menu #container{
-	top:46px;
-}
 .gallery-columns-6{
 	grid-template-columns:repeat(6, 1fr);
 }
@@ -790,13 +784,6 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 }
 .sub-menu li, .collapsible-navs .sub-menu a{
 	display:block;
-}
-.fixed_main_menu .main_menu_wrap{
-	position:fixed;
-	top:0; left:0; right:0;
-}
-.admin-bar.fixed_main_menu .main_menu_wrap{
-	top:32px;
 }
 .logo_with_menu{
 	display:flex;

@@ -36,6 +36,22 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
 		)
 	);
 
+	/**
+	 *	Page Title Over Header Video
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting( 'prime2g_pagetitle_over_headervideo', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_control(
+		'prime2g_pagetitle_over_headervideo',
+		array(
+			'label'		=>	__( 'Show Page Title Over Header Video', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_pagetitle_over_headervideo',
+			'section'	=>	'header_image',
+			'active_callback'	=>	'prime2g_video_features_active'
+		)
+	);
+
 
 	/**
 	 *	Replace Header Image with Post Thumbnail
@@ -109,7 +125,7 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
 	 */
 	$wp_customize->add_setting(
 		'prime2g_theme_header_height',
-		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '10' )
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '50' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_header_height',

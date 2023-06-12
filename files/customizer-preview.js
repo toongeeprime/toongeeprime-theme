@@ -6,10 +6,8 @@
  */
 jQuery( document ).ready( function( $ ) {
 /*if ( 'undefined' === typeof wp || ! wp.customize || ! wp.customize.selectiveRefresh ) return;*/
-
-$( '.custom-logo' ).attr( 'width', '' );
-$( '.custom-logo' ).attr( 'height', '' );
-$( '.custom-logo' ).css( 'width', 'auto' );
+let imgHeight	=	Math.ceil( $( '.custom-logo' ).height() );
+$( '.custom-logo' ).css( { 'width': 'auto', 'height': imgHeight } );
 
 	wp.customize( 'prime2g_header_background', function( value ) {
 		value.bind( function( newval ) { $( '#header' ).css( 'background-color', newval ); } );

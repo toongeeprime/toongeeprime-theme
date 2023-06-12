@@ -10,6 +10,7 @@
 /**
  *	The Site Title or Logo display
  */
+if ( ! function_exists( 'prime2g_title_or_logo' ) ) {
 function prime2g_title_or_logo( $before = '<div class="page_title prel title_tagline_logo site_width">', $after = '</div>', $darklogo = false )
 {
 	if ( ! display_header_text() ) return;
@@ -39,6 +40,8 @@ else {
 
 return $show;
 }
+}
+
 
 
 /**
@@ -57,9 +60,7 @@ function prime2g_get_dark_logo_url() {
 /**
  *	Theme's Placeholder Image
  */
-function prime2g_get_placeholder_url() {
-	return PRIME2G_THEMEURL. 'images/placeholder.gif';
-}
+function prime2g_get_placeholder_url() { return PRIME2G_THEMEURL. 'images/placeholder.gif'; }
 
 
 
@@ -100,7 +101,7 @@ if ( $getSrc ) return $src;
 	$siteName	=	get_bloginfo( 'name' );
 	$logoHeight	=	get_theme_mod( 'prime2g_theme_logo_height', '100' );	# @ Theme 1.0.55
 	$imgsrcs	=	wp_get_attachment_image_src( $iid, 'full' );
-	$width	=	$height	=	'';
+	$width	=	$height	=	'50';
 	if ( $imgsrcs ) {
 		$width		=	(int) $imgsrcs[1];
 		$height		=	(int) $imgsrcs[2];
@@ -110,7 +111,7 @@ if ( $getSrc ) return $src;
 
 	$img	=	'<img src="' . $src . '" alt class="custom-logo" title="' . $siteName . '" width="'. $width .'px" height="'. $logoHeight .'px" />';
 
-	# Link logo to homepage from all other pages
+	#	Link logo to homepage from all other pages
 	if ( ! is_front_page() ) {
 		$logo	=	'<a class="logo_link" href="'. esc_url( home_url() ) .'">' . $img . '</a>';
 	}

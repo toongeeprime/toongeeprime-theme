@@ -95,7 +95,7 @@ function prime2g_footer_widgets() {
 
 $cols	=	4;
 $wID	=	'';
-if ( CHILD2G_VERSION >= '2.0' ) {
+if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.0' ) {
 	$cols	=	(int) get_theme_mod( 'prime2g_footer_columns_num', '4' );
 }
 

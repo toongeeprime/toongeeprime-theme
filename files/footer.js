@@ -18,14 +18,11 @@ window.addEventListener( "scroll", ()=>{
 let primetoTop	=	p2getEl( '#prime2g_toTop' ),
 	popEl		=	p2getAll( '.popEl' );
 
-	if ( window.pageYOffset > 700 ) {
-		primetoTop.classList.add( 'show' );
-		theBody.classList.add( 'pop' );
-	}
-	else {
-		primetoTop.classList.remove( 'show' );
-		theBody.classList.remove( 'pop' );
-	}
+	if ( window.pageYOffset > 500 ) { theBody.classList.add( 'pop' ); }
+	else { theBody.classList.remove( 'pop' ); }
+
+	if ( window.pageYOffset > 800 ) { primetoTop.classList.add( 'show' ); }
+	else { primetoTop.classList.remove( 'show' ); }
 
 	if ( popEl ) {
 		popEl.forEach( ( pop )=>{

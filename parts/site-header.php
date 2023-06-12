@@ -14,15 +14,20 @@ global $post;	# 1.0.55
 $title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
 $hasHeader		=	has_custom_header();
 $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
+$videoActive	=	is_header_video_active();
 $pid			=	get_the_ID();
 $isSingular		=	is_singular();
 $keepHeader		=	$isSingular ? ( $post->remove_header !== 'remove' ) : true;
+
+$titleOverVideo	=	get_theme_mod( 'prime2g_pagetitle_over_headervideo' );
+$tov_class	=	( $titleOverVideo && ( $post->video_url || $videoActive ) || ! $isSingular ) ?
+' title_over_video' : ' grid';
 
 $headerBackground	=	'';
 
 if ( $hasHeader ) {
 
-	if ( $isSingular && has_post_thumbnail() && ( '' == get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
+	if ( $isSingular && has_post_thumbnail() && ( '' === get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
 		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
 	}
 	elseif ( is_category() || is_tag() || is_tax() ) {
@@ -36,29 +41,34 @@ $headerBackground	=	'style="background-image:url(' . $headerUrl . ');"';
 }
 
 
-	prime2g_before_header();
+prime2g_before_header();
 
-	if ( 'bottom' != $menuPlace ) prime2g_main_menu();
+if ( 'bottom' != $menuPlace ) prime2g_main_menu();
+
 
 if ( ! $isSingular || $isSingular && $keepHeader ) { ?>
 
-<header id="header" class="site_header prel" <?php echo $headerBackground; ?>>
+<header id="header" class="site_header prel<?php echo $tov_class; ?>" <?php echo $headerBackground; ?>>
 
 <?php
-	if ( $hasHeader ) {
-		echo '<div class="shader"></div>';
+if ( $hasHeader ) { echo '<div class="shader"></div>'; }
+
+echo '<div class="site_width title_wrap grid prel">';
+
+	if ( $isSingular && $post->video_url &&
+	( 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) ) {
+		echo prime2g_get_post_media_embed();
+		if ( $titleOverVideo )
+			do_action( 'prime2g_page_title_hook', $title_in_headr );
 	}
+	elseif ( has_header_video() && $videoActive ) {
+		the_custom_header_markup();
+		if ( $titleOverVideo )
+			do_action( 'prime2g_page_title_hook', $title_in_headr );
+	}
+	else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
 
-	echo '<div class="site_width title_wrap grid prel">';
-
-if ( $isSingular && $post->video_url &&
-( 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) ) {
-	echo prime2g_get_post_media_embed();
-}
-elseif ( has_header_video() && is_header_video_active() ) { the_custom_header_markup(); }
-else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
-
-	echo '</div>';
+echo '</div>';
 ?>
 
 </header>
@@ -66,9 +76,9 @@ else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
 <?php
 }
 
-	if ( 'bottom' == $menuPlace ) prime2g_main_menu();
+if ( 'bottom' == $menuPlace ) prime2g_main_menu();
 
-	prime2g_sub_header();
+prime2g_sub_header();
 
-	if ( $keepHeader ) { prime2g_after_header(); }
+if ( $keepHeader ) { prime2g_after_header(); }
 

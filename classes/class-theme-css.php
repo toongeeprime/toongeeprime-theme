@@ -12,7 +12,6 @@ require_once PRIME2G_CLASSDIR . 'class-theme-colors.php';
 if ( ! class_exists( 'ToongeePrime_ThemeCSS' ) ) {
 
 class ToongeePrime_ThemeCSS extends ToongeePrime_Colors {
-
 	/**
 	 *	Return :root CSS
 	 *
@@ -23,21 +22,19 @@ class ToongeePrime_ThemeCSS extends ToongeePrime_Colors {
 	$styles	=	new ToongeePrime_Styles();
 	$colors	=	new ToongeePrime_Colors();
 
-$root	=	"<style id=\"prime2g_root_css\">";
-$root	.=	"
+$css	=	"<style id=\"prime2g_root_css\">";
+$css	.=	"
 :root{";
-$root	.=	$styles->the_root_css();
-$root	.=	$colors->the_root_css();
-$root	.=
+$css	.=	$styles->the_root_css();
+$css	.=	$colors->the_root_css().
 "}
 body.themeswitched_dark{";
-$root	.=	$colors->the_root_dark_css();
-$root	.=
+$css	.=	$colors->the_root_dark_css().
 "}";
-$root	.=	$styles->theme_css();
-$root	.=	"</style>";
+$css	.=	$styles->theme_css();
+$css	.=	"</style>";
 
-return $root;
+return $css;
 
 	}
 

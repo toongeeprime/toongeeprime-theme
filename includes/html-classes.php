@@ -11,10 +11,8 @@
  *	Add Classes to Post Title Header
  */
 function prime2g_title_header_classes() {
-
 $classes	=	has_custom_logo() ? ' has-logo' : '';
 $classes	.=	has_nav_menu( 'main-menu' ) ? ' has-menu' : '';
-
 return $classes;
 }
 
@@ -29,32 +27,25 @@ function prime2g_body_classes( $classes ) {
 	$classes[]	=	'no-js';
 
 	# Add a body class if sidebar is set
-	if ( ! function_exists( 'define_2gRMVSidebar' ) && get_post_type() != 'product' ) {
+	if ( ! function_exists( 'define_2gRMVSidebar' ) && get_post_type() !== 'product' ) {
 		$classes[]	=	'has-sidebar';
 	}
 
 	# Add a body class if title is unset
-	if ( function_exists( 'define_2gRMVTitle' ) ) {
-		$classes[]	=	'no_title';
-	}
+	$classes[]	=	function_exists( 'define_2gRMVTitle' ) ? 'no_title' : '';
 
 	# Site's Width and Extras
-		$classes[]	=	'width_' . get_theme_mod( 'prime2g_site_width' );
-		$classes[]	=	'ext_' . get_theme_mod( 'prime2g_site_style_extras' );
+	$classes[]	=	'width_' . get_theme_mod( 'prime2g_site_width' );
+	$classes[]	=	'ext_' . get_theme_mod( 'prime2g_site_style_extras' );
 
 	# If post title is in header
-	if ( 'header' == get_theme_mod( 'prime2g_title_location' ) ) {
-		$classes[]	=	'title_in_header';
-	}
+	$classes[]	=	'header' === get_theme_mod( 'prime2g_title_location' ) ? 'title_in_header' : '';
 
 	# By Main Menu Position
 	$menuPosition	=	get_theme_mod( 'prime2g_menu_position' );
-	if ( 'fixed' == $menuPosition ) {
-		$classes[]	=	'fixed_main_menu';
-	}
-	if ( 'bottom' == $menuPosition ) {
-		$classes[]	=	'bottom_main_menu';
-	}
+	$classes[]	=	'menu_on_header' === $menuPosition ? 'menu_on_header' : '';
+	$classes[]	=	'fixed' === $menuPosition ? 'fixed_main_menu' : '';
+	$classes[]	=	'bottom' === $menuPosition ? 'bottom_main_menu' : '';
 
 	# If Preloader feature is active
 	# @since ToongeePrime Theme 1.0.48.50
@@ -67,68 +58,42 @@ function prime2g_body_classes( $classes ) {
 	if ( ! empty( get_theme_mod( 'prime2g_enable_video_features' ) ) ) {
 		$classes[]	=	'video_site';
 	}
-	if ( get_theme_mod( 'prime2g_sidebar_position' ) === 'left' ) {
-		$classes[]	=	'left_sidebar';
-	}
-	if ( is_header_video_active() || 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) {
-		$classes[]	=	'video_header';
-	}
+
+	$classes[]	=	'left' === get_theme_mod( 'prime2g_sidebar_position' ) ? 'left_sidebar' : '';
+	$classes[]	=	is_header_video_active() ? 'video_header' :'';
 
 	# With or without a header image
-	if ( has_header_image() ) {
-		$classes[]	=	'has-header-image';
-	}
-	else {
-		$classes[]	=	'no-header-image';
-	}
+	$classes[]	=	has_header_image() ? 'has-header-image' : 'no-header-image';
 
 	# When there's a custom background image
 	# WP has `custom-background`
-	if ( get_background_image() ) {
-		$classes[]	=	'has-background-image';
-	}
+	$classes[]	=	get_background_image() ? 'has-background-image' : '';
 
 	# Singular Entries & Archives
 	if ( is_singular() ) {
+		global $post;
 
 		$classes[]	=	'singular';
+		$classes[]	=	'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ? 'video_as_header' : '';
 
 		# Has featured image?
-		if ( has_post_thumbnail() ) {
-			$classes[]	=	'has-thumbnail';
-		}
-		else {
-			$classes[]	=	'no-thumbnail';
-		}
+		$classes[]	=	has_post_thumbnail() ? 'has-thumbnail' : 'no-thumbnail';
 
 		# Page width
-		$page_width	=	post_custom( 'page_width' );
-		if ( $page_width ) {
-			$classes[]	=	$page_width;
-		}
+		$classes[]	=	$post->page_width ?: '';
 
 		# Default Header Removed
-		if ( post_custom( 'remove_header' ) == 'remove' ) {
-			$classes[]	=	'header_removed';
-		}
-
+		$classes[]	=	'remove' === $post->remove_header ? 'header_removed' : '';
 	}
 	else {
 		$classes[]	=	'hfeed';
 	}
 
 	# Sites with more than 1 published author
-	if ( is_multi_author() ) {
-		$classes[]	=	'multi-authors';
-	}
+	$classes[]	=	is_multi_author() ? 'multi-authors' : '';
 
 	# Device class
-	if ( wp_is_mobile() ) {
-		$classes[]	=	'is-mobile';
-	}
-	else {
-		$classes[]	=	'is-desktop';
-	}
+	$classes[]	=	wp_is_mobile() ? 'is-mobile' : 'is-desktop';
 
 	# WP has `logged-in` class
 	# Logged in user's role else logged out
@@ -143,17 +108,16 @@ function prime2g_body_classes( $classes ) {
 
 	# WooCommerce product category as class(es)
 	if ( function_exists( 'is_product' ) && is_product() ) {
-			$categs	=	get_the_terms( get_the_ID(), 'product_cat' );
-			foreach ( $categs as $cat ) {
-				$pcatClass	=	'product-cat-' . $cat->slug;
-			break;
-			}
-		$classes[]	=	$pcatClass;
+		$categs	=	get_the_terms( get_the_ID(), 'product_cat' );
+		foreach ( $categs as $cat ) {
+			$classes[]	=	'product-cat-' . $cat->slug;
+		break;
+		}
 	}
 
 return $classes;
-
 }
+
 
 
 
@@ -164,10 +128,7 @@ add_filter( 'post_class', 'prime2g_post_classes', 10, 3 );
 function prime2g_post_classes( $classes ) {
 
 	$classes[]	=	'entry';
-
-	if ( get_option( 'sticky_posts' ) ) {
-		$classes[]	=	'sticky';
-	}
+	$classes[]	=	is_sticky() ? 'sticky' : '';
 
 return $classes;
 }
@@ -181,11 +142,8 @@ function prime2g_theme_html_classes( $echo = true ) {
 
 	$addClass	=	ToongeePrime_Colors::theme_color_classes();
 
-if ( $echo ) {
-	echo 'class="'. implode( ' ', $addClass ) .'"';
-} else {
-	return 'class="'. implode( ' ', $addClass ) .'"';
-}
+if ( $echo ) { echo 'class="'. implode( ' ', $addClass ) .'"'; }
+else { return 'class="'. implode( ' ', $addClass ) .'"'; }
 }
 
 

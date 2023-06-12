@@ -76,8 +76,9 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 			'section'	=>	'prime2g_theme_options_section',
 			'choices'	=>	array(
 				'top'	=>	__( 'Top of Header', PRIME2G_TEXTDOM ),
-				'bottom'	=>	__( 'Bottom of Header', PRIME2G_TEXTDOM ),
-				'fixed'	=>	__( 'Fixed At Top', PRIME2G_TEXTDOM )
+				'bottom'=>	__( 'Bottom of Header', PRIME2G_TEXTDOM ),
+				'fixed'	=>	__( 'Fixed At Site-Top', PRIME2G_TEXTDOM ),
+				'menu_on_header'	=>	__( 'On The Header', PRIME2G_TEXTDOM )
 			),
 		)
 	);
@@ -215,7 +216,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 		)
 	);
 
-if ( CHILD2G_VERSION >= '2.0' ) {
+if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.0' ) {
 
 	$wp_customize->add_setting( 'prime2g_theme_add_footer_logo',
 		array( 'type' => 'theme_mod', 'default' => '1' )

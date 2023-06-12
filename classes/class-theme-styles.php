@@ -55,6 +55,8 @@ class ToongeePrime_Styles {
 			case 'titlesWeight' : $mod = get_theme_mod( 'prime2g_page_titles_font_weight', $this->titlesF_Weight ); break; # 1.0.55
 			case 'bodyFontSize' : $mod = get_theme_mod( 'prime2g_body_text_font_size', '15' ); break; # 1.0.55
 			case 'ftImgHeight' : $mod = get_theme_mod( 'prime2g_loop_post_image_height', $this->arch_ftImgHeight ); break; # 1.0.55
+			case 'menu_place' : $mod = get_theme_mod( 'prime2g_menu_position' ); break; # 1.0.55
+			case 'titleOnHeader' : $mod = get_theme_mod( 'prime2g_pagetitle_over_headervideo' ); break; # 1.0.55
 		}
 	return $mod;
 	}
@@ -120,33 +122,63 @@ class ToongeePrime_Styles {
 	 *	Generate other CSS
 	 */
 	protected function theme_css() {
-	$bodyFS	=	$this->get_mod( 'bodyFontSize' ) . 'px';
+	$bodyFS	=	$this->get_mod( 'bodyFontSize' ) .'px';
 	$bgSize	=	$this->get_mod( 'headerimgsize' );
 	$t_weight	=	$this->get_mod( 'titlesWeight' );
 	$bgSize		=	( '' == $bgSize ) ? 'cover' : $bgSize;
+	$menuPlace	=	$this->get_mod( 'menu_place' );
+
 	$hHeight	=	$this->get_mod( 'h_height' );
-	$hHeight	=	( '' == $hHeight ) ? '' : $hHeight . 'vh';
-	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:' . $this->get_mod( 'ftImgHeight' ) . 'em;}';
+	$hHeight	=	( '' == $hHeight ) ? '' : $hHeight .'vh';
+
+	$titleOnHeader	=	$this->get_mod( 'titleOnHeader' ) ? '.title_over_video ' : '';
+
+	$videoActive	=	prime2g_video_features_active();
+	$headerVidCSS	=	$videoActive ?
+	"#header iframe{height:{$hHeight};}.site_width.title_wrap{max-width:none;}
+	.video_header #header,.video_as_header #header{padding:0;overflow:hidden;display:block;}
+	#header.grid{display:grid;}
+	#wp-custom-header{position:relative;height:{$hHeight};}
+	#wp-custom-header-video{width:auto;height:{$hHeight};}
+	.title_over_video .page_title{position:absolute;}" : '';
+	$headerVidCSSB	=	$videoActive ?
+	".video_header #header,.video_as_header #header{min-height:{$hHeight};}
+	#wp-custom-header-video{width:100%;height:auto;}" : '';
+
+	$fImgHeight	=	$this->get_mod( 'ftImgHeight' ) .'em';
+	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:'. $fImgHeight .';}';
 	$fImgCSS	=	( ! is_singular() ) ? $fImgCSS : '';
 
-	return "
+	$css	=	"
 #header{background-attachment:". $this->get_mod( 'headerattach' ) .";background-size:{$bgSize};min-height:{$hHeight};}
 h1.page-title{font-weight:{$t_weight};}
 .singular .entry-title{font-size:var(--post-titlesize);}
 body:not(.singular) .entry-title{font-size:var(--arch-titlesize);}
 body{font-size:{$bodyFS};}
 {$fImgCSS}
+{$headerVidCSS}
 
-@media(max-width:821px){
+@media(min-width:821px){";
+$css	.=	in_array( $menuPlace, [ 'fixed', 'menu_on_header' ] ) ? "#container{top:46px;}
+#main_nav{position:fixed;top:0;left:0;right:0;}.admin-bar #main_nav{top:32px;}" : "";
+$css	.=	( $menuPlace === 'menu_on_header' ) ? "#main_nav{background:transparent;}
+.pop #main_nav{background:var(--content-background);}#container{top:0;}":"";
+$css	.=	$headerVidCSSB;
+$css	.=	"}
+
+@media(max-width:820px){
 .singular .entry-title{font-size:calc(var(--post-titlesize)*0.8);}
-body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.8);}
-}
+body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.8);}";
+
+$css	.=	$fImgCSS ? ".posts_loop .thumbnail,.posts_loop .video iframe{height:calc({$fImgHeight} * .8);}" : "";
+$css	.=	"}
 
 @media(max-width:601px){
-.singular .entry-title{font-size:calc(var(--post-titlesize)*0.55);}
-body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.55);}
+.singular .entry-title{font-size:calc(var(--post-titlesize)*0.6);}
+body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.6);}
 }
 ";
+return $css;
 	}
 
 }

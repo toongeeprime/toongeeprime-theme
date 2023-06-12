@@ -82,6 +82,8 @@ background-size:cover;background-position:center;background-image:url('. get_bac
 	# Run Close-down
 	echo '<body class="coming_soon '. implode( ' ', get_body_class() ) .'">';
 
+	wp_body_open();
+
 	if ( current_user_can( 'edit_theme_options' ) && empty( get_background_image() ) )
 		echo '<p style="position:fixed;top:0;left:0;">* You can add a background image in Customizer</p>';
 
@@ -108,7 +110,7 @@ $headline	=	'maintenance' == $shutDown ?
 $msg	=	'maintenance' == $shutDown ? 'We will be back soon.' : 'Thank you for checking in.';
 
 	echo '<main id="message">';
-	echo '<h1>'. __( $headline, PRIME2G_TEXTDOM ) .'</h1>';
+	echo '<h1 class="entry-title page-title">'. __( $headline, PRIME2G_TEXTDOM ) .'</h1>';
 	echo '<h3>'. __( $msg, PRIME2G_TEXTDOM ) .'</h3>';
 	echo '</main>';
 }
