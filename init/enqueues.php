@@ -5,10 +5,10 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49.00
+ *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49
  */
 add_action( 'wp_enqueue_scripts', 'prime2g_theme_enqueues' );
-if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
+if ( !function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
     # Theme Styles
 	wp_enqueue_style(
@@ -67,16 +67,14 @@ function prime2g_theme_enqueues() {
 /**
  *	Removing Default WooCommerce styles
  */
-if ( class_exists( 'woocommerce' ) ) {
-	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
-}
+if ( class_exists( 'woocommerce' ) ) { add_filter( 'woocommerce_enqueue_styles', '__return_false' ); }
 
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.50.00
+ *	@since ToongeePrime Theme Theme 1.0.50
  */
 add_action( 'admin_enqueue_scripts', 'prime2g_admin_enqueues' );
-if ( ! function_exists( 'prime2g_admin_enqueues' ) ) {
+if ( !function_exists( 'prime2g_admin_enqueues' ) ) {
 function prime2g_admin_enqueues() {
 	wp_register_script(
 		'prime2g_js',
@@ -91,7 +89,7 @@ function prime2g_admin_enqueues() {
 
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.50.00
+ *	@since ToongeePrime Theme Theme 1.0.50
  */
 add_action( 'customize_controls_enqueue_scripts', 'prime2g_customizer_enqueues' );
 add_action( 'customize_preview_init', 'prime2g_customizer_preview_enqueues' );

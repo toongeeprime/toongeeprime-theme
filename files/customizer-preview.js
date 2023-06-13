@@ -5,7 +5,7 @@
  *	@since ToongeePrime Theme 1.0.50
  */
 jQuery( document ).ready( function( $ ) {
-/*if ( 'undefined' === typeof wp || ! wp.customize || ! wp.customize.selectiveRefresh ) return;*/
+/* if ( 'undefined' === typeof wp || ! wp.customize || ! wp.customize.selectiveRefresh ) return; */
 let imgHeight	=	Math.ceil( $( '.custom-logo' ).height() );
 $( '.custom-logo' ).css( { 'width': 'auto', 'height': imgHeight } );
 
@@ -88,3 +88,4 @@ $( '.custom-logo' ).css( { 'width': 'auto', 'height': imgHeight } );
 		value.bind( function( newval ) { $( '.custom-logo' ).css( 'height', newval+'px' ); } );
 	} );
 } );
+

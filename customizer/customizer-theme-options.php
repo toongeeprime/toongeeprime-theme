@@ -61,29 +61,6 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	);
 
 	/**
-	 *	MAIN MENU POSITION
-	 */
-	$wp_customize->add_setting(
-		'prime2g_menu_position',
-		array( 'type' => 'theme_mod', 'default' => 'top' )
-	);
-	$wp_customize->add_control(
-		'prime2g_menu_position',
-		array(
-			'label'		=>	__( 'Main Menu Position', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_menu_position',
-			'section'	=>	'prime2g_theme_options_section',
-			'choices'	=>	array(
-				'top'	=>	__( 'Top of Header', PRIME2G_TEXTDOM ),
-				'bottom'=>	__( 'Bottom of Header', PRIME2G_TEXTDOM ),
-				'fixed'	=>	__( 'Fixed At Site-Top', PRIME2G_TEXTDOM ),
-				'menu_on_header'	=>	__( 'On The Header', PRIME2G_TEXTDOM )
-			),
-		)
-	);
-
-	/**
 	 *	STYLING ADJUSTMENTS
 	 */
 	$wp_customize->add_setting( 'prime2g_site_style_extras', array( 'type' => 'theme_mod' ) );
@@ -160,20 +137,6 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	);
 
 	/**
-	 *	Logo Beside Menu
-	 */
-	$wp_customize->add_setting( 'prime2g_logo_with_menu', array( 'type' => 'theme_mod' ) );
-	$wp_customize->add_control(
-		'prime2g_logo_with_menu',
-		array(
-			'label'		=>	__( 'Show Logo by Main Menu', PRIME2G_TEXTDOM ),
-			'type'		=>	'checkbox',
-			'settings'	=>	'prime2g_logo_with_menu',
-			'section'	=>	'prime2g_theme_options_section'
-		)
-	);
-
-	/**
 	 *	BREADCRUMBS
 	 */
 	$wp_customize->add_setting( 'prime2g_theme_breadcrumbs', array( 'type' => 'theme_mod' ) );
@@ -190,19 +153,6 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
-	$wp_customize->add_setting( 'prime2g_theme_add_footer_menu',
-		array( 'type' => 'theme_mod', 'default' => '1' )
-	);
-	$wp_customize->add_control(
-		'prime2g_theme_add_footer_menu',
-		array(
-			'label'		=>	__( 'Footer Menu', PRIME2G_TEXTDOM ),
-			'type'		=>	'checkbox',
-			'settings'	=>	'prime2g_theme_add_footer_menu',
-			'section'	=>	'prime2g_theme_options_section'
-		)
-	);
-
 	$wp_customize->add_setting( 'prime2g_theme_add_footer_credits',
 		array( 'type' => 'theme_mod', 'default' => '1' )
 	);

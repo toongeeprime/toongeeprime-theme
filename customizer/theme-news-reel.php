@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	NEWS REEL
  *
@@ -10,9 +9,7 @@
 function prime2g_theme_newsreel_active() { return get_theme_mod( 'prime2g_theme_news_reel' ); }
 
 if ( ! function_exists( 'prime2g_theme_news_reel' ) ) {
-
 function prime2g_theme_news_reel( $wp_customize ) {
-
 
 	$wp_customize->selective_refresh->add_partial(
 		'prime2g_theme_news_reel',
@@ -27,10 +24,7 @@ function prime2g_theme_news_reel( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_theme_news_reel',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage'
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_news_reel',
@@ -63,10 +57,7 @@ function prime2g_theme_news_reel( $wp_customize ) {
 	#	Don't refresh the following + no JS @ 'transport' => 'postMessage'
 	$wp_customize->add_setting(
 		'prime2g_theme_news_reel_post_type',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage'
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_news_reel_post_type',
@@ -82,10 +73,7 @@ function prime2g_theme_news_reel( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_theme_news_reel_category',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage'
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_news_reel_category',
@@ -104,10 +92,7 @@ function prime2g_theme_news_reel( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_theme_news_reel_taxonomy',
-		array(
-			'type'		=> 'theme_mod',
-			'transport'	=>	'postMessage'
-			)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
 		);
 	$wp_customize->add_control(
 		'prime2g_theme_news_reel_taxonomy',
@@ -124,10 +109,7 @@ function prime2g_theme_news_reel( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_theme_news_reel_tax_term_id',
-		array(
-			'type'		=> 'theme_mod',
-			'transport'	=>	'postMessage'
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_news_reel_tax_term_id',
@@ -177,7 +159,7 @@ function prime2g_theme_news_reel( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_news_reel_width',
 		array(
-			'label'		=>	__( 'Reel Width', PRIME2G_TEXTDOM ), # Describe as width
+			'label'		=>	__( 'Reel Width', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_news_reel_width',
 			'section'	=>	'prime2g_media_features_section',
@@ -189,7 +171,4 @@ function prime2g_theme_news_reel( $wp_customize ) {
 		)
 	);
 }
-
 }
-
-

@@ -154,9 +154,10 @@ code{
 .site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
 	margin:auto; max-width:var(--site-width); /* Don't use width:100% */
 }
-.ext_stretch_head .site_container,.ext_stretch_foot .site_container,.ext_stretch_foot .footerWrap{
-	max-width:100vw;
+.w100pc{
+	width:100%;
 }
+.ext_stretch_head .site_container,.ext_stretch_foot .site_container,.ext_stretch_foot .footerWrap,
 .ext_stretch_hf .site_container, .ext_stretch_hf .footerWrap{
 	max-width:100vw;
 }
@@ -177,6 +178,9 @@ code{
 }
 .flex{
 	display:flex; flex-wrap:wrap;
+}
+.flexnw{
+	display:flex;
 }
 .shader{
 	position:absolute; left:0; right:0;

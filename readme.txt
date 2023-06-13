@@ -20,6 +20,7 @@ A WordPress theme with options for customization, design and development flexibi
 Several updates across the theme
 * HEADER VIDEO
 * 85 Google Fonts
+* @ customizer: File: customizer-theme-menus.php
 * @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks
 * @ customizer: Page Titles Font Weight

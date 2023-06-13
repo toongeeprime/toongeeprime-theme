@@ -133,15 +133,16 @@ class ToongeePrime_Styles {
 
 	$titleOnHeader	=	$this->get_mod( 'titleOnHeader' ) ? '.title_over_video ' : '';
 
-	$videoActive	=	prime2g_video_features_active();
-	$headerVidCSS	=	$videoActive ?
-	"#header iframe{height:{$hHeight};}.site_width.title_wrap{max-width:none;}
-	.video_header #header,.video_as_header #header{padding:0;overflow:hidden;display:block;}
-	#header.grid{display:grid;}
-	#wp-custom-header{position:relative;height:{$hHeight};}
-	#wp-custom-header-video{width:auto;height:{$hHeight};}
+	$videoActive	=	( has_header_video() && is_header_video_active() ) ?
+	".site_width.title_wrap{max-width:none;width:100%;height:100%;}
 	.title_over_video .page_title{position:absolute;}" : '';
-	$headerVidCSSB	=	$videoActive ?
+	$videoFeatures	=	prime2g_video_features_active();
+	$headerVidCSS	=	$videoFeatures ?
+	"#header iframe{height:{$hHeight};}{$videoActive}#header.grid{display:grid;}
+	.video_header #header,.video_as_header #header{padding:0;overflow:hidden;display:block;}
+	#wp-custom-header{position:relative;height:{$hHeight};}
+	#wp-custom-header-video{width:auto;height:{$hHeight};}" : '';
+	$headerVidCSSB	=	$videoFeatures ?
 	".video_header #header,.video_as_header #header{min-height:{$hHeight};}
 	#wp-custom-header-video{width:100%;height:auto;}" : '';
 

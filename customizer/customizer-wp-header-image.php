@@ -36,6 +36,8 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
 		)
 	);
 
+if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
+
 	/**
 	 *	Page Title Over Header Video
 	 *	@since ToongeePrime Theme 1.0.55
@@ -52,6 +54,7 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
 		)
 	);
 
+}
 
 	/**
 	 *	Replace Header Image with Post Thumbnail

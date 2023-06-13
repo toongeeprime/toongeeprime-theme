@@ -30,14 +30,10 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		)
 	);
 
-	// Social Media Settings & Controls:
+	// Social Media Settings & Controls
 	$wp_customize->add_setting(
 		'prime2g_facebook_url',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'esc_url',
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'esc_url' )
 	);
 	$wp_customize->add_control(
 		'prime2g_facebook_url',
@@ -55,11 +51,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_instagram_url',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'esc_url',
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'esc_url' )
 	);
 	$wp_customize->add_control(
 		'prime2g_instagram_url',
@@ -77,11 +69,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_twitter_url',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'esc_url',
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'esc_url' )
 	);
 	$wp_customize->add_control(
 		'prime2g_twitter_url',
@@ -99,11 +87,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_youtube_url',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'esc_url',
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'esc_url' )
 	);
 	$wp_customize->add_control(
 		'prime2g_youtube_url',
@@ -121,11 +105,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_linkedin_url',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'esc_url',
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'esc_url' )
 	);
 	$wp_customize->add_control(
 		'prime2g_linkedin_url',
@@ -143,11 +123,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_tiktok_url',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'esc_url',
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'esc_url' )
 	);
 	$wp_customize->add_control(
 		'prime2g_tiktok_url',
@@ -165,11 +141,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_telegram_url',
-		array(
-			'type'		=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'esc_url',
-		)
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'esc_url' )
 	);
 	$wp_customize->add_control(
 		'prime2g_telegram_url',
@@ -278,4 +250,5 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	);
 
 }
+
 

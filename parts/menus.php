@@ -7,6 +7,20 @@
  *	@since ToongeePrime Theme 1.0
  */
 
+/**
+ *	CTA Menu Item
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( ! function_exists( 'prime2g_cta_menu' ) ) {
+function prime2g_cta_menu() {
+$url	=	get_theme_mod( 'prime2g_cta_menu_url' );
+$text	=	get_theme_mod( 'prime2g_cta_button_text' );
+
+return '<li><a class="btn cta1" href="'. $url .'">'. $text .'</a>';
+}
+}
+
+
 
 /**
  *	Main Menu
@@ -15,11 +29,13 @@ if ( ! function_exists( 'prime2g_main_menu' ) ) {
 function prime2g_main_menu( $id = 'main_nav' ) {
 
 $incLogo	=	get_theme_mod( 'prime2g_logo_with_menu' );
+$cta_menu	=	get_theme_mod( 'prime2g_set_cta_menu_item' );	# Theme 1.0.55
 $theLogo	=	prime2g_siteLogo();
 
 ?>
 
 <div id="<?php echo $id; ?>" class="main_menu_wrap<?php if ( $incLogo ) echo ' logo_with_menu'; ?>">
+<div class="w100pc flexnw site_width">
 
 	<?php if ( has_nav_menu( 'main-menu' ) ) { ?>
 
@@ -36,19 +52,23 @@ $theLogo	=	prime2g_siteLogo();
 		</div>
 	</div>
 
-		<nav class="main-menu collapsible-navs site-menus site_width" role="navigation" aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location'	=>	'main-menu',
-					'menu_class'		=>	'main-menu-wrapper',
-					'container_class'	=>	'main-menu-container',
-					'items_wrap'		=>	'<ul id="main_menu_items" class="%2$s">%3$s</ul>',
-					'fallback_cb'		=>	false,
-				)
-			);
-			?>
-		</nav><!-- .main-menu -->
+	<nav class="main-menu collapsible-navs site-menus<?php if ( $cta_menu ) echo ' cta'; ?>"
+	aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
+		<?php
+		wp_nav_menu(
+			array(
+				'theme_location'	=>	'main-menu',
+				'menu_class'		=>	'main-menu-wrapper',
+				'container_class'	=>	'main-menu-container',
+				'items_wrap'		=>	'<ul id="main_menu_items" class="%2$s">%3$s</ul>',
+				'fallback_cb'		=>	false,
+			)
+		);
+		?>
+
+	<ul id="prime_cta_menu"><?php if ( $cta_menu ) echo prime2g_cta_menu(); ?></ul>
+
+	</nav><!-- .main-menu -->
 	<?php
 	}
 	else {
@@ -56,12 +76,11 @@ $theLogo	=	prime2g_siteLogo();
 	}
 	?>
 
+</div>
 </div><!-- #main_nav -->
-
 <?php
 }
 }
-
 
 
 
@@ -103,7 +122,5 @@ if ( get_theme_mod( 'prime2g_theme_add_footer_menu' ) )	{ ?>
 }
 }
 }
-
-
 
 
