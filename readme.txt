@@ -39,6 +39,7 @@ Several updates across the theme
 * @ js: Added insertAfter
 * @ Hooks: prime2g_before_head, prime2g_before_body
 * @ Features: Multislide capability added to HTML Slider
+* @ Features: accordion-frame-set.php
 * Pagination by numbers
 * Work Custom logo width and height attributes
 * Shortcodes: prime_site_logo, prime_site_title_and_description

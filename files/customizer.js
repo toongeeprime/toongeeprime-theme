@@ -126,10 +126,12 @@ value.bind( function( newval ) {
 api( 'prime2g_set_cta_menu_item', function( value ) {
 value.bind( function( newval ) {
 	let ctaURL	=	$( '#customize-control-prime2g_cta_menu_url' ),
-		ctaText	=	$( '#customize-control-prime2g_cta_button_text' );
+		ctaText	=	$( '#customize-control-prime2g_cta_button_text' ),
+		ctaTarget	=	$( '#customize-control-prime2g_cta_link_target' ),
+		ctaClasses	=	$( '#customize-control-prime2g_cta_button_classes' );
 
-	if ( newval ) { ctaURL.slideDown( 180 ); ctaText.slideDown( 180 ); }
-	else { ctaURL.slideUp( 180 ); ctaText.slideUp( 180 ); }
+	if ( newval ) { ctaURL.slideDown( 180 ); ctaText.slideDown( 180 ); ctaTarget.slideDown( 180 ); ctaClasses.slideDown( 180 ); }
+	else { ctaURL.slideUp( 180 ); ctaText.slideUp( 180 ); ctaTarget.slideUp( 180 ); ctaClasses.slideUp( 180 ); }
 } );
 } );
 

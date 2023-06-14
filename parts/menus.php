@@ -15,8 +15,12 @@ if ( ! function_exists( 'prime2g_cta_menu' ) ) {
 function prime2g_cta_menu() {
 $url	=	get_theme_mod( 'prime2g_cta_menu_url' );
 $text	=	get_theme_mod( 'prime2g_cta_button_text' );
+$target	=	get_theme_mod( 'prime2g_cta_link_target' ) ? ' target="_blank"' : '';
+$classes	=	get_theme_mod( 'prime2g_cta_button_classes' ) ?: '';
 
-return '<li><a class="btn cta1" href="'. $url .'">'. $text .'</a>';
+return '<ul>
+<li><a class="btn cta1 '. $classes .'" href="'. $url .'"'. $target .' rel="noopener">'. $text .'</a>
+</ul>';
 }
 }
 
@@ -66,7 +70,7 @@ $theLogo	=	prime2g_siteLogo();
 		);
 		?>
 
-	<ul id="prime_cta_menu"><?php if ( $cta_menu ) echo prime2g_cta_menu(); ?></ul>
+	<div id="prime_cta_menu" class="prime_cta_menu"><?php if ( $cta_menu ) echo prime2g_cta_menu(); ?></div>
 
 	</nav><!-- .main-menu -->
 	<?php

@@ -21,7 +21,7 @@
 		<div class="prel"><span class="ps_rzmr">Resume</span></div>
 	</div>
 </section><!-- #prime2g_posts_slider -->
- */
+*/
 
 
 add_shortcode( 'prime2g_slider_css', 'prime2g_auto_html_slider_frame_css' );
@@ -69,7 +69,7 @@ extract( $atts );
 
 add_action( 'wp_footer', function() use( &$timer, $multislides, $slider_ids ) {
 	prime2g_sliders_helper_funcs( $multislides );
-	if ( $multislides == 'yes' ) {
+	if ( $multislides === 'yes' ) {
 		prime2g_multi_instance_slider_js( $slider_ids, $timer );
 	} else {
 		prime2g_auto_html_slider_frame_js( $timer );

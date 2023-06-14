@@ -4,7 +4,7 @@
  *	CONTENT WRAPPING SHORTCODES
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.51.00
+ *	@since ToongeePrime Theme 1.0.51
  */
 
 #	Show contents to:
@@ -74,7 +74,7 @@ else {
 
 /**
  *	ADD IN-POST CONTENT TO THEME PARTS
- *	@since ToongeePrime Theme 1.0.55.00
+ *	@since ToongeePrime Theme 1.0.55
  */
 add_shortcode( 'prime_add_to_theme', 'prime2g_add_content_to_theme' );
 function prime2g_add_content_to_theme( $atts, $content, $tag ) {
@@ -85,7 +85,7 @@ extract( $atts );
 $output	=	do_shortcode( $content );
 
 #	Add by theme/WP hooks
-#	Currently working hooks:
+#	Tested hooks:
 $hook	=	$place;
 if ( $place == 'after post' ) $hook	=	'prime2g_after_post';
 if ( $place == 'base' ) $hook	=	'prime2g_site_base_strip';

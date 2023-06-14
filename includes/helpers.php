@@ -49,7 +49,7 @@ function prime2g_remove_title() {
 
 
 /**
- *	Use prime2g_is_plain_page() to declare a template as being plain
+ *	Use prime2g_is_plain_page() to declare a template as being plain.
  *	Thus, can be used to remove select features, widgets, etc.
  */
 function prime2g_is_plain_page() {
@@ -75,11 +75,10 @@ if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
 
 
 
-
 /**
  *	Get Country via 2 Char Code
  *	More @ http://country.io/data/
- *	@since ToongeePrime Theme 1.0.47.00
+ *	@since ToongeePrime Theme 1.0.47
  */
 function prime2g_get_country_by_code( $code ) {
 	// $countries	=	json_decode( file_get_contents( "http://country.io/names.json" ), true );

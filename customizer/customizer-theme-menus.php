@@ -16,7 +16,7 @@ function prime2g_customizer_theme_menus( $wp_customize ) {
 		array(
 			'selector'		=>	'#prime_cta_menu',
 			'settings'		=>	[ 'prime2g_set_cta_menu_item' ],
-			'container_inclusive'	=>	false,
+			'container_inclusive'	=>	true,
 			'render_callback'		=>	'prime2g_cta_menu',
 			'fallback_refresh'		=>	true,
 		)
@@ -117,8 +117,40 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 		'prime2g_cta_button_text',
 		array(
 			'label'		=>	__( 'CTA Button Text', PRIME2G_TEXTDOM ),
-			'type'		=>	'url',
 			'settings'	=>	'prime2g_cta_button_text',
+			'section'	=>	'prime2g_theme_menus_section',
+			'active_callback'	=>	function() { return get_theme_mod( 'prime2g_set_cta_menu_item' ); }
+		)
+	);
+
+	$wp_customize->add_setting( 'prime2g_cta_button_classes',
+		array(
+		'type' => 'theme_mod', 'transport' => 'postMessage',
+		'sanitize_callback' => 'sanitize_text_field'
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_cta_button_classes',
+		array(
+			'label'		=>	__( 'CTA Button Classes', PRIME2G_TEXTDOM ),
+			'settings'	=>	'prime2g_cta_button_classes',
+			'section'	=>	'prime2g_theme_menus_section',
+			'active_callback'	=>	function() { return get_theme_mod( 'prime2g_set_cta_menu_item' ); }
+		)
+	);
+
+	$wp_customize->add_setting( 'prime2g_cta_link_target',
+		array(
+		'type' => 'theme_mod', 'transport' => 'postMessage',
+		'sanitize_callback' => 'sanitize_text_field'
+		)
+	);
+	$wp_customize->add_control(
+		'prime2g_cta_link_target',
+		array(
+			'label'		=>	__( 'Open CTA Link in New Tab', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_cta_link_target',
 			'section'	=>	'prime2g_theme_menus_section',
 			'active_callback'	=>	function() { return get_theme_mod( 'prime2g_set_cta_menu_item' ); }
 		)

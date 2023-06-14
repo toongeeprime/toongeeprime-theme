@@ -3,7 +3,7 @@
 /**
  *	GET TAXONOMY IMAGE URL
  *
- *	@since ToongeePrime Theme 1.0.45.00
+ *	@since ToongeePrime Theme 1.0.45
  */
 
 if ( ! function_exists( 'prime2g_taxonomies_with_archive_image' ) ) {

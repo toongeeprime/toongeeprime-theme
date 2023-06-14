@@ -4,7 +4,7 @@
  *	CONNECT EXTRA FEATURES
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 
 if ( prime2g_use_extras() ) {
