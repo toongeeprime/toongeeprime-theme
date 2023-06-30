@@ -109,6 +109,11 @@ function toongeeprime_theme_setup() {
 		# Support full and wide align images
 		add_theme_support( 'align-wide' );
 
+		/**
+		 *	'editor-styles' @since ToongeePrime Theme Theme 1.0.55
+		 */
+		add_theme_support( 'editor-styles' );
+
 		# Add custom editor font sizes
 		add_theme_support(
 			'editor-font-sizes',

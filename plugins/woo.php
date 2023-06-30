@@ -9,17 +9,19 @@
  */
 
 /**
- *	Run if WooCommerce is active
+ *	File active if WooCommerce is active
  */
-if ( class_exists( 'woocommerce' ) ) :
+if ( class_exists( 'WooCommerce' ) ) :
 
 
 /**
  *	Get WooCommerce Mini Cart: Buffered
  *	@since ToongeePrime Theme 1.0.45.50
  */
+if ( ! function_exists( 'prime2g_get_woo_mini_cart' ) ) {
 function prime2g_get_woo_mini_cart() {
 	include PRIME2G_THEME . 'woocommerce/cart/mini-cart-buffered.php';
+}
 }
 
 
@@ -28,11 +30,12 @@ function prime2g_get_woo_mini_cart() {
  *	@since ToongeePrime Theme 1.0.44
  */
 add_filter( 'woocommerce_add_to_cart_fragments', 'prime2g_add_to_cart_fragments', 10, 1 );
+if ( ! function_exists( 'prime2g_add_to_cart_fragments' ) ) {
 function prime2g_add_to_cart_fragments( $fragments ) {
 	$count	=	WC()->cart->get_cart_contents_count();
 	ob_start(); ?>
 
-	<!-- div and function to use in theme **preferably wrapped: -->
+	<!-- div and function to use in theme **preferably wrapped** -->
 	<div class="widget_shopping_cart_content">
 		<?php woocommerce_mini_cart(); ?>
 	</div>
@@ -42,6 +45,7 @@ function prime2g_add_to_cart_fragments( $fragments ) {
 	$fragments[ 'div.minicartdiv' ]	=	ob_get_clean();
 
 return $fragments;
+}
 }
 
 
@@ -116,10 +120,10 @@ function prime2g_woo_wp_title( $title ) {
  *	Changing WooCommerce Texts
  */
 function prime2g_do_woo_texts( $get ) {
-	if ( $get == 'shop title' ) {
-		$text	=	get_theme_mod( 'prime2g_shop_page_title' );
-		if ( empty( $text ) ) $text = 'Shop Homepage';
-	}
+if ( $get == 'shop title' ) {
+	$text	=	get_theme_mod( 'prime2g_shop_page_title' );
+	if ( empty( $text ) ) $text = 'Shop Homepage';
+}
 return $text;
 }
 
@@ -143,6 +147,7 @@ switch ( $translated_text ) {
 return $translated_text;
 }
 }
+
 
 
 endif;

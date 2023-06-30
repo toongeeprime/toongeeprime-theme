@@ -21,7 +21,7 @@ if ( is_admin() || is_user_logged_in() ||
 
 
 /**
- *	SHUTDOWN PAGE
+ *	OPTION TO USE A SHUTDOWN PAGE
  *	@since ToongeePrime Theme @ 1.0.55
  */
 $usePage	=	get_theme_mod( 'prime2g_shutdown_display' );
@@ -107,11 +107,16 @@ function prime2g_close_down_template( $shutDown ) {
 $headline	=	'maintenance' == $shutDown ?
 'This website is undergoing Maintenance!' : 'This website is under construction and will be live soon!';
 
-$msg	=	'maintenance' == $shutDown ? 'We will be back soon.' : 'Thank you for checking in.';
+$msg	=	'maintenance' == $shutDown ? 'We will be back soon' : 'Thank you for checking in';
 
-	echo '<main id="message">';
-	echo '<h1 class="entry-title page-title">'. __( $headline, PRIME2G_TEXTDOM ) .'</h1>';
-	echo '<h3>'. __( $msg, PRIME2G_TEXTDOM ) .'</h3>';
+	echo '<main id="message">
+	<h1 class="entry-title page-title">'. __( $headline, PRIME2G_TEXTDOM ) .'</h1>
+	<h3>'. __( $msg, PRIME2G_TEXTDOM ) .'</h3>';
+
+	if ( get_theme_mod( 'prime2g_show_socials_and_contacts', 0 ) ) {
+		echo '<p style="margin:50px 0;">Contact/Follow Us</p>' . prime2g_theme_mod_social_and_contacts();
+	}
+
 	echo '</main>';
 }
 }

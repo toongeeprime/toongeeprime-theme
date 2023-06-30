@@ -8,20 +8,23 @@
 
 /*
  *****	ACCORDION FRAME TEMPLATE	*****
-<section id="" class="prime2g_accordion_wrap">
-	<div class="prime2g_accordion_set prel">
+<section class="prime2g_accordion_wrap">
+<div class="prime2g_accordion_set prel">
 
-	<!-- Accordion blocks: -->
-
-	<div class="p2g_accordion">
-		<header><div class="acc_toggle"></div></header>
-		<div class="acc_body"><div class="acc_content"></div></div>
+<!--- Accordion blocks: --->
+<div class="p2g_accordion">
+	<header>
+		<div class="acc_toggle"></div>
+	</header>
+	<div class="acc_body">
+		<div class="acc_content">
+		</div>
 	</div>
+</div>
 
-	</div>
+</div>
 </section><!-- .prime2g_accordion -->
 */
-
 
 
 function prime2g_accordion_frames_css() {

@@ -4,7 +4,7 @@
  *	REWORKING ADMIN MENUS
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 
 add_action( 'admin_menu', 'prime2g_reposition_admin_menus' );

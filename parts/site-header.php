@@ -20,8 +20,8 @@ $isSingular		=	is_singular();
 $keepHeader		=	$isSingular ? ( $post->remove_header !== 'remove' ) : true;
 
 $titleOverVideo	=	get_theme_mod( 'prime2g_pagetitle_over_headervideo' );
-$tov_class	=	( $titleOverVideo && ( $post->video_url || $videoActive ) || ! $isSingular ) ?
-' title_over_video' : ' grid';
+$tov_class	=	( $titleOverVideo && ( $post->video_url || $videoActive || ! $isSingular ) ) ?
+' title_over_video' : '';
 
 $headerBackground	=	'';
 

@@ -3,7 +3,7 @@
 /**
  *	MULTI-HTML SLIDER FRAME SCRIPTS
  *
- *	@since ToongeePrime Theme 1.0.51.00
+ *	@since ToongeePrime Theme 1.0.51
  */
 
 /*

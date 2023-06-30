@@ -27,10 +27,16 @@ $atts	=	shortcode_atts(
 		'start_cache'	=>	false,	#	@since 1.0.50
 		'cache_name'	=>	'prime2g_posts_shortcode',	#	@since 1.0.50
 		'offset'		=>	0,	#	@since 1.0.50
+		'device'		=>	0,	#	@since 1.0.55
 		),
 	$atts
 );
 extract( $atts );
+
+$isMobile	=	wp_is_mobile();
+
+if ( $device === 'desktop' ) { if ( $isMobile ) return; }
+if ( $device === 'mobile' ) { if ( ! $isMobile ) return; }
 
 
 #	@since ToongeePrime Theme 1.0.49
@@ -139,4 +145,5 @@ $template	.=	'</div>';
 return $template;
 
 }
+
 

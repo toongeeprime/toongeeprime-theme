@@ -11,7 +11,7 @@
 /**
  *	Run if WooCommerce is active
  */
-if ( class_exists( 'woocommerce' ) ) :
+if ( class_exists( 'WooCommerce' ) ) :
 
 
 /**

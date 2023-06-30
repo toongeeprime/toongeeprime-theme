@@ -32,8 +32,9 @@ Several updates across the theme
 * @ customizer: Remove sidebar controls (Archives / Singular)
 * @ customizer: Left/Right sidebar
 * @ customizer: Archive Pagination Type
-* @ customizer: Option: Place Menu over header
-* @ customizer: Option: Page title over header video
+* @ customizer: Place Menu over header
+* @ customizer: Page title over header video
+* @ customizer: Show/Hide Socials & contacts icon links
 * @ parts: Added adjust-templates.php for conditional adjustments
 * @ includes: Added css.php & js.php
 * @ js: Added insertAfter
