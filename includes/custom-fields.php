@@ -62,6 +62,7 @@ function prime2g_save_metas_1( $post_id ) {
 		'remove_header',
 		'page_width',
 		'disable_autop',
+		'use_main_nav_location',
 	];
 	foreach( $fields as $field ) {
 		if ( array_key_exists( $field, $_POST ) ) {
@@ -146,8 +147,30 @@ if ( ! $removeSidebar && $post->post_type !== 'page'
 		</select>
 	</div>
 
+<?php
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.2' ) {
+$nav_menus	=	get_registered_nav_menus(); ?>
+
+	<div class="meta-options prime2g_field">
+		<label for="use_main_nav_location">Select Menu Location</label>
+		<select id="use_main_nav_location" class="prime2g_options" name="use_main_nav_location">
+			<option value="">--- Leave Default ---</option>
+			<?php foreach ( $nav_menus as $slug => $name ) { ?>
+			<option value="<?php echo $slug; ?>"
+			<?php if ( $post->use_main_nav_location === $slug ) echo 'selected'; ?>>
+			<?php echo $name; ?>
+			</option>
+			<?php } ?>
+		</select>
+	</div>
+
 </div>
 <?php
+}
+
 }
 
 
@@ -190,5 +213,4 @@ else { ?>
 }
 
 }
-
 

@@ -58,6 +58,24 @@ register_nav_menus(
 );
 
 
+/**
+ *	Extra Navigation Menu Locations
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.2' ) {
+$extras	=	get_theme_mod( 'prime2g_extra_menu_locations', 0 );
+
+if ( $extras ) {
+	for ( $e = 0; $e < $extras; $e++ ) {
+		register_nav_menus(
+		array( 'extra-menu-location-' . $e+1 => esc_html__( 'Extra Menu Location ' . $e+1, PRIME2G_TEXTDOM ) )
+		);
+	}
+}
+
+}
+
+
 
 #	SIDEBARS
 add_action( 'widgets_init', 'prime2g_sidebars', 5 );
@@ -122,4 +140,5 @@ register_sidebars( $cols,
 
 }
 }
+
 

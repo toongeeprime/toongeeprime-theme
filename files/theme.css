@@ -291,9 +291,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 .page_title{
 	padding:var(--med-pad) var(--min-pad); text-align:center;
 }
-.menu_on_header #prime2g_before_header{
-	padding:0;
-}
 
 /* Footer */
 .footerWrap{

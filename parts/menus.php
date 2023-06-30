@@ -59,9 +59,15 @@ $theLogo	=	prime2g_siteLogo();
 	<nav class="main-menu collapsible-navs site-menus<?php if ( $cta_menu ) echo ' cta'; ?>"
 	aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
 		<?php
+		$main_menu	=	'main-menu';
+		if ( is_singular() ) {
+			global $post;
+			$menuOption	=	get_post_meta( $post->ID, 'use_main_nav_location', true );
+			$main_menu	=	$menuOption ?: 'main-menu';
+		}
 		wp_nav_menu(
 			array(
-				'theme_location'	=>	'main-menu',
+				'theme_location'	=>	$main_menu,
 				'menu_class'		=>	'main-menu-wrapper',
 				'container_class'	=>	'main-menu-container',
 				'items_wrap'		=>	'<ul id="main_menu_items" class="%2$s">%3$s</ul>',

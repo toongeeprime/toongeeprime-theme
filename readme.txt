@@ -41,6 +41,8 @@ Several updates across the theme
 * @ Hooks: prime2g_before_head, prime2g_before_body
 * @ Features: Multislide capability added to HTML Slider
 * @ Features: accordion-frame-set.php
+* Add more navigation menu locations + select location to use per page:
+	-	Menus have to be created to link to locations
 * Pagination by numbers
 * Work Custom logo width and height attributes
 * Shortcodes: prime_site_logo, prime_site_title_and_description
@@ -313,3 +315,4 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
+
