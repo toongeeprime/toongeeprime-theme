@@ -60,7 +60,7 @@ $theLogo	=	prime2g_siteLogo();
 	aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
 		<?php
 		$main_menu	=	'main-menu';
-		if ( is_singular() ) {
+		if ( is_singular() && get_theme_mod( 'prime2g_extra_menu_locations' ) ) {
 			global $post;
 			$menuOption	=	get_post_meta( $post->ID, 'use_main_nav_location', true );
 			$main_menu	=	$menuOption ?: 'main-menu';

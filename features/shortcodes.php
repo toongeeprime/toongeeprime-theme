@@ -87,7 +87,7 @@ add_shortcode( 'prime_site_footer_credits', 'prime2g_theme_footer_credit' );
 
 
 /**
- *	In-post Redirection
+ *	In-post Redirection by JavaScript
  *	@since ToongeePrime Theme 1.0.51
  */
 add_shortcode( 'prime_redirect_to', 'prime2g_redirect_shortcode' );
@@ -98,7 +98,6 @@ $loggedin	=	is_user_logged_in();
 $atts	=	shortcode_atts( array( 'url' => $home, 'users' => '' ), $atts );
 extract( $atts );
 
-// Leave echo, not return:
 if ( $users == 'logged out' ) {
 	if ( ! $loggedin ) {
 		echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
@@ -116,4 +115,5 @@ if ( $users == '' ) {
 }
 
 }
+
 

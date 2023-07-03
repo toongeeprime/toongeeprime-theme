@@ -22,7 +22,7 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
 		'prime2g_video_header_placements',
 		array(
 			'type'		=>	'select',
-			'label'		=>	__( 'Video Header Placement (Overlap Image) - May need page refresh', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Video Header Placement (Overlap Image) - May need Customizer refresh', PRIME2G_TEXTDOM ),
 			'settings'	=>	'prime2g_video_header_placements',
 			'section'	=>	'header_image',
 			'active_callback'	=>	'prime2g_video_features_active',

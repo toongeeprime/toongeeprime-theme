@@ -151,7 +151,7 @@ if ( ! $removeSidebar && $post->post_type !== 'page'
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
-if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.2' ) {
+if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.2' && get_theme_mod( 'prime2g_extra_menu_locations' ) ) {
 $nav_menus	=	get_registered_nav_menus(); ?>
 
 	<div class="meta-options prime2g_field">
@@ -166,10 +166,10 @@ $nav_menus	=	get_registered_nav_menus(); ?>
 			<?php } ?>
 		</select>
 	</div>
+<?php } ?>
 
 </div>
 <?php
-}
 
 }
 
