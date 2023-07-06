@@ -19,7 +19,7 @@ A WordPress theme with options for customization, design and development flexibi
 = 1.0.55.00... In progress =
 Several updates across the theme
 * HEADER VIDEO
-* 85 Google Fonts
+* 100 Google Fonts
 * @ customizer: File: customizer-theme-menus.php
 * @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks

@@ -424,7 +424,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	margin-bottom:var(--min-pad);
 }
 .asides .widget{
-	padding:1rem; border:1px solid #eee;
+	padding:1rem;
 }
 .footerWrap .widget, .footer_topWidgets .widget{
 	padding:0; border:0;
@@ -906,3 +906,4 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
+

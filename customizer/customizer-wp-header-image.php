@@ -109,7 +109,7 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 	$wp_customize->add_control(
 		'prime2g_header_background_size',
 		array(
-			'label'		=>	__( 'Header Background Image Size', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Header Image Size', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_header_background_size',
 			'section'	=>	'header_image',
