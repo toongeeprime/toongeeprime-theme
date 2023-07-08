@@ -15,12 +15,12 @@ if ( class_exists( 'WooCommerce' ) ) :
 
 
 /**
- *	Get WooCommerce Mini Cart: Buffered
+ *	Get WooCommerce Mini Cart
  *	@since ToongeePrime Theme 1.0.45.50
  */
 if ( ! function_exists( 'prime2g_get_woo_mini_cart' ) ) {
 function prime2g_get_woo_mini_cart() {
-	include PRIME2G_THEME . 'woocommerce/cart/mini-cart-buffered.php';
+	include PRIME2G_THEME . 'woocommerce/cart/mini-cart.php';
 }
 }
 

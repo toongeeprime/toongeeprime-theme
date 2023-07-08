@@ -285,6 +285,9 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{
 
 /** CART & CHECKOUT **
 ********************/
+.in_minicart{
+	z-index:1;
+}
 .shop_table tr{
 	position:relative;
 }

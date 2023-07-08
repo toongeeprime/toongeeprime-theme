@@ -40,6 +40,7 @@ Several updates across the theme
 * @ js: Added insertAfter
 * @ Hooks: prime2g_before_head, prime2g_before_body
 * @ Features: Multislide capability added to HTML Slider
+* @ Mini Cart: @version 7.8.0
 * @ Features: accordion-frame-set.php
 * Add more navigation menu locations + select location to use per page:
 	-	Menus have to be created to link to locations
