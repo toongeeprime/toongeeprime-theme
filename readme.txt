@@ -38,7 +38,9 @@ Several updates across the theme
 * @ parts: Added adjust-templates.php for conditional adjustments
 * @ includes: Added css.php & js.php
 * @ js: Added insertAfter
-* @ Hooks: prime2g_before_head, prime2g_before_body
+* @ Sidebars: aboveheader-widgets, belowheader-widgets, aboveposts-widgets,
+* @ Hooks: prime2g_before_head, prime2g_before_body,
+	prime2g_before_header_title, prime2g_after_header_title
 * @ Features: Multislide capability added to HTML Slider
 * @ Mini Cart: @version 7.8.0
 * @ Features: accordion-frame-set.php
@@ -265,7 +267,7 @@ Hooked to comment_form_defaults:
 
 
 == Theme Filters ==
-@since version 1.0.45.00
+@since version 1.0.45
 * prime2g_archive_post_top_filter
 * prime2g_archive_post_footer_filter
 
@@ -274,13 +276,24 @@ Hooked to comment_form_defaults:
 * prime2g_before_header
 * prime2g_sub_header
 * prime2g_after_header
-* prime2g_before_title since 1.0.50.00
+* prime2g_before_title @since 1.0.50
 * prime2g_after_title
 * prime2g_before_post
 * prime2g_after_post
 * prime2g_archive_post_top
 * prime2g_archive_post_footer
 * prime2g_site_base_strip
+* prime2g_before_head @since 1.0.55:
+* prime2g_before_body
+* prime2g_before_header_title
+* prime2g_after_header_title
+* prime2g_page_title_hook
+
+Hooked to prime2g_before_header: @since 1.0.55
+	prime2g_widgets_above_header
+
+Hooked to prime2g_sub_header:  @since 1.0.55
+	prime2g_widgets_below_header
 
 Hooked to prime2g_after_header:
 	prime2g_breadcrumbs, 7 priority
@@ -293,6 +306,7 @@ Hooked to prime2g_after_title:
 Hooked to prime2g_before_post:
 	prime2g_pageCSS, 2 priority
 	prime2g_edit_entry, 5 priority
+	prime2g_widgets_above_post @since 1.0.55
 
 Hooked to prime2g_after_post:
 	prime2g_postmeta_bottom, 5 priority

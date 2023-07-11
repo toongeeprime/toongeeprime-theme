@@ -55,6 +55,10 @@ if ( $hasHeader ) { echo '<div class="shader"></div>'; }
 
 echo '<div class="site_width title_wrap grid prel">';
 
+
+do_action( 'prime2g_before_header_title' );	# @since ToongeePrime Theme 1.0.55
+
+
 	if ( $isSingular && $post->video_url &&
 	( 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) ) {
 		echo prime2g_get_post_media_embed();
@@ -67,6 +71,10 @@ echo '<div class="site_width title_wrap grid prel">';
 			do_action( 'prime2g_page_title_hook', $title_in_headr );
 	}
 	else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
+
+
+do_action( 'prime2g_after_header_title' );	# @since ToongeePrime Theme 1.0.55
+
 
 echo '</div>';
 ?>
@@ -81,4 +89,6 @@ if ( 'bottom' == $menuPlace ) prime2g_main_menu();
 prime2g_sub_header();
 
 if ( $keepHeader ) { prime2g_after_header(); }
+
+
 

@@ -4,7 +4,7 @@
  *	NEWSREEL
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  */
 
 if ( ! function_exists( 'prime2g_news_reel_css' ) ) {

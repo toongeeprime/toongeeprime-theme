@@ -30,8 +30,6 @@
 
 </footer><!-- #site_footer -->
 
-<hr class="footer_hr" />
-
 	<section id="colophon" class="colophon prel" role="contentinfo">
 
 	<?php

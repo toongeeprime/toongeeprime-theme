@@ -67,8 +67,9 @@ $extras	=	get_theme_mod( 'prime2g_extra_menu_locations', 0 );
 
 if ( $extras ) {
 	for ( $e = 0; $e < $extras; $e++ ) {
+		$val	=	$e+1;
 		register_nav_menus(
-		array( 'extra-menu-location-' . $e+1 => esc_html__( 'Extra Menu Location ' . $e+1, PRIME2G_TEXTDOM ) )
+		array( 'extra-menu-location-' . $val => esc_html__( 'Extra Menu Location ' . $val, PRIME2G_TEXTDOM ) )
 		);
 	}
 }
@@ -89,6 +90,42 @@ register_sidebar(
 		'after_widget'  =>	'</div></div>',
 		'before_title'	=>	'<div class="w-headers"><h3 class="widget-title sidebar">',
 		'after_title'	=>	'</h3></div>'
+	)
+);
+#	@since ToongeePrime Theme 1.0.55:
+register_sidebar(
+	array(
+		'name'          =>	__( 'Above The Header', PRIME2G_TEXTDOM ),
+		'id'            =>	'aboveheader-widgets',
+		'description'   =>	__( 'Widgets above the site Header', PRIME2G_TEXTDOM ),
+		'before_widget' =>	'<div id="%1$s" class="aboveheader %2$s">',
+		'after_widget'  =>	'</div>',
+		'before_title'  =>	'<div class="hide">',
+		'after_title'   =>	'</div>'
+	)
+);
+#	@since ToongeePrime Theme 1.0.55:
+register_sidebar(
+	array(
+		'name'          =>	__( 'Below The Header', PRIME2G_TEXTDOM ),
+		'id'            =>	'belowheader-widgets',
+		'description'   =>	__( 'Widgets below the site Header', PRIME2G_TEXTDOM ),
+		'before_widget' =>	'<div id="%1$s" class="belowheader %2$s">',
+		'after_widget'  =>	'</div>',
+		'before_title'  =>	'<div class="hide">',
+		'after_title'   =>	'</div>'
+	)
+);
+#	@since ToongeePrime Theme 1.0.55:
+register_sidebar(
+	array(
+		'name'          =>	__( 'Above Posts', PRIME2G_TEXTDOM ),
+		'id'            =>	'aboveposts-widgets',
+		'description'   =>	__( 'Widgets above post entries', PRIME2G_TEXTDOM ),
+		'before_widget' =>	'<div id="%1$s" class="abovepostwidget %2$s"><div class="widget">',
+		'after_widget'  =>	'</div></div>',
+		'before_title'  =>	'<div class="hide">',
+		'after_title'   =>	'</div>'
 	)
 );
 register_sidebar(

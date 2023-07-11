@@ -289,7 +289,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	color:var(--header-text);
 }
 .page_title{
-	padding:var(--med-pad) var(--min-pad); text-align:center;
+	padding:1px; text-align:center;
 }
 
 /* Footer */
@@ -319,9 +319,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 }
 .site_footer a:hover, .site_footer a:focus{
 	text-decoration:underline;
-}
-.footer_hr{
-	margin-bottom:0;
 }
 .title_tagline_logo h1{
 	margin:0;
@@ -429,7 +426,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 .footerWrap .widget, .footer_topWidgets .widget{
 	padding:0; border:0;
 }
-.widget-title, .comment-reply-title{
+.widget-title{
 	margin:0 0 1rem; border-bottom:1px solid; padding-bottom:1rem;
 }
 .right ul{

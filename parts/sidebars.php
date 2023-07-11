@@ -11,12 +11,11 @@
  *	MAIN SIDEBAR
  */
 if ( ! function_exists( 'prime2g_sidebar' ) ) {
-
 function prime2g_sidebar() {
-
 /**
  *	return, if prime2g_removeSidebar() is called === where the function is defined
  */
+
 if ( function_exists( 'define_2gRMVSidebar' ) ) return;
 
 if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
@@ -31,18 +30,82 @@ if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
 
 <?php
 }
-
+}
 }
 
+
+#	@since ToongeePrime Theme 1.0.55:	#
+
+/**
+ *	WIDGETS SET ABOVE SITE HEADER
+ */
+add_action( 'prime2g_before_header', 'prime2g_widgets_above_header' );
+if ( ! function_exists( 'prime2g_widgets_above_header' ) ) {
+function prime2g_widgets_above_header() {
+
+if ( function_exists( 'define_2gPlainPage' ) ) return;
+
+if ( is_active_sidebar( 'aboveheader-widgets' ) ) { ?>
+	<aside id="above_headerWidgets" class="header asides clear">
+		<div class="widgets-box grid">
+			<?php dynamic_sidebar( 'aboveheader-widgets' ); ?>
+		</div>
+	</aside>
+<?php
+}
+}
 }
 
 
 /**
- *	WIDGETS SET AFTER POSTS
+ *	WIDGETS SET BELOW SITE HEADER
+ */
+add_action( 'prime2g_sub_header', 'prime2g_widgets_below_header' );
+if ( ! function_exists( 'prime2g_widgets_below_header' ) ) {
+function prime2g_widgets_below_header() {
+
+if ( function_exists( 'define_2gPlainPage' ) ) return;
+
+if ( is_active_sidebar( 'belowheader-widgets' ) ) { ?>
+	<aside id="below_headerWidgets" class="header asides clear">
+		<div class="widgets-box grid">
+			<?php dynamic_sidebar( 'belowheader-widgets' ); ?>
+		</div>
+	</aside>
+<?php
+}
+}
+}
+
+
+/**
+ *	WIDGETS SET BEFORE POST
+ */
+add_action( 'prime2g_before_post', 'prime2g_widgets_above_post' );
+if ( ! function_exists( 'prime2g_widgets_above_post' ) ) {
+function prime2g_widgets_above_post() {
+
+if ( function_exists( 'define_2gPlainPage' ) ) return;
+
+if ( is_active_sidebar( 'aboveposts-widgets' ) ) { ?>
+	<aside id="above_postsWidgets" class="asides clear">
+		<div class="widgets-box grid">
+			<?php dynamic_sidebar( 'aboveposts-widgets' ); ?>
+		</div>
+	</aside>
+<?php
+}
+}
+}
+
+#	@since ToongeePrime Theme 1.0.55 - end	#
+
+
+/**
+ *	WIDGETS SET AFTER POST
  */
 add_action( 'prime2g_after_post', 'prime2g_below_posts_widgets', 20 );
 if ( ! function_exists( 'prime2g_below_posts_widgets' ) ) {
-
 function prime2g_below_posts_widgets() {
 
 if ( function_exists( 'define_2gPlainPage' ) ) return;
@@ -55,9 +118,7 @@ if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 	</aside>
 <?php
 }
-
 }
-
 }
 
 
@@ -66,22 +127,19 @@ if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
  *	Widgets at the top of the Site's Footer
  */
 if ( ! function_exists( 'prime2g_footer_top_widgets' ) ) {
-
 function prime2g_footer_top_widgets() {
 
 if ( function_exists( 'define_2gPlainPage' ) ) return;
 
 if ( is_active_sidebar( 'footer-top' ) ) { ?>
-	<aside id="footer_topWidgets" class="footer_topWidgets asides site_width">
+	<aside id="footer_topWidgets" class="footer_topWidgets asides site_width clear">
 		<div class="widgets-box grid">
 			<?php dynamic_sidebar( 'footer-top' ); ?>
 		</div>
 	</aside>
 <?php
 }
-
 }
-
 }
 
 
@@ -90,7 +148,6 @@ if ( is_active_sidebar( 'footer-top' ) ) { ?>
  *	Updated for customizer columns @since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_footer_widgets' ) ) {
-
 function prime2g_footer_widgets() {
 
 $cols	=	4;
@@ -128,7 +185,5 @@ echo	'</div>';
 </aside>
 <?php
 }
-
 }
-
 }

@@ -138,7 +138,7 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 			'settings'	=>	'prime2g_theme_header_height',
 			'section'	=>	'header_image',
 			'input_attrs'	=>	array(
-				'min'		=>	'10',
+				'min'		=>	'15',
 				'max'		=>	'100',
 			),
 		)
