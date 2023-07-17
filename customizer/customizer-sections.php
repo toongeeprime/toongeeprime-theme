@@ -109,6 +109,21 @@ function prime2g_customizer_sections( $wp_customize ) {
 	);
 
 	/**
+	 *	Progreesive Web App (PWA)
+	 *	Condition checked @ customizer.php
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_section(
+		'prime2g_theme_pwa_section',
+		array(
+			'title'		=>	__( 'Web App', PRIME2G_TEXTDOM ),
+			'panel'		=>	'prime2g_customizer_panel',
+			'description'	=>	__( 'Theme\'s Web Application', PRIME2G_TEXTDOM ),
+			'capability'	=>	'edit_theme_options',
+		)
+	);
+
+	/**
 	 *	Theme Extras
 	 *	@since ToongeePrime Theme 1.0.48
 	 */

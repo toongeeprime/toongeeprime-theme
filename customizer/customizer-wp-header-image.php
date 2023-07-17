@@ -16,7 +16,8 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
  *	@since ToongeePrime Theme 1.0.55
  */
 	$wp_customize->add_setting(
-		'prime2g_video_header_placements', array( 'type' => 'theme_mod', 'default' => 'is_front_page' )
+		'prime2g_video_header_placements',
+		[ 'type' => 'theme_mod', 'default' => 'is_front_page', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_video_header_placements',
@@ -42,7 +43,10 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 	 *	Page Title Over Header Video
 	 *	@since ToongeePrime Theme 1.0.55
 	 */
-	$wp_customize->add_setting( 'prime2g_pagetitle_over_headervideo', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_pagetitle_over_headervideo',
+		array( 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' )
+	);
 	$wp_customize->add_control(
 		'prime2g_pagetitle_over_headervideo',
 		array(
@@ -60,7 +64,8 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 	 *	Replace Header Image with Post Thumbnail
 	 */
 	$wp_customize->add_setting(
-		'prime2g_thumb_replace_header', array( 'type' => 'theme_mod', 'default' => '' )
+		'prime2g_thumb_replace_header',
+		array( 'type' => 'theme_mod', 'default' => '', 'sanitize_callback' => 'sanitize_text_field' )
 	);
 	$wp_customize->add_control(
 		'prime2g_thumb_replace_header',
@@ -82,7 +87,7 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 	 */
 	$wp_customize->add_setting(
 		'prime2g_header_img_attachment',
-		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => 'scroll' )
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => 'scroll', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_header_img_attachment',
@@ -104,7 +109,7 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 	 */
 	$wp_customize->add_setting(
 		'prime2g_header_background_size',
-		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '' )
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '', 'sanitize_callback' => 'sanitize_text_field' )
 	);
 	$wp_customize->add_control(
 		'prime2g_header_background_size',
@@ -128,7 +133,7 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 	 */
 	$wp_customize->add_setting(
 		'prime2g_theme_header_height',
-		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '50' )
+		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '50', 'sanitize_callback' => 'sanitize_text_field' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_header_height',
@@ -146,5 +151,4 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 }
 
 }
-
 

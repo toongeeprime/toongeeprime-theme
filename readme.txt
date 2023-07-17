@@ -18,6 +18,7 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.55.00... In progress =
 Several updates across the theme
+* Introduced the beginnings of theme's PROGRESSIVE WEB APP (PWA)
 * HEADER VIDEO
 * 100 Google Fonts
 * @ customizer: File: customizer-theme-menus.php
@@ -36,11 +37,12 @@ Several updates across the theme
 * @ customizer: Page title over header video
 * @ customizer: Show/Hide Socials & contacts icon links
 * @ parts: Added adjust-templates.php for conditional adjustments
+* @ plugins: Added plugin-helpers.php
 * @ includes: Added css.php & js.php
 * @ js: Added insertAfter
 * @ Sidebars: aboveheader-widgets, belowheader-widgets, aboveposts-widgets,
-* @ Hooks: prime2g_before_head, prime2g_before_body,
-	prime2g_before_header_title, prime2g_after_header_title
+* @ Hooks: prime2g_before_head, prime2g_before_body, prime2g_before_header_title,
+	prime2g_after_header_title, prime2g_after_home_main_headline, prime2g_after_home_headlines
 * @ Features: Multislide capability added to HTML Slider
 * @ Mini Cart: @version 7.8.0
 * @ Features: accordion-frame-set.php
@@ -288,6 +290,8 @@ Hooked to comment_form_defaults:
 * prime2g_before_header_title
 * prime2g_after_header_title
 * prime2g_page_title_hook
+* prime2g_after_home_main_headline
+* prime2g_after_home_headlines
 
 Hooked to prime2g_before_header: @since 1.0.55
 	prime2g_widgets_above_header

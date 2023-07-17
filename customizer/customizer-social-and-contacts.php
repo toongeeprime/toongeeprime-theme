@@ -35,7 +35,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	 */
 	$wp_customize->add_setting(
 		'prime2g_show_socials_and_contacts',
-		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 ]
+		array( 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 )
 	);
 	$wp_customize->add_control(
 		'prime2g_show_socials_and_contacts',
@@ -172,7 +172,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		array(
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_email',
+			'sanitize_callback'	=>	'sanitize_email'
 		)
 	);
 	$wp_customize->add_control(
@@ -183,7 +183,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 			'settings'	=>	'prime2g_contact_email',
 			'section'	=>	'prime2g_socialmedia_links_section',
 			'input_attrs'	=>	array(
-				'placeholder'	=>	'contact@mymail.com',
+				'placeholder'	=>	'contact@mymail.com'
 			),
 		)
 	);
@@ -193,7 +193,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		array(
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -205,7 +205,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 			'section'	=>	'prime2g_socialmedia_links_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'Enter your business contact address',
-				'maxlength'		=>	'125',
+				'maxlength'		=>	'125'
 			),
 		)
 	);
@@ -238,7 +238,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 		array(
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(

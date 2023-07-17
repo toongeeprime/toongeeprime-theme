@@ -13,7 +13,7 @@ require_once 'website-shutdown.php';
 /**
  *	GET 'PHP' FILES THROUGH DIRECTORIES ARRAY
  */
-$directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'ajax', 'features' ];
+$directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'ajax', 'features', 'pwa' ];
 
 foreach( $directories as $dir ) {
 

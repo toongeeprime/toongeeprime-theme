@@ -12,7 +12,7 @@
  *	CONSTANTS
  */
 define( 'CHILD2G_URI', get_stylesheet_directory_uri() . '/' );
-define( 'CHILD2G_PART', STYLESHEETPATH . '/parts/' );
+define( 'CHILD2G_PART', get_stylesheet_directory() . '/parts/' );
 define( 'CHILD2G_SINGULAR', CHILD2G_PART . 'singular/' );
 define( 'CHILD2G_ARCHIVE', CHILD2G_PART . 'archive/' );
 define( 'CHILD2G_IMAGE', get_stylesheet_directory_uri() . '/images/' );

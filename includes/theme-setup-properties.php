@@ -9,7 +9,6 @@
 
 add_action( 'after_setup_theme', 'toongeeprime_theme_setup2' );
 if ( ! function_exists( 'toongeeprime_theme_setup2' ) ) {
-
 function toongeeprime_theme_setup2() {
 #	Custom Logo
 $logo_width		=	250;
@@ -92,7 +91,7 @@ register_sidebar(
 		'after_title'	=>	'</h3></div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55:
+#	@since ToongeePrime Theme 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'Above The Header', PRIME2G_TEXTDOM ),
@@ -104,7 +103,7 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55:
+#	@since ToongeePrime Theme 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'Below The Header', PRIME2G_TEXTDOM ),
@@ -116,7 +115,31 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55:
+#	@since ToongeePrime Theme 1.0.55
+register_sidebar(
+	array(
+		'name'          =>	__( 'After Main Headline Story', PRIME2G_TEXTDOM ),
+		'id'            =>	'belowmainheadline-widgets',
+		'description'   =>	__( 'Widgets below the main headline entry', PRIME2G_TEXTDOM ),
+		'before_widget' =>	'<div id="%1$s" class="belowmainheadline %2$s">',
+		'after_widget'  =>	'</div>',
+		'before_title'  =>	'<div class="hide">',
+		'after_title'   =>	'</div>'
+	)
+);
+#	@since ToongeePrime Theme 1.0.55
+register_sidebar(
+	array(
+		'name'          =>	__( 'After Headlines Section', PRIME2G_TEXTDOM ),
+		'id'            =>	'belowhomeheadlines-widgets',
+		'description'   =>	__( 'Widgets below headlines section', PRIME2G_TEXTDOM ),
+		'before_widget' =>	'<div id="%1$s" class="belowhomeheadlines %2$s">',
+		'after_widget'  =>	'</div>',
+		'before_title'  =>	'<div class="hide">',
+		'after_title'   =>	'</div>'
+	)
+);
+#	@since ToongeePrime Theme 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'Above Posts', PRIME2G_TEXTDOM ),
@@ -177,5 +200,4 @@ register_sidebars( $cols,
 
 }
 }
-
 

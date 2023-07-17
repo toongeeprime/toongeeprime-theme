@@ -79,6 +79,44 @@ if ( is_active_sidebar( 'belowheader-widgets' ) ) { ?>
 
 
 /**
+ *	WIDGETS SET BELOW HOME "MAIN" HEADLINE POST
+ */
+add_action( 'prime2g_after_home_main_headline', 'prime2g_widgets_after_main_headline' );
+if ( ! function_exists( 'prime2g_widgets_after_main_headline' ) ) {
+function prime2g_widgets_after_main_headline() {
+
+if ( is_active_sidebar( 'belowmainheadline-widgets' ) ) { ?>
+	<aside id="below_mainHeadlineWidgets" class="asides clear">
+		<div class="widgets-box grid">
+			<?php dynamic_sidebar( 'belowmainheadline-widgets' ); ?>
+		</div>
+	</aside>
+<?php
+}
+}
+}
+
+
+/**
+ *	WIDGETS SET BELOW HOME HEADLINE POSTS
+ */
+add_action( 'prime2g_after_home_headlines', 'prime2g_widgets_after_home_headlines' );
+if ( ! function_exists( 'prime2g_widgets_after_home_headlines' ) ) {
+function prime2g_widgets_after_home_headlines() {
+
+if ( is_active_sidebar( 'belowhomeheadlines-widgets' ) ) { ?>
+	<aside id="below_mainHeadlineWidgets" class="asides clear">
+		<div class="widgets-box grid">
+			<?php dynamic_sidebar( 'belowhomeheadlines-widgets' ); ?>
+		</div>
+	</aside>
+<?php
+}
+}
+}
+
+
+/**
  *	WIDGETS SET BEFORE POST
  */
 add_action( 'prime2g_before_post', 'prime2g_widgets_above_post' );

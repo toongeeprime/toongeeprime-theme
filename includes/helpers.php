@@ -89,11 +89,21 @@ function prime2g_get_country_by_code( $code ) {
 
 
 /**
- *	If To Use Theme Extras
+ *	Use Theme Extras?
  *	@since ToongeePrime Theme 1.0.48
  */
 function prime2g_use_extras() {
 	return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true );
+}
+
+
+
+/**
+ *	Use PWA?
+ *	@since ToongeePrime Theme 1.0.55
+ */
+function prime2g_add_theme_pwa() {
+	return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true );
 }
 
 

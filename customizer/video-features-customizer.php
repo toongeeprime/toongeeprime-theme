@@ -15,7 +15,10 @@ function prime2g_theme_video_features( $wp_customize ) {
 
 if ( ! prime2g_use_extras() ) return;
 
-	$wp_customize->add_setting( 'prime2g_enable_video_features', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_enable_video_features',
+		array( 'type' => 'theme_mod', 'sanitize_callback'	=>	'sanitize_text_field' )
+	);
 	$wp_customize->add_control(
 		'prime2g_enable_video_features',
 		array(
@@ -74,7 +77,10 @@ if ( ! prime2g_use_extras() ) return;
 		)
 	);
 
-	$wp_customize->add_setting( 'prime2g_replace_ftimage_with_video', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_replace_ftimage_with_video',
+		array( 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' )
+	);
 	$wp_customize->add_control(
 		'prime2g_replace_ftimage_with_video',
 		array(
@@ -89,4 +95,5 @@ if ( ! prime2g_use_extras() ) return;
 }
 
 }
+
 

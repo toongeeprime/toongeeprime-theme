@@ -21,7 +21,7 @@ function prime2g_customizer_front_page( $wp_customize ) {
 			'type'		=>	'theme_mod',
 			'transport'	=>	'postMessage',
 			'default'	=>	__( 'Welcome to ' . $siteTitle, PRIME2G_TEXTDOM ),
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -42,7 +42,10 @@ function prime2g_customizer_front_page( $wp_customize ) {
 	/**
 	 *	HOMEPAGE HEADLINES
 	 */
-	$wp_customize->add_setting( 'prime2g_theme_show_headlines', array( 'type'	=>	'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_theme_show_headlines',
+		[ 'type'	=>	'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
 	$wp_customize->add_control(
 		'prime2g_theme_show_headlines',
 		array(
@@ -59,10 +62,7 @@ function prime2g_customizer_front_page( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_headlines_category',
-		array(
-			'type'		=>	'theme_mod',
-			'default'	=>	'1',
-		)
+		[ 'type' => 'theme_mod', 'default' => '1', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_headlines_category',

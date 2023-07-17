@@ -21,9 +21,7 @@ if ( ! function_exists( 'prime2g_headlines_loop' ) ) {
 
 
 if ( ! function_exists( 'prime2g_home_headlines' ) ) {
-
 function prime2g_home_headlines() {
-
 if ( ! is_home() ) return;
 
 if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
@@ -45,9 +43,12 @@ if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
 			echo '</div>';
 
 			echo '<div class="mid grid prel">';
+			echo '<div class="mainheadline">';
 				prime2g_get_posts_query(
 					'post', 1, 0, 'date', 'category', 'IN', $slug, 'prime2g_archive_loop'
 				);
+			echo '</div>';
+			do_action( 'prime2g_after_home_main_headline' );	# @since ToongeePrime Theme 1.0.55
 			echo '</div>';
 
 			echo '<div class="right sides grid prel">';
@@ -57,6 +58,9 @@ if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
 			echo '</div>';
 
 		echo '</div>';
+
+		do_action( 'prime2g_after_home_headlines' );	# @since ToongeePrime Theme 1.0.55
+
 	echo '</section>';
 	}
 	else {
@@ -66,6 +70,5 @@ if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
 }
 
 }
-
 }
 

@@ -15,7 +15,7 @@ function prime2g_customizer_misc_wp_settings( $wp_customize ) {
 	 */
 	$wp_customize->add_setting(
 		'prime2g_theme_logo_height',
-		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '100' )
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => '100', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_logo_height',

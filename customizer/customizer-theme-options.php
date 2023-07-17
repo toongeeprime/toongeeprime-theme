@@ -42,7 +42,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_site_width',
-		array( 'type' => 'theme_mod', 'default' => $dWidth )
+		array( 'type' => 'theme_mod', 'default' => $dWidth, 'sanitize_callback' => 'sanitize_text_field' )
 	);
 	$wp_customize->add_control(
 		'prime2g_site_width',
@@ -63,7 +63,10 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	/**
 	 *	STYLING ADJUSTMENTS
 	 */
-	$wp_customize->add_setting( 'prime2g_site_style_extras', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_site_style_extras',
+		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
 	$wp_customize->add_control(
 		'prime2g_site_style_extras',
 		array(
@@ -84,7 +87,10 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	 *	SIDEBAR IN SINGULAR
 	 *	@since ToongeePrime Theme 1.0.55
 	 */
-	$wp_customize->add_setting( 'prime2g_sidebar_position', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_sidebar_position',
+		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
 	$wp_customize->add_control(
 		'prime2g_sidebar_position',
 		array(
@@ -99,7 +105,10 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_singular', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_remove_sidebar_in_singular',
+		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
 	$wp_customize->add_control(
 		'prime2g_remove_sidebar_in_singular',
 		array(
@@ -120,7 +129,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	 */
 	$wp_customize->add_setting(
 		'prime2g_title_location',
-		array( 'type' => 'theme_mod', 'default' => 'content', )
+		array( 'type' => 'theme_mod', 'default' => 'content', 'sanitize_callback' => 'sanitize_text_field' )
 	);
 	$wp_customize->add_control(
 		'prime2g_title_location',
@@ -139,7 +148,10 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 	/**
 	 *	BREADCRUMBS
 	 */
-	$wp_customize->add_setting( 'prime2g_theme_breadcrumbs', array( 'type' => 'theme_mod' ) );
+	$wp_customize->add_setting(
+		'prime2g_theme_breadcrumbs',
+		array( 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' )
+	);
 	$wp_customize->add_control(
 		'prime2g_theme_breadcrumbs',
 		array(
@@ -154,7 +166,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
  *	@since ToongeePrime Theme 1.0.55
  */
 	$wp_customize->add_setting( 'prime2g_theme_add_footer_credits',
-		array( 'type' => 'theme_mod', 'default' => '1' )
+		array( 'type' => 'theme_mod', 'default' => '1', 'sanitize_callback' => 'sanitize_text_field' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_add_footer_credits',
@@ -169,7 +181,7 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.0' ) {
 
 	$wp_customize->add_setting( 'prime2g_theme_add_footer_logo',
-		array( 'type' => 'theme_mod', 'default' => '1' )
+		array( 'type' => 'theme_mod', 'default' => '1', 'sanitize_callback' => 'sanitize_text_field' )
 	);
 	$wp_customize->add_control(
 		'prime2g_theme_add_footer_logo',
@@ -200,7 +212,8 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.0' ) {
 		array(
 			'type'	=>	'theme_mod',
 			'transport'	=>	'postMessage',
-			'default'	=>	'4'
+			'default'	=>	'4',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -321,4 +334,5 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.0' ) {
 }
 
 }
+
 
