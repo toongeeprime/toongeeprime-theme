@@ -88,7 +88,7 @@ ul{
 	padding-left:1rem;
 }
 html input, textarea, input[type="password"], select{
-	background-color:var(--content-background); color:var(--content-text); border:2px solid #aaaaaaaa;
+	background-color:var(--content-background); color:var(--content-text); border:1px solid #aaaaaaaa;
 	width:100%; padding:10px 15px; line-height:1.5;
 	max-width:100%;
 }
@@ -539,7 +539,7 @@ a.comment-reply-link:hover{
 	margin:0 0 20px;
 }
 .stickies, .home_headlines{
-	padding:var(--min-pad) 0 0;
+	padding:1px var(--min-pad);
 }
 .stickies .thumbnail, .sides .thumbnail, .widget_posts .thumbnail{
 	height:150px;
@@ -725,7 +725,7 @@ i.bi{
 	min-height:150px;
 }
 .site_main .searchform div{
-	display:grid; grid-template-columns:3fr 1fr;
+	display:flex;
 }
 .gallery-columns-5, .gallery-columns-9{
 	grid-template-columns:repeat(5, 1fr);

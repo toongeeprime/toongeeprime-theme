@@ -120,6 +120,7 @@ function prime2g_customizer_sections( $wp_customize ) {
 			'panel'		=>	'prime2g_customizer_panel',
 			'description'	=>	__( 'Theme\'s Web Application', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
+			'active_callback'	=>	'prime2g_add_theme_pwa',
 		)
 	);
 
@@ -133,6 +134,21 @@ function prime2g_customizer_sections( $wp_customize ) {
 			'title'		=>	__( 'Extra Features', PRIME2G_TEXTDOM ),
 			'panel'		=>	'prime2g_customizer_panel',
 			'description'	=>	__( 'Extra features for the theme', PRIME2G_TEXTDOM ),
+			'capability'	=>	'edit_theme_options',
+			'active_callback'	=>	'prime2g_use_extras',
+		)
+	);
+
+	/**
+	 *	SMTP Mail Settings
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_section(
+		'prime2g_theme_smtp_section',
+		array(
+			'title'		=>	__( 'SMTP Mail Settings', PRIME2G_TEXTDOM ),
+			'panel'		=>	'prime2g_customizer_panel',
+			'description'	=>	__( 'Configure SMTP Mailing Settings', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
 			'active_callback'	=>	'prime2g_use_extras',
 		)

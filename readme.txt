@@ -20,6 +20,7 @@ A WordPress theme with options for customization, design and development flexibi
 Several updates across the theme
 * Introduced the beginnings of theme's PROGRESSIVE WEB APP (PWA)
 * HEADER VIDEO
+* SMTP Mail Config
 * 100 Google Fonts
 * @ customizer: File: customizer-theme-menus.php
 * @ customizer: Theme Fonts Section

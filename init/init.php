@@ -13,6 +13,12 @@ elseif ( ! ob_start( "ob_gzhandler" ) ) { ob_start(); }
  *	@package WordPress
  *	File created @since ToongeePrime Theme 1.0.49
  */
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+require_once 'smtp.php';
+
 /**
  *	THEME CONSTANTS
  */

@@ -7,10 +7,6 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-/**
- *	ToongeePrime Theme Customizer Sections
- */
-
 function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	/**

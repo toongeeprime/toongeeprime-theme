@@ -37,7 +37,7 @@ class Prime2g_Web_Manifest {
 
 
 	public function on_activation() {
-		$this->add_rewrite_rule();
+		$this->rewrite_rule();
 		flush_rewrite_rules();
 	}
 
@@ -55,7 +55,7 @@ class Prime2g_Web_Manifest {
 	}
 
 
-	public function appID() { return 'p2g_pwa_sID' . get_current_blog_id() . 'V' . PRIME2G_PWA_VERSION; }
+	public function appID() { return 'p2g_pwa_ID' . get_current_blog_id() . 'V' . PRIME2G_PWA_VERSION; }
 
 
 	public function show_manifest( $iconID ) {
@@ -66,7 +66,8 @@ class Prime2g_Web_Manifest {
 	}
 
 	public function get_manifest( $iconID ) {
-		$siteName	=	esc_js( get_bloginfo( 'name' ) );
+		// $siteName	=	esc_js( get_bloginfo( 'name' ) );
+		$siteName	=	html_entity_decode( get_bloginfo( 'name' ) );
 		$getIcons	=	Prime2g_PWA_Icons::instance();
 		$startURL	=	get_theme_mod( 'prime2g_route_starturl_to_networkhome' ) ? network_home_url() : get_home_url();
 
@@ -78,7 +79,7 @@ class Prime2g_Web_Manifest {
 			'lang'			=>	get_locale(),
 			'id'			=>	$this->appID(),
 			'scope'			=>	'/',
-			'dir'			=>	'ltr',
+			'dir'			=>	is_rtl() ? 'rtl' : 'ltr',
 			'display'		=>	$this->get_display(),
 			'orientation'	=>	$this->get_orientation(),
 
@@ -106,4 +107,5 @@ class Prime2g_Web_Manifest {
 
 	private function get_bgcolor() { return get_theme_mod( 'prime2g_pwapp_backgroundcolor', '#ffffff' ); }
 }
+
 
