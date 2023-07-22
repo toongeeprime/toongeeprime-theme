@@ -22,7 +22,7 @@ class Prime2g_PWA_Prompt {
 
 
 	public function __construct() {
-		add_action( 'wp_footer', array( $this, 'button' ), 10, 0 );
+		add_action( 'wp_footer', array( $this, 'button' ), 5, 0 );
 	}
 
 
@@ -31,7 +31,7 @@ class Prime2g_PWA_Prompt {
 
 	public function button() {
 		$icons	=	Prime2g_PWA_Icons::instance();
-		$src	=	$icons->defaultIcon()[ 'src' ];
+		$src	=	$icons->mainIcon()['src'];
 		$appID	=	$this->appID();
 
 echo '<style id="p2g_pwaBtnCss">
@@ -43,7 +43,7 @@ background-color:#fff;background:var(--content-background);box-shadow:0 0 15px 3
 </style>
 <div id="p2g_pwaBtnWrap" class="prel">
 <i id="xpwaPrompt" class="bi bi-x-circle-fill p-abso" title="Close"></i>
-<div id="'. PRIME2G_PWA_BTNID .'" class="grid pointer" title="Install App" 
+<div id="'. PRIME2G_PWA_BTNID .'" class="grid pointer" title="Install Web App" 
 style="grid-template-columns:50px 1fr;padding:5px;gap:5px;">
 <img src="'. $src .'" alt width="50px" height="50px" />
 <button>Install App</button>
@@ -56,10 +56,10 @@ const p2g_pwabtnWrap=	document.getElementById( "p2g_pwaBtnWrap" );
 const xpwaPrompt	=	document.getElementById( "xpwaPrompt" );
 const p2g_pwaBtn	=	document.getElementById( "'. PRIME2G_PWA_BTNID .'" );
 
-window.addEventListener( "appinstalled", ()=>{ disableInAppInstallPrompt(); } );
-xpwaPrompt.addEventListener( "click", ()=>{ disableInAppInstallPrompt(); } );
+window.addEventListener( "appinstalled", ()=>{ stopPWAinstallPrompt(); } );
+xpwaPrompt.addEventListener( "click", ()=>{ stopPWAinstallPrompt(); } );
 
-window.addEventListener( "beforeinstallprompt", (event)=>{
+window.addEventListener( "beforeinstallprompt", ( event )=>{
 	event.preventDefault();
 	p2g_pwaPrompt	=	event;
 	p2g_pwabtnWrap.classList.add( "prime" );
@@ -70,10 +70,10 @@ if ( ! p2g_pwaPrompt ) { return; }
 
 	const result	=	await p2g_pwaPrompt.prompt();
 	console.log(`Install prompt was: ${result.outcome}`);
-	disableInAppInstallPrompt();
+	stopPWAinstallPrompt();
 } );
 
-function disableInAppInstallPrompt() {
+function stopPWAinstallPrompt() {
 	p2g_pwaPrompt	=	null;
 	p2g_pwabtnWrap.classList.remove( "prime" );
 }

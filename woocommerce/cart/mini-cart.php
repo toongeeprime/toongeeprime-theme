@@ -14,13 +14,13 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 7.8.0
+ * @version 7.9.0
  */
 
 /*
 	*	Added <div> wrappers
 	*	Restructured the image and text elements
-	*	Updated for WooCommerce @version 7.8.0 @since ToongeePrime Theme 1.0.55
+	*	Updated for WooCommerce @version 7.9.0 @since ToongeePrime Theme 1.0.55
 */
 ?>
 
@@ -28,8 +28,7 @@
 <div class="in_minicart slimscrollbar prel">
 <h3 id="cart-heading" class="cart-title"><i class="fas fa-shopping-cart"></i>Your Cart</h3>
 
-<?php
-do_action( 'woocommerce_before_mini_cart' ); ?>
+<?php do_action( 'woocommerce_before_mini_cart' ); ?>
 
 <?php if ( ! WC()->cart->is_empty() ) : ?>
 
@@ -43,9 +42,9 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 
 			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_widget_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 				/**
-				 * Filter the product name.
+				 * This filter is documented in woocommerce/templates/cart/cart.php.
 				 *
-				 * @param string $product_name Name of the product in the cart.
+				 * @since 2.1.0
 				 */
 				$product_name      = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key );
 				$thumbnail         = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
@@ -60,7 +59,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 							'<a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">&times;</a>',
 							esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
 							/* translators: %s is the product name */
-							esc_attr( sprintf( __( 'Remove %s from cart', 'woocommerce' ), $product_name ) ),
+							esc_attr( sprintf( __( 'Remove %s from cart', 'woocommerce' ), wp_strip_all_tags( $product_name ) ) ),
 							esc_attr( $product_id ),
 							esc_attr( $cart_item_key ),
 							esc_attr( $_product->get_sku() )
@@ -101,8 +100,6 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 		?>
 	</ul>
 
-<div class="mini_cart_base">
-
 	<p class="woocommerce-mini-cart__total total">
 		<?php
 		/**
@@ -120,11 +117,9 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 
 	<?php do_action( 'woocommerce_widget_shopping_cart_after_buttons' ); ?>
 
-</div>
-
 <?php else : ?>
 
-<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?></p>
+	<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?></p>
 
 <?php endif; ?>
 

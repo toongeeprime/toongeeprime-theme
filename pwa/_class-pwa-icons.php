@@ -23,12 +23,24 @@ class Prime2g_PWA_Icons {
 	}
 
 
-	public function defaultIcon() {
-	$iconURL	=	PRIME2G_PWA_IMAGE . 'default.png';
-
-	if ( $icon_id = get_theme_mod( 'prime2g_pwapp_primaryicon' ) ) {
-		$iconURL	=	wp_get_attachment_image_url( $icon_id, [ 144, 144 ] );
+	public function html_head() {
+		// Hooked to wp_head @ class Prime2g_Web_Manifest
+		$iconURL	=	$this->mainIcon()[ 'src' ];
+		echo '<link rel="apple-touch-icon" href="'. esc_url( $iconURL ) .'" />' . PHP_EOL;
 	}
+
+
+	public function mainIcon() {
+
+		if ( $icon_id = get_theme_mod( 'prime2g_pwapp_primaryicon' ) ) {
+			$iconURL	=	wp_get_attachment_image_url( $icon_id, [ 144, 144 ] );
+		}
+		elseif ( $icon_id = get_option( 'site_icon' ) ) {
+			$iconURL	=	wp_get_attachment_image_url( $icon_id, [ 144, 144 ] );
+		}
+		else {
+			$iconURL	=	PRIME2G_PWA_IMAGE . 'default.png';
+		}
 
 		return [
 			'src'		=>	$iconURL,
@@ -36,6 +48,7 @@ class Prime2g_PWA_Icons {
 			'type'		=>	'image/png',
 			'purpose'	=>	'any'
 		];
+
 	}
 
 

@@ -26,11 +26,13 @@ class Prime2g_Web_Manifest {
 		// Flush rewrite rules accordingly
 		add_action( 'after_switch_theme', array( $this, 'on_activation' ) );
 
-		add_action( 'init', array( $this, 'rewrite_rule' ) );
-		add_action( 'wp_head', array( $this, 'manifest_head_link' ), 15, 0 );
-		add_action( 'parse_request', function() use( $iconID ) {
-			$this->show_manifest( $iconID );
-		}, 10, 1 );
+		if ( ! class_exists( 'WP_Service_Workers' ) ) {
+			add_action( 'init', array( $this, 'rewrite_rule' ) );
+			add_action( 'wp_head', array( $this, 'pwa_html_head' ), 15, 0 );
+			add_action( 'parse_request', function() use( $iconID ) {
+				$this->show_manifest( $iconID );
+			}, 10, 1 );
+		}
 	}
 
 	}
@@ -42,7 +44,10 @@ class Prime2g_Web_Manifest {
 	}
 
 
-	public function manifest_head_link() {
+	public function pwa_html_head() {
+		$getIcons	=	Prime2g_PWA_Icons::instance();
+		$getIcons->html_head();
+
 		echo '<link rel="manifest" href="' . esc_url( home_url() ) . '/pwapp/manifest" />' . PHP_EOL;
 	}
 
@@ -66,7 +71,6 @@ class Prime2g_Web_Manifest {
 	}
 
 	public function get_manifest( $iconID ) {
-		// $siteName	=	esc_js( get_bloginfo( 'name' ) );
 		$siteName	=	html_entity_decode( get_bloginfo( 'name' ) );
 		$getIcons	=	Prime2g_PWA_Icons::instance();
 		$startURL	=	get_theme_mod( 'prime2g_route_starturl_to_networkhome' ) ? network_home_url() : get_home_url();
@@ -86,7 +90,7 @@ class Prime2g_Web_Manifest {
 			'theme_color'	=>	$this->get_themecolor(),
 			'background_color'	=>	$this->get_bgcolor(),
 
-			'icons'			=>	[ $getIcons->defaultIcon() ],
+			'icons'			=>	[ $getIcons->mainIcon() ],
 
 			// 'screenshots'	=>	[]
 		);
@@ -107,5 +111,7 @@ class Prime2g_Web_Manifest {
 
 	private function get_bgcolor() { return get_theme_mod( 'prime2g_pwapp_backgroundcolor', '#ffffff' ); }
 }
+
+
 
 
