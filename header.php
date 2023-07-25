@@ -37,7 +37,7 @@ $isSingular	=	is_singular(); ?>
 	<?php
 	if ( 'header' != get_theme_mod( 'prime2g_title_location' ) ) {
 		if ( $isSingular ) {
-			if ( ! function_exists( 'define_2gRMVTitle' ) ) {
+			if ( !function_exists( 'define_2gRMVTitle' ) ) {
 				prime2g_title_header( prime2g_title_header_classes() );
 			}
 		}
@@ -47,9 +47,8 @@ $isSingular	=	is_singular(); ?>
 	}
 	?>
 
-		<div id="content" class="site_content grid site_width">
+	<div id="content" class="site_content grid site_width">
 
-			<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
+		<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 
-			<?php if ( $isSingular ) echo '<article id="primary" class="primary_area">'; ?>
-
+		<?php if ( $isSingular ) echo '<article id="primary" class="primary_area">'; ?>

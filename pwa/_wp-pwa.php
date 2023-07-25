@@ -1,51 +1,48 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	WORKING WITH WP PWA Core
+ *	RUN WITH WP PWA
  *
- *	@package WordPress
+ *	@package WordPress, WP PWA core
  *	@since ToongeePrime Theme 1.0.55
  */
 
-class Prime2g_Hook_WP_PWA {
+if ( class_exists( 'WP_Service_Workers' ) ) {
 
-	/**
-	 *	Instantiate
-	 */
-	private static $instance;
+require_once PWA_PLUGIN_DIR . '/integrations/interface-wp-service-worker-integration.php';
+require_once PWA_PLUGIN_DIR . '/integrations/class-wp-service-worker-base-integration.php';
+require_once PWA_PLUGIN_DIR . '/integrations/functions.php';
 
-	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
-			self::$instance	=	new self();
-		}
-		return self::$instance;
-	}
 
-	public function __construct( $iconID = 0 ) {
-		$start			=	Prime2g_Web_Manifest::instance();
-		$primeManifest	=	$start->get_manifest( $iconID );
+$path	=	PRIME2G_PWA_PATH . 'wp-pwa/';
 
-		add_filter( 'web_app_manifest', function( $manifest ) use( $primeManifest ) {
-			$manifest[ 'name' ]	=	$primeManifest[ 'name' ];
-			$manifest[ 'short_name' ]	=	$primeManifest[ 'short_name' ];
-			$manifest[ 'id' ]	=	$primeManifest[ 'id' ];
-			$manifest[ 'description' ]	=	$primeManifest[ 'description' ];
-			$manifest[ 'display' ]	=	$primeManifest[ 'display' ];
-			$manifest[ 'orientation' ]	=	$primeManifest[ 'orientation' ];
-			$manifest[ 'theme_color' ]	=	$primeManifest[ 'theme_color' ];
-			$manifest[ 'background_color' ]	=	$primeManifest[ 'background_color' ];
-		return $manifest;
-		} );
+// require_once $path . 'wp-pwa-theme.php';
+require_once $path . 'wp-pwa-offline.php';
+require_once $path . 'wp-pwa.php';
 
-		$this->icons( $primeManifest );
-	}
 
-	private function icons( $primeManifest ) {
-		add_filter( 'web_app_manifest', static function( $manifest ) use( $primeManifest ) {
-			$manifest[ 'icons' ]	=	$primeManifest[ 'icons' ];
-			return $manifest;
-		} );
-	}
+
+// Applicable Theme App Classes
+$offline	=	new Prime2g_PWA_Offline_Manager();
+
+$cachingRoutes	=	$offline->caching_routes();
+
+$components	=	[];
+
+
+add_action( 'after_setup_theme', function() {
+// add_theme_support( 'service_worker', true );
+add_theme_support( 'service_worker', array(
+	'prime2g-offline'	=>	'Prime2g_PWA_Offline_Integration'
+) );
+} );
+
+
+pwa_register_service_worker_integrations( new WP_Service_Worker_Scripts(
+	$cachingRoutes['images'],
+	$cachingRoutes['offline'],
+	$components
+) );
 
 }
 

@@ -181,6 +181,19 @@ $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
+function prime2g_get_current_url() {
+if ( isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] === 'on' ) $url	=	"https://";   
+else $url	=	"http://";   
+	$url	.=	$_SERVER[ 'HTTP_HOST' ];
+	$url	.=	$_SERVER[ 'REQUEST_URI' ];
+return $url;
+}
+
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
 function prime2g_get_postsdata_array( array $get, array $args, array $options ) {
 
 $index	=	$value	=	'';	# $get
@@ -196,4 +209,5 @@ foreach ( $getPosts as $post ) {
 return array_combine( $indexes, $values );
 
 }
+
 
