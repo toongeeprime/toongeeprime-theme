@@ -23,9 +23,9 @@ define( 'PRIME2G_PWA_BTNID', 'pwa_install' );
 define( 'PRIME2G_PWA_PATH', PRIME2G_THEME .'pwa/' );
 
 define( 'PRIME2G_PWA_URL', PRIME2G_THEMEURL .'pwa/' );
-define( 'PRIME2G_PWA_FILES', PRIME2G_THEMEURL .'files/' );
-define( 'PRIME2G_PWA_THEMEDIR', PRIME2G_PWA_URL .'theme/' );
-define( 'PRIME2G_PWA_THEMEASSETS', PRIME2G_PWA_THEMEDIR .'assets/' );
+define( 'PRIME2G_PWA_FILE', PRIME2G_THEMEURL .'files/' );
+// define( 'PRIME2G_PWA_THEMEDIR', PRIME2G_PWA_URL .'theme/' );
+// define( 'PRIME2G_PWA_THEMEASSETS', PRIME2G_PWA_THEMEDIR .'assets/' );
 define( 'PRIME2G_PWA_IMAGE', PRIME2G_PWA_URL .'images/' );
 
 

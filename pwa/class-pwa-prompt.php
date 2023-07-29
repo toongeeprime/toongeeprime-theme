@@ -26,13 +26,9 @@ class Prime2g_PWA_Prompt {
 	}
 
 
-	private function appID() { return Prime2g_Web_Manifest::instance()->appID(); }
-
-
 	public function button() {
 		$icons	=	Prime2g_PWA_Icons::instance();
 		$src	=	$icons->mainIcon()['src'];
-		$appID	=	$this->appID();
 
 echo '<style id="p2g_pwaBtnCss">
 #p2g_pwaBtnWrap.prime{transform:translate(0);visibility:visible;opacity:1;}
@@ -50,7 +46,7 @@ style="grid-template-columns:50px 1fr;padding:5px;gap:5px;">
 </div>
 </div>';
 
-$js	=	'<script id="p2g_pwaScript-'. $appID .'">
+$js	=	'<script id="p2g_pwaPromptJS">
 let p2g_pwaPrompt	=	null;
 const p2g_pwabtnWrap=	document.getElementById( "p2g_pwaBtnWrap" );
 const xpwaPrompt	=	document.getElementById( "xpwaPrompt" );
@@ -86,4 +82,3 @@ echo $js;
 
 
 Prime2g_PWA_Prompt::instance();
-

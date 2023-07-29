@@ -13,6 +13,15 @@ function prime2g_customizer_theme_pwa( $wp_customize ) {
 
 if ( ! prime2g_add_theme_pwa() ) return;
 
+if ( is_multisite() ) {
+	switch_to_blog( 1 );
+	$route	=	get_theme_mod( 'prime2g_route_apps_to_networkhome' );
+	restore_current_blog();
+
+	if ( $route && get_current_blog_id() !== 1 ) return;
+}
+
+
 	$wp_customize->add_setting(
 		'prime2g_use_theme_pwa',
 		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
@@ -30,15 +39,15 @@ if ( ! prime2g_add_theme_pwa() ) return;
 
 if ( is_multisite() && get_current_blog_id() === 1 ) {
 	$wp_customize->add_setting(
-		'prime2g_route_starturl_to_networkhome',
+		'prime2g_route_apps_to_networkhome',
 		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
 	$wp_customize->add_control(
-		'prime2g_route_starturl_to_networkhome',
+		'prime2g_route_apps_to_networkhome',
 		array(
-			'label'		=>	__( 'Start All Sites\' Apps at Network Home?', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Route All Sites\' Apps to Network Home?', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
-			'settings'	=>	'prime2g_route_starturl_to_networkhome',
+			'settings'	=>	'prime2g_route_apps_to_networkhome',
 			'section'	=>	'prime2g_theme_pwa_section'
 		)
 	);
