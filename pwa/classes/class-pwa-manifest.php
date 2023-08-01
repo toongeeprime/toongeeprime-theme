@@ -11,39 +11,31 @@ class Prime2g_Web_Manifest {
 
 	private static $instance;
 
-	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
-			self::$instance	=	new self();
-		}
-		return self::$instance;
-	}
-
 	public function __construct( $iconID = 0 ) {
 
 	if ( ! isset( self::$instance ) ) {
 
 		new Prime2g_PWA_Offline_Manager();
 
-		// Flush rewrite rules accordingly:
-		// Consider flushing on version updates also*****
-		add_action( 'after_switch_theme', array( $this, 'on_activation' ) );
-		add_action( 'customize_save_after', array( $this, 'on_activation' ) );
+		// Flushing rewrite rules:
+		add_action( 'after_switch_theme', 'flush_rewrite_rules' );
+		add_action( 'customize_save_after', 'flush_rewrite_rules' );
 
 		$wppwa_plugin	=	trailingslashit( WP_CONTENT_DIR ) . 'plugins/pwa/pwa.php';
-		register_activation_hook( $wppwa_plugin, 'on_activation' );
-		register_deactivation_hook( $wppwa_plugin, 'on_activation' );
+		register_activation_hook( $wppwa_plugin, 'flush_rewrite_rules' );
+		register_deactivation_hook( $wppwa_plugin, 'flush_rewrite_rules' );
 
 
 		if ( ! class_exists( 'WP_Service_Workers' ) ) {
 			new Prime2g_PWA_Service_Worker();
-			add_action( 'init', array( $this, 'rewrite_rule' ) );
+			add_action( 'init', [ $this, 'manifest_rule' ] );
 			add_action( 'parse_request', function() use( $iconID ) {
 				$this->show_manifest( $iconID );
 			}, 10, 1 );
-			// add_action( 'wp_head', array( $this, 'pwa_html_head' ), 15, 0 );
 			add_action( 'wp_head', function() use( $iconID ) {
 				$this->pwa_html_head( $iconID );
 			}, 11, 1 );
+			add_action( 'upgrader_process_complete', [ $this, 'after_upgrades' ], 10, 2 );
 		}
 	}
 
@@ -51,18 +43,24 @@ class Prime2g_Web_Manifest {
 	}
 
 
-	public function on_activation() { $this->rewrite_rule(); flush_rewrite_rules(); }
+	public function after_upgrades( $upgrader_object, $options ) {
+	if ( $options['type'] === 'theme' ) {
+		foreach( $options['themes'] as $theme ) {
+			if ( $theme === PRIME2G_TEXTDOM ) { flush_rewrite_rules(); return; }
+		}
+	}
+	}
 
 
 	public function pwa_html_head( $iconID = 0 ) {
 		$getIcons	=	Prime2g_PWA_Icons::instance();
-		$startURL	=	Prime2g_PWA_Offline_Manager::startURL();
-		$getIcons->html_metadata( $iconID );	# register icons <link>
-		echo '<link rel="manifest" href="' . esc_url( $startURL ) . 'pwapp/manifest.json" />' . PHP_EOL;
+		$manifest	=	Prime2g_PWA_Offline_Manager::manifest_url();
+		$getIcons->html_metadata( $iconID );
+		echo '<link rel="manifest" href="'. $manifest . '">' . PHP_EOL;
 	}
 
 
-	public function rewrite_rule() {
+	public function manifest_rule() {
 		global $wp;
 		add_rewrite_rule( 'pwapp/\bmanifest.json\b', 'index.php?pwapp=manifest', 'top' );
 
@@ -119,7 +117,26 @@ class Prime2g_Web_Manifest {
 
 
 	private function manifest_data() {
-	$data	=	[
+
+	if ( is_multisite() ) {
+	$data	=	$this->get_manifest_data();
+
+		switch_to_blog( 1 );
+		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
+			$data	=	$this->get_manifest_data();
+		}
+		restore_current_blog();
+	}
+	else {
+		$data	=	$this->get_manifest_data();
+	}
+
+	return $data;
+	}
+
+
+	private function get_manifest_data() {
+	return [
 		'id'	=>	$this->appID(),
 		'short_name'	=>	get_theme_mod( 'prime2g_pwapp_shortname', 'Web App' ),
 		'description'	=>	get_bloginfo( 'description' ),
@@ -128,26 +145,6 @@ class Prime2g_Web_Manifest {
 		'theme_color'	=>	get_theme_mod( 'prime2g_pwapp_themecolor', '#ffffff' ),
 		'bg_color'		=>	get_theme_mod( 'prime2g_pwapp_backgroundcolor', '#ffffff' ),
 	];
-
-	if ( is_multisite() ) {
-	switch_to_blog( 1 );
-	if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
-
-		$data	=	[
-			'id'	=>	$this->appID(),
-			'short_name'	=>	get_theme_mod( 'prime2g_pwapp_shortname', 'Web App' ),
-			'description'	=>	get_bloginfo( 'description' ),
-			'display'		=>	get_theme_mod( 'prime2g_pwapp_display', 'standalone' ),
-			'orientation'	=>	get_theme_mod( 'prime2g_pwapp_orientation', 'portrait' ),
-			'theme_color'	=>	get_theme_mod( 'prime2g_pwapp_themecolor', '#ffffff' ),
-			'bg_color'		=>	get_theme_mod( 'prime2g_pwapp_backgroundcolor', '#ffffff' ),
-		];
-
-	}
-	restore_current_blog();
-	}
-
-	return $data;
 	}
 
 }

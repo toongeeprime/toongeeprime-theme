@@ -23,15 +23,12 @@ class Prime2g_PWA_Offline_Manager {
 	}
 
 
-	protected function offline_page() {
-		require_once PRIME2G_PWA_PATH . 'theme/offline-page.php';
-	}
+	protected function check_params( string $value ) {
+	$offlineUrls	=	$this->get_offline_url();
 
-
-	protected function check_params( string $value, string $offlinePage ) {
 	return (
 		isset( $_GET[ 'offline' ] ) && $_GET[ 'offline' ] === $value ||
-		prime2g_get_current_url() === $this->get_offline_url( $offlinePage )
+		prime2g_get_current_url() === $offlineUrls[ $value ]
 	);
 	}
 
@@ -48,23 +45,33 @@ class Prime2g_PWA_Offline_Manager {
 	// Virtual files output
 	public function show_offline_output() {
 
-		if ( $this->check_params( 'offline', 'index' ) ) {
-			$output	=	$this->offline_page();
-			wp_send_json( $output );
-		}
-
-		if ( $this->check_params( 'scripts', 'script' ) ) {
-			$output	=	Prime2g_PWA_Offline_Scripts::content();
-			$this->do_output_die( $output, 'javascript' );
-		}
-
-		if ( $this->check_params( 'service-worker', 'sw' ) ) {
+		if ( $this->check_params( 'service-worker' ) ) {
 			$output	=	Prime2g_PWA_Service_Worker::content();
 			$this->do_output_die( $output, 'javascript' );
 		}
 
-		$cacheFiles		=	$this->files_to_cache();
-		$cacheFilesV	=	$this->files_to_cache( 'versioned' );
+		if ( $this->check_params( 'scripts' ) ) {
+			$output	=	Prime2g_PWA_Offline_Scripts::content();
+			$this->do_output_die( $output, 'javascript' );
+		}
+
+		$offlineUrls	=	$this->get_offline_url();
+		$values	=	[ 'index', 'error', 'notcached' ];
+		foreach ( $values as $value ) {
+			if ( isset( $_GET[ 'offline' ] ) && $_GET[ 'offline' ] === $value ) {
+				require_once $this->offline_page();	# So params can be read
+				exit;
+			}
+
+			if ( prime2g_get_current_url() === $offlineUrls[ $value ] ) {
+				echo file_get_contents( self::startURL() . '?offline=' . $value );
+				exit;
+			}
+		}
+
+/*
+		$cacheFiles		=	$this->theme_files();
+		$cacheFilesV	=	$this->theme_files( 'versioned' );
 
 		// Match version requests
 		foreach ( $cacheFilesV as $vkey => $vurl ) {
@@ -74,6 +81,7 @@ class Prime2g_PWA_Offline_Manager {
 				}
 			}
 		}
+*/
 
 	}
 
@@ -92,49 +100,78 @@ class Prime2g_PWA_Offline_Manager {
 	}
 
 
-	public function get_offline_url( $get ) {
-	$startURL	=	self::startURL();
-
-	if ( $get === 'sw' ) return $startURL . 'service-worker.js'; # must be @ the top level scope
-
-	$url	=	$startURL . 'offline/';
-
-		switch( $get ) {
-			case 'index'	:	$end	=	'index.html'; break;
-			case 'script'	:	$end	=	'scripts.js'; break;
-			default	:	$end	=	''; break;
-		}
-
-	return $url . $end;
+	public static function manifest_url() {
+		$startURL	=	self::startURL();
+		return esc_url( $startURL ) . 'pwapp/manifest.json';
 	}
 
 
-	public static function files_to_cache( $get = 'array' ) {
+	public function get_offline_url() {
+	$startURL	=	self::startURL();
+	$manifest	=	self::manifest_url();
+	$offline	=	$startURL . 'offline/';
+
+	$files	=	[
+		'home'		=>	$startURL,
+		'manifest'	=>	$manifest,
+		'index'		=>	$offline . 'index.html',
+		'error'		=>	$offline . 'error.html',
+		'notcached'	=>	$offline . 'notcached.html',
+		'scripts'	=>	$offline . 'scripts.js',
+		'notfound'	=>	$offline . 'notfound.html',
+		'service-worker'	=>	$startURL . 'service-worker.js'
+	];
+
+	return $files;
+	}
+
+
+	protected function offline_page() {
+		require_once PRIME2G_PWA_PATH . 'theme/offline-page.php';
+	}
+
+
+	public static function theme_files( $get = 'array' ) {
 	$filesDir	=	PRIME2G_FILE;
+	$childDir	=	$childCss	=	$childJs	=	null;
+
+	if ( is_child_theme() ) {
+		$childDir	=	CHILD2G_FILE;
+		$childCss	=	$childDir . "child.css";
+		$childJs	=	$childDir . "child.js";
+	}
 
 	$array	=	[
-		'reset_css'	=>	$filesDir . "reset-and-wp.css",
-		'theme_css'	=>	$filesDir . "theme.css",
-		'theme_js'	=>	$filesDir . "theme.js",
-		'footer_js'	=>	$filesDir . "footer.js",
+		'resetcss'	=>	$filesDir . "reset-and-wp.css",
+		'themecss'	=>	$filesDir . "theme.css",
+		'themejs'	=>	$filesDir . "theme.js",
+		'footerjs'	=>	$filesDir . "footer.js",
+		'childcss'	=>	$childCss,
+		'childjs'	=>	$childJs
 	];
 
 	if ( $get === 'array' ) return $array;
 	if ( $get === 'csv' ) return implode( ', ', $array );
 
+
 	$ver	=	'?ver=' . PRIME2G_VERSION;
-	foreach ( $array as $key => $file ) {
-		$files[]	=	$file . $ver;
-	}
-	$versioned	=	array_combine( array_keys( $array ), $files );
+	$cVer	=	$childDir ? '?ver=' . CHILD2G_VERSION : '';
+
+	$versioned	=	[
+		'resetcss'	=>	$filesDir . "reset-and-wp.css" . $ver,
+		'themecss'	=>	$filesDir . "theme.css" . $ver,
+		'themejs'	=>	$filesDir . "theme.js" . $ver,
+		'footerjs'	=>	$filesDir . "footer.js" . $ver,
+		'childcss'	=>	$childCss . $cVer,
+		'childjs'	=>	$childJs . $cVer
+	];
 
 	if ( $get === 'versioned' ) return $versioned;
 	if ( $get === 'csv_versioned' ) return implode( ', ', $versioned );
-
 	}
 
 
-	// Because of WP PWA?
+	// Because of WP PWA??
 	public function caching_routes() {
 	// $homeUrl		=	self::startURL();
 	// $siteroute	=	preg_quote( $homeUrl . 'offline/*' );
@@ -143,9 +180,9 @@ class Prime2g_PWA_Offline_Manager {
 	return [
 		'offline'		=>	$siteroute,
 		'images'		=>	PRIME2G_PWA_IMAGE,
-		'files'			=>	PRIME2G_PWA_FILES,
-		'assets'		=>	PRIME2G_PWA_THEMEASSETS,
-		'child_assets'	=>	CHILD2G_PWA_THEMEASSETS,
+		'files'			=>	PRIME2G_PWA_FILE,
+		// 'assets'		=>	PRIME2G_PWA_THEMEASSETS,
+		// 'child_assets'	=>	CHILD2G_PWA_THEMEASSETS,
 		'pre_cache'		=>	CHILD2G_PWA_THEME_URL . 'precache/',
 	];
 

@@ -21,7 +21,6 @@ if ( is_multisite() ) {
 	if ( $route && get_current_blog_id() !== 1 ) return;
 }
 
-
 	$wp_customize->add_setting(
 		'prime2g_use_theme_pwa',
 		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
@@ -96,6 +95,28 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 				'placeholder'	=>	__( 'Web App', PRIME2G_TEXTDOM ),
 				'maxlength'		=>	12,
 			)
+		)
+	);
+
+
+	$wp_customize->add_setting(
+		'prime2g_add_request_to_pwa_cache',
+		[
+		'type' => 'theme_mod', 'default' => 'false',
+		'sanitize_callback' => 'sanitize_text_field', 'transport' => 'postMessage'
+		]
+	);
+	$wp_customize->add_control(
+		'prime2g_add_request_to_pwa_cache',
+		array(
+			'label'		=>	__( 'Save Contents For Offline Browsing?', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_add_request_to_pwa_cache',
+			'section'	=>	'prime2g_theme_pwa_section',
+			'choices'	=>	[
+				'false'	=>	__( 'Do Not Save', PRIME2G_TEXTDOM ),
+				'true'	=>	__( 'Yes, Save Offline', PRIME2G_TEXTDOM ),
+			]
 		)
 	);
 
@@ -193,6 +214,30 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		)
 	);
 
+
+	$wp_customize->add_setting(
+		'prime2g_pwa_cache_strategy',
+		[
+		'type' => 'theme_mod', 'transport' => 'postMessage',
+		'default' => PWA_CACHEFIRST, 'sanitize_callback' => 'sanitize_text_field'
+		]
+	);
+	$wp_customize->add_control(
+		'prime2g_pwa_cache_strategy',
+		array(
+			'label'		=>	__( 'Web App Cache Strategy', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_pwa_cache_strategy',
+			'section'	=>	'prime2g_theme_pwa_section',
+			'choices'	=>	array(
+				PWA_CACHEFIRST		=>	__( 'Cache First', PRIME2G_TEXTDOM ),
+				PWA_NETWORKFIRST	=>	__( 'Network First', PRIME2G_TEXTDOM ),
+				// PWA_CACHEONLY		=>	__( 'Cache Only', PRIME2G_TEXTDOM ),	# needs attention @ offline page refresh
+				PWA_NETWORKONLY		=>	__( 'Network Only', PRIME2G_TEXTDOM ),
+				PWA_STALE_REVAL		=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM ),
+			),
+		)
+	);
 
 }
 

@@ -8,8 +8,7 @@
  */
 
 /**
- *	Use prime2g_removeSidebar() to remove the sidebar from a template
- *	Sidebar is added throughout the theme via footer.php by prime2g_sidebar()
+ *	Use prime2g_removeSidebar() to remove sidebar areas from a template
  */
 function prime2g_removeSidebar() {
 	if ( ! function_exists( 'define_2gRMVSidebar' ) ) { function define_2gRMVSidebar(){} }

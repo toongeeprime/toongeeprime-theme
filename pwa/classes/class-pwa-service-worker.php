@@ -13,7 +13,8 @@ class Prime2g_PWA_Service_Worker {
 
 	public function __construct() {
 		if ( ! isset( self::$instance ) ) {
-		add_action( 'wp_footer', array( $this, 'register_service_worker' ) );
+			if ( is_admin() ) return;
+			add_action( 'wp_footer', array( $this, 'register_service_worker' ) );
 		}
 	return self::$instance;
 	}
@@ -22,7 +23,7 @@ class Prime2g_PWA_Service_Worker {
 	public function register_service_worker() {
 	if ( ! isset( self::$instance ) ) {
 		$offline	=	new Prime2g_PWA_Offline_Manager();
-		$sw_url		=	$offline->get_offline_url( 'sw' );
+		$sw_url		=	$offline->get_offline_url()[ 'service-worker' ];
 
 		echo '<script id="p2g_regServiceWorker">
 		if ( typeof navigator.serviceWorker !== "undefined" ) {
@@ -35,8 +36,8 @@ class Prime2g_PWA_Service_Worker {
 
 
 	/**
-	 *	Foundational Service Worker: for when WP PWA is not active
-	 *	Other scripts plugged in here as would be in WP PWA
+	 *	Core Service Worker
+	 *	Scripts plugged in
 	 */
 	public static function content() {
 	$start		=	new self;
@@ -53,56 +54,84 @@ class Prime2g_PWA_Service_Worker {
 	}
 
 
+	public function get_caching() {
+	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_CACHEFIRST );
+	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' ); # String
+
+	if ( is_multisite() ) {
+		switch_to_blog( 1 );
+		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
+			$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_CACHEFIRST );
+			$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );
+		}
+		restore_current_blog();
+	}
+
+	return [ 'strategy' => $strategy, 'addToCache' => $addToCache ];
+	}
+
+
+
 	public function core() {
 	$offline	=	new Prime2g_PWA_Offline_Manager();
+	$icons		=	new Prime2g_PWA_Icons();
+	$caching	=	$this->get_caching();
 	$name		=	html_entity_decode( get_bloginfo( 'name' ) );
+	$strategy	=	$caching[ 'strategy' ];
+	$addRequestToCache	=	$caching[ 'addToCache' ];
+	$offlineUrls	=	$offline->get_offline_url();
 
 	if ( is_multisite() ) {
 		switch_to_blog( 1 );
 		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) )
-			$name		=	html_entity_decode( get_bloginfo( 'name' ) );
+			$name	=	html_entity_decode( get_bloginfo( 'name' ) );
 		restore_current_blog();
 	}
 
 	$siteName	=	str_replace( [ ' ', '\'', '.' ], '', $name );
 
 	$js	=
-'const PWACACHE	=	"'. $siteName .'_p2gApp_cache'. PRIME2G_VERSION .'";
-const userIsOfflineURL	=	"'. $offline->get_offline_url( 'index' ) .'";
-const staticFiles		=	"'. $offline->files_to_cache( 'csv_versioned' ) .'";
-const filesString		=	"/" + ", " + userIsOfflineURL + ", " + staticFiles;
+'const PWACACHE		=	"'. $siteName .'_preCache" + SWVersion;
+const logoURL		=	"'. prime2g_siteLogo( false, true ) .'";
+const iconURL		=	"'. $icons->mainIcon()[ 'src' ] .'";
+const themeFiles	=	"'. $offline->theme_files( 'csv_versioned' ) .'";
+const homeStartURL	=	"'. $offlineUrls[ 'home' ] .'";
+const swURL			=	"'. $offlineUrls[ 'service-worker' ] .'";
+const manifestURL	=	"'. $offlineUrls[ 'manifest' ] .'";
+const userIsOfflineURL	=	"'. $offlineUrls[ 'index' ] .'";
+const errorPageURL		=	"'. $offlineUrls[ 'error' ] .'";
+const notCachedPageURL	=	"'. $offlineUrls[ 'notcached' ] .'";
+const filesString		=	logoURL + ", " + iconURL + ", " + manifestURL + ", " + swURL + ", " + themeFiles +
+", " + homeStartURL + ", " + userIsOfflineURL + ", " + errorPageURL + ", " + notCachedPageURL;
 const PRECACHE_ITEMS	=	filesString.split(", ");
-const DYNAMIC_CACHE		=	[];
+const addRequestToCache	=	'. $addRequestToCache .';
+const strategy			=	"'. $strategy .'";
+const DYNAMIC_CACHE		=	"'. $siteName .'_dynamicCache" + SWVersion;
+
+/**
+ *	HELPERS
+ */
+function addCachePermit() {
+	return ( addRequestToCache && strategy !== "'. PWA_NETWORKONLY .'" );
+}
 
 
 self.addEventListener( "install", event => {
 event.waitUntil( ( async () => {
 	const cache	=	await caches.open( PWACACHE );
 	await cache.addAll( PRECACHE_ITEMS );
-	await cache.add( new Request( userIsOfflineURL, { cache: "reload" } ) );
+	// await cache.add( new Request( userIsOfflineURL, { cache: "reload" } ) );
 } )() );
 self.skipWaiting();
 } );
 
 
-/**
- *	On App Activation
- */
+
 self.addEventListener( "activate", event => {
-
-async function enableNavPreload() {
-	if ( "navigationPreload" in self.registration ) {
-		await self.registration.navigationPreload.enable();
-	}
-}
-event.waitUntil( enableNavPreload() );
-
-
 async function deleteOldCaches() {
-// Get ALL caches by their names
 const cacheNames	=	await caches.keys();
 await Promise.all( cacheNames.map( name => {
-	if ( name !== PWACACHE ) {
+	if ( name !== PWACACHE && name !== DYNAMIC_CACHE ) {
 		return caches.delete( name );
 	}
 } ) );
@@ -113,51 +142,74 @@ self.clients.claim();
 } );
 
 
-/**
- *	FETCH HANDLER
- */
+
 self.addEventListener( "fetch", event => {
 
-async function networkOrOfflinePage() {
+async function networkFetcher( returnOffline = false ) {
 	try {
-		// Try preloaded
-		const preResponse	=	await event.preloadResponse;
-		if ( preResponse ) return preResponse;
-
-		const networkResponse	=	await fetch( event.request );
-		return networkResponse;
-	} catch ( error ) {
-		console.log( "Network Fetch failed; returning offline page instead.", error );
-
 		const cache	=	await caches.open( PWACACHE );
-		const userOffline	=	await cache.match( userIsOfflineURL );
-		return userOffline;
+
+		const fromNetwork	=	await fetch( event.request );
+		if ( addCachePermit() ) {
+			await cache.put( event.request, fromNetwork.clone() );
+		}
+		if ( fromNetwork ) return fromNetwork;
+	} catch ( error ) {
+		console.log( error );
+		const cache	=	await caches.open( PWACACHE );
+		if ( returnOffline ) {
+			const userOffline	=	await cache.match( userIsOfflineURL );
+			return userOffline;
+		}
 	}
 }
+
+
+if ( strategy === "'. PWA_NETWORKONLY .'" ) {
 if ( event.request.mode === "navigate" ) {
-	event.respondWith( networkOrOfflinePage() );
-	return;
+	event.respondWith( networkFetcher( true ) );
+}
+return;
 }
 
+
+/**
+ *	Network first strategy applies from here... Intercepted by cache based strategies
+ */
 event.respondWith(
 ( async () => {
-const cache	=	await caches.open( PWACACHE );
 
-// Check cache response
-const cachedResponse	=	await cache.match( event.request );
-if ( cachedResponse !== undefined ) return cachedResponse;
+if ( strategy === "'. PWA_CACHEFIRST .'" ||
+	strategy === "'. PWA_CACHEONLY .'" ||
+	strategy === "'. PWA_STALE_REVAL .'"
+	) {
+	const cachedResponse	=	await caches.match( event.request );
+	if ( cachedResponse ) return cachedResponse;
+}
 
-// Or, if preloaded response
-const pre_response	=	await event.preloadResponse;
-if ( pre_response ) return pre_response;
+if ( strategy === "'. PWA_CACHEONLY .'" ) {
+	const cache		=	await caches.open( PWACACHE );
+	const notCached	=	await cache.match( notCachedPageURL );
+	return notCached;
+}
 
-// Network?
-const netResponse	=	await fetch( event.request );
-if ( netResponse ) return netResponse;
+try {
+	const cache	=	await caches.open( PWACACHE );
 
-// Else, offline page
-const userOffline	=	await cache.match( userIsOfflineURL );
-return userOffline;
+	const fromNetwork	=	await fetch( event.request );
+	if ( addCachePermit() ) {
+		await cache.put( event.request, fromNetwork.clone() );
+	}
+	if ( fromNetwork ) return fromNetwork;
+} catch ( error ) {
+	const cachedResponse	=	await caches.match( event.request );
+	if ( cachedResponse ) return cachedResponse;
+
+	const cache			=	await caches.open( PWACACHE );
+	const userOffline	=	await cache.match( userIsOfflineURL );
+	return userOffline;
+}
+
 } )()
 );
 
@@ -171,13 +223,7 @@ return userOffline;
 
 
 /*
-Read more @:
+Read more @
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
-
-window.addEventListener("online",  function(){
-    console.log("You are online!");
-});
-window.addEventListener("offline", function(){
-    console.log("Oh no, you lost your network connection.");
-});
+https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
 */

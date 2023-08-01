@@ -11,8 +11,6 @@
 
 class Prime2g_PWA_Offline_Scripts {
 
-// Study: https://web.dev/learn/pwa/caching/#updating-and-deleting-assets updating & deleting
-
 	public static function content() {}
 
 
@@ -26,28 +24,65 @@ window.location.reload();
 }
 
 $js	.=	'
-// Listen to changes in network & reload == *When device is offline
-window.addEventListener( "online", () => { window.location.reload(); } );
-
-// Check if server is responding & reload == *Device is online, server failed
 async function checkNetworkAndReload() {
 try {
 	const response	=	await fetch( "." );
-	// Verify response from the server
 	if ( response.status >= 200 && response.status < 500 ) {
 		window.location.reload();
 		return;
 	}
-} catch {
-	// Unable to connect to the server, ignore
+} catch ( error ) {
+	// Nothing much to do
+	console.log( error );
 }
-window.setTimeout( checkNetworkAndReload, "'. $interval .'" );
 }
 
-checkNetworkAndReload();
+window.addEventListener( "online", () => { window.location.reload(); } );
+window.setInterval( checkNetworkAndReload, '. $interval .' );
+';
+return $js;
+	}
+
+
+	public static function getPageFromNetwork( string $btn = '' ) {
+	$offline	=	new Prime2g_PWA_Offline_Manager();
+	$offlineRul	=	$offline->get_offline_url()[ 'index' ];
+
+$js	=	'';
+
+if ( $btn ) {
+	$js	.=	'document.querySelector( "'. $btn .'" ).addEventListener( "click", ()=>{
+		event.respondWith( networkFetcher() );
+	}
+);';
+}
+
+$js	.=	'
+async function networkFetcher() {
+	try {
+		const dyn_cache	=	await caches.open( DYNAMIC_CACHE );
+
+		const fromNetwork	=	await fetch( "." );
+		await dyn_cache.put( ".", fromNetwork.clone() );
+		if ( fromNetwork ) return fromNetwork;
+	} catch ( error ) {
+		console.log( error );
+		const cache	=	await caches.open( PWACACHE );
+		const userOffline	=	await cache.match( '. $offlineRul .' );
+		return userOffline;
+	}
+
+window.setTimeout( ()=>{ window.location.reload() }, 1000 );
+}
 ';
 return $js;
 	}
 
 }
 
+
+/*
+window.addEventListener("offline", function(){
+    console.log("Oh no, you lost your network connection.");
+});
+*/

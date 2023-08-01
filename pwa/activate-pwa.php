@@ -27,15 +27,16 @@ function prime2g_pwa_activator() {
 
 if ( get_theme_mod( 'prime2g_use_theme_pwa' ) ) {
 
-// Use with WP PWA plugin if active
+// Use with WP PWA plugin if active... For later review
 if ( class_exists( 'WP_Service_Workers' ) ) {
 
-Prime2g_Hook_WP_PWA::instance();
+// Prime2g_Hook_WP_PWA::instance();
+$GLOBALS[ 'pwapp' ]	=	new Prime2g_Web_Manifest();
 
 }
 else {
 
-$GLOBALS[ 'pwapp' ]	=	Prime2g_Web_Manifest::instance();
+$GLOBALS[ 'pwapp' ]	=	new Prime2g_Web_Manifest();
 
 }
 
@@ -91,4 +92,3 @@ else { ?>
 
 } );
 */
-

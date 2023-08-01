@@ -25,6 +25,31 @@ class Prime2g_PWA_Icons {
 
 	public function mainIcon() {
 
+		if ( is_multisite() ) {
+		$iconURL	=	$this->get_main_icon();
+
+		switch_to_blog( 1 );
+		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
+			$iconURL	=	$this->get_main_icon();
+		}
+		restore_current_blog();
+		}
+		else {
+			$iconURL	=	$this->get_main_icon();
+		}
+
+		return [
+			'src'		=>	$iconURL,
+			'sizes'		=>	'144x144',
+			'type'		=>	'image/png',
+			'purpose'	=>	'any'
+		];
+
+	}
+
+
+	private function get_main_icon() {
+
 		if ( $icon_id = get_theme_mod( 'prime2g_pwapp_primaryicon' ) ) {
 			$iconURL	=	wp_get_attachment_image_url( $icon_id, [ 144, 144 ] );
 		}
@@ -35,13 +60,7 @@ class Prime2g_PWA_Icons {
 			$iconURL	=	PRIME2G_PWA_IMAGE . 'default.png';
 		}
 
-		return [
-			'src'		=>	$iconURL,
-			'sizes'		=>	'144x144',
-			'type'		=>	'image/png',
-			'purpose'	=>	'any'
-		];
-
+	return $iconURL;
 	}
 
 

@@ -15,18 +15,21 @@ function prime2g_appicons_image_sizes() {
 
 
 /**
- *	PWA Related Constants
+ *	Constants
  */
 $version	=	defined( 'CHILD2G_VERSION' ) ? CHILD2G_VERSION . PRIME2G_VERSION : PRIME2G_VERSION;
 define( 'PRIME2G_PWA_VERSION', $version );
 define( 'PRIME2G_PWA_BTNID', 'pwa_install' );
 define( 'PRIME2G_PWA_PATH', PRIME2G_THEME .'pwa/' );
-
 define( 'PRIME2G_PWA_URL', PRIME2G_THEMEURL .'pwa/' );
-define( 'PRIME2G_PWA_FILE', PRIME2G_THEMEURL .'files/' );
-// define( 'PRIME2G_PWA_THEMEDIR', PRIME2G_PWA_URL .'theme/' );
-// define( 'PRIME2G_PWA_THEMEASSETS', PRIME2G_PWA_THEMEDIR .'assets/' );
 define( 'PRIME2G_PWA_IMAGE', PRIME2G_PWA_URL .'images/' );
+
+// Cache Strategies
+define( 'PWA_CACHEFIRST', 'CacheFirst' );
+define( 'PWA_CACHEONLY', 'CacheOnly' );
+define( 'PWA_NETWORKFIRST', 'NetworkFirst' );
+define( 'PWA_NETWORKONLY', 'NetworkOnly' );
+define( 'PWA_STALE_REVAL', 'StaleWhileRevalidate' );
 
 
 // @ Child Theme

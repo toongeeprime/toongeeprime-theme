@@ -22,10 +22,10 @@ function prime2g_essential_chaching_control( $wp ) {
 	}
 	else {
 		if ( is_feed() ) {
-			header( 'Cache-Control: max-age=' . ( 5 * MINUTE_IN_SECONDS ) );
+			header( 'Cache-Control: max-age=' . ( 1 * DAY_IN_SECONDS ) );
 		}
 		else {
-			header( 'Cache-Control: max-age=' . ( 60 * MINUTE_IN_SECONDS ) );
+			header( 'Cache-Control: max-age=' . ( 1 * WEEK_IN_SECONDS ) );
 		}
 	}
 
