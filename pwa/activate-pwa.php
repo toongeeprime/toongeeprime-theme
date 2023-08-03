@@ -7,7 +7,6 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 
-
 if ( prime2g_add_theme_pwa() ) {
 
 if ( function_exists( 'prime2g_child_pwa_activator' ) ) {
@@ -92,3 +91,4 @@ else { ?>
 
 } );
 */
+

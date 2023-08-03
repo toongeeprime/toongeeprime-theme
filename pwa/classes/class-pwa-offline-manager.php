@@ -12,10 +12,12 @@ class Prime2g_PWA_Offline_Manager {
 
 	private static $instance;
 
+	protected function offline_page() { require_once PRIME2G_PWA_PATH . 'theme/offline-page.php'; }
+
+
 	public function __construct() {
 
 		if ( ! isset( self::$instance ) ) {
-			// flush_rewrite_rules();	# for dev
 			add_action( 'parse_request', array( $this, 'show_offline_output' ) );
 		}
 
@@ -59,7 +61,7 @@ class Prime2g_PWA_Offline_Manager {
 		$values	=	[ 'index', 'error', 'notcached' ];
 		foreach ( $values as $value ) {
 			if ( isset( $_GET[ 'offline' ] ) && $_GET[ 'offline' ] === $value ) {
-				require_once $this->offline_page();	# So params can be read
+				require_once $this->offline_page();	# Make params readable
 				exit;
 			}
 
@@ -68,20 +70,6 @@ class Prime2g_PWA_Offline_Manager {
 				exit;
 			}
 		}
-
-/*
-		$cacheFiles		=	$this->theme_files();
-		$cacheFilesV	=	$this->theme_files( 'versioned' );
-
-		// Match version requests
-		foreach ( $cacheFilesV as $vkey => $vurl ) {
-			if ( prime2g_get_current_url() === $vurl ) {
-				foreach ( $cacheFiles as $key => $url ) {
-					if ( $vkey === $key ) return $url;
-				}
-			}
-		}
-*/
 
 	}
 
@@ -111,7 +99,7 @@ class Prime2g_PWA_Offline_Manager {
 	$manifest	=	self::manifest_url();
 	$offline	=	$startURL . 'offline/';
 
-	$files	=	[
+	return [
 		'home'		=>	$startURL,
 		'manifest'	=>	$manifest,
 		'index'		=>	$offline . 'index.html',
@@ -121,13 +109,6 @@ class Prime2g_PWA_Offline_Manager {
 		'notfound'	=>	$offline . 'notfound.html',
 		'service-worker'	=>	$startURL . 'service-worker.js'
 	];
-
-	return $files;
-	}
-
-
-	protected function offline_page() {
-		require_once PRIME2G_PWA_PATH . 'theme/offline-page.php';
 	}
 
 
@@ -146,6 +127,7 @@ class Prime2g_PWA_Offline_Manager {
 		'themecss'	=>	$filesDir . "theme.css",
 		'themejs'	=>	$filesDir . "theme.js",
 		'footerjs'	=>	$filesDir . "footer.js",
+		'icons'		=>	prime2g_icons_file_url(),
 		'childcss'	=>	$childCss,
 		'childjs'	=>	$childJs
 	];
@@ -162,6 +144,7 @@ class Prime2g_PWA_Offline_Manager {
 		'themecss'	=>	$filesDir . "theme.css" . $ver,
 		'themejs'	=>	$filesDir . "theme.js" . $ver,
 		'footerjs'	=>	$filesDir . "footer.js" . $ver,
+		'icons'		=>	prime2g_icons_file_url() . $ver,
 		'childcss'	=>	$childCss . $cVer,
 		'childjs'	=>	$childJs . $cVer
 	];
@@ -189,4 +172,3 @@ class Prime2g_PWA_Offline_Manager {
 	}
 
 }
-

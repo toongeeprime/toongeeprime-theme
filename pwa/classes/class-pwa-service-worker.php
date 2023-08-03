@@ -27,7 +27,7 @@ class Prime2g_PWA_Service_Worker {
 
 		echo '<script id="p2g_regServiceWorker">
 		if ( typeof navigator.serviceWorker !== "undefined" ) {
-			navigator.serviceWorker.register( "'. $sw_url .'" );
+			navigator.serviceWorker.register( "'. esc_url( $sw_url ) .'" );
 		}
 		</script>';
 	}
@@ -76,19 +76,10 @@ class Prime2g_PWA_Service_Worker {
 	$offline	=	new Prime2g_PWA_Offline_Manager();
 	$icons		=	new Prime2g_PWA_Icons();
 	$caching	=	$this->get_caching();
-	$name		=	html_entity_decode( get_bloginfo( 'name' ) );
 	$strategy	=	$caching[ 'strategy' ];
 	$addRequestToCache	=	$caching[ 'addToCache' ];
 	$offlineUrls	=	$offline->get_offline_url();
-
-	if ( is_multisite() ) {
-		switch_to_blog( 1 );
-		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) )
-			$name	=	html_entity_decode( get_bloginfo( 'name' ) );
-		restore_current_blog();
-	}
-
-	$siteName	=	str_replace( [ ' ', '\'', '.' ], '', $name );
+	$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );
 
 	$js	=
 'const PWACACHE		=	"'. $siteName .'_preCache" + SWVersion;
@@ -184,7 +175,9 @@ if ( strategy === "'. PWA_CACHEFIRST .'" ||
 	strategy === "'. PWA_STALE_REVAL .'"
 	) {
 	const cachedResponse	=	await caches.match( event.request );
-	if ( cachedResponse ) return cachedResponse;
+	if ( cachedResponse && strategy !== "'. PWA_STALE_REVAL .'" ) {
+		return cachedResponse;
+	}
 }
 
 if ( strategy === "'. PWA_CACHEONLY .'" ) {
@@ -200,8 +193,14 @@ try {
 	if ( addCachePermit() ) {
 		await cache.put( event.request, fromNetwork.clone() );
 	}
+
+	if ( strategy === "'. PWA_STALE_REVAL .'" ) {
+		if ( cachedResponse ) return cachedResponse;
+	}
 	if ( fromNetwork ) return fromNetwork;
+
 } catch ( error ) {
+	// Retain for Network first:
 	const cachedResponse	=	await caches.match( event.request );
 	if ( cachedResponse ) return cachedResponse;
 
@@ -227,3 +226,4 @@ Read more @
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
 */
+

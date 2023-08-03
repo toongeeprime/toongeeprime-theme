@@ -17,7 +17,7 @@ class Prime2g_Web_Manifest {
 
 		new Prime2g_PWA_Offline_Manager();
 
-		// Flushing rewrite rules:
+		// Flushing rewrite rules
 		add_action( 'after_switch_theme', 'flush_rewrite_rules' );
 		add_action( 'customize_save_after', 'flush_rewrite_rules' );
 
@@ -33,7 +33,7 @@ class Prime2g_Web_Manifest {
 				$this->show_manifest( $iconID );
 			}, 10, 1 );
 			add_action( 'wp_head', function() use( $iconID ) {
-				$this->pwa_html_head( $iconID );
+				$this->html_metadata( $iconID );
 			}, 11, 1 );
 			add_action( 'upgrader_process_complete', [ $this, 'after_upgrades' ], 10, 2 );
 		}
@@ -52,11 +52,34 @@ class Prime2g_Web_Manifest {
 	}
 
 
-	public function pwa_html_head( $iconID = 0 ) {
-		$getIcons	=	Prime2g_PWA_Icons::instance();
-		$manifest	=	Prime2g_PWA_Offline_Manager::manifest_url();
-		$getIcons->html_metadata( $iconID );
-		echo '<link rel="manifest" href="'. $manifest . '">' . PHP_EOL;
+	public function html_metadata( $iconID = 0 ) {
+		$getIcons		=	Prime2g_PWA_Icons::instance();
+		$manifesturl	=	Prime2g_PWA_Offline_Manager::manifest_url();
+		$manifest		=	$this->get_manifest( $iconID );
+		$iconURL		=	$getIcons->mainIcon()[ 'src' ];
+
+echo '
+<link rel="manifest" href="'. $manifesturl . '">
+<meta name="web-application" content="toongeeprime-theme-web-app" />
+<meta name="theme-color" content="'. esc_attr( $manifest['theme_color'] ) .'">
+<meta name="apple-mobile-web-app-title" content="'. esc_attr( $manifest['name'] ) .'">
+<meta name="application-name" content="'. esc_attr( $manifest['name'] ) .'">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<link rel="apple-touch-icon" sizes="144x144" href="'. esc_url( $iconURL ) .'" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default">'  # "black-translucent", "black" or "white"
+. PHP_EOL;
+
+// <meta name="apple-touch-startup-image" content="splash.png" media="orientation: '. $manifest['orientation'] .'">
+// $linktags = '';
+// if ( isset( $manifest[ 'icons' ] ) && ! empty( $manifest[ 'icons' ] ) ) {
+	// $linktags .= '<link rel="apple-touch-icon" sizes="192x192" href="'. esc_url(  ) .'">' . PHP_EOL;
+// }
+
+// if ( isset( $manifest[ 'splash_icon' ] ) && ! empty( $manifest[ 'splash_icon' ] ) ) {
+	// $linktags .=  '<link rel="apple-touch-icon" sizes="512x512" href="'. esc_url(  ) .'">' . PHP_EOL;
+// }
 	}
 
 
@@ -70,7 +93,7 @@ class Prime2g_Web_Manifest {
 
 	public function appID() {
 		$siteID	=	is_multisite() ? get_current_blog_id() : '';
-		return 'p2gPWA_ID' . $siteID . 'V' . PRIME2G_PWA_VERSION;
+		return 'pwaID' . $siteID . 'V' . PRIME2G_PWA_VERSION;
 	}
 
 
@@ -83,19 +106,18 @@ class Prime2g_Web_Manifest {
 
 
 	public function get_manifest( $iconID ) {
-		$siteName	=	html_entity_decode( get_bloginfo( 'name' ) );
 		$getIcons	=	Prime2g_PWA_Icons::instance();
 		$data		=	$this->manifest_data();
 
 		$startURL	=	Prime2g_PWA_Offline_Manager::startURL();
 
 		$data	=	array(
-			'name'			=>	$siteName,
+			'name'			=>	PRIME2G_PWA_SITENAME,
 			'short_name'	=>	$data[ 'short_name' ],
 			'description'	=>	$data[ 'description' ],
 			'start_url'		=>	$startURL,
 			'lang'			=>	get_locale(),
-			'id'			=>	$data[ 'id' ],
+			'id'			=>	$this->appID(),
 			'scope'			=>	'/',
 			'dir'			=>	is_rtl() ? 'rtl' : 'ltr',
 			'display'		=>	$data[ 'display' ],
@@ -117,18 +139,14 @@ class Prime2g_Web_Manifest {
 
 
 	private function manifest_data() {
-
-	if ( is_multisite() ) {
 	$data	=	$this->get_manifest_data();
 
+	if ( is_multisite() ) {
 		switch_to_blog( 1 );
 		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
 			$data	=	$this->get_manifest_data();
 		}
 		restore_current_blog();
-	}
-	else {
-		$data	=	$this->get_manifest_data();
 	}
 
 	return $data;

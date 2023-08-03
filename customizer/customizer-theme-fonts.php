@@ -7,6 +7,11 @@
  *	Separated function @since ToongeePrime Theme 1.0.55
  */
 
+function prime2g_use_google_fonts() {
+	return get_theme_mod( 'prime2g_use_theme_google_fonts', '1' );
+}
+
+
 if ( ! function_exists( 'prime2g_customizer_theme_fonts' ) ) {
 
 function prime2g_customizer_theme_fonts( $wp_customize ) {

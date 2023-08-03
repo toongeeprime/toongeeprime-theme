@@ -2,8 +2,7 @@
 
 /**
  *	CACHING CONTROL
- *	: Since PWA caching is pretty aggressive if unattended
- *	: Needs More Development & Integration with WP PWA
+ *	: Needs More Logic
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
@@ -32,3 +31,4 @@ function prime2g_essential_chaching_control( $wp ) {
 }
 
 }
+

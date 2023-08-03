@@ -65,7 +65,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		$wp_customize,
 			'prime2g_pwapp_primaryicon',
 			array(
-				'label'		=>	__( 'Main App Icon', PRIME2G_TEXTDOM ),
+				'label'		=>	__( 'Main App Icon (PNG)', PRIME2G_TEXTDOM ),
 				'settings'	=>	'prime2g_pwapp_primaryicon',
 				'section'	=>	'prime2g_theme_pwa_section',
 				'width'		=>	144,
@@ -167,7 +167,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 				'standalone'	=>	__( 'Standalone', PRIME2G_TEXTDOM ),
 				'fullscreen'	=>	__( 'Full Screen', PRIME2G_TEXTDOM ),
 				'minimal-ui'	=>	__( 'Minimal', PRIME2G_TEXTDOM ),
-				'browser'	=>	__( 'Browser', PRIME2G_TEXTDOM ),
+				'browser'		=>	__( 'Browser', PRIME2G_TEXTDOM ),
 			),
 		)
 	);
@@ -232,9 +232,9 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			'choices'	=>	array(
 				PWA_CACHEFIRST		=>	__( 'Cache First', PRIME2G_TEXTDOM ),
 				PWA_NETWORKFIRST	=>	__( 'Network First', PRIME2G_TEXTDOM ),
-				// PWA_CACHEONLY		=>	__( 'Cache Only', PRIME2G_TEXTDOM ),	# needs attention @ offline page refresh
+				// PWA_CACHEONLY	=>	__( 'Cache Only', PRIME2G_TEXTDOM ),	# needs attention @ offline page refresh
 				PWA_NETWORKONLY		=>	__( 'Network Only', PRIME2G_TEXTDOM ),
-				PWA_STALE_REVAL		=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM ),
+				// PWA_STALE_REVAL	=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM ),
 			),
 		)
 	);

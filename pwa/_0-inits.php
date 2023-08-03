@@ -15,10 +15,25 @@ function prime2g_appicons_image_sizes() {
 
 
 /**
- *	Constants
+ *	Constants:
  */
 $version	=	defined( 'CHILD2G_VERSION' ) ? CHILD2G_VERSION . PRIME2G_VERSION : PRIME2G_VERSION;
+
+$name	=	html_entity_decode( get_bloginfo( 'name' ) );
+
+if ( is_multisite() ) {
+switch_to_blog( 1 );
+if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
+
+$name	=	html_entity_decode( get_bloginfo( 'name' ) );
+
+}
+restore_current_blog();
+}
+
+
 define( 'PRIME2G_PWA_VERSION', $version );
+define( 'PRIME2G_PWA_SITENAME', $name );
 define( 'PRIME2G_PWA_BTNID', 'pwa_install' );
 define( 'PRIME2G_PWA_PATH', PRIME2G_THEME .'pwa/' );
 define( 'PRIME2G_PWA_URL', PRIME2G_THEMEURL .'pwa/' );
@@ -31,11 +46,4 @@ define( 'PWA_NETWORKFIRST', 'NetworkFirst' );
 define( 'PWA_NETWORKONLY', 'NetworkOnly' );
 define( 'PWA_STALE_REVAL', 'StaleWhileRevalidate' );
 
-
-// @ Child Theme
-define( 'CHILD2G_PWA_THEME_URL', trailingslashit( get_stylesheet_directory_uri() ) . 'pwa-theme/' );
-define( 'CHILD2G_PWA_THEME_DIR', trailingslashit( get_stylesheet_directory() ) . 'pwa-theme/' );
-define( 'CHILD2G_PWA_THEMEASSETS', CHILD2G_PWA_THEME_URL . 'assets/' );
-define( 'CHILD2G_PWA_OFFLINEPAGE_URL', CHILD2G_PWA_THEME_URL . 'offline.html' );
-define( 'CHILD2G_PWA_OFFLINEPAGE_FILE', CHILD2G_PWA_THEME_DIR . 'offline.html' );
 

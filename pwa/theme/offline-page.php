@@ -9,7 +9,7 @@ prime2g_removeSidebar();
 $get	=	isset( $_GET[ 'offline' ] ) ? $_GET[ 'offline' ] : '';
 
 $headline	=	'You are Offline!';
-$maintext	=	'Please check your connection';
+$maintext	=	'Check your connection and try again';
 
 if ( $get === 'error' ) {
 	$headline	=	'Error!';
