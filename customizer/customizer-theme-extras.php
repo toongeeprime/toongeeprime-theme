@@ -30,9 +30,33 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 				'on'	=>	__( 'Preloader On', PRIME2G_TEXTDOM ),
 				'use_logo'	=>	__( 'Preloader On: Use Site Logo', PRIME2G_TEXTDOM ),
 				'use_icon'	=>	__( 'Preloader On: Use Site Icon', PRIME2G_TEXTDOM ),
+				'custom_url'	=>	__( 'Preloader On: Custom Image URL', PRIME2G_TEXTDOM ),	# @ 1.0.55
 			),
 		)
 	);
+
+
+	/**
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting(
+		'prime2g_custom_preloader_img_url',
+		[ 'type' => 'theme_mod', 'sanitize_callback' => 'esc_url' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_custom_preloader_img_url',
+		array(
+			'label'		=>	__( 'Custom Preloader Image URL', PRIME2G_TEXTDOM ),
+			'type'		=>	'url',
+			'settings'	=>	'prime2g_custom_preloader_img_url',
+			'section'	=>	'prime2g_theme_extras_section',
+			'active_callback'	=>	function() { return ( 'custom_url' === get_theme_mod( 'prime2g_use_page_preloader' ) ); },
+			'input_attrs'	=>	array(
+				'placeholder'	=>	get_home_url() . '/preloader-image.gif',
+			),
+		)
+	);
+
 
 	/**
 	 *	DARK THEME SWITCH

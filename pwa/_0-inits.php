@@ -34,6 +34,7 @@ restore_current_blog();
 
 define( 'PRIME2G_PWA_VERSION', $version );
 define( 'PRIME2G_PWA_SITENAME', $name );
+define( 'PRIME2G_PWA_SLUG', 'app' );
 define( 'PRIME2G_PWA_BTNID', 'pwa_install' );
 define( 'PRIME2G_PWA_PATH', PRIME2G_THEME .'pwa/' );
 define( 'PRIME2G_PWA_URL', PRIME2G_THEMEURL .'pwa/' );

@@ -19,8 +19,9 @@ add_action( 'customize_register', 'prime2g_customizer_theme_options' );
 add_action( 'customize_register', 'prime2g_customizer_theme_colors' );
 add_action( 'customize_register', 'prime2g_customizer_theme_fonts' );
 add_action( 'customize_register', 'prime2g_customizer_theme_menus' );
-add_action( 'customize_register', 'prime2g_customizer_home_and_archives' );
 add_action( 'customize_register', 'prime2g_customizer_front_page' );
+add_action( 'customize_register', 'prime2g_customizer_singular_entries' );
+add_action( 'customize_register', 'prime2g_customizer_home_and_archives' );
 add_action( 'customize_register', 'prime2g_customizer_socialmedia_and_contacts' );
 add_action( 'customize_register', 'prime2g_customizer_media_features' );
 add_action( 'customize_register', 'prime2g_customizer_theme_extras' );
@@ -66,4 +67,3 @@ $description	=	'<p>Customize ' . PRIME2G_THEMENAME . ' Options</p>';
 	);
 
 }
-

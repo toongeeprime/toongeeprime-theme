@@ -64,17 +64,19 @@ class Prime2g_PWA_Icons {
 	}
 
 
-	public function icons( $iconID = 0 ) {
+	public function icons(): array {
 
 	$iconsData	=	$iKeys	=	$iconsSet	=	[];
-	$iconID		=	$iconID ?: get_option( 'site_icon' );
+	$iconID		=	get_option( 'site_icon' );
 	$site_icon	=	get_post( $iconID );
 
-	if ( $site_icon ) {
+	if ( is_object( $site_icon ) ) {
 
 		$icons		=	[ 'pwa-small-icon',  'pwa-big-icon',  'thumbnail', 'large' ];
 		$meta_data	=	wp_get_attachment_metadata( $iconID );
 		$sizesN		=	$meta_data ? count( $meta_data ) : 0;
+
+		if ( ! is_array( $meta_data ) ) return [];
 
 		for ( $ii = 0; $ii < $sizesN; $ii++ ) {
 			if ( isset( array_keys( $meta_data[ 'sizes' ] )[ $ii ], $icons[ $ii ] ) ) {
@@ -86,11 +88,11 @@ class Prime2g_PWA_Icons {
 		// Merge icons and Meta data sizes
 		$sizes	=	array_unique( array_merge( [ 'full' ], $iconsSet, $iKeys ) );
 
-		if ( ! $sizes ) return [];
+		if ( ! is_array( $sizes ) ) return [];
 
 		foreach ( $sizes as $size ) {
 			$url_data	=	wp_get_attachment_image_src( $iconID, $size );
-			if ( ! $url_data ) continue;
+			if ( ! is_array( $url_data ) ) continue;
 
 			$image	=	array(
 				'file'		=>	$url_data[0],

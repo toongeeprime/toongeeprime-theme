@@ -6,7 +6,7 @@ if ( function_exists( 'pwa_offline_page_maker_override' ) ) {
 
 prime2g_removeSidebar();
 
-$get	=	isset( $_GET[ 'offline' ] ) ? $_GET[ 'offline' ] : '';
+$get	=	isset( $_GET[ PRIME2G_PWA_SLUG ] ) ? $_GET[ PRIME2G_PWA_SLUG ] : '';
 
 $headline	=	'You are Offline!';
 $maintext	=	'Check your connection and try again';

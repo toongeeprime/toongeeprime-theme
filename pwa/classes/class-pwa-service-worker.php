@@ -70,7 +70,7 @@ class Prime2g_PWA_Service_Worker {
 	return [ 'strategy' => $strategy, 'addToCache' => $addToCache ];
 	}
 
-
+// css class trigger
 
 	public function core() {
 	$offline	=	new Prime2g_PWA_Offline_Manager();
@@ -79,6 +79,8 @@ class Prime2g_PWA_Service_Worker {
 	$strategy	=	$caching[ 'strategy' ];
 	$addRequestToCache	=	$caching[ 'addToCache' ];
 	$offlineUrls	=	$offline->get_offline_url();
+	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ?
+						' + ", " + "' . child_add_to_pwa_precache() . '"' : null; # CSV
 	$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );
 
 	$js	=
@@ -88,12 +90,11 @@ const iconURL		=	"'. $icons->mainIcon()[ 'src' ] .'";
 const themeFiles	=	"'. $offline->theme_files( 'csv_versioned' ) .'";
 const homeStartURL	=	"'. $offlineUrls[ 'home' ] .'";
 const swURL			=	"'. $offlineUrls[ 'service-worker' ] .'";
-const manifestURL	=	"'. $offlineUrls[ 'manifest' ] .'";
-const userIsOfflineURL	=	"'. $offlineUrls[ 'index' ] .'";
+const userIsOfflineURL	=	"'. $offlineUrls[ 'offline' ] .'";
 const errorPageURL		=	"'. $offlineUrls[ 'error' ] .'";
 const notCachedPageURL	=	"'. $offlineUrls[ 'notcached' ] .'";
-const filesString		=	logoURL + ", " + iconURL + ", " + manifestURL + ", " + swURL + ", " + themeFiles +
-", " + homeStartURL + ", " + userIsOfflineURL + ", " + errorPageURL + ", " + notCachedPageURL;
+const filesString		=	logoURL + ", " + iconURL + ", " + swURL + ", " + themeFiles +
+", " + homeStartURL + ", " + userIsOfflineURL + ", " + errorPageURL + ", " + notCachedPageURL'. $addFileUrls .';
 const PRECACHE_ITEMS	=	filesString.split(", ");
 const addRequestToCache	=	'. $addRequestToCache .';
 const strategy			=	"'. $strategy .'";
@@ -226,4 +227,3 @@ Read more @
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
 */
-

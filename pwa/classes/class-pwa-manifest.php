@@ -11,7 +11,7 @@ class Prime2g_Web_Manifest {
 
 	private static $instance;
 
-	public function __construct( $iconID = 0 ) {
+	public function __construct() {
 
 	if ( ! isset( self::$instance ) ) {
 
@@ -26,17 +26,19 @@ class Prime2g_Web_Manifest {
 		register_deactivation_hook( $wppwa_plugin, 'flush_rewrite_rules' );
 
 
-		if ( ! class_exists( 'WP_Service_Workers' ) ) {
+		// if ( ! class_exists( 'WP_Service_Workers' ) ) {
 			new Prime2g_PWA_Service_Worker();
-			add_action( 'init', [ $this, 'manifest_rule' ] );
-			add_action( 'parse_request', function() use( $iconID ) {
-				$this->show_manifest( $iconID );
-			}, 10, 1 );
-			add_action( 'wp_head', function() use( $iconID ) {
-				$this->html_metadata( $iconID );
+
+			// add_action( 'init', [ $this, 'manifest_rule' ] );
+			// add_action( 'parse_request', function() {
+				// $this->show_manifest();
+			// }, 10, 1 );
+
+			add_action( 'wp_head', function() {
+				$this->html_metadata();
 			}, 11, 1 );
 			add_action( 'upgrader_process_complete', [ $this, 'after_upgrades' ], 10, 2 );
-		}
+		// }
 	}
 
 	return self::$instance;
@@ -52,10 +54,16 @@ class Prime2g_Web_Manifest {
 	}
 
 
-	public function html_metadata( $iconID = 0 ) {
+	public function appID() {
+		$siteID	=	is_multisite() ? get_current_blog_id() : '';
+		return 'pwaID' . $siteID . 'V' . PRIME2G_PWA_VERSION;
+	}
+
+
+	public function html_metadata() {
 		$getIcons		=	Prime2g_PWA_Icons::instance();
 		$manifesturl	=	Prime2g_PWA_Offline_Manager::manifest_url();
-		$manifest		=	$this->get_manifest( $iconID );
+		$manifest		=	$this->get_manifest();
 		$iconURL		=	$getIcons->mainIcon()[ 'src' ];
 
 echo '
@@ -85,27 +93,21 @@ echo '
 
 	public function manifest_rule() {
 		global $wp;
+		$file	=	Prime2g_PWA_Offline_Manager::manifest_url( 'file' );
 		add_rewrite_rule( 'pwapp/\bmanifest.json\b', 'index.php?pwapp=manifest', 'top' );
-
+		// add_rewrite_rule( '/\b'. $file .'\b', 'index.php?pwapp=manifest', 'top' );
 		$wp->add_query_var( 'pwapp' );
 	}
 
 
-	public function appID() {
-		$siteID	=	is_multisite() ? get_current_blog_id() : '';
-		return 'pwaID' . $siteID . 'V' . PRIME2G_PWA_VERSION;
-	}
-
-
-	public function show_manifest( $iconID ) {
+	public function show_manifest() {
 		if ( empty( $GLOBALS[ 'wp' ]->query_vars[ 'pwapp' ] ) ) { return; }
-
-		$manifest	=	$this->get_manifest( $iconID );
+		$manifest	=	$this->get_manifest();
 		wp_send_json( $manifest );
 	}
 
 
-	public function get_manifest( $iconID ) {
+	public function get_manifest() {
 		$getIcons	=	Prime2g_PWA_Icons::instance();
 		$data		=	$this->manifest_data();
 
@@ -131,7 +133,7 @@ echo '
 		);
 
 		// Add other available icons to icons array
-		$additionalIcons	=	$getIcons->icons( $iconID );
+		$additionalIcons	=	$getIcons->icons();
 		$data[ 'icons' ]	=	array_merge( $data[ 'icons' ], $additionalIcons );
 
 	return $data;

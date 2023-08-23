@@ -367,9 +367,6 @@ a:hover, a:focus, table a:hover, table a:focus{
 	height:0;
 }
 
-.collapsible-navs .menu-item-has-children{
-	position:relative;
-}
 .collapsible-navs .menu-item-has-children a{
 	padding-right:30px;
 }
@@ -769,7 +766,7 @@ i.bi{
 	color:var(--content-text);
 }
 .collapsible-navs li{
-	display:inline-block; position:relative;
+	display:inline-block;
 }
 .collapsible-navs li a{
 	display:inline-block;

@@ -10,24 +10,23 @@
 
 add_action( 'prime2g_before_head', 'prime2g_page_preloader', 0 );
 if ( ! function_exists( 'prime2g_page_preloader' ) ) {
-
 function prime2g_page_preloader() {
 
 $preloaderState	=	get_theme_mod( 'prime2g_use_page_preloader' );
-$preloaderOn	=	( 'on' == $preloaderState );
-$useSiteLogo	=	( 'use_logo' == $preloaderState );
-$useSiteIcon	=	( 'use_icon' == $preloaderState );
+$preloaderOn	=	( 'on' === $preloaderState );
+$useSiteLogo	=	( 'use_logo' === $preloaderState );
+$useSiteIcon	=	( 'use_icon' === $preloaderState );
+$useCustomUrl	=	( 'custom_url' === $preloaderState );	# 1.0.55
 
-if ( '' != $preloaderState ) {
-	$iconUrl	=	get_site_icon_url( 250, PRIME2G_IMAGE . 'spinner.gif' );
-	$logoImg	=	prime2g_siteLogo();
+if ( !empty( $preloaderState ) ) {
 
 	$preloader	=	'<div id="prime2gPreloading">';
 	$preloader	.=	prime2g_page_preloaderCSS();
 
 	if ( $preloaderOn ) $preloader	.=	'<div id="itsLoading"></div>';
-	if ( $useSiteLogo ) $preloader	.=	$logoImg;
-	if ( $useSiteIcon ) $preloader	.=	'<img src="' . $iconUrl . '" alt />';
+	if ( $useSiteLogo ) $preloader	.=	prime2g_siteLogo();
+	if ( $useSiteIcon ) $preloader	.=	'<img src="'. get_site_icon_url( 250, PRIME2G_IMAGE . 'spinner.gif' ) .'" alt />';
+	if ( $useCustomUrl ) $preloader	.=	'<img src="'. get_theme_mod( 'prime2g_custom_preloader_img_url' ) .'" alt />';
 
 	$preloader	.=	prime2g_page_preloaderJS();
 	$preloader	.=	'</div>';
@@ -36,9 +35,7 @@ echo $preloader;
 }
 
 }
-
 }
-
 
 
 if ( ! function_exists( 'prime2g_page_preloaderCSS' ) ) {
@@ -75,6 +72,3 @@ window.addEventListener( "load", prime2g_clearPreloader );
 return $js;
 }
 }
-
-
-

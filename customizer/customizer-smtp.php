@@ -34,10 +34,7 @@ function prime2g_customizer_smtp( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_smtp_from_email',
-		[
-			'type' => 'theme_mod', 'transport' => 'postMessage',
-			'default' => $adminEmail, 'sanitize_callback' => 'sanitize_email'
-		]
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_email' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_smtp_from_email',
@@ -55,10 +52,7 @@ function prime2g_customizer_smtp( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_smtp_username',
-		[
-			'type' => 'theme_mod', 'transport' => 'postMessage',
-			'default' => $adminEmail, 'sanitize_callback' => 'sanitize_email'
-		]
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_email' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_smtp_username',

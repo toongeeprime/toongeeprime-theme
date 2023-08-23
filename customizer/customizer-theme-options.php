@@ -105,25 +105,6 @@ function prime2g_customizer_theme_options( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_setting(
-		'prime2g_remove_sidebar_in_singular',
-		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
-	);
-	$wp_customize->add_control(
-		'prime2g_remove_sidebar_in_singular',
-		array(
-			'label'		=>	__( 'Remove Sidebar in Single Entries', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_remove_sidebar_in_singular',
-			'section'	=>	'prime2g_theme_options_section',
-			'choices'	=>	array(
-				''		=>	__( 'Keep Sidebar', PRIME2G_TEXTDOM ),
-				'posts'	=>	__( 'Remove but Exclude Pages', PRIME2G_TEXTDOM ),
-				'and_pages'	=>	__( 'Also Remove in Pages', PRIME2G_TEXTDOM )
-			)
-		)
-	);
-
 	/**
 	 *	PAGE TITLE POSITION
 	 */

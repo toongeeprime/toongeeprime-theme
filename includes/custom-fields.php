@@ -10,7 +10,7 @@
 /**
  *	DISPLAY SUBTITLE
  */
-add_action( 'prime2g_after_title', 'prime2g_post_subtitle' );
+add_action( 'prime2g_after_title', 'prime2g_post_subtitle', 2 );
 
 if ( ! function_exists( 'prime2g_post_subtitle' ) ) {
 function prime2g_post_subtitle( $post = null ) {

@@ -35,7 +35,7 @@ extract( $atts );
 
 $part	=	prime2g_insert_template_part( $id, false );
 
-if ( ! $part ) {
+if ( ! $part && current_user_can( 'edit_others_posts' ) ) {
 	return __( 'Invalid Template Part', PRIME2G_TEXTDOM );
 }
 

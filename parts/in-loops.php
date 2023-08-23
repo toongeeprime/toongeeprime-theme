@@ -249,7 +249,7 @@ else {
 $entry	=	'<article id="entry-' . get_the_ID() . '" class="' . implode( ' ', get_post_class() ) . '">';
 $entry	.=	'<div class="entry_img">';
 
-$entry	.=	prime2g_ft_image_in_loop( $title, $imgSize, $link );
+$entry	.=	prime2g_ft_image_in_loop( $title, $imgSize, $link, $post );
 
 $entry	.=	'</div>';
 $entry	.=	'<div class="entry_text">';
@@ -283,11 +283,12 @@ return $entry;
 if ( ! function_exists( 'prime2g_ft_image_in_loop' ) ) {
 function prime2g_ft_image_in_loop( string $title, string $size, string $link, object $post = null ) {
 
+$thepost	=	$post ?: null;
 $ftimg	=	'<a href="' . $link . '" title="' . $title . '">';
 
-if ( has_post_thumbnail() ) {
+if ( has_post_thumbnail( $thepost ) ) {
 	$ftimg	.=	'<div class="thumbnail" style="background-image:url(';
-	$ftimg	.=	get_the_post_thumbnail_url( null, $size );
+	$ftimg	.=	get_the_post_thumbnail_url( $thepost, $size );
 	$ftimg	.=	');"></div>';
 }
 else {

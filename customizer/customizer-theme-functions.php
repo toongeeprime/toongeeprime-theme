@@ -16,8 +16,6 @@ function prime2g_theme_mod_social_and_contacts( $incAddress = true ) {
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
-if ( ! get_theme_mod( 'prime2g_show_socials_and_contacts', 1 ) ) return;
-
 $siteName	=	esc_html( get_bloginfo( 'name' ) );
 $facebook	=	get_theme_mod( 'prime2g_facebook_url' );
 $instagram	=	get_theme_mod( 'prime2g_instagram_url' );

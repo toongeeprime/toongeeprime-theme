@@ -33,6 +33,9 @@ class ToongeePrime_Styles {
 	 *	Get from get_theme_mod()
 	 */
 	public function get_mod( $toGet ) {
+	$by_net_home	=	prime2g_design_by_network_home();
+	if ( $by_net_home ) { switch_to_blog( 1 ); }
+
 		switch( $toGet ) {
 			case 'brand' : $mod = get_theme_mod( 'prime2g_primary_brand_color', $this->brandClr ); break;
 			case 'brand2' : $mod = get_theme_mod( 'prime2g_secondary_brand_color', $this->brandClr2 ); break;
@@ -58,6 +61,9 @@ class ToongeePrime_Styles {
 			case 'menu_place' : $mod = get_theme_mod( 'prime2g_menu_position' ); break; # 1.0.55
 			case 'titleOnHeader' : $mod = get_theme_mod( 'prime2g_pagetitle_over_headervideo' ); break; # 1.0.55
 		}
+
+	if ( $by_net_home ) { restore_current_blog(); }
+
 	return $mod;
 	}
 

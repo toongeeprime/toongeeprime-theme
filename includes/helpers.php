@@ -96,13 +96,22 @@ function prime2g_use_extras() {
 }
 
 
-
 /**
  *	Use PWA?
  *	@since ToongeePrime Theme 1.0.55
  */
 function prime2g_add_theme_pwa() {
 	return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true );
+}
+
+
+/**
+ *	Control Design from Network home on multisite installs?
+ *	@since ToongeePrime Theme 1.0.55
+ */
+function prime2g_design_by_network_home() {
+	if ( ! is_multisite() ) return false;
+	return ( defined( 'PRIME2G_DESIGN_BY_NETWORK_HOME' ) && PRIME2G_DESIGN_BY_NETWORK_HOME === true );
 }
 
 

@@ -226,9 +226,13 @@ function prime2g_postmeta_top() {
 
 if ( is_page() || get_post_type() == 'product' ) return;
 
+$byline	=	get_theme_mod( 'prime2g_entry_byline_usage', '' );
+
+if ( $byline === 'remove_byline' ) return;
+
 echo '<div class="authorship postmetas">';
-	echo prime2g_posted_by();
-	prime2g_posted_on();
+	if ( $byline !== 'date_only' ) echo prime2g_posted_by();
+	if ( $byline !== 'author_only' ) prime2g_posted_on();
 echo '</div>';
 
 }
@@ -264,9 +268,13 @@ add_action( 'prime2g_archive_post_top', 'prime2g_archive_postmeta', 5, 2 );
 if ( ! function_exists( 'prime2g_archive_postmeta' ) ) {
 function prime2g_archive_postmeta( $postObject = null, $echo = true ) {
 
+$byline	=	get_theme_mod( 'prime2g_entry_byline_usage', '' );
+
+if ( $byline === 'remove_byline' ) return;
+
 $metas	=	'<div class="the_metas">';
-$metas	.=	prime2g_posted_by( 'By', '', $postObject );
-$metas	.=	prime2g_posted_on( ', on ', false );
+$metas	.=	( $byline !== 'date_only' ) ? prime2g_posted_by( 'By', '', $postObject ) : '';
+$metas	.=	( $byline !== 'author_only' ) ? prime2g_posted_on( ', on ', false ) : '';
 $metas	.=	'</div>';
 
 if ( $echo ) echo $metas;
@@ -350,6 +358,12 @@ $day	=	get_the_date('j');
 
 $dateUrl	=	esc_url( home_url( '/' . $year . '/' . $month . '/' . $day . '/' ) );
 
+if ( 'date_only' === get_theme_mod( 'prime2g_entry_byline_usage' ) ) {
+	$add_pre	=	'';
+} else {
+	$add_pre	=	__( $text, PRIME2G_TEXTDOM );
+}
+
 	$time_string	=	'<time class="entry_date" datetime="%1$s">%2$s</time>';
 
 	$time_string	=	sprintf(
@@ -357,7 +371,8 @@ $dateUrl	=	esc_url( home_url( '/' . $year . '/' . $month . '/' . $day . '/' ) );
 		esc_attr__( $date ),
 		esc_html__( $date )
 	);
-	$info	=	'<span class="posted_on">' . __( $text, PRIME2G_TEXTDOM );
+	$info	=	'<span class="posted_on">';
+	$info	.=	$add_pre ?  : '';
 	$info	.=	'<a href="' . $dateUrl . '" title="'. $more . ' ' . $date .'">' . $time_string . '</a>';
 	$info	.=	'</span>';
 

@@ -40,7 +40,11 @@
 
 		<div class="site-info">
 
-			<?php echo prime2g_theme_mod_social_and_contacts(); ?>
+<?php
+if ( get_theme_mod( 'prime2g_show_socials_and_contacts', 1 ) ) {
+	echo prime2g_theme_mod_social_and_contacts();
+}
+?>
 
 		</div><!-- .site-info -->
 

@@ -46,7 +46,7 @@ if ( get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ) ) {
 	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800&display=swap\">";
 }
 	# echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-	wp_enqueue_style( 'bootstrap-icons', prime2g_icons_file_url(), [], PRIME2G_VERSION, true );
+	wp_enqueue_style( 'bootstrap-icons', prime2g_icons_file_url(), [], PRIME2G_VERSION );
 
 }
 

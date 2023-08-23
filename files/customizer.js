@@ -113,6 +113,13 @@ value.bind( function( newval ) {
 } );
 } );
 
+api( 'prime2g_use_page_preloader', function( value ) {
+value.bind( function( newval ) {
+	let imgUrl	=	$( '#customize-control-prime2g_custom_preloader_img_url' );
+	if ( newval === 'custom_url' ) imgUrl.slideDown( 180 ); else imgUrl.slideUp( 180 );
+} );
+} );
+
 api( 'prime2g_use_theme_google_fonts', function( value ) {
 value.bind( function( newval ) {
 	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),

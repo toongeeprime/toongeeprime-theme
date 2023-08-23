@@ -80,7 +80,18 @@ function prime2g_customizer_sections( $wp_customize ) {
 			'panel'		=>	'prime2g_customizer_panel',
 			'description'	=>	__( 'Archives and Posts Homepage', PRIME2G_TEXTDOM ),
 			'capability'	=>	'edit_theme_options',
-			'active_callback'	=>	function(){ return ( is_home() || is_archive() ); },
+			'active_callback'	=>	function() { return ( is_home() || is_archive() ); },
+		)
+	);
+
+	$wp_customize->add_section(
+		'prime2g_singular_entries_section',
+		array(
+			'title'		=>	__( 'Singular Entries', PRIME2G_TEXTDOM ),
+			'panel'		=>	'prime2g_customizer_panel',
+			'description'	=>	__( 'Single posts, pages and other contents', PRIME2G_TEXTDOM ),
+			'capability'	=>	'edit_theme_options',
+			'active_callback'	=>	function() { return is_singular(); },
 		)
 	);
 
