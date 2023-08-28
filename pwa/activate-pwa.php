@@ -30,12 +30,12 @@ if ( get_theme_mod( 'prime2g_use_theme_pwa' ) ) {
 if ( class_exists( 'WP_Service_Workers' ) ) {
 
 // Prime2g_Hook_WP_PWA::instance();
-$GLOBALS[ 'pwapp' ]	=	new Prime2g_Web_Manifest();
+new Prime2g_Web_Manifest();
 
 }
 else {
 
-$GLOBALS[ 'pwapp' ]	=	new Prime2g_Web_Manifest();
+new Prime2g_Web_Manifest();
 
 }
 

@@ -5,7 +5,7 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Added div.title_wrap @since ToongeePrime Theme 1.0.55
+ *	Added div.title_wrap &&
  *	Support Header video @since ToongeePrime Theme 1.0.55
  */
 
@@ -41,9 +41,11 @@ $headerBackground	=	'style="background-image:url(' . $headerUrl . ');"';
 }
 
 
+if ( ! wp_is_mobile() ) prime2g_site_top_menu(); # @since ToongeePrime Theme 1.0.55
+
 prime2g_before_header();
 
-if ( 'bottom' != $menuPlace ) prime2g_main_menu();
+if ( 'bottom' !== $menuPlace ) prime2g_main_menu();
 
 
 if ( ! $isSingular || $isSingular && $keepHeader ) { ?>
@@ -84,11 +86,9 @@ echo '</div>';
 <?php
 }
 
-if ( 'bottom' == $menuPlace ) prime2g_main_menu();
+if ( 'bottom' === $menuPlace ) prime2g_main_menu();
 
 prime2g_sub_header();
 
 if ( $keepHeader ) { prime2g_after_header(); }
-
-
 

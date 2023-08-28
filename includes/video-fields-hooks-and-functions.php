@@ -78,15 +78,26 @@ global $wp_embed;
 
 if ( ! $post ) { global $post; }
 
-$get	=	$media ?: 'video';
+$type	=	$media ?: 'video';
 
-	switch( $get ) {
-		case 'audio'	:	$embed	=	$post->audio_url; break;
-		default	:	$embed	=	$post->video_url; break;
+	switch( $type ) {
+		case 'audio':	$url	=	$post->audio_url; break;
+		default		:	$url	=	$post->video_url; break;
 	}
 
-return '<div class="prime2g_embedded_media '. $get .'">'. $wp_embed->autoembed( $embed ) .'</div>';
+if ( empty( $url ) ) return;
+
+$parsed	=	parse_url( $url );
+$media_host	=	$parsed[ 'host' ];
+
+if ( in_array( $media_host, [ 'www.youtube.com', 'youtube.com', 'youtu.be', 'm.youtube.com', 'www.vimeo.com', 'vimeo.com' ] ) ) {
+	$embedded	=	$wp_embed->autoembed( $url );
+}
+else {
+	$embedded	=	do_shortcode( '[video src="'. $url .'" /]' );
+}
+
+return '<div class="prime2g_embedded_media '. $type .'">'. $embedded .'</div>';
 }
 
 }
-

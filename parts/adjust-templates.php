@@ -25,8 +25,10 @@ global $post;
 
 $removeSidebar	=	get_theme_mod( 'prime2g_remove_sidebar_in_singular', '' );
 
-if ( $post->remove_sidebar === 'remove' || 'and_pages' === $removeSidebar ||
-	! is_page() && ( 'posts' === $removeSidebar )
+if ( $post->remove_sidebar === 'remove' ||
+	'and_pages' === $removeSidebar ||
+	! is_page() && ( 'posts' === $removeSidebar ) ||
+	is_page() && ( 'pages_only' === $removeSidebar )
 	)
 	prime2g_removeSidebar();
 

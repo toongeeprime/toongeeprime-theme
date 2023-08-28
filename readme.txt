@@ -36,7 +36,9 @@ Several updates across the theme
 * @ customizer: Archive Pagination Type
 * @ customizer: Place Menu over header
 * @ customizer: Page title over header video
+* @ customizer: Byline Options
 * @ customizer: Show/Hide Socials & contacts icon links
+* @ Menus: Added Site Top Menu
 * @ parts: Added adjust-templates.php for conditional adjustments
 * @ plugins: Added plugin-helpers.php
 * @ includes: Added css.php & js.php

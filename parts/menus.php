@@ -30,12 +30,12 @@ return '<ul>
  *	Main Menu
  */
 if ( ! function_exists( 'prime2g_main_menu' ) ) {
-function prime2g_main_menu( $id = 'main_nav' ) {
+function prime2g_main_menu( $id = 'main_nav', $ul_id = 'main_menu_items' ) {
 
 $incLogo	=	get_theme_mod( 'prime2g_logo_with_menu' );
 $cta_menu	=	get_theme_mod( 'prime2g_set_cta_menu_item' );	# Theme 1.0.55
 $theLogo	=	prime2g_siteLogo();
-
+$isMobile	=	wp_is_mobile();
 ?>
 
 <div id="<?php echo $id; ?>" class="main_menu_wrap<?php if ( $incLogo ) echo ' logo_with_menu'; ?>">
@@ -43,7 +43,7 @@ $theLogo	=	prime2g_siteLogo();
 
 	<?php if ( has_nav_menu( 'main-menu' ) ) { ?>
 
-	<?php if ( ! wp_is_mobile() && $incLogo ) echo '<div class="desktop">' . $theLogo . '</div>'; ?>
+	<?php if ( ! $isMobile && $incLogo ) echo '<div class="desktop">' . $theLogo . '</div>'; ?>
 
 	<div id="menu_toggbar" class="menu_toggbar mobiles">
 		<div>
@@ -58,19 +58,22 @@ $theLogo	=	prime2g_siteLogo();
 
 	<nav class="main-menu collapsible-navs site-menus<?php if ( $cta_menu ) echo ' cta'; ?>"
 	aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
+
+<?php if ( $isMobile ) prime2g_site_top_menu(); ?>
+
 		<?php
 		$main_menu	=	'main-menu';
 		if ( is_singular() && get_theme_mod( 'prime2g_extra_menu_locations' ) ) {
 			global $post;
 			$menuOption	=	get_post_meta( $post->ID, 'use_main_nav_location', true );
-			$main_menu	=	$menuOption ?: 'main-menu';
+			$main_menu	=	$menuOption ?: $main_menu;
 		}
 		wp_nav_menu(
 			array(
 				'theme_location'	=>	$main_menu,
 				'menu_class'		=>	'main-menu-wrapper',
 				'container_class'	=>	'main-menu-container',
-				'items_wrap'		=>	'<ul id="main_menu_items" class="%2$s">%3$s</ul>',
+				'items_wrap'		=>	'<ul id="'. $ul_id .'" class="%2$s">%3$s</ul>',
 				'fallback_cb'		=>	false,
 			)
 		);
@@ -89,6 +92,35 @@ $theLogo	=	prime2g_siteLogo();
 </div>
 </div><!-- #main_nav -->
 <?php
+}
+}
+
+
+
+/**
+ *	Site Top Menu
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( ! function_exists( 'prime2g_site_top_menu' ) ) {
+function prime2g_site_top_menu() {
+if ( has_nav_menu( 'site-top-menu' ) && get_theme_mod( 'prime2g_use_site_top_menu' ) ) { ?>
+<div id="site_top_menu">
+<div class="w100pc flexnw site_width collapsible-navs">
+<?php
+wp_nav_menu(
+[	'depth'	=>	1,
+	'theme_location'	=>	'site-top-menu',
+	'menu_class'		=>	'site-menu-wrapper',
+	'container_class'	=>	'site-menu-container',
+	'items_wrap'		=>	'<ul id="site_top_menu_items" class="%2$s">%3$s</ul>',
+	'fallback_cb'		=>	false
+]
+);
+?>
+</div>
+</div>
+<?php
+}
 }
 }
 

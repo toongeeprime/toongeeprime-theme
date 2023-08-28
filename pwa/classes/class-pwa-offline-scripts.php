@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CLASS: PWA Offline Script
+ *	CLASS: PWA Offline Scripts
  *	Here to plug into either Theme's service worker or that of WP PWA
  *	codes are NOT wrapped in <script> tags
  *

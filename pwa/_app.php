@@ -14,5 +14,6 @@ require_once $path . 'class-pwa-manifest.php';	# app center
 require_once $path . 'class-pwa-offline-manager.php';
 require_once $path . 'class-pwa-offline-scripts.php';
 require_once $path . 'class-pwa-service-worker.php';
+require_once $path . 'class-pwa-prompt.php';
 
 

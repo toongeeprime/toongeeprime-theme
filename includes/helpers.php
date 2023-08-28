@@ -167,7 +167,7 @@ $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
 
 		$args	=	array( 'public' => true, 'publicly_queryable' => true );
 		$post_types	=	get_post_types( $args, 'objects' );
-		$slugs = $names = [];
+		$slugs	=	$names = [];
 
 		foreach ( $post_types as $post_type ) {
 			if ( ! isset( $post_type ) ) continue;

@@ -7,9 +7,17 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 
-$network	=	is_multisite();
+$netHome	=	false;
+if ( is_multisite() ) {
+switch_to_blog( 1 );
+if ( get_theme_mod( 'prime2g_route_smtp_to_networkhome' ) ) {
+	$netHome	=	true;
+}
+restore_current_blog();
+}
 
-if ( $network ) switch_to_blog( 1 );
+
+if ( $netHome ) switch_to_blog( 1 );
 
 $username	=	get_theme_mod( 'prime2g_smtp_username' );
 $password	=	get_theme_mod( 'prime2g_smtp_password' );
@@ -19,7 +27,7 @@ $from		=	get_theme_mod( 'prime2g_smtp_from_email' );
 $port		=	get_theme_mod( 'prime2g_smtp_port', '465' );
 $secure		=	get_theme_mod( 'prime2g_smtp_security_type', 'ssl' );
 
-if ( $network ) restore_current_blog();
+if ( $netHome ) restore_current_blog();
 
 
 define( 'SMTP_USERNAME', $username );

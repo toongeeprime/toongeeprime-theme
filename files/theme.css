@@ -795,6 +795,12 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 .logo_with_menu .main-menu{
 	margin:auto var(--min-pad);
 }
+#site_top_menu .flexnw{
+	justify-content:end;
+}
+#site_top_menu_items{
+	margin:0; padding:0;
+}
 .mainsidebar{
 	margin-top:var(--min-pad);
 }

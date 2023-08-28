@@ -58,6 +58,18 @@ register_nav_menus(
 
 
 /**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( get_theme_mod( 'prime2g_use_site_top_menu' ) ) {
+
+register_nav_menus(
+	[ 'site-top-menu'	=>	esc_html__( 'Site-Top Menu', PRIME2G_TEXTDOM ) ]	# @ Theme 1.0.55
+);
+
+}
+
+
+/**
  *	Extra Navigation Menu Locations
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -200,4 +212,3 @@ register_sidebars( $cols,
 
 }
 }
-

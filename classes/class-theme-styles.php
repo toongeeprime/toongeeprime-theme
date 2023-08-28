@@ -153,7 +153,8 @@ class ToongeePrime_Styles {
 	#wp-custom-header-video{width:100%;height:auto;}" : '';
 
 	$fImgHeight	=	$this->get_mod( 'ftImgHeight' ) .'em';
-	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:'. $fImgHeight .';}';
+	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:'. $fImgHeight .';}
+	.mejs-container{height:'. $fImgHeight .'!important;}';
 	$fImgCSS	=	( ! is_singular() ) ? $fImgCSS : '';
 
 	$css	=	"
@@ -174,15 +175,15 @@ $css	.=	$headerVidCSSB;
 $css	.=	"}
 
 @media(max-width:820px){
-.singular .entry-title{font-size:calc(var(--post-titlesize)*0.8);}
-body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.8);}";
+.singular .entry-title{font-size:calc(var(--post-titlesize)*0.85);}
+body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.85);}";
 
 $css	.=	$fImgCSS ? ".posts_loop .thumbnail,.posts_loop .video iframe{height:calc({$fImgHeight} * .8);}" : "";
 $css	.=	"}
 
 @media(max-width:601px){
-.singular .entry-title{font-size:calc(var(--post-titlesize)*0.6);}
-body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.6);}
+.singular .entry-title{font-size:calc(var(--post-titlesize)*0.7);}
+body:not(.singular) .entry-title{font-size:calc(var(--arch-titlesize)*0.7);}
 }
 ";
 return $css;
@@ -191,3 +192,4 @@ return $css;
 }
 
 }
+

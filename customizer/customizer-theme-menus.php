@@ -151,6 +151,23 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 
 if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.2' ) {
 
+	/**
+	 *	@since ToongeePrime Theme 1.0.55
+	 */
+	$wp_customize->add_setting( 'prime2g_use_site_top_menu',
+		array(
+		'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field'
+		)
+	);
+	$wp_customize->add_control( 'prime2g_use_site_top_menu',
+		array(
+			'label'		=>	__( 'Activate Site Top Menu', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_use_site_top_menu',
+			'section'	=>	'prime2g_theme_menus_section'
+		)
+	);
+
 	$wp_customize->add_setting( 'prime2g_extra_menu_locations',
 		array(
 		'type' => 'theme_mod', 'default' => 0, 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field'

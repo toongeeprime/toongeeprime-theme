@@ -63,17 +63,34 @@ return prime2g_siteLogo( $darkLogo, $src );
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
+add_shortcode( 'prime_search_form', 'prime2g_searchform_shortcode' );
+function prime2g_searchform_shortcode( $atts ) {
+$atts	=	shortcode_atts( [
+	'placeholder'	=>	'Keywords',
+	'buttontext'	=>	'Go',
+	'label'			=>	'Search here',
+	'echo'			=>	false
+], $atts );
+
+return prime2g_wp_block_search_form( $atts );
+}
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
 add_shortcode( 'prime_site_title_and_description', 'prime2g_title_and_description_shortcode' );
 function prime2g_title_and_description_shortcode( $atts ) {
-$atts	=	shortcode_atts( array( 'description' => 'yes', 'class' => '' ), $atts );
+$atts	=	shortcode_atts( [ 'description' => 'yes', 'descriptiononly' => '', 'class' => '' ], $atts );
 extract( $atts );
 
-$desc	=	( $description == 'yes' ) ? true : false;
-$name	=	get_bloginfo( 'name' );
+$desc		=	( $description === 'yes' ) ? true : false;
+$descOnly	=	( $descriptiononly === 'yes' ) ? true : false;
+$name		=	get_bloginfo( 'name' );
 
 $title	=	"<div class=\"page_title prel site_width {$class}\">";
-$title	.=	"<h1><span title=\"{$name}\">{$name}</span></h1>";
-$title	.=	$desc ? '<p id="site_description">'. get_bloginfo( 'description' ) .'</p>' : '';
+$title	.=	( ! $descOnly ) ? "<h1><span title=\"{$name}\">{$name}</span></h1>" : '';
+$title	.=	( $descOnly || $desc ) ? '<p id="site_description">'. get_bloginfo( 'description' ) .'</p>' : '';
 $title	.=	"</div>";
 
 return $title;
@@ -98,19 +115,19 @@ $loggedin	=	is_user_logged_in();
 $atts	=	shortcode_atts( array( 'url' => $home, 'users' => '' ), $atts );
 extract( $atts );
 
-if ( $users == 'logged out' ) {
+if ( $users === 'logged out' ) {
 	if ( ! $loggedin ) {
 		echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 	}
 }
 
-if ( $users == 'logged in' ) {
+if ( $users === 'logged in' ) {
 	if ( $loggedin ) {
 		echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 	}
 }
 
-if ( $users == '' ) {
+if ( empty( $users ) ) {
 	echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 }
 

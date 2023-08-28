@@ -15,6 +15,9 @@ class Prime2g_Web_Manifest {
 
 	if ( ! isset( self::$instance ) ) {
 
+		$GLOBALS[ 'theme_web_app' ]	=	'Web App Active';
+		$GLOBALS[ 'pwa_css_class' ]	=	'has_pwa';
+
 		new Prime2g_PWA_Offline_Manager();
 
 		// Flushing rewrite rules

@@ -78,7 +78,7 @@ function prime2g_save_metas_1( $post_id ) {
 function prime2g_cFields_metadivs( $post ) { ?>
 <div class="prime2g_meta_box">
 
-	<style scoped>
+	<style>
 		#prime2g_fieldsbox_1{box-shadow:0px 3px 5px #ccc;}
 		#prime2g_fieldsbox_1:hover{box-shadow:0px 3px 5px #aaa;}
 		.prime2g_meta_box{display:grid;gap:10px;}
@@ -115,8 +115,8 @@ value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 
 <?php
 $removeSidebar	=	get_theme_mod( 'prime2g_remove_sidebar_in_singular' );
-if ( ! $removeSidebar && $post->post_type !== 'page'
-	|| $post->post_type === 'page' && 'and_pages' !== $removeSidebar ) { ?>
+if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type !== 'page'
+	|| $post->post_type === 'page' && ! in_array( $removeSidebar, [ 'and_pages', 'pages_only' ] ) ) { ?>
 
 	<div class="meta-options prime2g_field">
 		<label for="remove_sidebar">Remove Sidebar?</label>

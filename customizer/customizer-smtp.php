@@ -9,6 +9,32 @@
 
 function prime2g_customizer_smtp( $wp_customize ) {
 
+if ( is_multisite() ) {
+	switch_to_blog( 1 );
+	$route	=	get_theme_mod( 'prime2g_route_smtp_to_networkhome' );
+	restore_current_blog();
+
+	if ( $route && get_current_blog_id() !== 1 ) return;
+}
+
+
+if ( is_multisite() && get_current_blog_id() === 1 ) {
+	$wp_customize->add_setting(
+		'prime2g_route_smtp_to_networkhome',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_route_smtp_to_networkhome',
+		array(
+			'label'		=>	__( 'Route All Sites\' SMTP to Network Home?', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_route_smtp_to_networkhome',
+			'section'	=>	'prime2g_theme_smtp_section'
+		)
+	);
+}
+
+
 	$siteName	=	get_bloginfo( 'name' );
 	$adminEmail	=	get_bloginfo( 'admin_email' );
 

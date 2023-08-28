@@ -4,7 +4,7 @@
  *	DARK THEME SWITCHER
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 add_action( 'wp_footer', 'prime2g_dark_theme_switch' );
 add_action( 'wp_footer', 'prime2g_dark_theme_set_logos', 99 );
@@ -12,6 +12,10 @@ add_action( 'wp_footer', 'prime2g_dark_theme_set_logos', 99 );
 if ( ! function_exists( 'prime2g_dark_theme_switch' ) ) {
 
 function prime2g_dark_theme_switch() {
+
+$by_net_home	=	prime2g_design_by_network_home();
+if ( $by_net_home ) { switch_to_blog( 1 ); }
+
 $theme_switch	=	get_theme_mod( 'prime2g_dark_theme_switch' );
 
 if ( 'on' === $theme_switch || 'on_dbody' === $theme_switch ) {
@@ -20,13 +24,17 @@ $domain	=	prime2g_get_site_domain();
 $domain	=	str_replace( '.', '', $domain );
 
 $switch	=	'<div id="prime2g_dt_switch">
-<style scoped>
+<style id="dThemeSwitchCss">
 #prime2g_dt_switch{position:fixed;bottom:0;right:0;z-index:+99999;}
 #prime2g_dt_switch .bi::before{place-items:center;width:30px;height:30px;border-radius:30px;margin:1rem;
 background:var(--content-text);color:var(--content-background);display:grid;border:1px solid;}
 .themeswitched_dark #prime2g_dt_switch .bi::before{color:var(--content-text);background:var(--content-background);}
 #prime2g_dt_switch .on,.themeswitched_dark #prime2g_dt_switch .bi{display:none;}
 .themeswitched_dark #prime2g_dt_switch .bi.on{display:grid;}
+
+@media (display-mode: browser){
+.has_pwa #prime2g_dt_switch{bottom:75px;}
+}
 </style>
 
 <div>
@@ -85,20 +93,27 @@ p2gDThemeOff.addEventListener( "click", ()=>{
 echo $switch;
 }
 
+if ( $by_net_home ) { restore_current_blog(); }
+
 }
 
 }
+
 
 
 if ( ! function_exists( 'prime2g_dark_theme_set_logos' ) ) {
 
 function prime2g_dark_theme_set_logos() {
+
+$by_net_home	=	prime2g_design_by_network_home();
+if ( $by_net_home ) { switch_to_blog( 1 ); }
+
 $theme_switch	=	get_theme_mod( 'prime2g_dark_theme_switch' );
 
 if ( 'on' === $theme_switch || 'on_dbody' === $theme_switch ) { ?>
 
 <script id="prime2g_dt_logos_setter">
-// Set Custom Logo URL on page load
+//Set Custom Logo URL on page load
 p2getAll( "img.custom-logo" ).forEach( logo=>{
 	if ( p2gThemeIsDark === "yes" || prime2gDarkThemeMedia() === true )
 		logo.src	=	dlogoUrl;
@@ -109,8 +124,10 @@ p2getAll( "img.custom-logo" ).forEach( logo=>{
 
 <?php
 }
-}
+
+if ( $by_net_home ) { restore_current_blog(); }
 
 }
 
+}
 

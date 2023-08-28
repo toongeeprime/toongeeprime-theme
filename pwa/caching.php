@@ -2,7 +2,6 @@
 
 /**
  *	CACHING CONTROL
- *	: Needs More Logic
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
@@ -31,4 +30,3 @@ function prime2g_essential_chaching_control( $wp ) {
 }
 
 }
-

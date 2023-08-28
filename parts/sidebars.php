@@ -201,8 +201,7 @@ if ( $n > 1 ) $wID	=	'-' . $n;
 
 if ( $hasactive ) { ?>
 
-<aside id="sitebasebar" role="complementary" class="sidebars asides grid grid<?php echo $cols; ?> site_width footer">
-
+<aside id="sitebasebar" role="complementary" class="asides grid grid<?php echo $cols; ?> site_width footer">
 <?php
 for ( $n = 1; $n <= $cols; $n++ ) {
 if ( $n > 1 ) $wID	=	'-' . $n;
@@ -219,7 +218,6 @@ echo	'</div>';
 
 }
 ?>
-
 </aside>
 <?php
 }

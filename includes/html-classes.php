@@ -59,6 +59,8 @@ function prime2g_body_classes( $classes ) {
 		$classes[]	=	'video_site';
 	}
 
+	$classes[]	=	isset( $GLOBALS[ 'pwa_css_class' ] ) ? $GLOBALS[ 'pwa_css_class' ] : '';
+
 	$classes[]	=	'left' === get_theme_mod( 'prime2g_sidebar_position' ) ? 'left_sidebar' : '';
 	$classes[]	=	is_header_video_active() ? 'video_header' :'';
 

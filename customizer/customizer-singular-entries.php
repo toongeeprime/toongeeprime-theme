@@ -25,7 +25,8 @@ function prime2g_customizer_singular_entries( $wp_customize ) {
 			'choices'	=>	array(
 				''		=>	__( 'Keep Sidebar', PRIME2G_TEXTDOM ),
 				'posts'	=>	__( 'Remove but Exclude Pages', PRIME2G_TEXTDOM ),
-				'and_pages'	=>	__( 'Also Remove in Pages', PRIME2G_TEXTDOM )
+				'and_pages'	=>	__( 'Also Remove in Pages', PRIME2G_TEXTDOM ),
+				'pages_only'=>	__( 'Remove in "Pages Only"', PRIME2G_TEXTDOM )
 			)
 		)
 	);
