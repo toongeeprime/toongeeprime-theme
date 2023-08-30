@@ -9,7 +9,7 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 
-class Prime2g_PWA_Offline_Scripts {
+class Prime2g_PWA_Scripts {
 
 	public static function content() {}
 
@@ -45,8 +45,8 @@ return $js;
 
 
 	public static function getPageFromNetwork( string $btn = '' ) {
-	$offline	=	new Prime2g_PWA_Offline_Manager();
-	$offlineRul	=	$offline->get_offline_url()[ 'index' ];
+	$offline	=	new Prime2g_PWA_File_Url_Manager();
+	$offlineRul	=	$offline->get_file_url()[ 'index' ];
 
 $js	=	'';
 

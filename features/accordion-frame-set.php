@@ -57,7 +57,7 @@ function prime2g_accordion_frames_js( $closeothers, $open ) { ?>
 <script id="prime2g_accordion_JS">
 const accords	=	p2getAll( '.p2g_accordion' ),
 	accToggs	=	p2getAll( '.acc_toggle' ),
-	openfirst	=	'<?php echo $open; ?>',	// incomplete
+	openfirst	=	'<?php echo $open; ?>',	// incomplete >> which to open / simply add class "on"
 	closeOthers	=	'<?php echo $closeothers; ?>';
 
 accToggs.forEach( tog =>{

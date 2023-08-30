@@ -47,10 +47,10 @@ echo	'</div>';
 
 if ( $get === 'notcached' ) {
 	//Script unfinished
-	echo '<script id="getFromNetwork">'. Prime2g_PWA_Offline_Scripts::getPageFromNetwork( '#reloadPage' ) .'</script>';
+	echo '<script id="getFromNetwork">'. Prime2g_PWA_Scripts::getPageFromNetwork( '#reloadPage' ) .'</script>';
 }
 else {
-	echo '<script id="checkAndReload">'. Prime2g_PWA_Offline_Scripts::checkAndReload( '#reloadPage' ) .'</script>';
+	echo '<script id="checkAndReload">'. Prime2g_PWA_Scripts::checkAndReload( '#reloadPage' ) .'</script>';
 }
 
 

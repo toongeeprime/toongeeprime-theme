@@ -2,6 +2,11 @@
  *	PWA CSS
  *	@ https://web.dev/learn/pwa/app-design/
  */
+#prime2g_offOnline_notif.off{transform:translateY(120%);}
+#prime2g_offOnline_notif{position:fixed;left:0;right:0;bottom:0;transition:0.2s;
+background:var(--content-text);color:var(--content-background);line-height:1;}
+.oo_notif.off{display:none;}
+
 /* It targets only the app used within the browser */
 @media (display-mode: browser) {
 }

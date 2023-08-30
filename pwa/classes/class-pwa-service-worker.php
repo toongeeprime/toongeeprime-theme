@@ -22,8 +22,8 @@ class Prime2g_PWA_Service_Worker {
 
 	public function register_service_worker() {
 	if ( ! isset( self::$instance ) ) {
-		$offline	=	new Prime2g_PWA_Offline_Manager();
-		$sw_url		=	$offline->get_offline_url()[ 'service-worker' ];
+		$offline	=	new Prime2g_PWA_File_Url_Manager();
+		$sw_url		=	$offline->get_file_url()[ 'service-worker' ];
 
 		echo '<script id="p2g_regServiceWorker">
 		if ( typeof navigator.serviceWorker !== "undefined" ) {
@@ -70,15 +70,14 @@ class Prime2g_PWA_Service_Worker {
 	return [ 'strategy' => $strategy, 'addToCache' => $addToCache ];
 	}
 
-// css class trigger
 
 	public function core() {
-	$offline	=	new Prime2g_PWA_Offline_Manager();
+	$fileURLs	=	new Prime2g_PWA_File_Url_Manager();
+	$get_url	=	$fileURLs->get_file_url();
 	$icons		=	new Prime2g_PWA_Icons();
 	$caching	=	$this->get_caching();
 	$strategy	=	$caching[ 'strategy' ];
 	$addRequestToCache	=	$caching[ 'addToCache' ];
-	$offlineUrls	=	$offline->get_offline_url();
 	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ?
 						' + ", " + "' . child_add_to_pwa_precache() . '"' : null; # CSV
 	$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );
@@ -87,13 +86,12 @@ class Prime2g_PWA_Service_Worker {
 'const PWACACHE		=	"'. $siteName .'_preCache" + SWVersion;
 const logoURL		=	"'. prime2g_siteLogo( false, true ) .'";
 const iconURL		=	"'. $icons->mainIcon()[ 'src' ] .'";
-const themeFiles	=	"'. $offline->theme_files( 'csv_versioned' ) .'";
-const homeStartURL	=	"'. $offlineUrls[ 'home' ] .'";
-const swURL			=	"'. $offlineUrls[ 'service-worker' ] .'";
-const userIsOfflineURL	=	"'. $offlineUrls[ 'offline' ] .'";
-const errorPageURL		=	"'. $offlineUrls[ 'error' ] .'";
-const notCachedPageURL	=	"'. $offlineUrls[ 'notcached' ] .'";
-const filesString		=	logoURL + ", " + iconURL + ", " + swURL + ", " + themeFiles +
+const themeFiles	=	"'. $fileURLs->theme_files( 'csv_versioned' ) .'";
+const homeStartURL	=	"'. $get_url[ 'home' ] .'";
+const userIsOfflineURL	=	"'. $get_url[ 'offline' ] .'";
+const errorPageURL		=	"'. $get_url[ 'error' ] .'";
+const notCachedPageURL	=	"'. $get_url[ 'notcached' ] .'";
+const filesString		=	logoURL + ", " + iconURL + ", " + themeFiles +
 ", " + homeStartURL + ", " + userIsOfflineURL + ", " + errorPageURL + ", " + notCachedPageURL'. $addFileUrls .';
 const PRECACHE_ITEMS	=	filesString.split(", ");
 const addRequestToCache	=	'. $addRequestToCache .';

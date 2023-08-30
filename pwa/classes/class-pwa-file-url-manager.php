@@ -1,14 +1,14 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CLASS: PWA Offline Contents Manager
+ *	CLASS: PWA Files and URLs Manager
  *
  *	Determine files, assets, etc. to be operational offline / with service worker
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
 
-class Prime2g_PWA_Offline_Manager {
+class Prime2g_PWA_File_Url_Manager {
 
 	private static $instance;
 
@@ -18,7 +18,7 @@ class Prime2g_PWA_Offline_Manager {
 	public function __construct() {
 
 		if ( ! isset( self::$instance ) ) {
-			add_action( 'parse_request', array( $this, 'show_offline_output' ) );
+			add_action( 'parse_request', array( $this, 'show_file_output' ) );
 		}
 
 	return self::$instance;
@@ -26,11 +26,11 @@ class Prime2g_PWA_Offline_Manager {
 
 
 	protected function check_params( string $value ) {
-	$offlineUrls	=	$this->get_offline_url();
+	$get_url	=	$this->get_file_url();
 
 	return (
 		isset( $_GET[ PRIME2G_PWA_SLUG ] ) && $_GET[ PRIME2G_PWA_SLUG ] === $value ||
-		prime2g_get_current_url() === $offlineUrls[ $value ]
+		prime2g_get_current_url() === $get_url[ $value ]
 	);
 	}
 
@@ -49,8 +49,8 @@ class Prime2g_PWA_Offline_Manager {
 	}
 
 
-	// Virtual files output
-	public function show_offline_output() {
+	//	Virtual files output:
+	public function show_file_output() {
 
 		if ( $this->check_params( 'manifest' ) ) {
 			$manifest	=	new Prime2g_Web_Manifest();
@@ -64,19 +64,19 @@ class Prime2g_PWA_Offline_Manager {
 		}
 
 		if ( $this->check_params( 'scripts' ) ) {
-			$output	=	Prime2g_PWA_Offline_Scripts::content();
+			$output	=	Prime2g_PWA_Scripts::content();
 			$this->do_output_die( $output, 'javascript' );
 		}
 
-		$offlineUrls	=	$this->get_offline_url();
+		$get_url	=	$this->get_file_url();
 		$values	=	[ 'offline', 'error', 'notcached' ];
 		foreach ( $values as $value ) {
 			if ( isset( $_GET[ PRIME2G_PWA_SLUG ] ) && $_GET[ PRIME2G_PWA_SLUG ] === $value ) {
-				require_once $this->offline_page();	# Make params readable
+				require_once $this->offline_page();
 				exit;
 			}
 
-			if ( prime2g_get_current_url() === $offlineUrls[ $value ] ) {
+			if ( prime2g_get_current_url() === $get_url[ $value ] ) {
 				echo file_get_contents( self::startURL() . '?'. PRIME2G_PWA_SLUG .'=' . $value );
 				exit;
 			}
@@ -109,7 +109,7 @@ class Prime2g_PWA_Offline_Manager {
 	}
 
 
-	public function get_offline_url() {
+	public function get_file_url() {
 	$startURL	=	self::startURL();
 	$manifest	=	self::manifest_url();
 	$app_url	=	$startURL . PRIME2G_PWA_SLUG . '/';
@@ -133,6 +133,7 @@ class Prime2g_PWA_Offline_Manager {
 	$childTheme	=	is_child_theme();
 
 	$filesDir	=	PRIME2G_FILE;
+	$appFile	=	PRIME2G_PWA_FILE;
 	if ( $childTheme ) $childDir	=	CHILD2G_FILE;
 
 	if ( is_multisite() ) {
@@ -157,7 +158,9 @@ class Prime2g_PWA_Offline_Manager {
 		'themecss'	=>	$filesDir . "theme.css",
 		'themejs'	=>	$filesDir . "theme.js",
 		'footerjs'	=>	$filesDir . "footer.js",
-		'icons'		=>	prime2g_icons_file_url(),
+		'appcss'	=>	$appFile . "app.css",
+		'appjs'		=>	$appFile . "app.js",
+		'icons'		=>	prime2g_icons_file_url(),	# i.e. Bootstrap icons
 		'childcss'	=>	$childCss,
 		'childlogin'=>	$childLogin,
 		'childjs'	=>	$childJs
@@ -175,6 +178,8 @@ class Prime2g_PWA_Offline_Manager {
 		'themecss'	=>	$filesDir . "theme.css" . $ver,
 		'themejs'	=>	$filesDir . "theme.js" . $ver,
 		'footerjs'	=>	$filesDir . "footer.js" . $ver,
+		'appcss'	=>	$appFile . "app.css" . $ver,
+		'appjs'		=>	$appFile . "app.js" . $ver,
 		'icons'		=>	prime2g_icons_file_url() . $ver,
 		'childcss'	=>	$childCss . $cVer,
 		'childlogin'=>	$childLogin . $cVer,
@@ -185,22 +190,5 @@ class Prime2g_PWA_Offline_Manager {
 	if ( $get === 'csv_versioned' ) return implode( ', ', $versioned );
 	}
 
-
-	// Because of WP PWA??
-	public function caching_routes() {
-	// $homeUrl		=	self::startURL();
-	// $siteroute	=	preg_quote( $homeUrl . 'offline/*' );
-	$siteroute		=	$this->get_offline_url();
-
-	return [
-		'offline'		=>	$siteroute,
-		// 'images'		=>	PRIME2G_PWA_IMAGE,
-		// 'files'			=>	PRIME2G_PWA_FILE,
-		// 'assets'		=>	PRIME2G_PWA_THEMEASSETS,
-		// 'child_assets'	=>	CHILD2G_PWA_THEMEASSETS,
-		// 'pre_cache'		=>	CHILD2G_PWA_THEME_URL . 'precache/',
-	];
-
-	}
-
 }
+

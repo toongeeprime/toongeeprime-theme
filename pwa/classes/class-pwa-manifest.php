@@ -18,7 +18,7 @@ class Prime2g_Web_Manifest {
 		$GLOBALS[ 'theme_web_app' ]	=	'Web App Active';
 		$GLOBALS[ 'pwa_css_class' ]	=	'has_pwa';
 
-		new Prime2g_PWA_Offline_Manager();
+		new Prime2g_PWA_File_Url_Manager();
 
 		// Flushing rewrite rules
 		add_action( 'after_switch_theme', 'flush_rewrite_rules' );
@@ -65,7 +65,7 @@ class Prime2g_Web_Manifest {
 
 	public function html_metadata() {
 		$getIcons		=	Prime2g_PWA_Icons::instance();
-		$manifesturl	=	Prime2g_PWA_Offline_Manager::manifest_url();
+		$manifesturl	=	Prime2g_PWA_File_Url_Manager::manifest_url();
 		$manifest		=	$this->get_manifest();
 		$iconURL		=	$getIcons->mainIcon()[ 'src' ];
 
@@ -96,7 +96,7 @@ echo '
 
 	public function manifest_rule() {
 		global $wp;
-		$file	=	Prime2g_PWA_Offline_Manager::manifest_url( 'file' );
+		$file	=	Prime2g_PWA_File_Url_Manager::manifest_url( 'file' );
 		add_rewrite_rule( 'pwapp/\bmanifest.json\b', 'index.php?pwapp=manifest', 'top' );
 		// add_rewrite_rule( '/\b'. $file .'\b', 'index.php?pwapp=manifest', 'top' );
 		$wp->add_query_var( 'pwapp' );
@@ -114,7 +114,7 @@ echo '
 		$getIcons	=	Prime2g_PWA_Icons::instance();
 		$data		=	$this->manifest_data();
 
-		$startURL	=	Prime2g_PWA_Offline_Manager::startURL();
+		$startURL	=	Prime2g_PWA_File_Url_Manager::startURL();
 
 		$data	=	array(
 			'name'			=>	PRIME2G_PWA_SITENAME,

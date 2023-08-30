@@ -39,8 +39,9 @@ define( 'PRIME2G_PWA_BTNID', 'pwa_install' );
 define( 'PRIME2G_PWA_PATH', PRIME2G_THEME .'pwa/' );
 define( 'PRIME2G_PWA_URL', PRIME2G_THEMEURL .'pwa/' );
 define( 'PRIME2G_PWA_IMAGE', PRIME2G_PWA_URL .'images/' );
+define( 'PRIME2G_PWA_FILE', PRIME2G_PWA_URL .'files/' );
 
-// Cache Strategies
+#	Cache Strategies
 define( 'PWA_CACHEFIRST', 'CacheFirst' );
 define( 'PWA_CACHEONLY', 'CacheOnly' );
 define( 'PWA_NETWORKFIRST', 'NetworkFirst' );

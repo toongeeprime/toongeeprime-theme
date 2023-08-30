@@ -19,6 +19,20 @@ function prime2g_toggElems( elems, clss = 'prime' ) {
 elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.toggle( clss ); } );
 }
 
+/**
+ *		@since ToongeePrime Theme 1.0.55
+ */
+function prime2g_addClass( elems, clss = 'prime' ) {
+elems.forEach( el=>{ p2getEl( el ).classList.add( clss ); } );
+}
+
+function prime2g_remClass( elems, clss = 'prime' ) {
+elems.forEach( el=>{ p2getEl( el ).classList.remove( clss ); } );
+}
+
+function prime2g_toggClass( elems, clss = 'prime' ) {
+elems.forEach( el=>{ p2getEl( el ).classList.toggle( clss ); } );
+}
 
 // Element in viewport checker
 function prime2g_inViewport( el ) {
@@ -39,7 +53,6 @@ let rect	=	el.getBoundingClientRect();
 		rect.right	<=	( window.innerWidth || document.documentElement.clientWidth )
 	);
 }
-
 
 function prime2g_gotoThis( selector ) {
 let elmt	=	p2getEl( selector );
@@ -96,7 +109,6 @@ runCount();
 } );
 }
 
-
 /**
  *	Counter
  *	@since ToongeePrime Theme 1.0.49
@@ -118,7 +130,6 @@ function prime2g_get_sibling( get, elem, sibClass = '' ) {
 	}
 
 }
-
 
 /**
  *	Detect Mobile or TouchScreen Devices
@@ -143,4 +154,3 @@ return ( windowWidth < screenSize );
  *	@since ToongeePrime Theme 1.0.55
  */
 function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newNode, refNode.nextSibling ); }
-
