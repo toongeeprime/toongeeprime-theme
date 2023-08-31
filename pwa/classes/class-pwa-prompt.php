@@ -47,16 +47,21 @@ style="grid-template-columns:50px 1fr;padding:5px;gap:5px;">
 </div>';
 
 $js	=	'<script id="p2g_pwaPromptJS">
-let p2g_pwaPrompt	=	null;
-const p2g_pwabtnWrap=	document.getElementById( "p2g_pwaBtnWrap" );
-const xpwaPrompt	=	document.getElementById( "xpwaPrompt" );
-const p2g_pwaBtn	=	document.getElementById( "'. PRIME2G_PWA_BTNID .'" );
+let p2g_pwaPrompt	=	null,
+	stopPrompt		=	"'. PRIME2G_PWA_SITENAME .'_stopPrompt";
+const	p2g_pwabtnWrap=	p2getEl( "#p2g_pwaBtnWrap" ),
+		xpwaPrompt	=	p2getEl( "#xpwaPrompt" ),
+		p2g_pwaBtn	=	p2getEl( "#'. PRIME2G_PWA_BTNID .'" );
 
 window.addEventListener( "appinstalled", ()=>{ stopPWAinstallPrompt(); } );
-xpwaPrompt.addEventListener( "click", ()=>{ stopPWAinstallPrompt(); } );
+xpwaPrompt.addEventListener( "click", ()=>{
+	stopPWAinstallPrompt();
+	primeSetCookie( stopPrompt, "stop", 1 );
+} );
 
 window.addEventListener( "beforeinstallprompt", ( event )=>{
 	event.preventDefault();
+	if ( primeHasCookie( stopPrompt ) ) return;
 	p2g_pwaPrompt	=	event;
 	p2g_pwabtnWrap.classList.add( "prime" );
 } );

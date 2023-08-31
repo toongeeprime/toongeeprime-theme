@@ -19,21 +19,6 @@ function prime2g_toggElems( elems, clss = 'prime' ) {
 elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.toggle( clss ); } );
 }
 
-/**
- *		@since ToongeePrime Theme 1.0.55
- */
-function prime2g_addClass( elems, clss = 'prime' ) {
-elems.forEach( el=>{ p2getEl( el ).classList.add( clss ); } );
-}
-
-function prime2g_remClass( elems, clss = 'prime' ) {
-elems.forEach( el=>{ p2getEl( el ).classList.remove( clss ); } );
-}
-
-function prime2g_toggClass( elems, clss = 'prime' ) {
-elems.forEach( el=>{ p2getEl( el ).classList.toggle( clss ); } );
-}
-
 // Element in viewport checker
 function prime2g_inViewport( el ) {
 let rect = el.getBoundingClientRect();
@@ -66,9 +51,7 @@ document.addEventListener(
 	let key = event.key || event.keyCode;
 	if ( key === 'Escape' || key === 'Esc' || key === 27 ) {
 	let allElems = document.getElementsByClassName( 'prime' );
-		while ( allElems.length > 0 ) {
-			allElems[0].classList.remove( 'prime' );
-		}
+		while ( allElems.length > 0 ) { allElems[0].classList.remove( 'prime' ); }
 	}
 }
 );
@@ -150,7 +133,51 @@ return ( windowWidth < screenSize );
 }
 
 /**
- *	Leave name so it can easily be removed if ever JS makes it inbuilt
  *	@since ToongeePrime Theme 1.0.55
+ *
+ **
+ *	Leave name so it can easily be removed if ever JS makes it inbuilt
  */
 function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newNode, refNode.nextSibling ); }
+
+function prime2g_addClass( elems, clss = 'prime' ) {
+elems.forEach( el=>{ p2getEl( el ).classList.add( clss ); } );
+}
+
+function prime2g_remClass( elems, clss = 'prime' ) {
+elems.forEach( el=>{ p2getEl( el ).classList.remove( clss ); } );
+}
+
+function prime2g_toggClass( elems, clss = 'prime' ) {
+elems.forEach( el=>{ p2getEl( el ).classList.toggle( clss ); } );
+}
+
+/**
+ *	COOKIES
+ *	You can delete a cookie by updating its expiration time to zero
+ */
+function primeSetCookie( cName, cValue, expDays ) {
+	let date	=	new Date();
+	date.setTime( date.getTime() + ( expDays * 24 * 60 * 60 * 1000 ) );
+	const expires	=	"expires=" + date.toUTCString();
+	document.cookie	=	cName + "=" + cValue + "; " + expires + "; path=/";
+}
+
+function primeHasCookie( cName ) {
+	return document.cookie.split( ";" ).some( (item) => item.trim().startsWith( cName ) );
+}
+
+function primeGetCookieValue( cName ) {
+let	name	=	cName + "=",
+	ca	=	document.cookie.split( ";" );
+for ( var i = 0; i < ca.length; i++ ) {
+var c	=	ca[i].trim();
+if ( ( c.indexOf( name ) ) == 0 ) {
+	return c.substr( name.length );
+}
+
+}
+return null;
+}
+
+
