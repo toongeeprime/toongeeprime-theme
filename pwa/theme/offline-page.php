@@ -46,7 +46,7 @@ echo	'</div>';
 
 
 if ( $get === 'notcached' ) {
-	//Script unfinished
+	// Untested/unfinished
 	echo '<script id="getFromNetwork">'. Prime2g_PWA_Scripts::getPageFromNetwork( '#reloadPage' ) .'</script>';
 }
 else {

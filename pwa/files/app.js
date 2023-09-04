@@ -27,16 +27,14 @@ if ( navigator.onLine ) {
 	prime2g_remClass( [ ooID, connClass ], 'off' );
 	}
 	} );
-
-setTimeout( ()=>{ prime2g_addClass( [ '#prime2g_offOnline_notif' ], 'off' ); }, 9000 );
 }
 else {
 	console.log( 'offline' );
 	prime2g_addClass( [ onClass, connClass ], 'off' );
 	prime2g_remClass( [ ooID, offClass ], 'off' );
-
-setTimeout( ()=>{ prime2g_addClass( [ '#prime2g_offOnline_notif' ], 'off' ); }, 9000 );
 }
+
+setTimeout( ()=>{ prime2g_addClass( [ '#prime2g_offOnline_notif' ], 'off' ); }, 10000 );
 }
 
 

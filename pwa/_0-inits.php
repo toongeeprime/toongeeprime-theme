@@ -15,17 +15,19 @@ function prime2g_appicons_image_sizes() {
 
 
 /**
- *	Constants:
+ *	Constants
  */
 $version	=	defined( 'CHILD2G_VERSION' ) ? CHILD2G_VERSION . PRIME2G_VERSION : PRIME2G_VERSION;
 
-$name	=	html_entity_decode( get_bloginfo( 'name' ) );
+$homeURL	=	get_home_url();
+$name		=	get_bloginfo( 'name' );
 
 if ( is_multisite() ) {
 switch_to_blog( 1 );
 if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
 
-$name	=	html_entity_decode( get_bloginfo( 'name' ) );
+$homeURL	=	network_home_url();
+$name		=	get_bloginfo( 'name' );
 
 }
 restore_current_blog();
@@ -33,13 +35,16 @@ restore_current_blog();
 
 
 define( 'PRIME2G_PWA_VERSION', $version );
-define( 'PRIME2G_PWA_SITENAME', $name );
+define( 'PRIME2G_PWA_SITENAME', html_entity_decode( $name ) );
+define( 'PRIME2G_PWA_HOMEURL', trailingslashit( $homeURL ) );
 define( 'PRIME2G_PWA_SLUG', 'app' );
 define( 'PRIME2G_PWA_BTNID', 'pwa_install' );
 define( 'PRIME2G_PWA_PATH', PRIME2G_THEME .'pwa/' );
 define( 'PRIME2G_PWA_URL', PRIME2G_THEMEURL .'pwa/' );
 define( 'PRIME2G_PWA_IMAGE', PRIME2G_PWA_URL .'images/' );
 define( 'PRIME2G_PWA_FILE', PRIME2G_PWA_URL .'files/' );
+#	Via site's home address NOT theme's pwa dir
+define( 'PRIME2G_PWA_VIRTUAL_DIR', PRIME2G_PWA_HOMEURL . PRIME2G_PWA_SLUG . '/' );
 
 #	Cache Strategies
 define( 'PWA_CACHEFIRST', 'CacheFirst' );
@@ -48,4 +53,7 @@ define( 'PWA_NETWORKFIRST', 'NetworkFirst' );
 define( 'PWA_NETWORKONLY', 'NetworkOnly' );
 define( 'PWA_STALE_REVAL', 'StaleWhileRevalidate' );
 
+if ( ! defined( 'PWA_SHARER_BTN_ID' ) ) {
+	define( 'PWA_SHARER_BTN_ID', 'sharerBTN' );
+}
 

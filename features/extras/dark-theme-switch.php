@@ -33,7 +33,7 @@ background:var(--content-text);color:var(--content-background);display:grid;bord
 .themeswitched_dark #prime2g_dt_switch .bi.on{display:grid;}
 
 @media (display-mode: browser){
-.has_pwa #prime2g_dt_switch{bottom:75px;}
+body.has_pwa:not(.prompt_hidden) #prime2g_dt_switch{bottom:75px;}
 }
 </style>
 

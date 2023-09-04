@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CLASS: Create PWA Web Manifest
+ *	CLASS: Create PWA Web Manifest & Activate App
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
@@ -18,7 +18,13 @@ class Prime2g_Web_Manifest {
 		$GLOBALS[ 'theme_web_app' ]	=	'Web App Active';
 		$GLOBALS[ 'pwa_css_class' ]	=	'has_pwa';
 
+		Prime2g_PWA_Prompt::instance();
+
+		new Prime2g_PWA_CSS();
+
 		new Prime2g_PWA_File_Url_Manager();
+
+		new Prime2g_PWA_Service_Worker();
 
 		// Flushing rewrite rules
 		add_action( 'after_switch_theme', 'flush_rewrite_rules' );
@@ -28,20 +34,9 @@ class Prime2g_Web_Manifest {
 		register_activation_hook( $wppwa_plugin, 'flush_rewrite_rules' );
 		register_deactivation_hook( $wppwa_plugin, 'flush_rewrite_rules' );
 
+		add_action( 'wp_head', function() { $this->html_metadata(); }, 11, 1 );
 
-		// if ( ! class_exists( 'WP_Service_Workers' ) ) {
-			new Prime2g_PWA_Service_Worker();
-
-			// add_action( 'init', [ $this, 'manifest_rule' ] );
-			// add_action( 'parse_request', function() {
-				// $this->show_manifest();
-			// }, 10, 1 );
-
-			add_action( 'wp_head', function() {
-				$this->html_metadata();
-			}, 11, 1 );
-			add_action( 'upgrader_process_complete', [ $this, 'after_upgrades' ], 10, 2 );
-		// }
+		add_action( 'upgrader_process_complete', [ $this, 'after_upgrades' ], 10, 2 );
 	}
 
 	return self::$instance;
@@ -171,3 +166,4 @@ echo '
 	}
 
 }
+

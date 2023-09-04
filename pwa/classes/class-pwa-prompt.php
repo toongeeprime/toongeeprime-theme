@@ -5,7 +5,6 @@
  *	@ https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
  */
 
-
 class Prime2g_PWA_Prompt {
 
 	/**
@@ -29,13 +28,13 @@ class Prime2g_PWA_Prompt {
 	public function button() {
 		$icons	=	Prime2g_PWA_Icons::instance();
 		$src	=	$icons->mainIcon()['src'];
+		$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );
 
 echo '<style id="p2g_pwaBtnCss">
 #p2g_pwaBtnWrap.prime{transform:translate(0);visibility:visible;opacity:1;}
 #p2g_pwaBtnWrap{transform:translateX(150%);position:fixed;bottom:0;right:0;transition:0.5s;visibility:hidden;opacity:0;
 background-color:#fff;background:var(--content-background);box-shadow:0 0 15px 3px rgba(0,0,0,0.2);}
 #p2g_pwaBtnWrap .bi{top:-20px;left:-15px;font-size:1.75em;}
-/*@media (display-mode: browser) { #p2g_pwaBtnWrap {display:block;} }*/
 </style>
 <div id="p2g_pwaBtnWrap" class="prel">
 <i id="xpwaPrompt" class="bi bi-x-circle-fill p-abso" title="Close"></i>
@@ -48,7 +47,7 @@ style="grid-template-columns:50px 1fr;padding:5px;gap:5px;">
 
 $js	=	'<script id="p2g_pwaPromptJS">
 let p2g_pwaPrompt	=	null,
-	stopPrompt		=	"'. PRIME2G_PWA_SITENAME .'_stopPrompt";
+	stopCookie		=	"'. $siteName .'_stopPrompt";
 const	p2g_pwabtnWrap=	p2getEl( "#p2g_pwaBtnWrap" ),
 		xpwaPrompt	=	p2getEl( "#xpwaPrompt" ),
 		p2g_pwaBtn	=	p2getEl( "#'. PRIME2G_PWA_BTNID .'" );
@@ -56,12 +55,16 @@ const	p2g_pwabtnWrap=	p2getEl( "#p2g_pwaBtnWrap" ),
 window.addEventListener( "appinstalled", ()=>{ stopPWAinstallPrompt(); } );
 xpwaPrompt.addEventListener( "click", ()=>{
 	stopPWAinstallPrompt();
-	primeSetCookie( stopPrompt, "stop", 1 );
+	primeSetCookie( stopCookie, "stop", 1 );
+	p2getEl( "body" ).classList.add( "prompt_hidden" );
 } );
 
 window.addEventListener( "beforeinstallprompt", ( event )=>{
 	event.preventDefault();
-	if ( primeHasCookie( stopPrompt ) ) return;
+	if ( primeHasCookie( stopCookie ) ) {
+		p2getEl( "body" ).classList.add( "prompt_hidden" )
+		return;
+	}
 	p2g_pwaPrompt	=	event;
 	p2g_pwabtnWrap.classList.add( "prime" );
 } );
@@ -84,6 +87,3 @@ echo $js;
 	}
 
 }
-
-
-Prime2g_PWA_Prompt::instance();

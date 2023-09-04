@@ -16,7 +16,6 @@ function prime2g_admin_footer_text() {
 }
 
 
-
 /**
  *	Modifies tag cloud widget arguments to display all tags in the same font size
  *	and use list format for better accessibility
@@ -32,15 +31,13 @@ return $args;
 }
 
 
-
 /**
  *	STOP WP HEARTBEAT
- *	@since ToongeePrime Theme 1.0.49.00
+ *	@since ToongeePrime Theme 1.0.49
  */
 add_action( 'init', 'prime2g_stop_wp_heartbeat', 1 );
 add_action( 'admin_enqueue_scripts', 'prime2g_stop_wp_heartbeat' );
 if ( ! function_exists( 'prime2g_stop_wp_heartbeat' ) ) {
-
 function prime2g_stop_wp_heartbeat() {
 	if ( 'stop' === get_theme_mod( 'prime2g_stop_wp_heartbeat' ) ) {
 	global $pagenow;
@@ -50,24 +47,20 @@ function prime2g_stop_wp_heartbeat() {
 		}
 	}
 }
-
 }
-
 
 
 /**
  *	DISABLE WP AUTOP
- *	@since ToongeePrime Theme 1.0.51.00
+ *	@since ToongeePrime Theme 1.0.51
  */
 add_filter( 'the_content', 'prime2g_disable_wpautop', 0 );
 function prime2g_disable_wpautop( $content ) {
 global $post;
-
 	if ( $post->disable_autop === 'disable' ) {
 		remove_filter( 'the_content', 'wpautop' );
 		remove_filter( 'the_excerpt', 'wpautop' );
 	}
-
 return $content;
 }
 

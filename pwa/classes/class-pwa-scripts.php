@@ -1,9 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CLASS: PWA Offline Scripts
- *	Here to plug into either Theme's service worker or that of WP PWA
- *	codes are NOT wrapped in <script> tags
+ *	CLASS: PWA Scripts
+ *	Plug into Theme's Web App
+ *	codes ARE NOT wrapped in <script> tags
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
@@ -11,14 +11,24 @@
 
 class Prime2g_PWA_Scripts {
 
-	public static function content() {}
+	private static $instance;
+
+	public static function content() {
+	if ( ! isset( self::$instance ) ) {
+		$start	=	new self();
+		$sharer	=	$start->share_this();
+
+		return $sharer;
+	}
+	return self::$instance;
+	}
 
 
 	public static function checkAndReload( string $btn = '', $interval = 60000 ) {
 $js	=	'';
 
 if ( $btn ) {
-	$js	.=	'document.querySelector( "'. $btn .'" ).addEventListener( "click", () => {
+	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", () => {
 window.location.reload();
 } );';
 }
@@ -46,15 +56,14 @@ return $js;
 
 	public static function getPageFromNetwork( string $btn = '' ) {
 	$offline	=	new Prime2g_PWA_File_Url_Manager();
-	$offlineRul	=	$offline->get_file_url()[ 'index' ];
+	$offlineUrll	=	$offline->get_file_url()[ 'offline' ];
 
 $js	=	'';
 
 if ( $btn ) {
-	$js	.=	'document.querySelector( "'. $btn .'" ).addEventListener( "click", ()=>{
+	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", ()=>{
 		event.respondWith( networkFetcher() );
-	}
-);';
+	} );';
 }
 
 $js	.=	'
@@ -68,7 +77,7 @@ async function networkFetcher() {
 	} catch ( error ) {
 		console.log( error );
 		const cache	=	await caches.open( PWACACHE );
-		const userOffline	=	await cache.match( '. $offlineRul .' );
+		const userOffline	=	await cache.match( '. $offlineUrll .' );
 		return userOffline;
 	}
 
@@ -78,11 +87,28 @@ window.setTimeout( ()=>{ window.location.reload() }, 1000 );
 return $js;
 	}
 
+
+	public function share_this() {
+	$title	=	$url	=	$text	=	'';
+
+$js	=	'const shareData = { title: "'. $title .'", url: "'. $url .'", text: "'. $text .'" };
+
+function canBrowserShareData( data ) {
+	if ( ! navigator.share || ! navigator.canShare ) { return false; }
+	return navigator.canShare( data ); // determines if data is shareable
 }
 
+const sharerBTN	=	p2getEl( "#'. PWA_SHARER_BTN_ID .'" );
+if ( sharerBTN && canBrowserShareData( shareData ) ) {
+sharerBTN.classList.remove( "hide" );
+sharerBTN.addEventListener( "click", async ()=>{
+	try { await navigator.share( shareData ); }
+	catch (err) { console.error( `URL could not be shared: ${err}` ); }
+} );
 
-/*
-window.addEventListener("offline", function(){
-    console.log("Oh no, you lost your network connection.");
-});
-*/
+}';
+return $js;
+	}
+
+}
+

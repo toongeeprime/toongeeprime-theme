@@ -22,7 +22,6 @@ if ( useGFonts && useGFonts.is( ":checked" ) ) {
 
 } );
 
-
 ( function( $, api ) {
 	'use strict';
 
@@ -119,7 +118,14 @@ value.bind( function( newval ) {
 	if ( newval === 'custom_url' ) imgUrl.slideDown( 180 ); else imgUrl.slideUp( 180 );
 } );
 } );
-
+/*
+api( 'prime2g_login_page_slug', function( value ) {
+value.bind( function( newval ) {
+	let slug	=	$( '#_customize-input-prime2g_login_page_slug' );
+	slug.keyup( function() { slug.val( $( this ).val().replace( /\d+|\s/g, '' ).toLowerCase() ); } );
+} );
+} );
+*/
 api( 'prime2g_use_theme_google_fonts', function( value ) {
 value.bind( function( newval ) {
 	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),

@@ -18,7 +18,6 @@ $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 
 	/**
 	 *	SHUT DOWN WEBSITE
-	 *	Setting 'type' changed to 'option' @ 1.0.52
 	 */
 	$wp_customize->add_setting(
 		'prime2g_website_shutdown',

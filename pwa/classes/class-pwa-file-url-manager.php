@@ -29,7 +29,7 @@ class Prime2g_PWA_File_Url_Manager {
 	$get_url	=	$this->get_file_url();
 
 	return (
-		isset( $_GET[ PRIME2G_PWA_SLUG ] ) && $_GET[ PRIME2G_PWA_SLUG ] === $value ||
+		// isset( $_GET[ PRIME2G_PWA_SLUG ] ) && $_GET[ PRIME2G_PWA_SLUG ] === $value ||
 		prime2g_get_current_url() === $get_url[ $value ]
 	);
 	}
@@ -49,7 +49,7 @@ class Prime2g_PWA_File_Url_Manager {
 	}
 
 
-	//	Virtual files output:
+	//	Virtual files output
 	public function show_file_output() {
 
 		if ( $this->check_params( 'manifest' ) ) {
@@ -86,16 +86,7 @@ class Prime2g_PWA_File_Url_Manager {
 
 
 	public static function startURL() {
-	$startURL	=	get_home_url();
-
-	if ( is_multisite() ) {
-		switch_to_blog( 1 );
-		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) )
-			$startURL	=	network_home_url();
-		restore_current_blog();
-	}
-
-	return trailingslashit( $startURL );
+		return PRIME2G_PWA_HOMEURL;
 	}
 
 
@@ -112,17 +103,17 @@ class Prime2g_PWA_File_Url_Manager {
 	public function get_file_url() {
 	$startURL	=	self::startURL();
 	$manifest	=	self::manifest_url();
-	$app_url	=	$startURL . PRIME2G_PWA_SLUG . '/';
+	$app_dir	=	$startURL . PRIME2G_PWA_SLUG . '/';
+	$ver	=	isset( $_GET[ 'ver' ] ) ? '?ver=' . PRIME2G_VERSION : '';
 
 	return [
 		'home'		=>	$startURL,
 		'manifest'	=>	$manifest,
-		'index'		=>	$app_url . 'index.html',
-		'offline'	=>	$app_url . 'offline.html',
-		'error'		=>	$app_url . 'error.html',
-		'notcached'	=>	$app_url . 'notcached.html',
-		'scripts'	=>	$app_url . 'scripts.js',
-		'notfound'	=>	$app_url . 'notfound.html',
+		'offline'	=>	$app_dir . 'offline.html',
+		'error'		=>	$app_dir . 'error.html',
+		'notcached'	=>	$app_dir . 'notcached.html',
+		'scripts'	=>	$app_dir . 'scripts.js' . $ver,
+		'notfound'	=>	$app_dir . 'notfound.html',
 		'service-worker'	=>	$startURL . 'service-worker.js'
 	];
 	}
@@ -132,8 +123,9 @@ class Prime2g_PWA_File_Url_Manager {
 	$childDir	=	$childCss	=	$childJs	=	$childLogin	=	null;
 	$childTheme	=	is_child_theme();
 
-	$filesDir	=	PRIME2G_FILE;
-	$appFile	=	PRIME2G_PWA_FILE;
+	$filesDir		=	PRIME2G_FILE;
+	$appFile		=	PRIME2G_PWA_FILE;
+	$virtual_dir	=	PRIME2G_PWA_VIRTUAL_DIR;
 	if ( $childTheme ) $childDir	=	CHILD2G_FILE;
 
 	if ( is_multisite() ) {
@@ -160,7 +152,8 @@ class Prime2g_PWA_File_Url_Manager {
 		'footerjs'	=>	$filesDir . "footer.js",
 		'appcss'	=>	$appFile . "app.css",
 		'appjs'		=>	$appFile . "app.js",
-		'icons'		=>	prime2g_icons_file_url(),	# i.e. Bootstrap icons
+		'scripts'	=>	$virtual_dir . "scripts.js",
+		'icons'		=>	prime2g_icons_file_url(),	# == Bootstrap icons
 		'childcss'	=>	$childCss,
 		'childlogin'=>	$childLogin,
 		'childjs'	=>	$childJs
@@ -180,6 +173,7 @@ class Prime2g_PWA_File_Url_Manager {
 		'footerjs'	=>	$filesDir . "footer.js" . $ver,
 		'appcss'	=>	$appFile . "app.css" . $ver,
 		'appjs'		=>	$appFile . "app.js" . $ver,
+		'scripts'	=>	$virtual_dir . "scripts.js" . $ver,
 		'icons'		=>	prime2g_icons_file_url() . $ver,
 		'childcss'	=>	$childCss . $cVer,
 		'childlogin'=>	$childLogin . $cVer,
@@ -191,4 +185,5 @@ class Prime2g_PWA_File_Url_Manager {
 	}
 
 }
+
 

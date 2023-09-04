@@ -18,10 +18,20 @@ if ( prime2g_add_theme_pwa() ) {
 		PRIME2G_VERSION
 	);
 
-	wp_enqueue_script(
+	wp_register_script(
 		'prime2g_pwa_js',
 		PRIME2G_PWA_URL . 'files/app.js',
 		array( 'prime2g_js' ),
+		PRIME2G_VERSION,
+		true
+	);
+
+	wp_enqueue_script( 'prime2g_pwa_js' );
+
+	wp_enqueue_script(
+		'prime2g_pwa_scripts',
+		PRIME2G_PWA_VIRTUAL_DIR . 'scripts.js',
+		[ 'prime2g_pwa_js' ],
 		PRIME2G_VERSION,
 		true
 	);
@@ -44,4 +54,3 @@ if ( prime2g_add_theme_pwa() ) {
 
 }
 }
-
