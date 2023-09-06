@@ -144,7 +144,7 @@ echo '</section>';
 
 
 /**
- *	Is set Before Archive post title
+ *	Set Before post title in Archive
  *	@since ToongeePrime Theme 1.0.45
  *	Added $post ToongeePrime Theme 1.0.50
  */

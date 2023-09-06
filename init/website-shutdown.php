@@ -16,9 +16,12 @@ if ( empty( $shutDown ) ) return;
 
 #	Other return conditions
 if ( is_admin() || is_user_logged_in() ||
-	in_array( $GLOBALS[ 'pagenow' ], array( 'wp-login.php', 'wp-register.php' ) )
+	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
 ) return;
 
+
+$add_css	=	function_exists( 'prime2g_add_shutdown_css' ) ? prime2g_add_shutdown_css() : '';
+$add_js		=	function_exists( 'prime2g_add_shutdown_js' ) ? prime2g_add_shutdown_js() : '';
 
 /**
  *	OPTION TO USE A SHUTDOWN PAGE
@@ -73,21 +76,26 @@ echo '<!DOCTYPE html><html '. get_language_attributes() .' '. prime2g_theme_html
 
 wp_head();
 
-echo '<style id="coming-soon-style">
+$background_image	=	get_background_image();
+
+echo '<style id="comingSoonCSS">
 body{display:grid;place-content:center;text-align:center;min-height:100vh;padding:var(--min-pad);
-background-size:cover;background-position:center;background-image:url('. get_background_image() .');}
+background-size:cover;background-position:center;background-image:url('. $background_image .');}
+'. $add_css .'
 </style>
 </head>';
 
-	# Run Close-down
+	//	Run Close-down
 	echo '<body class="coming_soon '. implode( ' ', get_body_class() ) .'">';
 
 	wp_body_open();
 
-	if ( current_user_can( 'edit_theme_options' ) && empty( get_background_image() ) )
+	if ( current_user_can( 'edit_theme_options' ) && empty( $background_image ) )
 		echo '<p style="position:fixed;top:0;left:0;">* You can add a background image in Customizer</p>';
 
 	prime2g_close_down_template( $shutDown );
+
+	echo '<script id="comingSoonJS">'. $add_js .'</script>';
 
 	wp_footer();
 
@@ -95,7 +103,6 @@ background-size:cover;background-position:center;background-image:url('. get_bac
 
 	exit;
 }
-
 
 
 /**

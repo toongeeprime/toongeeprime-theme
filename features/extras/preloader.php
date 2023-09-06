@@ -18,7 +18,7 @@ $useSiteLogo	=	( 'use_logo' === $preloaderState );
 $useSiteIcon	=	( 'use_icon' === $preloaderState );
 $useCustomUrl	=	( 'custom_url' === $preloaderState );	# 1.0.55
 
-if ( !empty( $preloaderState ) ) {
+if ( ! empty( $preloaderState ) ) {
 
 	$preloader	=	'<div id="prime2gPreloading">';
 	$preloader	.=	prime2g_page_preloaderCSS();
@@ -40,6 +40,8 @@ echo $preloader;
 
 if ( ! function_exists( 'prime2g_page_preloaderCSS' ) ) {
 function prime2g_page_preloaderCSS() {
+$add_css	=	function_exists( 'prime2g_add_preloader_css' ) ? prime2g_add_preloader_css() : '';
+
 $css	=	'<style id="preloaderCSS" scoped>
 #prime2gPreloading{position:fixed;top:0;bottom:0;left:0;right:0;background:var(--content-background);display:grid;
 place-items:center;z-index:100000;transition:0.5s;}
@@ -50,6 +52,7 @@ border-radius:50%;animation:loading 1s linear infinite;}
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
 }
+'. $add_css .'
 </style>';
 
 return $css;
@@ -59,6 +62,8 @@ return $css;
 
 if ( ! function_exists( 'prime2g_page_preloaderJS' ) ) {
 function prime2g_page_preloaderJS() {
+$add_js	=	function_exists( 'prime2g_add_preloader_js' ) ? prime2g_add_preloader_js() : '';
+
 $js	=	'<script id="preloaderJS">
 function prime2g_clearPreloader() {
 let p2Prloadr	=	p2getEl( "#prime2gPreloading" );
@@ -67,8 +72,10 @@ setTimeout( ()=>{ p2Prloadr.remove(); p2getEl( "body" ).classList.add( "preloade
 }
 
 window.addEventListener( "load", prime2g_clearPreloader );
+'. $add_js .'
 </script>';
 
 return $js;
 }
 }
+

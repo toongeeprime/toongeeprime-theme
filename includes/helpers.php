@@ -204,8 +204,17 @@ return $url;
  */
 function prime2g_get_postsdata_array( array $get, array $args, array $options ) {
 
-$index	=	$value	=	'';	# $get
+$index	=	$value	=	'';	# @$get
+$emptyoption	=	false;
+
 extract( $get );
+
+$indexes	=	$values	=	[];
+
+if ( $emptyoption ) {
+	$indexes[]	=	'';
+	$values[]	=	'';
+}
 
 $getPosts	=	prime2g_wp_query( $args, $options );
 
@@ -217,5 +226,4 @@ foreach ( $getPosts as $post ) {
 return array_combine( $indexes, $values );
 
 }
-
 

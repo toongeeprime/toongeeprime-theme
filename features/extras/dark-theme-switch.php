@@ -18,7 +18,7 @@ if ( $by_net_home ) { switch_to_blog( 1 ); }
 
 $theme_switch	=	get_theme_mod( 'prime2g_dark_theme_switch' );
 
-if ( 'on' === $theme_switch || 'on_dbody' === $theme_switch ) {
+if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) {
 
 $domain	=	prime2g_get_site_domain();
 $domain	=	str_replace( '.', '', $domain );
@@ -102,7 +102,6 @@ if ( $by_net_home ) { restore_current_blog(); }
 
 
 if ( ! function_exists( 'prime2g_dark_theme_set_logos' ) ) {
-
 function prime2g_dark_theme_set_logos() {
 
 $by_net_home	=	prime2g_design_by_network_home();
@@ -110,10 +109,10 @@ if ( $by_net_home ) { switch_to_blog( 1 ); }
 
 $theme_switch	=	get_theme_mod( 'prime2g_dark_theme_switch' );
 
-if ( 'on' === $theme_switch || 'on_dbody' === $theme_switch ) { ?>
+if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) { ?>
 
 <script id="prime2g_dt_logos_setter">
-//Set Custom Logo URL on page load
+//	Set Custom Logo URL on page load
 p2getAll( "img.custom-logo" ).forEach( logo=>{
 	if ( p2gThemeIsDark === "yes" || prime2gDarkThemeMedia() === true )
 		logo.src	=	dlogoUrl;
@@ -126,8 +125,6 @@ p2getAll( "img.custom-logo" ).forEach( logo=>{
 }
 
 if ( $by_net_home ) { restore_current_blog(); }
-
 }
-
 }
 

@@ -43,6 +43,7 @@ Several updates across the theme
 * @ plugins: Added plugin-helpers.php
 * @ includes: Added css.php & js.php
 * @ js: Added insertAfter
+* @ Preloader: Custom CSS/JS can be added
 * @ Sidebars: aboveheader-widgets, belowheader-widgets, aboveposts-widgets,
 * @ Hooks: prime2g_before_head, prime2g_before_body, prime2g_before_header_title,
 	prime2g_after_header_title, prime2g_after_home_main_headline, prime2g_after_home_headlines
@@ -270,7 +271,6 @@ Hooked to comment_form_defaults:
 	toongeeprime_comment_form_defaults()
 
 
-
 == Theme Filters ==
 @since version 1.0.45
 * prime2g_archive_post_top_filter
@@ -337,4 +337,3 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
-

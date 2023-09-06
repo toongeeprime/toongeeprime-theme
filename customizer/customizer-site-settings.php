@@ -11,7 +11,7 @@ if ( ! function_exists( 'prime2g_customizer_site_settings' ) ) {
 
 function prime2g_customizer_site_settings( $wp_customize ) {
 
-$get	=	[ 'index' => 'ID', 'value' => 'post_title' ];
+$get	=	[ 'index' => 'ID', 'value' => 'post_title', 'emptyoption' => true ];
 $args	=	[ 'post_type' => 'page', 'posts_per_page' => -1, 'post_status' => 'publish' ];
 $option	=	[ 'cacheName' => 'getpages', 'get' => 'posts' ];
 $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
