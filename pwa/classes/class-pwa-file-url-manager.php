@@ -101,20 +101,20 @@ class Prime2g_PWA_File_Url_Manager {
 
 
 	public function get_file_url() {
-	$startURL	=	self::startURL();
-	$manifest	=	self::manifest_url();
-	$app_dir	=	$startURL . PRIME2G_PWA_SLUG . '/';
-	$ver	=	isset( $_GET[ 'ver' ] ) ? '?ver=' . PRIME2G_VERSION : '';
+	$homeURL	=	PRIME2G_PWA_HOMEURL;
+	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', 0 ) ? $homeURL : '';
+	$app_dir	=	PRIME2G_PWA_VIRTUAL_DIR;
+	$ver		=	isset( $_GET[ 'ver' ] ) ? '?ver=' . PRIME2G_VERSION : '';
 
 	return [
-		'home'		=>	$startURL,
-		'manifest'	=>	$manifest,
+		'home'		=>	$addHome,
+		'manifest'	=>	self::manifest_url(),
 		'offline'	=>	$app_dir . 'offline.html',
 		'error'		=>	$app_dir . 'error.html',
 		'notcached'	=>	$app_dir . 'notcached.html',
 		'scripts'	=>	$app_dir . 'scripts.js' . $ver,
 		'notfound'	=>	$app_dir . 'notfound.html',
-		'service-worker'	=>	$startURL . 'service-worker.js'
+		'service-worker'	=>	$homeURL . 'service-worker.js'
 	];
 	}
 

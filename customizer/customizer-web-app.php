@@ -52,14 +52,24 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	);
 }
 
+	$wp_customize->add_setting(
+		'prime2g_add_homepage_to_cache',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_add_homepage_to_cache',
+		array(
+			'label'		=>	__( 'Add Homepage to App\'s Cache', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_add_homepage_to_cache',
+			'section'	=>	'prime2g_theme_pwa_section'
+		)
+	);
+
 
 	$wp_customize->add_setting(
 		'prime2g_pwapp_primaryicon',
-		array(
-			'type'	=>	'theme_mod',
-			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_text_field',
-		)
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
 	$wp_customize->add_control( new WP_Customize_Cropped_Image_Control(
 		$wp_customize,
