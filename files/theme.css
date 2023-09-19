@@ -285,7 +285,7 @@ a:hover, a:focus, table a:hover, table a:focus{
 	background-color:var(--header-background); color:var(--header-text); padding:var(--min-pad);
 	display:grid; align-items:center;
 }
-#header a{
+.site_header a{
 	color:var(--header-text);
 }
 .page_title{

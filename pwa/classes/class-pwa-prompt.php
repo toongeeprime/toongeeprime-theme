@@ -26,8 +26,8 @@ class Prime2g_PWA_Prompt {
 
 
 	public function button() {
-		$icons	=	Prime2g_PWA_Icons::instance();
-		$src	=	$icons->mainIcon()['src'];
+		$urls	=	wp_cache_get( 'pwa_urls', PRIME2G_APPCACHE );
+		$src	=	$urls[ 'appicon' ];
 		$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );
 
 echo '<style id="p2g_pwaBtnCss">

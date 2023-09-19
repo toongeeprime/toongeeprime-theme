@@ -20,9 +20,9 @@ function prime2g_removeSidebar() {
  *	nonce verifier
  *	@since ToongeePrime Theme 1.0.46
  */
-function prime2g_verify_nonce( $nonceField = 'prime_ajaxnonce' ) {
-	if ( ! isset( $_REQUEST[ '_prime-nonce' ] ) || ! wp_verify_nonce( $_POST[ '_prime-nonce' ], $nonceField ) ) {
-		$msg = akawey_message( 'security_fail', 'warning' ); wp_die( $msg );
+function prime2g_verify_nonce( $actionName = 'prime_ajaxnonce' ) {
+	if ( ! isset( $_REQUEST[ '_prime-nonce' ] ) || ! wp_verify_nonce( $_POST[ '_prime-nonce' ], $actionName ) ) {
+		$msg	=	__( 'Failed security verification!', PRIME2G_TEXTDOM ); wp_die( $msg );
 	}
 }
 

@@ -46,6 +46,8 @@ define( 'PRIME2G_PWA_FILE', PRIME2G_PWA_URL .'files/' );
 #	Via site's home address NOT theme's pwa dir
 define( 'PRIME2G_PWA_VIRTUAL_DIR', PRIME2G_PWA_HOMEURL . PRIME2G_PWA_SLUG . '/' );
 
+define( 'PRIME2G_APPCACHE', 'prime2g_pwa_app_cache' );
+
 #	Cache Strategies
 define( 'PWA_CACHEFIRST', 'CacheFirst' );
 define( 'PWA_CACHEONLY', 'CacheOnly' );

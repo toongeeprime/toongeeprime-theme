@@ -18,6 +18,7 @@ class Prime2g_PWA_File_Url_Manager {
 	public function __construct() {
 
 		if ( ! isset( self::$instance ) ) {
+			self::urls_cache();
 			add_action( 'parse_request', array( $this, 'show_file_output' ) );
 		}
 
@@ -184,6 +185,29 @@ class Prime2g_PWA_File_Url_Manager {
 	if ( $get === 'csv_versioned' ) return implode( ', ', $versioned );
 	}
 
-}
 
+	public static function urls_cache() {
+	$cache	=	wp_cache_get( 'pwa_urls', PRIME2G_APPCACHE );
+
+	if ( false === $cache ) {
+		$appIcons	=	[];
+
+		$icons		=	new Prime2g_PWA_Icons();
+		$allicons	=	$icons->icons();
+		foreach ( $allicons as $ii ) {
+			$appIcons[]	=	$ii[ 'src' ];
+		}
+
+		$keys		=	[ 'appicon', 'appicons' ];
+		$values		=	[ $icons->mainIcon()[ 'src' ], $appIcons ];
+
+		$array		=	array_combine( $keys, $values );
+		wp_cache_set( 'pwa_urls', $array, PRIME2G_APPCACHE, DAY_IN_SECONDS );
+		$cache	=	wp_cache_get( 'pwa_urls', PRIME2G_APPCACHE );
+	}
+
+	return $cache;
+	}
+
+}
 
