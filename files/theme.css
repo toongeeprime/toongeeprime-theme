@@ -664,9 +664,6 @@ a.comment-reply-link:hover{
 .stickies .sticky{
 	width:300px;
 }
-body .widget_eu_cookie_law_widget{
-	left:0; right:0; bottom:0;
-}
 body #eu-cookie-law{
 	padding:1rem;
 }

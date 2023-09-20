@@ -25,7 +25,7 @@ function prime2g_theme_root_styles() {
  */
 if ( ! function_exists( 'prime2g_icons_file_url' ) ) {
 function prime2g_icons_file_url() {
-	return 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css';
+	return 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css';
 }
 }
 
