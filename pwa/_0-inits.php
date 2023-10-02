@@ -19,6 +19,7 @@ function prime2g_appicons_image_sizes() {
  */
 $version	=	defined( 'CHILD2G_VERSION' ) ? CHILD2G_VERSION . PRIME2G_VERSION : PRIME2G_VERSION;
 
+// Do Not if/else
 $homeURL	=	get_home_url();
 $name		=	get_bloginfo( 'name' );
 
@@ -58,4 +59,5 @@ define( 'PWA_STALE_REVAL', 'StaleWhileRevalidate' );
 if ( ! defined( 'PWA_SHARER_BTN_ID' ) ) {
 	define( 'PWA_SHARER_BTN_ID', 'sharerBTN' );
 }
+
 

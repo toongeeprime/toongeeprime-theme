@@ -502,7 +502,7 @@ a.comment-reply-link:hover{
 	color:var(--content-text); background:var(--content-background);
 }
 .comment-metadata a{
-	border:0; font-size:90%;
+	border:0;font-size:90%;
 }
 .required-field-message{
 	display:block; font-size:80%; font-style:italic;
@@ -510,6 +510,9 @@ a.comment-reply-link:hover{
 }
 #reply-title small a{
 	display:block;width:max-content;
+}
+em.comment-awaiting-moderation{
+	display:block;margin:var(--min-pad);
 }
 
 /********* ARCHIVES *********/
@@ -862,8 +865,11 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 }
 .main-menu{
 	background:var(--content-background); right:var(--min-pad); position:fixed;
-	top:46px; left:0; bottom:0; padding-bottom:var(--min-pad);
+	left:0; bottom:0; padding-bottom:var(--min-pad);
 	transition:0.4s; transform:translateX(-200%); overflow-y:auto;
+}
+.admin-bar .main-menu{
+	top:46px;
 }
 .main-menu::-webkit-scrollbar{
 	width:12px; background:silver;

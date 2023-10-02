@@ -41,7 +41,8 @@ function prime2g_theme_enqueues() {
 	# jQuery
 	wp_enqueue_script(
 		'prime2g_jQuery',
-		'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+		// 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+		get_theme_file_uri( '/files/jquery.min.js' ),
 	);
 
 	wp_register_script(

@@ -55,6 +55,7 @@ Several updates across the theme
 * Pagination by numbers
 * Work Custom logo width and height attributes
 * Shortcodes: prime_site_logo, prime_site_title_and_description
+* Internalized jQuery.
 
 = 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()

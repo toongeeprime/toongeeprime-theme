@@ -56,18 +56,20 @@ class Prime2g_PWA_Service_Worker {
 
 	public function get_caching() {
 	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_CACHEFIRST );
+	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' ); # String
 
 	if ( is_multisite() ) {
 		switch_to_blog( 1 );
 		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
 			$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_CACHEFIRST );
+			$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 			$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );
 		}
 		restore_current_blog();
 	}
 
-	return [ 'strategy' => $strategy, 'addToCache' => $addToCache ];
+	return [ 'strategy' => $strategy, 'addHome' => $addHome, 'addToCache' => $addToCache ];
 	}
 
 
@@ -77,6 +79,7 @@ class Prime2g_PWA_Service_Worker {
 	$icons		=	new Prime2g_PWA_Icons();
 	$caching	=	$this->get_caching();
 	$strategy	=	$caching[ 'strategy' ];
+	$addHome	=	$caching[ 'addHome' ];
 	$addRequestToCache	=	$caching[ 'addToCache' ];
 	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ?
 						' + ", " + "' . child_add_to_pwa_precache() . '"' : null; # CSV
@@ -87,12 +90,16 @@ class Prime2g_PWA_Service_Worker {
 const logoURL		=	"'. prime2g_siteLogo( false, true ) .'";
 const iconURL		=	"'. $icons->mainIcon()[ 'src' ] .'";
 const themeFiles	=	"'. $fileURLs->theme_files( 'csv_versioned' ) .'";
-const homeStartURL	=	"'. $get_url[ 'home' ] .'";
+const addHome		=	'. $addHome .';
+const homeStartURL	=	"";
+if ( 0 != addHome ) {
+	const homeStartURL	=	"'. $get_url[ 'home' ] .'" + ", ";
+}
 const userIsOfflineURL	=	"'. $get_url[ 'offline' ] .'";
 const errorPageURL		=	"'. $get_url[ 'error' ] .'";
 const notCachedPageURL	=	"'. $get_url[ 'notcached' ] .'";
-const filesString		=	logoURL + ", " + iconURL + ", " + themeFiles +
-", " + homeStartURL + ", " + userIsOfflineURL + ", " + errorPageURL + ", " + notCachedPageURL'. $addFileUrls .';
+const filesString		=	homeStartURL + logoURL + ", " + iconURL + ", " + themeFiles +
+", " + userIsOfflineURL + ", " + errorPageURL + ", " + notCachedPageURL'. $addFileUrls .';
 const PRECACHE_ITEMS	=	filesString.split(", ");
 const addRequestToCache	=	'. $addRequestToCache .';
 const strategy			=	"'. $strategy .'";
@@ -220,10 +227,8 @@ try {
 }
 
 
-
 /*
 Read more @
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
 */
-

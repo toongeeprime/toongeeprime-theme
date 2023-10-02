@@ -36,7 +36,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_show_socials_and_contacts',
 		array(
-			'label'		=>	__( 'Show Icon Links', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Icon Links in Footer', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_show_socials_and_contacts',
 			'section'	=>	'prime2g_socialmedia_links_section'

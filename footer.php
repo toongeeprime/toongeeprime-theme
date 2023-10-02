@@ -23,14 +23,14 @@
 
 <div id="footerWrap" class="footerWrap">
 
-<footer id="site_footer" class="site_footer">
+<footer id="site_footer" class="site_footer site_width">
 
 	<?php prime2g_footer_widgets(); ?>
 	<?php prime2g_footer_menu(); ?>
 
 </footer><!-- #site_footer -->
 
-	<section id="colophon" class="colophon prel" role="contentinfo">
+	<section id="colophon" class="colophon prel site_width" role="contentinfo">
 
 	<?php
 	if ( get_theme_mod( 'prime2g_theme_add_footer_logo', '1' ) ) {
@@ -38,14 +38,12 @@
 	}
 	?>
 
-		<div class="site-info">
-
+		<div class="site-info site_width">
 <?php
 if ( get_theme_mod( 'prime2g_show_socials_and_contacts', 1 ) ) {
 	echo prime2g_theme_mod_social_and_contacts();
 }
 ?>
-
 		</div><!-- .site-info -->
 
 	</section><!-- #colophon -->

@@ -7,18 +7,6 @@
 function p2getEl( el ) { return document.querySelector( el ); }
 function p2getAll( els ) { return document.querySelectorAll( els ); }
 
-function prime2gElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.add( clss ); } );
-}
-
-function prime2g_offElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.remove( clss ); } );
-}
-
-function prime2g_toggElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.toggle( clss ); } );
-}
-
 // Element in viewport checker
 function prime2g_inViewport( el ) {
 let rect = el.getBoundingClientRect();
@@ -140,15 +128,34 @@ return ( windowWidth < screenSize );
  */
 function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newNode, refNode.nextSibling ); }
 
-function prime2g_addClass( elems, clss = 'prime' ) {
+
+// DEPRECATE: poor function naming, use below functions
+function prime2gElems( elems, clss = 'prime' ) {
+elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.add( clss ); } );
+}
+
+function prime2g_offElems( elems, clss = 'prime' ) {
+elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.remove( clss ); } );
+}
+
+function prime2g_toggElems( elems, clss = 'prime' ) {
+elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.toggle( clss ); } );
+}
+// DEPRECATE END
+
+
+function prime2g_addClass( elems, clss = 'prime', prevD = true ) {
+if ( prevD ) event.preventDefault();
 elems.forEach( el=>{ p2getEl( el ).classList.add( clss ); } );
 }
 
-function prime2g_remClass( elems, clss = 'prime' ) {
+function prime2g_remClass( elems, clss = 'prime', prevD = true ) {
+if ( prevD ) event.preventDefault();
 elems.forEach( el=>{ p2getEl( el ).classList.remove( clss ); } );
 }
 
-function prime2g_toggClass( elems, clss = 'prime' ) {
+function prime2g_toggClass( elems, clss = 'prime', prevD = true ) {
+if ( prevD ) event.preventDefault();
 elems.forEach( el=>{ p2getEl( el ).classList.toggle( clss ); } );
 }
 
@@ -179,5 +186,4 @@ if ( ( c.indexOf( name ) ) == 0 ) {
 }
 return null;
 }
-
 

@@ -224,7 +224,7 @@ add_action( 'prime2g_after_title', 'prime2g_postmeta_top', 4 );
 if ( ! function_exists( 'prime2g_postmeta_top' ) ) {
 function prime2g_postmeta_top() {
 
-if ( is_page() || get_post_type() == 'product' ) return;
+if ( is_page() || get_post_type() === 'product' ) return;
 
 $byline	=	get_theme_mod( 'prime2g_entry_byline_usage', '' );
 
@@ -662,3 +662,5 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
+
+

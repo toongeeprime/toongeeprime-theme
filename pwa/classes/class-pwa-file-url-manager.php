@@ -103,12 +103,11 @@ class Prime2g_PWA_File_Url_Manager {
 
 	public function get_file_url() {
 	$homeURL	=	PRIME2G_PWA_HOMEURL;
-	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', 0 ) ? $homeURL : '';
 	$app_dir	=	PRIME2G_PWA_VIRTUAL_DIR;
 	$ver		=	isset( $_GET[ 'ver' ] ) ? '?ver=' . PRIME2G_VERSION : '';
 
 	return [
-		'home'		=>	$addHome,
+		'home'		=>	$homeURL,
 		'manifest'	=>	self::manifest_url(),
 		'offline'	=>	$app_dir . 'offline.html',
 		'error'		=>	$app_dir . 'error.html',
