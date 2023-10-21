@@ -16,12 +16,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
-= 1.0.55.00... In progress =
+= 1.0.55... In progress =
 Several updates across the theme
 * Introduced the beginnings of theme's PROGRESSIVE WEB APP (PWA)
 * HEADER VIDEO
 * SMTP Mail Config
-* 100 Google Fonts
+* 106 Google Fonts
 * @ customizer: File: customizer-theme-menus.php
 * @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks
@@ -54,8 +54,9 @@ Several updates across the theme
 	-	Menus have to be created to link to locations
 * Pagination by numbers
 * Work Custom logo width and height attributes
-* Shortcodes: prime_site_logo, prime_site_title_and_description
-* Internalized jQuery.
+* Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_site_footer_credits
+* Internalized jQuery
+* Updated screenshot
 
 = 1.0.51.00 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()

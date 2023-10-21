@@ -205,13 +205,13 @@ code{
 	width:10px; height:5px; background:silver;
 }
 .slimscrollbar::-webkit-scrollbar-thumb{
-	background:var(--content-text); border-radius:10px;
+	background:var(--brand-color); border-radius:10px;
 }
 .slimscrollbar::-webkit-scrollbar:hover{
-	background:#909090;
+	background:#b0b0b0;
 }
 .slimscrollbar::-webkit-scrollbar-thumb:hover{
-	background:steelblue;
+	background:var(--brand-color-2);
 }
 .clear, .prev_next{
 	clear:both; width:100%;

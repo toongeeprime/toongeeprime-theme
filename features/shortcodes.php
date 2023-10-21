@@ -16,7 +16,7 @@ $atts	=	shortcode_atts( array( 'showaddress'	=>	'' ), $atts );
 extract( $atts );
 
 $address	=	false;
-if ( $showaddress == 'yes' ) {
+if ( $showaddress === 'yes' ) {
 	$address	=	true;
 }
 
@@ -30,7 +30,7 @@ return prime2g_theme_mod_social_and_contacts( $address );
  */
 add_shortcode( 'prime_insert_template_part', 'prime2g_insert_template_part_shortcode' );
 function prime2g_insert_template_part_shortcode( $atts ) {
-$atts	=	shortcode_atts( array( 'id'	=>	'1' ), $atts );
+$atts	=	shortcode_atts( [ 'id' => '1' ], $atts );
 extract( $atts );
 
 $part	=	prime2g_insert_template_part( $id, false );
@@ -40,7 +40,6 @@ if ( ! $part && current_user_can( 'edit_others_posts' ) ) {
 }
 
 return $part;
-
 }
 
 
@@ -53,8 +52,8 @@ function prime2g_sitelogo_shortcode( $atts ) {
 $atts	=	shortcode_atts( array( 'dark_logo' => '', 'source' => '' ), $atts );
 extract( $atts );
 
-$darkLogo	=	( $dark_logo == 'yes' ) ? true : false;
-$src	=	( $source == 'yes' ) ? true : false;
+$darkLogo	=	( $dark_logo === 'yes' ) ? true : false;
+$src	=	( $source === 'yes' ) ? true : false;
 
 return prime2g_siteLogo( $darkLogo, $src );
 }
@@ -67,7 +66,8 @@ add_shortcode( 'prime_search_form', 'prime2g_searchform_shortcode' );
 function prime2g_searchform_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
 	'placeholder'	=>	'Keywords',
-	'buttontext'	=>	'Go',
+	'required'		=>	'',
+	'buttontext'	=>	html_entity_decode( 'Go' ),
 	'label'			=>	'Search here',
 	'echo'			=>	false
 ], $atts );
@@ -94,6 +94,40 @@ $title	.=	( $descOnly || $desc ) ? '<p id="site_description">'. get_bloginfo( 'd
 $title	.=	"</div>";
 
 return $title;
+}
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+add_shortcode( 'prime_nav_menu', 'prime2g_get_nav_menu_shortcode' );
+function prime2g_get_nav_menu_shortcode( $atts ) {
+$atts	=	shortcode_atts( [ 'menu' => '', 'class' => 'shortcode_menu', 'id' => '', 'title_attrs' => 'yes' ], $atts );
+extract( $atts );
+
+$id		=	$id ? ' id="'. $id .'"' : '';
+$title_attrs	=	( $title_attrs === 'yes' ) ? true : false;
+
+$items	=	null;
+$menu_array	=	wp_get_nav_menu_items( $menu );
+
+if ( $menu_array ) {
+foreach ( $menu_array as $item ) {
+	$title_attrs	=	$title_attrs ? ' title="'. $item->title .'"' : '';
+	$items[]	=	'<li><a href="'. $item->url .'"'. $title_attrs .'>'. $item->title .'</a></li>';
+}
+}
+
+$none	=	current_user_can( 'edit_theme_options' ) ? 'No Menu Item Found' : '';
+
+$result	=	$items ? $items : $none;
+
+if ( is_array( $result ) ) {
+	$result	=	implode( '', $result );
+	$result	=	'<ul'. $id .' class="'. $class .'">'. $result .'</ul>';
+}
+
+return $result;
 }
 
 
@@ -132,5 +166,4 @@ if ( empty( $users ) ) {
 }
 
 }
-
 

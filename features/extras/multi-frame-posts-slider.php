@@ -4,7 +4,7 @@
  *	MULTI FRAME POSTS SLIDER
  *
  *	* MANUALLY ADD CSS AND JS: to prevent mulitple inserts
- *	@since ToongeePrime Theme 1.0.51.00
+ *	@since ToongeePrime Theme 1.0.51
  */
 
 add_shortcode( 'prime_multiposts_slider', 'prime2g_multiframe_posts_slider' );
@@ -98,6 +98,5 @@ else {
 
 return $div;
 }
-
 
 

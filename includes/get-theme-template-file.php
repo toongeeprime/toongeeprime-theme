@@ -48,7 +48,7 @@ function prime2g_get_theme_template( $archive = false ) {
 
 			# *Template filename format: posttypename.php
 
-			$posttypename	=	$obj->name;
+			$posttypename	=	$obj->name;	# NOT slug
 
 			/**
 			 *	Run Template for Archive Queries

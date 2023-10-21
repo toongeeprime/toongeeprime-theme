@@ -372,7 +372,7 @@ if ( 'date_only' === get_theme_mod( 'prime2g_entry_byline_usage' ) ) {
 		esc_html__( $date )
 	);
 	$info	=	'<span class="posted_on">';
-	$info	.=	$add_pre ?  : '';
+	$info	.=	$add_pre ?: '';
 	$info	.=	'<a href="' . $dateUrl . '" title="'. $more . ' ' . $date .'">' . $time_string . '</a>';
 	$info	.=	'</span>';
 

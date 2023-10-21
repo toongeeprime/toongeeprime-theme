@@ -39,7 +39,7 @@ if ( $facebook )
 if ( $instagram )
 	$contacts .= '<span class="sci ig"><a href="'. $instagram .'"'. $attrs .'"' . __( $siteName . ' on Instagram', PRIME2G_TEXTDOM ) . '"><i class="bi bi-instagram"></i></a></span>';
 if ( $twitter )
-	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on Twitter', PRIME2G_TEXTDOM ) . '"><i class="bi bi-twitter"></i></a></span>';
+	$contacts .= '<span class="sci tw"><a href="'. $twitter .'"'. $attrs .'"' . __( $siteName . ' on X', PRIME2G_TEXTDOM ) . '"><i class="bi bi-twitter-x"></i></a></span>';
 if ( $youTube )
 	$contacts .= '<span class="sci yt"><a href="'. $youTube .'"'. $attrs .'"' . __( $siteName . ' on YouTube', PRIME2G_TEXTDOM ) . '"><i class="bi bi-youtube"></i></a></span>';
 if ( $linkedIn )
@@ -72,7 +72,7 @@ return $contacts;
 
 
 /**
- *	Site's Footer Credit
+ *	Site' Footer Credit
  */
 if ( ! function_exists( 'prime2g_theme_mod_footer_credit' ) ) {
 
@@ -139,10 +139,9 @@ return $footerCred;
 
 
 /**
- *	Shop Page's Title
+ *	Shop Page' Title
  */
 if ( ! function_exists( 'prime2g_theme_mod_shop_title' ) ) {
-
 function prime2g_theme_mod_shop_title( $pre = '<h1 class="page-title">', $post = '</h1>' ) {
 $shopTitle	=	get_theme_mod( 'prime2g_shop_page_title' );
 
@@ -155,6 +154,5 @@ $shopTitle	=	get_theme_mod( 'prime2g_shop_page_title' );
 
 return $title;
 }
-
 }
 

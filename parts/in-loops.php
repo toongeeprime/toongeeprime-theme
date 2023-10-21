@@ -222,13 +222,16 @@ $link	=	get_permalink();
  */
 if ( ! function_exists( 'prime2g_get_archive_loop' ) ) {
 function prime2g_get_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
-$title	=	get_the_title();
+global $post;
+$title	=	$post->post_title;
 $link	=	get_permalink();
+$edit_link	=	true;
 
 #	@since ToongeePrime Theme 1.0.55
-global $post;
 
-if ( is_array( $size ) ) {	# Leave var name for backwards compatibility
+$loop_post_header_template	=	$loop_post_footer_template	=	null;
+
+if ( is_array( $size ) ) {	# Var name for backwards compatibility
 
 $imgSize	=	'large';
 $excerpt	=	true;
@@ -246,12 +249,15 @@ else {
 }
 #	@since ToongeePrime Theme 1.0.55 end
 
-$entry	=	'<article id="entry-' . get_the_ID() . '" class="' . implode( ' ', get_post_class() ) . '">';
+$entry	=	'<article id="entry-' . $post->ID . '" class="' . implode( ' ', get_post_class() ) . '">';
 $entry	.=	'<div class="entry_img">';
 
 $entry	.=	prime2g_ft_image_in_loop( $title, $imgSize, $link, $post );
 
 $entry	.=	'</div>';
+
+$entry	.=	$loop_post_header_template ? $loop_post_header_template() : '';
+
 $entry	.=	'<div class="entry_text">';
 
 if ( $metas )
@@ -262,10 +268,13 @@ $entry	.=	'<a href="' . $link . '" title="Read this entry"><' . $tag . ' class="
 if ( $excerpt && ! is_attachment() )
 	$entry	.=	prime2g_post_excerpt( $length, $post, $readmore );
 
+if ( $edit_link )
 	$entry	.=	prime2g_edit_entry_get( '<p class="edit-link edit-entry">', '</p>' );
 
 if ( $footer )
 	$entry	.=	prime2g_archive_post_footer_filter_part();
+
+$entry	.=	$loop_post_footer_template ? $loop_post_footer_template() : '';
 
 $entry	.=	'</div>';
 $entry	.=	'</article>';
@@ -326,8 +335,10 @@ $metas	=	true;
 $footer	=	false;
 $tag	=	'h2';
 $readmore	=	' - Read more';
+$edit_link	=	true;
 $entryClasses	=	'';
 $switch_img_vid	=	false;
+$loop_post_header_template	=	$loop_post_footer_template	=	null;
 
 extract( $args );
 
@@ -344,6 +355,9 @@ $entry	.=	'<div class="entry_img">';
 $entry	.=	prime2g_get_post_media_embed( '', $post );
 
 $entry	.=	'</div>';
+
+$entry	.=	$loop_post_header_template ? $loop_post_header_template() : '';
+
 $entry	.=	'<div class="entry_text">';
 
 if ( $metas )
@@ -357,7 +371,10 @@ if ( $excerpt && ! is_attachment( $post->ID ) )
 if ( $footer )
 	$entry	.=	prime2g_archive_post_footer_filter_part();
 
+if ( $edit_link )
 	$entry	.=	prime2g_edit_entry_get( '<p class="edit-link edit-entry">', '</p>', $post );
+
+$entry	.=	$loop_post_footer_template ? $loop_post_footer_template() : '';
 
 $entry	.=	'</div>';
 $entry	.=	'</article>';
@@ -365,8 +382,9 @@ $entry	.=	'</article>';
 }
 else {
 $data	=	[
-	'imgSize' => $size, 'excerpt' => $excerpt, 'length' => $length,
-	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'readmore' => $readmore
+	'imgSize' => $size, 'excerpt' => $excerpt, 'length' => $length, 'edit_link' => $edit_link,
+	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'readmore' => $readmore,
+	'loop_post_header_template' => $loop_post_header_template, 'loop_post_footer_template' => $loop_post_footer_template,
 ];
 	$entry	=	prime2g_get_archive_loop( $data );
 }

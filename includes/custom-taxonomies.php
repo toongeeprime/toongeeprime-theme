@@ -50,6 +50,5 @@ register_taxonomy( 'template_parts_section', 'prime_template_parts', $args );
 
 }
 
-
-
 }
+

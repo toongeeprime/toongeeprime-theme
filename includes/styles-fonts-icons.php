@@ -62,6 +62,7 @@ function prime2g_theme_fonts() {
 
 return array(
 	'Abril+Fatface'	=>	'Abril Fatface',
+	'Adamina'		=>	'Adamina',
 	'Alegreya+Sans'	=>	'Alegreya Sans',
 	'Amita'		=>	'Amita',
 	'Architects+Daughter'		=>	'Architects Daughter',
