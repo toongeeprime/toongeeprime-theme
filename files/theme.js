@@ -17,7 +17,7 @@ let rect = el.getBoundingClientRect();
 	);
 }
 
-function prime2g_inViewport_get( elmt ) {
+function prime2g_inViewport_get( elmt ) { // Get the element in-function
 el	=	p2getEl( elmt );
 let rect	=	el.getBoundingClientRect();
 	return (
@@ -61,19 +61,22 @@ if ( elmt ) {
  *	Counter
  *	@since ToongeePrime Theme 1.0.48.50
  */
-function prime2g_count_to( speed = 100, clss = '.countEl' ) {
+function prime2g_count_to( speedNum = 100, clss = '.countEl' ) {
 const	countEls	=	p2getAll( clss );
-countEls.forEach( run =>{
+
+countEls.forEach( el =>{
 const runCount	=	()=>{
-	const value	=	+run.getAttribute( 'countto' );
-	const data	=	+run.innerText;
+	const value	=	+el.getAttribute( 'countto' );
+	const attrSpeed	=	+el.getAttribute( 'speed' );
+	const num	=	+el.innerText;
+	const speed	=	attrSpeed ? attrSpeed : speedNum;
 	const result	=	value / speed;
-	if ( data < value ) {
-		run.innerText	=	Math.ceil( data + result );
+	if ( num < value ) {
+		el.innerText	=	Math.ceil( num + result );
 		setTimeout( runCount, speed );
 	}
 	else {
-		run.innerText	=	value;
+		el.innerText	=	value;
 	}
 }
 runCount();

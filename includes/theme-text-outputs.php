@@ -664,3 +664,4 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 }
 
 
+

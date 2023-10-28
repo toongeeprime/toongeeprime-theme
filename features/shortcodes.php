@@ -79,6 +79,27 @@ return prime2g_wp_block_search_form( $atts );
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
+add_shortcode( 'prime_video', 'prime2g_video_embed_shortcode' );
+function prime2g_video_embed_shortcode( $atts ) {
+$atts	=	shortcode_atts( [ 'url'	=>	'', 'id' => '', 'height' => '' ], $atts );
+extract( $atts );
+
+global $wp_embed;
+$embedded	=	$wp_embed->autoembed( $url );
+$vidID		=	$id ? ' id="'. $id .'"' : '';
+$js	=	'';
+
+if ( $height && $id ) {
+$js		=	'<script>p2getEl( "#'. $id .' iframe" ).setAttribute( "height", "'. $height .'" );</script>';
+}
+
+return '<div'. $vidID .' class="prime2g_embedded_media shortcode video">'. $embedded . '</div>' . $js;
+}
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
 add_shortcode( 'prime_site_title_and_description', 'prime2g_title_and_description_shortcode' );
 function prime2g_title_and_description_shortcode( $atts ) {
 $atts	=	shortcode_atts( [ 'description' => 'yes', 'descriptiononly' => '', 'class' => '' ], $atts );

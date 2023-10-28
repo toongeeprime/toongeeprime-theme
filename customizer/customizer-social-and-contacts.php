@@ -85,7 +85,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	$wp_customize->add_control(
 		'prime2g_twitter_url',
 		array(
-			'label'		=>	__( 'Twitter Url', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Twitter (X) Url', PRIME2G_TEXTDOM ),
 			'type'		=>	'url',
 			'settings'	=>	'prime2g_twitter_url',
 			'section'	=>	'prime2g_socialmedia_links_section',

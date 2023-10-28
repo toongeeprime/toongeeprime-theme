@@ -54,7 +54,7 @@ Several updates across the theme
 	-	Menus have to be created to link to locations
 * Pagination by numbers
 * Work Custom logo width and height attributes
-* Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_site_footer_credits
+* Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_video, prime_site_footer_credits
 * Internalized jQuery
 * Updated screenshot
 

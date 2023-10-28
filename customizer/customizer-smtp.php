@@ -9,6 +9,20 @@
 
 function prime2g_customizer_smtp( $wp_customize ) {
 
+	$wp_customize->add_setting(
+		'prime2g_use_theme_smtp',
+		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 ]
+	);
+	$wp_customize->add_control(
+		'prime2g_use_theme_smtp',
+		array(
+			'label'		=>	__( 'Activate SMTP', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_use_theme_smtp',
+			'section'	=>	'prime2g_theme_smtp_section'
+		)
+	);
+
 if ( is_multisite() ) {
 	switch_to_blog( 1 );
 	$route	=	get_theme_mod( 'prime2g_route_smtp_to_networkhome' );

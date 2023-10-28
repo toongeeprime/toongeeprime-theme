@@ -7,6 +7,8 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 
+if ( get_theme_mod( 'prime2g_use_theme_smtp', 1 ) ) {
+
 $netHome	=	false;
 if ( is_multisite() ) {
 switch_to_blog( 1 );
@@ -60,3 +62,8 @@ function prime2g_phpmailer_smtp( $phpmailer ) {
 }
 
 }
+
+}
+
+
+

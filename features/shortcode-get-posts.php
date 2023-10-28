@@ -27,10 +27,14 @@ array(
 	'start_cache'	=>	false,
 	'cache_name'	=>	'prime2g_posts_shortcode',
 	'offset'		=>	0,
-	'device'		=>	0	#	@since 1.0.55
+	'device'		=>	0,	#	@since 1.0.55
+	// 'pagination'	=>	0
 	),
 $atts
 );
+
+//***	REVIEW CACHING SYSTEM	***//
+
 extract( $atts );
 
 $isMobile	=	wp_is_mobile();
@@ -49,6 +53,7 @@ if ( count( $termsArray ) > 1 ) {
 $args	=	array(
 	'post_type'		=>	$post_type,
 	'orderby'		=>	$order,
+	// 'orderby'		=>	$pagination ? 'date' : $order,
 	'offset'		=>	$offset,
 	'posts_per_page'	=>	$count,
 	'ignore_sticky_posts'	=>	true,
@@ -101,7 +106,9 @@ if ( $cache_it || $use_cache ) {
 				'length'	=>	$words,
 				'readmore'	=>	$read_more,
 			];
-			$template	.=	$looptemplate ? $looptemplate() : prime2g_get_archive_loop_post_object( $postArgs );
+			$template	.=	$looptemplate ?
+			( function_exists( $looptemplate ) ? $looptemplate() : prime2g_get_archive_loop_post_object( $postArgs ) )
+			: prime2g_get_archive_loop_post_object( $postArgs );
 		}
 	}
 
@@ -122,7 +129,8 @@ else {
 
 		$loop->the_post();
 		$template	.=	$looptemplate ?
-			$looptemplate() : prime2g_get_archive_loop( 'medium', true, $words, false, false, 'h3' );
+			( function_exists( $looptemplate ) ? $looptemplate() : prime2g_get_archive_loop( 'medium', true, $words, false, false, 'h3' ) )
+			: prime2g_get_archive_loop( 'medium', true, $words, false, false, 'h3' );
 
 	}
 
@@ -135,6 +143,10 @@ else {
 }
 
 $template	.=	'</div>';
+
+// if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
+	// $template	.=	prime2g_pagination_nums( $loop, false );
+// }
 
 wp_reset_postdata();
 

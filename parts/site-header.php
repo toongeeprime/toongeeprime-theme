@@ -11,7 +11,7 @@
 
 global $post;	# 1.0.55
 
-$title_in_headr	=	( 'header' == get_theme_mod( 'prime2g_title_location' ) );
+$title_in_headr	=	( 'header' === get_theme_mod( 'prime2g_title_location' ) );
 $hasHeader		=	has_custom_header();
 $menuPlace		=	get_theme_mod( 'prime2g_menu_position' );
 $videoActive	=	is_header_video_active();
@@ -27,7 +27,7 @@ $headerBackground	=	'';
 
 if ( $hasHeader ) {
 
-	if ( $isSingular && has_post_thumbnail() && ( '' === get_theme_mod( 'prime2g_thumb_replace_header' ) ) ) {
+	if ( $isSingular && has_post_thumbnail() && ( '' === get_theme_mod( 'prime2g_thumb_replace_header', '' ) ) ) {
 		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
 	}
 	elseif ( is_category() || is_tag() || is_tax() ) {
