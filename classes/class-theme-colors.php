@@ -34,7 +34,7 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	/**
 	 *	Generate CSS :root variables
 	 */
-	protected function the_root_css() {
+	protected function text_colors() {
 
 		$brand		=	$this->get_mod( 'brand' );
 		$brand2		=	$this->get_mod( 'brand2' );
@@ -42,21 +42,22 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 		$hdr_color	=	$this->get_mod( 'header' );
 		$cnt_color	=	$this->get_mod( 'content' );
 		$ftr_color	=	$this->get_mod( 'footer' );
+		$buttonbg	=	defined( 'CHILD_BUTTONBG' ) ? CHILD_BUTTONBG : $brand; # @since 1.0.55
 
 	return "--body-text:". $this->get_readable_color( $bg_color ) .";
 	--header-text:". $this->get_readable_color( $hdr_color ) .";
 	--content-text:". $this->get_readable_color( $cnt_color ) .";
 	--footer-text:". $this->get_readable_color( $ftr_color ) .";
 	--headline-color:". $this->get_readable_color( $bg_color ) .";
-	--button-bg:". $brand .";
-	--button-text:". $this->get_readable_color( $brand ) .";
+	--button-bg:". $buttonbg .";
+	--button-text:". $this->get_readable_color( $buttonbg ) .";
 ";
 
 	}
 
 	/**
 	 *	Generate Dark Theme CSS :root variables
-	 *	@since ToongeePrime Theme 1.0.49.00
+	 *	@since ToongeePrime Theme 1.0.49
 	 */
 	protected function the_root_dark_css() {
 

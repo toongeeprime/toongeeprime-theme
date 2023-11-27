@@ -13,13 +13,18 @@ function prime2g_ajax_head() { ?>
 const prime2g_ajaxurl	=	"<?php echo admin_url( 'admin-ajax.php' ); ?>";
 
 function prime2g_run_ajax( formData, ajaxSuccess, ajaxError = '', reqType = 'POST' ) {
-	jQuery.ajax( {
+const done	=	jQuery.ajax( {
 		url: prime2g_ajaxurl,
 		type: reqType,
 		data: formData,
 		success: ajaxSuccess,
 		error: ajaxError,
 	} );
+
+return new Promise( (resolve) => {
+resolve( done );
+} );
+
 }
 
 /*

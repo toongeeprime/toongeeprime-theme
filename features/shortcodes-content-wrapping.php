@@ -22,6 +22,7 @@ $atts	=	shortcode_atts(
 	'roles'		=>	'',
 	'userids'	=>	'',
 	'capability'=>	'',
+	'device'	=>	'',	#	@since 1.0.55
 	), $atts
 );
 extract( $atts );
@@ -40,13 +41,27 @@ if ( ! empty( $users ) ) {
 }
 
 
+elseif ( ! empty( $device ) ) {
+$isMobile		=	wp_is_mobile();
+$mobile_devices	=	[ 'mobile', 'mobiles', 'phone', 'phones', 'tablet', 'tablets' ];
+
+if ( $isMobile && in_array( $device, $mobile_devices ) ) return $output;
+elseif ( ! $isMobile && ! in_array( $device, $mobile_devices ) ) return $output;
+}
+
+
 elseif ( ! empty( $roles ) ) {
 $user_roles		=	$current_user->roles;
 $showtoRoles	=	explode( ',', $roles );
+$hasRoles		=	false;
 
-$rolesFound		=	(bool) array_intersect( $showtoRoles, $user_roles );
+foreach ( $showtoRoles as $role ) {
+	if ( in_array( $role, $user_roles ) ) {
+		$hasRoles	=	true; break;
+	}
+}
 
-if ( $rolesFound ) return $output;
+if ( $hasRoles ) return $output;
 }
 
 
@@ -61,7 +76,17 @@ if ( $hasID ) return $output;
 
 
 elseif ( ! empty( $capability ) ) {
-	if ( user_can( $current_user, $capability ) ) return $output;
+$allcaps	=	$current_user->allcaps;
+$showtoCaps	=	explode( ',', $capability );
+$hasCapabs	=	false;
+
+foreach ( $showtoCaps as $cap ) {
+	if ( array_key_exists( $cap, $allcaps ) ) {	#	capabilities are array keys
+		$hasCapabs	=	true; break;
+	}
+}
+
+if ( $hasCapabs ) return $output;
 }
 
 
@@ -71,26 +96,4 @@ else {
 
 }
 
-
-/**
- *	ADD IN-POST CONTENT TO THEME PARTS
- *	@since ToongeePrime Theme 1.0.55
- */
-add_shortcode( 'prime_add_to_theme', 'prime2g_add_content_to_theme' );
-function prime2g_add_content_to_theme( $atts, $content, $tag ) {
-
-$atts	=	shortcode_atts( array( 'place' => 'after post', 'priority' => '10' ), $atts );
-extract( $atts );
-
-$output	=	do_shortcode( $content );
-
-#	Add by theme/WP hooks
-#	Tested hooks:
-$hook	=	$place;
-if ( $place == 'after post' ) $hook	=	'prime2g_after_post';
-if ( $place == 'base' ) $hook	=	'prime2g_site_base_strip';
-if ( $place == 'footer' ) $hook	=	'wp_footer';
-
-add_action( $hook, function() use( $output ) { echo $output; }, (int) $priority );
-}
 

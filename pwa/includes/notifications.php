@@ -9,6 +9,8 @@
 
 if ( ! function_exists( 'prime2g_pwa_online_offline_notif' ) ) {
 
+if ( ! get_theme_mod( 'prime2g_use_theme_pwa', 0 ) ) return;
+
 #	Hook placed here for re-placement flexibility
 add_action( 'wp_footer', 'prime2g_pwa_online_offline_notif' );
 

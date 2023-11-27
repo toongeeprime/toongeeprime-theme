@@ -12,18 +12,17 @@ if ( ! function_exists( 'prime2g_customizer_theme_colors' ) ) {
 
 function prime2g_customizer_theme_colors( $wp_customize ) {
 
-	$theStyles	=	new ToongeePrime_Styles();
-
+	$theStyles	=	prime2g_theme_styles_constant_overrides();
 
 	/**
 	 *	DEFAULT STYLE VALUES:
 	 */
-	$brandClr	=	$theStyles->brandClr;
-	$brandClr2	=	$theStyles->brandClr2;
-	$bgcolor	=	$theStyles->siteBG;
-	$headerbg	=	$theStyles->headerBG;
-	$contentbg	=	$theStyles->contentBG;
-	$footerbg	=	$theStyles->footerBG;
+	$brandClr	=	$theStyles->brandcolor;
+	$brandClr2	=	$theStyles->brandcolor2;
+	$bgcolor	=	$theStyles->bgcolor;
+	$headerbg	=	$theStyles->headerbg;
+	$contentbg	=	$theStyles->contentbg;
+	$footerbg	=	$theStyles->footerbg;
 
 	/**
 	 *	COLOURS

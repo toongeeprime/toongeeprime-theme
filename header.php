@@ -8,6 +8,7 @@
  */
 
 $isSingular	=	is_singular(); ?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> <?php prime2g_theme_html_classes(); ?>>
 

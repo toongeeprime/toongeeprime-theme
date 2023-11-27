@@ -37,14 +37,14 @@ class ToongeePrime_Styles {
 	if ( $by_net_home ) { switch_to_blog( 1 ); }
 
 		switch( $toGet ) {
-			case 'brand' : $mod = get_theme_mod( 'prime2g_primary_brand_color', $this->brandClr ); break;
-			case 'brand2' : $mod = get_theme_mod( 'prime2g_secondary_brand_color', $this->brandClr2 ); break;
+			case 'brand' : $mod = defined( 'CHILD_BRANDCOLOR' ) ? CHILD_BRANDCOLOR : get_theme_mod( 'prime2g_primary_brand_color', $this->brandClr ); break;
+			case 'brand2' : $mod = defined( 'CHILD_BRANDCOLOR2' ) ? CHILD_BRANDCOLOR2 : get_theme_mod( 'prime2g_secondary_brand_color', $this->brandClr2 ); break;
+			case 'background' : $mod = defined( 'CHILD_SITEBG' ) ? CHILD_SITEBG : get_theme_mod( 'prime2g_background_color', $this->siteBG ); break;
+			case 'header' : $mod = defined( 'CHILD_HEADERBG' ) ? CHILD_HEADERBG : get_theme_mod( 'prime2g_header_background', $this->headerBG ); break;
+			case 'content' : $mod = defined( 'CHILD_CONTENTBG' ) ? CHILD_CONTENTBG : get_theme_mod( 'prime2g_content_background', $this->contentBG ); break;
+			case 'footer' : $mod = defined( 'CHILD_FOOTERBG' ) ? CHILD_FOOTERBG : get_theme_mod( 'prime2g_footer_background', $this->footerBG ); break;
 			case 'width' : $mod = get_theme_mod( 'prime2g_site_width', $this->siteWidth ); break;
-			case 'background' : $mod = get_theme_mod( 'prime2g_background_color', $this->siteBG ); break;
-			case 'header' : $mod = get_theme_mod( 'prime2g_header_background', $this->headerBG ); break;
 			case 'h_height' : $mod = get_theme_mod( 'prime2g_theme_header_height' ); break;		# No default for backwards compat
-			case 'content' : $mod = get_theme_mod( 'prime2g_content_background', $this->contentBG ); break;
-			case 'footer' : $mod = get_theme_mod( 'prime2g_footer_background', $this->footerBG ); break;
 			case 'use_gFonts' : $mod = get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ); break;
 			case 'bodyF' : $mod = get_theme_mod( 'prime2g_site_body_font', $this->bodyFont ); break;
 			case 'b_AltFont' : $mod = get_theme_mod( 'prime2g_body_fallback_fonts', $this->bodyAltFont ); break;

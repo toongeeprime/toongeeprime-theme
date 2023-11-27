@@ -24,6 +24,7 @@ return prime2g_theme_mod_social_and_contacts( $address );
 }
 
 
+
 /**
  *	Insert a Template Part
  *	@since ToongeePrime Theme 1.0.50
@@ -43,6 +44,7 @@ return $part;
 }
 
 
+
 /**
  *	@since ToongeePrime Theme 1.0.55
  *	Considered for Template Parts
@@ -57,6 +59,7 @@ $src	=	( $source === 'yes' ) ? true : false;
 
 return prime2g_siteLogo( $darkLogo, $src );
 }
+
 
 
 /**
@@ -74,6 +77,7 @@ $atts	=	shortcode_atts( [
 
 return prime2g_wp_block_search_form( $atts );
 }
+
 
 
 /**
@@ -97,6 +101,7 @@ return '<div'. $vidID .' class="prime2g_embedded_media shortcode video">'. $embe
 }
 
 
+
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -116,6 +121,50 @@ $title	.=	"</div>";
 
 return $title;
 }
+
+
+
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
+add_shortcode( 'prime_map', 'prime2g_map_shortcode' );
+function prime2g_map_shortcode( $atts ) {
+$atts	=	shortcode_atts( [
+'address'	=>	'',
+'map'		=>	'google',
+'height'	=>	'400px',
+'zoom'		=>	'15',
+'maptype'	=>	'roadmap',
+'id'		=>	'google-maps-display'
+], $atts );
+extract( $atts );
+
+$address	=	str_replace( ' ', '+', $address );
+
+if ( $address ) {
+
+$embed	=	'<div id="'. $id .'" class="prime_map" style="max-width:100%;overflow:hidden;color:red;width:100%;height:'. $height .';margin-top:var(--med-pad);">
+<div style="height:100%;width:100%;max-width:100%;">';
+
+if ( $map === 'google' ) {
+$embed	.=	'<iframe style="height:100%;width:100%;border:0;" frameborder="0"
+src="https://www.google.com/maps/embed/v1/place?q='. $address .'&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&zoom='. $zoom .'&maptype='. $maptype .'">
+</iframe>
+<a class="auth-map-data embed-ded-maphtml" rel="nofollow" href="https://www.bootstrapskins.com/themes">premium bootstrap themes</a>
+<style>#'. $id .' img.text-marker{max-width:none!important;background:none!important;}#'. $id .' img{max-width:none}</style>';
+}
+
+$embed	.=	'</div>
+</div><!-- .prime_map -->';
+
+}
+else {
+$embed	=	'<strong><p>NO ADDRESS FOR MAP</p></strong>';
+}
+
+return $embed;
+}
+
 
 
 /**
@@ -152,10 +201,12 @@ return $result;
 }
 
 
+
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
 add_shortcode( 'prime_site_footer_credits', 'prime2g_theme_footer_credit' );
+
 
 
 /**
@@ -187,4 +238,29 @@ if ( empty( $users ) ) {
 }
 
 }
+
+
+
+/**
+ *	ADD IN-POST CONTENT TO THEME PARTS
+ *	@since ToongeePrime Theme 1.0.55
+ */
+add_shortcode( 'prime_add_to_theme', 'prime2g_add_content_to_theme' );
+function prime2g_add_content_to_theme( $atts, $content, $tag ) {
+
+$atts	=	shortcode_atts( array( 'place' => 'after post', 'priority' => '10' ), $atts );
+extract( $atts );
+
+$output	=	do_shortcode( $content );
+
+#	Add by theme/WP hooks
+#	Tested hooks:
+$hook	=	$place;
+if ( $place == 'after post' ) $hook	=	'prime2g_after_post';
+if ( $place == 'base' ) $hook	=	'prime2g_site_base_strip';
+if ( $place == 'footer' ) $hook	=	'wp_footer';
+
+add_action( $hook, function() use( $output ) { echo $output; }, (int) $priority );
+}
+
 

@@ -7,7 +7,9 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 
-add_action( 'plugins_loaded', 'prime2g_essential_chaching_control' );
+#	INTRODUCE CONTROLS @ CUSTOMIZER TO TIME THE CACHING
+
+// add_action( 'plugins_loaded', 'prime2g_essential_chaching_control' );
 if ( ! function_exists( 'prime2g_essential_chaching_control' ) ) {
 
 function prime2g_essential_chaching_control( $wp ) {

@@ -14,7 +14,9 @@ background:var(--content-text);color:var(--content-background);line-height:1;}
 @media (display-mode: standalone) {
 }
 
-@media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {}
+@media all and (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
+.webonly{display:none!important;}
+}
 
 
 /* setting user-system fonts */

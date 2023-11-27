@@ -12,6 +12,7 @@ class Prime2g_Web_Manifest {
 	private static $instance;
 
 	public function __construct() {
+	if ( ! get_theme_mod( 'prime2g_use_theme_pwa', 0 ) ) return;
 
 	if ( ! isset( self::$instance ) ) {
 

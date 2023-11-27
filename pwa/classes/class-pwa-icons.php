@@ -56,6 +56,9 @@ class Prime2g_PWA_Icons {
 		elseif ( $icon_id = get_option( 'site_icon' ) ) {
 			$iconURL	=	wp_get_attachment_image_url( $icon_id, [ 144, 144 ] );
 		}
+		elseif ( file_exists( get_stylesheet_directory() . '/images/pwa-default-icon.png' ) ) {	# file_exists needs abs path
+			$iconURL	=	CHILD2G_IMAGE . 'pwa-default-icon.png';
+		}
 		else {
 			$iconURL	=	PRIME2G_PWA_IMAGE . 'default.png';
 		}

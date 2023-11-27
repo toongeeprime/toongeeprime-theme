@@ -23,7 +23,7 @@ if ( is_multisite() ) {
 
 	$wp_customize->add_setting(
 		'prime2g_use_theme_pwa',
-		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
+		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'transport' => 'postMessage' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_use_theme_pwa',
@@ -229,7 +229,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		'prime2g_pwa_cache_strategy',
 		[
 		'type' => 'theme_mod', 'transport' => 'postMessage',
-		'default' => PWA_CACHEFIRST, 'sanitize_callback' => 'sanitize_text_field'
+		'default' => PWA_NETWORKFIRST, 'sanitize_callback' => 'sanitize_text_field'
 		]
 	);
 	$wp_customize->add_control(

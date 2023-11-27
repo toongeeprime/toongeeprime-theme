@@ -28,12 +28,12 @@ array(
 	'cache_name'	=>	'prime2g_posts_shortcode',
 	'offset'		=>	0,
 	'device'		=>	0,	#	@since 1.0.55
-	// 'pagination'	=>	0
+	'pagination'	=>	0
 	),
 $atts
 );
 
-//***	REVIEW CACHING SYSTEM	***//
+			//***	REVIEW CACHING SYSTEM	***//
 
 extract( $atts );
 
@@ -49,13 +49,17 @@ if ( count( $termsArray ) > 1 ) {
 	$terms	=	$termsArray;
 }
 
+$pagedNum	=	basename( prime2g_get_current_url() );
+$paged		=	is_numeric( $pagedNum ) ? (int) $pagedNum : 1;
 
 $args	=	array(
 	'post_type'		=>	$post_type,
 	'orderby'		=>	$order,
-	// 'orderby'		=>	$pagination ? 'date' : $order,
-	'offset'		=>	$offset,
-	'posts_per_page'	=>	$count,
+	'orderby'		=>	$pagination ? 'date' : $order,
+	'paged'			=>	$paged,
+	'page'			=>	$paged,
+	'offset'		=>	$pagination ? null : $offset,
+	'posts_per_page'	=>	(int) $count,
 	'ignore_sticky_posts'	=>	true,
 	'tax_query'		=>	array(
 		array(
@@ -144,13 +148,12 @@ else {
 
 $template	.=	'</div>';
 
-// if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
-	// $template	.=	prime2g_pagination_nums( $loop, false );
-// }
+if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
+	$template	.=	prime2g_pagination_nums( $loop, false );
+}
 
 wp_reset_postdata();
 
 return $template;
 }
-
 

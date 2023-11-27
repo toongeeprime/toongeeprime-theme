@@ -55,14 +55,14 @@ class Prime2g_PWA_Service_Worker {
 
 
 	public function get_caching() {
-	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_CACHEFIRST );
+	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
 	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' ); # String
 
 	if ( is_multisite() ) {
 		switch_to_blog( 1 );
 		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
-			$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_CACHEFIRST );
+			$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
 			$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 			$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );
 		}

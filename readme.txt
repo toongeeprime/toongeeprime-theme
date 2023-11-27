@@ -16,9 +16,9 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
-= 1.0.55... In progress =
+= 1.0.55 =
 Several updates across the theme
-* Introduced the beginnings of theme's PROGRESSIVE WEB APP (PWA)
+* Introduced theme's PROGRESSIVE WEB APP (PWA)
 * HEADER VIDEO
 * SMTP Mail Config
 * 106 Google Fonts
@@ -54,11 +54,12 @@ Several updates across the theme
 	-	Menus have to be created to link to locations
 * Pagination by numbers
 * Work Custom logo width and height attributes
-* Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_video, prime_site_footer_credits
+* Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_video, prime_map, prime_site_footer_credits
 * Internalized jQuery
 * Updated screenshot
+* Function prime2g_theme_styles_constant_overrides
 
-= 1.0.51.00 =
+= 1.0.51 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()
 * Feature: multi-html-slider-with-shortcodes.php
 * Extras: multi-frame-posts-slider.php
@@ -67,7 +68,7 @@ Several updates across the theme
 * Reworked prime2g_show_sticky_posts()
 * wp_title() removed from header
 
-= 1.0.50.00 =
+= 1.0.50 =
 MAJOR UPDATE
 * @ includes: custom-post-types.php, custom-taxonomies.php & custom-admin-menu-actions.php
 * @ customizer: Adding of Custom Post Types in Theme Extras

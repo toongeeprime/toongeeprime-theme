@@ -26,7 +26,7 @@ $css	=	"<style id=\"prime2g_root_css\">";
 $css	.=	"
 :root{";
 $css	.=	$styles->the_root_css();
-$css	.=	$colors->the_root_css().
+$css	.=	$colors->text_colors().
 "}
 body.themeswitched_dark{";
 $css	.=	$colors->the_root_dark_css().
