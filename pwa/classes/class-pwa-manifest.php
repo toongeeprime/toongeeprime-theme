@@ -12,7 +12,7 @@ class Prime2g_Web_Manifest {
 	private static $instance;
 
 	public function __construct() {
-	if ( ! get_theme_mod( 'prime2g_use_theme_pwa', 0 ) ) return;
+	if ( ! prime2g_activate_theme_pwa() ) return;
 
 	if ( ! isset( self::$instance ) ) {
 
@@ -115,7 +115,7 @@ echo '
 		$data	=	array(
 			'name'			=>	PRIME2G_PWA_SITENAME,
 			'short_name'	=>	$data[ 'short_name' ],
-			'description'	=>	$data[ 'description' ],
+			'description'	=>	html_entity_decode( $data[ 'description' ] ),
 			'start_url'		=>	$startURL,
 			'lang'			=>	get_locale(),
 			'id'			=>	$this->appID(),

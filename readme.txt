@@ -22,6 +22,9 @@ Several updates across the theme
 * HEADER VIDEO
 * SMTP Mail Config
 * 106 Google Fonts
+* @ Class: @ ToongeePrime_Styles, allow child overriding of defaults
+* @ Child Theme Optional Constants: *CHILD_BUTTONTEXT, CHILD_BUTTONBG, CHILD_BRANDCOLOR, CHILD_BRANDCOLOR2,
+CHILD_SITEBG, CHILD_HEADERBG, CHILD_CONTENTBG, CHILD_FOOTERBG
 * @ customizer: File: customizer-theme-menus.php
 * @ customizer: Theme Fonts Section
 * @ customizer: Alt Fonts Fallbacks
@@ -57,7 +60,6 @@ Several updates across the theme
 * Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_video, prime_map, prime_site_footer_credits
 * Internalized jQuery
 * Updated screenshot
-* Function prime2g_theme_styles_constant_overrides
 
 = 1.0.51 =
 * JS: prime2g_isMobile(), prime2g_isTouchDevice(), prime2g_screenIsSmaller()

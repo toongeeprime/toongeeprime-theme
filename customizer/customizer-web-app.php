@@ -35,7 +35,6 @@ if ( is_multisite() ) {
 		)
 	);
 
-
 if ( is_multisite() && get_current_blog_id() === 1 ) {
 	$wp_customize->add_setting(
 		'prime2g_route_apps_to_networkhome',
@@ -66,7 +65,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		)
 	);
 
-
 	$wp_customize->add_setting(
 		'prime2g_pwapp_primaryicon',
 		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
@@ -84,7 +82,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			)
 		)
 	);
-
 
 	$wp_customize->add_setting(
 		'prime2g_pwapp_shortname',
@@ -108,7 +105,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		)
 	);
 
-
 	$wp_customize->add_setting(
 		'prime2g_add_request_to_pwa_cache',
 		[
@@ -129,7 +125,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			]
 		)
 	);
-
 
 	$wp_customize->add_setting(
 		'prime2g_pwapp_orientation',
@@ -158,7 +153,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		)
 	);
 
-
 	$wp_customize->add_setting(
 		'prime2g_pwapp_display',
 		[
@@ -182,7 +176,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		)
 	);
 
-
 	$wp_customize->add_setting(
 		'prime2g_pwapp_themecolor',
 		array(
@@ -202,7 +195,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			)
 		)
 	);
-
 
 	$wp_customize->add_setting(
 		'prime2g_pwapp_backgroundcolor',
@@ -224,7 +216,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 		)
 	);
 
-
 	$wp_customize->add_setting(
 		'prime2g_pwa_cache_strategy',
 		[
@@ -235,20 +226,39 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	$wp_customize->add_control(
 		'prime2g_pwa_cache_strategy',
 		array(
-			'label'		=>	__( 'Web App Cache Strategy', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Web App Sourcing Strategy', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_pwa_cache_strategy',
 			'section'	=>	'prime2g_theme_pwa_section',
 			'choices'	=>	array(
 				PWA_CACHEFIRST		=>	__( 'Cache First', PRIME2G_TEXTDOM ),
 				PWA_NETWORKFIRST	=>	__( 'Network First', PRIME2G_TEXTDOM ),
-				// PWA_CACHEONLY	=>	__( 'Cache Only', PRIME2G_TEXTDOM ),	# needs attention @ offline page refresh
+				PWA_CACHEONLY		=>	__( 'Cache Only', PRIME2G_TEXTDOM ),
 				PWA_NETWORKONLY		=>	__( 'Network Only', PRIME2G_TEXTDOM ),
-				// PWA_STALE_REVAL	=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM ),
+				// PWA_STALE_REVAL		=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM ),	# dead when offline
 			),
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_pwapp_version',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_pwapp_version',
+		array(
+			'label'		=>	__( 'App Version (to force update)', PRIME2G_TEXTDOM ),
+			'settings'	=>	'prime2g_pwapp_version',
+			'section'	=>	'prime2g_theme_pwa_section',
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'1.00.xx',
+				'maxlength'		=>	7,
+			)
 		)
 	);
 
 }
 
 }
+
+

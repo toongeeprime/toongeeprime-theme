@@ -28,9 +28,7 @@ class Prime2g_PWA_Scripts {
 $js	=	'';
 
 if ( $btn ) {
-	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", () => {
-window.location.reload();
-} );';
+	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", () => { window.location.reload(); } );';
 }
 
 $js	.=	'
@@ -56,32 +54,32 @@ return $js;
 
 	public static function getPageFromNetwork( string $btn = '' ) {
 	$offline	=	new Prime2g_PWA_File_Url_Manager();
-	$offlineUrll	=	$offline->get_file_url()[ 'offline' ];
+	$offlineUrl	=	$offline->get_file_url()[ 'offline' ];
+	$cacheNames	=	prime2g_pwa_cache_names();
 
 $js	=	'';
 
 if ( $btn ) {
-	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", ()=>{
-		event.respondWith( networkFetcher() );
-	} );';
+	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", event => { tryPageDownload(); } );';
 }
 
 $js	.=	'
-async function networkFetcher() {
-	try {
-		const dyn_cache	=	await caches.open( DYNAMIC_CACHE );
+async function tryPageDownload() {
+const PWACACHE		=	"'. $cacheNames->pwa_core .'";
+const DYNACACHE		=	"'. $cacheNames->dynamic .'";
 
+	try {
+		const dyn_cache	=	await caches.open( DYNACACHE );
 		const fromNetwork	=	await fetch( "." );
 		await dyn_cache.put( ".", fromNetwork.clone() );
-		if ( fromNetwork ) return fromNetwork;
+		console.log( "Network request made!" );
+		window.setTimeout( ()=>{ window.location.reload() }, 1000 );
 	} catch ( error ) {
 		console.log( error );
 		const cache	=	await caches.open( PWACACHE );
-		const userOffline	=	await cache.match( '. $offlineUrll .' );
+		const userOffline	=	await cache.match( "'. $offlineUrl .'" );
 		return userOffline;
 	}
-
-window.setTimeout( ()=>{ window.location.reload() }, 1000 );
 }
 ';
 return $js;
@@ -111,4 +109,6 @@ return $js;
 	}
 
 }
+
+
 

@@ -28,7 +28,7 @@ foreach( $directories as $dir ) {
 /**
  *	ACTIVATE
  */
-if ( prime2g_add_theme_pwa() ) {
+if ( prime2g_activate_theme_pwa() ) {
 
 if ( function_exists( 'prime2g_child_pwa_activator' ) ) {
 	prime2g_child_pwa_activator();

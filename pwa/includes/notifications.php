@@ -9,13 +9,13 @@
 
 if ( ! function_exists( 'prime2g_pwa_online_offline_notif' ) ) {
 
-if ( ! get_theme_mod( 'prime2g_use_theme_pwa', 0 ) ) return;
+if ( ! prime2g_activate_theme_pwa() ) return;
 
 #	Hook placed here for re-placement flexibility
 add_action( 'wp_footer', 'prime2g_pwa_online_offline_notif' );
 
 function prime2g_pwa_online_offline_notif() {
-if ( prime2g_add_theme_pwa() ) {
+if ( prime2g_activate_theme_pwa() ) {
 
 $div	=	'<div id="prime2g_offOnline_notif" class="centered off pointer">
 <p class="offline oo_notif off"><i class="bi bi-reception-0"></i> '. __( 'You are Offline', PRIME2G_TEXTDOM ) .'</p>

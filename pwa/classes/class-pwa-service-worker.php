@@ -44,11 +44,7 @@ class Prime2g_PWA_Service_Worker {
 	$sw_plugs	=	function_exists( 'p2g_child_service_worker_scripts' ) ?
 					p2g_child_service_worker_scripts() : '';
 
-	$js	=
-'const SWVersion	=	"'. PRIME2G_PWA_VERSION .'";
-'. $start->core() .'
-'. $sw_plugs .'
-';
+	$js	= $start->core() . $sw_plugs;
 
 	return $js;
 	}
@@ -79,14 +75,16 @@ class Prime2g_PWA_Service_Worker {
 	$icons		=	new Prime2g_PWA_Icons();
 	$caching	=	$this->get_caching();
 	$strategy	=	$caching[ 'strategy' ];
-	$addHome	=	$caching[ 'addHome' ];
+	$addHome	=	$caching[ 'addHome' ] ?: '""';
 	$addRequestToCache	=	$caching[ 'addToCache' ];
+	$cacheNames	=	prime2g_pwa_cache_names();
 	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ?
 						' + ", " + "' . child_add_to_pwa_precache() . '"' : null; # CSV
-	$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );
 
 	$js	=
-'const PWACACHE		=	"'. $siteName .'_preCache" + SWVersion;
+'const PWACACHE		=	"'. $cacheNames->pwa_core .'";
+const SCRIPTSCACHE	=	"'. $cacheNames->scripts .'";
+const DYNACACHE		=	"'. $cacheNames->dynamic .'";
 const logoURL		=	"'. prime2g_siteLogo( false, true ) .'";
 const iconURL		=	"'. $icons->mainIcon()[ 'src' ] .'";
 const themeFiles	=	"'. $fileURLs->theme_files( 'csv_versioned' ) .'";
@@ -103,7 +101,6 @@ const filesString		=	homeStartURL + logoURL + ", " + iconURL + ", " + themeFiles
 const PRECACHE_ITEMS	=	filesString.split(", ");
 const addRequestToCache	=	'. $addRequestToCache .';
 const strategy			=	"'. $strategy .'";
-const DYNAMIC_CACHE		=	"'. $siteName .'_dynamicCache" + SWVersion;
 
 /**
  *	HELPERS
@@ -112,7 +109,30 @@ function addCachePermit() {
 	return ( addRequestToCache && strategy !== "'. PWA_NETWORKONLY .'" );
 }
 
+function stopServiceWorkerByRequest( event ) {
+const urlObj	=	new URL( event.request.url );
+const urlStr	=	event.request.url;
+const exclPaths	=	[ "/wp-admin/", "/login/", "/wp-login.php" ]; // Consider control to add other paths
+const exclEnds	=	[ "/login/", "/wp-login.php", "admin-ajax.php", "/api/users/auth/google" ]; // Consider control too
 
+/**
+ *	Do not run in these paths
+ */
+exclPaths.forEach( xcl => { if ( urlObj.pathname.startsWith( xcl ) ) { return; } } );
+
+/**
+ *	Check if the request ends with any of these and respond with a network fetch
+ */
+exclEnds.forEach( xcl => { if ( urlStr.endsWith( xcl ) ) {
+	event.respondWith( fetch( event.request ) ); return;
+} } );
+}
+
+
+
+/**
+ *	On Install
+ */
 self.addEventListener( "install", event => {
 event.waitUntil( ( async () => {
 	const cache	=	await caches.open( PWACACHE );
@@ -123,100 +143,92 @@ self.skipWaiting();
 } );
 
 
-
+/**
+ *	On Activate
+ */
 self.addEventListener( "activate", event => {
 async function deleteOldCaches() {
 const cacheNames	=	await caches.keys();
 await Promise.all( cacheNames.map( name => {
-	if ( name !== PWACACHE && name !== DYNAMIC_CACHE ) {
+	if ( name !== PWACACHE && name !== SCRIPTSCACHE && name !== DYNACACHE ) {
 		return caches.delete( name );
 	}
 } ) );
 }
 event.waitUntil( deleteOldCaches() );
-
 self.clients.claim();
 } );
 
 
-
+/**
+ *	FETCHING
+ */
 self.addEventListener( "fetch", event => {
 
-async function networkFetcher( returnOffline = false ) {
+stopServiceWorkerByRequest( event );
+
+async function networkFetcher( returnCache ) {
 	try {
 		const cache	=	await caches.open( PWACACHE );
-
 		const fromNetwork	=	await fetch( event.request );
-		if ( addCachePermit() ) {
-			await cache.put( event.request, fromNetwork.clone() );
-		}
+		if ( addCachePermit() ) { await cache.put( event.request, fromNetwork.clone() ); }
 		if ( fromNetwork ) return fromNetwork;
 	} catch ( error ) {
 		console.log( error );
-		const cache	=	await caches.open( PWACACHE );
-		if ( returnOffline ) {
-			const userOffline	=	await cache.match( userIsOfflineURL );
-			return userOffline;
+		if ( returnCache ) {
+			stopServiceWorkerByRequest( event );
+			const cachedResponse	=	await caches.match( event.request );
+			if ( cachedResponse ) return cachedResponse;
 		}
+
+		const cache	=	await caches.open( PWACACHE );
+		const userOffline	=	await cache.match( userIsOfflineURL );
+		return userOffline;
 	}
 }
+
+
+async function cacheFetcher() {
+if ( strategy === "'. PWA_CACHEFIRST .'" || strategy === "'. PWA_CACHEONLY .'" || strategy === "'. PWA_STALE_REVAL .'" ) {
+	const cachedResponse	=	await caches.match( event.request );
+
+	if ( cachedResponse ) {
+	stopServiceWorkerByRequest( event );
+		if ( strategy === "'. PWA_STALE_REVAL .'" ) {
+			const cache		=	await caches.open( PWACACHE );
+			const fromNetwork	=	await fetch( event.request );
+			await cache.put( event.request, fromNetwork.clone() );
+		}
+	return cachedResponse;
+	}
+	else {
+		if ( strategy === "'. PWA_CACHEONLY .'" ) {
+			const cache		=	await caches.open( PWACACHE );
+			const notCached	=	await cache.match( notCachedPageURL );
+			return notCached;
+		}
+	}
+
+networkFetcher( false );
+}
+}
+
+
 
 
 if ( strategy === "'. PWA_NETWORKONLY .'" ) {
-if ( event.request.mode === "navigate" ) {
-	event.respondWith( networkFetcher( true ) );
-}
+	if ( event.request.mode === "navigate" ) { event.respondWith( networkFetcher( false ) ); } // do not return cache
 return;
 }
 
-
-/**
- *	Network first strategy applies from here... Intercepted by cache based strategies
- */
-event.respondWith(
-( async () => {
-
-if ( strategy === "'. PWA_CACHEFIRST .'" ||
-	strategy === "'. PWA_CACHEONLY .'" ||
-	strategy === "'. PWA_STALE_REVAL .'"
-	) {
-	const cachedResponse	=	await caches.match( event.request );
-	if ( cachedResponse && strategy !== "'. PWA_STALE_REVAL .'" ) {
-		return cachedResponse;
-	}
+else if ( strategy === "'. PWA_NETWORKFIRST .'" ) {
+	if ( event.request.mode === "navigate" ) { event.respondWith( networkFetcher( true ) ); } // return cache
+return;
 }
 
-if ( strategy === "'. PWA_CACHEONLY .'" ) {
-	const cache		=	await caches.open( PWACACHE );
-	const notCached	=	await cache.match( notCachedPageURL );
-	return notCached;
+else {
+	if ( event.request.mode === "navigate" ) { event.respondWith( cacheFetcher() ); return; }
 }
-
-try {
-	const cache	=	await caches.open( PWACACHE );
-
-	const fromNetwork	=	await fetch( event.request );
-	if ( addCachePermit() ) {
-		await cache.put( event.request, fromNetwork.clone() );
-	}
-
-	if ( strategy === "'. PWA_STALE_REVAL .'" ) {
-		if ( cachedResponse ) return cachedResponse;
-	}
-	if ( fromNetwork ) return fromNetwork;
-
-} catch ( error ) {
-	// Retain for Network first:
-	const cachedResponse	=	await caches.match( event.request );
-	if ( cachedResponse ) return cachedResponse;
-
-	const cache			=	await caches.open( PWACACHE );
-	const userOffline	=	await cache.match( userIsOfflineURL );
-	return userOffline;
-}
-
-} )()
-);
 
 } );
 ';
@@ -227,8 +239,10 @@ try {
 }
 
 
+
 /*
-Read more @
+Read more@
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
 */
+

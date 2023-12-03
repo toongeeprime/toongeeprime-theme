@@ -11,7 +11,7 @@ function prime2g_customizer_smtp( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'prime2g_use_theme_smtp',
-		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1, 'transport' => 'postMessage' ]
+		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 0, 'transport' => 'postMessage' ]
 	);
 	$wp_customize->add_control(
 		'prime2g_use_theme_smtp',

@@ -9,7 +9,7 @@
 
 add_action( 'wp_enqueue_scripts', 'prime2g_enqueue_pwa_files' );
 function prime2g_enqueue_pwa_files() {
-if ( prime2g_add_theme_pwa() && get_theme_mod( 'prime2g_use_theme_pwa', 0 ) ) {
+if ( prime2g_activate_theme_pwa() ) {
 $version	=	PRIME2G_VERSION;
 
 wp_enqueue_style(

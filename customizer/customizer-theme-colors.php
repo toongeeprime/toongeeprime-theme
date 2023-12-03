@@ -12,7 +12,9 @@ if ( ! function_exists( 'prime2g_customizer_theme_colors' ) ) {
 
 function prime2g_customizer_theme_colors( $wp_customize ) {
 
-	$theStyles	=	prime2g_theme_styles_constant_overrides();
+	$theStyles	=	new ToongeePrime_Styles();
+	$theStyles	=	$theStyles->defaults();
+
 
 	/**
 	 *	DEFAULT STYLE VALUES:
@@ -22,11 +24,13 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 	$bgcolor	=	$theStyles->bgcolor;
 	$headerbg	=	$theStyles->headerbg;
 	$contentbg	=	$theStyles->contentbg;
+	$buttonbg	=	$theStyles->buttonbg;
 	$footerbg	=	$theStyles->footerbg;
 
 	/**
 	 *	COLOURS
 	 */
+if ( ! defined( 'CHILD_BRANDCOLOR' ) ) {
 	$wp_customize->add_setting(
 		'prime2g_primary_brand_color',
 		array(
@@ -45,8 +49,10 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 			)
 		)
 	);
+}
 
 
+if ( ! defined( 'CHILD_BRANDCOLOR2' ) ) {
 	$wp_customize->add_setting(
 		'prime2g_secondary_brand_color',
 		array(
@@ -65,8 +71,10 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 			)
 		)
 	);
+}
 
 
+if ( ! defined( 'CHILD_SITEBG' ) ) {
 	$wp_customize->add_setting(
 		'prime2g_background_color',
 		array(
@@ -86,8 +94,10 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 			)
 		)
 	);
+}
 
 
+if ( ! defined( 'CHILD_HEADERBG' ) ) {
 	$wp_customize->add_setting(
 		'prime2g_header_background',
 		array(
@@ -106,8 +116,10 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 			)
 		)
 	);
+}
 
 
+if ( ! defined( 'CHILD_CONTENTBG' ) ) {
 	$wp_customize->add_setting(
 		'prime2g_content_background',
 		array(
@@ -126,8 +138,32 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 			)
 		)
 	);
+}
 
 
+if ( ! defined( 'CHILD_BUTTONBG' ) ) {
+	$wp_customize->add_setting(
+		'prime2g_button_background',
+		array(
+			'capability'	=>	'edit_theme_options',
+			'default'		=>	$buttonbg,
+			'sanitize_callback'	=>	'sanitize_hex_color',
+		)
+	);
+	$wp_customize->add_control( new WP_Customize_Color_Control(
+		$wp_customize,
+		'prime2g_button_background',
+			array(
+				'label'		=>	__( 'Buttons Background Color', PRIME2G_TEXTDOM ),
+				'section'	=>	'prime2g_theme_colors_section',
+				'settings'	=>	'prime2g_button_background',
+			)
+		)
+	);
+}
+
+
+if ( ! defined( 'CHILD_FOOTERBG' ) ) {
 	$wp_customize->add_setting(
 		'prime2g_footer_background',
 		array(
@@ -146,7 +182,7 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 			)
 		)
 	);
-
+}
 
 }
 

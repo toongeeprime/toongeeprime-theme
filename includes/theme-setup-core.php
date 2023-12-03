@@ -41,6 +41,7 @@ if ( ! function_exists( 'toongeeprime_theme_setup' ) ) {
 function toongeeprime_theme_setup() {
 
 	$theStyles	=	new ToongeePrime_Styles();
+	$theStyles	=	$theStyles->defaults();
 
 		/**
 		 *	@since ToongeePrime Theme 1.0.50
@@ -61,7 +62,7 @@ function toongeeprime_theme_setup() {
 		/**
 		 *	Custom background
 		 */
-		$bgcolor	=	$theStyles->siteBG;
+		$bgcolor	=	$theStyles->bgcolor;
 		add_theme_support(
 			'custom-background',
 			array(
@@ -113,6 +114,8 @@ function toongeeprime_theme_setup() {
 		 *	'editor-styles' @since ToongeePrime Theme Theme 1.0.55
 		 */
 		add_theme_support( 'editor-styles' );
+		// add_editor_style( get_theme_file_uri( '/files/reset-and-wp.css' ) );
+		// add_editor_style( get_theme_file_uri( '/files/theme.css' ) );
 
 		# Add custom editor font sizes
 		add_theme_support(

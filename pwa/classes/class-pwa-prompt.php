@@ -73,11 +73,13 @@ window.addEventListener( "beforeinstallprompt", ( event )=>{
 	p2g_pwabtnWrap.classList.add( "prime" );
 } );
 
-
-installPWA.forEach( ii => { ii.addEventListener( "click", prime_install_app ); } );
 p2g_pwaBtn.addEventListener( "click", prime_install_app );
+if ( installPWA ) {
+	installPWA.forEach( ii => { ii.addEventListener( "click", prime_install_app ); } );
+}
 
-async function prime_install_app() {
+async function prime_install_app( event ) {
+event.preventDefault();
 if ( ! p2g_pwaPrompt ) { return; }
 	const result	=	await p2g_pwaPrompt.prompt();
 	console.log(`Install prompt was: ${result.outcome}`);

@@ -15,12 +15,6 @@ class ToongeePrime_Styles {
 	 *	Defaults
 	 *	Public for defaults' usage in customizer and other theme files
 	 */
-	public $brandClr	=	'#777777';
-	public $brandClr2	=	'#aaaaaa';
-	public $siteBG		=	'#efefef';
-	public $headerBG	=	'#030303';
-	public $contentBG	=	'#ffffff';
-	public $footerBG	=	'#030303';
 	public $siteWidth	=	'1100px';
 	public $bodyFont	=	'Open+Sans';
 	public $bodyAltFont	=	'Arial, Helvetica, sans-serif'; # 1.0.55
@@ -29,22 +23,48 @@ class ToongeePrime_Styles {
 	public $titlesF_Weight	=	'500'; # 1.0.55
 	public $arch_ftImgHeight=	'17'; # 1.0.55
 
+
+	/**
+	 *	Defaults subject to Child Overrides
+	 */
+	public function defaults() {
+	$brandcolor	=	defined( 'CHILD_BRANDCOLOR' ) ? CHILD_BRANDCOLOR : '#777777';
+	$brandcolor2	=	defined( 'CHILD_BRANDCOLOR2' ) ? CHILD_BRANDCOLOR2 : '#aaaaaa';
+	$bgcolor	=	defined( 'CHILD_SITEBG' ) ? CHILD_SITEBG : '#efefef';
+	$headerbg	=	defined( 'CHILD_HEADERBG' ) ? CHILD_HEADERBG : '#030303';
+	$contentbg	=	defined( 'CHILD_CONTENTBG' ) ? CHILD_CONTENTBG : '#ffffff';
+	$buttonbg	=	defined( 'CHILD_BUTTONBG' ) ? CHILD_BUTTONBG : '#777777';
+	$footerbg	=	defined( 'CHILD_FOOTERBG' ) ? CHILD_FOOTERBG : '#030303';
+
+	return (object) [
+		'brandcolor'	=>	$brandcolor,
+		'brandcolor2'	=>	$brandcolor2,
+		'bgcolor'	=>	$bgcolor,
+		'headerbg'	=>	$headerbg,
+		'contentbg'	=>	$contentbg,
+		'buttonbg'	=>	$buttonbg,
+		'footerbg'	=>	$footerbg
+	];
+	}
+
 	/**
 	 *	Get from get_theme_mod()
 	 */
 	public function get_mod( $toGet ) {
 	$by_net_home	=	prime2g_design_by_network_home();
 	if ( $by_net_home ) { switch_to_blog( 1 ); }
+	$defaults	=	$this->defaults();
 
 		switch( $toGet ) {
-			case 'brand' : $mod = defined( 'CHILD_BRANDCOLOR' ) ? CHILD_BRANDCOLOR : get_theme_mod( 'prime2g_primary_brand_color', $this->brandClr ); break;
-			case 'brand2' : $mod = defined( 'CHILD_BRANDCOLOR2' ) ? CHILD_BRANDCOLOR2 : get_theme_mod( 'prime2g_secondary_brand_color', $this->brandClr2 ); break;
-			case 'background' : $mod = defined( 'CHILD_SITEBG' ) ? CHILD_SITEBG : get_theme_mod( 'prime2g_background_color', $this->siteBG ); break;
-			case 'header' : $mod = defined( 'CHILD_HEADERBG' ) ? CHILD_HEADERBG : get_theme_mod( 'prime2g_header_background', $this->headerBG ); break;
-			case 'content' : $mod = defined( 'CHILD_CONTENTBG' ) ? CHILD_CONTENTBG : get_theme_mod( 'prime2g_content_background', $this->contentBG ); break;
-			case 'footer' : $mod = defined( 'CHILD_FOOTERBG' ) ? CHILD_FOOTERBG : get_theme_mod( 'prime2g_footer_background', $this->footerBG ); break;
+			case 'brand' : $mod = defined( 'CHILD_BRANDCOLOR' ) ? CHILD_BRANDCOLOR : get_theme_mod( 'prime2g_primary_brand_color', $defaults->brandcolor ); break;
+			case 'brand2' : $mod = defined( 'CHILD_BRANDCOLOR2' ) ? CHILD_BRANDCOLOR2 : get_theme_mod( 'prime2g_secondary_brand_color', $defaults->brandcolor2 ); break;
+			case 'background' : $mod = defined( 'CHILD_SITEBG' ) ? CHILD_SITEBG : get_theme_mod( 'prime2g_background_color', $defaults->bgcolor ); break;
+			case 'header' : $mod = defined( 'CHILD_HEADERBG' ) ? CHILD_HEADERBG : get_theme_mod( 'prime2g_header_background', $defaults->headerbg ); break;
+			case 'content' : $mod = defined( 'CHILD_CONTENTBG' ) ? CHILD_CONTENTBG : get_theme_mod( 'prime2g_content_background', $defaults->contentbg ); break;
+			case 'footer' : $mod = defined( 'CHILD_FOOTERBG' ) ? CHILD_FOOTERBG : get_theme_mod( 'prime2g_footer_background', $defaults->footerbg ); break;
+			case 'buttonbg' : $mod = defined( 'CHILD_BUTTONBG' ) ? CHILD_BUTTONBG : get_theme_mod( 'prime2g_button_background', $defaults->buttonbg ); break;
 			case 'width' : $mod = get_theme_mod( 'prime2g_site_width', $this->siteWidth ); break;
-			case 'h_height' : $mod = get_theme_mod( 'prime2g_theme_header_height' ); break;		# No default for backwards compat
+			case 'h_height' : $mod = get_theme_mod( 'prime2g_theme_header_height', '' ); break;		# '' === default for backwards compat
 			case 'use_gFonts' : $mod = get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ); break;
 			case 'bodyF' : $mod = get_theme_mod( 'prime2g_site_body_font', $this->bodyFont ); break;
 			case 'b_AltFont' : $mod = get_theme_mod( 'prime2g_body_fallback_fonts', $this->bodyAltFont ); break;
@@ -135,7 +155,7 @@ class ToongeePrime_Styles {
 	$menuPlace	=	$this->get_mod( 'menu_place' );
 
 	$hHeight	=	$this->get_mod( 'h_height' );
-	$hHeight	=	( '' == $hHeight ) ? '' : $hHeight .'vh';
+	$hHeight	=	( '' === $hHeight ) ? '' : $hHeight .'vh';
 
 	$titleOnHeader	=	$this->get_mod( 'titleOnHeader' ) ? '.title_over_video ' : '';
 
@@ -192,4 +212,3 @@ return $css;
 }
 
 }
-

@@ -18,7 +18,7 @@ if ( $get === 'error' ) {
 
 if ( $get === 'notcached' ) {
 	$headline	=	'Not Available!';
-	$maintext	=	'Your request is not available - you may have to download it afresh';
+	$maintext	=	'Your request is not available offline - try downloading it afresh';
 }
 
 

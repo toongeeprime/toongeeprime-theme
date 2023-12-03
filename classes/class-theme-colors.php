@@ -42,7 +42,8 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 		$hdr_color	=	$this->get_mod( 'header' );
 		$cnt_color	=	$this->get_mod( 'content' );
 		$ftr_color	=	$this->get_mod( 'footer' );
-		$buttonbg	=	defined( 'CHILD_BUTTONBG' ) ? CHILD_BUTTONBG : $brand; # @since 1.0.55
+		$buttonbg	=	$this->get_mod( 'buttonbg' );
+		$btnText	=	defined( 'CHILD_BUTTONTEXT' ) ? CHILD_BUTTONTEXT : $this->get_readable_color( $buttonbg );
 
 	return "--body-text:". $this->get_readable_color( $bg_color ) .";
 	--header-text:". $this->get_readable_color( $hdr_color ) .";
@@ -50,7 +51,7 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	--footer-text:". $this->get_readable_color( $ftr_color ) .";
 	--headline-color:". $this->get_readable_color( $bg_color ) .";
 	--button-bg:". $buttonbg .";
-	--button-text:". $this->get_readable_color( $buttonbg ) .";
+	--button-text:". $btnText .";
 ";
 
 	}
@@ -63,10 +64,9 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 
 		$bg_color	=	$this->get_mod( 'background' );
 		$cnt_color	=	$this->get_mod( 'content' );
-		$dTheme		=	$this->get_mod( 'darktheme' );
 
 	$dBody	=	'';
-	if ( 'on_dbody' === $dTheme ) {
+	if ( 'on_dbody' === $this->get_mod( 'darktheme' ) ) {
 		$dBody	=	"--body-text:#efefef;
 	--body-background:#030303;
 	--header-text:#efefef;

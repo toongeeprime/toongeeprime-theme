@@ -17,14 +17,17 @@ function prime2g_appicons_image_sizes() {
 /**
  *	Constants
  */
-$version	=	defined( 'CHILD2G_VERSION' ) ? CHILD2G_VERSION . PRIME2G_VERSION : PRIME2G_VERSION;
 
-// Do Not if/else
+// DO NOT if/else
 $homeURL	=	get_home_url();
 $name		=	get_bloginfo( 'name' );
+$version	=	get_theme_mod( 'prime2g_pwapp_version' );
 
 if ( is_multisite() ) {
 switch_to_blog( 1 );
+
+$version	=	get_theme_mod( 'prime2g_pwapp_version' );
+
 if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
 
 $homeURL	=	network_home_url();
