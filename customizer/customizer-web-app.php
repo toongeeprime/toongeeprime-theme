@@ -78,7 +78,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 				'section'	=>	'prime2g_theme_pwa_section',
 				'width'		=>	144,
 				'height'	=>	144,
-				'mime_type' =>	'image',
+				'mime_type' =>	'image'
 			)
 		)
 	);
@@ -148,7 +148,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 				'portrait-secondary'	=>	__( 'Portrait Secondary', PRIME2G_TEXTDOM ),
 				'landscape-secondary'	=>	__( 'Landscape Secondary', PRIME2G_TEXTDOM ),
 				'natural'	=>	__( 'Natural', PRIME2G_TEXTDOM ),
-				'any'	=>	__( 'Any', PRIME2G_TEXTDOM ),
+				'any'	=>	__( 'Any', PRIME2G_TEXTDOM )
 			]
 		)
 	);
@@ -171,7 +171,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 				'standalone'	=>	__( 'Standalone', PRIME2G_TEXTDOM ),
 				'fullscreen'	=>	__( 'Full Screen', PRIME2G_TEXTDOM ),
 				'minimal-ui'	=>	__( 'Minimal', PRIME2G_TEXTDOM ),
-				'browser'		=>	__( 'Browser', PRIME2G_TEXTDOM ),
+				'browser'		=>	__( 'Browser', PRIME2G_TEXTDOM )
 			),
 		)
 	);
@@ -191,7 +191,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			array(
 				'label'		=>	__( 'App\'s Theme Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_pwa_section',
-				'settings'	=>	'prime2g_pwapp_themecolor',
+				'settings'	=>	'prime2g_pwapp_themecolor'
 			)
 		)
 	);
@@ -211,7 +211,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			array(
 				'label'		=>	__( 'App\'s Background Color', PRIME2G_TEXTDOM ),
 				'section'	=>	'prime2g_theme_pwa_section',
-				'settings'	=>	'prime2g_pwapp_backgroundcolor',
+				'settings'	=>	'prime2g_pwapp_backgroundcolor'
 			)
 		)
 	);
@@ -235,7 +235,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 				PWA_NETWORKFIRST	=>	__( 'Network First', PRIME2G_TEXTDOM ),
 				PWA_CACHEONLY		=>	__( 'Cache Only', PRIME2G_TEXTDOM ),
 				PWA_NETWORKONLY		=>	__( 'Network Only', PRIME2G_TEXTDOM ),
-				// PWA_STALE_REVAL		=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM ),	# dead when offline
+				PWA_STALE_REVAL		=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM )
 			),
 		)
 	);
@@ -252,7 +252,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			'section'	=>	'prime2g_theme_pwa_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'1.00.xx',
-				'maxlength'		=>	7,
+				'maxlength'		=>	7
 			)
 		)
 	);

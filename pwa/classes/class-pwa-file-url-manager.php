@@ -3,7 +3,7 @@
 /**
  *	CLASS: PWA Files and URLs Manager
  *
- *	Determine files, assets, etc. to be operational offline / with service worker
+ *	Determine files, assets, etc to render
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -26,13 +26,10 @@ class Prime2g_PWA_File_Url_Manager {
 	}
 
 
-	protected function check_params( string $value ) {
+	protected function file_url_match( string $value ) {
 	$get_url	=	$this->get_file_url();
 
-	return (
-		// isset( $_GET[ PRIME2G_PWA_SLUG ] ) && $_GET[ PRIME2G_PWA_SLUG ] === $value ||
-		prime2g_get_current_url() === $get_url[ $value ]
-	);
+	return ( prime2g_get_current_url() === $get_url[ $value ] );
 	}
 
 
@@ -53,18 +50,18 @@ class Prime2g_PWA_File_Url_Manager {
 	//	Virtual files output
 	public function show_file_output() {
 
-		if ( $this->check_params( 'manifest' ) ) {
+		if ( $this->file_url_match( 'manifest' ) ) {
 			$manifest	=	new Prime2g_Web_Manifest();
 			$output		=	$manifest->get_manifest();
 			$this->do_output_die( $output );
 		}
 
-		if ( $this->check_params( 'service-worker' ) ) {
+		if ( $this->file_url_match( 'service-worker' ) ) {
 			$output	=	Prime2g_PWA_Service_Worker::content();
 			$this->do_output_die( $output, 'javascript' );
 		}
 
-		if ( $this->check_params( 'scripts' ) ) {
+		if ( $this->file_url_match( 'scripts' ) ) {
 			$output	=	Prime2g_PWA_Scripts::content();
 			$this->do_output_die( $output, 'javascript' );
 		}

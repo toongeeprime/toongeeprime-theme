@@ -9,7 +9,7 @@ prime2g_removeSidebar();
 $get	=	isset( $_GET[ PRIME2G_PWA_SLUG ] ) ? $_GET[ PRIME2G_PWA_SLUG ] : '';
 
 $headline	=	'You are Offline!';
-$maintext	=	'Check your connection and try again';
+$maintext	=	'Check your connection and try again.';
 
 if ( $get === 'error' ) {
 	$headline	=	'Error!';
@@ -46,7 +46,6 @@ echo	'</div>';
 
 
 if ( $get === 'notcached' ) {
-	// Untested/unfinished
 	echo '<script id="getFromNetwork">'. Prime2g_PWA_Scripts::getPageFromNetwork( '#reloadPage' ) .'</script>';
 }
 else {
@@ -57,3 +56,4 @@ else {
 get_footer();
 
 exit;
+

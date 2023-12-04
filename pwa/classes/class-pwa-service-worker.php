@@ -53,7 +53,7 @@ class Prime2g_PWA_Service_Worker {
 	public function get_caching() {
 	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
 	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
-	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' ); # String
+	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );	# String
 
 	if ( is_multisite() ) {
 		switch_to_blog( 1 );
@@ -79,7 +79,7 @@ class Prime2g_PWA_Service_Worker {
 	$addRequestToCache	=	$caching[ 'addToCache' ];
 	$cacheNames	=	prime2g_pwa_cache_names();
 	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ?
-						' + ", " + "' . child_add_to_pwa_precache() . '"' : null; # CSV
+						' + ", " + "' . child_add_to_pwa_precache() . '"' : null;	# CSV
 
 	$js	=
 'const PWACACHE		=	"'. $cacheNames->pwa_core .'";
@@ -121,11 +121,9 @@ const exclEnds	=	[ "/login/", "/wp-login.php", "admin-ajax.php", "/api/users/aut
 exclPaths.forEach( xcl => { if ( urlObj.pathname.startsWith( xcl ) ) { return; } } );
 
 /**
- *	Check if the request ends with any of these and respond with a network fetch
+ *	Check if the request ends with any of these - respond with a network fetch
  */
-exclEnds.forEach( xcl => { if ( urlStr.endsWith( xcl ) ) {
-	event.respondWith( fetch( event.request ) ); return;
-} } );
+exclEnds.forEach( xcl => { if ( urlStr.endsWith( xcl ) ) { event.respondWith( fetch( event.request ) ); return; } } );
 }
 
 
@@ -187,35 +185,30 @@ async function networkFetcher( returnCache ) {
 	}
 }
 
-
 async function cacheFetcher() {
-if ( strategy === "'. PWA_CACHEFIRST .'" || strategy === "'. PWA_CACHEONLY .'" || strategy === "'. PWA_STALE_REVAL .'" ) {
-	const cachedResponse	=	await caches.match( event.request );
-
-	if ( cachedResponse ) {
+	try {
 	stopServiceWorkerByRequest( event );
-		if ( strategy === "'. PWA_STALE_REVAL .'" ) {
-			const cache		=	await caches.open( PWACACHE );
-			const fromNetwork	=	await fetch( event.request );
-			await cache.put( event.request, fromNetwork.clone() );
-		}
-	return cachedResponse;
-	}
-	else {
-		if ( strategy === "'. PWA_CACHEONLY .'" ) {
+	const cachedResponse	=	await caches.match( event.request );
+		if ( ! cachedResponse && strategy === "'. PWA_CACHEONLY .'" ) {
 			const cache		=	await caches.open( PWACACHE );
 			const notCached	=	await cache.match( notCachedPageURL );
 			return notCached;
 		}
+		if ( strategy === "'. PWA_STALE_REVAL .'" ) {
+			return cachedResponse || networkFetcher( true );	// from cache or go back to network for revalidation
+		}
+	return cachedResponse || networkFetcher( false );
 	}
-
-networkFetcher( false );
+	catch ( error ) {
+		console.log( error );
+	}
 }
-}
 
 
 
-
+/**
+ *	RETURN RESPONSE
+ */
 if ( strategy === "'. PWA_NETWORKONLY .'" ) {
 	if ( event.request.mode === "navigate" ) { event.respondWith( networkFetcher( false ) ); } // do not return cache
 return;
@@ -239,10 +232,8 @@ else {
 }
 
 
-
 /*
 Read more@
-https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
-https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
+	https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
+	https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
 */
-
