@@ -8,21 +8,23 @@
  *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49
  */
 add_action( 'wp_enqueue_scripts', 'prime2g_theme_enqueues' );
-if ( !function_exists( 'prime2g_theme_enqueues' ) ) {
+if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
+$version	=	PRIME2G_VERSION;
+
     # Theme Styles
 	wp_enqueue_style(
 		'prime2g_reset_and_wp_css',
 		get_theme_file_uri( '/files/reset-and-wp.css' ),
 		array(),
-		PRIME2G_VERSION
+		$version
 	);
 
 	wp_register_style(
 		'prime2g_css',
 		get_theme_file_uri( '/files/theme.css' ),
-		array(),
-		PRIME2G_VERSION
+		[],
+		$version
 	);
 
     wp_enqueue_style( 'prime2g_css' );
@@ -33,7 +35,7 @@ function prime2g_theme_enqueues() {
 			'prime2g_woocommerce_css',
 			get_theme_file_uri( '/files/prime_woocommerce.css' ),
 			array( 'prime2g_css' ),
-			PRIME2G_VERSION
+			$version
 		);
 	}
 
@@ -48,8 +50,8 @@ function prime2g_theme_enqueues() {
 	wp_register_script(
 		'prime2g_js',
 		get_theme_file_uri( '/files/theme.js' ),
-		array(),
-		PRIME2G_VERSION
+		[],
+		$version
 	);
 
 	wp_enqueue_script( 'prime2g_js' );
@@ -58,8 +60,8 @@ function prime2g_theme_enqueues() {
 		'prime2g_footer_js',
 		get_theme_file_uri( '/files/footer.js' ),
 		array( 'prime2g_js' ),
-		PRIME2G_VERSION,
-		true # script in footer
+		$version,
+		true // script in footer
 	);
 }
 }

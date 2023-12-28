@@ -36,15 +36,13 @@ class Prime2g_PWA_Service_Worker {
 
 
 	/**
-	 *	Core Service Worker
-	 *	Scripts plugged in
+	 *	Core Service Worker (Scripts plugged in)
 	 */
 	public static function content() {
 	$start		=	new self;
-	$sw_plugs	=	function_exists( 'p2g_child_service_worker_scripts' ) ?
-					p2g_child_service_worker_scripts() : '';
+	$sw_plugs	=	function_exists( 'p2g_child_service_worker_scripts' ) ? p2g_child_service_worker_scripts() : '';
 
-	$js	= $start->core() . $sw_plugs;
+	$js	=	$start->core() . $sw_plugs;
 
 	return $js;
 	}
@@ -54,6 +52,8 @@ class Prime2g_PWA_Service_Worker {
 	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
 	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );	# String
+	$excludePaths	=	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' );
+	$endPoints	=	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' );
 
 	if ( is_multisite() ) {
 		switch_to_blog( 1 );
@@ -61,25 +61,31 @@ class Prime2g_PWA_Service_Worker {
 			$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
 			$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 			$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );
+			$excludePaths	=	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' );
+			$endPoints	=	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' );
 		}
 		restore_current_blog();
 	}
 
-	return [ 'strategy' => $strategy, 'addHome' => $addHome, 'addToCache' => $addToCache ];
+	return [ 'strategy' => $strategy, 'addHome' => $addHome, 'addToCache' => $addToCache,
+	'excludePaths' => $excludePaths, 'endPoints' => $endPoints ];
 	}
 
 
 	public function core() {
 	$fileURLs	=	new Prime2g_PWA_File_Url_Manager();
 	$get_url	=	$fileURLs->get_file_url();
+	$scripts	=	new Prime2g_PWA_Scripts();
 	$icons		=	new Prime2g_PWA_Icons();
 	$caching	=	$this->get_caching();
 	$strategy	=	$caching[ 'strategy' ];
 	$addHome	=	$caching[ 'addHome' ] ?: '""';
+	$excludePaths	=	$caching[ 'excludePaths' ] ?: null;
+	$endPoints	=	$caching[ 'endPoints' ] ?: null;
 	$addRequestToCache	=	$caching[ 'addToCache' ];
 	$cacheNames	=	prime2g_pwa_cache_names();
-	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ?
-						' + ", " + "' . child_add_to_pwa_precache() . '"' : null;	# CSV
+	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ? ' + ", " + "' . child_add_to_pwa_precache() . '"' : null;	# CSV
+	$overrideSW_fetch	=	function_exists( 'prime2g_override_service_worker_fetch' ) ? prime2g_override_service_worker_fetch() : 'false';
 
 	$js	=
 'const PWACACHE		=	"'. $cacheNames->pwa_core .'";
@@ -102,29 +108,39 @@ const PRECACHE_ITEMS	=	filesString.split(", ");
 const addRequestToCache	=	'. $addRequestToCache .';
 const strategy			=	"'. $strategy .'";
 
-/**
- *	HELPERS
- */
+
+/**		HELPERS		**/
 function addCachePermit() {
 	return ( addRequestToCache && strategy !== "'. PWA_NETWORKONLY .'" );
 }
 
-function stopServiceWorkerByRequest( event ) {
+function sw_donotcache_items( event ) {
 const urlObj	=	new URL( event.request.url );
-const urlStr	=	event.request.url;
-const exclPaths	=	[ "/wp-admin/", "/login/", "/wp-login.php" ]; // Consider control to add other paths
-const exclEnds	=	[ "/login/", "/wp-login.php", "admin-ajax.php", "/api/users/auth/google" ]; // Consider control too
+const urlPath	=	urlObj.pathname;
+const excl_paths=	"wp-admin, login, wp-login.php, '. $excludePaths .'";
+const exclPaths	=	excl_paths.split(", ");
+const pathNum	=	exclPaths.length;
 
-/**
- *	Do not run in these paths
- */
-exclPaths.forEach( xcl => { if ( urlObj.pathname.startsWith( xcl ) ) { return; } } );
+var ans	=	false;
 
-/**
- *	Check if the request ends with any of these - respond with a network fetch
- */
-exclEnds.forEach( xcl => { if ( urlStr.endsWith( xcl ) ) { event.respondWith( fetch( event.request ) ); return; } } );
+for ( u = 0; u < pathNum; u++ ) {
+	startPath	=	"/" + exclPaths[u];
+	if ( urlPath.startsWith( startPath ) ) { ans = true; break; }
 }
+
+return ans;
+}
+
+function requestFromNetworkOnly( event ) {
+const reloaded	=	event.request.mode === "navigate";
+const urlStr	=	event.request.url;
+const excl_ends		=	"login/, wp-login.php, admin-ajax.php, '. $endPoints .'";
+const exclEnds	=	excl_ends.split(", ");
+
+exclEnds.forEach( xcl => { if ( reloaded && urlStr.endsWith( xcl ) ) { return true; } } );
+return false;
+}
+/**		HELPERS END		**/
 
 
 
@@ -132,12 +148,14 @@ exclEnds.forEach( xcl => { if ( urlStr.endsWith( xcl ) ) { event.respondWith( fe
  *	On Install
  */
 self.addEventListener( "install", event => {
-event.waitUntil( ( async () => {
-	const cache	=	await caches.open( PWACACHE );
-	await cache.addAll( PRECACHE_ITEMS );
-	// await cache.add( new Request( userIsOfflineURL, { cache: "reload" } ) );
-} )() );
+event.waitUntil(
+( async ()=>{
+	const cache1	=	await caches.open( PWACACHE );
+	await cache1.addAll( PRECACHE_ITEMS );
+	// await cache1.add( new Request( userIsOfflineURL, { cache:"reload" } ) );
 self.skipWaiting();
+} )()
+);
 } );
 
 
@@ -163,41 +181,52 @@ self.clients.claim();
  */
 self.addEventListener( "fetch", event => {
 
-stopServiceWorkerByRequest( event );
+if ( true === '. $overrideSW_fetch .' ) return;
+
+var netOnly	=	requestFromNetworkOnly( event );
+
+if ( netOnly ) { return event.respondWith( fetch( event.request ) ); }
+
+var doNotCache	=	sw_donotcache_items( event );
 
 async function networkFetcher( returnCache ) {
 	try {
-		const cache	=	await caches.open( PWACACHE );
+		const cache1	=	await caches.open( PWACACHE );
 		const fromNetwork	=	await fetch( event.request );
-		if ( addCachePermit() ) { await cache.put( event.request, fromNetwork.clone() ); }
+		if ( netOnly ) return fromNetwork;
+		if ( addCachePermit() && ! doNotCache ) {
+			await cache1.put( event.request, fromNetwork.clone() );
+		}
 		if ( fromNetwork ) return fromNetwork;
 	} catch ( error ) {
 		console.log( error );
+
 		if ( returnCache ) {
-			stopServiceWorkerByRequest( event );
 			const cachedResponse	=	await caches.match( event.request );
 			if ( cachedResponse ) return cachedResponse;
 		}
 
-		const cache	=	await caches.open( PWACACHE );
-		const userOffline	=	await cache.match( userIsOfflineURL );
+		const cache1	=	await caches.open( PWACACHE );
+		const userOffline	=	await cache1.match( userIsOfflineURL );
 		return userOffline;
 	}
 }
 
 async function cacheFetcher() {
 	try {
-	stopServiceWorkerByRequest( event );
-	const cachedResponse	=	await caches.match( event.request );
+	if ( ! doNotCache ) {
+		const cachedResponse	=	await caches.match( event.request );
 		if ( ! cachedResponse && strategy === "'. PWA_CACHEONLY .'" ) {
-			const cache		=	await caches.open( PWACACHE );
-			const notCached	=	await cache.match( notCachedPageURL );
+			const cache1	=	await caches.open( PWACACHE );
+			const notCached	=	await cache1.match( notCachedPageURL );
 			return notCached;
 		}
 		if ( strategy === "'. PWA_STALE_REVAL .'" ) {
 			return cachedResponse || networkFetcher( true );	// from cache or go back to network for revalidation
 		}
-	return cachedResponse || networkFetcher( false );
+	return cachedResponse || networkFetcher( false );	// cache-first
+	}
+	return networkFetcher( false );
 	}
 	catch ( error ) {
 		console.log( error );
@@ -209,18 +238,18 @@ async function cacheFetcher() {
 /**
  *	RETURN RESPONSE
  */
+if ( event.request.mode === "navigate" ) {
+
 if ( strategy === "'. PWA_NETWORKONLY .'" ) {
-	if ( event.request.mode === "navigate" ) { event.respondWith( networkFetcher( false ) ); } // do not return cache
-return;
+	return event.respondWith( networkFetcher( false ) );	// do not return cached
 }
 
 else if ( strategy === "'. PWA_NETWORKFIRST .'" ) {
-	if ( event.request.mode === "navigate" ) { event.respondWith( networkFetcher( true ) ); } // return cache
-return;
+	return event.respondWith( networkFetcher( true ) );
 }
 
-else {
-	if ( event.request.mode === "navigate" ) { event.respondWith( cacheFetcher() ); return; }
+else { return event.respondWith( cacheFetcher() ); }
+
 }
 
 } );
@@ -234,6 +263,10 @@ else {
 
 /*
 Read more@
-	https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
-	https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
+https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
+https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
+const host_names	=	"'. $values->hostNames .'";
+const hostNames		=	host_names.split(", ");
+hostNames.forEach( xclh => { if ( reloaded && urlObj.hostname === xclh ) { serv_Worker.terminate(); } } );
 */
+

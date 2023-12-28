@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	Theme's Progressive Web App (PWA)
+ *	Theme's Progressive Web App (PWA):
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
@@ -89,7 +89,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			'type'		=>	'theme_mod',
 			'default'	=>	'Web App',
 			'transport'	=>	'postMessage',
-			'sanitize_callback'	=>	'sanitize_text_field',
+			'sanitize_callback'	=>	'sanitize_text_field'
 		)
 	);
 	$wp_customize->add_control(
@@ -100,7 +100,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			'section'	=>	'prime2g_theme_pwa_section',
 			'input_attrs'	=>	array(
 				'placeholder'	=>	__( 'Web App', PRIME2G_TEXTDOM ),
-				'maxlength'		=>	12,
+				'maxlength'		=>	12
 			)
 		)
 	);
@@ -121,7 +121,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			'section'	=>	'prime2g_theme_pwa_section',
 			'choices'	=>	[
 				'false'	=>	__( 'Do Not Save', PRIME2G_TEXTDOM ),
-				'true'	=>	__( 'Yes, Save Offline', PRIME2G_TEXTDOM ),
+				'true'	=>	__( 'Yes, Save Offline', PRIME2G_TEXTDOM )
 			]
 		)
 	);
@@ -179,10 +179,8 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	$wp_customize->add_setting(
 		'prime2g_pwapp_themecolor',
 		array(
-			'capability'=>	'edit_theme_options',
-			'default'	=>	'#ffffff',
-			'sanitize_callback'	=>	'sanitize_hex_color',
-			'transport'	=>	'postMessage'
+			'capability'=>	'edit_theme_options', 'default'	=>	'#ffffff',
+			'sanitize_callback'	=>	'sanitize_hex_color', 'transport'	=>	'postMessage'
 		)
 	);
 	$wp_customize->add_control( new WP_Customize_Color_Control(
@@ -235,7 +233,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 				PWA_NETWORKFIRST	=>	__( 'Network First', PRIME2G_TEXTDOM ),
 				PWA_CACHEONLY		=>	__( 'Cache Only', PRIME2G_TEXTDOM ),
 				PWA_NETWORKONLY		=>	__( 'Network Only', PRIME2G_TEXTDOM ),
-				PWA_STALE_REVAL		=>	__( 'Stale &amp; Revalidate', PRIME2G_TEXTDOM )
+				PWA_STALE_REVAL		=>	__( 'Cache &amp; Revalidate', PRIME2G_TEXTDOM )
 			),
 		)
 	);
@@ -253,6 +251,38 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			'input_attrs'	=>	array(
 				'placeholder'	=>	'1.00.xx',
 				'maxlength'		=>	7
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_pwapp_cache_exclude_paths',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_pwapp_cache_exclude_paths',
+		array(
+			'label'		=>	__( 'Paths to Exclude from Cache', PRIME2G_TEXTDOM ),
+			'settings'	=>	'prime2g_pwapp_cache_exclude_paths',
+			'section'	=>	'prime2g_theme_pwa_section',
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'Separate by comma.'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_pwapp_endpoints_to_request',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_pwapp_endpoints_to_request',
+		array(
+			'label'		=>	__( 'Endpoints to Request', PRIME2G_TEXTDOM ),
+			'settings'	=>	'prime2g_pwapp_endpoints_to_request',
+			'section'	=>	'prime2g_theme_pwa_section',
+			'input_attrs'	=>	array(
+				'placeholder'	=>	'Separate by comma. E.g. /api/endpoint'
 			)
 		)
 	);

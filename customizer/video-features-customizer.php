@@ -73,6 +73,7 @@ if ( ! prime2g_use_extras() ) return;
 				'prime2g_before_post'	=>	__( 'Before Post Content', PRIME2G_TEXTDOM ),
 				'prime2g_after_post'	=>	__( 'After Post Content', PRIME2G_TEXTDOM ),
 				'replace_header'	=>	__( 'Replace Header', PRIME2G_TEXTDOM ),	# values !== hook name
+				''					=>	__( 'Do Not Show Video', PRIME2G_TEXTDOM )
 			),
 		)
 	);
@@ -95,5 +96,4 @@ if ( ! prime2g_use_extras() ) return;
 }
 
 }
-
 

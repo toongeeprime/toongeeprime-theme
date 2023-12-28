@@ -15,10 +15,10 @@ class Prime2g_PWA_Scripts {
 
 	public static function content() {
 	if ( ! isset( self::$instance ) ) {
-		$start	=	new self();
-		$sharer	=	$start->share_this();
+		$start		=	new self();
+		$content	=	$start->share_this();
 
-		return $sharer;
+		return $content;
 	}
 	return self::$instance;
 	}
@@ -35,7 +35,7 @@ $js	.=	'
 async function checkNetworkAndReload() {
 try {
 	const response	=	await fetch( "." );
-	if ( response.status >= 200 && response.status < 500 ) {
+	if ( response.status >= 200 && response.status < 500 && document.hasFocus() ) {
 		window.location.reload();
 		return;
 	}
@@ -108,7 +108,50 @@ sharerBTN.addEventListener( "click", async ()=>{
 return $js;
 	}
 
-}
 
+	public function helpers() {
+$js	=	'
+// Returns ANY type of page reload
+// @https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming/type
+// window is not defined in service worker.
+function ifPageIsReloaded() {
+	return ( window.performance.getEntriesByType( "navigation" )[0].type === "reload" ||
+	window.performance.navigation && window.performance.navigation.type === 1 );
+}
+';
+return $js;
+	}
+
+
+	public function abort_fetch_api() { // unused yet
+	$values	=	$this->values_and_mods();
+
+$js	=	$this->helpers() .
+'const controller	=	new AbortController();
+const reloaded		=	ifPageIsReloaded();
+const sw_url		=	"'. $values->service_worker .'";
+const serv_Worker	=	new Worker( sw_url );
+
+/*	Do not run on form submit	*/
+const forms		=	p2getAll( "form" );
+if ( forms ) { forms.forEach( f => { f.addEventListener( "submit", ()=>{ serv_Worker.terminate(); } ); } ); }
+';
+return $js;
+	}
+
+
+	private function values_and_mods() {
+	$fileURLs	=	new Prime2g_PWA_File_Url_Manager();
+	$get_url	=	$fileURLs->get_file_url();
+
+	$hostNames	=	defined( 'PWA_REQUEST_HOSTS' ) ? PWA_REQUEST_HOSTS : '""';
+
+	return (object) [
+		'hostNames'			=>	$hostNames,
+		'service_worker'	=>	$get_url[ 'service-worker' ],
+	];
+	}
+
+}
 
 

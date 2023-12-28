@@ -107,15 +107,23 @@ return '<div'. $vidID .' class="prime2g_embedded_media shortcode video">'. $embe
  */
 add_shortcode( 'prime_site_title_and_description', 'prime2g_title_and_description_shortcode' );
 function prime2g_title_and_description_shortcode( $atts ) {
-$atts	=	shortcode_atts( [ 'description' => 'yes', 'descriptiononly' => '', 'class' => '' ], $atts );
+$atts	=	shortcode_atts( [
+	'description' => 'yes',
+	'descriptiononly' => '',
+	'innerelement' => 'span',
+	'class' => 'page_title prel site_width',
+	'h1class' => 'prel'
+], $atts );
 extract( $atts );
 
 $desc		=	( $description === 'yes' ) ? true : false;
 $descOnly	=	( $descriptiononly === 'yes' ) ? true : false;
+$el_start	=	$innerelement ? "<{$innerelement}>" : "";
+$el_end		=	$innerelement ? "</{$innerelement}>" : "";
 $name		=	get_bloginfo( 'name' );
 
-$title	=	"<div class=\"page_title prel site_width {$class}\">";
-$title	.=	( ! $descOnly ) ? "<h1><span title=\"{$name}\">{$name}</span></h1>" : '';
+$title	=	"<div class=\"{$class}\">";
+$title	.=	( ! $descOnly ) ? "<h1 class=\"{$h1class}\" title=\"{$name}\">{$el_start}{$name}{$el_end}</h1>" : '';
 $title	.=	( $descOnly || $desc ) ? '<p id="site_description">'. get_bloginfo( 'description' ) .'</p>' : '';
 $title	.=	"</div>";
 

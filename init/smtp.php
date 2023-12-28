@@ -7,11 +7,10 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 
-if ( get_theme_mod( 'prime2g_use_theme_smtp', 0 ) ) {
-
 $netHome	=	false;
 $siteName	=	get_bloginfo( 'name' );
 $adminEmail	=	get_bloginfo( 'admin_email' );
+$useSMTP	=	get_theme_mod( 'prime2g_use_theme_smtp', 0 );
 
 if ( is_multisite() ) {
 switch_to_blog( 1 );
@@ -19,10 +18,13 @@ if ( get_theme_mod( 'prime2g_route_smtp_to_networkhome' ) ) {
 	$netHome	=	true;
 	$siteName	=	get_bloginfo( 'name' );
 	$adminEmail	=	get_bloginfo( 'admin_email' );
+	$useSMTP	=	get_theme_mod( 'prime2g_use_theme_smtp', 0 );
 }
 restore_current_blog();
 }
 
+
+if ( $useSMTP ) {
 
 if ( $netHome ) switch_to_blog( 1 );
 
@@ -69,6 +71,4 @@ function prime2g_phpmailer_smtp( $phpmailer ) {
 }
 
 }
-
-
 

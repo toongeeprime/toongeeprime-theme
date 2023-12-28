@@ -22,7 +22,7 @@ wp_enqueue_style(
 wp_register_script(
 	'prime2g_pwa_js',
 	PRIME2G_PWA_URL . 'files/app.js',
-	array( 'prime2g_js' ),
+	[ 'prime2g_js' ],
 	$version,
 	true
 );

@@ -166,11 +166,12 @@ elems.forEach( el=>{ p2getEl( el ).classList.toggle( clss ); } );
  *	COOKIES
  *	You can delete a cookie by updating its expiration time to zero
  */
-function primeSetCookie( cName, cValue, expDays ) {
+function primeSetCookie( cName, cValue, expDays, setdomain = null ) {
 	let date	=	new Date();
 	date.setTime( date.getTime() + ( expDays * 24 * 60 * 60 * 1000 ) );
-	const expires	=	"expires=" + date.toUTCString();
-	document.cookie	=	cName + "=" + cValue + "; " + expires + "; path=/";
+	let expires	=	"expires=" + date.toUTCString();
+	let thedomain	=	setdomain ? '; domain='+ setdomain: null;
+	document.cookie	=	cName + "=" + cValue + "; " + expires + "; path=/" + thedomain;
 }
 
 function primeHasCookie( cName ) {
@@ -189,4 +190,5 @@ if ( ( c.indexOf( name ) ) == 0 ) {
 }
 return null;
 }
+
 
