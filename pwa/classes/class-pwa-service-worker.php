@@ -121,24 +121,27 @@ const excl_paths=	"wp-admin, login, wp-login.php, '. $excludePaths .'";
 const exclPaths	=	excl_paths.split(", ");
 const pathNum	=	exclPaths.length;
 
-var ans	=	false;
+var doNot	=	false;
 
 for ( u = 0; u < pathNum; u++ ) {
 	startPath	=	"/" + exclPaths[u];
-	if ( urlPath.startsWith( startPath ) ) { ans = true; break; }
+	if ( urlPath.startsWith( startPath ) ) { doNot = true; break; }
 }
 
-return ans;
+return doNot;
 }
 
 function requestFromNetworkOnly( event ) {
-const reloaded	=	event.request.mode === "navigate";
 const urlStr	=	event.request.url;
 const excl_ends		=	"login/, wp-login.php, admin-ajax.php, '. $endPoints .'";
 const exclEnds	=	excl_ends.split(", ");
+const urlNum	=	exclEnds.length;
 
-exclEnds.forEach( xcl => { if ( reloaded && urlStr.endsWith( xcl ) ) { return true; } } );
-return false;
+var toNet	=	false;
+
+for ( u = 0; u < urlNum; u++ ) { if ( urlStr.indexOf( exclEnds[u] ) > -1 ) { toNet = true; break; } }
+
+return toNet;
 }
 /**		HELPERS END		**/
 
@@ -183,17 +186,12 @@ self.addEventListener( "fetch", event => {
 
 if ( true === '. $overrideSW_fetch .' ) return;
 
-var netOnly	=	requestFromNetworkOnly( event );
-
-if ( netOnly ) { return event.respondWith( fetch( event.request ) ); }
-
 var doNotCache	=	sw_donotcache_items( event );
 
 async function networkFetcher( returnCache ) {
 	try {
 		const cache1	=	await caches.open( PWACACHE );
 		const fromNetwork	=	await fetch( event.request );
-		if ( netOnly ) return fromNetwork;
 		if ( addCachePermit() && ! doNotCache ) {
 			await cache1.put( event.request, fromNetwork.clone() );
 		}
@@ -240,7 +238,11 @@ async function cacheFetcher() {
  */
 if ( event.request.mode === "navigate" ) {
 
-if ( strategy === "'. PWA_NETWORKONLY .'" ) {
+if ( requestFromNetworkOnly( event ) ) {
+	return event.respondWith( fetch( event.request ) );
+}
+
+else if ( strategy === "'. PWA_NETWORKONLY .'" ) {
 	return event.respondWith( networkFetcher( false ) );	// do not return cached
 }
 
