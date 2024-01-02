@@ -42,9 +42,7 @@ class Prime2g_PWA_Service_Worker {
 	$start		=	new self;
 	$sw_plugs	=	function_exists( 'p2g_child_service_worker_scripts' ) ? p2g_child_service_worker_scripts() : '';
 
-	$js	=	$start->core() . $sw_plugs;
-
-	return $js;
+	return $start->core() . $sw_plugs;
 	}
 
 
@@ -97,7 +95,7 @@ const themeFiles	=	"'. $fileURLs->theme_files( 'csv_versioned' ) .'";
 const addHome		=	'. $addHome .';
 const homeStartURL	=	"";
 if ( 0 != addHome ) {
-	const homeStartURL	=	"'. $get_url[ 'home' ] .'" + ", ";
+	const homeStartURL	=	"'. $get_url[ 'home' ] .'" + ", "; // for Concatenation
 }
 const userIsOfflineURL	=	"'. $get_url[ 'offline' ] .'";
 const errorPageURL		=	"'. $get_url[ 'error' ] .'";
@@ -263,6 +261,7 @@ else { return event.respondWith( cacheFetcher() ); }
 }
 
 
+
 /*
 Read more@
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
@@ -271,4 +270,5 @@ const host_names	=	"'. $values->hostNames .'";
 const hostNames		=	host_names.split(", ");
 hostNames.forEach( xclh => { if ( reloaded && urlObj.hostname === xclh ) { serv_Worker.terminate(); } } );
 */
+
 

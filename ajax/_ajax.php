@@ -21,7 +21,7 @@ const done	=	jQuery.ajax( {
 		error: ajaxError,
 	} );
 
-return new Promise( (resolve) => {
+return new Promise( ( resolve, reject ) => {
 resolve( done );
 } );
 

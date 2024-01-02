@@ -21,9 +21,9 @@ return (object) [
 
 
 
-#	bool as string must be returned for service worker JS use
-function prime2g_stop_service_worker() : string {
-if ( function_exists( 'child_stop_service_worker' ) ) return child_stop_service_worker();
+#	bool/code as string must be returned for service worker JS use
+function prime2g_override_service_worker_fetch() : string {
+if ( function_exists( 'prime_override_service_worker_fetch' ) ) return prime_override_service_worker_fetch();
 return 'false';
 }
 

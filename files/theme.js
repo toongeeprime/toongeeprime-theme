@@ -180,15 +180,20 @@ function primeHasCookie( cName ) {
 
 function primeGetCookieValue( cName ) {
 let	name	=	cName + "=",
-	ca	=	document.cookie.split( ";" );
-for ( var i = 0; i < ca.length; i++ ) {
-var c	=	ca[i].trim();
-if ( ( c.indexOf( name ) ) == 0 ) {
-	return c.substr( name.length );
+	ca		=	document.cookie.split( ";" ),
+	cNum	=	ca.length;
+
+for ( var i = 0; i < cNum; i++ ) {
+	var c	=	ca[i].trim();
+	if ( ( c.indexOf( name ) ) == 0 ) { return c.substr( name.length ); }
 }
 
+return "undefined";
 }
-return null;
+
+function primeCookieIsDefined( cName ) {
+	return primeHasCookie( cName ) && "undefined" !== primeGetCookieValue( cName );
 }
+
 
 

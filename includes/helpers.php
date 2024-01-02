@@ -104,6 +104,7 @@ function prime2g_add_theme_pwa() {
 	return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true );
 }
 
+#	Preferred @ front-end matters
 function prime2g_activate_theme_pwa() {
 	$activate	=	prime2g_add_theme_pwa();
 	if ( function_exists( 'prime2g_child_pwa_activator' ) ) return $activate;
