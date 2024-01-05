@@ -13,6 +13,7 @@
 add_action( 'add_meta_boxes', 'prime2g_reg_fieldset_2' );
 if ( ! function_exists( 'prime2g_reg_fieldset_2' ) ) {
 function prime2g_reg_fieldset_2() {
+if ( get_theme_mod( 'prime2g_use_theme_css_js_custom_fields', 1 ) ) {
 	add_meta_box(
 	'prime2g_fieldsbox_2',
 	__( 'Page Codes (Advanced)', PRIME2G_TEXTDOM ),
@@ -21,6 +22,7 @@ function prime2g_reg_fieldset_2() {
 	'normal',
 	'high'
 );
+}
 }
 }
 
@@ -53,12 +55,13 @@ function prime2g_save_metas_2( $post_id ) {
  */
 function toongeeprime_cFields_callback_2( $post ) { ?>
 <div class="prime2g_meta_box">
-	<style scoped>
+	<style>
 		#prime2g_fieldsbox_2{box-shadow:0px 3px 5px #ccc;}
 		#prime2g_fieldsbox_2:hover{box-shadow:0px 3px 5px #aaa;}
 	</style>
 
-    <div class="meta-options prime2g_field">
+    <small><em>*This is a legacy feature. Preferably use HTML Blocks.</em></small>
+	<div class="meta-options prime2g_field">
 		<label for="prime_page_css">CSS</label>
 <textarea id="prime_page_css" class="toongeeprime_admintextarea" name="prime_page_css" rows="5" placeholder="Do not include <style> tags">
 <?php echo $post->prime_page_css; ?>
