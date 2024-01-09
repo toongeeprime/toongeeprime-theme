@@ -21,7 +21,7 @@ return (object) [
 
 
 
-#	bool/code as string must be returned for service worker JS use
+#	bool as string must be returned for service worker JS use
 function prime2g_override_service_worker_fetch() : string {
 if ( function_exists( 'prime_override_service_worker_fetch' ) ) return prime_override_service_worker_fetch();
 return 'false';

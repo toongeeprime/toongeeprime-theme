@@ -66,6 +66,20 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	);
 
 	$wp_customize->add_setting(
+		'prime2g_use_navigation_preload',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_use_navigation_preload',
+		array(
+			'label'		=>	__( 'Use Navigation Preload', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_use_navigation_preload',
+			'section'	=>	'prime2g_theme_pwa_section'
+		)
+	);
+
+	$wp_customize->add_setting(
 		'prime2g_pwapp_primaryicon',
 		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
@@ -282,7 +296,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 			'settings'	=>	'prime2g_pwapp_endpoints_to_request',
 			'section'	=>	'prime2g_theme_pwa_section',
 			'input_attrs'	=>	array(
-				'placeholder'	=>	'Separate by comma. E.g. /api/endpoint'
+				'placeholder'	=>	'Separate by comma. E.g. ?, /api/endpoint'
 			)
 		)
 	);
@@ -290,5 +304,6 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 }
 
 }
+
 
 

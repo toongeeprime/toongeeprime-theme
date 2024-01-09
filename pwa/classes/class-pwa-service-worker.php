@@ -50,6 +50,7 @@ class Prime2g_PWA_Service_Worker {
 	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
 	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );	# String
+	$navPreload	=	get_theme_mod( 'prime2g_use_navigation_preload' ) ? 'true' : 'false';
 	$excludePaths	=	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' );
 	$endPoints	=	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' );
 
@@ -59,13 +60,14 @@ class Prime2g_PWA_Service_Worker {
 			$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
 			$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
 			$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );
+			$navPreload	=	get_theme_mod( 'prime2g_use_navigation_preload' ) ? 'true' : 'false';
 			$excludePaths	=	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' );
 			$endPoints	=	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' );
 		}
 		restore_current_blog();
 	}
 
-	return [ 'strategy' => $strategy, 'addHome' => $addHome, 'addToCache' => $addToCache,
+	return [ 'strategy' => $strategy, 'addHome' => $addHome, 'addToCache' => $addToCache, 'navPreload' => $navPreload,
 	'excludePaths' => $excludePaths, 'endPoints' => $endPoints ];
 	}
 
@@ -78,6 +80,7 @@ class Prime2g_PWA_Service_Worker {
 	$caching	=	$this->get_caching();
 	$strategy	=	$caching[ 'strategy' ];
 	$addHome	=	$caching[ 'addHome' ] ?: '""';
+	$navPreload	=	$caching[ 'navPreload' ];
 	$excludePaths	=	$caching[ 'excludePaths' ] ?: null;
 	$endPoints	=	$caching[ 'endPoints' ] ?: null;
 	$addRequestToCache	=	$caching[ 'addToCache' ];
@@ -105,6 +108,7 @@ const filesString		=	homeStartURL + logoURL + ", " + iconURL + ", " + themeFiles
 const PRECACHE_ITEMS	=	filesString.split(", ");
 const addRequestToCache	=	'. $addRequestToCache .';
 const strategy			=	"'. $strategy .'";
+const navPreload		=	'. $navPreload .';
 
 
 /**		HELPERS		**/
@@ -164,6 +168,7 @@ self.skipWaiting();
  *	On Activate
  */
 self.addEventListener( "activate", event => {
+
 async function deleteOldCaches() {
 const cacheNames	=	await caches.keys();
 await Promise.all( cacheNames.map( name => {
@@ -172,7 +177,15 @@ await Promise.all( cacheNames.map( name => {
 	}
 } ) );
 }
-event.waitUntil( deleteOldCaches() );
+
+async function navPreload_on() {
+if ( navPreload && self.registration.navigationPreload ) {
+	await self.registration.navigationPreload.enable();
+}
+}
+
+const promises	=	[ deleteOldCaches(), navPreload_on() ];
+event.waitUntil( Promise.allSettled( promises ) );
 self.clients.claim();
 } );
 
@@ -182,7 +195,7 @@ self.clients.claim();
  */
 self.addEventListener( "fetch", event => {
 
-if ( true === '. $overrideSW_fetch .' ) return;
+if ( false !== '. $overrideSW_fetch .' ) return;	// ?? override code must therefore be added.
 
 var doNotCache	=	sw_donotcache_items( event );
 
@@ -193,6 +206,12 @@ async function networkFetcher( returnCache ) {
 		if ( addCachePermit() && ! doNotCache ) {
 			await cache1.put( event.request, fromNetwork.clone() );
 		}
+
+		if ( navPreload ) {
+			const preloaded	=	await event.preloadResponse;
+			if ( preloaded ) return preloaded;
+		}
+
 		if ( fromNetwork ) return fromNetwork;
 	} catch ( error ) {
 		console.log( error );
@@ -262,13 +281,14 @@ else { return event.respondWith( cacheFetcher() ); }
 
 
 
-/*
+
+
+/**
 Read more@
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
-const host_names	=	"'. $values->hostNames .'";
+const host_names	=	"'.$values->hostNames.'";
 const hostNames		=	host_names.split(", ");
 hostNames.forEach( xclh => { if ( reloaded && urlObj.hostname === xclh ) { serv_Worker.terminate(); } } );
 */
-
 
