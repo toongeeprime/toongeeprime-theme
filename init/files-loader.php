@@ -42,5 +42,7 @@ foreach( $parts as $part ) {
 /**
  *	UPDATER
  */
-require_once PRIME2G_THEME . 'update/updater-index.php';
+new Prime2gThemeUpdater( PRIME2G_TEXTDOM, 'https://dev.akawey.com/wp/themes/toongeeprime-theme/theme.json' );
+
+
 
