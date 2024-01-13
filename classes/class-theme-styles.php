@@ -16,12 +16,12 @@ class ToongeePrime_Styles {
 	 *	Public for defaults' usage in customizer and other theme files
 	 */
 	public $siteWidth	=	'1100px';
-	public $bodyFont	=	'Open+Sans';
-	public $bodyAltFont	=	'Arial, Helvetica, sans-serif'; # 1.0.55
 	public $headFont	=	'Oxygen';
+	public $bodyFont	=	'Open+Sans';
 	public $headingsAltFont	=	'Geneva, Verdana, sans-serif'; # 1.0.55
-	public $titlesF_Weight	=	'500'; # 1.0.55
-	public $arch_ftImgHeight=	'17'; # 1.0.55
+	public $bodyAltFont	=	'Arial, Helvetica, sans-serif';
+	public $titlesF_Weight	=	'500';
+	public $arch_ftImgHeight=	'17';
 
 
 	/**
@@ -29,7 +29,7 @@ class ToongeePrime_Styles {
 	 */
 	public function defaults() {
 	$brandcolor	=	defined( 'CHILD_BRANDCOLOR' ) ? CHILD_BRANDCOLOR : '#777777';
-	$brandcolor2	=	defined( 'CHILD_BRANDCOLOR2' ) ? CHILD_BRANDCOLOR2 : '#aaaaaa';
+	$brandcolor2=	defined( 'CHILD_BRANDCOLOR2' ) ? CHILD_BRANDCOLOR2 : '#aaaaaa';
 	$bgcolor	=	defined( 'CHILD_SITEBG' ) ? CHILD_SITEBG : '#efefef';
 	$headerbg	=	defined( 'CHILD_HEADERBG' ) ? CHILD_HEADERBG : '#030303';
 	$contentbg	=	defined( 'CHILD_CONTENTBG' ) ? CHILD_CONTENTBG : '#ffffff';
@@ -125,9 +125,18 @@ class ToongeePrime_Styles {
 	 *	Generate CSS :root variables
 	 */
 	protected function the_root_css() {
-	$useGFonts	=	$this->get_mod( 'use_gFonts' );
-	$bodyGFont	=	$useGFonts ? str_replace( "+", " ", $this->get_mod( 'bodyF' ) ) : '';
-	$headGFont	=	$useGFonts ? str_replace( "+", " ", $this->get_mod( 'headF' ) ) : '';
+	if ( $this->get_mod( 'use_gFonts' ) ) {
+		$hFont		=	$this->get_mod( 'headF' );
+		$headGFont	=	str_replace( "+", " ", $hFont );
+		$headGFont	=	$headGFont . '\', \'' . prime2g_get_gfont_category( $hFont );
+
+		$bFont		=	$this->get_mod( 'bodyF' );
+		$bodyGFont	=	str_replace( "+", " ", $bFont );
+		$bodyGFont	=	$bodyGFont . '\', \'' . prime2g_get_gfont_category( $bFont );
+	} else {
+		$headGFont	=	$this->get_mod( 'h_AltFont' );
+		$bodyGFont	=	$this->get_mod( 'b_AltFont' );
+	}
 
 	return "
 	--brand-color:". $this->get_mod( 'brand' ) .";
@@ -137,8 +146,8 @@ class ToongeePrime_Styles {
 	--header-background:". $this->get_mod( 'header' ) .";
 	--content-background:". $this->get_mod( 'content' ) .";
 	--footer-background:". $this->get_mod( 'footer' ) .";
-	--body-font:'{$bodyGFont}', ". $this->get_mod( 'b_AltFont' ) .";
-	--headings-font:'{$headGFont}', ". $this->get_mod( 'h_AltFont' ) .";
+	--body-font:'{$bodyGFont}';
+	--headings-font:'{$headGFont}';
 	--post-titlesize:". $this->get_mod( 'post_titleSize' ) ."rem;
 	--arch-titlesize:". $this->get_mod( 'arch_titleSize' ) ."rem;
 	";
@@ -212,3 +221,4 @@ return $css;
 }
 
 }
+

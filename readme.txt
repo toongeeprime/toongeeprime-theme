@@ -21,7 +21,8 @@ Several updates across the theme
 * Introduced theme's PROGRESSIVE WEB APP (PWA)
 * HEADER VIDEO
 * SMTP Mail Config
-* 106 Google Fonts
+* Overhaul Google Fonts system, added prime2g_get_google_fonts_remote()
+* @ Class: Prime2gThemeUpdater - overhauling former update system
 * @ Class: @ ToongeePrime_Styles, allow child overriding of defaults
 * @ Child Theme Optional Constants: *CHILD_BUTTONTEXT, CHILD_BUTTONBG, CHILD_BRANDCOLOR, CHILD_BRANDCOLOR2,
 CHILD_SITEBG, CHILD_HEADERBG, CHILD_CONTENTBG, CHILD_FOOTERBG

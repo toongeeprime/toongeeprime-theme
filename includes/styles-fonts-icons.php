@@ -35,7 +35,6 @@ function prime2g_icons_file_url() {
  */
 add_action( 'wp_footer', 'prime2g_load_fonts_and_icons' );
 if ( ! function_exists( 'prime2g_load_fonts_and_icons' ) ) {
-
 function prime2g_load_fonts_and_icons() {
 
 if ( get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ) ) {
@@ -49,125 +48,84 @@ if ( get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ) ) {
 	wp_enqueue_style( 'bootstrap-icons', prime2g_icons_file_url(), [], PRIME2G_VERSION );
 
 }
+}
 
+
+
+/**
+ *	Get Google Fonts
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( ! function_exists( 'prime2g_get_google_fonts_remote' ) ) {
+function prime2g_get_google_fonts_remote() {
+$transient_name	=	'prime2g_google_fonts_sets';
+$font_sets		=	get_transient( $transient_name );
+
+if ( $font_sets ) {
+	return $font_sets;
+}
+else {
+$remote		=	wp_remote_get( 'https://dev.akawey.com/fonts/google-fonts-fam-categ.json' );
+
+if ( ! is_wp_error( $remote ) ) {
+$fonts_string	=	wp_remote_retrieve_body( $remote );
+$fonts_array	=	json_decode( $fonts_string );
+
+foreach( $fonts_array as $font ) {
+$family_keys[]		=	str_replace( ' ', '+', $font->family );
+$family_names[]		=	$font->family;
+$categories[]		=	$font->category;
+}
+
+$keys_names		=	array_combine( $family_keys, $family_names );
+$keys_categs	=	array_combine( $family_keys, $categories );
+
+$font_sets	=	[
+	'family_keys'	=>	$family_keys,
+	'family_names'	=>	$family_names,
+	'categories'	=>	$categories,
+	'keys_names'	=>	$keys_names,
+	'keys_categs'	=>	$keys_categs
+];
+
+set_transient( $transient_name, $font_sets, MONTH_IN_SECONDS );
+}
+else {
+	$font_sets	=	[];
+}
+}
+
+return $font_sets;
+}
 }
 
 
 
 /**
  *	Theme (Google) Fonts
+ *	Overhauled @since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_theme_fonts' ) ) {
 function prime2g_theme_fonts() {
-
-return array(
-	'Abril+Fatface'	=>	'Abril Fatface',
-	'Adamina'		=>	'Adamina',
-	'Alegreya+Sans'	=>	'Alegreya Sans',
-	'Amita'		=>	'Amita',
-	'Architects+Daughter'		=>	'Architects Daughter',
-	'Archivo+Narrow'		=>	'Archivo Narrow',
-	'Arimo'		=>	'Arimo',
-	'Ar+One+Sans'	=>	'Ar One Sans',
-	'Barlow'	=>	'Barlow',
-	'Barlow+Condensed'	=>	'Barlow Condensed',
-	'Barriecito'=>	'Barriecito',
-	'Bebas+Neue'=>	'Bebas Neue',
-	'Bellefair'	=>	'Bellefair',
-	'Be+Vietnam+Pro'	=>	'Be Vietnam Pro',
-	'Bitter'	=>	'Bitter',
-	'Bonbon'	=>	'Bonbon',
-	'Cabin'		=>	'Cabin',
-	'Cantarell'	=>	'Cantarell',
-	'Cantata+One'	=>	'Cantata One',
-	'Cardo'	=>	'Cardo',
-	'Carter+One'=>	'Carter One',
-	'Caveat'	=>	'Caveat',
-	'Charm'		=>	'Charm',
-	'Cherry+Swash'	=>	'Cherry Swash',
-	'Comfortaa'	=>	'Comfortaa',
-	'Comforter+Brush'	=>	'Comforter Brush',
-	'Coming+Soon'	=>	'Coming Soon',
-	'Cormorant+Garamond'	=>	'Cormorant Garamond',
-	'Cormorant+Infant'	=>	'Cormorant Infant',
-	'Crimson+Text'	=>	'Crimson Text',
-	'Dancing+Script'	=>	'Dancing Script',
-	'Delius'	=>	'Delius',
-	'DM+Sans'	=>	'DM Sans',
-	'Dosis'		=>	'Dosis',
-	'Fahkwang'	=>	'Fahkwang',
-	'Fredoka'	=>	'Fredoka',
-	'Fuzzy+Bubbles'	=>	'Fuzzy Bubbles',
-	'Gabarito'	=>	'Gabarito',
-	'Habibi'	=>	'Habibi',
-	'Heebo'	=>	'Heebo',
-	'Inconsolata'	=>	'Inconsolata',
-	'Inria+Serif'	=>	'Inria Serif',
-	'Inspiration'	=>	'Inspiration',
-	'Inter'		=>	'Inter',
-	'Josefin+Sans'	=>	'Josefin Sans',
-	'Jost'		=>	'Jost',
-	'Just+Another+Hand'	=>	'Just Another Hand',
-	'Karla'		=>	'Karla',
-	'Khula'		=>	'Khula',
-	'Krub'		=>	'Krub',
-	'Kumbh+Sans'=>	'Kumbh Sans',
-	'Lato'		=>	'Lato',
-	'Lexend+Exa'=>	'Lexend Exa',
-	'Lora'		=>	'Lora',
-	'Luckiest+Guy'	=>	'Luckiest Guy',
-	'Lustria'	=>	'Lustria',
-	'Mada'		=>	'Mada',
-	'Marcellus'	=>	'Marcellus',
-	'Merriweather'	=>	'Merriweather',
-	'Montserrat'=>	'Montserrat',
-	'Mulish'	=>	'Mulish',
-	'Nanum+Myeongjo'	=>	'Nanum Myeongjo',
-	'Noto+Sans'	=>	'Noto Sans',
-	'Noto+Sans+Display'	=>	'Noto Sans Display',
-	'Noto+Sans+Mono'	=>	'Noto Sans Mono',
-	'Nunito'	=>	'Nunito',
-	'Nunito+Sans'	=>	'Nunito Sans',
-	'Open+Sans'	=>	'Open Sans',
-	'Orbitron'	=>	'Orbitron',
-	'Oswald'	=>	'Oswald',
-	'Overpass'	=>	'Overpass',
-	'Oxygen'	=>	'Oxygen',
-	'Pixelify+Sans'	=>	'Pixelify Sans',
-	'Playfair+Display'	=>	'Playfair Display',
-	'Poppins'	=>	'Poppins',
-	'Poiret+One'=>	'Poiret One',
-	'PT+Mono'	=>	'PT Mono',
-	'PT+Sans'	=>	'PT Sans',
-	'Quicksand'	=>	'Quicksand',
-	'Quintessential'	=>	'Quintessential',
-	'Qwigley'	=>	'Qwigley',
-	'Raleway'	=>	'Raleway',
-	'Red+Hat+Display'	=>	'Red Hat Display',
-	'Redressed'	=>	'Redressed',
-	'Reenie+Beanie'	=>	'Reenie Beanie',
-	'Roboto'	=>	'Roboto',
-	'Roboto+Mono'	=>	'Roboto Mono',
-	'Rochester'	=>	'Rochester',
-	'Rubik+Dirt'=>	'Rubik Dirt',
-	'Rubik+Maze'=>	'Rubik Maze',
-	'Sofia'		=>	'Sofia',
-	'Source+Code+Pro'	=>	'Source Code Pro',
-	'Source+Sans+Pro'	=>	'Source Sans Pro',
-	'Source+Serif+4'	=>	'Source Serif 4',
-	'Source+Serif+Pro'	=>	'Source Serif Pro',
-	'Spartan'	=>	'Spartan',
-	'Syne'		=>	'Syne',
-	'Tajawal'	=>	'Tajawal',
-	'Trirong'	=>	'Trirong',
-	'Ubuntu'	=>	'Ubuntu',
-	'Unna'	=>	'Unna',
-	'Work+Sans'	=>	'Work Sans',
-	'Yeseva+One'=>	'Yeseva One',
-	'Young+Serif'=>	'Young Serif',
-	'Zen+Dots'	=>	'Zen Dots',
-	'Zilla+Slab'	=>	'Zilla Slab',
-);
-
+	$font_sets	=	prime2g_get_google_fonts_remote();
+	return $font_sets[ 'keys_names' ];
 }
 }
+
+
+
+if ( ! function_exists( 'prime2g_get_gfont_category' ) ) {
+function prime2g_get_gfont_category( string $font_key ) {
+$font_sets	=	prime2g_get_google_fonts_remote();
+$fonts		=	$font_sets[ 'keys_categs' ];
+
+foreach( $fonts as $key => $value ) {
+	if ( $font_key === $key ) return $value;
+}
+
+return '';
+}
+}
+
+
+
