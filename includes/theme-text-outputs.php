@@ -633,7 +633,19 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 	<?php
 	}
 	elseif ( is_404() ) {
-		_e( '<h1 class="entry-title page-title title">Sorry, what you are looking for can\'t be found</h1>', PRIME2G_TEXTDOM );
+	echo '<h1 class="entry-title page-title title">';
+		$title404	=	__( 'Sorry, what you are looking for can\'t be found', PRIME2G_TEXTDOM );
+		if ( get_theme_mod( 'prime2g_use_page_for404' ) ) {
+			$pageID	=	(int) get_theme_mod( 'prime2g_404error_page_id' );
+			$page	=	new WP_Query( [ 'page_id' => $pageID ] );
+			if ( $page->have_posts() ) {
+				$page->the_post();
+				echo get_the_title();
+			}
+			else { echo $title404; }
+		}
+		else { echo $title404; }
+	echo '</h1>';
 	}
 	elseif ( is_search() ) { ?>
 		<h1 class="entry-title page-title title">

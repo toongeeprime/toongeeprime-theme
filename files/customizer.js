@@ -136,6 +136,13 @@ value.bind( function( newval ) {
 } );
 } );
 
+api( 'prime2g_use_page_for404', function( value ) {
+value.bind( function( newval ) {
+	let ePageID	=	$( '#customize-control-prime2g_404error_page_id' );
+	if ( newval ) { ePageID.slideDown( 180 ); } else { ePageID.slideUp( 180 ); }
+} );
+} );
+
 api( 'prime2g_set_cta_menu_item', function( value ) {
 value.bind( function( newval ) {
 	let ctaURL	=	$( '#customize-control-prime2g_cta_menu_url' ),
@@ -159,3 +166,4 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 } );
 
 } )( jQuery, wp.customize );
+

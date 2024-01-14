@@ -113,7 +113,7 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_template_parts_richedit',
 			'section'	=>	'prime2g_theme_extras_section',
-			'active_callback'	=>	function() { return get_theme_mod( 'prime2g_cpt_template_parts' ); },
+			'active_callback'	=>	function() { return ! empty( get_theme_mod( 'prime2g_cpt_template_parts' ) ); },
 		)
 	);
 

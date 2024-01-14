@@ -82,6 +82,40 @@ $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 	);
 
 	/**
+	 *	404 ERROR PAGE
+	 *	@since ToongeePrime Theme @ 1.0.55
+	 */
+	$wp_customize->add_setting(
+		'prime2g_use_page_for404',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_use_page_for404',
+		array(
+			'label'		=>	__( 'Use Custom 404 Error Page', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_use_page_for404',
+			'section'	=>	'prime2g_site_settings_section'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'prime2g_404error_page_id',
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_404error_page_id',
+		array(
+			'label'		=>	__( 'Select 404 Error Page', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_404error_page_id',
+			'section'	=>	'prime2g_site_settings_section',
+			'choices'	=>	$pages,
+			'active_callback'	=> function() { return ! empty( get_theme_mod( 'prime2g_use_page_for404' ) ); }
+		)
+	);
+
+	/**
 	 *	STOP WP HEARTBEAT
 	 *	@since ToongeePrime Theme 1.0.49
 	 */

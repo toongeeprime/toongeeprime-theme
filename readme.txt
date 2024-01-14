@@ -21,7 +21,7 @@ Several updates across the theme
 * Introduced theme's PROGRESSIVE WEB APP (PWA)
 * HEADER VIDEO
 * SMTP Mail Config
-* Overhaul Google Fonts system, added prime2g_get_google_fonts_remote()
+* Overhaul Google Fonts system, added prime2g_get_google_fonts_remote() and prime2g_get_gfont_category()
 * @ Class: Prime2gThemeUpdater - overhauling former update system
 * @ Class: @ ToongeePrime_Styles, allow child overriding of defaults
 * @ Child Theme Optional Constants: *CHILD_BUTTONTEXT, CHILD_BUTTONBG, CHILD_BRANDCOLOR, CHILD_BRANDCOLOR2,
@@ -41,6 +41,7 @@ CHILD_SITEBG, CHILD_HEADERBG, CHILD_CONTENTBG, CHILD_FOOTERBG
 * @ customizer: Place Menu over header
 * @ customizer: Page title over header video
 * @ customizer: Byline Options
+* @ customizer: 404 Error Page Options
 * @ customizer: Show/Hide Socials & contacts icon links
 * @ Menus: Added Site Top Menu
 * @ parts: Added adjust-templates.php for conditional adjustments
