@@ -29,5 +29,6 @@ A WordPress theme with options for customization in the WordPress Customizer
 ***\*More details on the theme's hooks are in the theme's readme.txt file***
 
 
-![screenshot](https://user-images.githubusercontent.com/39152476/160936850-e8efb85e-6853-4fe1-afbb-c0273a500a43.jpg)
+![screenshot](https://github.com/toongeeprime/toongeeprime-theme/blob/279c38c9b399e1be36c6a7f809ab3db3b90408ce/screenshot.jpg)
+
 
