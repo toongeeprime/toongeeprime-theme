@@ -25,6 +25,13 @@ class Prime2gThemeUpdater {
 	 *	Returns either a the theme JSON object, or NULL
 	 */
 	public function requestUpdate() {
+	$transient_name	=	'prime2g_theme_update_check';
+	$updateinfo		=	get_transient( $transient_name );
+
+	if ( $updateinfo ) {
+		return $updateinfo;
+	}
+	else {
 		$remote	=	wp_remote_get(
 			$this->metadataUrl,
 			array(
@@ -36,13 +43,13 @@ class Prime2gThemeUpdater {
 		$remote_body	=	wp_remote_retrieve_body( $remote );
 
 		if (
-		is_wp_error( $remote ) || 200 !== wp_remote_retrieve_response_code( $remote ) ||
-		empty( $remote_body ) || $remote === null
-		) {
-			return null;
-		}
+		is_wp_error( $remote ) || 200 !== wp_remote_retrieve_response_code( $remote ) || empty( $remote_body )
+		) { return null; }
 
-	return json_decode( $remote_body );
+		$updateinfo	=	json_decode( $remote_body );
+		set_transient( $transient_name, $updateinfo, HOUR_IN_SECONDS );
+		return $updateinfo;
+	}
 	}
 
 	/**
@@ -84,6 +91,4 @@ class Prime2gThemeUpdater {
 	}
 
 }
-
-
 

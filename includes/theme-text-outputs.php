@@ -637,10 +637,12 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 		$title404	=	__( 'Sorry, what you are looking for can\'t be found', PRIME2G_TEXTDOM );
 		if ( get_theme_mod( 'prime2g_use_page_for404' ) ) {
 			$pageID	=	(int) get_theme_mod( 'prime2g_404error_page_id' );
-			$page	=	new WP_Query( [ 'page_id' => $pageID ] );
-			if ( $page->have_posts() ) {
-				$page->the_post();
-				echo get_the_title();
+			if ( $pageID ) {
+				$page	=	prime2g_wp_query( [ 'page_id' => $pageID ], [ 'cacheName' => 'custom_404error_page' ] );
+				if ( $page->have_posts() ) {
+					$page->the_post();
+					echo get_the_title();
+				}
 			}
 			else { echo $title404; }
 		}
@@ -674,6 +676,4 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
-
-
 

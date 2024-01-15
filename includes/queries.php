@@ -53,7 +53,7 @@ else {
 }
 
 if ( $get === 'posts' ) return $loop->posts;
-if ( $get === 'count' ) return $loop->found_posts;
+if ( $get === 'count' ) return $loop->found_posts;	# not exactly necessary
 
 return $loop; # $get == null
 }
