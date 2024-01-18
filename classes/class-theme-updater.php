@@ -67,8 +67,8 @@ class Prime2gThemeUpdater {
 
 	$compatible	=	(
 		version_compare( $currentVer, $update->version, '<' )
-		&& version_compare( $update->requires, get_bloginfo( 'version' ), '<' )
-		&& version_compare( $update->requires_php, PHP_VERSION, '<' )
+		&& version_compare( $update->requires, get_bloginfo( 'version' ), '<=' )
+		&& version_compare( $update->requires_php, PHP_VERSION, '<=' )
 	);
 
 	$data	=	array(
