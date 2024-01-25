@@ -53,10 +53,7 @@ function prime2g_customizer_front_page( $wp_customize ) {
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_theme_show_headlines',
 			'section'	=>	'prime2g_theme_archives_section',
-			'choices'	=>	array(
-				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM ),
-			),
-			'active_callback'	=>	'is_home',
+			'active_callback'	=>	'is_home'
 		)
 	);
 
@@ -72,7 +69,7 @@ function prime2g_customizer_front_page( $wp_customize ) {
 			'settings'	=>	'prime2g_headlines_category',
 			'section'	=>	'prime2g_theme_archives_section',
 			'choices'	=>	prime2g_categs_and_ids_array(),
-			'active_callback'	=>	'is_home',
+			'active_callback'	=>	'is_home'
 		)
 	);
 

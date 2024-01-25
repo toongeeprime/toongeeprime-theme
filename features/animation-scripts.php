@@ -19,7 +19,7 @@ $atts );
 extract( $atts );
 
 add_action( 'wp_footer', function() use( $threshold, $use ) {
-	if ( $use == 'jquery' ) {
+	if ( $use === 'jquery' ) {
 		echo '<script id="prime2g_element_observerJQ">prime2g_element_observerJQ();';
 		echo prime2g_element_observerJQuery( $threshold );
 		echo '</script>';
@@ -122,6 +122,5 @@ function prime2g_element_observerJQ() {
 
 return $jq;
 }
-
 
 

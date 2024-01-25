@@ -59,8 +59,5 @@ define( 'PWA_NETWORKFIRST', 'NetworkFirst' );
 define( 'PWA_NETWORKONLY', 'NetworkOnly' );
 define( 'PWA_STALE_REVAL', 'StaleWhileRevalidate' );
 
-if ( ! defined( 'PWA_SHARER_BTN_ID' ) ) {
-	define( 'PWA_SHARER_BTN_ID', 'sharerBTN' );
-}
-
+defined( 'PWA_SHARER_BTN_ID' ) || define( 'PWA_SHARER_BTN_ID', 'sharerBTN' );
 

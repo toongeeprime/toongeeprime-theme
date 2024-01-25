@@ -62,16 +62,20 @@ exit;
 
 
 $title	=	( 'maintenance' === $shutDown ) ? 'Website is Under Maintenance!' : 'Coming Soon!';
+$icon	=	get_site_icon_url();
 
 echo '<!DOCTYPE html><html '. get_language_attributes() .' '. prime2g_theme_html_classes( false ) .'>
 <head>
 	<meta charset="' . get_bloginfo( 'charset' ) . '" />
 	<title>' . $title . ' - ' . get_bloginfo( 'name' ) . '</title>
+	<link rel="icon" href="'. $icon .'">
 	<!-- Open Graph -->
 	<meta property="og:url" content="' . get_home_url() . '" />
 	<meta property="og:type" content="website" />
+	<meta property="og:image" content="'. $icon .'" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:image" content="'. $icon .'" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />';
 
 wp_head();

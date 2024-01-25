@@ -25,7 +25,15 @@ if ( $pageID ) {
 if ( $page->have_posts() ) {
 	$page->the_post();
 
-if ( get_post_meta( get_the_ID(), 'remove_sidebar', true ) === 'remove' ) {
+$page_id	=	get_the_ID();
+
+if ( get_post_meta( $page_id, 'remove_header', true ) === 'remove' ) {
+	echo '<style>#header{display:none!important;}</style>';
+}
+
+if ( get_post_meta( $page_id, 'remove_sidebar', true ) === 'remove' ||
+in_array( get_theme_mod( 'prime2g_remove_sidebar_in_singular' ), [ 'and_pages', 'pages_only' ] )
+) {
 	echo '<style>#content{grid-template-columns:1fr;}</style>';
 	prime2g_removeSidebar();
 }
@@ -65,3 +73,4 @@ prime2g_below_posts_widgets();
 }
 
 get_footer();
+

@@ -51,6 +51,19 @@ function prime2g_customizer_singular_entries( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting( 'prime2g_use_theme_css_js_custom_fields',
+		[ 'type' => 'theme_mod', 'default' => 1, 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+	);
+	$wp_customize->add_control(
+		'prime2g_use_theme_css_js_custom_fields',
+		array(
+			'label'		=>	__( 'Use CSS &amp; JS Fields (Legacy)', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_use_theme_css_js_custom_fields',
+			'section'	=>	'prime2g_singular_entries_section'
+		)
+	);
+
 }
 
 }

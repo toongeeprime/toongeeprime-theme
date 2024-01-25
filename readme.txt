@@ -23,6 +23,7 @@ Several updates across the theme
 * SMTP Mail Config
 * Overhaul Google Fonts system, added prime2g_get_google_fonts_remote() and prime2g_get_gfont_category()
 * @ Class: Prime2gThemeUpdater - overhauling former update system
+* @ Class: Prime2g_PWA_Features
 * @ Class: @ ToongeePrime_Styles, allow child overriding of defaults
 * @ Child Theme Optional Constants: *CHILD_BUTTONTEXT, CHILD_BUTTONBG, CHILD_BRANDCOLOR, CHILD_BRANDCOLOR2,
 CHILD_SITEBG, CHILD_HEADERBG, CHILD_CONTENTBG, CHILD_FOOTERBG
@@ -59,7 +60,8 @@ CHILD_SITEBG, CHILD_HEADERBG, CHILD_CONTENTBG, CHILD_FOOTERBG
 	-	Menus have to be created to link to locations
 * Pagination by numbers
 * Work Custom logo width and height attributes
-* Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_video, prime_map, prime_site_footer_credits
+* Shortcodes: prime_site_logo, prime_search_form, prime_site_title_and_description, prime_nav_menu, prime_video,
+prime_map, prime_site_footer_credits, prime2g_lottie
 * Internalized jQuery
 * Updated screenshot
 

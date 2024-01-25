@@ -155,10 +155,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 			'label'		=>	__( 'Show Sticky Posts at the Top of Archives?', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_theme_show_stickies',
-			'section'	=>	'prime2g_theme_archives_section',
-			'choices'	=>	array(
-				'show'	=>	__( 'Yes', PRIME2G_TEXTDOM )
-			)
+			'section'	=>	'prime2g_theme_archives_section'
 		)
 	);
 

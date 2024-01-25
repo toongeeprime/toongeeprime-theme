@@ -13,9 +13,11 @@
 add_action( 'prime2g_after_header', 'prime2g_home_headlines', 12 );
 
 if ( ! function_exists( 'prime2g_headlines_loop' ) ) {
-	function prime2g_headlines_loop() {
-		return prime2g_archive_loop( true, 'medium', 20, false, false );
-	}
+function prime2g_headlines_loop( $post ) {
+return prime2g_get_archive_loop_post_object( [
+'post' => $post, 'size' => 'medium', 'length' => 20, 'metas' => false, 'switch_img_vid' => true
+] );
+}
 }
 
 
@@ -24,49 +26,57 @@ if ( ! function_exists( 'prime2g_home_headlines' ) ) {
 function prime2g_home_headlines() {
 if ( ! is_home() ) return;
 
-if ( 'show' == get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
+if ( get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
 	$cid	=	get_theme_mod( 'prime2g_headlines_category' );
 	$cat	=	get_category( $cid );
 	if ( $cat ) {
 	$slug	=	$cat->slug;
 
-	echo '<section class="home_headlines">';
+$options	=	[ 'useCache' => false, 'cacheIt' => false ];
+$tax_query	=	[ 'taxonomy' => 'category', 'operator' => 'IN', 'terms' => $slug ];
 
-		echo '<h1 class="headlines_heading">' . $cat->name . '</h1>';
+$set_1	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
 
-		echo '<div class="grid display prel">';
+$mid	=	prime2g_wp_query( [ 'posts_per_page' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
 
-			echo '<div class="left sides grid prel">';
-				prime2g_get_posts_query(
-					'post', 2, 1, 'date', 'category', 'IN', $slug, 'prime2g_headlines_loop'
-				);
-			echo '</div>';
+$set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
 
-			echo '<div class="mid grid prel">';
-			echo '<div class="mainheadline">';
-				prime2g_get_posts_query(
-					'post', 1, 0, 'date', 'category', 'IN', $slug, 'prime2g_archive_loop'
-				);
+
+	echo '<section class="home_headlines">
+
+		<h1 class="headlines_heading">' . $cat->name . '</h1>
+		<div class="grid display prel">
+
+			<div class="left sides grid prel">';
+			if ( $set_1->have_posts() ) {
+				while ( $set_1->have_posts() ) { $set_1->the_post(); echo prime2g_headlines_loop( null ); }
+			}
+			echo '</div>
+
+			<div class="mid grid prel">
+			<div class="mainheadline">';
+			if ( $mid->have_posts() ) {
+				while ( $mid->have_posts() ) {
+					$mid->the_post();
+					echo prime2g_get_archive_loop_post_object( [ 'switch_img_vid' => true ] );
+				}
+			}
 			echo '</div>';
 			do_action( 'prime2g_after_home_main_headline' );	# @since ToongeePrime Theme 1.0.55
-			echo '</div>';
+			echo '</div>
 
-			echo '<div class="right sides grid prel">';
-				prime2g_get_posts_query(
-					'post', 2, 3, 'date', 'category', 'IN', $slug, 'prime2g_headlines_loop'
-				);
-			echo '</div>';
-
-		echo '</div>';
+			<div class="right sides grid prel">';
+			if ( $set_2->have_posts() ) {
+				while ( $set_2->have_posts() ) { $set_2->the_post(); echo prime2g_headlines_loop( null ); }
+			}
+			echo '</div>
+			</div>';
 
 		do_action( 'prime2g_after_home_headlines' );	# @since ToongeePrime Theme 1.0.55
 
 	echo '</section>';
 	}
-	else {
-		echo '<h2>Select Category</h2>';
-	}
-
+	else { echo '<h2>Select Category</h2>'; }
 }
 
 }

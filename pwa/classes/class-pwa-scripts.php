@@ -2,24 +2,36 @@
 
 /**
  *	CLASS: PWA Scripts
- *	Plug into Theme's Web App
- *	codes ARE NOT wrapped in <script> tags
+ *	Contents for PWA script.js file and for selective usage around the PWA
+ *	No <script> tags
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
 
+/**
+ *	Create and use this Class to add code to the script.js file
+ *
+ *	class Prime2g_Add_PWA_Script {
+ *		public static function add() { return 'string'; }
+ *	}
+ */
+
+
 class Prime2g_PWA_Scripts {
 
+	public $scripts;
 	private static $instance;
 
-	public static function content() {
+	public function __construct() {
 	if ( ! isset( self::$instance ) ) {
-		$start		=	new self();
-		$content	=	$start->share_this();
-
-		return $content;
+		$this->scripts	=	"// PWA Scripts\n";
 	}
+
+	if ( class_exists( 'Prime2g_Add_PWA_Script' ) ) {
+		$this->scripts	.=	Prime2g_Add_PWA_Script::add();
+	}
+
 	return self::$instance;
 	}
 
@@ -40,7 +52,6 @@ try {
 		return;
 	}
 } catch ( error ) {
-	// Nothing much to do
 	console.log( error );
 }
 }
@@ -85,73 +96,5 @@ const DYNACACHE		=	"'. $cacheNames->dynamic .'";
 return $js;
 	}
 
-
-	public function share_this() {
-	$title	=	$url	=	$text	=	'';
-
-$js	=	'const shareData = { title: "'. $title .'", url: "'. $url .'", text: "'. $text .'" };
-
-function canBrowserShareData( data ) {
-	if ( ! navigator.share || ! navigator.canShare ) { return false; }
-	return navigator.canShare( data ); // determines if data is shareable
 }
-
-const sharerBTN	=	p2getEl( "#'. PWA_SHARER_BTN_ID .'" );
-if ( sharerBTN && canBrowserShareData( shareData ) ) {
-sharerBTN.classList.remove( "hide" );
-sharerBTN.addEventListener( "click", async ()=>{
-	try { await navigator.share( shareData ); }
-	catch (err) { console.error( `URL could not be shared: ${err}` ); }
-} );
-
-}';
-return $js;
-	}
-
-
-	public function helpers() {
-$js	=	'
-// Returns ANY type of page reload
-// @https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming/type
-// window is not defined in service worker.
-function ifPageIsReloaded() {
-	return ( window.performance.getEntriesByType( "navigation" )[0].type === "reload" ||
-	window.performance.navigation && window.performance.navigation.type === 1 );
-}
-';
-return $js;
-	}
-
-
-	public function abort_fetch_api() { // unused yet
-	$values	=	$this->values_and_mods();
-
-$js	=	$this->helpers() .
-'const controller	=	new AbortController();
-const reloaded		=	ifPageIsReloaded();
-const sw_url		=	"'. $values->service_worker .'";
-const serv_Worker	=	new Worker( sw_url );
-
-/*	Do not run on form submit	*/
-const forms		=	p2getAll( "form" );
-if ( forms ) { forms.forEach( f => { f.addEventListener( "submit", ()=>{ serv_Worker.terminate(); } ); } ); }
-';
-return $js;
-	}
-
-
-	private function values_and_mods() {
-	$fileURLs	=	new Prime2g_PWA_File_Url_Manager();
-	$get_url	=	$fileURLs->get_file_url();
-
-	$hostNames	=	defined( 'PWA_REQUEST_HOSTS' ) ? PWA_REQUEST_HOSTS : '""';
-
-	return (object) [
-		'hostNames'			=>	$hostNames,
-		'service_worker'	=>	$get_url[ 'service-worker' ],
-	];
-	}
-
-}
-
 

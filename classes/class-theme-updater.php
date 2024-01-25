@@ -47,7 +47,7 @@ class Prime2gThemeUpdater {
 		) { return null; }
 
 		$updateinfo	=	json_decode( $remote_body );
-		set_transient( $transient_name, $updateinfo, HOUR_IN_SECONDS );
+		set_transient( $transient_name, $updateinfo, DAY_IN_SECONDS );
 		return $updateinfo;
 	}
 	}

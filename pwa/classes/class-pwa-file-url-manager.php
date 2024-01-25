@@ -47,7 +47,7 @@ class Prime2g_PWA_File_Url_Manager {
 	}
 
 
-	//	Virtual files output
+	//	Virtual files output:
 	public function show_file_output() {
 
 		if ( $this->file_url_match( 'manifest' ) ) {
@@ -62,7 +62,8 @@ class Prime2g_PWA_File_Url_Manager {
 		}
 
 		if ( $this->file_url_match( 'scripts' ) ) {
-			$output	=	Prime2g_PWA_Scripts::content();
+			$scripts	=	new Prime2g_PWA_Scripts();
+			$output		=	$scripts->scripts;
 			$this->do_output_die( $output, 'javascript' );
 		}
 
@@ -150,7 +151,7 @@ class Prime2g_PWA_File_Url_Manager {
 		'appcss'	=>	$appFile . "app.css",
 		'appjs'		=>	$appFile . "app.js",
 		'scripts'	=>	$virtual_dir . "scripts.js",
-		'icons'		=>	prime2g_icons_file_url(),	# == Bootstrap icons
+		'icons'		=>	prime2g_icons_file_url(),	# === Bootstrap icons
 		'childcss'	=>	$childCss,
 		'childlogin'=>	$childLogin,
 		'childjs'	=>	$childJs
@@ -206,4 +207,3 @@ class Prime2g_PWA_File_Url_Manager {
 	}
 
 }
-

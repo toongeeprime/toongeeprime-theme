@@ -75,7 +75,6 @@ class Prime2g_PWA_Service_Worker {
 	public function core() {
 	$fileURLs	=	new Prime2g_PWA_File_Url_Manager();
 	$get_url	=	$fileURLs->get_file_url();
-	$scripts	=	new Prime2g_PWA_Scripts();
 	$icons		=	new Prime2g_PWA_Icons();
 	$caching	=	$this->get_caching();
 	$strategy	=	$caching[ 'strategy' ];
