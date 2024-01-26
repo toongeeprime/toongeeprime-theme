@@ -4,7 +4,7 @@
  *	VIDEO AFFAIRS
  *
  *	@package WordPress
- *	@since ToongeePrime Theme Theme 1.0.55
+ *	@since ToongeePrime Theme 1.0.55
  */
 function prime2g_video_features_active() {
 	return ( prime2g_use_extras() && get_theme_mod( 'prime2g_enable_video_features' ) );

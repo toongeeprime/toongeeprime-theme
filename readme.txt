@@ -24,6 +24,7 @@ Several updates across the theme
 * Overhaul Google Fonts system, added prime2g_get_google_fonts_remote() and prime2g_get_gfont_category()
 * @ Class: Prime2gThemeUpdater - overhauling former update system
 * @ Class: Prime2g_PWA_Features
+* @ Class: Prime2gMailer
 * @ Class: @ ToongeePrime_Styles, allow child overriding of defaults
 * @ Child Theme Optional Constants: *CHILD_BUTTONTEXT, CHILD_BUTTONBG, CHILD_BRANDCOLOR, CHILD_BRANDCOLOR2,
 CHILD_SITEBG, CHILD_HEADERBG, CHILD_CONTENTBG, CHILD_FOOTERBG

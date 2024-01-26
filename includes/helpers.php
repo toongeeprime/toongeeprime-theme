@@ -127,8 +127,12 @@ function prime2g_design_by_network_home() {
  *	Get Site' Domain name
  *	@since ToongeePrime Theme 1.0.49
  */
-function prime2g_get_site_domain() {
-$url	=	get_bloginfo( 'url' );
+function prime2g_get_site_domain( $site = null ) {
+if ( is_multisite() && in_array( $site, [ 1, '1', 'home', 'main' ] ) )
+	$url	=	network_home_url();
+else
+	$url	=	get_bloginfo( 'url' );
+
 $url	=	parse_url( $url );
 $url	=	preg_replace( '/^www\./', '', $url['host'] );
 return $url;

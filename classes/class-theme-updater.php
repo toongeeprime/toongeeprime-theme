@@ -2,6 +2,9 @@
 
 /**
  *	THEME UPDATER
+ *
+ *	@package WordPress
+ *	@since ToongeePrime Theme 1.0.55
  *	https://make.wordpress.org/core/2020/07/30/recommended-usage-of-the-updates-api-to-support-the-auto-updates-ui-for-plugins-and-themes-in-wordpress-5-5
  */
 
