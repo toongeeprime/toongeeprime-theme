@@ -238,3 +238,15 @@ return array_combine( $indexes, $values );
 
 }
 
+
+
+/**
+ *	Check Minimum Child Theme Version
+ *	@since ToongeePrime Theme 1.0.56
+ */
+function prime_child_min_version( string $version ) {
+if ( is_child_theme() ) return version_compare( CHILD2G_VERSION, $version, '>=' );
+return true;	// so features work in parent
+}
+
+

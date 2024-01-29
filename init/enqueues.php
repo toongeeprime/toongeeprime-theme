@@ -20,9 +20,14 @@ $version	=	PRIME2G_VERSION;
 		$version
 	);
 
+if ( prime_child_min_version( '2.3' ) ) {
+	$themeCSS	=	'theme.css';
+} else {
+	$themeCSS	=	'theme-old.css';
+}
 	wp_register_style(
 		'prime2g_css',
-		get_theme_file_uri( '/files/theme.css' ),
+		get_theme_file_uri( '/files/' . $themeCSS ),
 		[],
 		$version
 	);

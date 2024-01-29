@@ -21,6 +21,20 @@ return prime2g_get_archive_loop_post_object( [
 }
 
 
+if ( ! function_exists( 'prime2g_headlines_css' ) ) {
+function prime2g_headlines_css() {
+if ( prime_child_min_version( '2.3' ) ) {
+return '<style id="headlines_css">.home_headlines .display{align-items:start;}
+.mid .thumbnail{min-height:200px;}
+@media(min-width:821px){
+.mid .thumbnail{min-height:300px;}
+.home_headlines .display{grid-template-columns:1fr 2fr 1fr;}
+}</style>';
+}
+}
+}
+
+
 
 if ( ! function_exists( 'prime2g_home_headlines' ) ) {
 function prime2g_home_headlines() {
@@ -36,15 +50,13 @@ $options	=	[ 'useCache' => false, 'cacheIt' => false ];
 $tax_query	=	[ 'taxonomy' => 'category', 'operator' => 'IN', 'terms' => $slug ];
 
 $set_1	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
-
 $mid	=	prime2g_wp_query( [ 'posts_per_page' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
-
 $set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
 
 
-	echo '<section class="home_headlines">
+	echo prime2g_headlines_css() . '<section class="home_headlines">
 
-		<h1 class="headlines_heading">' . $cat->name . '</h1>
+		<h1 class="headlines_heading">'. $cat->name .'</h1>
 		<div class="grid display prel">
 
 			<div class="left sides grid prel">';
@@ -81,4 +93,5 @@ $set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 
 
 }
 }
+
 

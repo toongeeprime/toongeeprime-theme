@@ -16,6 +16,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.56 =
+* Deprecated theme.css to theme-old.css, to strip down the file and pass more style control to child theme
+* More conditions to css.php
+* Functions: prime_child_min_version(), prime2g_menu_togglers(), prime2g_chache_control_headers()
+* @ customizer: cache controls @ site settings
+
 = 1.0.55 =
 Several updates across the theme
 * Introduced theme's PROGRESSIVE WEB APP (PWA)

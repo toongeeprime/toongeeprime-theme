@@ -37,7 +37,7 @@ function prime2g_customizer_wp_header_image( $wp_customize ) {
 		)
 	);
 
-if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
+if ( prime_child_min_version( '2.1' ) ) {
 
 	/**
 	 *	Page Title Over Header Video

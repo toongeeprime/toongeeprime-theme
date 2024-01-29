@@ -73,7 +73,7 @@ function prime2g_customizer_theme_menus( $wp_customize ) {
 		)
 	);
 
-if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
+if ( prime_child_min_version( '2.1' ) ) {
 
 	/**
 	 *	CTA Menu Button
@@ -149,7 +149,7 @@ if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.1' ) {
 
 }
 
-if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.2' ) {
+if ( prime_child_min_version( '2.2' ) ) {
 
 	/**
 	 *	@since ToongeePrime Theme 1.0.55

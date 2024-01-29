@@ -73,7 +73,7 @@ register_nav_menus(
  *	Extra Navigation Menu Locations
  *	@since ToongeePrime Theme 1.0.55
  */
-if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.2' ) {
+if ( prime_child_min_version( '2.2' ) ) {
 $extras	=	get_theme_mod( 'prime2g_extra_menu_locations', 0 );
 
 if ( $extras ) {
@@ -193,7 +193,7 @@ $cols	=	4;
 $num	=	' %d';
 $name	=	'Footer Widgets';
 $fname	=	$name . $num;
-if ( defined( 'CHILD2G_VERSION' ) && CHILD2G_VERSION >= '2.0' ) {
+if ( prime_child_min_version( '2.0' ) ) {
 	$cols	=	(int) get_theme_mod( 'prime2g_footer_columns_num', '4' );
 	$name	=	( $cols > 1 ) ? $fname : $name;
 }

@@ -155,6 +155,23 @@ value.bind( function( newval ) {
 } );
 } );
 
+/**
+ *	@since ToongeePrime Theme 1.0.56
+ */
+api( 'prime2g_activate_chache_controls', function( value ) {
+value.bind( function( newval ) {
+	let ctimeS	=	$( '#customize-control-prime2g_chache_time_singular' ),
+		cunitS	=	$( '#customize-control-prime2g_chache_seconds_singular' ),
+		ctimeF	=	$( '#customize-control-prime2g_chache_time_feeds' ),
+		cunitF	=	$( '#customize-control-prime2g_chache_seconds_feeds' );
+
+	if ( newval ) {
+		ctimeS.slideDown( 180 ); cunitS.slideDown( 180 ); ctimeF.slideDown( 180 ); cunitF.slideDown( 180 );
+	}
+	else { ctimeS.slideUp( 180 ); cunitS.slideUp( 180 ); ctimeF.slideUp( 180 ); cunitF.slideUp( 180 ); }
+} );
+} );
+
 wp.customize.bind( 'ready', function() {
 wp.customize.previewer.bind( 'ready', function( message ) {
 	let cta_text	=	$( "#_customize-input-prime2g_cta_button_text" );
@@ -166,4 +183,6 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 } );
 
 } )( jQuery, wp.customize );
+
+
 
