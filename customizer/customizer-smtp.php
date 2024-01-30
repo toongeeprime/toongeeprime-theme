@@ -9,6 +9,9 @@
 
 function prime2g_customizer_smtp( $wp_customize ) {
 
+$postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
+$postMsg_email	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_email' ];
+
 	$wp_customize->add_setting(
 		'prime2g_use_theme_smtp',
 		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 0, 'transport' => 'postMessage' ]
@@ -23,7 +26,9 @@ function prime2g_customizer_smtp( $wp_customize ) {
 		)
 	);
 
-if ( is_multisite() ) {
+$network	=	is_multisite();
+
+if ( $network ) {
 	switch_to_blog( 1 );
 	$route	=	get_theme_mod( 'prime2g_route_smtp_to_networkhome' );
 	restore_current_blog();
@@ -32,11 +37,8 @@ if ( is_multisite() ) {
 }
 
 
-if ( is_multisite() && get_current_blog_id() === 1 ) {
-	$wp_customize->add_setting(
-		'prime2g_route_smtp_to_networkhome',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
-	);
+if ( $network && get_current_blog_id() === 1 ) {
+	$wp_customize->add_setting( 'prime2g_route_smtp_to_networkhome', $postMsg_text );
 	$wp_customize->add_control(
 		'prime2g_route_smtp_to_networkhome',
 		array(
@@ -72,10 +74,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	);
 
 
-	$wp_customize->add_setting(
-		'prime2g_smtp_from_email',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_email' ]
-	);
+	$wp_customize->add_setting( 'prime2g_smtp_from_email', $postMsg_email );
 	$wp_customize->add_control(
 		'prime2g_smtp_from_email',
 		array(
@@ -90,10 +89,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	);
 
 
-	$wp_customize->add_setting(
-		'prime2g_smtp_username',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_email' ]
-	);
+	$wp_customize->add_setting( 'prime2g_smtp_username', $postMsg_email );
 	$wp_customize->add_control(
 		'prime2g_smtp_username',
 		array(
@@ -108,10 +104,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	);
 
 
-	$wp_customize->add_setting(
-		'prime2g_smtp_password',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
-	);
+	$wp_customize->add_setting( 'prime2g_smtp_password', $postMsg_text );
 	$wp_customize->add_control(
 		'prime2g_smtp_password',
 		array(
@@ -123,10 +116,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	);
 
 
-	$wp_customize->add_setting(
-		'prime2g_smtp_server',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
-	);
+	$wp_customize->add_setting( 'prime2g_smtp_server', $postMsg_text );
 	$wp_customize->add_control(
 		'prime2g_smtp_server',
 		array(
@@ -140,10 +130,7 @@ if ( is_multisite() && get_current_blog_id() === 1 ) {
 	);
 
 
-	$wp_customize->add_setting(
-		'prime2g_smtp_port',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
-	);
+	$wp_customize->add_setting( 'prime2g_smtp_port', $postMsg_text );
 	$wp_customize->add_control(
 		'prime2g_smtp_port',
 		array(

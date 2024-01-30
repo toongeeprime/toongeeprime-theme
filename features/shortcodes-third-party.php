@@ -46,7 +46,7 @@ $id     	=	$id ? ' id="'. $id .'"' : '';
 
 if ( ! defined( 'P2G_LOTTIESCRIPT' ) ) {
 add_action( 'wp_footer', function() {
-echo '<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>';
+echo '<script defer src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>';
 }, 100 );
 define( 'P2G_LOTTIESCRIPT', true );
 }

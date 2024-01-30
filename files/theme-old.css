@@ -376,13 +376,13 @@ a:hover, a:focus, table a:hover, table a:focus{
 .menu_togs span:nth-child(2){
 	transition:0.5s;
 }
-.prime .menu_togs span:nth-child(1){
+.togs.prime .menu_togs span:nth-child(1){
 	transform:translateY(0) rotate(-45deg) scale(1);
 }
-.prime .menu_togs span:nth-child(3){
+.togs.prime .menu_togs span:nth-child(3){
 	transform:translateY(0) rotate(45deg) scale(1);
 }
-.prime .menu_togs span:nth-child(2){
+.togs.prime .menu_togs span:nth-child(2){
 	opacity:0; transform:scale(0);
 }
 
@@ -592,7 +592,7 @@ em.comment-awaiting-moderation{
 .site_main .searchform, #respond{
 	margin-bottom:calc(2 * var(--min-pad));
 }
-.show, .enter{
+.hidden.prime, .show, .enter{
 	visibility:visible!important; opacity:1!important;
 }
 

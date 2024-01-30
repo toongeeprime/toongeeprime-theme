@@ -11,6 +11,9 @@ if ( ! function_exists( 'prime2g_customizer_theme_menus' ) ) {
 
 function prime2g_customizer_theme_menus( $wp_customize ) {
 
+$postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
+$simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ];
+
 	$wp_customize->selective_refresh->add_partial(
 		'prime2g_set_cta_menu_item',
 		array(
@@ -46,9 +49,7 @@ function prime2g_customizer_theme_menus( $wp_customize ) {
 	/**
 	 *	Logo Beside Menu
 	 */
-	$wp_customize->add_setting( 'prime2g_logo_with_menu',
-		array( 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' )
-	);
+	$wp_customize->add_setting( 'prime2g_logo_with_menu', $simple_text );
 	$wp_customize->add_control( 'prime2g_logo_with_menu',
 		array(
 			'label'		=>	__( 'Show Logo by Main Menu', PRIME2G_TEXTDOM ),
@@ -78,9 +79,7 @@ if ( prime_child_min_version( '2.1' ) ) {
 	/**
 	 *	CTA Menu Button
 	 */
-	$wp_customize->add_setting( 'prime2g_set_cta_menu_item',
-		array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' )
-	);
+	$wp_customize->add_setting( 'prime2g_set_cta_menu_item', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_set_cta_menu_item',
 		array(
 			'label'		=>	__( 'Activate CTA Menu Button', PRIME2G_TEXTDOM ),
@@ -118,11 +117,7 @@ if ( prime_child_min_version( '2.1' ) ) {
 		)
 	);
 
-	$wp_customize->add_setting( 'prime2g_cta_button_classes',
-		array(
-		'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field'
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_cta_button_classes', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_cta_button_classes',
 		array(
 			'label'		=>	__( 'CTA Button Classes', PRIME2G_TEXTDOM ),
@@ -132,11 +127,7 @@ if ( prime_child_min_version( '2.1' ) ) {
 		)
 	);
 
-	$wp_customize->add_setting( 'prime2g_cta_link_target',
-		array(
-		'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field'
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_cta_link_target', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_cta_link_target',
 		array(
 			'label'		=>	__( 'Open CTA Link in New Tab', PRIME2G_TEXTDOM ),
@@ -149,16 +140,12 @@ if ( prime_child_min_version( '2.1' ) ) {
 
 }
 
+/**
+ *	@since ToongeePrime Theme 1.0.55
+ */
 if ( prime_child_min_version( '2.2' ) ) {
 
-	/**
-	 *	@since ToongeePrime Theme 1.0.55
-	 */
-	$wp_customize->add_setting( 'prime2g_use_site_top_menu',
-		array(
-		'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field'
-		)
-	);
+	$wp_customize->add_setting( 'prime2g_use_site_top_menu', $simple_text );
 	$wp_customize->add_control( 'prime2g_use_site_top_menu',
 		array(
 			'label'		=>	__( 'Activate Site Top Menu', PRIME2G_TEXTDOM ),
@@ -169,9 +156,7 @@ if ( prime_child_min_version( '2.2' ) ) {
 	);
 
 	$wp_customize->add_setting( 'prime2g_extra_menu_locations',
-		array(
-		'type' => 'theme_mod', 'default' => 0, 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field'
-		)
+	[ 'type' => 'theme_mod', 'default' => 0, 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
 	$wp_customize->add_control( 'prime2g_extra_menu_locations',
 		array(
@@ -184,6 +169,33 @@ if ( prime_child_min_version( '2.2' ) ) {
 
 }
 
+/**
+ *	@since ToongeePrime Theme 1.0.57
+ */
+if ( prime_child_min_version( '2.3' ) ) {
+
+	/**
+	 *	MAIN MENU TYPE
+	 */
+	$wp_customize->add_setting( 'prime2g_main_menu_type', $simple_text );
+	$wp_customize->add_control(
+		'prime2g_main_menu_type',
+		array(
+			'label'		=>	__( 'Main Menu Type', PRIME2G_TEXTDOM ),
+			'type'		=>	'select',
+			'settings'	=>	'prime2g_main_menu_type',
+			'section'	=>	'prime2g_theme_menus_section',
+			'choices'	=>	array(
+				''		=>	__( 'Default', PRIME2G_TEXTDOM ),
+				'togglers'	=>	__( 'Togglers', PRIME2G_TEXTDOM ),
+				// 'mega_menu'	=>	__( 'Mega Menu', PRIME2G_TEXTDOM )
+			),
+		)
+	);
+
 }
 
 }
+
+}
+

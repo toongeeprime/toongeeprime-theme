@@ -125,7 +125,34 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	 *	CACHE CONTROLS
 	 *	@since ToongeePrime Theme 1.0.56
 	 */
-	function prime2g_a_c_ctrls() { return ( ! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ); }
+
+function prime2g_a_c_ctrls() { return ( ! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ); }
+
+$network	=	is_multisite();
+$route		=	'';
+
+if ( $network ) {
+	switch_to_blog( 1 );
+	$route	=	get_theme_mod( 'prime2g_route_caching_to_networkhome' );
+	restore_current_blog();
+}
+
+
+if ( $network && get_current_blog_id() === 1 ) {
+	$wp_customize->add_setting( 'prime2g_route_caching_to_networkhome', $postMsg_text );
+	$wp_customize->add_control(
+		'prime2g_route_caching_to_networkhome',
+		array(
+			'label'		=>	__( 'Route Caching Controls to Network Home?', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_route_caching_to_networkhome',
+			'section'	=>	'prime2g_site_settings_section'
+		)
+	);
+}
+
+
+if ( ! $network || $network && ( empty( $route ) || $route && get_current_blog_id() === 1 ) ) {
 
 $time_units	=	[ MINUTE_IN_SECONDS => __( 'Minutes', PRIME2G_TEXTDOM ), HOUR_IN_SECONDS => __( 'Hours', PRIME2G_TEXTDOM ),
 DAY_IN_SECONDS => __( 'Days', PRIME2G_TEXTDOM ), WEEK_IN_SECONDS => __( 'Weeks', PRIME2G_TEXTDOM ),
@@ -193,6 +220,9 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 			'active_callback'	=> 'prime2g_a_c_ctrls'
 		)
 	);
+
+}
+
 
 }
 

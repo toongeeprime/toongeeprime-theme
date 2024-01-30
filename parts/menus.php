@@ -8,51 +8,43 @@
  */
 
 /**
- *	CTA Menu Item
- *	@since ToongeePrime Theme 1.0.55
- */
-if ( ! function_exists( 'prime2g_cta_menu' ) ) {
-function prime2g_cta_menu() {
-$url	=	get_theme_mod( 'prime2g_cta_menu_url' );
-$text	=	get_theme_mod( 'prime2g_cta_button_text' );
-$target	=	get_theme_mod( 'prime2g_cta_link_target' ) ? ' target="_blank"' : '';
-$classes	=	get_theme_mod( 'prime2g_cta_button_classes' ) ?: '';
-
-return '<ul><li><a class="btn cta1 '. $classes .'" href="'. $url .'"'. $target .' rel="noopener">'. $text .'</a></ul>';
-}
-}
-
-
-
-/**
- *	CTA Menu Item
+ *	Menu Togglers
  *	@since ToongeePrime Theme 1.0.56
  */
+if ( ! function_exists( 'prime2g_menu_togglers' ) ) {
 function prime2g_menu_togglers( array $options = [] ) {
 $incLogo	=	false;
 $theLogo	=	'';
 $class		=	'';
+$togTargets	=	'\'.main_menu_wrap\'';	// be sure to escape
 extract( $options );
 
 echo '<div id="menu_toggbar" class="menu_toggbar ' . $class . '">
 	<div>';
 	if ( $incLogo ) echo $theLogo;
 echo '</div>
-<div class="menu_togs prel" onclick="prime2g_toggElems( [ \'.main_menu_wrap\' ] );">
+<div class="menu_togs prel" onclick="prime2g_toggClass( [ '. $togTargets .' ] );">
 	<span></span>
 	<span></span>
 	<span></span>
 </div>
 </div>';
 }
+}
 
 
 
 /**
- *	Main Menu
+ *	MAIN MENU
  */
 if ( ! function_exists( 'prime2g_main_menu' ) ) {
 function prime2g_main_menu( $id = 'main_nav', $ul_id = 'main_menu_items' ) {
+
+# Theme 1.0.57
+if ( prime_child_min_version( '2.3' ) && 'togglers' === get_theme_mod( 'prime2g_main_menu_type' ) ) {
+	prime2g_toggler_menu_type_elements();
+}
+else {
 
 $incLogo	=	get_theme_mod( 'prime2g_logo_with_menu' );
 $cta_menu	=	get_theme_mod( 'prime2g_set_cta_menu_item' );	# Theme 1.0.55
@@ -60,7 +52,7 @@ $theLogo	=	prime2g_siteLogo();
 $isMobile	=	wp_is_mobile();
 ?>
 
-<div id="<?php echo $id; ?>" class="main_menu_wrap<?php if ( $incLogo ) echo ' logo_with_menu'; ?>">
+<div id="<?php echo $id; ?>" class="togs main_menu_wrap<?php if ( $incLogo ) echo ' logo_with_menu'; ?>">
 <div class="w100pc flexnw site_width">
 
 <?php if ( has_nav_menu( 'main-menu' ) ) {
@@ -105,6 +97,7 @@ else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Main Menu
 <?php
 }
 }
+}
 
 
 
@@ -135,6 +128,21 @@ wp_nav_menu(
 }
 }
 
+
+/**
+ *	CTA Menu Item
+ *	@since ToongeePrime Theme 1.0.55
+ */
+if ( ! function_exists( 'prime2g_cta_menu' ) ) {
+function prime2g_cta_menu() {
+$url	=	get_theme_mod( 'prime2g_cta_menu_url' );
+$text	=	get_theme_mod( 'prime2g_cta_button_text' );
+$target	=	get_theme_mod( 'prime2g_cta_link_target' ) ? ' target="_blank"' : '';
+$classes	=	get_theme_mod( 'prime2g_cta_button_classes' ) ?: '';
+
+return '<ul><li><a class="btn cta1 '. $classes .'" href="'. $url .'"'. $target .' rel="noopener">'. $text .'</a></ul>';
+}
+}
 
 
 /**
@@ -171,6 +179,28 @@ else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Footer Me
 
 <?php
 }
+}
+}
+
+
+
+/**
+ *	TOGGLER MENU ELEMENTS
+ *	@since ToongeePrime Theme 1.0.57
+ */
+if ( ! function_exists( 'prime2g_toggler_menu_type_elements' ) ) {
+function prime2g_toggler_menu_type_elements( array $options = [] ) {
+$wrap_class	=	'hidden';
+$div_class	=	'';
+extract( $options );
+
+$target	=	'<section id="tog_menu_target" class="main_menu_wrap '. $wrap_class .'"><div class="prel '. $div_class .'">';
+
+$target	.=	'</div></section>';
+
+prime2g_menu_togglers( [ 'class' => 'togs', 'togTargets' => "'#tog_menu_target', '.togs'" ] );
+
+add_action( 'wp_footer', function() use( $target ) { echo $target; }, 5 );
 }
 }
 

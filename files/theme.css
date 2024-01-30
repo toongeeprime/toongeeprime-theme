@@ -68,7 +68,7 @@ code{background-color:#eee; border:1px solid #999; display:block; padding:var(--
 .acaps{text-transform:uppercase;}
 .has-icons{font-family:"bootstrap-icons";}
 .oshadow{box-shadow:0 0 12px rgba(0,0,0,0.25);}
-.show, .enter{visibility:visible!important; opacity:1!important;}
+.hidden.prime, .show, .enter{visibility:visible!important; opacity:1!important;}
 
 .slimscrollbar{overflow:hidden; overflow-y:auto;}
 .scrollX{overflow:hidden; overflow-x:auto;}

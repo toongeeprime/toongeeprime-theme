@@ -29,13 +29,16 @@ $sidebar1101	=	'.has-sidebar .site_content{grid-template-columns:minmax(200px, 3
 }
 
 
+$themeV2css	=	$mainMenu = $menuMin821 = $menuMax820 = '';
+
+
 /**
  *	@since ToongeePrime Theme 1.0.56
  *	Introduced file theme-2.css for child themes of minimum version 2.3
  */
 if ( prime_child_min_version( '2.3' ) ) {
 
-$themeV2css	=	'';
+$themeV2css	.=	prime2g_main_menu_css();
 
 if ( is_singular() ) {
 
@@ -91,7 +94,14 @@ $themeV2css	.=	'.nothing_found_info{text-align:center;}
 /**
  *	MAIN MENU
  */
-$menuMin821 = $menuMax820 = '';
+$mainMenuType	=	get_theme_mod( 'prime2g_main_menu_type', '' );
+
+if ( $mainMenuType === 'togglers' ) {
+
+$mainMenu	=	'';
+
+}
+else {
 
 $mainMenu	=	'.main_menu_wrap{z-index:99990;position:relative;}
 .sub-menu{padding-left:1rem;}
@@ -152,6 +162,8 @@ $menuMax820	=	'#container{top:46px;}
 
 }
 
+}
+
 
 /**
  *	CSS OUTPUT
@@ -195,7 +207,9 @@ echo $css;
 
 /**
  *	FUNCTIONS
+ *	@since ToongeePrime Theme 1.0.57
  */
+if ( ! function_exists( 'prime2g_comments_css' ) ) {
 function prime2g_comments_css() {
 return '/* Comments */
 .comments-area{padding-top:var(--min-pad);}
@@ -215,5 +229,29 @@ em.comment-awaiting-moderation{display:block;margin:var(--min-pad);}
 .comment-form-url{width:48%; float:right; margin-left:2%;}
 }';
 }
+}
+
+
+
+if ( ! function_exists( 'prime2g_main_menu_css' ) ) {
+function prime2g_main_menu_css() {
+$css	=	'/* Menu Togglers */
+.menu_togs{width:50px; cursor:pointer;}
+.menu_togs span{
+width:80%; background:var(--content-text); height:4px;
+position:absolute; top:calc(50% - 5%); right:calc(50% - 30%);
+transition:0.3s; animation:easein;
+}
+.menu_togs span:nth-child(1){transform:translateY(-12px) scale(0.8);}
+.menu_togs span:nth-child(3){transform:translateY(12px) scale(0.8);}
+.menu_togs span:nth-child(2){transition:0.5s;}
+.togs.prime .menu_togs span:nth-child(1){transform:translateY(0) rotate(-45deg) scale(1);}
+.togs.prime .menu_togs span:nth-child(3){transform:translateY(0) rotate(45deg) scale(1);}
+.togs.prime .menu_togs span:nth-child(2){opacity:0; transform:scale(0);}';
+
+return $css;
+}
+}
+
 
 
