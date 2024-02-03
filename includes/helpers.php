@@ -10,10 +10,7 @@
 /**
  *	Use prime2g_removeSidebar() to remove sidebar areas from a template
  */
-function prime2g_removeSidebar() {
-	if ( ! function_exists( 'define_2gRMVSidebar' ) ) { function define_2gRMVSidebar(){} }
-}
-
+function prime2g_removeSidebar() { if ( ! function_exists( 'define_2gRMVSidebar' ) ) { function define_2gRMVSidebar(){} } }
 
 
 /**
@@ -27,7 +24,6 @@ function prime2g_verify_nonce( $actionName = 'prime_ajaxnonce' ) {
 }
 
 
-
 /**
  *	If current user is post author
  *	@since ToongeePrime Theme 1.0.45
@@ -38,32 +34,24 @@ function prime2g_is_post_author( $post, $userID = null ) {
 }
 
 
-
 /**
  *	Use prime2g_remove_title() to remove the title from a template
  */
-function prime2g_remove_title() {
-	function define_2gRMVTitle(){}
-}
+function prime2g_remove_title() { function define_2gRMVTitle(){} }
 
 
 /**
  *	Use prime2g_is_plain_page() to declare a template as being plain.
  *	Thus, can be used to remove select features, widgets, etc.
  */
-function prime2g_is_plain_page() {
-	function define_2gPlainPage(){}
-}
-
+function prime2g_is_plain_page() { function define_2gPlainPage(){} }
 
 
 /**
  *	Include or exclude post types
  */
 if ( ! function_exists( 'prime2g_include_post_types' ) ) {
-	function prime2g_include_post_types( array $addTo = [ 'post', 'page' ] ) {
-		return $addTo;
-	}
+	function prime2g_include_post_types( array $addTo = [ 'post', 'page' ] ) { return $addTo; }
 }
 
 if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
@@ -71,7 +59,6 @@ if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
 		return ( ! in_array( get_post_type(), $pTypes ) );
 	}
 }
-
 
 
 /**
@@ -86,23 +73,18 @@ function prime2g_get_country_by_code( $code ) {
 }
 
 
-
 /**
  *	Use Theme Extras?
  *	@since ToongeePrime Theme 1.0.48
  */
-function prime2g_use_extras() {
-	return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true );
-}
+function prime2g_use_extras() { return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true ); }
 
 
 /**
  *	Use PWA?
  *	@since ToongeePrime Theme 1.0.55
  */
-function prime2g_add_theme_pwa() {
-	return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true );
-}
+function prime2g_add_theme_pwa() { return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true ); }
 
 #	Preferred @ front-end matters
 function prime2g_activate_theme_pwa() {
@@ -114,13 +96,14 @@ function prime2g_activate_theme_pwa() {
 
 /**
  *	Control Design from Network home on multisite installs?
- *	@since ToongeePrime Theme 1.0.55
+ *	@since ToongeePrime Theme 1.0.55, updated with prime2g_constant_is_true() @since 1.0.57
  */
 function prime2g_design_by_network_home() {
-	if ( ! is_multisite() ) return false;
-	return ( defined( 'PRIME2G_DESIGN_BY_NETWORK_HOME' ) && PRIME2G_DESIGN_BY_NETWORK_HOME === true );
+	return prime2g_constant_is_true( 'PRIME2G_DESIGN_BY_NETWORK_HOME' );
 }
 
+/* @since ToongeePrime Theme 1.0.57 */
+function prime2g_designing_at_networkhome() { return prime2g_design_by_network_home() && get_current_blog_id() === 1; }
 
 
 /**
@@ -137,7 +120,6 @@ $url	=	parse_url( $url );
 $url	=	preg_replace( '/^www\./', '', $url['host'] );
 return $url;
 }
-
 
 
 /**
@@ -164,37 +146,31 @@ $categsArray	=	wp_cache_get( 'prime2g_categs_array' );
 }
 
 
-
-/**
- *	@since ToongeePrime Theme 1.0.50
- */
 function prime2g_posttypes_names_array() {
 $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
-
-	if ( false !== $posttypesArray ) {
-		return $posttypesArray;
-	}
-	else {
-
-		$args	=	array( 'public' => true, 'publicly_queryable' => true );
-		$post_types	=	get_post_types( $args, 'objects' );
-		$slugs	=	$names = [];
-
-		foreach ( $post_types as $post_type ) {
-			if ( ! isset( $post_type ) ) continue;
-			$slugs[]	=	$post_type->name;
-			$names[]	=	$post_type->labels->name;
-		}
-
-		$posttypesArray	=	array_combine( $slugs, $names );
-
-		wp_cache_set( 'prime2g_posttypes_array', $posttypesArray, '', PRIME2G_CACHE_EXPIRES );
-
-		return $posttypesArray;
-	}
-
+if ( false !== $posttypesArray ) {
+	return $posttypesArray;
 }
+else {
 
+	$args	=	array( 'public' => true, 'publicly_queryable' => true );
+	$post_types	=	get_post_types( $args, 'objects' );
+	$slugs	=	$names = [];
+
+	foreach ( $post_types as $post_type ) {
+		if ( ! isset( $post_type ) ) continue;
+		$slugs[]	=	$post_type->name;
+		$names[]	=	$post_type->labels->name;
+	}
+
+	$posttypesArray	=	array_combine( $slugs, $names );
+
+	wp_cache_set( 'prime2g_posttypes_array', $posttypesArray, '', PRIME2G_CACHE_EXPIRES );
+
+return $posttypesArray;
+}
+}
+/* @since ToongeePrime Theme 1.0.50 End */
 
 
 /**
@@ -209,12 +185,7 @@ return $url;
 }
 
 
-
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
 function prime2g_get_postsdata_array( array $get, array $args, array $options ) {
-
 $index	=	$value	=	'';	# @$get
 $emptyoption	=	false;
 
@@ -235,9 +206,8 @@ foreach ( $getPosts as $post ) {
 }
 
 return array_combine( $indexes, $values );
-
 }
-
+/* @since ToongeePrime Theme 1.0.55 End */
 
 
 /**
@@ -246,7 +216,15 @@ return array_combine( $indexes, $values );
  */
 function prime_child_min_version( string $version ) {
 if ( is_child_theme() ) return version_compare( CHILD2G_VERSION, $version, '>=' );
-return true;	// so features work in parent
+return true;	// features should work in parent
 }
 
+
+/**
+ *	@since ToongeePrime Theme 1.0.57
+ */
+function prime2g_constant_is_true( string $constant, bool $for_network = true ) {
+	if ( $for_network && ! is_multisite() ) return false;
+	return ( defined( $constant ) && constant( $constant ) === true );
+}
 

@@ -7,7 +7,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-$isSingular	=	is_singular(); ?>
+$isSingular	=	is_singular();
+$styles		=	ToongeePrime_Styles::mods_cache();	# 1.0.57
+?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> <?php prime2g_theme_html_classes(); ?>>
@@ -36,7 +38,7 @@ $isSingular	=	is_singular(); ?>
 	<div id="contentWrap" class="contentWrap">
 
 	<?php
-	if ( 'header' !== get_theme_mod( 'prime2g_title_location' ) ) {
+	if ( 'header' !== $styles->title_place ) {
 		if ( $isSingular ) {
 			if ( ! function_exists( 'define_2gRMVTitle' ) ) {
 				prime2g_title_header( prime2g_title_header_classes() );

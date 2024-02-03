@@ -13,13 +13,6 @@ function prime2g_theme_enqueues() {
 $version	=	PRIME2G_VERSION;
 
     # Theme Styles
-	wp_enqueue_style(
-		'prime2g_reset_and_wp_css',
-		get_theme_file_uri( '/files/reset-and-wp.css' ),
-		array(),
-		$version
-	);
-
 if ( prime_child_min_version( '2.3' ) ) {
 	$themeCSS	=	'theme.css';
 } else {
@@ -28,8 +21,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 	wp_register_style(
 		'prime2g_css',
 		get_theme_file_uri( '/files/' . $themeCSS ),
-		[],
-		$version
+		[], $version
 	);
 
     wp_enqueue_style( 'prime2g_css' );
@@ -39,8 +31,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 		wp_enqueue_style(
 			'prime2g_woocommerce_css',
 			get_theme_file_uri( '/files/prime_woocommerce.css' ),
-			array( 'prime2g_css' ),
-			$version
+			array( 'prime2g_css' ), $version
 		);
 	}
 
@@ -48,24 +39,27 @@ if ( prime_child_min_version( '2.3' ) ) {
 	# jQuery
 	wp_enqueue_script(
 		'prime2g_jQuery',
-		// 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+		// 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js'
 		get_theme_file_uri( '/files/jquery.min.js' ),
+		[], '3.7.1', [ 'strategy' => 'defer' ]
 	);
 
 	wp_register_script(
 		'prime2g_js',
-		get_theme_file_uri( '/files/theme.js' ),
-		[],
-		$version
+		get_theme_file_uri( '/files/theme-min.js' ),
+		[], $version
 	);
+
+if ( ! prime_child_min_version( '2.3' ) ) {
+	wp_register_script( 'prime2g_deprecated_js', get_theme_file_uri( '/files/deprecated.js' ) );
+}
 
 	wp_enqueue_script( 'prime2g_js' );
 
 	wp_enqueue_script(
 		'prime2g_footer_js',
 		get_theme_file_uri( '/files/footer.js' ),
-		array( 'prime2g_js' ),
-		$version,
+		array( 'prime2g_js' ), $version,
 		true // script in footer
 	);
 }
@@ -73,13 +67,13 @@ if ( prime_child_min_version( '2.3' ) ) {
 
 
 /**
- *	Removing Default WooCommerce styles
+ *	Removing Default WooCommerce styles:
  */
 if ( class_exists( 'woocommerce' ) ) { add_filter( 'woocommerce_enqueue_styles', '__return_false' ); }
 
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.50
+ *	@since ToongeePrime Theme 1.0.50
  */
 add_action( 'admin_enqueue_scripts', 'prime2g_admin_enqueues' );
 if ( !function_exists( 'prime2g_admin_enqueues' ) ) {
@@ -87,18 +81,13 @@ function prime2g_admin_enqueues() {
 	wp_register_script(
 		'prime2g_js',
 		get_theme_file_uri( '/files/theme.js' ),
-		array(),
-		PRIME2G_VERSION
+		[], PRIME2G_VERSION
 	);
 
 	wp_enqueue_script( 'prime2g_js' );
 }
 }
 
-
-/**
- *	@since ToongeePrime Theme Theme 1.0.50
- */
 add_action( 'customize_controls_enqueue_scripts', 'prime2g_customizer_enqueues' );
 add_action( 'customize_preview_init', 'prime2g_customizer_preview_enqueues' );
 function prime2g_customizer_enqueues() {
@@ -120,5 +109,6 @@ function prime2g_customizer_preview_enqueues() {
 		true
 	);
 }
+/* @since ToongeePrime Theme 1.0.50 End */
 
 

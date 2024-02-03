@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	MINI THEME FEATURES
  *
@@ -7,22 +6,18 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-
 /**
  *	Scroll back to the top of the page
  */
 add_action( 'wp_footer', 'prime2g_toTop' );
 if ( ! function_exists( 'prime2g_toTop' ) ) {
 function prime2g_toTop() { ?>
-	<div id="prime2g_toTop">
-		<p onclick="prime2g_gotoThis( 'body' );" title="Back to the Top">
-			<i class="bi bi-arrow-up"></i>
-		</p>
-	</div>
+<div id="prime2g_toTop">
+	<p onclick="prime2g_gotoThis( 'body' );" title="Back to the Top"><i class="bi bi-arrow-up"></i></p>
+</div>
 <?php
 }
 }
-
 
 
 /**
@@ -33,7 +28,6 @@ function prime2g_toTop() { ?>
  */
 if ( ! function_exists( 'prime2g_wp_block_search_form' ) ) {
 function prime2g_wp_block_search_form( $echo = true, $label = 'Search', $buttontext = null ) {
-
 $placeholder	=	$required	=	'';
 
 if ( is_array( $echo ) ) {
@@ -46,6 +40,23 @@ $form	=	'<form role="search" method="get" action="' . get_home_url() . '" class=
 
 if ( $echo ) echo $form;
 else return $form;
+}
+}
+
+
+/**
+ *	Class Remover Sheet
+ *	Background div to remove class from elements on click
+ *	@since ToongeePrime Theme 1.0.57
+ */
+if ( ! function_exists( 'prime2g_class_remover_sheet' ) ) {
+function prime2g_class_remover_sheet( string $items, string $class = 'prime' ) {
+// $items must be escaped
+add_action( 'wp_footer', function() use( $items, $class ) {
+echo	'<div id="prime_class_remover" class="hidden p-fix" style="top:0;bottom:0;right:0;left:0;z-index:90000;"
+ onclick="prime2g_remClass( ['. $items .', \'#prime_class_remover\'], \''. $class .'\' );"></div>';
+}, 3 );
+
 }
 }
 

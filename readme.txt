@@ -16,6 +16,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.57 =
+* Added functions in css.php, mini-features.php & menus.php
+* Helper: prime2g_constant_is_true()
+* Method mods_cache() added to ToongeePrime_Styles class
+* jQuery 3.7.1
+
 = 1.0.56 =
 * Deprecated theme.css to theme-old.css, to strip down the file and pass more style control to child theme
 * More conditions to css.php
@@ -23,7 +29,7 @@ A WordPress theme with options for customization, design and development flexibi
 * @ customizer: cache controls @ site settings
 
 = 1.0.55 =
-Several updates across the theme
+Several features & updates across the theme
 * Introduced theme's PROGRESSIVE WEB APP (PWA)
 * HEADER VIDEO
 * SMTP Mail Config

@@ -131,22 +131,6 @@ return ( windowWidth < screenSize );
  */
 function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newNode, refNode.nextSibling ); }
 
-
-// DEPRECATE: poor function naming, use below functions
-function prime2gElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.add( clss ); } );
-}
-
-function prime2g_offElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.remove( clss ); } );
-}
-
-function prime2g_toggElems( elems, clss = 'prime' ) {
-elems.forEach( el=>{ event.preventDefault(); p2getEl( el ).classList.toggle( clss ); } );
-}
-// DEPRECATE END
-
-
 function prime2g_addClass( elems, clss = 'prime', prevD = true ) {
 if ( prevD ) event.preventDefault();
 elems.forEach( el=>{ p2getEl( el ).classList.add( clss ); } );
@@ -194,6 +178,4 @@ return "undefined";
 function primeCookieIsDefined( cName ) {
 	return primeHasCookie( cName ) && "undefined" !== primeGetCookieValue( cName );
 }
-
-
 

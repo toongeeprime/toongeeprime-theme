@@ -24,3 +24,4 @@ define( 'PRIME2G_POSTSCACHE', 'prime2g_posts_cache' ); #	@since version 1.0.55
 define( 'PRIME2G_FILE', PRIME2G_THEMEURL . 'files/' );
 define( 'PRIME2G_FILESDIR', PRIME2G_THEME . 'files/' );
 
+define( 'PRIME2G_CACHEGROUP', 'prime2g_theme_cache_group' ); #	@since version 1.0.57

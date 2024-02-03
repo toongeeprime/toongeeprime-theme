@@ -45,7 +45,7 @@ class Prime2g_Web_Manifest {
 
 
 	public function after_upgrades( $upgrader_object, $options ) {
-	if ( $options['type'] === 'theme' ) {
+	if ( $options['type'] === 'theme' && isset( $options['themes'] ) ) {
 		foreach( $options['themes'] as $theme ) {
 			if ( $theme === PRIME2G_TEXTDOM ) { flush_rewrite_rules(); return; }
 		}

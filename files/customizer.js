@@ -23,7 +23,7 @@ if ( useGFonts && useGFonts.is( ":checked" ) ) {
 } );
 
 ( function( $, api ) {
-	'use strict';
+'use strict';
 
 api( 'prime2g_theme_news_reel', function( value ) {
 value.bind( function( newval ) {
@@ -56,11 +56,11 @@ value.bind( function( newval ) {
 		nrCount		=	$( '#customize-control-prime2g_theme_news_reel_posts_count' ),
 		nrCategory	=	$( '#customize-control-prime2g_theme_news_reel_category' );
 
-	if ( newval == 'post' ) {
+	if ( newval === 'post' ) {
 		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 );
 		nrCategory.slideDown( 180 ); nrCount.slideDown( 180 );
 	}
-	else if ( newval == 'page' ) {
+	else if ( newval === 'page' ) {
 		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 );
 		nrCategory.slideUp( 180 ); nrCount.slideDown( 180 );
 	}
@@ -169,6 +169,17 @@ value.bind( function( newval ) {
 		ctimeS.slideDown( 180 ); cunitS.slideDown( 180 ); ctimeF.slideDown( 180 ); cunitF.slideDown( 180 );
 	}
 	else { ctimeS.slideUp( 180 ); cunitS.slideUp( 180 ); ctimeF.slideUp( 180 ); cunitF.slideUp( 180 ); }
+} );
+} );
+
+/**
+ *	@since ToongeePrime Theme 1.0.57
+ */
+api( 'prime2g_main_menu_type', function( value ) {
+value.bind( function( newval ) {
+	let mmenuSC	=	$( '#customize-control-prime2g_menu_content_shortcode' );
+
+	if ( newval !== '' ) { mmenuSC.slideDown( 180 ); } else { mmenuSC.slideUp( 180 ); }
 } );
 } );
 

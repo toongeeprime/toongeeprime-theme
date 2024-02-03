@@ -10,6 +10,7 @@
 
 add_action( 'wp_head', 'prime2g_conditional_css', 3 );
 function prime2g_conditional_css() {
+$styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 
 /**
  *	THE SIDEBAR
@@ -18,7 +19,7 @@ $sidebar821	=	'.mainsidebar{padding-right:var(--min-pad);}';
 $sidebar901	=	'.has-sidebar .site_content,.has-sidebar.width_960px .site_content{grid-template-columns:2.5fr 1fr;}';
 $sidebar1101	=	'.has-sidebar .site_content{grid-template-columns:1fr minmax(200px, 300px);}';
 
-if ( get_theme_mod( 'prime2g_sidebar_position' ) === 'left' ) {
+if ( $styles->sidebar_place === 'left' ) {
 $sidebar821	=	'.mainsidebar{padding-left:var(--min-pad);}';
 $sidebar901	=
 '#main{grid-area:sbMain;}
@@ -94,16 +95,18 @@ $themeV2css	.=	'.nothing_found_info{text-align:center;}
 /**
  *	MAIN MENU
  */
-$mainMenuType	=	get_theme_mod( 'prime2g_main_menu_type', '' );
+$mainMenuType	=	$styles->menu_type;
+
+$mainMenu	=	'.main_menu_wrap{z-index:99990;}';
 
 if ( $mainMenuType === 'togglers' ) {
 
-$mainMenu	=	'';
+$mainMenu	.=	'';
 
 }
 else {
 
-$mainMenu	=	'.main_menu_wrap{z-index:99990;position:relative;}
+$mainMenu	.=	'.main_menu_wrap{position:relative;}
 .sub-menu{padding-left:1rem;}
 .site-menus ul{list-style:none;padding:0;margin:0;}
 .collapsible-navs li{position:relative;}
@@ -204,7 +207,6 @@ echo $css;
 
 
 
-
 /**
  *	FUNCTIONS
  *	@since ToongeePrime Theme 1.0.57
@@ -235,8 +237,15 @@ em.comment-awaiting-moderation{display:block;margin:var(--min-pad);}
 
 if ( ! function_exists( 'prime2g_main_menu_css' ) ) {
 function prime2g_main_menu_css() {
-$css	=	'/* Menu Togglers */
-.menu_togs{width:50px; cursor:pointer;}
+$styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
+
+$css	=	'
+/* Menu Togglers */
+';
+
+$menu_type	=	$styles->menu_type;
+
+$css	.=	'.menu_togs{width:50px; cursor:pointer;}
 .menu_togs span{
 width:80%; background:var(--content-text); height:4px;
 position:absolute; top:calc(50% - 5%); right:calc(50% - 30%);
@@ -249,9 +258,47 @@ transition:0.3s; animation:easein;
 .togs.prime .menu_togs span:nth-child(3){transform:translateY(0) rotate(45deg) scale(1);}
 .togs.prime .menu_togs span:nth-child(2){opacity:0; transform:scale(0);}';
 
+if ( 'togglers' === $menu_type ) {
+
+$css	.=	'#tog_menu_target{position:fixed;transition:0.2s;background:var(--content-background);
+color:var(--content-text);top:var(--min-pad);bottom:var(--min-pad);right:var(--min-pad);left:var(--min-pad);
+box-shadow:0 10px 20px 10px rgba(0,0,0,0.3);margin:auto;max-width:700px;}
+#menu_toggbar{position:fixed;z-index:100500;top:50px;right:10px;}
+@media(min-width:821px){
+#menu_toggbar{top:100px;right:30px;}
+}';
+
+}
+
 return $css;
 }
 }
 
+
+/**
+ *	Remove from theme.css/child.css to make code style optional
+ *	function does not need to be pluggable
+ */
+function prime2g_animations_css() {
+$entrance	=	'.inUp{transform:translateY(50px);opacity:0;}
+.inDown{transform:translateY(-50px);opacity:0;}
+.inRight{transform:translateX(50px);opacity:0;}
+.inLeft{transform:translateX(-50px);opacity:0;}
+.enter{transition:0.5s;transition-delay:0.2s;}
+#page .enter{transform:translate(0);}';
+
+$spin	=	'
+@keyframes prime_spin {
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}';
+
+return (object)[
+'entrance'	=>	$entrance,
+'spin'		=>	$spin
+];
+}
+
+/** @since ToongeePrime Theme 1.0.57 End **/
 
 

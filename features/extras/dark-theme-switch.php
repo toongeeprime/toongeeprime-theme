@@ -13,15 +13,15 @@ if ( ! function_exists( 'prime2g_dark_theme_switch' ) ) {
 
 function prime2g_dark_theme_switch() {
 
-$by_net_home	=	prime2g_design_by_network_home();
-if ( $by_net_home ) { switch_to_blog( 1 ); }
-
-$theme_switch	=	get_theme_mod( 'prime2g_dark_theme_switch' );
+$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
+$theme_switch	=	$styles->dt_switch;
 
 if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) {
 
+$id		=	( is_multisite() && ! prime2g_design_by_network_home() && get_current_blog_id() !== 1 ) ?
+get_current_blog_id() : '';
 $domain	=	prime2g_get_site_domain();
-$domain	=	str_replace( '.', '', $domain );
+$domain	=	str_replace( '.', '', $domain ) . $id;
 
 $switch	=	'<div id="prime2g_dt_switch">
 <style id="dThemeSwitchCss">
@@ -93,8 +93,6 @@ p2gDThemeOff.addEventListener( "click", ()=>{
 echo $switch;
 }
 
-if ( $by_net_home ) { restore_current_blog(); }
-
 }
 
 }
@@ -103,11 +101,8 @@ if ( $by_net_home ) { restore_current_blog(); }
 
 if ( ! function_exists( 'prime2g_dark_theme_set_logos' ) ) {
 function prime2g_dark_theme_set_logos() {
-
-$by_net_home	=	prime2g_design_by_network_home();
-if ( $by_net_home ) { switch_to_blog( 1 ); }
-
-$theme_switch	=	get_theme_mod( 'prime2g_dark_theme_switch' );
+$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
+$theme_switch	=	$styles->dt_switch;
 
 if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) { ?>
 
@@ -123,8 +118,7 @@ p2getAll( "img.custom-logo" ).forEach( logo=>{
 
 <?php
 }
+}
+}
 
-if ( $by_net_home ) { restore_current_blog(); }
-}
-}
 

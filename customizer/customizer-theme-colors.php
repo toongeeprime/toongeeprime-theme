@@ -31,8 +31,7 @@ function prime2g_customizer_theme_colors( $wp_customize ) {
 	 *	COLOURS
 	 */
 if ( ! defined( 'CHILD_BRANDCOLOR' ) ) {
-	$wp_customize->add_setting(
-		'prime2g_primary_brand_color',
+	$wp_customize->add_setting( 'prime2g_primary_brand_color',
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$brandClr,
@@ -53,8 +52,7 @@ if ( ! defined( 'CHILD_BRANDCOLOR' ) ) {
 
 
 if ( ! defined( 'CHILD_BRANDCOLOR2' ) ) {
-	$wp_customize->add_setting(
-		'prime2g_secondary_brand_color',
+	$wp_customize->add_setting( 'prime2g_secondary_brand_color',
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$brandClr2,
@@ -75,8 +73,7 @@ if ( ! defined( 'CHILD_BRANDCOLOR2' ) ) {
 
 
 if ( ! defined( 'CHILD_SITEBG' ) ) {
-	$wp_customize->add_setting(
-		'prime2g_background_color',
+	$wp_customize->add_setting( 'prime2g_background_color',
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$bgcolor,
@@ -98,8 +95,7 @@ if ( ! defined( 'CHILD_SITEBG' ) ) {
 
 
 if ( ! defined( 'CHILD_HEADERBG' ) ) {
-	$wp_customize->add_setting(
-		'prime2g_header_background',
+	$wp_customize->add_setting( 'prime2g_header_background',
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$headerbg,
@@ -120,8 +116,7 @@ if ( ! defined( 'CHILD_HEADERBG' ) ) {
 
 
 if ( ! defined( 'CHILD_CONTENTBG' ) ) {
-	$wp_customize->add_setting(
-		'prime2g_content_background',
+	$wp_customize->add_setting( 'prime2g_content_background',
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$contentbg,
@@ -142,8 +137,7 @@ if ( ! defined( 'CHILD_CONTENTBG' ) ) {
 
 
 if ( ! defined( 'CHILD_BUTTONBG' ) ) {
-	$wp_customize->add_setting(
-		'prime2g_button_background',
+	$wp_customize->add_setting( 'prime2g_button_background',
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$buttonbg,
@@ -164,8 +158,7 @@ if ( ! defined( 'CHILD_BUTTONBG' ) ) {
 
 
 if ( ! defined( 'CHILD_FOOTERBG' ) ) {
-	$wp_customize->add_setting(
-		'prime2g_footer_background',
+	$wp_customize->add_setting( 'prime2g_footer_background',
 		array(
 			'capability'	=>	'edit_theme_options',
 			'default'		=>	$footerbg,

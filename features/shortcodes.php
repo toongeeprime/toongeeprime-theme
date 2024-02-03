@@ -16,13 +16,10 @@ $atts	=	shortcode_atts( array( 'showaddress'	=>	'' ), $atts );
 extract( $atts );
 
 $address	=	false;
-if ( $showaddress === 'yes' ) {
-	$address	=	true;
-}
+if ( $showaddress === 'yes' )  $address = true;
 
 return prime2g_theme_mod_social_and_contacts( $address );
 }
-
 
 
 /**
@@ -44,11 +41,12 @@ return $part;
 }
 
 
-
 /**
  *	@since ToongeePrime Theme 1.0.55
- *	Considered for Template Parts
  */
+add_shortcode( 'prime_site_footer_credits', 'prime2g_theme_footer_credit' );
+
+
 add_shortcode( 'prime_site_logo', 'prime2g_sitelogo_shortcode' );
 function prime2g_sitelogo_shortcode( $atts ) {
 $atts	=	shortcode_atts( array( 'dark_logo' => '', 'source' => '' ), $atts );
@@ -61,10 +59,6 @@ return prime2g_siteLogo( $darkLogo, $src );
 }
 
 
-
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
 add_shortcode( 'prime_search_form', 'prime2g_searchform_shortcode' );
 function prime2g_searchform_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
@@ -79,10 +73,6 @@ return prime2g_wp_block_search_form( $atts );
 }
 
 
-
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
 add_shortcode( 'prime_video', 'prime2g_video_embed_shortcode' );
 function prime2g_video_embed_shortcode( $atts ) {
 $atts	=	shortcode_atts( [ 'url'	=>	'', 'id' => '', 'height' => '' ], $atts );
@@ -101,10 +91,6 @@ return '<div'. $vidID .' class="prime2g_embedded_media shortcode video">'. $embe
 }
 
 
-
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
 add_shortcode( 'prime_site_title_and_description', 'prime2g_title_and_description_shortcode' );
 function prime2g_title_and_description_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
@@ -131,10 +117,6 @@ return $title;
 }
 
 
-
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
 add_shortcode( 'prime_map', 'prime2g_map_shortcode' );
 function prime2g_map_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
@@ -174,10 +156,6 @@ return $embed;
 }
 
 
-
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
 add_shortcode( 'prime_nav_menu', 'prime2g_get_nav_menu_shortcode' );
 function prime2g_get_nav_menu_shortcode( $atts ) {
 $atts	=	shortcode_atts( [ 'menu' => '', 'class' => 'shortcode_menu', 'id' => '', 'title_attrs' => 'yes' ], $atts );
@@ -209,12 +187,28 @@ return $result;
 }
 
 
-
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	ADD IN-POST CONTENT TO THEME PARTS
  */
-add_shortcode( 'prime_site_footer_credits', 'prime2g_theme_footer_credit' );
+add_shortcode( 'prime_add_to_theme', 'prime2g_add_content_to_theme' );
+function prime2g_add_content_to_theme( $atts, $content, $tag ) {
 
+$atts	=	shortcode_atts( array( 'place' => 'after post', 'priority' => '10' ), $atts );
+extract( $atts );
+
+$output	=	do_shortcode( $content );
+
+#	Add by theme/WP hooks
+#	Tested hooks:
+$hook	=	$place;
+if ( $place == 'after post' ) $hook	=	'prime2g_after_post';
+if ( $place == 'base' ) $hook	=	'prime2g_site_base_strip';
+if ( $place == 'footer' ) $hook	=	'wp_footer';
+
+add_action( $hook, function() use( $output ) { echo $output; }, (int) $priority );
+}
+
+/* @since ToongeePrime Theme 1.0.55 END */
 
 
 /**
@@ -250,25 +244,23 @@ if ( empty( $users ) ) {
 
 
 /**
- *	ADD IN-POST CONTENT TO THEME PARTS
- *	@since ToongeePrime Theme 1.0.55
+ *	ADD ANIMATION CSS
+ *	@since ToongeePrime Theme 1.0.57
  */
-add_shortcode( 'prime_add_to_theme', 'prime2g_add_content_to_theme' );
-function prime2g_add_content_to_theme( $atts, $content, $tag ) {
-
-$atts	=	shortcode_atts( array( 'place' => 'after post', 'priority' => '10' ), $atts );
+add_shortcode( 'prime_animation_css', 'prime2g_animations_css_shortcode' );
+function prime2g_animations_css_shortcode( $atts ) {
+$atts	=	shortcode_atts( array( 'get' => '' ), $atts );
 extract( $atts );
 
-$output	=	do_shortcode( $content );
+$css	=	prime2g_animations_css();
 
-#	Add by theme/WP hooks
-#	Tested hooks:
-$hook	=	$place;
-if ( $place == 'after post' ) $hook	=	'prime2g_after_post';
-if ( $place == 'base' ) $hook	=	'prime2g_site_base_strip';
-if ( $place == 'footer' ) $hook	=	'wp_footer';
-
-add_action( $hook, function() use( $output ) { echo $output; }, (int) $priority );
+switch( $get ) {
+	case 'entrance'	:	$addCSS	=	$css->entrance; break;
+	case 'spin'		:	$addCSS	=	$css->spin; break;
 }
+
+add_action( 'wp_head', function() use( $addCSS ) { echo '<style id="primeAnimationCssSC">'. $addCSS .'</style>'; } );
+}
+
 
 
