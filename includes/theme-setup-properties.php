@@ -25,7 +25,9 @@ add_theme_support(
 	)
 );
 
-#	@since ToongeePrime Theme 1.0.55:
+$styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
+
+#	@since ToongeePrime Theme 1.0.55
 $enableVideo	=	prime2g_video_features_active() ?: false;
 $videoActive	=	get_theme_mod( 'prime2g_video_header_placements', 'is_front_page' );
 
@@ -47,7 +49,6 @@ add_theme_support(
 );
 
 
-
 #	Navigation Menus
 register_nav_menus(
 	array(
@@ -60,12 +61,10 @@ register_nav_menus(
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
-if ( get_theme_mod( 'prime2g_use_site_top_menu' ) ) {
-
+if ( $styles->top_menu ) {
 register_nav_menus(
 	[ 'site-top-menu'	=>	esc_html__( 'Site-Top Menu', PRIME2G_TEXTDOM ) ]	# @ Theme 1.0.55
 );
-
 }
 
 
@@ -75,7 +74,6 @@ register_nav_menus(
  */
 if ( prime_child_min_version( '2.2' ) ) {
 $extras	=	get_theme_mod( 'prime2g_extra_menu_locations', 0 );
-
 if ( $extras ) {
 	for ( $e = 0; $e < $extras; $e++ ) {
 		$val	=	$e+1;
@@ -84,9 +82,7 @@ if ( $extras ) {
 		);
 	}
 }
-
 }
-
 
 
 #	SIDEBARS
@@ -115,7 +111,7 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55
+#	@since 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'Below The Header', PRIME2G_TEXTDOM ),
@@ -127,7 +123,7 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55
+#	@since 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'After Main Headline Story', PRIME2G_TEXTDOM ),
@@ -139,7 +135,7 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55
+#	@since 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'After Headlines Section', PRIME2G_TEXTDOM ),
@@ -151,7 +147,7 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55
+#	@since 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'Above Posts', PRIME2G_TEXTDOM ),
@@ -212,3 +208,4 @@ register_sidebars( $cols,
 
 }
 }
+

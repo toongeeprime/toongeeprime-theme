@@ -11,8 +11,11 @@
  * Social Media and Contacts
  */
 if ( ! function_exists( 'prime2g_theme_mod_social_and_contacts' ) ) {
-
 function prime2g_theme_mod_social_and_contacts( $incAddress = true ) {
+$net_home_socials	=	prime2g_constant_is_true( 'PRIME2G_SOCIALS_BY_NETWORK_HOME' );
+
+if ( $net_home_socials ) switch_to_blog( 1 );
+
 /**
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -64,20 +67,18 @@ if ( $address && $incAddress )
 
 $contacts	.=	'</div>';
 
+if ( $net_home_socials ) restore_current_blog();
+
 return $contacts;
 }
-
 }
-
 
 
 /**
  *	Site' Footer Credit
  */
 if ( ! function_exists( 'prime2g_theme_mod_footer_credit' ) ) {
-
 function prime2g_theme_mod_footer_credit() {
-
 $footerCred	=	'';
 
 if ( get_theme_mod( 'prime2g_theme_add_footer_credits', '1' ) ) {
@@ -88,7 +89,6 @@ $footerCred	.=	'<p id="akaweyCredit" style="font-size:70%;text-align:center;padd
 
 return $footerCred;
 }
-
 }
 
 
@@ -97,9 +97,7 @@ return $footerCred;
  *	@since ToongeePrime Theme 1.0.55
  */
 if ( ! function_exists( 'prime2g_theme_footer_credit' ) ) {
-
 function prime2g_theme_footer_credit() {
-
 $power	=	get_theme_mod( 'prime2g_footer_credit_power', 'Powered by' );
 $name	=	get_theme_mod( 'prime2g_footer_credit_name', 'ToongeePrime Theme' );
 $url	=	get_theme_mod( 'prime2g_footer_credit_url', 'https://akawey.com/' );
@@ -110,49 +108,47 @@ $cRight	=	'<span id="copyright_date"> &copy; ' . date( 'Y' ) . '.</span> ';
 
 $footerCred	=	'<div class="site_footer_credits site_width">';
 
-	if ( $name ) {
-		if( $url && $name ) {
-			$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span> <a href="' . $url . '"' . $attrs . '>' . $name . '</a> '. $cRight .'</span>';
-		}
-		elseif ( $name ) {
-			$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span> ' . $name . $cRight .'</span>';
-		}
-		else {
-			$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span>' . $cRight .'</span>';
-		}
+if ( $name ) {
+	if( $url && $name ) {
+		$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span> <a href="' . $url . '"' . $attrs . '>' . $name . '</a> '. $cRight .'</span>';
+	}
+	elseif ( $name ) {
+		$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span> ' . $name . $cRight .'</span>';
 	}
 	else {
-		$footerCred	.=	'<span id="powered_by_credit" title="Site Credits">Powered by <a href="https://akawey.com/" title="ToongeePrime of Akàwey Online Enterprises" target="_blank" rel="noopener">ToongeePrime Theme</a>.' . $cRight . '</span>';
+		$footerCred	.=	'<span title="Site Credits"><span class="power">' . $power . '</span>' . $cRight .'</span>';
 	}
+}
+else {
+	$footerCred	.=	'<span id="powered_by_credit" title="Site Credits">Powered by <a href="https://akawey.com/" title="ToongeePrime of Akàwey Online Enterprises" target="_blank" rel="noopener">ToongeePrime Theme</a>.' . $cRight . '</span>';
+}
 
-	$footerCred	.=	'<span id="appended_credit" title="Site Credits">';
-	if ( '' !== $append ) { $footerCred	.=	$append; }
-	$footerCred	.=	'</span>';
+$footerCred	.=	'<span id="appended_credit" title="Site Credits">';
+if ( '' !== $append ) { $footerCred	.=	$append; }
+$footerCred	.=	'</span>';
 
 $footerCred	.=	'</div>';
 
 return $footerCred;
 }
-
 }
-
 
 
 /**
  *	Shop Page' Title
  */
 if ( ! function_exists( 'prime2g_theme_mod_shop_title' ) ) {
-function prime2g_theme_mod_shop_title( $pre = '<h1 class="page-title">', $post = '</h1>' ) {
+function prime2g_theme_mod_shop_title( $pre = '<h1 class="page-title">', $end = '</h1>' ) {
 $shopTitle	=	get_theme_mod( 'prime2g_shop_page_title' );
-
 	if ( $shopTitle ) {
-		$title	=	$pre . __( $shopTitle, PRIME2G_TEXTDOM ) . $post;
+		$title	=	$pre . __( $shopTitle, PRIME2G_TEXTDOM ) . $end;
 	}
 	else {
-		$title	=	$pre . __( 'Products', PRIME2G_TEXTDOM ) . $post;
+		$title	=	$pre . __( 'Products', PRIME2G_TEXTDOM ) . $end;
 	}
-
 return $title;
 }
 }
+
+
 

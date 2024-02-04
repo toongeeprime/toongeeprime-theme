@@ -88,6 +88,7 @@ class ToongeePrime_Styles {
 			case 'video_place' : $mod = get_theme_mod( 'prime2g_video_embed_location' ); break;
 			case 'menu_type' : $mod = get_theme_mod( 'prime2g_main_menu_type' ); break;
 			case 'logo_with_menu' : $mod = get_theme_mod( 'prime2g_logo_with_menu' ); break;
+			case 'top_menu' : $mod = get_theme_mod( 'prime2g_use_site_top_menu' ); break;
 		}
 
 	if ( $by_net_home ) { restore_current_blog(); }
@@ -269,7 +270,8 @@ return $css;
 		'sidebar_place'	=>	$mods->get_mod( 'sidebar_place' ),
 		'video_place'	=>	$mods->get_mod( 'video_place' ),
 		'menu_type'		=>	$mods->get_mod( 'menu_type' ),
-		'logo_with_menu'=>	$mods->get_mod( 'logo_with_menu' )
+		'logo_with_menu'=>	$mods->get_mod( 'logo_with_menu' ),
+		'top_menu'		=>	$mods->get_mod( 'top_menu' )
 	];
 	}
 

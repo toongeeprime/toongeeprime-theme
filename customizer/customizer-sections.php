@@ -45,7 +45,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 
 	/**
 	 *	Theme Fonts
-	 *	@since ToongeePrime Theme 1.0.55
+	 *	@since 1.0.55
 	 */
 	$wp_customize->add_section( 'prime2g_theme_fonts_section', array(
 		'title'		=>	__( 'Theme Fonts', PRIME2G_TEXTDOM ),
@@ -65,7 +65,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 
 	/**
 	 *	Media Features
-	 *	@since ToongeePrime Theme 1.0.55
+	 *	@since 1.0.55
 	 */
 	$wp_customize->add_section( 'prime2g_theme_menus_section', array(
 		'title'		=>	__( 'Theme Menus', PRIME2G_TEXTDOM ),
@@ -97,12 +97,15 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 		'title'		=>	__( 'Social Media &amp; Contacts', PRIME2G_TEXTDOM ),
 		'panel'		=>	'prime2g_customizer_panel',
 		'description'	=>	__( 'Social media links and contact details', PRIME2G_TEXTDOM ),
-		'capability'	=>	'edit_theme_options'
+		'capability'	=>	'edit_theme_options',
+		'active_callback'	=>	function() use( $network, $is_site1 ) {
+		$homeSocials	=	prime2g_constant_is_true( 'PRIME2G_SOCIALS_BY_NETWORK_HOME' );
+		return ! $network || $homeSocials && $is_site1 || $network && ! $homeSocials; }
 	) );
 
 	/**
 	 *	Media Features
-	 *	@since ToongeePrime Theme 1.0.50
+	 *	@since 1.0.50
 	 */
 	$wp_customize->add_section( 'prime2g_media_features_section', array(
 		'title'		=>	__( 'Media Features', PRIME2G_TEXTDOM ),
@@ -113,7 +116,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 
 	/**
 	 *	Progreesive Web App (PWA)
-	 *	@since ToongeePrime Theme 1.0.55
+	 *	@since 1.0.55
 	 */
 	$wp_customize->add_section( 'prime2g_theme_pwa_section', array(
 		'title'		=>	__( 'Web App', PRIME2G_TEXTDOM ),
@@ -125,7 +128,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 
 	/**
 	 *	Theme Extras
-	 *	@since ToongeePrime Theme 1.0.48
+	 *	@since 1.0.48
 	 */
 	$wp_customize->add_section( 'prime2g_theme_extras_section', array(
 		'title'		=>	__( 'Extra Features', PRIME2G_TEXTDOM ),
@@ -137,7 +140,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 
 	/**
 	 *	SMTP Mail Settings
-	 *	@since ToongeePrime Theme 1.0.55
+	 *	@since 1.0.55
 	 */
 	$wp_customize->add_section( 'prime2g_theme_smtp_section', array(
 		'title'		=>	__( 'SMTP Mail Settings', PRIME2G_TEXTDOM ),
@@ -158,7 +161,7 @@ if ( class_exists( 'woocommerce' ) ) {
 
 	/**
 	 *	Site Settings
-	 *	@since ToongeePrime Theme 1.0.48.50
+	 *	@since 1.0.48.50
 	 */
 	$wp_customize->add_section( 'prime2g_site_settings_section', array(
 		'title'		=>	__( 'Site Settings/Status', PRIME2G_TEXTDOM ),
@@ -170,5 +173,4 @@ if ( class_exists( 'woocommerce' ) ) {
 }
 
 }
-
 

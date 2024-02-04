@@ -42,6 +42,7 @@ function prime2g_main_menu( $id = 'main_nav', $ul_id = 'main_menu_items' ) {
 # Theme 1.0.57
 $styles		=	ToongeePrime_Styles::mods_cache();
 $min_v23	=	prime_child_min_version( '2.3' );
+
 $incLogo	=	$styles->logo_with_menu;
 $lwm_class	=	$incLogo ? ' logo_with_menu' : '';
 $theLogo	=	prime2g_siteLogo();
@@ -109,7 +110,9 @@ echo	'</div></div><!-- #'. $id .' -->';
  */
 if ( ! function_exists( 'prime2g_site_top_menu' ) ) {
 function prime2g_site_top_menu() {
-if ( has_nav_menu( 'site-top-menu' ) && get_theme_mod( 'prime2g_use_site_top_menu' ) ) { ?>
+$styles		=	ToongeePrime_Styles::mods_cache();
+
+if ( has_nav_menu( 'site-top-menu' ) && $styles->top_menu ) { ?>
 <div id="site_top_menu">
 <div class="w100pc flexnw site_width collapsible-navs">
 <?php
