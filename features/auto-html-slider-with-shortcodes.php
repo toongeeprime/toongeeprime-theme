@@ -67,7 +67,7 @@ function prime2g_auto_html_slider_frame_js_shortcode( $atts ) {
 $atts	=	shortcode_atts( array( 'timer' => 4000, 'multislides' => '', 'slider_ids' => '' ), $atts );
 extract( $atts );
 
-add_action( 'wp_footer', function() use( &$timer, $multislides, $slider_ids ) {
+add_action( 'wp_footer', function() use( $timer, $multislides, $slider_ids ) {
 	prime2g_sliders_helper_funcs( $multislides );
 	if ( $multislides === 'yes' ) {
 		prime2g_multi_instance_slider_js( $slider_ids, $timer );
@@ -158,7 +158,7 @@ $prev_next_lits		=
 	litCntrl	=	p2getEl( '.slCtrl.lit' ),
 	slider_id	=	'';";
 
-if ( $multislides == 'yes' ) {
+if ( $multislides === 'yes' ) {
 $slides_n_controls	=
 "let slidez	=	p2getAll( sliderID + ' .slidebox' ),
 	slCtrlz	=	p2getAll( sliderID + ' .slCtrl' );";

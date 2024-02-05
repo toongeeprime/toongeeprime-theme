@@ -12,7 +12,6 @@
  */
 function prime2g_removeSidebar() { if ( ! function_exists( 'define_2gRMVSidebar' ) ) { function define_2gRMVSidebar(){} } }
 
-
 /**
  *	nonce verifier
  *	@since ToongeePrime Theme 1.0.46
@@ -23,7 +22,6 @@ function prime2g_verify_nonce( $actionName = 'prime_ajaxnonce' ) {
 	}
 }
 
-
 /**
  *	If current user is post author
  *	@since ToongeePrime Theme 1.0.45
@@ -33,19 +31,16 @@ function prime2g_is_post_author( $post, $userID = null ) {
 	$post->post_author == get_current_user_id();
 }
 
-
 /**
  *	Use prime2g_remove_title() to remove the title from a template
  */
 function prime2g_remove_title() { function define_2gRMVTitle(){} }
-
 
 /**
  *	Use prime2g_is_plain_page() to declare a template as being plain.
  *	Thus, can be used to remove select features, widgets, etc.
  */
 function prime2g_is_plain_page() { function define_2gPlainPage(){} }
-
 
 /**
  *	Include or exclude post types
@@ -60,7 +55,6 @@ if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
 	}
 }
 
-
 /**
  *	Get Country via 2 Char Code
  *	More @ http://country.io/data/
@@ -72,13 +66,11 @@ function prime2g_get_country_by_code( $code ) {
 	return $countries[ $code ];
 }
 
-
 /**
  *	Use Theme Extras?
  *	@since ToongeePrime Theme 1.0.48
  */
 function prime2g_use_extras() { return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true ); }
-
 
 /**
  *	Use PWA?
@@ -93,7 +85,6 @@ function prime2g_activate_theme_pwa() {
 	return ( get_theme_mod( 'prime2g_use_theme_pwa', 0 ) && $activate );
 }
 
-
 /**
  *	Control Design from Network home on multisite installs?
  *	@since ToongeePrime Theme 1.0.55, updated with prime2g_constant_is_true() @since 1.0.57
@@ -104,7 +95,6 @@ function prime2g_design_by_network_home() {
 
 /* @since ToongeePrime Theme 1.0.57 */
 function prime2g_designing_at_networkhome() { return prime2g_design_by_network_home() && get_current_blog_id() === 1; }
-
 
 /**
  *	Get Site' Domain name
@@ -121,30 +111,26 @@ $url	=	preg_replace( '/^www\./', '', $url['host'] );
 return $url;
 }
 
-
 /**
  *	@since ToongeePrime Theme Theme 1.0.50
  */
 function prime2g_categs_and_ids_array() {
 $categsArray	=	wp_cache_get( 'prime2g_categs_array' );
-
-	if ( false !== $categsArray ) {
-		return $categsArray;
-	}
-	else {
-		$categs	=	get_categories();
-		$ids	=	array_column( $categs, 'term_id' );
-		$names	=	array_column( $categs, 'name' );
-
-		$categsArray	=	array_combine( $ids, $names );
-
-		wp_cache_set( 'prime2g_categs_array', $categsArray, '', PRIME2G_CACHE_EXPIRES );
-
-		return $categsArray;
-	}
-
+if ( false !== $categsArray ) {
+	return $categsArray;
 }
+else {
+	$categs	=	get_categories();
+	$ids	=	array_column( $categs, 'term_id' );
+	$names	=	array_column( $categs, 'name' );
 
+	$categsArray	=	array_combine( $ids, $names );
+
+	wp_cache_set( 'prime2g_categs_array', $categsArray, '', PRIME2G_CACHE_EXPIRES );
+
+	return $categsArray;
+}
+}
 
 function prime2g_posttypes_names_array() {
 $posttypesArray	=	wp_cache_get( 'prime2g_posttypes_array' );
@@ -164,14 +150,12 @@ else {
 	}
 
 	$posttypesArray	=	array_combine( $slugs, $names );
-
 	wp_cache_set( 'prime2g_posttypes_array', $posttypesArray, '', PRIME2G_CACHE_EXPIRES );
 
 return $posttypesArray;
 }
 }
 /* @since ToongeePrime Theme 1.0.50 End */
-
 
 /**
  *	@since ToongeePrime Theme 1.0.55
@@ -183,7 +167,6 @@ else $url	=	"http://";
 	$url	.=	$_SERVER[ 'REQUEST_URI' ];
 return $url;
 }
-
 
 function prime2g_get_postsdata_array( array $get, array $args, array $options ) {
 $index	=	$value	=	'';	# @$get
@@ -209,7 +192,6 @@ return array_combine( $indexes, $values );
 }
 /* @since ToongeePrime Theme 1.0.55 End */
 
-
 /**
  *	Check Minimum Child Theme Version
  *	@since ToongeePrime Theme 1.0.56
@@ -219,12 +201,16 @@ if ( is_child_theme() ) return version_compare( CHILD2G_VERSION, $version, '>=' 
 return true;	// features should work in parent
 }
 
-
-/**
- *	@since ToongeePrime Theme 1.0.57
- */
+/* @since ToongeePrime Theme 1.0.57 */
 function prime2g_constant_is_true( string $constant, bool $for_network = true ) {
 	if ( $for_network && ! is_multisite() ) return false;
 	return ( defined( $constant ) && constant( $constant ) === true );
 }
+
+/* @since ToongeePrime Theme 1.0.58 */
+if ( ! function_exists( 'prime_posttypes_with_settings' ) ) {
+function prime_posttypes_with_settings() { return [ 'post', 'page' ]; }
+}
+
+
 

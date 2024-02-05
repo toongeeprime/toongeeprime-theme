@@ -32,9 +32,7 @@ function prime2g_save_mediafields( $post_id ) {
 	if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
 		$post_id	=	$parent_id;
 	}
-	$fields	=	[
-		'video_url',
-	];
+	$fields	=	[ 'video_url' ];
 	foreach( $fields as $field ) {
 		if ( array_key_exists( $field, $_POST ) ) {
 		update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
@@ -47,15 +45,16 @@ function prime2g_save_mediafields( $post_id ) {
 function prime2g_mediacfields_metadivs( $post ) { ?>
 <div class="prime2g_meta_box">
 
-	<style scoped>
-		#prime2g_media_cfields{box-shadow:0px 3px 5px #ccc;}
-		#prime2g_media_cfields:hover{box-shadow:0px 3px 5px #aaa;}
-	</style>
+<style>
+	#prime2g_media_cfields{box-shadow:0px 3px 5px #ccc;}
+	#prime2g_media_cfields:hover{box-shadow:0px 3px 5px #aaa;}
+	<?php prime2g_custom_mbox_css(); ?>
+</style>
 
-	<div class="meta-options prime2g_field">
-		<label for="video_url">Video URL</label>
-		<input type="url" name="video_url" id="video_url" value="<?php echo esc_url( $post->video_url ); ?>" />
-	</div>
+<div class="meta-options prime2g_field">
+	<label for="video_url">Video URL</label>
+	<input type="url" name="video_url" id="video_url" value="<?php echo esc_url( $post->video_url ); ?>" />
+</div>
 
 </div>
 <?php

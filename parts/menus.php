@@ -16,7 +16,8 @@ function prime2g_menu_togglers( array $options = [] ) {
 $incLogo	=	false;
 $theLogo	=	'';
 $class		=	'';
-$togTargets	=	'\'.main_menu_wrap\'';	// be sure to escape
+$content	=	'<span></span><span></span><span></span>';
+$togTargets	=	'\'.main_menu_wrap\'';	// ESCAPE!
 extract( $options );
 
 echo '<div id="menu_toggbar" class="menu_toggbar ' . $class . '">
@@ -24,9 +25,7 @@ echo '<div id="menu_toggbar" class="menu_toggbar ' . $class . '">
 	if ( $incLogo ) echo $theLogo;
 echo '</div>
 <div class="menu_togs prel" onclick="prime2g_toggClass( ['. $togTargets .'] );">
-	<span></span>
-	<span></span>
-	<span></span>
+'. $content .'
 </div>
 </div>';
 }

@@ -85,6 +85,7 @@ $background_image	=	get_background_image();
 echo '<style id="comingSoonCSS">
 body{display:grid;place-content:center;text-align:center;min-height:100vh;padding:var(--min-pad);
 background-size:cover;background-position:center;background-image:url('. $background_image .');}
+#prime2g_toTop{display:none;}
 '. $add_css .'
 </style>
 </head>';

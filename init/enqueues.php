@@ -50,11 +50,11 @@ if ( prime_child_min_version( '2.3' ) ) {
 		[], $version
 	);
 
-if ( ! prime_child_min_version( '2.3' ) ) {
-	wp_register_script( 'prime2g_deprecated_js', get_theme_file_uri( '/files/deprecated.js' ) );
-}
-
 	wp_enqueue_script( 'prime2g_js' );
+
+if ( ! prime_child_min_version( '2.3' ) ) {
+	wp_enqueue_script( 'prime2g_deprecated_js', get_theme_file_uri( '/files/deprecated.js' ), [], $version );
+}
 
 	wp_enqueue_script(
 		'prime2g_footer_js',

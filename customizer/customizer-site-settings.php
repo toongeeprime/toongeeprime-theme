@@ -22,8 +22,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	 *	SHUT DOWN WEBSITE
 	 */
 	$wp_customize->add_setting( 'prime2g_website_shutdown', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_website_shutdown',
+	$wp_customize->add_control( 'prime2g_website_shutdown',
 		array(
 			'label'		=>	__( 'Shut Down Website?', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
@@ -44,8 +43,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	function prime2g_c_siteNotSD() { return ( ! empty( get_theme_mod( 'prime2g_website_shutdown' ) ) ); }
 
 	$wp_customize->add_setting( 'prime2g_shutdown_display', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_shutdown_display',
+	$wp_customize->add_control( 'prime2g_shutdown_display',
 		array(
 			'label'		=>	__( 'Shutdown Display (To display a page, homepage must be set to *Static)', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
@@ -60,8 +58,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	);
 
 	$wp_customize->add_setting( 'prime2g_shutdown_page_id', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_shutdown_page_id',
+	$wp_customize->add_control( 'prime2g_shutdown_page_id',
 		array(
 			'label'		=>	__( 'Select Shutdown Page', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
@@ -79,8 +76,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	 *	@since ToongeePrime Theme @ 1.0.55
 	 */
 	$wp_customize->add_setting( 'prime2g_use_page_for404', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_use_page_for404',
+	$wp_customize->add_control( 'prime2g_use_page_for404',
 		array(
 			'label'		=>	__( 'Use Custom 404 Error Page', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
@@ -90,8 +86,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	);
 
 	$wp_customize->add_setting( 'prime2g_404error_page_id', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_404error_page_id',
+	$wp_customize->add_control( 'prime2g_404error_page_id',
 		array(
 			'label'		=>	__( 'Select 404 Error Page', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
@@ -107,8 +102,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	 *	@since ToongeePrime Theme 1.0.49
 	 */
 	$wp_customize->add_setting( 'prime2g_stop_wp_heartbeat', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_stop_wp_heartbeat',
+	$wp_customize->add_control( 'prime2g_stop_wp_heartbeat',
 		array(
 			'label'		=>	__( 'Stop Excess Scripts', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
@@ -140,8 +134,7 @@ if ( $network ) {
 
 if ( $network && get_current_blog_id() === 1 ) {
 	$wp_customize->add_setting( 'prime2g_route_caching_to_networkhome', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_route_caching_to_networkhome',
+	$wp_customize->add_control( 'prime2g_route_caching_to_networkhome',
 		array(
 			'label'		=>	__( 'Route Caching Controls to Network Home?', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
@@ -159,8 +152,7 @@ DAY_IN_SECONDS => __( 'Days', PRIME2G_TEXTDOM ), WEEK_IN_SECONDS => __( 'Weeks',
 MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Years', PRIME2G_TEXTDOM ) ];
 
 	$wp_customize->add_setting( 'prime2g_activate_chache_controls', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_activate_chache_controls',
+	$wp_customize->add_control( 'prime2g_activate_chache_controls',
 		array(
 			'label'		=>	__( 'Activate Cache Controls', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
@@ -170,8 +162,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_time_singular', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_chache_time_singular',
+	$wp_customize->add_control( 'prime2g_chache_time_singular',
 		array(
 			'label'		=>	__( 'Cache Time: Single Entries', PRIME2G_TEXTDOM ),
 			'type'		=>	'number',
@@ -183,8 +174,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_seconds_singular', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_chache_seconds_singular',
+	$wp_customize->add_control( 'prime2g_chache_seconds_singular',
 		array(
 			'label'		=>	__( 'Cache Unit: Single Entries', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
@@ -196,8 +186,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_time_feeds', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_chache_time_feeds',
+	$wp_customize->add_control( 'prime2g_chache_time_feeds',
 		array(
 			'label'		=>	__( 'Cache Time: Archives', PRIME2G_TEXTDOM ),
 			'type'		=>	'number',
@@ -209,14 +198,24 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_seconds_feeds', $postMsg_text );
-	$wp_customize->add_control(
-		'prime2g_chache_seconds_feeds',
+	$wp_customize->add_control( 'prime2g_chache_seconds_feeds',
 		array(
 			'label'		=>	__( 'Cache Unit: Archives', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_chache_seconds_feeds',
 			'section'	=>	'prime2g_site_settings_section',
 			'choices'	=>	$time_units,
+			'active_callback'	=> 'prime2g_a_c_ctrls'
+		)
+	);
+
+	$wp_customize->add_setting( 'prime2g_allow_chache_data_clearing', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_allow_chache_data_clearing',
+		array(
+			'label'		=>	__( 'Allow Cache Data Clearing', PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_allow_chache_data_clearing',
+			'section'	=>	'prime2g_site_settings_section',
 			'active_callback'	=> 'prime2g_a_c_ctrls'
 		)
 	);

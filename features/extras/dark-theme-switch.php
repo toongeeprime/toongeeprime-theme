@@ -18,8 +18,9 @@ $theme_switch	=	$styles->dt_switch;
 
 if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) {
 
-$id		=	( is_multisite() && ! prime2g_design_by_network_home() && get_current_blog_id() !== 1 ) ?
-get_current_blog_id() : '';
+$id		=	( is_multisite() && ! prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' )
+ && get_current_blog_id() !== 1 ) ? get_current_blog_id() : '';
+
 $domain	=	prime2g_get_site_domain();
 $domain	=	str_replace( '.', '', $domain ) . $id;
 

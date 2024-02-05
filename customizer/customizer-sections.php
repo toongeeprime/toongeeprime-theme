@@ -126,6 +126,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 		'active_callback'	=>	'prime2g_add_theme_pwa'
 	) );
 
+if ( prime2g_use_extras() ) {
 	/**
 	 *	Theme Extras
 	 *	@since 1.0.48
@@ -135,7 +136,9 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 		'panel'		=>	'prime2g_customizer_panel',
 		'description'	=>	__( 'Extra features for the theme', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
-		'active_callback'	=>	'prime2g_use_extras'
+		'active_callback'	=>	function() use( $network, $is_site1 ) {
+		$homeExtras	=	prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' );
+		return ! $network || $homeExtras && $is_site1 || $network && ! $homeExtras; }
 	) );
 
 	/**
@@ -146,9 +149,9 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 		'title'		=>	__( 'SMTP Mail Settings', PRIME2G_TEXTDOM ),
 		'panel'		=>	'prime2g_customizer_panel',
 		'description'	=>	__( 'Configure SMTP Mailing Settings', PRIME2G_TEXTDOM ),
-		'capability'	=>	'edit_theme_options',
-		'active_callback'	=>	'prime2g_use_extras'
+		'capability'	=>	'edit_theme_options'
 	) );
+}
 
 if ( class_exists( 'woocommerce' ) ) {
 	$wp_customize->add_section( 'prime2g_woocommerce_edits_section', array(

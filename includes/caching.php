@@ -6,15 +6,32 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.56
  */
-add_action( 'template_redirect', 'prime2g_chache_control_headers' );
-if ( !function_exists( 'prime2g_chache_control_headers' ) ) {
 
-function prime2g_chache_control_headers() {
+add_action( 'template_redirect', 'prime2g_cache_control_headers' );
+if ( ! function_exists( 'prime2g_cache_control_headers' ) ) {
+
+function prime2g_cache_control_headers() {
 if ( empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ) return;
 
-	if ( is_admin() || current_user_can( 'edit_others_posts' ) ||
+$cache_clearing_active	=	isset( $_GET[ 'clear-data' ] ) && ! empty( get_theme_mod( 'prime2g_allow_chache_data_clearing' ) );
+$data_to_clear	=	$cache_clearing_active ? $_GET[ 'clear-data' ] : null;
+
+if ( $cache_clearing_active ) {
+	if ( $data_to_clear === 'cache' ) header( 'Clear-Site-Data: "cache"' );
+	if ( $data_to_clear === 'cookies' ) header( 'Clear-Site-Data: "cookies"' );
+	if ( $data_to_clear === 'storage' ) header( 'Clear-Site-Data: "storage"' );
+	if ( $data_to_clear === 'all' ) header( 'Clear-Site-Data: "*"' );
+	if ( $data_to_clear === 'logout' ) header( 'Clear-Site-Data: "cache", "cookies", "storage", "executionContexts"' );
+return;
+}
+
+
+global $post;
+
+	if (
+	is_admin() || current_user_can( 'edit_others_posts' ) || false !== strpos( $_SERVER[ 'REQUEST_URI' ], '?' ) ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] ) ||
-	false !== strpos( $_SERVER[ 'REQUEST_URI' ], '?' )
+	isset( $post ) && $post->prevent_caching === 'prevent'
 	) {
 	header( 'Cache-Control: max-age=0,no-cache,no-store,must-revalidate' );
 	}
@@ -36,12 +53,12 @@ if ( get_theme_mod( 'prime2g_route_caching_to_networkhome' ) ) {
 restore_current_blog();
 }
 
-		if ( is_feed() ) {
-			header( 'Cache-Control: max-age=' . ( $time_feeds * $seconds_feeds ) );
-		}
-		else {
-			header( 'Cache-Control: max-age=' . ( $time_single * $seconds_single ) );
-		}
+	if ( is_feed() ) {
+		header( 'Cache-Control: max-age=' . ( $time_feeds * $seconds_feeds ) );
+	}
+	else {
+		header( 'Cache-Control: max-age=' . ( $time_single * $seconds_single ) );
+	}
 	}
 
 }

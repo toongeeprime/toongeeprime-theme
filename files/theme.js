@@ -89,8 +89,8 @@ runCount();
  */
 function prime2g_get_sibling( get, elem, sibClass = '' ) {
 
-	if ( get == 'previous' ) { var sibling	=	elem.previousElementSibling; }
-	if ( get == 'next' ) { var sibling	=	elem.nextElementSibling; }
+	if ( get === 'previous' ) { var sibling	=	elem.previousElementSibling; }
+	if ( get === 'next' ) { var sibling	=	elem.nextElementSibling; }
 
 	// If no sibClass, return first sibling
 	if ( ! sibClass ) return sibling;
@@ -99,8 +99,8 @@ function prime2g_get_sibling( get, elem, sibClass = '' ) {
 	while ( sibling ) {
 		if ( sibling.classList.contains( sibClass ) ) return sibling;
 
-		if ( get == 'previous' ) { sibling	=	sibling.previousElementSibling; }
-		if ( get == 'next' ) { sibling	=	sibling.nextElementSibling; }
+		if ( get === 'previous' ) { sibling	=	sibling.previousElementSibling; }
+		if ( get === 'next' ) { sibling	=	sibling.nextElementSibling; }
 	}
 
 }
@@ -178,4 +178,3 @@ return "undefined";
 function primeCookieIsDefined( cName ) {
 	return primeHasCookie( cName ) && "undefined" !== primeGetCookieValue( cName );
 }
-

@@ -2,7 +2,6 @@
 
 /**
  *	PAGE PRELOADER FEATURE
- *	Includes CSS and JS functions
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.48
@@ -11,6 +10,9 @@
 add_action( 'prime2g_before_head', 'prime2g_page_preloader', 0 );
 if ( ! function_exists( 'prime2g_page_preloader' ) ) {
 function prime2g_page_preloader() {
+# 1.0.57
+$net_home_extras	=	prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' );
+if ( $net_home_extras ) switch_to_blog( 1 );
 
 $preloaderState	=	get_theme_mod( 'prime2g_use_page_preloader' );
 $preloaderOn	=	( 'on' === $preloaderState );
@@ -33,6 +35,8 @@ if ( ! empty( $preloaderState ) ) {
 
 echo $preloader;
 }
+
+if ( $net_home_extras ) restore_current_blog();
 
 }
 }
@@ -78,4 +82,5 @@ window.addEventListener( "load", prime2g_clearPreloader );
 return $js;
 }
 }
+
 
