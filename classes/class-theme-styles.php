@@ -52,7 +52,7 @@ class ToongeePrime_Styles {
 	 */
 	public function get_mod( string $get ) {
 	$by_net_home	=	prime2g_design_by_network_home();
-	if ( $by_net_home ) { switch_to_blog( 1 ); }
+	if ( $by_net_home ) switch_to_blog( 1 );
 	$defaults	=	$this->defaults();
 
 		switch( $get ) {
@@ -91,7 +91,7 @@ class ToongeePrime_Styles {
 			case 'top_menu' : $mod = get_theme_mod( 'prime2g_use_site_top_menu' ); break;
 		}
 
-	if ( $by_net_home ) { restore_current_blog(); }
+	if ( $by_net_home ) restore_current_blog();
 
 	return $mod;
 	}

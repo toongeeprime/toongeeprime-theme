@@ -221,6 +221,9 @@ else { ?>
  */
 add_action( 'add_meta_boxes', 'prime2g_mBox_for_settings' );
 function prime2g_mBox_for_settings() {
+$cache_on	=	! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) );
+if ( ! $cache_on ) return;	# Until other settings are added
+
 $pType_obj	=	get_post_type_object( get_post_type() );
 $pType_name	=	$pType_obj->labels->singular_name;
 
@@ -233,9 +236,6 @@ add_meta_box(
 function prime2g_settings_control_fields( $post ) {
 $pType_obj	=	get_post_type_object( $post->post_type );
 $pType_name	=	$pType_obj->labels->singular_name;
-$cache_on	=	! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) );
-
-if ( ! $cache_on ) return;	# Until other settings are added
 ?>
 <div class="prime2g_meta_box">
 <style>

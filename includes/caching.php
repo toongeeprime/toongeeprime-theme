@@ -13,17 +13,31 @@ if ( ! function_exists( 'prime2g_cache_control_headers' ) ) {
 function prime2g_cache_control_headers() {
 if ( empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ) return;
 
-$cache_clearing_active	=	isset( $_GET[ 'clear-data' ] ) && ! empty( get_theme_mod( 'prime2g_allow_chache_data_clearing' ) );
-$data_to_clear	=	$cache_clearing_active ? $_GET[ 'clear-data' ] : null;
+/* @since ToongeePrime Theme 1.0.58 */
+$allow_clearing	=	! empty( get_theme_mod( 'prime2g_allow_chache_data_clearing' ) );
 
-if ( $cache_clearing_active ) {
-	if ( $data_to_clear === 'cache' ) header( 'Clear-Site-Data: "cache"' );
-	if ( $data_to_clear === 'cookies' ) header( 'Clear-Site-Data: "cookies"' );
-	if ( $data_to_clear === 'storage' ) header( 'Clear-Site-Data: "storage"' );
-	if ( $data_to_clear === 'all' ) header( 'Clear-Site-Data: "*"' );
-	if ( $data_to_clear === 'logout' ) header( 'Clear-Site-Data: "cache", "cookies", "storage", "executionContexts"' );
+if ( is_multisite() ) {
+switch_to_blog( 1 );
+if ( get_theme_mod( 'prime2g_route_caching_to_networkhome' ) ) {
+	$allow_clearing	=	! empty( get_theme_mod( 'prime2g_allow_chache_data_clearing' ) );
+}
+restore_current_blog();
+}
+
+
+if ( isset( $_GET[ 'clear-data' ] ) && $allow_clearing ) {
+
+$clear_data	=	$_GET[ 'clear-data' ];
+
+if ( $clear_data === 'cache' ) header( 'Clear-Site-Data: "cache"' );
+if ( $clear_data === 'cookies' ) header( 'Clear-Site-Data: "cookies"' );
+if ( $clear_data === 'storage' ) header( 'Clear-Site-Data: "storage"' );
+if ( $clear_data === 'all' ) header( 'Clear-Site-Data: "*"' );
+if ( $clear_data === 'logout' ) header( 'Clear-Site-Data: "cache", "cookies", "storage", "executionContexts"' );
+
 return;
 }
+/* @since ToongeePrime Theme 1.0.58 End */
 
 
 global $post;
@@ -98,4 +112,3 @@ ExpiresDefault "access plus 7 days"
 ## EXPIRES CACHING ##
 
 */
-
