@@ -29,6 +29,7 @@ add_action( 'customize_register', 'prime2g_customizer_wp_header_image' );
 add_action( 'customize_register', 'prime2g_customizer_misc_wp_settings' );
 add_action( 'customize_register', 'prime2g_customizer_theme_pwa' );
 add_action( 'customize_register', 'prime2g_customizer_smtp' );
+add_action( 'customize_register', 'prime2g_customizer_site_performance' );
 
 if ( class_exists( 'woocommerce' ) ) {
 	add_action( 'customize_register', 'prime2g_customizer_woocommerce_edits' );

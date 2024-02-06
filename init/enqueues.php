@@ -12,7 +12,7 @@ if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
 $version	=	PRIME2G_VERSION;
 
-    # Theme Styles
+    #	Theme Styles
 if ( prime_child_min_version( '2.3' ) ) {
 	$themeCSS	=	'theme.css';
 } else {
@@ -26,7 +26,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 
     wp_enqueue_style( 'prime2g_css' );
 
-	# WooCommerce Styles
+	#	WooCommerce Styles
 	if ( class_exists( 'woocommerce' ) ) {
 		wp_enqueue_style(
 			'prime2g_woocommerce_css',
@@ -35,14 +35,26 @@ if ( prime_child_min_version( '2.3' ) ) {
 		);
 	}
 
-    # Theme Scripts
-	# jQuery
+    /**
+	 *	Theme Scripts
+	 */
+// @since 1.0.59
+if ( is_multisite() ) {
+	switch_to_blog( 1 );
+	$useJQ	=	 ! empty( get_theme_mod( 'prime2g_enqueue_theme_jquery' ) );
+	restore_current_blog();
+} else {
+	$useJQ	=	 ! empty( get_theme_mod( 'prime2g_enqueue_theme_jquery' ) );
+}
+
+if ( $useJQ ) {
+	#	jQuery
 	wp_enqueue_script(
 		'prime2g_jQuery',
-		// 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js'
 		get_theme_file_uri( '/files/jquery.min.js' ),
 		[], '3.7.1', [ 'strategy' => 'defer' ]
 	);
+}
 
 	wp_register_script(
 		'prime2g_js',
@@ -67,7 +79,7 @@ if ( ! prime_child_min_version( '2.3' ) ) {
 
 
 /**
- *	Removing Default WooCommerce styles:
+ *	Removing Default WooCommerce styles
  */
 if ( class_exists( 'woocommerce' ) ) { add_filter( 'woocommerce_enqueue_styles', '__return_false' ); }
 

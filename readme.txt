@@ -16,6 +16,13 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.59 =
+* Conditionally use theme's jQuery
+* Performance section added to Customizer
+
+= 1.0.58 =
+* Do not use cached styles in Customizer
+
 = 1.0.57 =
 * Added functions in css.php, mini-features.php & menus.php
 * Helper: prime2g_constant_is_true()

@@ -38,7 +38,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 
 	/**
 	 *	SHUTDOWN DISPLAY
-	 *	@since ToongeePrime Theme @ 1.0.55
+	 *	@since @ 1.0.55
 	 */
 	function prime2g_c_siteNotSD() { return ( ! empty( get_theme_mod( 'prime2g_website_shutdown' ) ) ); }
 
@@ -73,7 +73,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 
 	/**
 	 *	404 ERROR PAGE
-	 *	@since ToongeePrime Theme @ 1.0.55
+	 *	@since @ 1.0.55
 	 */
 	$wp_customize->add_setting( 'prime2g_use_page_for404', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_use_page_for404',
@@ -99,7 +99,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 
 	/**
 	 *	STOP WP HEARTBEAT
-	 *	@since ToongeePrime Theme 1.0.49
+	 *	@since 1.0.49
 	 */
 	$wp_customize->add_setting( 'prime2g_stop_wp_heartbeat', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_stop_wp_heartbeat',
@@ -116,115 +116,20 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	);
 
 	/**
-	 *	CACHE CONTROLS
-	 *	@since ToongeePrime Theme 1.0.56
+	 *	@since 1.0.59
 	 */
-
-function prime2g_a_c_ctrls() { return ( ! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ); }
-
-$network	=	is_multisite();
-$route		=	'';
-
-if ( $network ) {
-	switch_to_blog( 1 );
-	$route	=	get_theme_mod( 'prime2g_route_caching_to_networkhome' );
-	restore_current_blog();
-}
-
-
-if ( $network && get_current_blog_id() === 1 ) {
-	$wp_customize->add_setting( 'prime2g_route_caching_to_networkhome', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_route_caching_to_networkhome',
+	$wp_customize->add_setting( 'prime2g_enqueue_theme_jquery', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_enqueue_theme_jquery',
 		array(
-			'label'		=>	__( 'Route Caching Controls to Network Home?', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Enqueue Theme\' jQuery File', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
-			'settings'	=>	'prime2g_route_caching_to_networkhome',
-			'section'	=>	'prime2g_site_settings_section'
-		)
-	);
-}
-
-
-if ( ! $network || $network && ( empty( $route ) || $route && get_current_blog_id() === 1 ) ) {
-
-$time_units	=	[ MINUTE_IN_SECONDS => __( 'Minutes', PRIME2G_TEXTDOM ), HOUR_IN_SECONDS => __( 'Hours', PRIME2G_TEXTDOM ),
-DAY_IN_SECONDS => __( 'Days', PRIME2G_TEXTDOM ), WEEK_IN_SECONDS => __( 'Weeks', PRIME2G_TEXTDOM ),
-MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Years', PRIME2G_TEXTDOM ) ];
-
-	$wp_customize->add_setting( 'prime2g_activate_chache_controls', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_activate_chache_controls',
-		array(
-			'label'		=>	__( 'Activate Cache Controls', PRIME2G_TEXTDOM ),
-			'type'		=>	'checkbox',
-			'settings'	=>	'prime2g_activate_chache_controls',
-			'section'	=>	'prime2g_site_settings_section'
-		)
-	);
-
-	$wp_customize->add_setting( 'prime2g_chache_time_singular', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_time_singular',
-		array(
-			'label'		=>	__( 'Cache Time: Single Entries', PRIME2G_TEXTDOM ),
-			'type'		=>	'number',
-			'settings'	=>	'prime2g_chache_time_singular',
+			'settings'	=>	'prime2g_enqueue_theme_jquery',
 			'section'	=>	'prime2g_site_settings_section',
-			'input_attrs'	=>	[ 'min' => '1' ],
-			'active_callback'	=> 'prime2g_a_c_ctrls'
-		)
-	);
-
-	$wp_customize->add_setting( 'prime2g_chache_seconds_singular', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_seconds_singular',
-		array(
-			'label'		=>	__( 'Cache Unit: Single Entries', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_chache_seconds_singular',
-			'section'	=>	'prime2g_site_settings_section',
-			'choices'	=>	$time_units,
-			'active_callback'	=> 'prime2g_a_c_ctrls'
-		)
-	);
-
-	$wp_customize->add_setting( 'prime2g_chache_time_feeds', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_time_feeds',
-		array(
-			'label'		=>	__( 'Cache Time: Archives', PRIME2G_TEXTDOM ),
-			'type'		=>	'number',
-			'settings'	=>	'prime2g_chache_time_feeds',
-			'section'	=>	'prime2g_site_settings_section',
-			'input_attrs'	=>	[ 'min' => '1' ],
-			'active_callback'	=> 'prime2g_a_c_ctrls'
-		)
-	);
-
-	$wp_customize->add_setting( 'prime2g_chache_seconds_feeds', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_seconds_feeds',
-		array(
-			'label'		=>	__( 'Cache Unit: Archives', PRIME2G_TEXTDOM ),
-			'type'		=>	'select',
-			'settings'	=>	'prime2g_chache_seconds_feeds',
-			'section'	=>	'prime2g_site_settings_section',
-			'choices'	=>	$time_units,
-			'active_callback'	=> 'prime2g_a_c_ctrls'
-		)
-	);
-
-	$wp_customize->add_setting( 'prime2g_allow_chache_data_clearing', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_allow_chache_data_clearing',
-		array(
-			'label'		=>	__( 'Allow Cache Data Clearing', PRIME2G_TEXTDOM ),
-			'type'		=>	'checkbox',
-			'settings'	=>	'prime2g_allow_chache_data_clearing',
-			'section'	=>	'prime2g_site_settings_section',
-			'active_callback'	=> 'prime2g_a_c_ctrls'
+			'active_callback'	=> function() { return ! is_multisite() || is_multisite() && get_current_blog_id() === 1; }
 		)
 	);
 
 }
 
-
 }
-
-}
-
 
