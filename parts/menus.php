@@ -60,7 +60,7 @@ $cta_menu	=	get_theme_mod( 'prime2g_set_cta_menu_item' );	# Theme 1.0.55
 
 if ( has_nav_menu( 'main-menu' ) ) {
 
-if ( ! $isMobile && $incLogo ) echo '<div>' . $theLogo . '</div>';
+if ( ! $isMobile && $incLogo ) echo '<div class="desktop">' . $theLogo . '</div>';
 
 prime2g_menu_togglers( [ 'incLogo'=>$incLogo, 'theLogo'=>$theLogo, 'class'=>'mobiles' ] ); ?>
 

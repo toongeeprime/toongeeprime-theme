@@ -201,9 +201,9 @@ $output	=	do_shortcode( $content );
 #	Add by theme/WP hooks
 #	Tested hooks:
 $hook	=	$place;
-if ( $place == 'after post' ) $hook	=	'prime2g_after_post';
-if ( $place == 'base' ) $hook	=	'prime2g_site_base_strip';
-if ( $place == 'footer' ) $hook	=	'wp_footer';
+if ( $place === 'after post' ) $hook	=	'prime2g_after_post';
+if ( $place === 'base' ) $hook	=	'prime2g_site_base_strip';
+if ( $place === 'footer' ) $hook	=	'wp_footer';
 
 add_action( $hook, function() use( $output ) { echo $output; }, (int) $priority );
 }

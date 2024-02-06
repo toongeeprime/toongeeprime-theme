@@ -231,6 +231,8 @@ return $css;
 	 *	@since ToongeePrime Theme 1.0.57
 	 */
 	public static function mods_cache() {
+		if ( is_customize_preview() ) return self::mods_object();
+
 		if ( $modsCache = wp_cache_get( 'theme_mods', PRIME2G_CACHEGROUP ) ) { return $modsCache; }
 		else {
 			wp_cache_set( 'theme_mods', self::mods_object(), PRIME2G_CACHEGROUP, DAY_IN_SECONDS + 11 );
