@@ -16,6 +16,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.60 =
+* prime2g_load_fonts_and_icons() renamed to prime2g_load_theme_fonts()
+* Added performance.php @ init/
+* files-loader.php renamed to run.php, with matters brought from init.php
+* Font custom field
+
 = 1.0.59 =
 * Conditionally use theme's jQuery
 * Performance section added to Customizer

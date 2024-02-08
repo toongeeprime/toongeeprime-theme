@@ -20,8 +20,9 @@ define( 'PRIME2G_IMAGE', PRIME2G_THEMEURL . 'images/' );
 define( 'PRIME2G_THEMENAME', wp_get_theme()->get( 'Name' ) );
 
 define( 'PRIME2G_CACHE_EXPIRES', 30 * MINUTE_IN_SECONDS );
-define( 'PRIME2G_POSTSCACHE', 'prime2g_posts_cache' ); #	@since version 1.0.55
+define( 'PRIME2G_POSTSCACHE', 'prime2g_posts_cache' ); #	@since 1.0.55
 define( 'PRIME2G_FILE', PRIME2G_THEMEURL . 'files/' );
 define( 'PRIME2G_FILESDIR', PRIME2G_THEME . 'files/' );
 
-define( 'PRIME2G_CACHEGROUP', 'prime2g_theme_cache_group' ); #	@since version 1.0.57
+define( 'PRIME2G_CACHEGROUP', 'prime2g_theme_cache_group' ); #	@since 1.0.57
+define( 'PRIME2G_ICONS_HANDLE', 'bootstrap-icons' ); #	@since 1.0.60

@@ -50,13 +50,14 @@ else return $form;
  *	@since ToongeePrime Theme 1.0.57
  */
 if ( ! function_exists( 'prime2g_class_remover_sheet' ) ) {
+add_action( 'wp_footer', 'prime2g_class_remover_sheet', 10, 2 );
 function prime2g_class_remover_sheet( string $items, string $class = 'prime' ) {
-// $items must be escaped
-$items	=	function_exists( 'prime_remover_sheet_items' ) ? prime_remover_sheet_items() : $items;
-add_action( 'wp_footer', function() use( $items, $class ) {
+if ( ! function_exists( 'prime_remover_sheet_items' ) ) return; #	activator function
+
+$items	=	prime_remover_sheet_items()->items;	#	$items must be escaped
+$class  =   prime_remover_sheet_items()->class;
 echo	'<div id="prime_class_remover" class="hidden p-fix" style="top:0;bottom:0;right:0;left:0;z-index:90000;"
  onclick="prime2g_remClass( ['. $items .', \'#prime_class_remover\'], \''. $class .'\' );"></div>';
-}, 3 );
 
 }
 }

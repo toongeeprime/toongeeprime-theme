@@ -161,12 +161,13 @@ if ( prime_child_min_version( '2.3' ) ) {
 		),
 	) );
 
-	$wp_customize->add_setting( 'prime2g_menu_content_shortcode', $simple_text );
-	$wp_customize->add_control( 'prime2g_menu_content_shortcode', array(
-		'label'		=>	__( 'Menu Content Shortcode', PRIME2G_TEXTDOM ),
-		'settings'	=>	'prime2g_menu_content_shortcode',
+	$wp_customize->add_setting( 'prime2g_menu_template_part_id', $simple_text );
+	$wp_customize->add_control( 'prime2g_menu_template_part_id', array(
+		'label'		=>	__( 'Menu Template Part ID', PRIME2G_TEXTDOM ),
+		'type'		=>	'number',
+		'settings'	=>	'prime2g_menu_template_part_id',
 		'section'	=>	'prime2g_theme_menus_section',
-		'input_attrs'	=>	[ 'placeholder'	=>	'[prime_insert_template_part id="123"]' ],
+		'input_attrs'	=>	[ 'placeholder'	=>	'12345' ],
 		'active_callback'	=>	function() { return ! empty( get_theme_mod( 'prime2g_main_menu_type' ) ); }
 	) );
 }

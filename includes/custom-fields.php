@@ -56,36 +56,33 @@ function prime2g_reg_fieldset_1() {
 
 
 /**
- *	SAVE CUSTOM FIELDS
+ *	SAVE ALL THEME CUSTOM FIELDS
  *	@param int $post_id Post ID
  */
-add_action( 'save_post', 'prime2g_save_metaboxes_fields' );
-if ( ! function_exists( 'prime2g_save_metaboxes_fields' ) ) {
-function prime2g_save_metaboxes_fields( $post_id ) {
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
-		$post_id	=	$parent_id;
+add_action( 'save_post', 'prime2g_save_theme_custom_fields' );
+if ( ! function_exists( 'prime2g_save_theme_custom_fields' ) ) {
+function prime2g_save_theme_custom_fields( $post_id ) {
+if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+
+if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
+	$post_id	=	$parent_id;
+}
+$fields	=	[
+	'post_subtitle', 'remove_sidebar', 'remove_header', 'page_width', 'video_url',
+	'disable_autop', 'use_main_nav_location', 'prevent_caching', 'font_url'
+];
+foreach( $fields as $field ) {
+	if ( array_key_exists( $field, $_POST ) ) {
+	update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
 	}
-	$fields	=	[
-		'post_subtitle',
-		'remove_sidebar',
-		'remove_header',
-		'page_width',
-		'disable_autop',
-		'use_main_nav_location',
-		'prevent_caching'
-	];
-	foreach( $fields as $field ) {
-		if ( array_key_exists( $field, $_POST ) ) {
-		update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
-		}
-	}
+}
+
 }
 }
 
 
 
-//Custom Fields Admin Form
+#	Custom Fieldset 1
 function prime2g_cFields_metadivs( $post ) { ?>
 <div class="prime2g_meta_box">
 
@@ -158,18 +155,18 @@ if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type
 if ( prime_child_min_version( '2.2' ) && get_theme_mod( 'prime2g_extra_menu_locations' ) ) {
 $nav_menus	=	get_registered_nav_menus(); ?>
 
-	<div class="meta-options prime2g_field">
-		<label for="use_main_nav_location">Select Menu Location</label>
-		<select id="use_main_nav_location" class="prime2g_options" name="use_main_nav_location">
-			<option value="">--- Leave Default ---</option>
-			<?php foreach ( $nav_menus as $slug => $name ) { ?>
-			<option value="<?php echo $slug; ?>"
-			<?php if ( $post->use_main_nav_location === $slug ) echo 'selected'; ?>>
-			<?php echo $name; ?>
-			</option>
-			<?php } ?>
-		</select>
-	</div>
+<div class="meta-options prime2g_field">
+	<label for="use_main_nav_location">Select Menu Location</label>
+	<select id="use_main_nav_location" class="prime2g_options" name="use_main_nav_location">
+		<option value="">--- Leave Default ---</option>
+		<?php foreach ( $nav_menus as $slug => $name ) { ?>
+		<option value="<?php echo $slug; ?>"
+		<?php if ( $post->use_main_nav_location === $slug ) echo 'selected'; ?>>
+		<?php echo $name; ?>
+		</option>
+		<?php } ?>
+	</select>
+</div>
 <?php } ?>
 
 </div>
@@ -216,8 +213,8 @@ else { ?>
 
 /**
  *	SETTINGS
- *	cache control, 
- *	@since ToongeePrime Theme 1.0.58
+ *	cache control, ++
+ *	@since 1.0.58
  */
 add_action( 'add_meta_boxes', 'prime2g_mBox_for_settings' );
 function prime2g_mBox_for_settings() {
@@ -229,11 +226,11 @@ $pType_name	=	$pType_obj->labels->singular_name;
 
 add_meta_box(
 	'prime2g_settings_fields', __( $pType_name . ' Settings', PRIME2G_TEXTDOM ),
-	'prime2g_settings_control_fields', prime_posttypes_with_settings(), 'side', 'high'
+	'prime2g_settings_control_callback', prime_posttypes_with_settings(), 'side', 'high'
 );
 }
 
-function prime2g_settings_control_fields( $post ) {
+function prime2g_settings_control_callback( $post ) {
 $pType_obj	=	get_post_type_object( $post->post_type );
 $pType_name	=	$pType_obj->labels->singular_name;
 ?>
@@ -256,4 +253,37 @@ $pType_name	=	$pType_obj->labels->singular_name;
 <?php
 }
 
+
+
+
+
+/**
+ *	@since 1.0.60
+ */
+add_action( 'add_meta_boxes', 'prime2g_theme_extras_fieldset' );
+if ( ! function_exists( 'prime2g_theme_extras_fieldset' ) ) {
+function prime2g_theme_extras_fieldset() {
+add_meta_box(
+	'prime2g_extras_fields', __( 'Style Extras', PRIME2G_TEXTDOM ),
+	'prime2g_field_extras_callback', prime2g_include_post_types(), 'normal', 'high'
+);
+}
+}
+
+function prime2g_field_extras_callback( $post ) { ?>
+<div class="prime2g_meta_box">
+<style>
+	#prime2g_extras_fields{box-shadow:0px 3px 5px #ccc;}
+	#prime2g_extras_fields:hover{box-shadow:0px 3px 5px #aaa;}
+	<?php prime2g_custom_mbox_css(); ?>
+</style>
+
+<div class="meta-options prime2g_field">
+	<label for="font_url">Google Font URL</label>
+	<input type="url" id="font_url" name="font_url" value="<?php echo esc_url( $post->font_url ); ?>">
+</div>
+
+</div>
+<?php
+}
 

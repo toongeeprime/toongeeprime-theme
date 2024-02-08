@@ -43,7 +43,7 @@ body.has_pwa:not(.prompt_hidden) #prime2g_dt_switch{bottom:75px;}
 <i class="bi bi-moon switchOn" title="' . __( 'Dark Theme', PRIME2G_TEXTDOM ) . '"></i>
 </div>
 
-<script id="prime2g_darkTheme_js">
+<script async id="prime2g_darkTheme_js">
 let dtBody		=	p2getEl( "body" ),
 	llogoUrl	=	"'. prime2g_get_custom_logo_url() .'",
 	darklogoUrl	=	"'. prime2g_siteLogo( true, true ) .'",
@@ -107,7 +107,7 @@ $theme_switch	=	$styles->dt_switch;
 
 if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) { ?>
 
-<script id="prime2g_dt_logos_setter">
+<script defer id="prime2g_dt_logos_setter">
 //	Set Custom Logo URL on page load
 p2getAll( "img.custom-logo" ).forEach( logo=>{
 	if ( p2gThemeIsDark === "yes" || prime2gDarkThemeMedia() === true )

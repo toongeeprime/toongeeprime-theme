@@ -10,7 +10,7 @@
 /**
  *	Print Root CSS Styles
  */
-add_action( 'wp_head', 'prime2g_theme_root_styles', 3 );
+add_action( 'wp_head', 'prime2g_theme_root_styles', 1 );
 if ( ! function_exists( 'prime2g_theme_root_styles' ) ) {
 function prime2g_theme_root_styles() {
 
@@ -33,23 +33,23 @@ function prime2g_icons_file_url() {
 /**
  *	Load Theme Fonts
  */
-add_action( 'wp_footer', 'prime2g_load_fonts_and_icons' );
-if ( ! function_exists( 'prime2g_load_fonts_and_icons' ) ) {
-function prime2g_load_fonts_and_icons() {
+add_action( 'wp_head', 'prime2g_load_theme_fonts' );
+if ( ! function_exists( 'prime2g_load_theme_fonts' ) ) {
+function prime2g_load_theme_fonts() {
 
 if ( get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ) ) {
 	$theStyles	=	new ToongeePrime_Styles();
 
 	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font', $theStyles->bodyFont );
 	$headings	=	get_theme_mod( 'prime2g_site_headings_font', $theStyles->headFont );
-	echo "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800&display=swap\">";
-}
-	# echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-	wp_enqueue_style( 'bootstrap-icons', prime2g_icons_file_url(), [], PRIME2G_VERSION );
-
-}
+	$fonts_href	=	"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800&display=swap";
+	echo "<link rel=\"preload\" href=\"$fonts_href\" as=\"style\" onload=\"this.onload=null;this.rel='stylesheet'\" />
+<noscript><link rel=\"stylesheet\" href=\"$fonts_href\"></noscript>";
+// "<link rel=\"preload\" href=\"font-file.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>"
 }
 
+}
+}
 
 
 /**
@@ -65,6 +65,7 @@ if ( $font_sets ) {
 	return $font_sets;
 }
 else {
+$font_sets	=	[];
 $remote		=	wp_remote_get( 'https://dev.akawey.com/fonts/google-fonts-fam-categ.json' );
 
 if ( ! is_wp_error( $remote ) ) {
@@ -72,9 +73,9 @@ $fonts_string	=	wp_remote_retrieve_body( $remote );
 $fonts_array	=	json_decode( $fonts_string );
 
 foreach( $fonts_array as $font ) {
-$family_keys[]		=	str_replace( ' ', '+', $font->family );
-$family_names[]		=	$font->family;
-$categories[]		=	$font->category;
+$family_keys[]	=	str_replace( ' ', '+', $font->family );
+$family_names[]	=	$font->family;
+$categories[]	=	$font->category;
 }
 
 $keys_names		=	array_combine( $family_keys, $family_names );
@@ -90,15 +91,11 @@ $font_sets	=	[
 
 set_transient( $transient_name, $font_sets, MONTH_IN_SECONDS );
 }
-else {
-	$font_sets	=	[];
-}
 }
 
 return $font_sets;
 }
 }
-
 
 
 /**
@@ -113,7 +110,6 @@ function prime2g_theme_fonts() {
 }
 
 
-
 if ( ! function_exists( 'prime2g_get_gfont_category' ) ) {
 function prime2g_get_gfont_category( string $font_key ) {
 $font_sets	=	prime2g_get_google_fonts_remote();
@@ -122,10 +118,7 @@ $fonts		=	$font_sets[ 'keys_categs' ];
 foreach( $fonts as $key => $value ) {
 	if ( $font_key === $key ) return $value;
 }
-
 return '';
 }
 }
-
-
 

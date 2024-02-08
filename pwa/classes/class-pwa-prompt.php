@@ -2,7 +2,7 @@
 
 /**
  *	CLASS: Create PWA Prompt
- *	@ https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
+ *	@https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
  */
 
 class Prime2g_PWA_Prompt {
@@ -48,7 +48,7 @@ style="grid-template-columns:50px 1fr;padding:5px;gap:5px;">
 </div>
 </div>';
 
-$js	=	'<script id="p2g_pwaPromptJS">
+$js	=	'<script defer id="p2g_pwaPromptJS">
 let p2g_pwaPrompt	=	null,
 	stopCookie		=	"'. $siteName .'_stopPrompt";
 const	p2g_pwabtnWrap=	p2getEl( "#p2g_pwaBtnWrap" ),

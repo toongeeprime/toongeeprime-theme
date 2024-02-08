@@ -133,17 +133,17 @@ function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newN
 
 function prime2g_addClass( elems, clss = 'prime', prevD = true ) {
 if ( prevD ) event.preventDefault();
-elems.forEach( el=>{ p2getEl( el ).classList.add( clss ); } );
+elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.add( clss ); } );
 }
 
 function prime2g_remClass( elems, clss = 'prime', prevD = true ) {
 if ( prevD ) event.preventDefault();
-elems.forEach( el=>{ p2getEl( el ).classList.remove( clss ); } );
+elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.remove( clss ); } );
 }
 
 function prime2g_toggClass( elems, clss = 'prime', prevD = true ) {
 if ( prevD ) event.preventDefault();
-elems.forEach( el=>{ p2getEl( el ).classList.toggle( clss ); } );
+elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.toggle( clss ); } );
 }
 
 /**

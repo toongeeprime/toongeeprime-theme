@@ -203,7 +203,7 @@ return true;	// features should work in parent
 
 /* @since ToongeePrime Theme 1.0.57 */
 function prime2g_constant_is_true( string $constant, bool $for_network = true ) {
-	if ( $for_network && ! is_multisite() ) return false;
+	if ( $for_network !== false && ! is_multisite() ) return false;
 	return ( defined( $constant ) && constant( $constant ) === true );
 }
 
@@ -211,6 +211,4 @@ function prime2g_constant_is_true( string $constant, bool $for_network = true ) 
 if ( ! function_exists( 'prime_posttypes_with_settings' ) ) {
 function prime_posttypes_with_settings() { return [ 'post', 'page' ]; }
 }
-
-
 

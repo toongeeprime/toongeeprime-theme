@@ -13,17 +13,14 @@ jQuery( document ).ready( function() {
 
 setTimeout( ()=>{
 let useGFonts	=	jQuery( '#_customize-input-prime2g_use_theme_google_fonts' );
-
 if ( useGFonts && useGFonts.is( ":checked" ) ) {
 	jQuery( '#customize-control-prime2g_site_headings_font' ).css( 'display', 'block' );
 	jQuery( '#customize-control-prime2g_site_body_font' ).css( 'display', 'block' );
-}
-}, 1000 );
-
+} }, 1000 );
 } );
 
-( function( $, api ) {
-'use strict';
+
+( function( $, api ) { 'use strict';
 
 api( 'prime2g_theme_news_reel', function( value ) {
 value.bind( function( newval ) {
@@ -34,16 +31,13 @@ value.bind( function( newval ) {
 		nrTaxTerm	=	$( '#customize-control-prime2g_theme_news_reel_tax_term_id' ),
 		nrCount		=	$( '#customize-control-prime2g_theme_news_reel_posts_count' ),
 		nrWidth		=	$( '#customize-control-prime2g_news_reel_width' );
-
 	nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 ); nrCategory.slideUp( 180 );
 
 	if ( newval ) {
-		nrPostType.slideDown( 180 ); nrTitle.slideDown( 180 );
-		nrCount.slideDown( 180 ); nrWidth.slideDown( 180 );
+		nrPostType.slideDown( 180 ); nrTitle.slideDown( 180 ); nrCount.slideDown( 180 ); nrWidth.slideDown( 180 );
 	}
 	else {
-		nrPostType.slideUp( 180 ); nrTitle.slideUp( 180 );
-		nrCount.slideUp( 180 ); nrWidth.slideUp( 180 );
+		nrPostType.slideUp( 180 ); nrTitle.slideUp( 180 ); nrCount.slideUp( 180 ); nrWidth.slideUp( 180 );
 		$( '#_customize-input-prime2g_theme_news_reel_post_type' ).val( 'non-existent' );
 	}
 } );
@@ -55,18 +49,14 @@ value.bind( function( newval ) {
 		nrTaxTerm	=	$( '#customize-control-prime2g_theme_news_reel_tax_term_id' ),
 		nrCount		=	$( '#customize-control-prime2g_theme_news_reel_posts_count' ),
 		nrCategory	=	$( '#customize-control-prime2g_theme_news_reel_category' );
-
 	if ( newval === 'post' ) {
-		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 );
-		nrCategory.slideDown( 180 ); nrCount.slideDown( 180 );
+		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 ); nrCategory.slideDown( 180 ); nrCount.slideDown( 180 );
 	}
 	else if ( newval === 'page' ) {
-		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 );
-		nrCategory.slideUp( 180 ); nrCount.slideDown( 180 );
+		nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 ); nrCategory.slideUp( 180 ); nrCount.slideDown( 180 );
 	}
 	else {
-		nrTaxonomy.slideDown( 180 ); nrTaxTerm.slideDown( 180 );
-		nrCategory.slideUp( 180 ); nrCount.slideDown( 180 );
+		nrTaxonomy.slideDown( 180 ); nrTaxTerm.slideDown( 180 ); nrCategory.slideUp( 180 ); nrCount.slideDown( 180 );
 	}
 } );
 } );
@@ -82,14 +72,13 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 } );
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 api( 'prime2g_website_shutdown', function( value ) {
 value.bind( function( newval ) {
 	let sdDisplay	=	$( '#customize-control-prime2g_shutdown_display' ),
 		sddSelect	=	$( '#_customize-input-prime2g_shutdown_display' ),
 		sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
-
 	if ( newval ) {
 		sdDisplay.slideDown( 180 );
 		if ( sddSelect.val() ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
@@ -130,7 +119,6 @@ api( 'prime2g_use_theme_google_fonts', function( value ) {
 value.bind( function( newval ) {
 	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),
 		bFont	=	$( '#customize-control-prime2g_site_body_font' );
-
 	if ( newval ) { hFont.slideDown( 180 ); bFont.slideDown( 180 ); }
 	else { hFont.slideUp( 180 ); bFont.slideUp( 180 ); }
 } );
@@ -149,14 +137,13 @@ value.bind( function( newval ) {
 		ctaText	=	$( '#customize-control-prime2g_cta_button_text' ),
 		ctaTarget	=	$( '#customize-control-prime2g_cta_link_target' ),
 		ctaClasses	=	$( '#customize-control-prime2g_cta_button_classes' );
-
 	if ( newval ) { ctaURL.slideDown( 180 ); ctaText.slideDown( 180 ); ctaTarget.slideDown( 180 ); ctaClasses.slideDown( 180 ); }
 	else { ctaURL.slideUp( 180 ); ctaText.slideUp( 180 ); ctaTarget.slideUp( 180 ); ctaClasses.slideUp( 180 ); }
 } );
 } );
 
 /**
- *	@since ToongeePrime Theme 1.0.56
+ *	@since 1.0.56
  */
 api( 'prime2g_activate_chache_controls', function( value ) {
 value.bind( function( newval ) {
@@ -165,7 +152,6 @@ value.bind( function( newval ) {
 		ctimeF	=	$( '#customize-control-prime2g_chache_time_feeds' ),
 		cunitF	=	$( '#customize-control-prime2g_chache_seconds_feeds' ),
 		cData	=	$( '#customize-control-prime2g_allow_chache_data_clearing' ); // 1.0.58
-
 	if ( newval ) {
 		ctimeS.slideDown( 180 ); cunitS.slideDown( 180 ); ctimeF.slideDown( 180 ); cunitF.slideDown( 180 ); cData.slideDown( 180 );
 	}
@@ -174,13 +160,25 @@ value.bind( function( newval ) {
 } );
 
 /**
- *	@since ToongeePrime Theme 1.0.57
+ *	@since 1.0.57
  */
 api( 'prime2g_main_menu_type', function( value ) {
 value.bind( function( newval ) {
 	let mmenuSC	=	$( '#customize-control-prime2g_menu_content_shortcode' );
-
 	if ( newval !== '' ) { mmenuSC.slideDown( 180 ); } else { mmenuSC.slideUp( 180 ); }
+} );
+} );
+
+/**
+ *	@since 1.0.60
+ */
+api( 'prime2g_theme_show_stickies', function( value ) {
+value.bind( function( newval ) {
+	let stHead	=	$( '#customize-control-prime2g_theme_sticky_heading' ),
+		stPType	=	$( '#customize-control-prime2g_theme_stickies_post_type' ),
+		stCount	=	$( '#customize-control-prime2g_theme_stickies_count' );
+	if ( newval !== '' ) { stHead.slideDown( 180 ); stPType.slideDown( 180 ); stCount.slideDown( 180 ); }
+	else { stHead.slideUp( 180 ); stPType.slideUp( 180 ); stCount.slideUp( 180 ); }
 } );
 } );
 
@@ -195,6 +193,4 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 } );
 
 } )( jQuery, wp.customize );
-
-
 

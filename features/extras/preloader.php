@@ -46,7 +46,7 @@ if ( ! function_exists( 'prime2g_page_preloaderCSS' ) ) {
 function prime2g_page_preloaderCSS() {
 $add_css	=	function_exists( 'prime2g_add_preloader_css' ) ? prime2g_add_preloader_css() : '';
 
-$css	=	'<style id="preloaderCSS" scoped>
+$css	=	'<style id="preloaderCSS">
 #prime2gPreloading{position:fixed;top:0;bottom:0;left:0;right:0;background:var(--content-background);display:grid;
 place-items:center;z-index:100000;transition:0.5s;}
 #itsLoading{border:10px solid var(--brand-color);border-top:10px solid var(--brand-color-2);width:120px;height:120px;

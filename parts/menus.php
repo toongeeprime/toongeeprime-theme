@@ -200,19 +200,32 @@ $tog_class	=	'';
 $togTargets	=	"'#tog_menu_target', '.togs', '#prime_class_remover'";
 extract( $options );
 
-$shortcode	=	get_theme_mod( 'prime2g_menu_content_shortcode', '' );
-
-$target	=	'<section id="tog_menu_target" class="tog_menu_target '. $wrap_class .'" style="z-index:99999;">
-<div class="in_menu_target prel slimscrollbar '. $div_class .'">';
-$target	.=	do_shortcode( $shortcode );
-$target	.=	'</div></section>';
-
 prime2g_menu_togglers( [ 'class' => $tog_class, 'togTargets' => $togTargets ] );
 
-prime2g_class_remover_sheet( "'#tog_menu_target', '.togs'" );
+add_action( 'wp_footer', function() use( $wrap_class, $div_class ) {
 
-add_action( 'wp_footer', function() use( $target ) { echo $target; }, 5 );
+$partID	=	get_theme_mod( 'prime2g_menu_template_part_id', '' );
+
+echo	'<section id="tog_menu_target" class="tog_menu_target '. $wrap_class .'" style="z-index:99999;">
+<div class="in_menu_target prel slimscrollbar '. $div_class .'">';
+prime2g_insert_template_part( $partID );
+echo	'</div></section>';
+
+} );
 }
 }
 
+
+/**
+ *	Activate prime2g_class_remover_sheet() mini feature
+ *	@since ToongeePrime Theme 1.0.60
+ */
+if ( ! function_exists( 'prime_remover_sheet_items' ) ) {
+function prime_remover_sheet_items() {
+return (object) [
+   'items' => "'#tog_menu_target', '.togs'",
+   'class' => "prime"
+];
+}
+}
 

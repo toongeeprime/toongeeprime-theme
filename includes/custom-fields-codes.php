@@ -1,11 +1,8 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CSS, JS codes & Google Fonts
- *	via CUSTOM FIELDS
- *	- for enabled Templates
+ *	CSS, JS codes
  */
-
 
 /**
  *	Fields Set 2
@@ -37,10 +34,7 @@ function prime2g_save_metas_2( $post_id ) {
 	if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
 		$post_id	=	$parent_id;
 	}
-	$fields	=	[
-		'prime_page_css',
-		'prime_page_js',
-	];
+	$fields	=	[ 'prime_page_css', 'prime_page_js' ];
 	foreach ( $fields as $field ) {
 		if ( array_key_exists( $field, $_POST ) ) {
 			update_post_meta( $post_id, $field, wp_strip_all_tags( $_POST[ $field ] ) );
@@ -80,27 +74,18 @@ function toongeeprime_cFields_callback_2( $post ) { ?>
 
 
 
-
 /**
  *	Get and embed Codes for custom a post type design
  */
 add_action( 'prime2g_before_post', 'prime2g_pageCSS', 2 );
 function prime2g_pageCSS() {
 $style	=	post_custom( 'prime_page_css' );
-
-	if ( $style ) {
-		echo '<style id="prime2g_pageCSS" type="text/css">' . $style . '</style>';
-	}
+if ( $style ) { echo '<style id="prime2g_pageCSS" type="text/css">' . $style . '</style>'; }
 }
-
 
 add_action( 'prime2g_after_post', 'prime2g_pageJS', 50 );
 function prime2g_pageJS() {
 $script	=	post_custom( 'prime_page_js' );
-
-	if ( $script ) {
-		echo '<script id="prime2g_pageJS" type="text/javascript">' . $script . '</script>';
-	}
+if ( $script ) { echo '<script id="prime2g_pageJS" type="text/javascript">' . $script . '</script>'; }
 }
-
 
