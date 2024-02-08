@@ -350,13 +350,13 @@ $more	=	__( 'More entries posted on', PRIME2G_TEXTDOM );
 $date	=	get_the_date();
 
 /**
- *	Creating Date URL:
+ *	Creating Date URL
  */
-$year	=	get_the_date('Y');
-$month	=	get_the_date('m');
-$day	=	get_the_date('j');
+$year	=	(int) get_the_date('Y');
+$month	=	(int) get_the_date('m');
+$day	=	(int) get_the_date('j');
 
-$dateUrl	=	esc_url( home_url( '/' . $year . '/' . $month . '/' . $day . '/' ) );
+$dateUrl	=	esc_url( get_day_link( $year, $month, $day ) );
 
 if ( 'date_only' === get_theme_mod( 'prime2g_entry_byline_usage' ) ) {
 	$add_pre	=	'';
