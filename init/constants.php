@@ -24,5 +24,6 @@ define( 'PRIME2G_POSTSCACHE', 'prime2g_posts_cache' ); #	@since 1.0.55
 define( 'PRIME2G_FILE', PRIME2G_THEMEURL . 'files/' );
 define( 'PRIME2G_FILESDIR', PRIME2G_THEME . 'files/' );
 
-define( 'PRIME2G_CACHEGROUP', 'prime2g_theme_cache_group' ); #	@since 1.0.57
-define( 'PRIME2G_ICONS_HANDLE', 'bootstrap-icons' ); #	@since 1.0.60
+define( 'PRIME2G_CACHEGROUP', 'prime2g_theme_cache_group' ); #	@1.0.57
+define( 'PRIME2G_ICONS_HANDLE', 'bootstrap-icons' ); #	@1.0.60
+defined( 'PRIME2G_ENQ_JQUERY' ) || define( 'PRIME2G_ENQ_JQUERY', false ); #	@1.0.70, enqueue theme's local jQuery?

@@ -164,7 +164,7 @@ value.bind( function( newval ) {
  */
 api( 'prime2g_main_menu_type', function( value ) {
 value.bind( function( newval ) {
-	let mmenuSC	=	$( '#customize-control-prime2g_menu_content_shortcode' );
+	let mmenuSC	=	$( '#customize-control-prime2g_menu_template_part_id' );
 	if ( newval !== '' ) { mmenuSC.slideDown( 180 ); } else { mmenuSC.slideUp( 180 ); }
 } );
 } );

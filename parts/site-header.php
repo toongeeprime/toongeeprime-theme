@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	SITE HEADER
  *
@@ -9,7 +8,7 @@
  *	Support Header video @since ToongeePrime Theme 1.0.55
  */
 
-global $post;	# 1.0.55
+global $post;	# @since 1.0.55
 $styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 
 $title_in_headr	=	( 'header' === $styles->title_place );
@@ -18,7 +17,7 @@ $menuPlace		=	$styles->menu_place;
 $videoActive	=	is_header_video_active();
 $pid			=	get_the_ID();
 $isSingular		=	is_singular();
-$keepHeader		=	$isSingular ? ( $post->remove_header !== 'remove' ) : true;
+$keepHeader		=	$isSingular ? ! in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) : true;
 
 $titleOverVideo	=	get_theme_mod( 'prime2g_pagetitle_over_headervideo' );
 $tov_class	=	( $titleOverVideo && ( $post->video_url || $videoActive || ! $isSingular ) ) ?
@@ -27,22 +26,12 @@ $tov_class	=	( $titleOverVideo && ( $post->video_url || $videoActive || ! $isSin
 $headerBackground	=	'';
 
 if ( $hasHeader ) {
-
-	if ( $isSingular && has_post_thumbnail() && ( '' === get_theme_mod( 'prime2g_thumb_replace_header', '' ) ) ) {
-		$headerUrl	=	get_the_post_thumbnail_url( $pid, 'full' );
-	}
-	elseif ( is_category() || is_tag() || is_tax() ) {
-		$headerUrl	=	prime2g_get_term_archive_image_url( 'full' );
-	}
-	else {
-		$headerUrl	=	get_header_image();
-	}
-
-$headerBackground	=	'style="background-image:url(' . $headerUrl . ');"';
+	$headerUrl	=	prime2g_get_header_image_url( $hasHeader );	# 1.0.70
+	$headerBackground	=	' style="background-image:url(' . $headerUrl . ');"';
 }
 
 
-if ( ! wp_is_mobile() ) prime2g_site_top_menu(); # @since 1.0.55
+if ( ! wp_is_mobile() ) prime2g_site_top_menu(); # 1.0.55
 
 prime2g_before_header();
 
@@ -50,17 +39,14 @@ if ( 'bottom' !== $menuPlace ) prime2g_main_menu();
 
 
 if ( ! $isSingular || $isSingular && $keepHeader ) { ?>
-
-<header id="header" class="site_header prel<?php echo $tov_class; ?>" <?php echo $headerBackground; ?>>
+<header id="header" class="site_header prel<?php echo $tov_class; ?>"<?php echo $headerBackground; ?>>
 
 <?php
 if ( $hasHeader ) { echo '<div class="shader"></div>'; }
 
 echo '<div class="site_width title_wrap grid prel">';
 
-
-do_action( 'prime2g_before_header_title' );	# @since 1.0.55
-
+do_action( 'prime2g_before_header_title' );	# 1.0.55
 
 	if ( $isSingular && $post->video_url &&
 	( 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) ) {
@@ -75,15 +61,12 @@ do_action( 'prime2g_before_header_title' );	# @since 1.0.55
 	}
 	else { do_action( 'prime2g_page_title_hook', $title_in_headr ); }
 
-
-do_action( 'prime2g_after_header_title' );	# @since 1.0.55
-
+do_action( 'prime2g_after_header_title' );	# 1.0.55
 
 echo '</div>';
 ?>
 
 </header>
-
 <?php
 }
 

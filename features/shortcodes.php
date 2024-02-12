@@ -90,6 +90,26 @@ $js		=	'<script>p2getEl( "#'. $id .' iframe" ).setAttribute( "height", "'. $heig
 return '<div'. $vidID .' class="prime2g_embedded_media shortcode video">'. $embedded . '</div>' . $js;
 }
 
+/**
+ *	Gets Text Content Only, for better html usage
+ *	@since 1.0.70
+ */
+add_shortcode( 'prime_get_titles_or_description', 'prime2g_get_title_or_description_shortcode' );
+function prime2g_get_title_or_description_shortcode( $atts ) {
+$atts	=	shortcode_atts( [ 'get' => 'sitetitle' ], $atts );
+extract( $atts );
+
+if ( $get === 'sitetitle' ) $text	=	get_bloginfo( 'name' );
+
+if ( $get === 'description' ) $text	=	get_bloginfo( 'description' );
+
+if ( $get === 'pagetitle' ) {
+	global $post; $text	=	$post->post_title;
+}
+
+return $text;
+}
+
 
 add_shortcode( 'prime_site_title_and_description', 'prime2g_title_and_description_shortcode' );
 function prime2g_title_and_description_shortcode( $atts ) {
@@ -245,7 +265,7 @@ if ( empty( $users ) ) {
 
 /**
  *	ADD ANIMATION CSS
- *	@since ToongeePrime Theme 1.0.57
+ *	@since 1.0.57
  */
 add_shortcode( 'prime_animation_css', 'prime2g_animations_css_shortcode' );
 function prime2g_animations_css_shortcode( $atts ) {
@@ -261,6 +281,5 @@ switch( $get ) {
 
 add_action( 'wp_head', function() use( $addCSS ) { echo '<style id="primeAnimationCssSC">'. $addCSS .'</style>'; } );
 }
-
 
 

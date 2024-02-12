@@ -4,7 +4,7 @@
  *	HOMEPAGE PARTS
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0
+ *	@since 1.0
  */
 
 /**
@@ -41,22 +41,36 @@ function prime2g_home_headlines() {
 if ( ! is_home() ) return;
 
 if ( get_theme_mod( 'prime2g_theme_show_headlines' ) ) {
-	$cid	=	get_theme_mod( 'prime2g_headlines_category' );
-	$cat	=	get_category( $cid );
-	if ( $cat ) {
-	$slug	=	$cat->slug;
+$is_slider	=	prime2g_use_extras() && 'slideshow' === get_theme_mod( 'prime2g_home_main_headline_type' );
+$cat	=	null;
 
-$options	=	[ 'useCache' => false, 'cacheIt' => false ];
+	if ( ! $is_slider ) {
+	$cat	=	get_category( get_theme_mod( 'prime2g_headlines_category', 1 ) );	# By Category ID
+	if ( is_object( $cat ) && is_wp_error( $cat ) ) {
+		echo '<h2>Category Error</h2>'; return;
+	}
+	}
+
+	if ( $is_slider || ! $is_slider && $cat ) {
+	if ( is_object( $cat ) ) {
+		$slug		=	$cat->slug;
+		$term_name	=	$cat->name;
+	} else {
+		$slug		=	get_theme_mod( 'prime2g_slideshow_tax_term_slug' );
+		$term_name	=	get_term_by( 'slug', $slug, get_theme_mod( 'prime2g_slideshow_taxonomy', 'category' ) )->name ?? '*Check Slider Term';
+	}
+
+$options	=	[ 'useCache' => false, 'setCache' => false ];
 $tax_query	=	[ 'taxonomy' => 'category', 'operator' => 'IN', 'terms' => $slug ];
 
 $set_1	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
-$mid	=	prime2g_wp_query( [ 'posts_per_page' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
+$mid	=	$is_slider ? null : prime2g_wp_query( [ 'posts_per_page' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
 $set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
 
 
 	echo prime2g_headlines_css() . '<section class="home_headlines">
 
-		<h1 class="headlines_heading">'. $cat->name .'</h1>
+		<h1 class="headlines_heading">'. $term_name .'</h1>
 		<div class="grid display prel">
 
 			<div class="left sides grid prel">';
@@ -67,14 +81,18 @@ $set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 
 
 			<div class="mid grid prel">
 			<div class="mainheadline">';
-			if ( $mid->have_posts() ) {
-				while ( $mid->have_posts() ) {
-					$mid->the_post();
-					echo prime2g_get_archive_loop_post_object( [ 'switch_img_vid' => true ] );
+			if ( $is_slider ) {
+				prime2g_posts_slider();
+			} else {
+				if ( $mid->have_posts() ) {
+					while ( $mid->have_posts() ) {
+						$mid->the_post();
+						echo prime2g_get_archive_loop_post_object( [ 'switch_img_vid' => true ] );
+					}
 				}
 			}
 			echo '</div>';
-			do_action( 'prime2g_after_home_main_headline' );	# @since ToongeePrime Theme 1.0.55
+			do_action( 'prime2g_after_home_main_headline' );	# @since 1.0.55
 			echo '</div>
 
 			<div class="right sides grid prel">';
@@ -84,7 +102,7 @@ $set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 
 			echo '</div>
 			</div>';
 
-		do_action( 'prime2g_after_home_headlines' );	# @since ToongeePrime Theme 1.0.55
+		do_action( 'prime2g_after_home_headlines' );	# @since 1.0.55
 
 	echo '</section>';
 	}

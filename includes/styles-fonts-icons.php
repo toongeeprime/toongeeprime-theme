@@ -38,10 +38,10 @@ if ( ! function_exists( 'prime2g_load_theme_fonts' ) ) {
 function prime2g_load_theme_fonts() {
 
 if ( get_theme_mod( 'prime2g_use_theme_google_fonts', '1' ) ) {
-	$theStyles	=	new ToongeePrime_Styles();
+$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 
-	$bodyfont	=	get_theme_mod( 'prime2g_site_body_font', $theStyles->bodyFont );
-	$headings	=	get_theme_mod( 'prime2g_site_headings_font', $theStyles->headFont );
+	$bodyfont	=	$styles->bodyF;
+	$headings	=	$styles->headF;
 	$fonts_href	=	"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800&display=swap";
 	echo "<link rel=\"preload\" href=\"$fonts_href\" as=\"style\" onload=\"this.onload=null;this.rel='stylesheet'\" />
 <noscript><link rel=\"stylesheet\" href=\"$fonts_href\"></noscript>";

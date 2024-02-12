@@ -62,7 +62,7 @@ function prime2g_auto_html_slider_frame_js_shortcode( $atts ) {
 
 /**
  *	Multislider logic added
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 $atts	=	shortcode_atts( array( 'timer' => 4000, 'multislides' => '', 'slider_ids' => '' ), $atts );
 extract( $atts );
@@ -116,7 +116,7 @@ const prime2g_runInt	=	setInterval( ()=>{
 i_timer,
 );
 
-// @since ToongeePrime Theme 1.0.49
+// @since 1.0.49
 let sp_prev	=	p2getEl( '.psPrev span' ),
 	sp_next	=	p2getEl( '.psNext span' );
 
@@ -148,7 +148,7 @@ p2getAll( '.ps_rzmr' ).forEach( (sp)=>{
 
 /**
  *	Separated to be reuseable & upgraded for multi-instance use
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 function prime2g_sliders_helper_funcs( $multislides = '' ) {
 
@@ -233,10 +233,10 @@ if ( direction == 'next' ) {
 
 /**
  *	Multislider Capability
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 function prime2g_multi_instance_slider_js( $sliderIDs, $timer = 4000 ) { ?>
-<script id="prime2g_multi_instance_slider">
+<script async defer id="prime2g_multi_instance_slider">
 const i_timer	=	<?php echo $timer; ?>,
 	idsString	=	"<?php echo $sliderIDs; ?>",
 	slider_ids	=	idsString.split( /[ ,]+/ );
@@ -305,4 +305,5 @@ p2getAll( sliderID + ' .ps_rzmr' ).forEach( (sp)=>{
 </script>
 <?php
 }
+
 

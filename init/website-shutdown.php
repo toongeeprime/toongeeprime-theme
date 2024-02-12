@@ -61,7 +61,7 @@ exit;
 }
 
 
-$title	=	( 'maintenance' === $shutDown ) ? 'Website is Under Maintenance!' : 'Coming Soon!';
+$title	=	'maintenance' === $shutDown ? 'Website is Under Maintenance!' : 'Coming Soon!';
 $icon	=	get_site_icon_url();
 
 echo '<!DOCTYPE html><html '. get_language_attributes() .' '. prime2g_theme_html_classes( false ) .'>
@@ -116,10 +116,10 @@ background-size:cover;background-position:center;background-image:url('. $backgr
 if ( ! function_exists( 'prime2g_close_down_template' ) ) {
 function prime2g_close_down_template( $shutDown ) {
 
-$headline	=	'maintenance' == $shutDown ?
+$headline	=	'maintenance' === $shutDown ?
 'This website is undergoing Maintenance!' : 'This website is under construction and will be live soon!';
 
-$msg	=	'maintenance' == $shutDown ? 'We will be back soon' : 'Thank you for checking in';
+$msg	=	'maintenance' === $shutDown ? '... and will be back soon' : 'Thank you for checking in';
 
 	echo '<main id="message">
 	<h1 class="entry-title page-title">'. __( $headline, PRIME2G_TEXTDOM ) .'</h1>

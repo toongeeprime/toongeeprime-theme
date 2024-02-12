@@ -17,23 +17,20 @@ function toongeeprime_pingback_header() {
 	}
 }
 
-
 /**
  *	Comment form defaults
  */
 add_filter( 'comment_form_defaults', 'toongeeprime_comment_form_defaults' );
 function toongeeprime_comment_form_defaults( $defaults ) {
-
-	// Height of comment form
+	//	Height of comment form
 	$defaults[ 'comment_field' ] = preg_replace( '/rows="\d+"/', 'rows="5"', $defaults[ 'comment_field' ] );
-
-	return $defaults;
+return $defaults;
 }
 
 
 
 /**
- *		SETUP THE THEME
+ *	SETUP THE THEME
  */
 add_action( 'after_setup_theme', 'toongeeprime_theme_setup' );
 if ( ! function_exists( 'toongeeprime_theme_setup' ) ) {
@@ -56,7 +53,7 @@ function toongeeprime_theme_setup() {
 
 		add_theme_support( 'title-tag' );
 
-		# Add default posts and comments RSS feed links to head
+		#	Add default posts and comments RSS feed links to head
 		add_theme_support( 'automatic-feed-links' );
 
 		/**
@@ -64,16 +61,16 @@ function toongeeprime_theme_setup() {
 		 */
 		$bgcolor	=	$theStyles->bgcolor;
 		add_theme_support( 'custom-background',
-			array(
-				'default-image'			=>	'',
-				'default-preset'		=>	'custom',
-				'default-position-x'	=>	'center',
-				'default-position-y'	=>	'top',
-				'default-size'			=>	'cover',
-				'default-repeat'		=>	'no-repeat',
-				'default-attachment'	=>	'fixed',
-				'default-color'			=>	$bgcolor,
-			)
+		array(
+			'default-image'			=>	'',
+			'default-preset'		=>	'custom',
+			'default-position-x'	=>	'center',
+			'default-position-y'	=>	'top',
+			'default-size'			=>	'cover',
+			'default-repeat'		=>	'no-repeat',
+			'default-attachment'	=>	'fixed',
+			'default-color'			=>	$bgcolor,
+		)
 		);
 
 		/**
@@ -98,20 +95,20 @@ function toongeeprime_theme_setup() {
 		array( 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' )
 		);
 
-		# Support Block Styles
+		#	Support Block Styles
 		add_theme_support( 'wp-block-styles' );
 
-		# Support full and wide align images
+		#	Support full and wide align images
 		add_theme_support( 'align-wide' );
 
 		/**
-		 *	'editor-styles' @since ToongeePrime Theme Theme 1.0.55
+		 *	'editor-styles' @since 1.0.55
 		 */
 		add_theme_support( 'editor-styles' );
-		add_editor_style( get_theme_file_uri( '/files/reset-and-wp.css' ) );
+		add_editor_style( get_theme_file_uri( '/files/editor.css' ) );	#	1.0.70
 		add_editor_style( get_theme_file_uri( '/files/theme.css' ) );
 
-		# Add custom editor font sizes
+		#	Add custom editor font sizes
 		add_theme_support( 'editor-font-sizes',
 		array(
 			array(
@@ -159,7 +156,7 @@ function toongeeprime_theme_setup() {
 		)
 		);
 
-		# Editor color palette
+		#	Editor color palette
 		$black     = '#000000';
 		$dark_gray = '#28303D';
 		$gray      = '#39414D';
@@ -286,7 +283,7 @@ function toongeeprime_theme_setup() {
 				'default_columns'	=>	4,
 				'min_columns'		=>	2,
 				'max_columns'		=>	6,
-			),
+			)
 		)
 		);
 		add_theme_support( 'wc-product-gallery-lightbox' );
@@ -294,16 +291,16 @@ function toongeeprime_theme_setup() {
 		add_theme_support( 'wc-product-gallery-slider' );
 
 
-		# Support responsive embedded content
+		#	Support responsive embedded content
 		add_theme_support( 'responsive-embeds' );
 
-		# Support custom line height controls
+		#	Support custom line height controls
 		add_theme_support( 'custom-line-height' );
 
-		# Support experimental link color control
+		#	Support experimental link color control
 		add_theme_support( 'experimental-link-color' );
 
-		# Support experimental cover block spacing
+		#	Support experimental cover block spacing
 		add_theme_support( 'custom-spacing' );
 }
 

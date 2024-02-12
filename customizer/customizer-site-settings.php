@@ -115,20 +115,6 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		)
 	);
 
-	/**
-	 *	@since 1.0.59
-	 */
-	$wp_customize->add_setting( 'prime2g_enqueue_theme_jquery', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_enqueue_theme_jquery',
-		array(
-			'label'		=>	__( 'Enqueue Theme\' jQuery File', PRIME2G_TEXTDOM ),
-			'type'		=>	'checkbox',
-			'settings'	=>	'prime2g_enqueue_theme_jquery',
-			'section'	=>	'prime2g_site_settings_section',
-			'active_callback'	=> function() { return ! is_multisite() || is_multisite() && get_current_blog_id() === 1; }
-		)
-	);
-
 }
 
 }

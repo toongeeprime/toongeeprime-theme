@@ -16,6 +16,13 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.70 =
+* Homepage Slideshow
+* Added prime2g_fields_in_post_types()
+* @includes: helpers-for-templates.php
+* Deprecated prime2g_include_post_types() & prime2g_exclude_post_types()
+* Header image CSS option added to 'remove_header' field
+
 = 1.0.60 =
 * prime2g_load_fonts_and_icons() renamed to prime2g_load_theme_fonts()
 * Added performance.php @ init/

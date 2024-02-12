@@ -14,7 +14,7 @@ function prime2g_customizer_home_and_archives( $wp_customize ) {
 $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ];
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_archives', $simple_text );
 	$wp_customize->add_control( 'prime2g_remove_sidebar_in_archives',
@@ -40,7 +40,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'settings'	=>	'prime2g_posts_home_title',
 		'section'	=>	'prime2g_theme_archives_section',
 		'input_attrs'	=>	array(
-			'placeholder'	=>	$siteTitle,
+			'placeholder'	=>	$siteTitle
 		),
 		'active_callback'	=>	'is_home'
 	) );
@@ -163,10 +163,12 @@ function p2_show_stky() { return ! empty( get_theme_mod( 'prime2g_theme_show_sti
 		'section'	=>	'prime2g_theme_archives_section',
 		'choices'	=>	[
 			'2'	=>	'2', '3'	=>	'3',
-			'4'	=>	'4', '6'	=>	'6',
-			'8'	=>	'8', '9'	=>	'9',
+			'4'	=>	'4', '5'	=>	'5',
+			'6'	=>	'6', '8'	=>	'8',
+			'9'	=>	'9', '10'	=>	'10',
 			'12'=>	'12', '15'	=>	'15',
-			'16'=>	'16', '20'	=>	'20'
+			'16'=>	'16', '20'	=>	'20',
+			'24'=>	'24', '25'	=>	'25'
 		],
 		'active_callback'	=>	'p2_show_stky'
 	) );

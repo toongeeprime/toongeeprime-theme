@@ -32,7 +32,11 @@ if ( get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_categor
 	$posts		=	$stickies->posts;
 
 	if ( $stickies->have_posts() ) {
-	$numClass	=	( in_array( $count, [ '3', '6', '9' ] ) ) ? ' by3' : '';
+	$numClass	=	'';
+	if ( in_array( $count, [ '3', '6', '9' ] ) ) { $numClass = ' by3'; }
+	if ( in_array( $count, [ '4', '8', '16' ] ) ) { $numClass = ' by4'; }
+	if ( in_array( $count, [ '5', '10', '15', '20', '25' ] ) ) { $numClass = ' by5'; }
+	if ( in_array( $count, [ '12', '24' ] ) ) { $numClass = ' by6'; }
 
 	echo '<section id="stickies" class="stickies">';
 

@@ -1,0 +1,39 @@
+/**
+ *	WP Editor CSS
+ *	File created because these rules are now printed in the frontend via prime_custom_theme_classes_styles() at css.php
+ *
+ *	@package WordPress
+ *	@since ToongeePrime Theme 1.0.70
+ */
+.site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
+margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
+}
+.ext_stretch_head .site_container,.ext_stretch_foot .site_container,.ext_stretch_foot .footerWrap,
+.ext_stretch_hf .site_container, .ext_stretch_hf .footerWrap{max-width:100vw;}
+.shader{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,0.5);}
+.hide, .logged-in .logged-out, .logged-out .logged-in{display:none!important;}
+.w100pc{width:100%;}
+.centered{margin:auto;text-align:center;display:block;}
+.p-abso{position:absolute;}
+.prel{position:relative;}
+.p-fix{position:fixed;}
+.grid{display:grid;gap:var(--min-pad);}
+.flex{display:flex;flex-wrap:wrap;}
+.flexnw{display:flex;}
+.hidden{opacity:0;visibility:hidden;z-index:0;}
+.pointer{cursor:pointer;}
+.breakall{word-break:break-all;}
+.white, .white a{color:#fff;}
+.alignC{align-items:center;}
+.justifC{justify-content:center;}
+.fixBG{background-attachment:fixed;}
+.brandcolor{color:var(--brand-color);}
+.brandcolor2{color:var(--brand-color-2);}
+.acaps{text-transform:uppercase;}
+.has-icons{font-family:"bootstrap-icons";}
+.oshadow{box-shadow:0 0 12px rgba(0,0,0,0.25);}
+.hidden.prime, .show, .enter{visibility:visible!important;opacity:1!important;}
+.clear, .prev_next{clear:both;width:100%;}
+.clear:before,.clear:after{content:'';display:block;clear:both;}
+.slimscrollbar{overflow:hidden;overflow-y:auto;}
+.scrollX{overflow:hidden;overflow-x:auto;}

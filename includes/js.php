@@ -12,7 +12,7 @@ function prime2g_conditional_js() {
 $singular	=	is_singular();
 $jsSingular	=	$singular ? 'true' : 'false';
 
-$js	=	'<script id="prime2g_conditional_js">
+$js	=	'<script async defer id="prime2g_conditional_js">
 const	singular	=	'. $jsSingular .';
 ';
 

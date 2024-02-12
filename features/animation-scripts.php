@@ -20,7 +20,7 @@ extract( $atts );
 
 add_action( 'wp_footer', function() use( $threshold, $use ) {
 	if ( $use === 'jquery' ) {
-		echo '<script id="prime2g_element_observerJQ">prime2g_element_observerJQ();';
+		echo '<script async defer id="prime2g_element_observerJQ">prime2g_element_observerJQ();';
 		echo prime2g_element_observerJQuery( $threshold );
 		echo '</script>';
 	}
@@ -33,7 +33,7 @@ add_action( 'wp_footer', function() use( $threshold, $use ) {
 
 
 function prime2g_element_observerJS( $threshold = 0.25 ) { ?>
-<script id="prime2g_animations_observer">
+<script async defer id="prime2g_animations_observer">
 //	Theme's CSS Animation classes
 let inUps	=	p2getAll( '.inUp' ),
 	inDwns	=	p2getAll( '.inDown' ),

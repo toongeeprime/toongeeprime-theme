@@ -13,17 +13,16 @@
  */
 if ( ! function_exists( 'prime2g_link_pages' ) ) {
 function prime2g_link_pages() {
-	wp_link_pages(
-		array(
-			'before'	=>	'<div id="page_parts" class="page_parts clear"><p>Parts:',
-			'after'		=>	'</p></div>',
-			'link_before'	=>	' Part ',
-			// 'separator'		=>	'>> ',
-		)
-	);
+wp_link_pages(
+	array(
+		'before'	=>	'<div id="page_parts" class="page_parts clear"><p>Parts:',
+		'after'		=>	'</p></div>',
+		'link_before'	=>	' Part ',
+		// 'separator'		=>	'>> ',
+	)
+);
 }
 }
-
 
 
 /**
@@ -38,12 +37,12 @@ if ( is_front_page() || empty( get_theme_mod( 'prime2g_theme_breadcrumbs' ) ) ) 
 
 function prime2g_shopCrumb() {
 if ( ! class_exists( 'woocommerce' ) ) return;
-	if ( is_woocommerce() ) {
-		$shopTitle	=	__( get_theme_mod( 'prime2g_shop_page_title' ), PRIME2G_TEXTDOM );
-		// This must remain because shop title would be empty if not set in customizer:
-		if ( $shopTitle == '' ) $shopTitle	=	__( 'Shop Homepage', PRIME2G_TEXTDOM );
-		return '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="' . $shopTitle . '">' . $shopTitle . '</a> &#187; </span>';
-	}
+if ( is_woocommerce() ) {
+	$shopTitle	=	__( get_theme_mod( 'prime2g_shop_page_title' ), PRIME2G_TEXTDOM );
+	// This must remain because shop title would be empty if not set in customizer:
+	if ( $shopTitle === '' ) $shopTitle	=	__( 'Shop Homepage', PRIME2G_TEXTDOM );
+	return '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="' . $shopTitle . '">' . $shopTitle . '</a> &#187; </span>';
+}
 }
 
 
@@ -54,7 +53,6 @@ $home	=	'<span class="home"><a href="'. get_home_url() .'/" title="'. __( 'Site\
 $crumbs	.=	$home;
 
 if ( is_singular() ) {
-
 	$postTaxs	=	get_post_taxonomies();
 
 	if ( $postTaxs ) {
@@ -101,13 +99,10 @@ if ( is_singular() ) {
 	}
 
 	$crumbs	.=	'<span class="crumb_page_title" title="Title">'. get_the_title() .'</span>';
-
 }
 
 if ( is_archive() || is_tax() ) {
-
 	$object		=	get_queried_object();
-
 	if ( ! $object instanceof WP_Term ) return;
 
 	$termAncs	=	$object ? get_ancestors( $object->term_id, $object->taxonomy ) : null;
@@ -139,7 +134,6 @@ if ( is_archive() || is_tax() ) {
 	}
 
 	$crumbs	.=	'<span class="crumb_page_title" title="This Archive">' . get_the_archive_title() .'</span>';
-
 }
 
 
@@ -160,10 +154,8 @@ if ( is_404() ) {
 	$crumbs	.=	'</div>';
 
 echo $crumbs;
-
 }
 }
-
 
 
 /**
@@ -175,16 +167,13 @@ if ( ! function_exists( 'prime2g_edit_entry' ) ) {
 function prime2g_edit_entry( $par1 = '', $par2 = '' ) {
 $par1 = '<p class="edit-link edit-entry">';
 $par2 = '</p>';
-
 	echo prime2g_edit_entry_get( $par1, $par2 );
-
 }
 }
 
 
 if ( ! function_exists( 'prime2g_edit_entry_get' ) ) {
 function prime2g_edit_entry_get( $pre = '<p class="edit-link edit-entry">', $end = '</p>', $postObject = null ) {
-
 $post	=	$postObject;
 
 if ( $postObject === null )
@@ -223,11 +212,9 @@ return $link;
 add_action( 'prime2g_after_title', 'prime2g_postmeta_top', 4 );
 if ( ! function_exists( 'prime2g_postmeta_top' ) ) {
 function prime2g_postmeta_top() {
-
 if ( is_page() || get_post_type() === 'product' ) return;
 
 $byline	=	get_theme_mod( 'prime2g_entry_byline_usage', '' );
-
 if ( $byline === 'remove_byline' ) return;
 
 echo '<div class="authorship postmetas">';
@@ -248,15 +235,12 @@ if ( ! function_exists( 'prime2g_postmeta_bottom' ) ) {
 function prime2g_postmeta_bottom() {
 
 echo '<div class="the_post_taxonomies">';
-
 	prime2g_post_taxonomies( 'category' );
 	prime2g_post_taxonomies( 'post_tag', '', 'Tags:', 'post_tags' );
-
 echo '</div>';
 
 }
 }
-
 
 
 /**
@@ -269,7 +253,6 @@ if ( ! function_exists( 'prime2g_archive_postmeta' ) ) {
 function prime2g_archive_postmeta( $postObject = null, $echo = true ) {
 
 $byline	=	get_theme_mod( 'prime2g_entry_byline_usage', '' );
-
 if ( $byline === 'remove_byline' ) return;
 
 $metas	=	'<div class="the_metas">';
@@ -279,10 +262,8 @@ $metas	.=	'</div>';
 
 if ( $echo ) echo $metas;
 else return $metas;
-
 }
 }
-
 
 
 /**
@@ -304,20 +285,17 @@ else return $div;
 }
 
 
-
 /**
  *	Tell Post Author
  */
 if ( ! function_exists( 'prime2g_posted_by' ) ) {
 function prime2g_posted_by( $text = 'Posted by', $more = 'More entries by', $postObject = null ) {
-
 /**
  *	@https://developer.wordpress.org/reference/functions/get_the_author_posts_link/
  */
 global $post;
 
 $post	=	$postObject ?: $post;
-
 $id		=	(int) $post->post_author;
 
 $author	=	get_the_author_meta( 'display_name', $id );
@@ -326,17 +304,12 @@ $slug	=	get_the_author_meta( 'user_nicename', $id );
 $text	=	__( $text, PRIME2G_TEXTDOM );
 $more	=	__( $more, PRIME2G_TEXTDOM );
 
-// if ( ! is_object( $authordata ) ) { return ''; }
-
 $href	=	esc_url( get_author_posts_url( $id, $slug ) );
-
 $link	=	'<span class="post_author vcard">' . $text . ' <a href="' . $href . '" title="' . $more . ' ' . $author . '" rel="author">' . $author . '</a></span>';
 
 return apply_filters( 'get_the_author_posts_link', $link );
-
 }
 }
-
 
 
 /**
@@ -344,18 +317,16 @@ return apply_filters( 'get_the_author_posts_link', $link );
  */
 if ( ! function_exists( 'prime2g_posted_on' ) ) {
 function prime2g_posted_on( $text = ', on ', $echo = true ) {
-
 $text	=	__( $text, PRIME2G_TEXTDOM );
 $more	=	__( 'More entries posted on', PRIME2G_TEXTDOM );
 $date	=	get_the_date();
 
 /**
- *	Creating Date URL
+ *	Create Date URL
  */
 $year	=	(int) get_the_date('Y');
 $month	=	(int) get_the_date('m');
 $day	=	(int) get_the_date('j');
-
 $dateUrl	=	esc_url( get_day_link( $year, $month, $day ) );
 
 if ( 'date_only' === get_theme_mod( 'prime2g_entry_byline_usage' ) ) {
@@ -365,7 +336,6 @@ if ( 'date_only' === get_theme_mod( 'prime2g_entry_byline_usage' ) ) {
 }
 
 	$time_string	=	'<time class="entry_date" datetime="%1$s">%2$s</time>';
-
 	$time_string	=	sprintf(
 		$time_string,
 		esc_attr__( $date ),
@@ -378,10 +348,8 @@ if ( 'date_only' === get_theme_mod( 'prime2g_entry_byline_usage' ) ) {
 
 if ( $echo ) echo $info;
 else return $info;
-
 }
 }
-
 
 
 /**
@@ -393,42 +361,31 @@ else return $info;
  */
 if ( ! function_exists( 'prime2g_post_taxonomies' ) ) {
 function prime2g_post_taxonomies( $taxonomy, $count = '', $text = 'Categories:', $class = 'post_categories', $echo = true ) {
-
 $taxonomies	=	get_the_terms( get_the_ID(), $taxonomy );
 $before		=	'<span><a href="';
 $mid		=	'" title="' . __( 'See more entries here', PRIME2G_TEXTDOM ) . '">';
 $after		=	'</a></span> ';
 
 if ( ! empty( $taxonomies ) ) {
-
 	$taxons	=	'<div class="' . $class . ' post_taxonomies"><span class="taxo_heading">'. __( $text, PRIME2G_TEXTDOM ) . '</span> ';
 
-	if( $count == 1 ) {
-
+	if ( $count == 1 ) {
 		$cat	=	$taxonomies[0];
 		$taxons	.=	$before . esc_url( get_category_link( $cat->term_id ) ) . $mid . esc_html( $cat->name ) . $after;
-		
 	}
 	else {
-
 		foreach( $taxonomies as $cat ) {
-
 		$taxons	.=	$before . esc_url( get_category_link( $cat->term_id ) ) . $mid . esc_html( $cat->name ) . $after;
-
 		}
-
 	}
 
 	$taxons	.=	'</div>';
 
 if ( $echo ) echo $taxons;
 else return $taxons;
-
-}
-
 }
 }
-
+}
 
 
 /**
@@ -470,19 +427,17 @@ return $title;
 }
 
 
-
 /**
  *	Archive Description
  */
 if ( ! function_exists( 'prime2g_archive_description' ) ) {
 function prime2g_archive_description( $tag = 'p' ) {
-	$descr = get_the_archive_description();
-	if ( is_archive() && $descr ) {
-		echo "<div class=\"archive-description\"><$tag>" . __( $descr, PRIME2G_TEXTDOM ) . "</$tag></div>";
-	}
+$descr = get_the_archive_description();
+if ( is_archive() && $descr ) {
+	echo "<div class=\"archive-description\"><$tag>" . __( $descr, PRIME2G_TEXTDOM ) . "</$tag></div>";
 }
 }
-
+}
 
 
 /**
@@ -491,12 +446,9 @@ function prime2g_archive_description( $tag = 'p' ) {
  */
 if ( ! function_exists( 'prime2g_post_excerpt' ) ) {
 function prime2g_post_excerpt( $length = 25, $post = null, $readmore = '&hellip; Keep reading' ) {
-
-	$excerpt_length = apply_filters( 'excerpt_length', $length );
-
-	$text = wp_trim_words( get_the_excerpt( $post ), $excerpt_length, prime2g_read_more_excerpt_link( $readmore, $length ) );
-
-	$text = apply_filters( 'get_the_excerpt', $text );
+	$excerpt_length	=	apply_filters( 'excerpt_length', $length );
+	$text	=	wp_trim_words( get_the_excerpt( $post ), $excerpt_length, prime2g_read_more_excerpt_link( $readmore, $length ) );
+	$text	=	apply_filters( 'get_the_excerpt', $text );
 
 	if ( ! in_array( $text, array( '', ' ', '&nbsp;' ) ) )
 		return '<p class="excerpt">' . $text . '</p>';
@@ -504,21 +456,19 @@ function prime2g_post_excerpt( $length = 25, $post = null, $readmore = '&hellip;
 }
 
 
-
 /**
  *	Read more text
  */
 if ( ! function_exists( 'prime2g_read_more_text' ) ) {
 function prime2g_read_more_text( $text = 'Read more' ) {
-	$readMore = sprintf(
-		/* translators: %s: Name of current post */
-		esc_html__( $text . ' %s', PRIME2G_TEXTDOM ),
-		the_title( '<span class="screen-reader-text">', '</span>', false )
-	);
+$readMore	=	sprintf(
+	/* translators: %s: Name of current post */
+	esc_html__( $text . ' %s', PRIME2G_TEXTDOM ),
+	the_title( '<span class="screen-reader-text">', '</span>', false )
+);
 return $readMore;
 }
 }
-
 
 
 /**
@@ -528,12 +478,11 @@ return $readMore;
 add_filter( 'excerpt_more', 'prime2g_read_more_excerpt_link' );
 if ( ! function_exists( 'prime2g_read_more_excerpt_link' ) ) {
 function prime2g_read_more_excerpt_link( $text = '&hellip; Keep reading', $length = 25 ) {
-	if ( ! is_admin() && $length != 0 ) {
-		return ' <a class="more-link" href="' . esc_url( get_permalink() ) . '" title="' . get_the_title() . '">' . __( $text, PRIME2G_TEXTDOM ) . '</a>';
-	}
+if ( ! is_admin() && $length != 0 ) {
+	return ' <a class="more-link" href="' . esc_url( get_permalink() ) . '" title="' . get_the_title() . '">' . __( $text, PRIME2G_TEXTDOM ) . '</a>';
 }
 }
-
+}
 
 
 /**
@@ -543,12 +492,11 @@ function prime2g_read_more_excerpt_link( $text = '&hellip; Keep reading', $lengt
 add_filter( 'the_content_more_link', 'prime2g_read_more_link' );
 if ( ! function_exists( 'prime2g_read_more_link' ) ) {
 function prime2g_read_more_link( $text = 'Read more' ) {
-	if ( ! is_admin() ) {
-		return '<div class="more-link-container"><a class="more-link" href="' . esc_url( get_permalink() ) . '#more-' . esc_attr( get_the_ID() ) . '">' . prime2g_read_more_text( $text ) . '</a></div>';
-	}
+if ( ! is_admin() ) {
+	return '<div class="more-link-container"><a class="more-link" href="' . esc_url( get_permalink() ) . '#more-' . esc_attr( get_the_ID() ) . '">' . prime2g_read_more_text( $text ) . '</a></div>';
 }
 }
-
+}
 
 
 /**
@@ -584,22 +532,18 @@ function prime2g_hook_the_page_title( $title_in_headr ) {
  */
 if ( ! function_exists( 'prime2g_title_header' ) ) {
 function prime2g_title_header( $header_classes = '' ) {
-
 if ( function_exists( 'define_2gRMVTitle' ) ) return;
 
 $is_singular	=	is_singular();
 $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 ?>
-
 <div class="page_title site_width prel<?php echo $header_classes . $hClass; ?>">
-
 <?php
-	#	Theme Hook @since ToongeePrime Theme 1.0.50:
-	#	Moved outside $is_singular 1.0.51:
+	#	Theme Hook @since 1.0.50
+	#	Moved outside $is_singular 1.0.51
 	prime2g_before_title();
 
 	if ( $is_singular ) {
-
 		if ( is_front_page() ) { ?>
 		<h1 class="entry-title page-title title">
 	<?php _e( get_theme_mod( 'prime2g_front_page_title', 'Welcome to ' . get_bloginfo( 'name' ) ), PRIME2G_TEXTDOM ); ?>
@@ -615,7 +559,6 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 				the_title( "<h1 class=\"entry-title page-title title$prod_class\">", "</h1>" );
 			}
 		}
-
 	#	Theme Hook:
 	prime2g_after_title();
 	}
@@ -665,13 +608,10 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 		the_archive_title( '<h1 class="entry-title page-title">', '</h1>' );
 		prime2g_archive_description();
 	}
-	?>
 
-<?php
-	#	Theme Hook: @since ToongeePrime Theme 1.0.55
+	#	Theme Hook: @since 1.0.55
 	if ( is_archive() ) prime2g_after_archive_title();
 ?>
-
 </div><!-- .page_title -->
 <?php
 }

@@ -9,21 +9,19 @@
 
 add_action( 'template_redirect', 'prime2g_cache_control_headers' );
 if ( ! function_exists( 'prime2g_cache_control_headers' ) ) {
-
 function prime2g_cache_control_headers() {
 if ( empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ) return;
 
 /* @since ToongeePrime Theme 1.0.58 */
-$allow_clearing	=	! empty( get_theme_mod( 'prime2g_allow_chache_data_clearing' ) );
-
 if ( is_multisite() ) {
 switch_to_blog( 1 );
 if ( get_theme_mod( 'prime2g_route_caching_to_networkhome' ) ) {
 	$allow_clearing	=	! empty( get_theme_mod( 'prime2g_allow_chache_data_clearing' ) );
 }
 restore_current_blog();
+} else {
+	$allow_clearing	=	! empty( get_theme_mod( 'prime2g_allow_chache_data_clearing' ) );
 }
-
 
 if ( isset( $_GET[ 'clear-data' ] ) && $allow_clearing ) {
 
@@ -37,8 +35,10 @@ if ( $clear_data === 'logout' ) header( 'Clear-Site-Data: "cache", "cookies", "s
 
 return;
 }
-/* @since ToongeePrime Theme 1.0.58 End */
+/* @since 1.0.58 End */
 
+
+if ( defined( 'WP_CACHE' ) && WP_CACHE === false ) return;	// @since 1.0.70
 
 global $post;
 
@@ -47,7 +47,7 @@ global $post;
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] ) ||
 	isset( $post ) && $post->prevent_caching === 'prevent'
 	) {
-	header( 'Cache-Control: max-age=0,no-cache,no-store,must-revalidate' );
+		header( 'Cache-Control: max-age=0,no-cache,no-store,must-revalidate' );
 	}
 	else {
 
@@ -76,11 +76,17 @@ restore_current_blog();
 	}
 
 }
-
 }
+
 
 /**
 @.htaccess caching
+#   CACHE CONTROL = REVALIDATE
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault A1
+    Header append Cache-Control must-revalidate
+</IfModule>
 
 <IfModule deflate_module>
 # Enable compression for the following file types.
@@ -112,3 +118,4 @@ ExpiresDefault "access plus 7 days"
 ## EXPIRES CACHING ##
 
 */
+

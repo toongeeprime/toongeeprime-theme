@@ -28,7 +28,7 @@ return $html;
 
 add_filter( 'script_loader_tag', 'prime2g_script_loader_tag_filter', 10, 3 );
 function prime2g_script_loader_tag_filter( $tag, $handle, $src ) {
-$handles	=	array( 'prime2g_js', 'prime2g_pwa_js', 'prime2g_pwa_scripts', 'prime2g_child_js' );
+$handles	=	array( 'prime2g_pwa_js', 'prime2g_pwa_scripts', 'prime2g_child_js' );
 
 if ( in_array( $handle, $handles ) ) {
 	$tag	=	str_replace( ' src=', ' async src=', $tag );
@@ -36,5 +36,4 @@ if ( in_array( $handle, $handles ) ) {
 
 return $tag;
 }
-
 

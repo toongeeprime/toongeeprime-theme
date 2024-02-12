@@ -40,19 +40,11 @@ if ( isset( $post ) && $post->font_url ) {
  *	SCRIPTS
  *
  ** 
- *	Theme's local jQuery? default false
+ *	Theme's local jQuery?
  *	@since 1.0.59
  */
-if ( is_multisite() ) {
-switch_to_blog( 1 );
-	$useJQ	=	 ! empty( get_theme_mod( 'prime2g_enqueue_theme_jquery' ) );
-restore_current_blog();
-} else {
-	$useJQ	=	 ! empty( get_theme_mod( 'prime2g_enqueue_theme_jquery' ) );
-}
-
-if ( $useJQ ) {
-wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', [ 'strategy' => 'defer' ] );
+if ( PRIME2G_ENQ_JQUERY || isset( $post ) && $post->enqueue_jquery === 'yes' ) {
+wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', true ); # do not async/defer
 }
 
 	wp_register_script( 'prime2g_js', get_theme_file_uri( '/files/theme-min.js' ), [], $version );

@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Media Features "ACTIVATOR"
  *
@@ -8,11 +7,10 @@
  */
 
 if ( ! function_exists( 'prime2g_customizer_media_features' ) ) {
-
 function prime2g_customizer_media_features( $wp_customize ) {
 	/**
 	 *	VIDEO FEATURES
-	 *	@since ToongeePrime Theme 1.0.55
+	 *	@since 1.0.55
 	 */
 	prime2g_theme_video_features( $wp_customize );
 
@@ -21,7 +19,6 @@ function prime2g_customizer_media_features( $wp_customize ) {
 	 */
 	prime2g_theme_news_reel( $wp_customize );
 }
-
 }
 
 

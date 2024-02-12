@@ -7,6 +7,22 @@
  *	@since ToongeePrime Theme 1.0
  */
 
+/**
+ *	DETERMINE POST TYPES FOR CUSTOM FIELDS
+ *	@since ToongeePrime Theme 1.0.70
+ */
+if ( ! function_exists( 'prime2g_fields_in_post_types' ) ) {
+function prime2g_fields_in_post_types() {
+return (object) [
+	'prime_fields1'		=>	[ 'post', 'page' ],
+	'settings_fields'	=>	[ 'post', 'page' ],
+	'extras_fields'		=>	[ 'post', 'page', 'prime_template_parts' ],
+	'fields1_excludes'	=>	[ 'page' ]
+];
+}
+}
+
+
 /* DISPLAY SUBTITLE */
 add_action( 'prime2g_after_title', 'prime2g_post_subtitle', 2 );
 if ( ! function_exists( 'prime2g_post_subtitle' ) ) {
@@ -44,12 +60,12 @@ define( 'PRIME_ADD_CMETABOX_CSS', true );
  *	METABOXES
  *	Fields Set 1
  */
-add_action( 'add_meta_boxes', 'prime2g_reg_fieldset_1' );
-if ( ! function_exists( 'prime2g_add_meta_boxes' ) ) {
-function prime2g_reg_fieldset_1() {
+add_action( 'add_meta_boxes', 'prime2g_meta_fieldset_1' );
+if ( ! function_exists( 'prime2g_meta_fieldset_1' ) ) {
+function prime2g_meta_fieldset_1() {
 	add_meta_box(
-		'prime2g_fieldsbox_1', __( 'Page Options', PRIME2G_TEXTDOM ),
-		'prime2g_cFields_metadivs', prime2g_include_post_types(), 'side', 'high'
+		'prime2g_prime_fields1', __( 'Page Options', PRIME2G_TEXTDOM ),
+		'prime2g_cFields_metadivs', prime2g_fields_in_post_types()->prime_fields1, 'side', 'high'
 	);
 }
 }
@@ -69,7 +85,7 @@ if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
 }
 $fields	=	[
 	'post_subtitle', 'remove_sidebar', 'remove_header', 'page_width', 'video_url',
-	'disable_autop', 'use_main_nav_location', 'prevent_caching', 'font_url'
+	'disable_autop', 'use_main_nav_location', 'prevent_caching', 'font_url', 'enqueue_jquery'
 ];
 foreach( $fields as $field ) {
 	if ( array_key_exists( $field, $_POST ) ) {
@@ -87,12 +103,12 @@ function prime2g_cFields_metadivs( $post ) { ?>
 <div class="prime2g_meta_box">
 
 <style>
-	#prime2g_fieldsbox_1{box-shadow:0px 3px 5px #ccc;}
-	#prime2g_fieldsbox_1:hover{box-shadow:0px 3px 5px #aaa;}
+	#prime2g_prime_fields1{box-shadow:0px 3px 5px #ccc;}
+	#prime2g_prime_fields1:hover{box-shadow:0px 3px 5px #aaa;}
 	<?php prime2g_custom_mbox_css(); ?>
 </style>
 
-<?php if ( prime2g_exclude_post_types() ) { ?>
+<?php if ( prime2g_fields_in_post_types()->fields1_excludes ) { ?>
 
 	<div class="meta-options prime2g_field">
 		<label for="post_subtitle">Post Subtitle</label>
@@ -123,34 +139,46 @@ if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type
 	<label for="remove_sidebar">Remove Sidebar?</label>
 	<select id="remove_sidebar" class="prime2g_options" name="remove_sidebar">
 		<option>--- Keep Sidebar ---</option>
-		<option value="remove" <?php if ( $post->remove_sidebar == 'remove' ) echo 'selected'; ?>>Remove Sidebar</option>
+		<option value="remove" <?php if ( $post->remove_sidebar === 'remove' ) echo 'selected'; ?>>Remove Sidebar</option>
 	</select>
 </div>
 
 <?php } ?>
 
 <div class="meta-options prime2g_field">
-	<label for="remove_header">Remove Header?</label>
+	<label for="remove_header">Remove Default Header?</label>
 	<select id="remove_header" class="prime2g_options" name="remove_header">
 		<option>--- Keep Header ---</option>
-		<option value="remove" <?php if ( $post->remove_header === 'remove' ) echo 'selected'; ?>>Remove Header</option>
+		<option value="remove" <?php if ( $post->remove_header === 'remove' ) echo 'selected'; ?>>Remove Header Completely</option>
+		<option value="header_image_css" <?php if ( $post->remove_header === 'header_image_css' ) echo 'selected'; ?>>Use Header Image CSS</option>
 	</select>
 </div>
 
 
 <hr class="hr" />
 
+<h3>Advanced</h3>
+
 <div class="meta-options prime2g_field">
-	<label for="disable_autop">Content Auto P (Advanced)</label>
+	<label for="disable_autop">Content Auto P</label>
 	<select id="disable_autop" class="prime2g_options" name="disable_autop">
 		<option>--- Leave Active ---</option>
 		<option value="disable" <?php if ( $post->disable_autop === 'disable' ) echo 'selected'; ?>>Disable</option>
 	</select>
 </div>
 
+<!-- @since 1.0.70 -->
+<div class="meta-options prime2g_field">
+	<label for="enqueue_jquery">Enqueue jQuery?</label>
+	<select id="enqueue_jquery" class="prime2g_options" name="enqueue_jquery">
+		<option>--- No ---</option>
+		<option value="yes" <?php if ( $post->enqueue_jquery === 'yes' ) echo 'selected'; ?>>Yes</option>
+	</select>
+</div>
+
 <?php
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 if ( prime_child_min_version( '2.2' ) && get_theme_mod( 'prime2g_extra_menu_locations' ) ) {
 $nav_menus	=	get_registered_nav_menus(); ?>
@@ -181,7 +209,7 @@ $nav_menus	=	get_registered_nav_menus(); ?>
 
 /**
  *	FOR THEME'S TEMPLATE PARTS
- *	@since ToongeePrime Theme 1.0.50
+ *	@since 1.0.50
  */
 add_action( 'add_meta_boxes', 'prime2g_template_part_boxes' );
 function prime2g_template_part_boxes() {
@@ -226,7 +254,7 @@ $pType_name	=	$pType_obj->labels->singular_name;
 
 add_meta_box(
 	'prime2g_settings_fields', __( $pType_name . ' Settings', PRIME2G_TEXTDOM ),
-	'prime2g_settings_control_callback', prime_posttypes_with_settings(), 'side', 'high'
+	'prime2g_settings_control_callback', prime2g_fields_in_post_types()->settings_fields, 'side', 'high'
 );
 }
 
@@ -265,7 +293,7 @@ if ( ! function_exists( 'prime2g_theme_extras_fieldset' ) ) {
 function prime2g_theme_extras_fieldset() {
 add_meta_box(
 	'prime2g_extras_fields', __( 'Style Extras', PRIME2G_TEXTDOM ),
-	'prime2g_field_extras_callback', prime2g_include_post_types(), 'normal', 'high'
+	'prime2g_field_extras_callback', prime2g_fields_in_post_types()->extras_fields, 'normal', 'high'
 );
 }
 }
@@ -286,4 +314,3 @@ function prime2g_field_extras_callback( $post ) { ?>
 </div>
 <?php
 }
-

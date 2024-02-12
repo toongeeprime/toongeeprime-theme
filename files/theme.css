@@ -47,25 +47,9 @@ h1, h2, h3{font-family:var(--headings-font);}
 #header{background-color:var(--header-background);color:var(--header-text);}
 .site_header a{color:var(--header-text);}
 
-.site_main{min-height:75vh;height:max-content;}
-.no_title .site_main{min-height:0;padding:0;}
-
 .site_content, .contentWrap .page_title, .footer_topWidgets, #prime2g_after_header{
 background-color:var(--content-background);color:var(--content-text);
 }
-
-#page .logo_link, #page .logo_link:hover, #page .logo_link:focus{border:0;background:none;}
-
-/* WP */
-.gallery-columns-1, .gallery-columns-2, .gallery-columns-3, .gallery-columns-4, .gallery-columns-5,
-.gallery-columns-6, .gallery-columns-7, .gallery-columns-8, .gallery-columns-9{display:grid;gap:10px;}
-.gallery-columns-2{grid-template-columns:1fr 1fr;}
-.gallery-columns-3{grid-template-columns:1fr 1fr 1fr;}
-.gallery-columns-4, .gallery-columns-5, .gallery-columns-6, .gallery-columns-7,
-.gallery-columns-8, .gallery-columns-9{grid-template-columns:repeat(4, 1fr);}
-
-/* Bootstrap Icons */
-i.bi{font-size:1rem;cursor:pointer;}
 
 /**********
 RESPONSIVE
@@ -73,19 +57,12 @@ RESPONSIVE
 @media(min-width:681px){.grid4, .grid5, .grid6{grid-template-columns:1fr 1fr;}}
 
 @media(min-width:783px){
-.search.grid .thumbnail{min-height:150px;}
-.site_main .searchform div{display:flex;}
-.gallery-columns-5, .gallery-columns-9{grid-template-columns:repeat(5, 1fr);}
 .grid2{grid-template-columns:1fr 1fr;}
 .grid3, .grid6{grid-template-columns:1fr 1fr 1fr;}
 }
 
 @media(min-width:821px){
 .mobiles{display:none!important;}
-.gallery-columns-6{grid-template-columns:repeat(6, 1fr);}
-.gallery-columns-7{grid-template-columns:repeat(7, 1fr);}
-.gallery-columns-8{grid-template-columns:repeat(8, 1fr);}
-.gallery-columns-9{grid-template-columns:repeat(9, 1fr);}
 .grid4{grid-template-columns:repeat(4, 1fr);}
 }
 

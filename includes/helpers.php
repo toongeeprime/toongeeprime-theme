@@ -43,19 +43,6 @@ function prime2g_remove_title() { function define_2gRMVTitle(){} }
 function prime2g_is_plain_page() { function define_2gPlainPage(){} }
 
 /**
- *	Include or exclude post types
- */
-if ( ! function_exists( 'prime2g_include_post_types' ) ) {
-	function prime2g_include_post_types( array $addTo = [ 'post', 'page' ] ) { return $addTo; }
-}
-
-if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
-	function prime2g_exclude_post_types( array $pTypes = [ 'page' ] ) {
-		return ( ! in_array( get_post_type(), $pTypes ) );
-	}
-}
-
-/**
  *	Get Country via 2 Char Code
  *	More @ http://country.io/data/
  *	@since ToongeePrime Theme 1.0.47
@@ -205,10 +192,5 @@ return true;	// features should work in parent
 function prime2g_constant_is_true( string $constant, bool $for_network = true ) {
 	if ( $for_network !== false && ! is_multisite() ) return false;
 	return ( defined( $constant ) && constant( $constant ) === true );
-}
-
-/* @since ToongeePrime Theme 1.0.58 */
-if ( ! function_exists( 'prime_posttypes_with_settings' ) ) {
-function prime_posttypes_with_settings() { return [ 'post', 'page' ]; }
 }
 
