@@ -14,7 +14,7 @@ function prime2g_removeSidebar() { if ( ! function_exists( 'define_2gRMVSidebar'
 
 /**
  *	nonce verifier
- *	@since ToongeePrime Theme 1.0.46
+ *	@since 1.0.46
  */
 function prime2g_verify_nonce( $actionName = 'prime_ajaxnonce' ) {
 	if ( ! isset( $_REQUEST[ '_prime-nonce' ] ) || ! wp_verify_nonce( $_POST[ '_prime-nonce' ], $actionName ) ) {
@@ -24,7 +24,7 @@ function prime2g_verify_nonce( $actionName = 'prime_ajaxnonce' ) {
 
 /**
  *	If current user is post author
- *	@since ToongeePrime Theme 1.0.45
+ *	@since 1.0.45
  */
 function prime2g_is_post_author( $post, $userID = null ) {
 	return ( $userID ) ? $post->post_author == $userID :
@@ -45,7 +45,7 @@ function prime2g_is_plain_page() { function define_2gPlainPage(){} }
 /**
  *	Get Country via 2 Char Code
  *	More @ http://country.io/data/
- *	@since ToongeePrime Theme 1.0.47
+ *	@since 1.0.47
  */
 function prime2g_get_country_by_code( $code ) {
 	// $countries	=	json_decode( file_get_contents( "http://country.io/names.json" ), true );
@@ -55,13 +55,13 @@ function prime2g_get_country_by_code( $code ) {
 
 /**
  *	Use Theme Extras?
- *	@since ToongeePrime Theme 1.0.48
+ *	@since 1.0.48
  */
 function prime2g_use_extras() { return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true ); }
 
 /**
  *	Use PWA?
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 function prime2g_add_theme_pwa() { return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true ); }
 
@@ -74,18 +74,18 @@ function prime2g_activate_theme_pwa() {
 
 /**
  *	Control Design from Network home on multisite installs?
- *	@since ToongeePrime Theme 1.0.55, updated with prime2g_constant_is_true() @since 1.0.57
+ *	@since 1.0.55, updated with prime2g_constant_is_true() @since 1.0.57
  */
 function prime2g_design_by_network_home() {
 	return prime2g_constant_is_true( 'PRIME2G_DESIGN_BY_NETWORK_HOME' );
 }
 
-/* @since ToongeePrime Theme 1.0.57 */
+/* @since 1.0.57 */
 function prime2g_designing_at_networkhome() { return prime2g_design_by_network_home() && get_current_blog_id() === 1; }
 
 /**
  *	Get Site' Domain name
- *	@since ToongeePrime Theme 1.0.49
+ *	@since 1.0.49
  */
 function prime2g_get_site_domain( $site = null ) {
 if ( is_multisite() && in_array( $site, [ 1, '1', 'home', 'main' ] ) )
@@ -99,7 +99,7 @@ return $url;
 }
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.50
+ *	@since Theme 1.0.50
  */
 function prime2g_categs_and_ids_array() {
 $categsArray	=	wp_cache_get( 'prime2g_categs_array' );
@@ -142,10 +142,10 @@ else {
 return $posttypesArray;
 }
 }
-/* @since ToongeePrime Theme 1.0.50 End */
+/* @since 1.0.50 End */
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 function prime2g_get_current_url() {
 if ( isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] === 'on' ) $url	=	"https://";   
@@ -177,20 +177,19 @@ foreach ( $getPosts as $post ) {
 
 return array_combine( $indexes, $values );
 }
-/* @since ToongeePrime Theme 1.0.55 End */
+/* @since 1.0.55 End */
 
 /**
  *	Check Minimum Child Theme Version
- *	@since ToongeePrime Theme 1.0.56
+ *	@since 1.0.56
  */
 function prime_child_min_version( string $version ) {
 if ( is_child_theme() ) return version_compare( CHILD2G_VERSION, $version, '>=' );
 return true;	// features should work in parent
 }
 
-/* @since ToongeePrime Theme 1.0.57 */
+/* @since 1.0.57 */
 function prime2g_constant_is_true( string $constant, bool $for_network = true ) {
 	if ( $for_network !== false && ! is_multisite() ) return false;
 	return ( defined( $constant ) && constant( $constant ) === true );
 }
-

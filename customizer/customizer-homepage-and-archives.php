@@ -17,8 +17,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
  *	@since 1.0.55
  */
 	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_archives', $simple_text );
-	$wp_customize->add_control( 'prime2g_remove_sidebar_in_archives',
-	array(
+	$wp_customize->add_control( 'prime2g_remove_sidebar_in_archives', array(
 		'label'		=>	__( 'Remove Sidebar in Archives?', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_remove_sidebar_in_archives',
@@ -33,8 +32,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 	$wp_customize->add_setting( 'prime2g_posts_home_title',
 	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'default' => $siteTitle, 'sanitize_callback' => 'sanitize_text_field' ]
 	);
-	$wp_customize->add_control( 'prime2g_posts_home_title',
-	array(
+	$wp_customize->add_control( 'prime2g_posts_home_title', array(
 		'label'		=>	__( 'Posts Homepage Title', PRIME2G_TEXTDOM ),
 		'type'		=>	'text',
 		'settings'	=>	'prime2g_posts_home_title',
@@ -45,13 +43,11 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'active_callback'	=>	'is_home'
 	) );
 
-	$wp_customize->add_setting( 'prime2g_posts_home_description',
-	array(
+	$wp_customize->add_setting( 'prime2g_posts_home_description', array(
 	'type' => 'theme_mod', 'default' => 'Posts Homepage',
 	'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field'
 	) );
-	$wp_customize->add_control( 'prime2g_posts_home_description',
-	array(
+	$wp_customize->add_control( 'prime2g_posts_home_description', array(
 		'label'		=>	__( 'Posts Homepage Description', PRIME2G_TEXTDOM ),
 		'type'		=>	'text',
 		'settings'	=>	'prime2g_posts_home_description',
@@ -64,8 +60,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
  *	@since 1.0.55
  */
 	$wp_customize->add_setting( 'prime2g_archive_post_columns_num', $simple_text );
-	$wp_customize->add_control( 'prime2g_archive_post_columns_num',
-	array(
+	$wp_customize->add_control( 'prime2g_archive_post_columns_num', array(
 		'label'		=>	__( 'Archive Post Columns', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_archive_post_columns_num',
@@ -79,8 +74,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 	) );
 
 	$wp_customize->add_setting( 'prime2g_archive_pagination_type', $simple_text );
-	$wp_customize->add_control( 'prime2g_archive_pagination_type',
-	array(
+	$wp_customize->add_control( 'prime2g_archive_pagination_type', array(
 		'label'		=>	__( 'Pagination Type', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_archive_pagination_type',
@@ -91,13 +85,11 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		],
 	) );
 
-	$wp_customize->add_setting( 'prime2g_loop_post_image_height',
-	array(
+	$wp_customize->add_setting( 'prime2g_loop_post_image_height', array(
 		'type' => 'theme_mod', 'transport' => 'postMessage',
 		'default' => '17', 'sanitize_callback' => 'sanitize_text_field'
 	) );
-	$wp_customize->add_control( 'prime2g_loop_post_image_height',
-	array(
+	$wp_customize->add_control( 'prime2g_loop_post_image_height', array(
 		'label'		=>	__( 'Post Featured Image Height', PRIME2G_TEXTDOM ),
 		'type'		=>	'number',
 		'settings'	=>	'prime2g_loop_post_image_height',
@@ -115,8 +107,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 function p2_show_stky() { return ! empty( get_theme_mod( 'prime2g_theme_show_stickies' ) ); }
 
 	$wp_customize->add_setting( 'prime2g_theme_show_stickies', $simple_text );
-	$wp_customize->add_control( 'prime2g_theme_show_stickies',
-	array(
+	$wp_customize->add_control( 'prime2g_theme_show_stickies', array(
 		'label'		=>	__( 'Show Sticky Posts at the Top of Archives?', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_theme_show_stickies',
@@ -126,8 +117,7 @@ function p2_show_stky() { return ! empty( get_theme_mod( 'prime2g_theme_show_sti
 	$wp_customize->add_setting( 'prime2g_theme_sticky_heading',
 	array( 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' )
 	);
-	$wp_customize->add_control( 'prime2g_theme_sticky_heading',
-	array(
+	$wp_customize->add_control( 'prime2g_theme_sticky_heading', array(
 		'label'		=>	__( 'Sticky Posts Heading', PRIME2G_TEXTDOM ),
 		'settings'	=>	'prime2g_theme_sticky_heading',
 		'section'	=>	'prime2g_theme_archives_section',
@@ -142,8 +132,7 @@ function p2_show_stky() { return ! empty( get_theme_mod( 'prime2g_theme_show_sti
 	$wp_customize->add_setting( 'prime2g_theme_stickies_post_type',
 	[ 'type' => 'theme_mod', 'default' => 'post', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
-	$wp_customize->add_control( 'prime2g_theme_stickies_post_type',
-	array(
+	$wp_customize->add_control( 'prime2g_theme_stickies_post_type', array(
 		'label'		=>	__( 'Stickies\' Post Type', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_theme_stickies_post_type',
@@ -155,8 +144,7 @@ function p2_show_stky() { return ! empty( get_theme_mod( 'prime2g_theme_show_sti
 	$wp_customize->add_setting( 'prime2g_theme_stickies_count',
 	[ 'type' => 'theme_mod', 'default' => '4', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
-	$wp_customize->add_control( 'prime2g_theme_stickies_count',
-	array(
+	$wp_customize->add_control( 'prime2g_theme_stickies_count', array(
 		'label'		=>	__( 'How many Stickies?', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_theme_stickies_count',

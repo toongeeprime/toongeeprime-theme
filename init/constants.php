@@ -26,4 +26,19 @@ define( 'PRIME2G_FILESDIR', PRIME2G_THEME . 'files/' );
 
 define( 'PRIME2G_CACHEGROUP', 'prime2g_theme_cache_group' ); #	@1.0.57
 define( 'PRIME2G_ICONS_HANDLE', 'bootstrap-icons' ); #	@1.0.60
-defined( 'PRIME2G_ENQ_JQUERY' ) || define( 'PRIME2G_ENQ_JQUERY', false ); #	@1.0.70, enqueue theme's local jQuery?
+defined( 'PRIME2G_ENQ_JQUERY' ) || define( 'PRIME2G_ENQ_JQUERY', false ); #	@1.0.70, enqueue theme' local jQuery?
+
+
+/**
+ *	Define-able Constants
+ *
+PRIME2G_EXTRAS
+PRIME2G_ADD_PWA
+PRIME2G_DESIGN_BY_NETWORK_HOME
+PRIME2G_OPTIONS_BY_NETWORK_HOME
+PRIME2G_EXTRAS_BY_NETWORK_HOME
+PRIME2G_SOCIALS_BY_NETWORK_HOME
+PRIME2G_MENUS_BY_NETWORK_HOME
+*/
+
+

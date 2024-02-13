@@ -10,7 +10,7 @@
  */
 
 /**
- * Register Theme Customizer Functions
+ *	Register Theme' Customizer Functions
  */
 add_action( 'customize_register', 'prime2g_register_customizer_panel' );
 add_action( 'customize_register', 'prime2g_customizer_sections' );
@@ -30,6 +30,7 @@ add_action( 'customize_register', 'prime2g_customizer_misc_wp_settings' );
 add_action( 'customize_register', 'prime2g_customizer_theme_pwa' );
 add_action( 'customize_register', 'prime2g_customizer_smtp' );
 add_action( 'customize_register', 'prime2g_customizer_site_performance' );
+add_action( 'customize_register', 'prime2g_customizer_advanced_settings' );
 
 if ( class_exists( 'woocommerce' ) ) {
 	add_action( 'customize_register', 'prime2g_customizer_woocommerce_edits' );
@@ -57,7 +58,6 @@ function prime2g_edit_customizer_wp_defaults( $wp_customize ) {
  */
 function prime2g_register_customizer_panel( $wp_customize ) {
 $description	=	'<p>Customize ' . PRIME2G_THEMENAME . ' Options</p>';
-
 	$wp_customize->add_panel(
 		'prime2g_customizer_panel',
 		array(
@@ -66,5 +66,4 @@ $description	=	'<p>Customize ' . PRIME2G_THEMENAME . ' Options</p>';
 			'priority'		=>	50,
 		)
 	);
-
 }

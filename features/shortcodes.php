@@ -244,7 +244,7 @@ $atts	=	shortcode_atts( array( 'url' => $home, 'users' => '' ), $atts );
 extract( $atts );
 
 if ( $users === 'logged out' ) {
-	if ( ! $loggedin ) {
+	if ( !$loggedin ) {
 		echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 	}
 }
@@ -259,27 +259,6 @@ if ( empty( $users ) ) {
 	echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 }
 
-}
-
-
-
-/**
- *	ADD ANIMATION CSS
- *	@since 1.0.57
- */
-add_shortcode( 'prime_animation_css', 'prime2g_animations_css_shortcode' );
-function prime2g_animations_css_shortcode( $atts ) {
-$atts	=	shortcode_atts( array( 'get' => '' ), $atts );
-extract( $atts );
-
-$css	=	prime2g_animations_css();
-
-switch( $get ) {
-	case 'entrance'	:	$addCSS	=	$css->entrance; break;
-	case 'spin'		:	$addCSS	=	$css->spin; break;
-}
-
-add_action( 'wp_head', function() use( $addCSS ) { echo '<style id="primeAnimationCssSC">'. $addCSS .'</style>'; } );
 }
 
 

@@ -14,8 +14,7 @@ function prime2g_customizer_singular_entries( $wp_customize ) {
 $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ];
 
 	$wp_customize->add_setting( 'prime2g_remove_sidebar_in_singular', $simple_text );
-	$wp_customize->add_control( 'prime2g_remove_sidebar_in_singular',
-	array(
+	$wp_customize->add_control( 'prime2g_remove_sidebar_in_singular', array(
 		'label'		=>	__( 'Remove Sidebar in Single Entries', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_remove_sidebar_in_singular',
@@ -29,8 +28,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 	) );
 
 	$wp_customize->add_setting( 'prime2g_entry_byline_usage', $simple_text );
-	$wp_customize->add_control( 'prime2g_entry_byline_usage',
-	array(
+	$wp_customize->add_control( 'prime2g_entry_byline_usage', array(
 		'label'		=>	__( 'Bylines', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_entry_byline_usage',
@@ -46,8 +44,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 	$wp_customize->add_setting( 'prime2g_use_theme_css_js_custom_fields',
 		[ 'type' => 'theme_mod', 'default' => 1, 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
-	$wp_customize->add_control( 'prime2g_use_theme_css_js_custom_fields',
-	array(
+	$wp_customize->add_control( 'prime2g_use_theme_css_js_custom_fields', array(
 		'label'		=>	__( 'Use CSS &amp; JS Fields (Legacy)', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_use_theme_css_js_custom_fields',

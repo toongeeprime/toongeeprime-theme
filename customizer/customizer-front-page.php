@@ -13,15 +13,13 @@ function prime2g_customizer_front_page( $wp_customize ) {
 	 *	POSTS HOME TITLE
 	 */
 	$siteTitle	=	get_bloginfo( 'name' );
-	$wp_customize->add_setting( 'prime2g_front_page_title',
-	array(
+	$wp_customize->add_setting( 'prime2g_front_page_title', array(
 		'type'		=>	'theme_mod',
 		'transport'	=>	'postMessage',
 		'default'	=>	__( 'Welcome to ' . $siteTitle, PRIME2G_TEXTDOM ),
 		'sanitize_callback'	=>	'sanitize_text_field'
 	) );
-	$wp_customize->add_control( 'prime2g_front_page_title',
-	array(
+	$wp_customize->add_control( 'prime2g_front_page_title', array(
 		'label'		=>	__( 'Front Page Title', PRIME2G_TEXTDOM ),
 		'type'		=>	'text',
 		'settings'	=>	'prime2g_front_page_title',
@@ -38,8 +36,7 @@ function prime2g_customizer_front_page( $wp_customize ) {
 	$wp_customize->add_setting( 'prime2g_theme_show_headlines',
 		[ 'type'	=>	'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
-	$wp_customize->add_control( 'prime2g_theme_show_headlines',
-	array(
+	$wp_customize->add_control( 'prime2g_theme_show_headlines', array(
 		'label'		=>	__( 'Show Headlines Section?', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_theme_show_headlines',
@@ -51,8 +48,7 @@ function prime2g_customizer_front_page( $wp_customize ) {
 	$wp_customize->add_setting( 'prime2g_headlines_category',
 		[ 'type' => 'theme_mod', 'default' => '1', 'sanitize_callback' => 'sanitize_text_field' ]
 	);
-	$wp_customize->add_control( 'prime2g_headlines_category',
-	array(
+	$wp_customize->add_control( 'prime2g_headlines_category', array(
 		'label'		=>	__( 'Headlines Category', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_headlines_category',

@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	PARTS IN THE LOOP
  *
@@ -9,16 +8,24 @@
 
 /**
  *	Showing Sticky Posts
- *	Reworked @since ToongeePrime Theme 1.0.51
+ *	Reworked @since 1.0.51
+ *	New function extracted @since 1.0.70
  */
-
 add_action( 'prime2g_after_header', 'prime2g_show_sticky_posts' );
 if ( ! function_exists( 'prime2g_show_sticky_posts' ) ) {
 function prime2g_show_sticky_posts() {
+	#	if sticky posts should be shown
+	if ( get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_category() || is_tag() || is_tax() ) ) {
+		echo prime2g_get_stickies_by_customizer();
+	}
+}
+}
 
-// # if sticky posts are to be shown
-if ( get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_category() || is_tag() || is_tax() ) ) {
-	# Get sticky posts
+
+add_shortcode( 'prime2g_customizer_stickies', 'prime2g_get_stickies_by_customizer' );
+if ( ! function_exists( 'prime2g_get_stickies_by_customizer' ) ) {
+function prime2g_get_stickies_by_customizer() {
+	#	Get sticky posts
 	$posttype	=	get_theme_mod( 'prime2g_theme_stickies_post_type', 'post' );
 	$count		=	get_theme_mod( 'prime2g_theme_stickies_count', '4' );
 
@@ -31,29 +38,27 @@ if ( get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_categor
 	$stickies	=	new WP_Query( $args );
 	$posts		=	$stickies->posts;
 
-	if ( $stickies->have_posts() ) {
+if ( $stickies->have_posts() ) {
 	$numClass	=	'';
 	if ( in_array( $count, [ '3', '6', '9' ] ) ) { $numClass = ' by3'; }
 	if ( in_array( $count, [ '4', '8', '16' ] ) ) { $numClass = ' by4'; }
 	if ( in_array( $count, [ '5', '10', '15', '20', '25' ] ) ) { $numClass = ' by5'; }
 	if ( in_array( $count, [ '12', '24' ] ) ) { $numClass = ' by6'; }
 
-	echo '<section id="stickies" class="stickies">';
+	$output	=	prime2g_stickies_css() . '<section id="stickies" class="stickies">
 
-	# The Heading
-	echo '<h1 class="sticky_heading">' . get_theme_mod( 'prime2g_theme_sticky_heading' ) . '</h1>';
+	<h2 class="sticky_heading">' . get_theme_mod( 'prime2g_theme_sticky_heading' ) . '</h2>
 
-		echo '<div class="grid prel'. $numClass .'">';
+	<div class="grid prel'. $numClass .'">';
 
-			foreach ( $posts as $post ) {
-				prime2g_post_object_template( $post, 'medium' );
-			}
+		foreach ( $posts as $post ) {
+			$output	.=	prime2g_get_post_object_template( [ 'post' => $post, 'size' => 'medium' ] );
+		}
 
-		echo '</div>';
-	echo '</section>';
-	}
+	$output	.=	'</div></section>';
+	return $output;
 }
-
+else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Results for Stickies', PRIME2G_TEXTDOM ); }
 }
 }
 
@@ -94,7 +99,7 @@ $nextText	=	__( $next, PRIME2G_TEXTDOM );
 if ( ! function_exists( 'prime2g_prev_next' ) ) {
 function prime2g_prev_next( $spepr = ' ', $prev = '&laquo; Previous Page', $next = 'Next Page &raquo;' ) {
 
-if ( get_theme_mod( 'prime2g_archive_pagination_type' ) === 'numbers' ) {	# @since ToongeePrime Theme 1.0.55
+if ( get_theme_mod( 'prime2g_archive_pagination_type' ) === 'numbers' ) {	#	@since 1.0.55
 	global $wp_query;
 	prime2g_pagination_nums( $wp_query );
 }
@@ -118,9 +123,7 @@ echo '</nav>';
  */
 if ( ! function_exists( 'prime2g_archive_loop' ) ) {
 function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
-
 	echo prime2g_get_archive_loop( $size, $excerpt, $length, $metas, $footer, $tag );
-
 }
 }
 
@@ -132,42 +135,63 @@ function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $
 if ( ! function_exists( 'prime2g_post_object_template' ) ) {
 function prime2g_post_object_template( $object, $size = 'large', $excerpt = null, $length = 25, $metas = null ) {
 
-$id		=	$object->ID;
-$title	=	$object->post_title;
+$options = [ 'post' => $object, 'length' => $length, 'excerpt' => $excerpt, 'metas' => $metas, 'size' => $size ];
+
+echo prime2g_get_post_object_template( $options );
+}
+}
+
+
+/**
+ *	Return Post Object Template
+ *	@since 1.0.70
+ */
+if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
+function prime2g_get_post_object_template( array $options ) { // required so $post is defined
+$post	=	$excerpt = $metas = null;
+$size	=	'large';
+$length	=	25;
+
+extract( $options );
+
+if ( ! is_object( $post ) ) return 'No post';
+
+$id		=	$post->ID;
+$title	=	$post->post_title;
 $link	=	get_permalink( $id );
 
-echo '<article id="entry-'. $id .'" class="'. implode( ' ', get_post_class( '', $id ) ) .'">';
-echo '<div class="entry_img">';
-echo '<a href="'. $link .'" title="'. $title .'">';
+$template	=	'<article id="entry-'. $id .'" class="'. implode( ' ', get_post_class( '', $id ) ) .'">
+<div class="entry_img">
+<a href="'. $link .'" title="'. $title .'">';
 
-	if ( has_post_thumbnail( $object ) ) {
-		echo '<div class="thumbnail" style="background-image:url(';
-		echo get_the_post_thumbnail_url( $object, $size );
-		echo ');"></div>';
+if ( has_post_thumbnail( $post ) ) {
+	$template	.=	'<div class="thumbnail" style="background-image:url(';
+	$template	.=	get_the_post_thumbnail_url( $post, $size );
+	$template	.=	');"></div>';
+}
+else {
+	if ( child2g_has_placeholder() ) {
+		$template	.=	'<div class="thumbnail" style="background-image:url(';
+		$template	.=	child2g_placeholder_url( true );
+		$template	.=	');"></div>';
 	}
 	else {
-		if ( child2g_has_placeholder() ) {
-			echo '<div class="thumbnail" style="background-image:url(';
-			child2g_placeholder_url();
-			echo ');"></div>';
-		}
-		else {
-			echo '<div class="thumbnail">'. $title .'</div>';
-		}
+		$template	.=	'<div class="thumbnail">'. $title .'</div>';
 	}
-
-echo '</a></div>';
-echo '<div class="entry_text">';
-if ( $metas ) prime2g_archive_post_top( $object );
-echo '<a href="'. $link .'" title="Read this entry"><h2 class="entry_title">'. $title .'</h2></a>';
-if ( $excerpt ) echo prime2g_post_excerpt( $length, $object );
-prime2g_archive_post_footer();
-echo '</div>';
-echo '</article>';
-
-}
 }
 
+$template	.=	'</a></div>
+<div class="entry_text">';
+if ( $metas ) $template	.=	prime2g_archive_post_top_filter_part( $post );
+$template	.=	'<a href="'. $link .'" title="Read this entry"><h2 class="entry_title">'. $title .'</h2></a>';
+if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post );
+$template	.=	prime2g_archive_post_footer_filter_part();
+$template	.=	'</div>
+</article>';
+
+return $template;
+}
+}
 
 
 
@@ -222,7 +246,7 @@ $link	=	get_permalink();
 /**
  *	Split from prime2g_archive_loop()
  *	Archive Post Entry Template: returned
- *	@since ToongeePrime Theme 1.0.45
+ *	@since 1.0.45
  */
 if ( ! function_exists( 'prime2g_get_archive_loop' ) ) {
 function prime2g_get_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
@@ -231,11 +255,11 @@ $title	=	$post->post_title;
 $link	=	get_permalink();
 $edit_link	=	true;
 
-#	@since ToongeePrime Theme 1.0.55
+#	@since 1.0.55
 
 $loop_post_header_template	=	$loop_post_footer_template	=	null;
 
-if ( is_array( $size ) ) {	# Var name for backwards compatibility
+if ( is_array( $size ) ) {	#	Var name for backwards compatibility
 
 $imgSize	=	'large';
 $excerpt	=	true;
@@ -251,7 +275,7 @@ else {
 	$imgSize	=	$size;
 	$readmore	=	'... Keep reading';
 }
-#	@since ToongeePrime Theme 1.0.55 end
+#	@since 1.0.55 end
 
 $entry	=	'<article id="entry-' . $post->ID . '" class="' . implode( ' ', get_post_class() ) . '">';
 $entry	.=	'<div class="entry_img">';
@@ -291,7 +315,7 @@ return $entry;
 
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 if ( ! function_exists( 'prime2g_ft_image_in_loop' ) ) {
 function prime2g_ft_image_in_loop( string $title, string $size, string $link, object $post = null ) {
@@ -326,8 +350,8 @@ return $ftimg;
 
 /**
  *	Archive Post Template by post object
- *	@since ToongeePrime Theme 1.0.50
- *	Media field logic @since ToongeePrime Theme 1.0.55
+ *	@since 1.0.50
+ *	Media field logic @since 1.0.55
  */
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
 function prime2g_get_archive_loop_post_object( array $args ) {
@@ -403,7 +427,7 @@ return $entry;
 
 /**
  *	Entry Titles-only Template
- *	@since ToongeePrime Theme 1.0.50
+ *	@since 1.0.50
  */
 if ( ! function_exists( 'prime2g_entry_titles_template' ) ) {
 function prime2g_entry_titles_template( array $args ) {
@@ -413,7 +437,6 @@ $class	=	'entry';
 $class2	=	'entry_title';
 
 extract( $args );
-
 if ( ! $post ) { global $post; }
 
 $title	=	$post->post_title;

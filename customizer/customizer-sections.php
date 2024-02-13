@@ -187,8 +187,23 @@ if ( class_exists( 'woocommerce' ) ) {
 		return ! $network || $homeOptions && $is_site1 || $network && ! $homeOptions; }
 	) );
 
+	/**
+	 *	Advanced Section
+	 *	@since 1.0.70
+	 */
+	$wp_customize->add_section( 'prime2g_site_advanced_section', array(
+		'title'		=>	__( 'Advanced Settings', PRIME2G_TEXTDOM ),
+		'panel'		=>	'prime2g_customizer_panel',
+		'description'	=>	__( 'Advanced Settings - BE CAUTIOUS!', PRIME2G_TEXTDOM ),
+		'capability'	=>	'edit_theme_options',
+		'active_callback'	=>	function() use( $network, $is_site1 ) {
+		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME' );
+		return ! $network || $homeOptions && $is_site1 || $network && ! $homeOptions; }
+	) );
+
 }
 
 }
+
 
 

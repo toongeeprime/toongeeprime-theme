@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Theme Menus
  *
@@ -8,7 +7,6 @@
  */
 
 if ( ! function_exists( 'prime2g_customizer_theme_menus' ) ) {
-
 function prime2g_customizer_theme_menus( $wp_customize ) {
 
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
@@ -20,7 +18,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'settings'		=>	[ 'prime2g_set_cta_menu_item' ],
 		'container_inclusive'	=>	true,
 		'render_callback'		=>	'prime2g_cta_menu',
-		'fallback_refresh'		=>	true,
+		'fallback_refresh'		=>	true
 	) );
 
 	/**
@@ -173,5 +171,4 @@ if ( prime_child_min_version( '2.3' ) ) {
 }
 
 }
-
 }

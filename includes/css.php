@@ -61,24 +61,6 @@ $themeV2css	.=	'.prev_next{margin:var(--min-pad) 0;}
 }
 else {
 
-if ( get_theme_mod( 'prime2g_theme_show_stickies' ) ) {
-$themeV2css	.=	'.stickies, .home_headlines{padding:1px var(--min-pad);}
-.stickies .thumbnail, .sides .thumbnail, .widget_posts .thumbnail{height:150px;}
-.stickies .grid{grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));}
-.stickies .entry_title, .sides .entry_title, .widget_posts .entry_title{font-size:1rem; margin:10px 0 0;}
-.stickies p, .sides p, .widget_posts p{margin:0;}
-@media(min-width:681px){
-.stickies .grid.by3,.stickies .grid.by6{grid-template-columns:1fr 1fr 1fr;}
-}
-@media(min-width:821px){
-.stickies .grid.by4{grid-template-columns:repeat(4, 1fr);}
-}
-@media(min-width:1001px){
-.stickies .grid.by5{grid-template-columns:repeat(5, 1fr);}
-.stickies .grid.by6{grid-template-columns:repeat(6, 1fr);}
-}';
-}
-
 $themeV2css	.=	'#archive_loop{height:max-content;}
 .infinite-scroll .archive.prev_next{display:none;}
 #page #infinite-handle span{display:inline-block;}
@@ -352,3 +334,33 @@ margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 .scrollX{overflow:hidden;overflow-x:auto;}';
 }
 }
+
+
+/**
+ *	Embedded in prime2g_get_stickies_by_customizer()
+ *	@since 1.0.70
+ */
+if ( ! function_exists( 'prime2g_stickies_css' ) ) {
+function prime2g_stickies_css() {
+if ( ! defined( 'PRIME2G_STICKIES_CSS' ) ) {
+$css	=	'<style id="prime2g_stickies_css">.stickies, .home_headlines{padding:1px var(--min-pad);}
+.stickies .thumbnail, .sides .thumbnail, .widget_posts .thumbnail{height:150px;}
+.stickies .grid{grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));}
+.stickies .entry_title, .sides .entry_title, .widget_posts .entry_title{font-size:1rem; margin:10px 0 0;}
+.stickies p, .sides p, .widget_posts p{margin:0;}
+@media(min-width:681px){
+.stickies .grid.by3,.stickies .grid.by6{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(min-width:821px){
+.stickies .grid.by4{grid-template-columns:repeat(4, 1fr);}
+}
+@media(min-width:1001px){
+.stickies .grid.by5{grid-template-columns:repeat(5, 1fr);}
+.stickies .grid.by6{grid-template-columns:repeat(6, 1fr);}
+}</style>';
+define( 'PRIME2G_STICKIES_CSS', true );
+return $css;
+}
+}
+}
+

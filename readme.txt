@@ -18,10 +18,11 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.70 =
 * Homepage Slideshow
-* Added prime2g_fields_in_post_types()
+* Added prime2g_fields_in_post_types(), prime2g_get_stickies_by_customizer(), prime2g_stickies_css(), prime2g_get_post_object_template()
 * @includes: helpers-for-templates.php
 * Deprecated prime2g_include_post_types() & prime2g_exclude_post_types()
 * Header image CSS option added to 'remove_header' field
+* @Customizer: add code to <head> and <body>
 
 = 1.0.60 =
 * prime2g_load_fonts_and_icons() renamed to prime2g_load_theme_fonts()

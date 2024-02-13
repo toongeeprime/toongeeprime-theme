@@ -31,8 +31,7 @@ if ( $network ) {
 
 if ( $network && get_current_blog_id() === 1 ) {
 	$wp_customize->add_setting( 'prime2g_route_caching_to_networkhome', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_route_caching_to_networkhome',
-		array(
+	$wp_customize->add_control( 'prime2g_route_caching_to_networkhome', array(
 			'label'		=>	__( 'Route Caching Controls to Network Home?', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_route_caching_to_networkhome',
@@ -49,8 +48,7 @@ DAY_IN_SECONDS => __( 'Days', PRIME2G_TEXTDOM ), WEEK_IN_SECONDS => __( 'Weeks',
 MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Years', PRIME2G_TEXTDOM ) ];
 
 	$wp_customize->add_setting( 'prime2g_activate_chache_controls', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_activate_chache_controls',
-		array(
+	$wp_customize->add_control( 'prime2g_activate_chache_controls', array(
 			'label'		=>	__( 'Activate Cache Controls', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_activate_chache_controls',
@@ -59,8 +57,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_time_singular', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_time_singular',
-		array(
+	$wp_customize->add_control( 'prime2g_chache_time_singular', array(
 			'label'		=>	__( 'Cache Time: Single Entries', PRIME2G_TEXTDOM ),
 			'type'		=>	'number',
 			'settings'	=>	'prime2g_chache_time_singular',
@@ -71,8 +68,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_seconds_singular', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_seconds_singular',
-		array(
+	$wp_customize->add_control( 'prime2g_chache_seconds_singular', array(
 			'label'		=>	__( 'Cache Unit: Single Entries', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_chache_seconds_singular',
@@ -83,8 +79,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_time_feeds', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_time_feeds',
-		array(
+	$wp_customize->add_control( 'prime2g_chache_time_feeds', array(
 			'label'		=>	__( 'Cache Time: Archives', PRIME2G_TEXTDOM ),
 			'type'		=>	'number',
 			'settings'	=>	'prime2g_chache_time_feeds',
@@ -95,8 +90,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_chache_seconds_feeds', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_chache_seconds_feeds',
-		array(
+	$wp_customize->add_control( 'prime2g_chache_seconds_feeds', array(
 			'label'		=>	__( 'Cache Unit: Archives', PRIME2G_TEXTDOM ),
 			'type'		=>	'select',
 			'settings'	=>	'prime2g_chache_seconds_feeds',
@@ -107,8 +101,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 	);
 
 	$wp_customize->add_setting( 'prime2g_allow_chache_data_clearing', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_allow_chache_data_clearing',
-		array(
+	$wp_customize->add_control( 'prime2g_allow_chache_data_clearing', array(
 			'label'		=>	__( 'Allow Cache Data Clearing', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_allow_chache_data_clearing',
