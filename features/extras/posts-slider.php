@@ -11,12 +11,11 @@ return	'.prime_post_slides_wrap .post_taxonomies{position:absolute;}
 .prime_posts_slider article.lit{opacity:1;visibility:visible;}
 .prime_posts_slider .entry_img, .prime_posts_slider .thumbnail{height:400px;}
 .prime_slides_box{display:grid;grid-template-columns:1fr;grid-template-rows:1fr;}
-.slide_entry_title{position:relative;cursor:pointer;opacity:0.7;margin-bottom:7px;}
+.slide_entry_title{position:relative;cursor:pointer;opacity:0.7;margin-bottom:7px;width:20%;display:grid;place-content:center;height:50px;}
 #post_s_rzmr{opacity:0;visibility:hidden;cursor:pointer;position:absolute;z-index:+10;top:0;right:0;background:#111;font-size:12px;padding:5px 10px;}
 .pause #post_s_rzmr{opacity:1;visibility:visible;color:#fff;}
-
 .titles_box{display:flex;flex-wrap:wrap;}
-.slide_entry_title{width:20%;display:grid;place-content:center;height:50px;}
+
 .slide_entry_title:hover{opacity:1;background:var(--brand-color-2);color:#fff;}
 .slide_entry_title.lit{opacity:1;background:var(--brand-color);color:#fff;}
 

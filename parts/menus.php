@@ -9,23 +9,24 @@
 
 /**
  *	Menu Togglers
- *	@since ToongeePrime Theme 1.0.56
+ *	@since 1.0.56
  */
 if ( ! function_exists( 'prime2g_menu_togglers' ) ) {
 function prime2g_menu_togglers( array $options = [] ) {
 $incLogo	=	false;
 $theLogo	=	'';
 $class		=	'';
-$content	=	'<span></span><span></span><span></span>';
+$id			=	'menu_toggbar';
+$inner_el	=	'<span></span><span></span><span></span>';
 $togTargets	=	'\'.main_menu_wrap\'';	// ESCAPE!
 extract( $options );
 
-echo '<div id="menu_toggbar" class="menu_toggbar ' . $class . '">
+echo '<div id="'. $id .'" class="menu_toggbar '. $class .'">
 	<div>';
 	if ( $incLogo ) echo $theLogo;
 echo '</div>
 <div class="menu_togs prel" onclick="prime2g_toggClass( ['. $togTargets .'] );">
-'. $content .'
+'. $inner_el .'
 </div>
 </div>';
 }
@@ -103,7 +104,7 @@ echo	'</div></div><!-- #'. $id .' -->';
 
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  *
  *	Site Top Menu
  */
@@ -115,15 +116,14 @@ if ( has_nav_menu( 'site-top-menu' ) && $styles->top_menu ) { ?>
 <div id="site_top_menu">
 <div class="w100pc flexnw site_width collapsible-navs">
 <?php
-wp_nav_menu(
-[	'depth'	=>	1,
+wp_nav_menu( [
+	'depth'				=>	1,
 	'theme_location'	=>	'site-top-menu',
 	'menu_class'		=>	'site-menu-wrapper',
 	'container_class'	=>	'site-menu-container',
 	'items_wrap'		=>	'<ul id="site_top_menu_items" class="%2$s">%3$s</ul>',
 	'fallback_cb'		=>	false
-]
-);
+] );
 ?>
 </div>
 </div>
@@ -146,7 +146,7 @@ $classes	=	get_theme_mod( 'prime2g_cta_button_classes' ) ?: '';
 return '<ul><li><a class="btn cta1 '. $classes .'" href="'. $url .'"'. $target .' rel="noopener">'. $text .'</a></ul>';
 }
 }
-/* @since ToongeePrime Theme 1.0.55 End */
+/* @since 1.0.55 End */
 
 
 /**
@@ -190,7 +190,7 @@ else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Footer Me
 
 /**
  *	TOGGLER MENU ELEMENTS
- *	@since ToongeePrime Theme 1.0.57
+ *	@since 1.0.57
  */
 if ( ! function_exists( 'prime2g_toggler_menu_type_elements' ) ) {
 function prime2g_toggler_menu_type_elements( array $options = [] ) {
@@ -218,7 +218,7 @@ echo	'</div></section>';
 
 /**
  *	Activate prime2g_class_remover_sheet() mini feature
- *	@since ToongeePrime Theme 1.0.60
+ *	@since 1.0.60
  */
 if ( ! function_exists( 'prime_remover_sheet_items' ) ) {
 function prime_remover_sheet_items() {

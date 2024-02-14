@@ -155,7 +155,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 		'choices'	=>	array(
 			''		=>	__( 'Default', PRIME2G_TEXTDOM ),
 			'togglers'	=>	__( 'Togglers', PRIME2G_TEXTDOM ),
-			'mega_menu'	=>	__( 'Mega Menu', PRIME2G_TEXTDOM )
+			// 'mega_menu'	=>	__( 'Mega Menu', PRIME2G_TEXTDOM )
 		),
 	) );
 

@@ -15,7 +15,8 @@ $atts	=	shortcode_atts(
 array(
 	'count'	=>	5,
 	'words'	=>	10,
-	'order'	=>	'rand',
+	'order'	=>	'DESC',	# ASC
+	'orderby'	=>	'rand',
 	'post_type'	=>	'post',
 	'taxonomy'	=>	'category',
 	'inornot'	=>	'NOT IN',
@@ -54,8 +55,8 @@ $paged		=	is_numeric( $pagedNum ) ? (int) $pagedNum : 1;
 
 $args	=	array(
 	'post_type'		=>	$post_type,
-	'orderby'		=>	$order,
-	'orderby'		=>	$pagination ? 'date' : $order,
+	'order'			=>	$order,
+	'orderby'		=>	$pagination ? 'date' : $orderby,
 	'paged'			=>	$paged,
 	'page'			=>	$paged,
 	'offset'		=>	$pagination ? null : $offset,
@@ -97,7 +98,7 @@ if ( $cache_it || $use_cache ) {
 	$loop	=	prime2g_wp_query( $args, $options ); #array
 	if ( ! empty( $loop ) ) {
 
-	if ( $order === 'rand' ) shuffle( $loop );
+	if ( $orderby === 'rand' ) shuffle( $loop );
 
 	for ( $p = 0; $p < $count; $p++ ) {
 	if ( ! isset( $loop[ $p ] ) ) continue;

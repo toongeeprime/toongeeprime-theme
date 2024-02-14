@@ -64,7 +64,8 @@ else {
 $themeV2css	.=	'#archive_loop{height:max-content;}
 .infinite-scroll .archive.prev_next{display:none;}
 #page #infinite-handle span{display:inline-block;}
-.pagination .page-numbers{line-height:1;}';
+.pagination .page-numbers{line-height:1;}
+.home_headlines{padding:1px var(--min-pad);}';
 
 }
 
@@ -298,9 +299,12 @@ return (object)[
 /**
  *	@since 1.0.60
  */
-if ( ! function_exists( 'prime_custom_theme_classes_styles' ) ) {
 function prime_custom_theme_classes_styles() {
-return	'.site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
+return	'.sides .thumbnail, .widget_posts .thumbnail{height:150px;}
+.sides .entry_title, .widget_posts .entry_title{font-size:1rem; margin:10px 0 0;}
+.sides p, .widget_posts p{margin:0;}
+
+.site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
 margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 }
 .ext_stretch_head .site_container,.ext_stretch_foot .site_container,.ext_stretch_foot .footerWrap,
@@ -333,7 +337,6 @@ margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 .slimscrollbar{overflow:hidden;overflow-y:auto;}
 .scrollX{overflow:hidden;overflow-x:auto;}';
 }
-}
 
 
 /**
@@ -343,11 +346,12 @@ margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 if ( ! function_exists( 'prime2g_stickies_css' ) ) {
 function prime2g_stickies_css() {
 if ( ! defined( 'PRIME2G_STICKIES_CSS' ) ) {
-$css	=	'<style id="prime2g_stickies_css">.stickies, .home_headlines{padding:1px var(--min-pad);}
-.stickies .thumbnail, .sides .thumbnail, .widget_posts .thumbnail{height:150px;}
+$css	=	'<style id="prime2g_stickies_css">
+.stickies{padding:1px var(--min-pad);}
+.stickies .thumbnail{height:150px;}
 .stickies .grid{grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));}
-.stickies .entry_title, .sides .entry_title, .widget_posts .entry_title{font-size:1rem; margin:10px 0 0;}
-.stickies p, .sides p, .widget_posts p{margin:0;}
+.stickies .entry_title{font-size:1rem; margin:10px 0 0;}
+.stickies p{margin:0;}
 @media(min-width:681px){
 .stickies .grid.by3,.stickies .grid.by6{grid-template-columns:1fr 1fr 1fr;}
 }
