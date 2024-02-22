@@ -8,22 +8,12 @@
  */
 
 if ( prime2g_use_extras() ) {
+$folder	=	__DIR__ . '/extras/';
+$files	=	scandir( $folder );
 
-$directories	=	[ 'extras' ];
-
-foreach( $directories as $dir ) {
-
-	$folder	=	__DIR__ . '/' . $dir . '/';
-	$files	=	scandir( $folder );
-
-	foreach( $files as $file ) {
+foreach( $files as $file ) {
 	$path	=	$folder . $file;
-
-		if ( is_file( $path ) && pathinfo( $path )[ 'extension' ] == 'php' ) require_once $path;
-	}
-
+	if ( is_file( $path ) && pathinfo( $path )[ 'extension' ] === 'php' ) require_once $path;
 }
 
 }
-
-

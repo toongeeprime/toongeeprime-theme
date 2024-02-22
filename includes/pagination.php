@@ -17,12 +17,9 @@ if ( $paged ) return $text . $paged . $extend;
 }
 
 
-
 #	Pagination by numbers
 if ( ! function_exists( 'prime2g_pagination_nums' ) ) {
-
 function prime2g_pagination_nums( $the_query, $echo = true, $max_page = '' ) {
-
 $big	=	999999999;
 
 if ( ! $max_page ) $max_page	=	$the_query->max_num_pages;
@@ -42,5 +39,5 @@ if ( ! $max_page ) $max_page	=	$the_query->max_num_pages;
 if ( $echo ) echo $div;
 else return $div;
 }
-
 }
+

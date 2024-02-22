@@ -13,7 +13,7 @@ function prime2g_wp_query( array $args, $options = 'posts' ) {
  *	$get == string, for backwards compatibility
  *	$setCache & $useCache == false, not to break former output
  */
-
+// get_transient || get_site_transient
 $get		=	$options;
 $setCache	=	false;
 $useCache	=	false;
@@ -83,10 +83,16 @@ add_filter( 'user_can_richedit', function( $default ) {
 global $post;
 if ( ! is_object( $post ) ) return $default;
 
+# 1.0.57
+$net_home_extras	=	prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' );
+if ( $net_home_extras ) switch_to_blog( 1 );
+
 if ( ! get_theme_mod( 'prime2g_template_parts_richedit' ) ) {
 	if ( $post->post_type === 'prime_template_part' ||
 	$post->post_type === 'prime_template_parts' ) return false;
 }
+
+if ( $net_home_extras ) restore_current_blog();
 
 return $default;
 }

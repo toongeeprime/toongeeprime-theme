@@ -1,8 +1,8 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CLASS: THEME STYLES
- *	Sets the stage for theme styles
+ *	CLASS: BUILD THEME STYLES
+ *	Sets up theme styles
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
@@ -280,4 +280,5 @@ return $css;
 }
 
 }
+
 

@@ -22,7 +22,7 @@ array(
 	'inornot'	=>	'NOT IN',
 	'terms'		=>	'uncategorized',
 	'looptemplate'	=>	null,	#	@since 1.0.46
-	'read_more'		=>	'Read more',#	@since 1.0.50, works with caching template
+	'read_more'		=>	'Read more',#	@since 1.0.50, works with the set caching template
 	'cache_it'		=>	false,
 	'use_cache'		=>	false,
 	'start_cache'	=>	false,

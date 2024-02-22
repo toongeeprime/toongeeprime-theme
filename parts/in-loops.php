@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
- *	PARTS IN THE LOOP
+ *	PARTS IN A LOOP
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
@@ -33,7 +33,7 @@ function prime2g_get_stickies_by_customizer() {
 		'post_type'			=>	$posttype,
 		'posts_per_page'	=>	$count,
 		'post__in'			=>	get_option( 'sticky_posts' ),
-		'ignore_sticky_posts'	=>	1,
+		'ignore_sticky_posts'	=>	1
 	);
 	$stickies	=	new WP_Query( $args );
 	$posts		=	$stickies->posts;
@@ -70,7 +70,7 @@ else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Results f
 add_action( 'prime2g_after_post', 'prime2g_prev_next_post', 7, 3 );
 if ( ! function_exists( 'prime2g_prev_next_post' ) ) {
 
-// Empty argument was added coz somehow, it reads from the second var
+//	Empty argument was added coz somehow, it reads from the second var
 function prime2g_prev_next_post( $empty = '', $prev = 'Previous Entry ', $next = 'Next Entry ', $taxonomy = 'category' )
 {
 
@@ -84,7 +84,7 @@ $nextText	=	__( $next, PRIME2G_TEXTDOM );
 			'prev_text'	=>	'<p class="meta-nav">'. $prevText .'</p><p class="post-title">%title</p>',
 			'next_text'	=>	'<p class="meta-nav">'. $nextText .'</p><p class="post-title">%title</p>',
 			'taxonomy'	=>	$taxonomy,
-			'class'		=>	'prev_next',
+			'class'		=>	'prev_next'
 		)
 	);
 
@@ -147,7 +147,7 @@ echo prime2g_get_post_object_template( $options );
  *	@since 1.0.70
  */
 if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
-function prime2g_get_post_object_template( array $options ) { // required so $post is defined
+function prime2g_get_post_object_template( array $options ) {	// required so $post is defined
 $post	=	$excerpt = $metas = null;
 $size	=	'large';
 $length	=	25;
@@ -203,39 +203,31 @@ function prime2g_search_loop() {
 $title	=	get_the_title();
 $link	=	get_permalink();
 ?>
-
 <article id="entry-<?php echo get_the_ID(); ?>" <?php post_class( 'search grid' ); ?>>
-
-	<div class="entry_img">
-		<a href="<?php echo $link; ?>" title="<?php echo $title; ?>">
-			<?php
-			if ( has_post_thumbnail() ) {
+<div class="entry_img">
+	<a href="<?php echo $link; ?>" title="<?php echo $title; ?>">
+		<?php
+		if ( has_post_thumbnail() ) {
+			echo '<div class="thumbnail" style="background-image:url(';
+			the_post_thumbnail_url( 'large' );
+			echo ');"></div>';
+		}
+		else {
+			if ( child2g_has_placeholder() ) {
 				echo '<div class="thumbnail" style="background-image:url(';
-				the_post_thumbnail_url( 'large' );
+				child2g_placeholder_url();
 				echo ');"></div>';
 			}
-			else {
-				if ( child2g_has_placeholder() ) {
-					echo '<div class="thumbnail" style="background-image:url(';
-					child2g_placeholder_url();
-					echo ');"></div>';
-				}
-				else {
-					echo '<div class="thumbnail">'. $title .'</div>';
-				}
-			}
-			?>
-		</a>
-	</div>
-	<div class="entry_text">
-
-		<a href="<?php echo $link; ?>" title="Read this entry"><h3 class="search_result_title"><?php echo $title; ?></h3></a>
-		<?php echo prime2g_post_excerpt(); ?>
-
-	</div>
-
+			else { echo '<div class="thumbnail">'. $title .'</div>'; }
+		}
+		?>
+	</a>
+</div>
+<div class="entry_text">
+	<a href="<?php echo $link; ?>" title="Read this entry"><h3 class="search_result_title"><?php echo $title; ?></h3></a>
+	<?php echo prime2g_post_excerpt(); ?>
+</div>
 </article>
-
 <?php
 }
 }

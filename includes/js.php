@@ -22,9 +22,7 @@ $js	.=
 	sCodeVids	=	p2getAll( "video.wp-video-shortcode" ),
 	wpVids	=	p2getAll( ".wp-video" );
 if ( sCodeVids ) {
-sCodeVids.forEach( vid => {
-	vid.setAttribute( "width", "100%" ); vid.style.width = "100%";
-} );
+sCodeVids.forEach( vid => { vid.setAttribute( "width", "100%" ); vid.style.width = "100%"; } );
 }
 if ( sCodeDivs ) { sCodeDivs.forEach( div => { div.style.width = "auto"; } ); }
 if ( wpVids ) { wpVids.forEach( wpv => { wpv.style.width = "auto"; } ); }
@@ -47,13 +45,11 @@ if ( wp.customHeader.handlers.youtube.player == null ) {
 ';
 }
 }
-
 /*
 let ytHeader	=	p2getEl( "#wp-custom-header" );
 ytHeader.classList.add( "unclicked" );
 ytHeader.onclick	=	()=>{ ytHeader.classList.remove( "unclicked" ); };
 */
-
 $js	.=	'</script>';
 
 echo $js;
@@ -87,3 +83,4 @@ echo $js;
 }
 }
 }
+

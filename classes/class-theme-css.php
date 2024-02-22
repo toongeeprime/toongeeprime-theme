@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CLASS: THEME ROOT CSS
+ *	CLASS: OUTPUT THEME ROOT CSS
  *	Outputting to the Theme
  *
  *	@package WordPress

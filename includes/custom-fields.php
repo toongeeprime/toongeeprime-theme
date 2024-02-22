@@ -57,21 +57,6 @@ define( 'PRIME_ADD_CMETABOX_CSS', true );
 
 
 /**
- *	METABOXES
- *	Fields Set 1
- */
-add_action( 'add_meta_boxes', 'prime2g_meta_fieldset_1' );
-if ( ! function_exists( 'prime2g_meta_fieldset_1' ) ) {
-function prime2g_meta_fieldset_1() {
-	add_meta_box(
-		'prime2g_prime_fields1', __( 'Page Options', PRIME2G_TEXTDOM ),
-		'prime2g_cFields_metadivs', prime2g_fields_in_post_types()->prime_fields1, 'side', 'high'
-	);
-}
-}
-
-
-/**
  *	SAVE ALL THEME CUSTOM FIELDS
  *	@param int $post_id Post ID
  */
@@ -98,6 +83,21 @@ foreach( $fields as $field ) {
 
 
 
+/**
+ *	METABOXES
+ *	Fields Set 1
+ */
+add_action( 'add_meta_boxes', 'prime2g_meta_fieldset_1' );
+if ( ! function_exists( 'prime2g_meta_fieldset_1' ) ) {
+function prime2g_meta_fieldset_1() {
+	add_meta_box(
+		'prime2g_prime_fields1', __( 'Page Options', PRIME2G_TEXTDOM ),
+		'prime2g_cFields_metadivs', prime2g_fields_in_post_types()->prime_fields1, 'side', 'high'
+	);
+}
+}
+
+
 #	Custom Fieldset 1
 function prime2g_cFields_metadivs( $post ) { ?>
 <div class="prime2g_meta_box">
@@ -112,7 +112,7 @@ function prime2g_cFields_metadivs( $post ) { ?>
 
 	<div class="meta-options prime2g_field">
 		<label for="post_subtitle">Post Subtitle</label>
-<input id="post_subtitle" type="text" class="prime2g_admintext" name="post_subtitle" placeholder="A Subtitle for this Entry"
+<input id="post_subtitle" type="text" class="prime2g_admintext" name="post_subtitle" placeholder="A Subtitle for this Entry" 
 value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 />
 	</div>

@@ -153,7 +153,7 @@ $address	=	str_replace( ' ', '+', $address );
 
 if ( $address ) {
 
-$embed	=	'<div id="'. $id .'" class="prime_map" style="max-width:100%;overflow:hidden;color:red;width:100%;height:'. $height .';margin-top:var(--med-pad);">
+$embed	=	'<div id="'. $id .'" class="prime_map" style="max-width:100%;overflow:hidden;color:red;width:100%;height:'. $height .';">
 <div style="height:100%;width:100%;max-width:100%;">';
 
 if ( $map === 'google' ) {
@@ -260,5 +260,4 @@ if ( empty( $users ) ) {
 }
 
 }
-
 
