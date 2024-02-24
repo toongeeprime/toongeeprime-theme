@@ -300,11 +300,7 @@ return (object)[
  *	@since 1.0.60
  */
 function prime_custom_theme_classes_styles() {
-return	'.sides .thumbnail, .widget_posts .thumbnail{height:150px;}
-.sides .entry_title, .widget_posts .entry_title{font-size:1rem; margin:10px 0 0;}
-.sides p, .widget_posts p{margin:0;}
-
-.site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
+return	'.site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
 margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 }
 .ext_stretch_head .site_container,.ext_stretch_foot .site_container,.ext_stretch_foot .footerWrap,

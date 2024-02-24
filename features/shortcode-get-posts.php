@@ -23,18 +23,16 @@ array(
 	'terms'		=>	'uncategorized',
 	'looptemplate'	=>	null,	#	@since 1.0.46
 	'read_more'		=>	'Read more',#	@since 1.0.50, works with the set caching template
+	'start_cache'	=>	false,	#	& cache_it should be used by the starting shortcode in a group
 	'cache_it'		=>	false,
-	'use_cache'		=>	false,
-	'start_cache'	=>	false,
-	'cache_name'	=>	'prime2g_posts_shortcode',
+	'use_cache'		=>	false,	# should be used by subsequent shortcodes in the group
+	'cache_name'	=>	'prime2g_posts_shortcode',	#	should be named according to groups
 	'offset'		=>	0,
 	'device'		=>	0,	#	@since 1.0.55
-	'pagination'	=>	0
+	'pagination'	=>	0	#	works when shortcode is used in a page
 	),
 $atts
 );
-
-			//***	REVIEW CACHING SYSTEM	***//
 
 extract( $atts );
 
@@ -82,12 +80,12 @@ if ( $start_cache === 'yes' ) $start_cache	=	true;
 
 $options	=	array(
 	'get'		=>	$get_array,
-	'cacheIt'	=>	$cache_it,
+	'setCache'	=>	$cache_it,
 	'useCache'	=>	$use_cache,
 	'cacheName'	=>	$cache_name
 );
 
-$template	=	$start_cache ? '<div class="hide scode-cache">' : '<div class="widget_posts grid">';
+$template	=	$start_cache ? '<div class="hide scode-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
 
 
 /**
