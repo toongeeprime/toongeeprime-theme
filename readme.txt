@@ -23,6 +23,7 @@ A WordPress theme with options for customization, design and development flexibi
 * Deprecated prime2g_include_post_types() & prime2g_exclude_post_types()
 * Header image CSS option added to 'remove_header' field
 * @Customizer: add code to <head> and <body>
+* Added "Template Part Shortcode" column to Template Parts Edit Screen
 * Added 'device' parameter to prime_insert_template_part shortcode
 * prime2g_display_posts shortcode now works with multisite; added image_size, image_to_video, site_id and randomize_sites parameters
 
