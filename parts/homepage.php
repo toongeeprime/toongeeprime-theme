@@ -57,7 +57,7 @@ $cat	=	null;
 		$term_name	=	$cat->name;
 	} else {
 		$slug		=	get_theme_mod( 'prime2g_slideshow_tax_term_slug' );
-		$term_name	=	get_term_by( 'slug', $slug, get_theme_mod( 'prime2g_slideshow_taxonomy', 'category' ) )->name ?? '*Check Slider Term';
+		$term_name	=	get_term_by( 'slug', $slug, get_theme_mod( 'prime2g_slideshow_taxonomy', 'category' ) )->name ?: '*Check Slider Term';
 	}
 
 $options	=	[ 'useCache' => false, 'setCache' => false ];

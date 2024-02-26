@@ -22,15 +22,18 @@ array(
 	'inornot'	=>	'NOT IN',
 	'terms'		=>	'uncategorized',
 	'looptemplate'	=>	null,	#	@since 1.0.46
-	'read_more'		=>	'Read more',#	@since 1.0.50, works with the set caching template
-	'start_cache'	=>	false,	#	& cache_it should be used by the starting shortcode in a group
-	'cache_it'		=>	false,
-	'use_cache'		=>	false,	# should be used by subsequent shortcodes in the group
-	'cache_name'	=>	'prime2g_posts_shortcode',	#	should be named according to groups
-	'offset'		=>	0,
-	'device'		=>	0,	#	@since 1.0.55
-	'pagination'	=>	0	#	works when shortcode is used in a page
-	),
+	'read_more'	=>	'Read more',#	@since 1.0.50
+	'set_cache'	=>	false,	#	should be used by the starting shortcode in a group
+	'use_cache'	=>	false,	#	should be used by outputting shortcodes in the group
+	'cache_name'=>	'prime2g_posts_shortcode',	#	should be named according to groups
+	'offset'	=>	0,
+	'device'	=>	0,	#	@since 1.0.55
+	'pagination'=>	0,	#	works when shortcode is used in a "page"
+	'image_size'	=>	'medium',	#	@since 1.0.70
+	'image_to_video'=>	'',
+	'site_id'	=>	'',
+	'randomize_sites'	=>	''
+),
 $atts
 );
 
@@ -38,11 +41,10 @@ extract( $atts );
 
 $isMobile	=	wp_is_mobile();
 
-if ( $device === 'desktop' ) { if ( $isMobile ) return; }
-if ( $device === 'mobile' ) { if ( ! $isMobile ) return; }
+if ( in_array( $device, prime2g_devices_array()->desktops ) && $isMobile ) return;
+if ( in_array( $device, prime2g_devices_array()->mobiles ) && ! $isMobile ) return;
 
 
-#	@since ToongeePrime Theme 1.0.49
 $termsArray	=	explode( ',', $terms );
 if ( count( $termsArray ) > 1 ) {
 	$terms	=	$termsArray;
@@ -52,98 +54,83 @@ $pagedNum	=	basename( prime2g_get_current_url() );
 $paged		=	is_numeric( $pagedNum ) ? (int) $pagedNum : 1;
 
 $args	=	array(
-	'post_type'		=>	$post_type,
-	'order'			=>	$order,
-	'orderby'		=>	$pagination ? 'date' : $orderby,
-	'paged'			=>	$paged,
-	'page'			=>	$paged,
-	'offset'		=>	$pagination ? null : $offset,
-	'posts_per_page'	=>	(int) $count,
-	'ignore_sticky_posts'	=>	true,
-	'tax_query'		=>	array(
-		array(
-			'taxonomy'	=>	$taxonomy,
-			'field'		=>	'slug',
-			'operator'	=>	$inornot,
-			'terms'		=>	$terms
-			)
-		)
+'post_type'	=>	$post_type,
+'order'		=>	$order,
+'orderby'	=>	$pagination ? 'date' : $orderby,
+'paged'		=>	$paged,
+'page'		=>	$paged,
+'offset'	=>	$pagination ? null : $offset,
+'posts_per_page'	=>	(int) $count,
+'ignore_sticky_posts'	=>	true,
+'tax_query'	=>	array( [
+	'taxonomy'	=>	$taxonomy,
+	'field'		=>	'slug',
+	'operator'	=>	$inornot,
+	'terms'		=>	$terms
+] )
 );
 
-
-#	null returns object else return posts array when using cache
-$get_array	=	in_array( 'yes', [ $use_cache, $cache_it ] ) ? 'posts' : null;
-
-if ( $cache_it === 'yes' ) $cache_it = true;
+if ( $set_cache === 'yes' ) $set_cache = true;
 if ( $use_cache === 'yes' ) $use_cache = true;
-if ( $start_cache === 'yes' ) $start_cache	=	true;
 
 $options	=	array(
-	'get'		=>	$get_array,
-	'setCache'	=>	$cache_it,
+	'setCache'	=>	$set_cache,
 	'useCache'	=>	$use_cache,
 	'cacheName'	=>	$cache_name
 );
 
-$template	=	$start_cache ? '<div class="hide scode-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
+$template	=	$set_cache ? '<div class="hide scode-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
 
+#	@since 1.0.70
+$isNetwork	=	is_multisite();
+if ( $isNetwork ) {
 
-/**
- *	If using cache, work with wp_query as an array
- */
-if ( $cache_it || $use_cache ) {
+#	$site_id should override site randomization
+if ( ! empty( $site_id ) ) {
+	$site_id	=	(int) $site_id;
+}
 
-	$loop	=	prime2g_wp_query( $args, $options ); #array
-	if ( ! empty( $loop ) ) {
+if ( empty( $site_id ) && $randomize_sites === 'yes' ) {
+$siteIDs	=	get_sites( [ 'fields' => 'ids' ] );
+shuffle( $siteIDs );
+$site_id	=	$siteIDs[0];
+}
 
-	if ( $orderby === 'rand' ) shuffle( $loop );
+if ( $site_id ) switch_to_blog( $site_id );
+}
 
-	for ( $p = 0; $p < $count; $p++ ) {
-	if ( ! isset( $loop[ $p ] ) ) continue;
-		if ( $start_cache ) {
-			$template	.=	'';
-		}
-		else {
-			$postArgs	=	[
-				'post'	=>	$loop[ $p ],
-				'length'	=>	$words,
-				'readmore'	=>	$read_more,
-			];
-			$template	.=	$looptemplate ?
-			( function_exists( $looptemplate ) ? $looptemplate() : prime2g_get_archive_loop_post_object( $postArgs ) )
-			: prime2g_get_archive_loop_post_object( $postArgs );
-		}
-	}
+$loop	=	prime2g_wp_query( $args, $options );
 
-	}
-	else {
-		if ( current_user_can( 'edit_posts' ) )
-			$template	.=	__( 'No entries found for this shortcode request', PRIME2G_TEXTDOM );
-	}
+if ( $loop->have_posts() ) {
+
+if ( $set_cache ) { $template	.=	''; }
+else {
+
+while ( $loop->have_posts() ) {
+$post	=	$loop->the_post();
+	$postArgs	=	[
+		'post'		=>	$post,
+		'length'	=>	$words,
+		'readmore'	=>	$read_more,
+		'size'		=>	$image_size,
+		'edit_link'	=>	false,
+		'switch_img_vid'	=>	$image_to_video === 'yes' ? true : false
+	];
+	$template	.=	$looptemplate ?
+	( function_exists( $looptemplate ) ? $looptemplate() : prime2g_get_archive_loop_post_object( $postArgs ) )
+	: prime2g_get_archive_loop_post_object( $postArgs );
+}
+
+}
 
 }
 else {
-
-	$loop	=	prime2g_wp_query( $args, $options ); #object
-
-	if ( $loop->have_posts() ) {
-
-	while ( $loop->have_posts() ) {
-
-		$loop->the_post();
-		$template	.=	$looptemplate ?
-			( function_exists( $looptemplate ) ? $looptemplate() : prime2g_get_archive_loop( 'medium', true, $words, false, false, 'h3' ) )
-			: prime2g_get_archive_loop( 'medium', true, $words, false, false, 'h3' );
-
-	}
-
-	}
-	else {
-		if ( current_user_can( 'edit_posts' ) )
-			$template	.=	__( 'No entries found for this shortcode request', PRIME2G_TEXTDOM );
-	}
-
+if ( current_user_can( 'edit_posts' ) )
+	$template	.=	__( 'No entries found for this shortcode request', PRIME2G_TEXTDOM );
 }
+
+#	@since 1.0.70
+if ( $isNetwork && ! empty( $site_id ) ) restore_current_blog();
 
 $template	.=	'</div>';
 
@@ -152,7 +139,6 @@ if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
 }
 
 wp_reset_postdata();
-
 return $template;
 }
 

@@ -74,7 +74,7 @@ if ( ! function_exists( 'prime2g_prev_next_post' ) ) {
 function prime2g_prev_next_post( $empty = '', $prev = 'Previous Entry ', $next = 'Next Entry ', $taxonomy = 'category' )
 {
 
-if ( is_page() ) return;
+if ( is_page() || ! is_singular() ) return;
 
 $prevText	=	__( $prev, PRIME2G_TEXTDOM );
 $nextText	=	__( $next, PRIME2G_TEXTDOM );

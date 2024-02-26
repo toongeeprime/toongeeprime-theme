@@ -9,7 +9,7 @@
 
 function prime2g_get_header_image_url( bool $hasHeader = false ) {
 
-$headerUrl	=	$hasHeader ?? has_custom_header();
+$headerUrl	=	$hasHeader ?: has_custom_header();
 
 if ( $hasHeader ) {
 	if ( is_singular() && has_post_thumbnail() && ( '' === get_theme_mod( 'prime2g_thumb_replace_header', '' ) ) ) {

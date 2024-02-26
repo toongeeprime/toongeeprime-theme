@@ -103,3 +103,21 @@ if ( ! function_exists( 'prime2g_include_post_types' ) ) {
 if ( ! function_exists( 'prime2g_exclude_post_types' ) ) {
 	function prime2g_exclude_post_types( array $pTypes = [ 'page' ] ) { return ( ! in_array( get_post_type(), $pTypes ) ); }
 }
+
+function prime2g_defaults_query( $count, $tax_slug, $taxonomy = 'category', $ptype = 'post' ) {
+$args	=	array(
+	'post_type'		=>	$ptype,
+	'posts_per_page'	=>	$count,
+	'ignore_sticky_posts'	=>	true,
+	'tax_query'		=>	array(
+	array(
+		'taxonomy'	=>	$taxonomy,
+		'field'		=>	'slug',
+		'operator'	=>	'IN',
+		'terms'		=>	$tax_slug,
+	)
+	)
+);
+return prime2g_wp_query( $args );
+}
+

@@ -2,11 +2,9 @@
 
 /**
  *	TOUCHING WP
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-
 /**
  *	ADMIN FOOTER
  */
@@ -26,33 +24,32 @@ function prime2g_widget_tag_cloud_args( $args ) {
 	$args['smallest']	=	1;
 	$args['unit']		=	'em';
 	$args['format']		=	'list';
-
 return $args;
 }
 
 
 /**
  *	STOP WP HEARTBEAT
- *	@since ToongeePrime Theme 1.0.49
+ *	@since 1.0.49
  */
 add_action( 'init', 'prime2g_stop_wp_heartbeat', 1 );
 add_action( 'admin_enqueue_scripts', 'prime2g_stop_wp_heartbeat' );
 if ( ! function_exists( 'prime2g_stop_wp_heartbeat' ) ) {
 function prime2g_stop_wp_heartbeat() {
-	if ( 'stop' === get_theme_mod( 'prime2g_stop_wp_heartbeat' ) ) {
-	global $pagenow;
-		if ( 'post.php' !== $pagenow && 'post-new.php' !== $pagenow ) {
-			wp_deregister_script( 'heartbeat' );
-			wp_register_script( 'heartbeat', false );
-		}
+if ( 'stop' === get_theme_mod( 'prime2g_stop_wp_heartbeat' ) ) {
+global $pagenow;
+	if ( 'post.php' !== $pagenow && 'post-new.php' !== $pagenow ) {
+		wp_deregister_script( 'heartbeat' );
+		wp_register_script( 'heartbeat', false );
 	}
+}
 }
 }
 
 
 /**
  *	DISABLE WP AUTOP
- *	@since ToongeePrime Theme 1.0.51
+ *	@since 1.0.51
  */
 add_filter( 'the_content', 'prime2g_disable_wpautop', 0 );
 function prime2g_disable_wpautop( $content ) {
@@ -62,6 +59,29 @@ global $post;
 		remove_filter( 'the_excerpt', 'wpautop' );
 	}
 return $content;
+}
+
+
+/**
+ *	Add Shortcode Column To Template Parts Edit screen
+ *	@since 1.0.70
+ */
+add_filter( 'manage_prime_template_parts_posts_columns', 'prime2g_template_parts_posts_cols' );
+add_filter( 'manage_prime_template_parts_posts_custom_column', 'prime2g_template_parts_posts_custom_cols', 10, 2 );
+function prime2g_template_parts_posts_cols( $cols ) {
+$cols	=	[
+'cb'	=>	$cols[ 'cb' ],
+'title'	=>	__( 'Title', PRIME2G_TEXTDOM ),
+'taxonomy-template_parts_section'	=>	__( 'Template Parts Sections', PRIME2G_TEXTDOM ),
+'template_part_shortcode'	=>	__( 'Template Part Shortcode', PRIME2G_TEXTDOM ),
+];
+return $cols;
+}
+
+function prime2g_template_parts_posts_custom_cols( $col, $post_id ) {
+if ( 'template_part_shortcode' === $col ) {
+	echo '[prime_insert_template_part id="'. $post_id .'"]';
+}
 }
 
 

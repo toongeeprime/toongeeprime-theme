@@ -1,10 +1,10 @@
 Plugin Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
-Requires at least: 6.1
-Tested up to: 6.2
-Stable tag: 1.0.54
-Requires PHP: 7.4
+Requires at least: 6.3
+Tested up to: 6.4
+Stable tag: 1.0.70
+Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,8 @@ A WordPress theme with options for customization, design and development flexibi
 * Deprecated prime2g_include_post_types() & prime2g_exclude_post_types()
 * Header image CSS option added to 'remove_header' field
 * @Customizer: add code to <head> and <body>
+* Added 'device' parameter to prime_insert_template_part shortcode
+* prime2g_display_posts shortcode now works with multisite; added image_size, image_to_video, site_id and randomize_sites parameters
 
 = 1.0.60 =
 * prime2g_load_fonts_and_icons() renamed to prime2g_load_theme_fonts()

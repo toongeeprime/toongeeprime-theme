@@ -13,7 +13,7 @@ function prime2g_wp_query( array $args, $options = 'posts' ) {
  *	$get == string, for backwards compatibility
  *	$setCache & $useCache == false, not to break former output
  */
-// get_transient || get_site_transient
+#	get_transient || get_site_transient vs cache??
 $get		=	$options;
 $setCache	=	false;
 $useCache	=	false;
@@ -49,28 +49,9 @@ else {
 	if ( $setCache ) wp_cache_set( $cacheName, $loop, PRIME2G_POSTSCACHE, $cacheTime );
 }
 
-if ( $get === 'posts' ) return $loop->posts;
+if ( $get === 'posts' ) return $loop->posts;	# array
 if ( $get === 'count' ) return $loop->found_posts;	# not exactly necessary
-return $loop; # $get == null
-}
-
-
-
-function prime2g_defaults_query( $count, $tax_slug, $taxonomy = 'category', $ptype = 'post' ) {
-$args	=	array(
-	'post_type'		=>	$ptype,
-	'posts_per_page'	=>	$count,
-	'ignore_sticky_posts'	=>	true,
-	'tax_query'		=>	array(
-	array(
-		'taxonomy'	=>	$taxonomy,
-		'field'		=>	'slug',
-		'operator'	=>	'IN',
-		'terms'		=>	$tax_slug,
-	)
-	)
-);
-return prime2g_wp_query( $args );
+return $loop; # object when $get === null
 }
 
 

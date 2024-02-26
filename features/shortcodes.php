@@ -28,8 +28,14 @@ return prime2g_theme_mod_social_and_contacts( $address );
  */
 add_shortcode( 'prime_insert_template_part', 'prime2g_insert_template_part_shortcode' );
 function prime2g_insert_template_part_shortcode( $atts ) {
-$atts	=	shortcode_atts( [ 'id' => '1' ], $atts );
+$atts	=	shortcode_atts( [ 'id' => '1', 'device' => '' ], $atts );
 extract( $atts );
+
+$isMobile	=	wp_is_mobile();
+
+if ( in_array( $device, prime2g_devices_array()->desktops ) && $isMobile ) return;
+if ( in_array( $device, prime2g_devices_array()->mobiles ) && ! $isMobile ) return;
+
 
 $part	=	prime2g_insert_template_part( $id, false );
 
@@ -62,11 +68,11 @@ return prime2g_siteLogo( $darkLogo, $src );
 add_shortcode( 'prime_search_form', 'prime2g_searchform_shortcode' );
 function prime2g_searchform_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
-	'placeholder'	=>	'Keywords',
-	'required'		=>	'',
-	'buttontext'	=>	html_entity_decode( 'Go' ),
-	'label'			=>	'Search here',
-	'echo'			=>	false
+	'placeholder'=>	'Keywords',
+	'required'	=>	'',
+	'buttontext'=>	html_entity_decode( 'Go' ),
+	'label'		=>	'Search here',
+	'echo'		=>	false
 ], $atts );
 
 return prime2g_wp_block_search_form( $atts );
@@ -89,6 +95,7 @@ $js		=	'<script>p2getEl( "#'. $id .' iframe" ).setAttribute( "height", "'. $heig
 
 return '<div'. $vidID .' class="prime2g_embedded_media shortcode video">'. $embedded . '</div>' . $js;
 }
+
 
 /**
  *	Gets Text Content Only, for better html usage
@@ -244,7 +251,7 @@ $atts	=	shortcode_atts( array( 'url' => $home, 'users' => '' ), $atts );
 extract( $atts );
 
 if ( $users === 'logged out' ) {
-	if ( !$loggedin ) {
+	if ( ! $loggedin ) {
 		echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 	}
 }
@@ -258,6 +265,5 @@ if ( $users === 'logged in' ) {
 if ( empty( $users ) ) {
 	echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 }
-
 }
 

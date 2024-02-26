@@ -193,3 +193,12 @@ function prime2g_constant_is_true( string $constant, bool $for_network = true ) 
 	if ( $for_network !== false && ! is_multisite() ) return false;
 	return ( defined( $constant ) && constant( $constant ) === true );
 }
+
+/* @since 1.0.70 */
+function prime2g_devices_array() {
+return (object) [
+'desktops'	=>	[ 'desktop', 'desktops', 'laptop', 'laptops', 'computer', 'computers' ],
+'mobiles'	=>	[ 'mobile', 'mobiles', 'phone', 'phones', 'iphone', 'iphones', 'tablet', 'tablets' ],
+];
+}
+
