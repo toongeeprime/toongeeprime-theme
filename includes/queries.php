@@ -115,7 +115,7 @@ return $part;
 
 /**
  *	GET TEMPLATED POSTS QUERY OUTPUT
- *	@since ToongeePrime Theme 1.0.71
+ *	@since 1.0.71
  */
 function prime2g_get_posts_output( array $params = [] ) {
 $process	=	array_merge(
