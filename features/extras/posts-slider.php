@@ -74,16 +74,16 @@ $template	=	$template ?? 'prime2g_home_slideshow_template';
 <div class="prime_post_slides_wrap">
 	<div class="prime_slides_box prel">
 <?php
-$options	=	[ 'cacheName' => 'posts_slider_cache' ];
-$tax_query	=	[ 'taxonomy' => $taxonomy, 'operator' => 'IN', 'terms' => $slug ];
-$slides		=	prime2g_wp_query(
-[ 'posts_type' => $posttype, 'posts_per_page' => $count, 'orderby' => 'date', 'tax_query' => $tax_query ],
-$options
-);
-
-if ( $slides->have_posts() ) {
-	while ( $slides->have_posts() ) { $slides->the_post(); $template(); }
-}
+prime2g_get_posts_output( [
+'count'	=>	$count,
+'orderby'	=>	'date',
+'posts_type'=>	$posttype,
+'inornot'	=>	'IN',
+'taxonomy'	=>	$taxonomy,
+'terms'		=>	$slug,
+// 'cache_name'=>	'home_headlines_cache',
+'looptemplate'	=>	$template	# Template must do echo
+] );
 ?>
 	</div>
 	<div class="titles_box prel">

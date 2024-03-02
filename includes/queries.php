@@ -28,6 +28,9 @@ extract( $options );
 /**
  *	The cache-setting call should not "use" cache:
  *	Other calls can use the set cache
+ *
+ *	Not: caching yields static results &
+ *	MUST be reworked for instructed behaviour, probably by array
  */
 if ( $useCache ) {
 	$cached	=	wp_cache_get( $cacheName, PRIME2G_POSTSCACHE );
