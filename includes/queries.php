@@ -139,7 +139,8 @@ $process	=	array_merge(
 	'image_size'	=>	'medium',
 	'image_to_video'=>	'',
 	'site_id'	=>	null,
-	'randomize_sites'	=>	''
+	'randomize_sites'	=>	'',
+	'no_result'	=>	'Nothing found for this query!'
 ],
 $params
 );
@@ -232,7 +233,7 @@ $post	=	$loop->the_post();
 }
 else {
 if ( current_user_can( 'edit_posts' ) )
-	$output	.=	__( 'No entries found for this shortcode request.', PRIME2G_TEXTDOM );
+	$output	.=	__( $no_result, PRIME2G_TEXTDOM );
 }
 
 #	@since 1.0.70

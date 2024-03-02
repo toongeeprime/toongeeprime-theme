@@ -32,7 +32,8 @@ array(
 	'image_size'	=>	'medium',	#	@since 1.0.70
 	'image_to_video'=>	'',
 	'site_id'	=>	null,
-	'randomize_sites'	=>	''
+	'randomize_sites'	=>	'',
+	'no_result'	=>	'No entries found for this shortcode request'	#	@since 1.0.71
 ),
 $atts
 );
