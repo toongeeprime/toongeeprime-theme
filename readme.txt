@@ -18,7 +18,8 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.70 =
 * Homepage Slideshow
-* Added prime2g_fields_in_post_types(), prime2g_get_stickies_by_customizer(), prime2g_stickies_css(), prime2g_get_post_object_template()
+* Added prime2g_fields_in_post_types(), prime2g_get_stickies_by_customizer(), prime2g_stickies_css(), prime2g_get_post_object_template(), prime_url_is_ok()
+* Class: Prime2gJSBits
 * @includes: helpers-for-templates.php
 * Deprecated prime2g_include_post_types() & prime2g_exclude_post_types()
 * Header image CSS option added to 'remove_header' field
@@ -130,15 +131,13 @@ MAJOR UPDATE
 * add_theme_support( 'customize-selective-refresh-widgets' )
 
 = 1.0.49.05 =
-
 * Dark Theme Updates
 * Introduced ajax directory
 * Added $getSrc parameter to prime2g_siteLogo()
 * Add "preloaded" class when preloader is active & page is fully loaded
 * Reworked theme Classes
 
-= 1.0.49.00 =
-
+= 1.0.49 =
 * Added JS prime2g_get_sibling()
 * Added previous/next functionality to html slider
 * Added $darklogo parameter to prime2g_siteLogo()
@@ -152,17 +151,14 @@ MAJOR UPDATE
 * Introduced init directory, to offload functions.php
 
 = 1.0.48.50 =
-
 * Added prime2g_customizer_site_settings() & theme_mod: prime2g_footer_credit_append
 * Added JS prime2g_count_to(), prime2g_inViewport_get()
 
 = 1.0.48.10 =
-
 * Added prime2g_add_template_part()
 * Added JS function prime2g_class_on_scroll()
 
-= 1.0.48.00 =
-
+= 1.0.48 =
 * Tested on WP 6.1 requiring at least 6.0
 * Header image size @ Customizer
 * Created extras folder @features
@@ -171,25 +167,21 @@ MAJOR UPDATE
 * Added prime2g_add_jp_related_posts() to hook prime2g_after_post
 * Added prime2g_use_extras()
 
-= 1.0.47.00 =
-
+= 1.0.47 =
 * Added helper prime2g_get_country_by_code()
 * Created get-theme-template-file.php to separate prime2g_get_theme_template()
 * Created plugins folder to contain 3rd party plugins related functions
 * Added JetPack Infinite Scroll support
 
-= 1.0.46.00 =
-
+= 1.0.46 =
 * [prime2g_display_posts] now supports template attribute @ looptemplate
 * @ includes: Introduced ajax.php
 * Added prime2g_element_observerJQuery() to [prime2g_animation_script]
 
 = 1.0.45.50 =
-
 * Added prime2g_get_woo_mini_cart()
 
-= 1.0.45.00 =
-
+= 1.0.45 =
 * Added HTML slider 'frame' feature with JS and CSS shortcodes
 * Upgraded the function prime2g_posts_shortcode()
 * Added prime2g_get_archive_loop() to return template and prime2g_archive_loop() now echoes it
@@ -197,13 +189,11 @@ MAJOR UPDATE
 * Added prime2g_edit_entry_get() and prime2g_edit_entry() echoes it
 * Added prime2g_is_post_author()
 
-= 1.0.44.00 =
-
+= 1.0.44 =
 * WooCommerce Mini-cart workings
 * JS function with shortcode to add basic animation support
 
-= 1.0.43.00 =
-
+= 1.0.43 =
 * Introduced deprecated file
 * Deprecated query functions in favour of more concise new functions
 * Extended prime2g_post_object_template() to allow excerpts
@@ -214,85 +204,65 @@ MAJOR UPDATE
 * Other code updates and optimizations
 
 = 1.0.42.51 =
-
 * CSS and various edits
 
 = 1.0.42.50 =
-
 * Added Bootstrap icons via CSS... to delete WP icons later
 
 = 1.0.42.11 =
-
 * Header Image Attachment option in Customizer
 
-= 1.0.42.00 =
-
+= 1.0.42 =
 * Detect Post Type Archive Template
 
-= 1.0.41.00 =
-
+= 1.0.41 =
 * Added Front-page settings to Customizer
 
 = 1.0.40.971 =
-
 * Up to this update were Template detecting and CSS updates
 
 = 1.0.40.2 =
-
 * CSS and other edits.
 
 = 1.0.40 =
-
 * Added option to replace header image with post thumbnail. Default: replace
 
 = 1.0.39.1 =
-
 * Added wrapping tags to some text
 
 = 1.0.39 =
-
 * Add JS function to close mobile menu using CSS class: close_mobile_menu
 * CSS edits
 
 = 1.0.38 =
-
 * Add Edit post link to archive post entries
 
 = 1.0.37 =
-
 * Edit post link updated
 * Breadcrumbs avoids some errors
 
 = 1.0.36 =
-
 * Marked PHP 7.4 compatible
 * Automate Customizer Panel naming for active Child Theme
 
 = 1.0.35 =
-
 * Added placeholder image possibility for posts without thumbnails in archives
 
 = 1.0.3 =
-
 * Template selection process refactored
 
 = 1.0.25 =
-
 * Added Option to hide header in theme's custom templates
 * Added YouTube url to social media links in theme's Customizer options
 
 = 1.0.2 =
-
 * Added Empty Page template and accompanying edits
 
 = 1.0.1 =
-
 * Important Edits
 
 = 1.0 =
-
 * First release
-
 
 
 == Hooked Functions ==

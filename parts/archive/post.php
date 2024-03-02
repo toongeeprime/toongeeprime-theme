@@ -19,7 +19,7 @@ $options	=	[
 
 echo '<section id="archive_loop" class="posts_loop grid '. $cols .' prel">';
 
-	# Load posts loop
+	#	Run posts loop
 	while ( have_posts() ) {
 
 		the_post();
@@ -30,7 +30,7 @@ echo '<section id="archive_loop" class="posts_loop grid '. $cols .' prel">';
 
 echo '</section>';
 
-	# Prev/next page navigation
+	#	Prev/next page navigation
 	prime2g_prev_next();
 
 get_footer();

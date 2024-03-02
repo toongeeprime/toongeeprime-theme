@@ -57,14 +57,13 @@ echo $js;
 
 
 
-
 prime2g_conditional_customizer_js();
 function prime2g_conditional_customizer_js() {
 $scriptName	=	basename( $_SERVER[ 'PHP_SELF' ] );
 if ( $scriptName === 'customize.php' ) {
 if ( prime2g_design_by_network_home() && get_current_blog_id() !== 1 ) {
 
-$js	=	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" id="jQueryTmp"></script>
+$js	=	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" id="jQueryTmp"></script>
 <script id="prime2g_conditional_customizer_js">
 jQuery( document ).ready( function() {';
 
@@ -83,4 +82,5 @@ echo $js;
 }
 }
 }
+
 

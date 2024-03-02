@@ -36,16 +36,16 @@ let elmt	=	p2getEl( selector );
 document.addEventListener(
 	'keyup', function( event ) {
 	if ( event.defaultPrevented ) { return; }
-	let key = event.key || event.keyCode;
+	let key	=	event.key || event.keyCode;
 	if ( key === 'Escape' || key === 'Esc' || key === 27 ) {
-	let allElems = document.getElementsByClassName( 'prime' );
+	let allElems	=	document.getElementsByClassName( 'prime' );
 		while ( allElems.length > 0 ) { allElems[0].classList.remove( 'prime' ); }
 	}
 }
 );
 
 /**
- *	@since ToongeePrime Theme 1.0.48.10
+ *	@since 1.0.48.10
  */
 function prime2g_class_on_scroll( el, cls = 'pop', level = 200 ) {
 window.addEventListener( "scroll", ()=>{
@@ -59,7 +59,7 @@ if ( elmt ) {
 
 /**
  *	Counter
- *	@since ToongeePrime Theme 1.0.48.50
+ *	@since 1.0.48.50
  */
 function prime2g_count_to( speedNum = 100, clss = '.countEl' ) {
 const	countEls	=	p2getAll( clss );
@@ -85,7 +85,7 @@ runCount();
 
 /**
  *	Counter
- *	@since ToongeePrime Theme 1.0.49
+ *	@since 1.0.49
  */
 function prime2g_get_sibling( get, elem, sibClass = '' ) {
 
@@ -107,7 +107,7 @@ function prime2g_get_sibling( get, elem, sibClass = '' ) {
 
 /**
  *	Detect Mobile or TouchScreen Devices
- *	@since ToongeePrime Theme 1.0.51
+ *	@since 1.0.51
  */
 function prime2g_isMobile() { return ( 'ontouchstart' in document.documentElement ); }
 
@@ -124,7 +124,7 @@ return ( windowWidth < screenSize );
 }
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  *
  **
  *	Leave name so it can easily be removed if ever JS makes it inbuilt

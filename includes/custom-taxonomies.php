@@ -4,20 +4,26 @@
  *	CUSTOM TAXONOMIES
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.50.00
+ *	@since ToongeePrime Theme 1.0.50
  *	https://developer.wordpress.org/reference/functions/register_taxonomy/
  */
 
-add_action( 'init', 'prime2g_register_custom_taxonomies', 0 );
-
 if ( ! function_exists( 'prime2g_register_custom_taxonomies' ) ) {
+
+add_action( 'init', 'prime2g_register_custom_taxonomies', 0 );
 
 function prime2g_register_custom_taxonomies() {
 # 1.0.57
-$net_home_extras	=	prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' );
-if ( $net_home_extras ) switch_to_blog( 1 );
+if ( prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' ) ) {
+switch_to_blog( 1 );
+	$activate	=	get_theme_mod( 'prime2g_cpt_template_parts' );
+restore_current_blog();
+}
+else {
+	$activate	=	get_theme_mod( 'prime2g_cpt_template_parts' );
+}
 
-if ( get_theme_mod( 'prime2g_cpt_template_parts' ) ) {
+if ( $activate ) {
 #	Template Part Sections
 $labels	=	array(
 	'name'			=>	_x( 'Template Parts Sections', 'taxonomy general name', PRIME2G_TEXTDOM ),
@@ -49,7 +55,6 @@ $args	=	array(
 register_taxonomy( 'template_parts_section', 'prime_template_parts', $args );
 }
 
-if ( $net_home_extras ) restore_current_blog();
 }
 
 }

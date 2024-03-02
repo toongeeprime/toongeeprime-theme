@@ -202,3 +202,8 @@ return (object) [
 ];
 }
 
+function prime_url_is_ok( string $url ) {
+$headers = get_headers( $url );
+return stripos( $headers[0],"200 OK" ) ? true : false;
+}
+

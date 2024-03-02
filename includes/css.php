@@ -172,7 +172,7 @@ transition:0.3s;
 
 if ( 'togglers' === $menu_type ) {
 
-$css	.=	'#tog_menu_target{position:fixed;transition:0.3s;background:var(--content-background);
+$css	.=	'#tog_menu_target{position:fixed;transition:0.4s;background:var(--content-background);
 color:var(--content-text);top:var(--min-pad);bottom:var(--min-pad);right:var(--min-pad);left:var(--min-pad);
 box-shadow:0 10px 20px 10px rgba(0,0,0,0.3);margin:auto;max-width:700px;}
 #menu_toggbar{position:fixed;z-index:100500;top:50px;right:10px;}

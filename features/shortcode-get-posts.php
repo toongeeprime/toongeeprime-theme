@@ -27,11 +27,11 @@ array(
 	'use_cache'	=>	false,	#	should be used by outputting shortcodes in the group
 	'cache_name'=>	'prime2g_posts_shortcode',	#	should be named according to groups
 	'offset'	=>	0,
-	'device'	=>	0,	#	@since 1.0.55
+	'device'	=>	'',	#	@since 1.0.55
 	'pagination'=>	0,	#	works when shortcode is used in a "page"
 	'image_size'	=>	'medium',	#	@since 1.0.70
 	'image_to_video'=>	'',
-	'site_id'	=>	'',
+	'site_id'	=>	null,
 	'randomize_sites'	=>	''
 ),
 $atts
@@ -43,7 +43,6 @@ $isMobile	=	wp_is_mobile();
 
 if ( in_array( $device, prime2g_devices_array()->desktops ) && $isMobile ) return;
 if ( in_array( $device, prime2g_devices_array()->mobiles ) && ! $isMobile ) return;
-
 
 $termsArray	=	explode( ',', $terms );
 if ( count( $termsArray ) > 1 ) {
@@ -86,14 +85,15 @@ $isNetwork	=	is_multisite();
 if ( $isNetwork ) {
 
 #	$site_id should override site randomization
-if ( ! empty( $site_id ) ) {
+if ( $site_id ) {
 	$site_id	=	(int) $site_id;
 }
-
-if ( empty( $site_id ) && $randomize_sites === 'yes' ) {
-$siteIDs	=	get_sites( [ 'fields' => 'ids' ] );
-shuffle( $siteIDs );
-$site_id	=	$siteIDs[0];
+else {
+if ( $randomize_sites === 'yes' ) {
+	$siteIDs	=	get_sites( [ 'fields' => 'ids' ] );
+	shuffle( $siteIDs );
+	$site_id	=	$siteIDs[0];
+}
 }
 
 if ( $site_id ) switch_to_blog( $site_id );
@@ -126,11 +126,11 @@ $post	=	$loop->the_post();
 }
 else {
 if ( current_user_can( 'edit_posts' ) )
-	$template	.=	__( 'No entries found for this shortcode request', PRIME2G_TEXTDOM );
+	$template	.=	__( 'No entries found for this shortcode request.', PRIME2G_TEXTDOM );
 }
 
 #	@since 1.0.70
-if ( $isNetwork && ! empty( $site_id ) ) restore_current_blog();
+if ( $isNetwork && $site_id ) restore_current_blog();
 
 $template	.=	'</div>';
 

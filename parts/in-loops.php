@@ -148,7 +148,7 @@ echo prime2g_get_post_object_template( $options );
  */
 if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
 function prime2g_get_post_object_template( array $options ) {	// required so $post is defined
-$post	=	$excerpt = $metas = null;
+$post	=	$excerpt = $metas = $readmore = null;
 $size	=	'large';
 $length	=	25;
 
@@ -184,7 +184,7 @@ $template	.=	'</a></div>
 <div class="entry_text">';
 if ( $metas ) $template	.=	prime2g_archive_post_top_filter_part( $post );
 $template	.=	'<a href="'. $link .'" title="Read this entry"><h2 class="entry_title">'. $title .'</h2></a>';
-if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post );
+if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post, $readmore );
 $template	.=	prime2g_archive_post_footer_filter_part();
 $template	.=	'</div>
 </article>';
@@ -356,7 +356,7 @@ $footer	=	false;
 $tag	=	'h2';
 $readmore	=	' - Read more';
 $edit_link	=	true;
-$entryClasses	=	'';
+$entryClasses	=	'';	# string|string[]
 $switch_img_vid	=	false;
 $loop_post_header_template	=	$loop_post_footer_template	=	null;
 

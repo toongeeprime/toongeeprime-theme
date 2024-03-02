@@ -855,7 +855,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{
 }
 .main-menu{
 	background:var(--content-background); right:var(--min-pad); position:fixed;
-	left:0; bottom:0; padding-bottom:var(--min-pad);
+	left:0; bottom:0; padding-bottom:var(--min-pad); top:0; padding-top:46px;
 	transition:0.4s; transform:translateX(-200%); overflow-y:auto;
 }
 .admin-bar .main-menu{

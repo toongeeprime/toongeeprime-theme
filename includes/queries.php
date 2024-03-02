@@ -13,22 +13,20 @@ function prime2g_wp_query( array $args, $options = 'posts' ) {
  *	$get == string, for backwards compatibility
  *	$setCache & $useCache == false, not to break former output
  */
+
 #	get_transient || get_site_transient vs cache??
 $get		=	$options;
-$setCache	=	false;
-$useCache	=	false;
+$setCache	=	$useCache	=	false;
 
 if ( is_array( $options ) ) {
 	$get		=	null;
-	$setCache	=	true;
-	$useCache	=	true;
 	$cacheName	=	'prime2g_wp_query';
 	$cacheTime	=	PRIME2G_CACHE_EXPIRES;	# @since 1.0.61
 extract( $options );
 }
 
 /**
- *	The cache-setting call should not "use" cache
+ *	The cache-setting call should not "use" cache:
  *	Other calls can use the set cache
  */
 if ( $useCache ) {
@@ -39,15 +37,15 @@ if ( $useCache ) {
 	}
 	else {
 		$loop	=	new WP_Query( $args );
-		wp_reset_postdata();
 		wp_cache_set( $cacheName, $loop, PRIME2G_POSTSCACHE, $cacheTime );
 	}
 }
 else {
 	$loop	=	new WP_Query( $args );
-	wp_reset_postdata();
 	if ( $setCache ) wp_cache_set( $cacheName, $loop, PRIME2G_POSTSCACHE, $cacheTime );
 }
+
+wp_reset_postdata();
 
 if ( $get === 'posts' ) return $loop->posts;	# array
 if ( $get === 'count' ) return $loop->found_posts;	# not exactly necessary

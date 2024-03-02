@@ -80,8 +80,10 @@ return $cols;
 
 function prime2g_template_parts_posts_custom_cols( $col, $post_id ) {
 if ( 'template_part_shortcode' === $col ) {
-	echo '[prime_insert_template_part id="'. $post_id .'"]';
+	echo '<div id="scid_'. $post_id .'" class="scids" onclick="p2gCopyToClipBoard(this);">[prime_insert_template_part id="'. $post_id .'"]</div>';
 }
+Prime2gJSBits::copy_to_clipboard();
 }
+
 
 
