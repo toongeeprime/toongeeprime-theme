@@ -185,7 +185,7 @@ $options	=	array(
 	'cacheName'	=>	$cache_name
 );
 
-$output	=	$set_cache ? '<div class="hide scode-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
+$output	=	$set_cache ? '<div class="hide query-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
 
 #	@since 1.0.70
 $isNetwork	=	is_multisite();
