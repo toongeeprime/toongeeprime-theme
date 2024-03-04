@@ -12,10 +12,9 @@ add_action( 'template_redirect', 'prime2g_close_down_website' );
 function prime2g_close_down_website() {
 
 $shutDown	=	get_theme_mod( 'prime2g_website_shutdown' );
-if ( empty( $shutDown ) ) return;
 
-#	Other return conditions
-if ( is_admin() || is_user_logged_in() ||
+#	Return conditions
+if ( empty( $shutDown ) || is_admin() || is_user_logged_in() ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
 ) return;
 
@@ -25,25 +24,32 @@ $add_js		=	function_exists( 'prime2g_add_shutdown_js' ) ? prime2g_add_shutdown_j
 
 /**
  *	OPTION TO USE A SHUTDOWN PAGE
- *	@since ToongeePrime Theme @ 1.0.55
+ *	@since @ 1.0.55
  */
-$usePage	=	get_theme_mod( 'prime2g_shutdown_display' );
-if ( 'use_page' === $usePage ) {
+if ( 'use_page' === get_theme_mod( 'prime2g_shutdown_display' ) ) {
 
-if ( is_archive() && ! is_home() || is_singular() && ! is_front_page() ) {
-	wp_safe_redirect( home_url() ); exit;
+if ( is_singular() && ! is_front_page() || is_archive() && ! is_home() ) { wp_safe_redirect( home_url() ); exit; }
+
+$page_id	=	get_theme_mod( 'prime2g_shutdown_page_id' );
+
+if ( empty( $page_id ) || is_front_page() && is_home() ) {
+	prime2g_close_down_template( $shutDown );	#	use raw template
+	exit;
 }
 
-$pageID	=	(int) get_theme_mod( 'prime2g_shutdown_page_id' );
-
-$page	=	new WP_Query( [ 'page_id' => $pageID ] );
+$pageID	=	(int) $page_id;
+$page	=	new WP_Query( [ 'post_type' => 'page', 'p' => $pageID ] );
 
 if ( $page->have_posts() ) {
+get_header();
+
+	while ( $page->have_posts() ) {
 	$page->the_post();
 
-if ( get_post_meta( get_the_ID(), 'remove_sidebar', true ) === 'remove' ) prime2g_removeSidebar();
-
-get_header();
+if ( get_post_meta( get_the_ID(), 'remove_sidebar', true ) === 'remove' ) {
+	prime2g_removeSidebar();
+	echo '<style>#content{display:block;}</style>';
+}
 
 	prime2g_before_post();
 
@@ -52,9 +58,9 @@ get_header();
 	prime2g_link_pages();
 
 	prime2g_after_post();
-
+break;
+	}
 get_footer();
-
 }
 
 exit;
@@ -90,7 +96,7 @@ background-size:cover;background-position:center;background-image:url('. $backgr
 </style>
 </head>';
 
-	//	Run Close-down
+	#	Run Closedown
 	echo '<body class="coming_soon '. implode( ' ', get_body_class() ) .'">';
 
 	wp_body_open();
@@ -106,7 +112,7 @@ background-size:cover;background-position:center;background-image:url('. $backgr
 
 	echo '</body></html>';
 
-	exit;
+exit;
 }
 
 
@@ -132,3 +138,4 @@ $msg	=	'maintenance' === $shutDown ? '... and will be back soon' : 'Thank you fo
 	echo '</main>';
 }
 }
+

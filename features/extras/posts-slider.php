@@ -82,7 +82,7 @@ prime2g_get_posts_output( [
 'taxonomy'	=>	$taxonomy,
 'terms'		=>	$slug,
 // 'cache_name'=>	'home_headlines_cache',
-'looptemplate'	=>	$template	# Template must do echo
+'looptemplate'	=>	$template	# Template must echo
 ] );
 ?>
 	</div>
@@ -92,7 +92,8 @@ prime2g_get_posts_output( [
 		echo '<p class="slide_entry_title" title="View slide '. $c+1 .'"><span>'. $c+1 .'</span></p>';
 	}
 	?>
-	<span id="post_s_rzmr" class="ps_rzmr">Resume</span></div>
+	<span id="post_s_rzmr" class="ps_rzmr">Resume</span>
+	</div>
 </div>
 
 </section><!-- # -->

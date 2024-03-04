@@ -48,9 +48,13 @@ function prime2g_is_plain_page() { function define_2gPlainPage(){} }
  *	@since 1.0.47
  */
 function prime2g_get_country_by_code( $code ) {
-	// $countries	=	json_decode( file_get_contents( "http://country.io/names.json" ), true );
-	$countries	=	json_decode( file_get_contents( "https://dev.akawey.com/cdn/countrynames.json" ), true );
-	return $countries[ $code ];
+	if ( $cached = wp_cache_get( 'country_codes_json', PRIME2G_CACHEGROUP ) ) { return $cached; }
+	else {
+		//	$countries	=	json_decode( file_get_contents( "http://country.io/names.json" ), true );
+		$countries	=	json_decode( file_get_contents( "https://dev.akawey.com/cdn/countrynames.json" ), true );
+		wp_cache_set( 'country_codes_json', $countries[ $code ], PRIME2G_CACHEGROUP, MONTH_IN_SECONDS + 2173 );
+		return wp_cache_get( 'country_codes_json', PRIME2G_CACHEGROUP );
+	}
 }
 
 /**
@@ -206,4 +210,5 @@ function prime_url_is_ok( string $url ) {
 $headers = get_headers( $url );
 return stripos( $headers[0],"200 OK" ) ? true : false;
 }
+
 

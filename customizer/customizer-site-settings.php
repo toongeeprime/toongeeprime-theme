@@ -13,7 +13,7 @@ function prime2g_customizer_site_settings( $wp_customize ) {
 
 $get	=	[ 'index' => 'ID', 'value' => 'post_title', 'emptyoption' => true ];
 $args	=	[ 'post_type' => 'page', 'posts_per_page' => -1, 'post_status' => 'publish' ];
-$option	=	[ 'cacheName' => 'getpages', 'get' => 'posts' ];
+$option	=	[ 'cache_name' => 'getpages', 'get' => 'posts' ];
 $pages	=	prime2g_get_postsdata_array( $get, $args, $option );
 
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
@@ -38,7 +38,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	 *	SHUTDOWN DISPLAY
 	 *	@since @ 1.0.55
 	 */
-	function prime2g_c_siteNotSD() { return ( ! empty( get_theme_mod( 'prime2g_website_shutdown' ) ) ); }
+	function prime2g_c_siteIsSD() { return ( ! empty( get_theme_mod( 'prime2g_website_shutdown' ) ) ); }
 
 	$wp_customize->add_setting( 'prime2g_shutdown_display', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_shutdown_display', array(
@@ -50,7 +50,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 			''		=>	__( 'Default', PRIME2G_TEXTDOM ),
 			'use_page'	=>	__( 'Use a Page for Shutdown', PRIME2G_TEXTDOM )
 		),
-		'active_callback'	=> 'prime2g_c_siteNotSD'
+		'active_callback'	=> 'prime2g_c_siteIsSD'
 	) );
 
 	$wp_customize->add_setting( 'prime2g_shutdown_page_id', $postMsg_text );
@@ -61,7 +61,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		'section'	=>	'prime2g_site_settings_section',
 		'choices'	=>	$pages,
 		'active_callback'	=> function() {
-			return ( 'use_page' === get_theme_mod( 'prime2g_shutdown_display' ) && prime2g_c_siteNotSD() );
+			return ( 'use_page' === get_theme_mod( 'prime2g_shutdown_display' ) && prime2g_c_siteIsSD() );
 		}
 	) );
 

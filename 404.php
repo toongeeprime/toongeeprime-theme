@@ -7,7 +7,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-if ( ! get_theme_mod( 'prime2g_use_page_for404' ) && ! function_exists( 'define_2gRMVSidebar' ) ) prime2g_removeSidebar();
+$use_page	=	get_theme_mod( 'prime2g_use_page_for404' );
+
+if ( ! $use_page && ! function_exists( 'define_2gRMVSidebar' ) ) prime2g_removeSidebar();
 
 get_header();
 
@@ -16,7 +18,7 @@ get_header();
  *	@since ToongeePrime Theme 1.0.55
  */
 
-if ( get_theme_mod( 'prime2g_use_page_for404' ) ) {
+if ( $use_page ) {
 
 $pageID	=	(int) get_theme_mod( 'prime2g_404error_page_id' );
 $page	=	prime2g_wp_query( [ 'page_id' => $pageID ], [ 'cacheName' => 'custom_404error_page' ] );
@@ -42,6 +44,7 @@ in_array( get_theme_mod( 'prime2g_remove_sidebar_in_singular' ), [ 'and_pages', 
 
 	the_content();
 
+	prime2g_after_post();
 }
 }
 else {
@@ -51,6 +54,13 @@ if ( ! function_exists( 'define_2gRMVSidebar' ) ) prime2g_removeSidebar();
 		<div class="centered">
 		<h1>' . __( 'Custom Error Page Not Set', PRIME2G_TEXTDOM ) . '!</h1>';
 		esc_html_e( 'No page is set for custom 404 error page.', PRIME2G_TEXTDOM );
+		echo '</div>';
+	}
+	else {
+		echo '<style>#content{grid-template-columns:1fr;}</style>
+		<div class="centered">
+		<h1>' . __( '404 Error!', PRIME2G_TEXTDOM ) . '!</h1>';
+		esc_html_e( 'Not Found!', PRIME2G_TEXTDOM );
 		echo '</div>';
 	}
 }
@@ -67,10 +77,9 @@ get_search_form();
 
 echo '</section>';
 
+}
 
 prime2g_below_posts_widgets();
-
-}
 
 get_footer();
 

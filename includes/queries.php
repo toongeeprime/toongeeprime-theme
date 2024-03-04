@@ -11,48 +11,45 @@
 function prime2g_wp_query( array $args, $options = 'posts' ) {
 /**
  *	$get == string, for backwards compatibility
- *	$setCache & $useCache == false, not to break former output
+ *	$set_cache & $use_cache == false, not to break former output
  */
 
 #	get_transient || get_site_transient vs cache??
 $get		=	$options;
-$setCache	=	$useCache	=	false;
+$set_cache	=	$use_cache	=	false;
 
 if ( is_array( $options ) ) {
 	$get		=	null;
-	$cacheName	=	'prime2g_wp_query';
+	$cache_name	=	'prime2g_wp_query';
 	$cacheTime	=	PRIME2G_CACHE_EXPIRES;	# @since 1.0.61
 extract( $options );
 }
 
 /**
- *	The cache-setting call should not "use" cache:
+ *	The cache-setting call should not "use" cache
  *	Other calls can use the set cache
- *
- *	Not: caching yields static results &
- *	MUST be reworked for instructed behaviour, probably by array
  */
-if ( $useCache ) {
-	$cached	=	wp_cache_get( $cacheName, PRIME2G_POSTSCACHE );
+if ( $use_cache ) {
+	$cached	=	wp_cache_get( $cache_name, PRIME2G_POSTSCACHE );
 
 	if ( false !== $cached ) {
-		$loop	=	$cached;
+		return $cached;
 	}
 	else {
 		$loop	=	new WP_Query( $args );
-		wp_cache_set( $cacheName, $loop, PRIME2G_POSTSCACHE, $cacheTime );
+		$loop	=	$get === 'posts' ? $loop->posts : $loop;
+		wp_cache_set( $cache_name, $loop, PRIME2G_POSTSCACHE, $cacheTime );
 	}
 }
 else {
 	$loop	=	new WP_Query( $args );
-	if ( $setCache ) wp_cache_set( $cacheName, $loop, PRIME2G_POSTSCACHE, $cacheTime );
+	$loop	=	$get === 'posts' ? $loop->posts : $loop;
+	if ( $set_cache ) wp_cache_set( $cache_name, $loop, PRIME2G_POSTSCACHE, $cacheTime );
 }
 
 wp_reset_postdata();
 
-if ( $get === 'posts' ) return $loop->posts;	# array
-if ( $get === 'count' ) return $loop->found_posts;	# not exactly necessary
-return $loop; # object when $get === null
+return $loop; # object if $get === null || array
 }
 
 
@@ -96,7 +93,7 @@ $args	=	array(
 	'posts_per_page'	=>	-1
 );
 
-$options	=	[ 'cacheName' => 'prime2g_template_parts' ];
+$options	=	[ 'cache_name' => 'prime2g_template_parts' ];
 
 $parts	=	prime2g_wp_query( $args, $options );
 
@@ -183,9 +180,9 @@ if ( $set_cache === 'yes' ) $set_cache = true;
 if ( $use_cache === 'yes' ) $use_cache = true;
 
 $options	=	array(
-	'setCache'	=>	$set_cache,
-	'useCache'	=>	$use_cache,
-	'cacheName'	=>	$cache_name
+	'set_cache'	=>	$set_cache,
+	'use_cache'	=>	$use_cache,
+	'cache_name'	=>	$cache_name
 );
 
 $output	=	$set_cache ? '<div class="hide query-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
@@ -251,5 +248,4 @@ if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
 wp_reset_postdata();
 return $output;
 }
-
 

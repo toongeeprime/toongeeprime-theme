@@ -16,6 +16,9 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.72 =
+* Fixed website shutdown loophole
+
 = 1.0.71 =
 * Added prime2g_get_posts_output() and use in prime2g_posts_shortcode()
 

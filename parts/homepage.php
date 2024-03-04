@@ -15,7 +15,7 @@ add_action( 'prime2g_after_header', 'prime2g_home_headlines', 12 );
 if ( ! function_exists( 'prime2g_headlines_loop' ) ) {
 function prime2g_headlines_loop( $post ) {
 return prime2g_get_archive_loop_post_object( [
-'post' => $post, 'size' => 'medium', 'length' => 20, 'metas' => false, 'switch_img_vid' => true
+	'post' => $post, 'size' => 'medium', 'length' => 20, 'metas' => false, 'switch_img_vid' => true
 ] );
 }
 }
@@ -33,7 +33,6 @@ return '<style id="headlines_css">.home_headlines .display{align-items:start;}
 }
 }
 }
-
 
 
 if ( ! function_exists( 'prime2g_home_headlines' ) ) {
@@ -60,7 +59,7 @@ $cat	=	null;
 		$term_name	=	get_term_by( 'slug', $slug, get_theme_mod( 'prime2g_slideshow_taxonomy', 'category' ) )->name ?: '*Check Slider Term';
 	}
 
-$options	=	[ 'useCache' => false, 'setCache' => false ];
+$options	=	[ 'use_cache' => false, 'set_cache' => false ];
 $tax_query	=	[ 'taxonomy' => 'category', 'operator' => 'IN', 'terms' => $slug ];
 
 $set_1	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
@@ -111,5 +110,4 @@ $set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 
 
 }
 }
-
 
