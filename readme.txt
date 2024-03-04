@@ -16,6 +16,11 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.73 =
+* Added: prime2g_admin_metabox_css(), prime2g_metabox_javascript()
+* File: custom-fields-js.php @includes
+* Folder: deprecated
+
 = 1.0.72 =
 * Fixed website shutdown loophole
 
@@ -24,7 +29,7 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.70 =
 * Homepage Slideshow
-* Added prime2g_fields_in_post_types(), prime2g_get_stickies_by_customizer(), prime2g_stickies_css(), prime2g_get_post_object_template(), prime_url_is_ok()
+* Added: prime2g_fields_in_post_types(), prime2g_get_stickies_by_customizer(), prime2g_stickies_css(), prime2g_get_post_object_template(), prime_url_is_ok()
 * Class: Prime2gJSBits
 * @includes: helpers-for-templates.php
 * Deprecated prime2g_include_post_types() & prime2g_exclude_post_types()

@@ -11,13 +11,13 @@ add_action( 'template_redirect', 'prime2g_close_down_website' );
 
 function prime2g_close_down_website() {
 
+/* NOTE: WordPress still preloads frontpage object */
 $shutDown	=	get_theme_mod( 'prime2g_website_shutdown' );
 
 #	Return conditions
 if ( empty( $shutDown ) || is_admin() || is_user_logged_in() ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
 ) return;
-
 
 $add_css	=	function_exists( 'prime2g_add_shutdown_css' ) ? prime2g_add_shutdown_css() : '';
 $add_js		=	function_exists( 'prime2g_add_shutdown_js' ) ? prime2g_add_shutdown_js() : '';
@@ -138,4 +138,5 @@ $msg	=	'maintenance' === $shutDown ? '... and will be back soon' : 'Thank you fo
 	echo '</main>';
 }
 }
+
 

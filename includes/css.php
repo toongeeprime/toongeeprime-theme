@@ -408,3 +408,22 @@ return '#container{top:46px;}
 
 /** @since 1.0.70 End **/
 
+
+
+/**
+ *	@since 1.0.73
+ */
+if ( ! function_exists( 'prime2g_admin_metabox_css' ) ) {
+function prime2g_admin_metabox_css() {
+$css	=	'
+.prime2g_postbox{border:0;}
+.prime2g_postbox .postbox-header{background:#222;color:#fff;border:0;}
+.prime2g_postbox .postbox-header h2,.prime2g_postbox .postbox-header button,.prime2g_postbox .toggle-indicator{color:#fff;}
+@media(min-width:681px){
+}
+@media(min-width:821px){
+}';
+return $css;
+}
+}
+

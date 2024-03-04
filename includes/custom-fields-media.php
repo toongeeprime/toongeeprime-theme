@@ -23,11 +23,8 @@ add_meta_box(
 
 function prime2g_mediacfields_metadivs( $post ) { ?>
 <div class="prime2g_meta_box">
-<style>
-	#prime2g_media_cfields{box-shadow:0px 3px 5px #ccc;}
-	#prime2g_media_cfields:hover{box-shadow:0px 3px 5px #aaa;}
-	<?php prime2g_custom_mbox_css(); ?>
-</style>
+<?php prime2g_custom_mbox_css(); ?>
+
 <div class="meta-options prime2g_field">
 	<label for="video_url">Video URL</label>
 	<input type="url" name="video_url" id="video_url" value="<?php echo esc_url( $post->video_url ); ?>" />

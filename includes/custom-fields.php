@@ -37,12 +37,14 @@ if ( $postSubtitle )
 
 /**
  *	METABOXES CSS
- *	@since ToongeePrime Theme 1.0.58
+ *	@since 1.0.58, include <style> tags @since 1.0.73
  */
 function prime2g_custom_mbox_css() {
-if ( ! defined( 'PRIME_ADD_CMETABOX_CSS' ) ) { ?>
-#prime2g_settings_fields{box-shadow:0px 3px 5px #ccc;}
-#prime2g_settings_fields:hover{box-shadow:0px 3px 5px #aaa;}
+if ( ! defined( 'PRIME_ADD_CMETABOX_CSS' ) ) {
+define( 'PRIME_ADD_CMETABOX_CSS', true ); ?>
+<style id="prime2gMetaBoxCSS">
+.prime2g_postbox{box-shadow:0px 3px 5px #ccc;}
+.prime2g_postbox:hover{box-shadow:0px 3px 5px #aaa;}
 .prime2g_meta_box{display:grid;gap:10px;}
 .prime2g_meta_box input,.prime2g_meta_box select,.prime2g_meta_box textarea{border-radius:0;}
 .prime2g_field{display:contents;}
@@ -50,8 +52,9 @@ if ( ! defined( 'PRIME_ADD_CMETABOX_CSS' ) ) { ?>
 .hide{display:none;}
 .checkboxes label{font-weight:normal;}
 .hr{border-bottom:1px solid;margin:15px 0;display:block;}
+<?php echo prime2g_admin_metabox_css(); ?>
+</style>
 <?php
-define( 'PRIME_ADD_CMETABOX_CSS', true );
 }
 }
 
@@ -101,12 +104,7 @@ function prime2g_meta_fieldset_1() {
 #	Custom Fieldset 1
 function prime2g_cFields_metadivs( $post ) { ?>
 <div class="prime2g_meta_box">
-
-<style>
-	#prime2g_prime_fields1{box-shadow:0px 3px 5px #ccc;}
-	#prime2g_prime_fields1:hover{box-shadow:0px 3px 5px #aaa;}
-	<?php prime2g_custom_mbox_css(); ?>
-</style>
+<?php prime2g_custom_mbox_css(); ?>
 
 <?php if ( prime2g_fields_in_post_types()->fields1_excludes ) { ?>
 
@@ -145,6 +143,17 @@ if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type
 
 <?php } ?>
 
+<?php
+/* Condition added @since 1.0.73 */
+if (
+$post->post_type === 'page' && $post->ID != get_option('page_on_front') && $post->ID == get_theme_mod( 'prime2g_shutdown_page_id' )
+&& ! empty( get_theme_mod( 'prime2g_website_shutdown' ) )
+) {
+	echo '<div class="prime2gMetaboxNotice">
+	<h3>Header controls are at the page set as Static Homepage</h3>
+	</div>';
+}
+else { ?>
 <div class="meta-options prime2g_field">
 	<label for="remove_header">Remove Default Header?</label>
 	<select id="remove_header" class="prime2g_options" name="remove_header">
@@ -153,7 +162,7 @@ if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type
 		<option value="header_image_css" <?php if ( $post->remove_header === 'header_image_css' ) echo 'selected'; ?>>Use Header Image CSS</option>
 	</select>
 </div>
-
+<?php } ?>
 
 <hr class="hr" />
 
@@ -209,12 +218,14 @@ $nav_menus	=	get_registered_nav_menus(); ?>
 
 /**
  *	FOR THEME'S TEMPLATE PARTS
+ *	Add data about post in this box
+ *
  *	@since 1.0.50
  */
 add_action( 'add_meta_boxes', 'prime2g_template_part_boxes' );
 function prime2g_template_part_boxes() {
 add_meta_box(
-	'prime2g_fieldsbox_2', __( 'Shortcode', PRIME2G_TEXTDOM ),
+	'prime2g_postdata_box', __( 'Shortcode', PRIME2G_TEXTDOM ),
 	'prime2g_cFields_metadivs2', 'prime_template_parts', 'side', 'high'
 );
 }
@@ -263,11 +274,7 @@ $pType_obj	=	get_post_type_object( $post->post_type );
 $pType_name	=	$pType_obj->labels->singular_name;
 ?>
 <div class="prime2g_meta_box">
-<style>
-	#prime2g_settings_fields{box-shadow:0px 3px 5px #ccc;}
-	#prime2g_settings_fields:hover{box-shadow:0px 3px 5px #aaa;}
-	<?php prime2g_custom_mbox_css(); ?>
-</style>
+<?php prime2g_custom_mbox_css(); ?>
 
 <div class="meta-options prime2g_field">
 	<label for="prevent_caching">Cache This <?php echo $pType_name; ?></label>
@@ -300,11 +307,7 @@ add_meta_box(
 
 function prime2g_field_extras_callback( $post ) { ?>
 <div class="prime2g_meta_box">
-<style>
-	#prime2g_extras_fields{box-shadow:0px 3px 5px #ccc;}
-	#prime2g_extras_fields:hover{box-shadow:0px 3px 5px #aaa;}
-	<?php prime2g_custom_mbox_css(); ?>
-</style>
+<?php prime2g_custom_mbox_css(); ?>
 
 <div class="meta-options prime2g_field">
 	<label for="font_url">Google Font URL</label>
