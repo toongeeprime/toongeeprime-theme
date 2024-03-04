@@ -34,7 +34,7 @@ class Prime2gJSBits {
 	if ( $get === 'copied_to_clip' ) {
 	return '#jsBit_copiedtoclip{position:fixed;bottom:5px;right:10px;transform:translateY(120%);transition:0.3s;z-index:99999;font-size:110%;font-weight:600;letter-spacing:1px;background:#f7f7f7;color:#000;padding:5px 10px;margin:0;line-height:1;border-radius:5px;box-shadow:0 3px 7px rgba(0,0,0,0.3);}
 	.prime#jsBit_copiedtoclip{transform:translate(0);}
-	.highlight{background:var(--content-text);color:var(--content-background);}';
+	.highlight{background:blue;color:#fff;}';
 	}
 
 	}
@@ -43,7 +43,7 @@ class Prime2gJSBits {
 	/**
 	 *	JS CODES
 	 */
-	public static function copy_to_clipboard( bool $tags = true ) {
+	public static function copy_to_clipboard( bool $run = false, bool $tags = true ) {
 	if ( defined( 'P2GJSBIT_CTCLIPB' ) ) return;	//	Prevent multiple instances
 	define( 'P2GJSBIT_CTCLIPB', true );
 
@@ -53,12 +53,34 @@ class Prime2gJSBits {
 $js	=	$tags ? '<script id="p2bit_c2clipboard">' : '';
 
 $js	.=	self::set_class() . self::class_by_timeout();
+$js	.=	$run ? 'p2gCopyToClipBoard( null )' : '';
 $js	.=	'
-function p2gCopyToClipBoard( elmt ) {
-var copyFrom	=	( typeof elmt === "object" ) ? elmt : p2getEl( elmt );
-copyFrom.addEventListener( "click", ()=>{
-event.preventDefault();
+function p2gCopyToClipBoard( elmt = null ) {
+if ( null === elmt ) {
+	p2getAll( ".p2gClipCopyThis" ).forEach( cp => {
+		cp.setAttribute( "onclick", "p2gDoCopyToClipBoard(this);" );
+		cp.setAttribute( "title", "Click to copy" );
+	} );
+}
+else {
+var cp	=	typeof elmt === "object" ? elmt : p2getEl( elmt );
+p2gDoCopyToClipBoard( cp );
+}
+}
+
+function p2gDoCopyToClipBoard( copyFrom ) {
+function doC2CUX() {
+	p2gClassByTimeout( [ copyFrom, "#jsBit_copiedtoclip" ], 0, [ "highlight", "prime" ] );
+	p2gClassByTimeout( [ copyFrom, "#jsBit_copiedtoclip" ], 5000, [ "highlight", "prime" ], "remove" );
+}
+
 try {
+if ( copyFrom.tagName.toLowerCase() === "input" ) {	/* review textarea and button */
+	copyFrom.select();
+	if ( document.execCommand( "copy" ) ) { doC2CUX(); }
+	else { console.log( "Failed to copy text!" ); }
+}
+else {
 	var range	=	document.createRange();
 	window.getSelection().removeAllRanges();	/* clear current selection */
 	range.selectNodeContents( copyFrom );
@@ -66,15 +88,15 @@ try {
 
 	if ( selectedString ) {
 		navigator.clipboard.writeText( selectedString );
-		p2gClassByTimeout( [ copyFrom, "#jsBit_copiedtoclip" ], 0, [ "highlight", "prime" ] );
-		p2gClassByTimeout( [ copyFrom, "#jsBit_copiedtoclip" ], 5000, [ "highlight", "prime" ], "remove" );
-		console.log( selectedString );
+		doC2CUX();
+		// console.log( selectedString );
 	}
 	else { console.log( "Failed to copy text!" ); }
 }
+}
 catch (error) { console.error( error.message ); }
-} );
-}';
+}
+';
 
 $js	.=	$tags ? '</script>' : '';
 
