@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: CUSTOM LOGIN PAGE
  *	Forked: https://github.com/wp-plugins/wps-hide-login/blob/master/wps-hide-login.php
@@ -10,10 +9,11 @@
  *	***			Class called @ login-page.php
  */
 
+if ( ! class_exists( 'Prime2gLoginPage' ) ) {
+
 class Prime2gLoginPage {
 
 		private $wp_login_php;
-
         /**
          *	Instance of this class
          *	@var object
@@ -74,7 +74,7 @@ class Prime2gLoginPage {
             add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 2 );
 			add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
 
-			add_action( 'login_header', [ $this, 'login_header' ] );
+			add_action( 'login_header', [ $this, 'login_page_content' ] );
 			add_filter( 'login_url', [ $this, 'login_url' ], 10, 3 );
 			add_filter( 'retrieve_password_message', [ $this, 'password_reset_message' ], 20, 2 );
 
@@ -125,9 +125,8 @@ class Prime2gLoginPage {
 			if ( ! is_user_logged_in() &&
 			( is_admin() && ! defined( 'DOING_AJAX' ) || $pagenow === 'wp-login.php' && ! wp_get_referer() )
 			) {
-				// wp_safe_redirect( site_url( '404' ) );
-				// status_header(404);
-				http_response_code(404);
+				status_header(404);
+				// http_response_code(404);
                 nocache_headers();
                 include_once get_404_template();
             exit;
@@ -189,7 +188,7 @@ class Prime2gLoginPage {
 		}
 
 
-		public function login_header() {
+		public function login_page_content() {
 			if ( $pageID = get_theme_mod( 'prime2g_custom_login_page_id', 0 ) ) {
 				if ( ! $pageID ) return;
 				$pageID		=	(int) $pageID;
@@ -222,6 +221,7 @@ class Prime2gLoginPage {
 			if ( strpos( $url, 'wp-login.php' ) !== false ) {
 
 				if ( is_ssl() ) { $scheme = 'https'; }
+
 				$args	=	explode( '?', $url );
 
 				if ( isset( $args[1] ) ) {
@@ -239,7 +239,8 @@ class Prime2gLoginPage {
 		function password_reset_message( $message, $key ) {
 		if ( strpos( $_POST['user_login'], '@' ) ) {
 			$user_data	=	get_user_by( 'email', trim( $_POST['user_login'] ) );
-		} else {
+		}
+		else {
 			$login		=	trim( $_POST['user_login'] );
 			$user_data	=	get_user_by( 'login', $login );
 		}
@@ -265,4 +266,5 @@ class Prime2gLoginPage {
 		}
 }
 
+}
 

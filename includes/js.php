@@ -89,10 +89,10 @@ echo $js;
 /**
  *	@since 1.0.73
  *
- *	LOGIN PAGE JS
+ *	Password Toggler
  */
-if ( ! function_exists( 'prime2g_custom_login_js' ) ) {
-function prime2g_custom_login_js() {
+if ( ! function_exists( 'prime2g_view_password_toggler' ) ) {
+function prime2g_view_password_toggler() {
 echo Prime2gJSBits::dom_create_and_insert();
 
 $js	=	'<script id="primeLoginJS">

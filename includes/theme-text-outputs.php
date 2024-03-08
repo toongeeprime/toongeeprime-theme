@@ -575,13 +575,13 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 		<div class="archive-description"><p><?php _e( get_theme_mod( 'prime2g_shop_page_description', prime2g_woo_shop_description() ), PRIME2G_TEXTDOM ); ?></p></div>
 	<?php
 	}
-	elseif ( is_404() ) {
+	elseif ( is_404() || 404 === http_response_code() ) {
 	echo '<h1 class="entry-title page-title title">';
 		$title404	=	__( 'Sorry, what you are looking for can\'t be found', PRIME2G_TEXTDOM );
 		if ( get_theme_mod( 'prime2g_use_page_for404' ) ) {
 			$pageID	=	(int) get_theme_mod( 'prime2g_404error_page_id' );
 			if ( $pageID ) {
-				$page	=	prime2g_wp_query( [ 'page_id' => $pageID ], [ 'cacheName' => 'custom_404error_page' ] );
+				$page	=	prime2g_wp_query( [ 'page_id' => $pageID ], [ 'cache_name' => 'custom_404error_page' ] );
 				if ( $page->have_posts() ) {
 					$page->the_post();
 					echo get_the_title();

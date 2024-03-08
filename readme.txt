@@ -17,13 +17,12 @@ A WordPress theme with options for customization, design and development flexibi
 == Changelog ==
 
 = 1.0.73 =
-* Added: prime2g_admin_metabox_css(), prime2g_metabox_javascript()
-* /login/, /deprecated/
+* Added: prime2g_admin_metabox_css(), prime2g_metabox_javascript(), prime2g_view_password_toggler()
+* Dirs: /login/, /deprecated/
 * LOGIN PAGE REVAMP:
 	* Class: Prime2gLoginPage
-	* Added: login-form.php, prime2g_theme_styles_at_login_page(), prime2g_login_page_css()
-	prime2g_custom_login_js(), prime2g_login_form() and shortcode
-	* Major Updates @ login-page.php
+	* Added: login-form.php, prime2g_theme_styles_at_login_page(), prime2g_login_page_css(), prime2g_login_form() and shortcode
+	* Updates @ login-page.php
 	* Admin access controls @ wp.php
 
 = 1.0.72 =

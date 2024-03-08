@@ -70,7 +70,7 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 	 *	@since ToongeePrime Theme 1.0.50
 	 */
 	$wp_customize->add_setting( 'prime2g_cpt_template_parts',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 ]
 	);
 	$wp_customize->add_control( 'prime2g_cpt_template_parts', array(
 		'label'		=>	__( 'Add Template Parts to Theme', PRIME2G_TEXTDOM ),
@@ -83,7 +83,7 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 	 *	@since ToongeePrime Theme 1.0.55
 	 */
 	$wp_customize->add_setting( 'prime2g_template_parts_richedit',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
+		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 ]
 	);
 	$wp_customize->add_control( 'prime2g_template_parts_richedit', array(
 		'label'		=>	__( 'Rich Edit Template Parts?', PRIME2G_TEXTDOM ),

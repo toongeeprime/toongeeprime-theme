@@ -26,11 +26,13 @@ $text_above	=	$text_above === 'default' ? 'Log into your account or '. $signup_t
 $text_below	=	$text_below === 'default' ? 'Not a member yet? '. $signup_text : $text_below;
 
 $redirect_to=	$redirect_to ?: wp_get_referer();
-// $redirect_to=	$redirect_to ?: prime2g_get_current_url();
+// $redirect_to	=	$redirect_to ?: prime2g_get_current_url();
 $wrapper_id	=	$wrapper_id ? ' id="' . $wrapper_id . '"' : '';
 $classes	=	$classes ? $classes . ' ' : '';
 
-$form	=	'<div'. $wrapper_id .' class="'. $classes .'prime_loginform form_has_pw_field">' . $text_above;
+$form	=	do_action( 'before_prime_login_form' );
+$form	.=	'<div'. $wrapper_id .' class="'. $classes .'prime_loginform form_has_pw_field">' . $text_above;
+$form	.=	do_action( 'prime_login_form_top' );
 
 $args	=	array(
 	'echo'				=>	$echoform,
@@ -43,10 +45,12 @@ $args	=	array(
 );
 $form	.=	wp_login_form( $args );
 
+$form	.=	do_action( 'prime_login_form_bottom' );
 $form	.=	$text_below . '</div>';
+$form	.=	do_action( 'after_prime_login_form' );
 
-if ( $echo ) echo prime2g_get_login_notice_text() . $form;
-else return prime2g_get_login_notice_text() . $form;
+if ( $echo ) echo $form;
+else return $form;
 }
 else {
 	return __( '<h3>You are logged in. <a href="'. wp_logout_url() .'" title="Log out now">Log out</a>.</h3>', PRIME2G_TEXTDOM );
@@ -71,4 +75,5 @@ if ( $signup )
 
 return $loginHtm;
 }
+
 
