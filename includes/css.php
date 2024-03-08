@@ -405,7 +405,6 @@ return '#container{top:46px;}
 }
 }
 
-
 /** @since 1.0.70 End **/
 
 
@@ -418,12 +417,22 @@ function prime2g_admin_metabox_css() {
 $css	=	'
 .prime2g_postbox{border:0;}
 .prime2g_postbox .postbox-header{background:#222;color:#fff;border:0;}
-.prime2g_postbox .postbox-header h2,.prime2g_postbox .postbox-header button,.prime2g_postbox .toggle-indicator{color:#fff;}
-@media(min-width:681px){
-}
-@media(min-width:821px){
-}';
+.prime2g_postbox .postbox-header h2,.prime2g_postbox .postbox-header button,.prime2g_postbox .toggle-indicator{color:#fff;}';
 return $css;
 }
 }
+
+
+if ( ! function_exists( 'prime2g_login_page_css' ) ) {
+function prime2g_login_page_css() {
+return '.login-password,.password{position:relative;}
+#page .pwTogg .bi{font-size:1.2rem;margin:0;}
+.pwTogg{bottom:0;height:56%;right:10px;}
+.pwTogg .bi-eye-slash,.pwTogg.visible .bi-eye{display:none;}
+.pwTogg.visible .bi-eye-slash,.pwTogg .bi-eye{display:inline;}';
+}
+}
+
+/** @since 1.0.73 End **/
+
 

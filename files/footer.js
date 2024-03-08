@@ -24,6 +24,9 @@ p2getAll( '.close_mobile_menu' ).forEach( el=>{
 	el.addEventListener( 'click', ()=>{ p2getEl( '.main_menu_wrap.prime' ).classList.remove( 'prime' ); } )
 } );
 
-// Remove class to determine browser supports JavaScript
+// Indicate browser supports JavaScript
 document.body.classList.remove( 'no-js' );
+document.body.classList.add( 'js' );
+
+
 

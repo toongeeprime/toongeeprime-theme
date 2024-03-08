@@ -19,7 +19,7 @@ require_once 'smtp.php';
 /**
  *	GET PHP FILES THROUGH DIRECTORIES ARRAY
  */
-$directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'ajax', 'features', 'pwa', 'deprecated' ];
+$directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'ajax', 'features', 'login', 'pwa', 'deprecated' ];
 foreach( $directories as $dir ) {
 
 	$folder	=	PRIME2G_THEME . $dir . '/';

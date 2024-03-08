@@ -107,14 +107,7 @@ value.bind( function( newval ) {
 	if ( newval === 'custom_url' ) imgUrl.slideDown( 180 ); else imgUrl.slideUp( 180 );
 } );
 } );
-/*
-api( 'prime2g_login_page_slug', function( value ) {
-value.bind( function( newval ) {
-	let slug	=	$( '#_customize-input-prime2g_login_page_slug' );
-	slug.keyup( function() { slug.val( $( this ).val().replace( /\d+|\s/g, '' ).toLowerCase() ); } );
-} );
-} );
-*/
+
 api( 'prime2g_use_theme_google_fonts', function( value ) {
 value.bind( function( newval ) {
 	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),
@@ -142,9 +135,7 @@ value.bind( function( newval ) {
 } );
 } );
 
-/**
- *	@since 1.0.56
- */
+/* @since 1.0.56 */
 api( 'prime2g_activate_chache_controls', function( value ) {
 value.bind( function( newval ) {
 	let ctimeS	=	$( '#customize-control-prime2g_chache_time_singular' ),
@@ -159,9 +150,7 @@ value.bind( function( newval ) {
 } );
 } );
 
-/**
- *	@since 1.0.57
- */
+/* @since 1.0.57 */
 api( 'prime2g_main_menu_type', function( value ) {
 value.bind( function( newval ) {
 	let mmenuSC	=	$( '#customize-control-prime2g_menu_template_part_id' );
@@ -169,9 +158,7 @@ value.bind( function( newval ) {
 } );
 } );
 
-/**
- *	@since 1.0.60
- */
+/* @since 1.0.60 */
 api( 'prime2g_theme_show_stickies', function( value ) {
 value.bind( function( newval ) {
 	let stHead	=	$( '#customize-control-prime2g_theme_sticky_heading' ),
@@ -179,6 +166,17 @@ value.bind( function( newval ) {
 		stCount	=	$( '#customize-control-prime2g_theme_stickies_count' );
 	if ( newval !== '' ) { stHead.slideDown( 180 ); stPType.slideDown( 180 ); stCount.slideDown( 180 ); }
 	else { stHead.slideUp( 180 ); stPType.slideUp( 180 ); stCount.slideUp( 180 ); }
+} );
+} );
+
+/* @since 1.0.73 */
+api( 'prime2g_use_custom_login_page', function( value ) {
+value.bind( function( newval ) {
+	let logPID	=	$( '#customize-control-prime2g_custom_login_page_id' ),
+		wplSlug	=	$( '#customize-control-prime2g_wp_login_page_slug' ),
+		noAdmin	=	$( '#customize-control-prime2g_admin_access_capability' );
+	if ( newval ) { logPID.slideDown( 180 ); wplSlug.slideDown( 180 ); noAdmin.slideDown( 180 ); }
+	else { logPID.slideUp( 180 ); wplSlug.slideUp( 180 ); noAdmin.slideUp( 180 ); }
 } );
 } );
 
@@ -193,4 +191,5 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 } );
 
 } )( jQuery, wp.customize );
+
 

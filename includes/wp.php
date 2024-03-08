@@ -54,7 +54,7 @@ global $pagenow;
 add_filter( 'the_content', 'prime2g_disable_wpautop', 0 );
 function prime2g_disable_wpautop( $content ) {
 global $post;
-	if ( $post->disable_autop === 'disable' ) {
+	if ( $post && $post->disable_autop === 'disable' ) {
 		remove_filter( 'the_content', 'wpautop' );
 		remove_filter( 'the_excerpt', 'wpautop' );
 	}
@@ -87,4 +87,28 @@ Prime2gJSBits::copy_to_clipboard(true);
 }
 
 
+/**
+ *	REDIRECTIONS
+ *	@since 1.0.73
+ */
+add_action( 'admin_init', 'prime2g_admin_access_control', 100 );
+function prime2g_admin_access_control() {
+if ( is_admin() && Prime2gLoginPage::run() ) {
 
+$capability	=	get_theme_mod( 'prime2g_admin_access_capability', 'edit_posts' );
+if ( ! current_user_can( $capability ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+$wp_get_referer	=	wp_get_referer();
+
+	if ( $wp_get_referer ) {
+		#	if referer is an admin page
+		if ( str_contains( $wp_get_referer, 'wp-admin' ) ) {
+			wp_safe_redirect( site_url( '404' ) );
+		}
+		else { wp_safe_redirect( $wp_get_referer ); }
+	}
+	else { wp_safe_redirect( site_url( '/' ) ); }
+exit;
+}
+
+}
+}

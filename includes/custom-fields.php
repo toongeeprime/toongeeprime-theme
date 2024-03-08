@@ -224,19 +224,30 @@ $nav_menus	=	get_registered_nav_menus(); ?>
  */
 add_action( 'add_meta_boxes', 'prime2g_template_part_boxes' );
 function prime2g_template_part_boxes() {
+$obj	=	get_post_type_object( get_post_type() );
+$name	=	$obj->labels->singular_name;
 add_meta_box(
-	'prime2g_postdata_box', __( 'Shortcode', PRIME2G_TEXTDOM ),
-	'prime2g_cFields_metadivs2', 'prime_template_parts', 'side', 'high'
+	'prime2g_postdata_box', __( $name . ' Data', PRIME2G_TEXTDOM ),
+	'prime2g_post_data_metabox', null, 'side', 'high'
 );
 }
 
-function prime2g_cFields_metadivs2( $post ) {
+function prime2g_post_data_metabox( $post ) {
+
+/*
+if ( $post->post_type === 'page' && $post->ID == get_theme_mod( 'prime2g_custom_login_page_id' ) ) { ?>
+	<div class="meta-options">
+		<h3>Use the Login Form Shortcode in this page:</h3>
+		<p class="p2gClipCopyThis">[prime_login_form]</p>
+	</div>
+<?php
+}*/
 
 if ( $post->post_type === 'prime_template_parts' ) {
 if ( $post->post_status === 'publish' ) { ?>
 	<div class="meta-options">
 		<h3>Use this shortcode:</h3>
-		<p>[prime_insert_template_part id="<?php echo get_the_ID(); ?>"]</p>
+		<p class="p2gClipCopyThis">[prime_insert_template_part id="<?php echo get_the_ID(); ?>"]</p>
 	</div>
 <?php
 }
@@ -245,7 +256,12 @@ else { ?>
 <?php
 }
 }
+else { ?>
+	<style id="hidePostDataBox">#prime2g_postdata_box{display:none!important;}</style>
+<?php
+}
 
+Prime2gJSBits::copy_to_clipboard(true);
 }
 
 

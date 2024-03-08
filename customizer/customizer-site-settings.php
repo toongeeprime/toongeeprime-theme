@@ -31,7 +31,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 			''		=>	__( '-- Website is live --', PRIME2G_TEXTDOM ),
 			'maintenance'	=>	__( 'Set to Maintenance Mode', PRIME2G_TEXTDOM ),
 			'coming_soon'	=>	__( 'Set to Coming Soon Mode', PRIME2G_TEXTDOM )
-		),
+		)
 	) );
 
 	/**
@@ -87,6 +87,57 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		'active_callback'	=> function() { return ! empty( get_theme_mod( 'prime2g_use_page_for404' ) ); }
 	) );
 
+if ( prime_child_min_version( '2.3' ) ) {
+	/**
+	 *	LOGIN PAGE
+	 *	@since @ 1.0.73
+	 */
+	function p2g_useCLogin() { return ! empty( get_theme_mod( 'prime2g_use_custom_login_page' ) ); }
+
+	$wp_customize->add_setting( 'prime2g_use_custom_login_page', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_use_custom_login_page', array(
+		'label'		=>	__( 'LOGIN: Use Page for Site Login', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_use_custom_login_page',
+		'section'	=>	'prime2g_site_settings_section'
+	) );
+
+	$wp_customize->add_setting( 'prime2g_custom_login_page_id', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_custom_login_page_id', array(
+		'label'		=>	__( 'Select Custom Login Page Content', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_custom_login_page_id',
+		'section'	=>	'prime2g_site_settings_section',
+		'choices'	=>	$pages,
+		'active_callback'	=> 'p2g_useCLogin'
+	) );
+
+	$wp_customize->add_setting( 'prime2g_wp_login_page_slug', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_wp_login_page_slug', array(
+		'label'		=>	__( 'Custom Login Page Slug', PRIME2G_TEXTDOM ),
+		'type'		=>	'text',
+		'settings'	=>	'prime2g_wp_login_page_slug',
+		'section'	=>	'prime2g_site_settings_section',
+		'active_callback'	=> 'p2g_useCLogin',
+		'input_attrs'	=>	[ 'placeholder' => 'Example: login-page' ]
+	) );
+
+	$wp_customize->add_setting( 'prime2g_admin_access_capability', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_admin_access_capability', array(
+		'label'		=>	__( 'Redirect Users from Admin?', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_admin_access_capability',
+		'section'	=>	'prime2g_site_settings_section',
+		'choices'	=>	array(
+			''		=>	__( '-- No Redirects --', PRIME2G_TEXTDOM ),
+			'edit_posts'			=>	__( 'Redirect if user is not an Author', PRIME2G_TEXTDOM ),
+			'edit_others_posts'		=>	__( 'Redirect if user is not an Editor', PRIME2G_TEXTDOM ),
+			'edit_theme_options'	=>	__( 'Redirect if user is not an Administrator', PRIME2G_TEXTDOM )
+		),
+		'active_callback'	=> 'p2g_useCLogin'
+	) );
+}
+
 	/**
 	 *	STOP WP HEARTBEAT
 	 *	@since 1.0.49
@@ -98,7 +149,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		'settings'	=>	'prime2g_stop_wp_heartbeat',
 		'section'	=>	'prime2g_site_settings_section',
 		'choices'	=>	array(
-			''	=>	__( 'Default', PRIME2G_TEXTDOM ),
+			''	=>	__( 'Leave Running', PRIME2G_TEXTDOM ),
 			'stop'	=>	__( 'Stop', PRIME2G_TEXTDOM )
 		)
 	) );
@@ -106,4 +157,5 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 }
 
 }
+
 

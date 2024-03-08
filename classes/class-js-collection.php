@@ -57,10 +57,12 @@ $js	.=	$run ? 'p2gCopyToClipBoard( null )' : '';
 $js	.=	'
 function p2gCopyToClipBoard( elmt = null ) {
 if ( null === elmt ) {
-	p2getAll( ".p2gClipCopyThis" ).forEach( cp => {
+	let	copyEls	=	p2getAll( ".p2gClipCopyThis" )
+	if ( copyEls ) {
+		copyEls.forEach( cp => {
 		cp.setAttribute( "onclick", "p2gDoCopyToClipBoard(this);" );
 		cp.setAttribute( "title", "Click to copy" );
-	} );
+	} ) };
 }
 else {
 var cp	=	typeof elmt === "object" ? elmt : p2getEl( elmt );
@@ -133,6 +135,58 @@ $js	.=	$tags ? '</script>' : '';
 		if ( toDo === "remove" ) theEl.classList.remove( theClass );
 	}
 	}';
+	}
+
+
+	// @since 1.0.73
+	public static function dom_create_and_insert( bool $tags = true, bool $hook = false ) {
+	if ( defined( 'P2GJSBIT_DC_I' ) ) return;
+	define( 'P2GJSBIT_DC_I', true );
+
+	$headhook	=	is_admin() ? 'admin_head' : 'wp_head';
+
+	$js	=	$tags ? '<script id="p2bit_creatingEls">' : '';
+	$js	.=	'// Create New DOM Element
+function p2g_createNewItem( elType, newID, newClass, parentEl, putBeforeEl ) {
+
+	if ( typeof parentEl === "object" ) { parentElmt	=	parentEl; }
+	else { parentElmt	=	document.querySelector( parentEl ); }
+
+	if ( typeof putBeforeEl === "object" ) { iBefore	=	putBeforeEl; }
+	else { iBefore		=	parentElmt.querySelector( putBeforeEl ); }
+
+	let newEl		=	document.createElement( elType );
+		newEl.id	=	newID,
+		newEl.className	=	newClass,
+		parentElmt.insertBefore( newEl, iBefore );
+}
+
+// Add content to Elements
+function p2g_addContentToEl( theEl, theTxt, theHtml, ifNoText = "Empty!" ) {
+let theElmt	=	document.querySelector( theEl );
+	if ( theElmt !== null ) {
+	let txtContent	=	document.createTextNode( theTxt ),
+		noTxt		=	document.createTextNode( ifNoText );
+
+		if ( theTxt ) { theElmt.appendChild( txtContent ); }
+		else if ( theHtml ) { theElmt.innerHTML = theHtml; }
+		else {
+			theElmt.innerHTML = ifNoText; // html
+		}
+	}
+	else {
+		notifBox.innerHTML = "Your Requested Element, "+theEl+", Doesn\'t Exist.<br>No contents can be inserted therefore. <em>Sorry!</em>";
+		notifBox.style.display = "block";
+	}
+}';
+$js	.=	$tags ? '</script>' : '';
+
+	if ( $hook ) {
+		add_action( $headhook, function() use( $js ) { echo $js; }, 12 );
+	} else {
+		return $js;
+	}
+
 	}
 
 }

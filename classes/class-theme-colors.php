@@ -29,13 +29,14 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	 *	Generate CSS :root variables
 	 */
 	protected function text_colors() {
-	$brand		=	$this->get_mod( 'brand' );
-	$brand2		=	$this->get_mod( 'brand2' );
-	$bg_color	=	$this->get_mod( 'background' );
-	$hdr_color	=	$this->get_mod( 'header' );
-	$cnt_color	=	$this->get_mod( 'content' );
-	$ftr_color	=	$this->get_mod( 'footer' );
-	$buttonbg	=	$this->get_mod( 'buttonbg' );
+	$cache	=	self::mods_cache();
+	$brand		=	$cache->brand;
+	$brand2		=	$cache->brand2;
+	$bg_color	=	$cache->background;
+	$hdr_color	=	$cache->header;
+	$cnt_color	=	$cache->content;
+	$ftr_color	=	$cache->footer;
+	$buttonbg	=	$cache->buttonbg;
 	$btnText	=	defined( 'CHILD_BUTTONTEXT' ) ? CHILD_BUTTONTEXT : $this->get_readable_color( $buttonbg );
 
 	return "--body-text:". $this->get_readable_color( $bg_color ) .";
@@ -53,11 +54,12 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	 *	@since ToongeePrime Theme 1.0.49
 	 */
 	protected function the_root_dark_css() {
-	$bg_color	=	$this->get_mod( 'background' );
-	$cnt_color	=	$this->get_mod( 'content' );
+	$cache	=	self::mods_cache();
+	$bg_color	=	$cache->background;
+	$cnt_color	=	$cache->content;
 
 	$dBody	=	'';
-	if ( 'on_dbody' === $this->get_mod( 'darktheme' ) ) {
+	if ( 'on_dbody' === $cache->dt_switch ) {
 		$dBody	=	"--body-text:#efefef;
 	--body-background:#030303;
 	--header-text:#efefef;
@@ -66,9 +68,9 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	--footer-background:#000;
 ";
 	}
-	return "--content-text:". $this->get_mod( 'content' ) .";
+	return "--content-text:". $cache->content .";
 	--content-background:". $this->get_readable_color( $cnt_color ) .";
-	--body-text:". $this->get_mod( 'background' ) .";
+	--body-text:". $cache->background .";
 	--body-background:". $this->get_readable_color( $bg_color ) .";
 	$dBody
 ";
@@ -80,9 +82,9 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	 */
 	public static function theme_color_classes() {
 	$classes	=	[];
-	$color		=	new self;
-	$bgColor	=	$color->get_mod( 'background' );
-	$ctColor	=	$color->get_mod( 'content' );
+	$cache		=	self::mods_cache();
+	$bgColor	=	$cache->background;
+	$ctColor	=	$cache->content;
 	$bgLum		=	parent::the_hex_luminance( $bgColor );
 	$ctLum		=	parent::the_hex_luminance( $ctColor );
 

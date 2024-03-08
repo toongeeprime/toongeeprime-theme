@@ -62,7 +62,7 @@ RESPONSIVE
 }
 
 @media(min-width:821px){
-.mobiles{display:none!important;}
+.mobile,.mobiles{display:none!important;}
 .grid4{grid-template-columns:repeat(4, 1fr);}
 }
 

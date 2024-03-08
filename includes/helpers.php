@@ -211,4 +211,30 @@ $headers = get_headers( $url );
 return stripos( $headers[0],"200 OK" ) ? true : false;
 }
 
+/* @since 1.0.73 */
+function p2g_str_contains( string $string, $contains ) {
+	if ( is_string( $contains ) ) {
+		return str_contains( $string, $contains );
+	}
+	if ( is_array( $contains ) ) {
+		$result	=	[];
+		foreach( $contains as $str ) {
+			$result[]	=	str_contains( $string, $str );
+		}
+	return in_array( true, $result );
+	}
+return 'Needle type is neither string nor array';
+}
+
+
+function prime_wp_forbidden_slugs() {
+$wp	=	new WP;
+return array_merge( $wp->public_query_vars, $wp->private_query_vars );
+}
+
+
+function prime_url_has_params( string $url ) {
+$args	=	explode( '?', $url );
+return  isset( $args[1] );
+}
 

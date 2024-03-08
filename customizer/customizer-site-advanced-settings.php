@@ -21,9 +21,15 @@ return wp_kses( $text, array(
 	// 'title'	=>	[]
 // ),
 	// 'meta'	=>	[], // ??
-	'link'	=>	[],
-	'style'	=>	[],
-	'script'=>	[]
+	'link'	=>	[
+		'href' => [], 'type' => [], 'rel' => []
+	],
+	'style'	=>	[
+		'id' => [], 'src' => [], 'media' => [], 'title' => []
+	],
+	'script'=>	[
+	'id' => [], 'type' => [], 'async' => [], 'defer' => [], 'src' => [], 'crossorigin' => [], 'integrity' => [], 'referrerpolicy' => []
+	]
 ) );
 }
 

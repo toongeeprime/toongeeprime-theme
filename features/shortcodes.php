@@ -185,8 +185,15 @@ return $embed;
 
 add_shortcode( 'prime_nav_menu', 'prime2g_get_nav_menu_shortcode' );
 function prime2g_get_nav_menu_shortcode( $atts ) {
-$atts	=	shortcode_atts( [ 'menu' => '', 'class' => 'shortcode_menu', 'id' => '', 'title_attrs' => 'yes' ], $atts );
+$atts	=	shortcode_atts(
+[ 'menu' => '', 'class' => 'shortcode_menu', 'id' => '', 'title_attrs' => 'yes', 'device' => '' ],
+$atts
+);
 extract( $atts );
+
+$isMobile	=	wp_is_mobile();
+if ( in_array( $device, prime2g_devices_array()->desktops ) && $isMobile ) return;
+if ( in_array( $device, prime2g_devices_array()->mobiles ) && ! $isMobile ) return;
 
 $id		=	$id ? ' id="'. $id .'"' : '';
 $title_attrs	=	( $title_attrs === 'yes' ) ? true : false;
@@ -219,7 +226,6 @@ return $result;
  */
 add_shortcode( 'prime_add_to_theme', 'prime2g_add_content_to_theme' );
 function prime2g_add_content_to_theme( $atts, $content, $tag ) {
-
 $atts	=	shortcode_atts( array( 'place' => 'after post', 'priority' => '10' ), $atts );
 extract( $atts );
 
@@ -266,4 +272,33 @@ if ( empty( $users ) ) {
 	echo '<script id="prime_redirect_shortcode">window.location = "'. $url .'";</script>';
 }
 }
+
+
+/**
+ *	Login Form
+ *	@since 1.0.73
+ */
+add_shortcode( 'prime_login_form', 'prime2g_login_form_shortcode' );
+function prime2g_login_form_shortcode( $atts ) {
+$atts	=	shortcode_atts( [
+'redirect_to'	=>	'',
+'wrapper_id'=>	'',
+'classes'	=>	'',
+'form_id'	=>	'custom_login_page_form',
+'username_label'	=>	'Username/Email',
+'password_label'	=>	'Password',
+'button_text'=>	'Log in',
+'text_above'=>	'',
+'text_below'=>	''
+],
+$atts );
+
+add_action( 'wp_footer', function() {
+	echo '<style id="loginFormCSS">' . prime2g_login_page_css() . '</style>';
+	echo prime2g_custom_login_js();
+} );
+
+return prime2g_login_form( $atts );
+}
+
 
