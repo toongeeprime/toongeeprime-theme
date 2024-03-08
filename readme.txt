@@ -21,7 +21,8 @@ A WordPress theme with options for customization, design and development flexibi
 * Dirs: /login/, /deprecated/
 * LOGIN PAGE REVAMP:
 	* Class: Prime2gLoginPage
-	* Added: login-form.php, prime2g_theme_styles_at_login_page(), prime2g_login_page_css(), prime2g_login_form() and shortcode
+	* Added: login-form.php, prime2g_theme_styles_at_login_page(), prime2g_enqueue_parent_css_login(), prime2g_login_page_css(),
+	prime2g_login_form() and shortcode
 	* Updates @ login-page.php
 	* Admin access controls @ wp.php
 
