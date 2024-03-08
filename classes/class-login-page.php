@@ -74,8 +74,9 @@ class Prime2gLoginPage {
             add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 2 );
 			add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
 
-			add_action( 'login_header', array( $this, 'login_header' ) );
-			add_filter( 'login_url', array( $this, 'login_url' ), 10, 3 );
+			add_action( 'login_header', [ $this, 'login_header' ] );
+			add_filter( 'login_url', [ $this, 'login_url' ], 10, 3 );
+			add_filter( 'retrieve_password_message', [ $this, 'password_reset_message' ], 20, 2 );
 
 			remove_action( 'template_redirect', 'wp_redirect_admin_locations', 1000 );
 			remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -113,10 +114,10 @@ class Prime2gLoginPage {
 					&& isset( $_GET[$this->new_login_slug()] )
 					&& empty( $_GET[$this->new_login_slug()] ) )
 					) {
-
 			$pagenow	=	'wp-login.php';
 			}
 		}
+
 
 		public function wp_loaded() {
 		global $pagenow;
@@ -125,7 +126,8 @@ class Prime2gLoginPage {
 			( is_admin() && ! defined( 'DOING_AJAX' ) || $pagenow === 'wp-login.php' && ! wp_get_referer() )
 			) {
 				// wp_safe_redirect( site_url( '404' ) );
-				status_header(404);
+				// status_header(404);
+				http_response_code(404);
                 nocache_headers();
                 include_once get_404_template();
             exit;
@@ -140,29 +142,29 @@ class Prime2gLoginPage {
 					. ( ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : '' ) );
 			die;
 			}
-			// elseif ( $this->wp_login_php ) {
+			elseif ( $this->wp_login_php ) {
 
-				// if ( ( $referer = wp_get_referer() )
-					// && strpos( $referer, 'wp-activate.php' ) !== false
-					// && ( $referer = parse_url( $referer ) )
-					// && ! empty( $referer['query'] ) ) {
+				if ( ( $referer = wp_get_referer() )
+					&& strpos( $referer, 'wp-activate.php' ) !== false
+					&& ( $referer = parse_url( $referer ) )
+					&& ! empty( $referer['query'] ) ) {
 
-					// parse_str( $referer['query'], $referer );
+					parse_str( $referer['query'], $referer );
 
-					// if ( ! empty( $referer['key'] )
-						// && ( $result = wpmu_activate_signup( $referer['key'] ) )
-						// && is_wp_error( $result )
-						// && ( $result->get_error_code() === 'already_active'
-							// || $result->get_error_code() === 'blog_taken' ) ) {
+					if ( ! empty( $referer['key'] )
+						&& ( $result = wpmu_activate_signup( $referer['key'] ) )
+						&& is_wp_error( $result )
+						&& ( $result->get_error_code() === 'already_active'
+							|| $result->get_error_code() === 'blog_taken' ) ) {
 
-						// wp_safe_redirect( $this->new_login_url()
-							// . ( ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : '' ) );
-					// die;
-					// }
-				// }
+						wp_safe_redirect( $this->new_login_url()
+							. ( ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : '' ) );
+					die;
+					}
+				}
 
-			// $this->wp_template_loader();
-			// }
+			$this->wp_template_loader();
+			}
 			elseif ( str_contains( prime2g_get_current_url(), $this->new_login_slug() ) ) {
 				global $error, $interim_login, $action, $user_login;
 				@require_once ABSPATH . 'wp-login.php';
@@ -170,20 +172,21 @@ class Prime2gLoginPage {
 			}
 		}
 
-		// private function wp_template_loader() {
-			// global $pagenow;
-			// $pagenow	=	'index.php';
 
-			// if ( ! defined( 'WP_USE_THEMES' ) ) { define( 'WP_USE_THEMES', true ); }
-			// wp();
+		private function wp_template_loader() {
+			global $pagenow;
+			$pagenow	=	'index.php';
 
-			// if ( $_SERVER['REQUEST_URI'] === $this->user_trailingslashit( str_repeat( '-/', 10 ) ) ) {
-				// $_SERVER['REQUEST_URI']	=	$this->user_trailingslashit( '/wp-login-php/' );
-			// }
+			if ( ! defined( 'WP_USE_THEMES' ) ) { define( 'WP_USE_THEMES', true ); }
+			wp();
 
-			// require_once( ABSPATH . WPINC . '/template-loader.php' );
-		// die;
-		// }
+			if ( $_SERVER['REQUEST_URI'] === $this->user_trailingslashit( str_repeat( '-/', 10 ) ) ) {
+				$_SERVER['REQUEST_URI']	=	$this->user_trailingslashit( '/wp-login-php/' );
+			}
+
+			require_once( ABSPATH . WPINC . '/template-loader.php' );
+		die;
+		}
 
 
 		public function login_header() {
@@ -218,10 +221,7 @@ class Prime2gLoginPage {
 		public function filter_wp_login_php( $url, $scheme = null ) {
 			if ( strpos( $url, 'wp-login.php' ) !== false ) {
 
-				if ( ! is_user_logged_in() && ! wp_get_referer() ) { $url = site_url( '404' ); }
-
 				if ( is_ssl() ) { $scheme = 'https'; }
-
 				$args	=	explode( '?', $url );
 
 				if ( isset( $args[1] ) ) {
@@ -233,6 +233,29 @@ class Prime2gLoginPage {
 				}
 			}
 		return $url;
+		}
+
+
+		function password_reset_message( $message, $key ) {
+		if ( strpos( $_POST['user_login'], '@' ) ) {
+			$user_data	=	get_user_by( 'email', trim( $_POST['user_login'] ) );
+		} else {
+			$login		=	trim( $_POST['user_login'] );
+			$user_data	=	get_user_by( 'login', $login );
+		}
+
+		$user_login	=	$user_data->user_login;
+		$reset_link	=	network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' );
+		$reset_link	=	$this->filter_wp_login_php( $reset_link );
+		// network_site_url()
+
+		$msg = __( 'A password reset for the following account has been requested at ' ) . get_bloginfo( 'name' ) . '...' . "\r\n\r\n";
+		$msg .= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
+		$msg .= __( 'If this message was sent in error, please ignore this email.' ) . "\r\n\r\n";
+		$msg .= __( 'To reset your password, visit the following link:' );
+		$msg .= ' ' . $reset_link . "\r\n";
+
+		return $msg;
 		}
 
 
