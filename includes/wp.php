@@ -93,10 +93,11 @@ Prime2gJSBits::copy_to_clipboard(true);
  */
 add_action( 'admin_init', 'prime2g_admin_access_control', 100 );
 function prime2g_admin_access_control() {
-if ( is_admin() && Prime2gLoginPage::run() ) {
+if ( is_admin() &&  ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
-$capability	=	get_theme_mod( 'prime2g_admin_access_capability', 'edit_posts' );
-if ( ! current_user_can( $capability ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+$capability	=	get_theme_mod( 'prime2g_admin_access_capability' );
+
+if ( ! empty( $capability ) && ! current_user_can( $capability ) ) {
 $wp_get_referer	=	wp_get_referer();
 
 	if ( $wp_get_referer ) {
@@ -112,3 +113,6 @@ exit;
 
 }
 }
+
+
+

@@ -7,7 +7,7 @@
  *	Placed in dir and upgraded @since 1.0.73
  */
 
-// do_action( 'login_init' ); // Fires when the login form is initialized
+// add_action( 'login_init' ); // Fires when the login form is initialized
 // add_action( 'login_footer', '', 15 );
 
 $prime_custom_login_class	=	Prime2gLoginPage::get_instance();
@@ -49,4 +49,3 @@ function prime2g_enqueue_parent_css_login() {
 	wp_register_style( 'prime2g_css', get_theme_file_uri( '/files/theme.css' ), [], PRIME2G_VERSION );
     wp_enqueue_style( 'prime2g_css' );
 }
-
