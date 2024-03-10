@@ -13,17 +13,8 @@ if ( ! function_exists( 'prime2g_register_custom_taxonomies' ) ) {
 add_action( 'init', 'prime2g_register_custom_taxonomies', 0 );
 
 function prime2g_register_custom_taxonomies() {
-# 1.0.57
-if ( prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' ) ) {
-switch_to_blog( 1 );
-	$activate	=	get_theme_mod( 'prime2g_cpt_template_parts', 1 );
-restore_current_blog();
-}
-else {
-	$activate	=	get_theme_mod( 'prime2g_cpt_template_parts', 1 );
-}
-
-if ( $activate ) {
+# 1.0.74: condition is now only prime2g_use_extras()
+if ( prime2g_use_extras() ) {
 #	Template Part Sections
 $labels	=	array(
 	'name'			=>	_x( 'Template Parts Sections', 'taxonomy general name', PRIME2G_TEXTDOM ),

@@ -173,10 +173,9 @@ value.bind( function( newval ) {
 api( 'prime2g_use_custom_login_page', function( value ) {
 value.bind( function( newval ) {
 	let logPID	=	$( '#customize-control-prime2g_custom_login_page_id' ),
-		wplSlug	=	$( '#customize-control-prime2g_wp_login_page_slug' ),
-		noAdmin	=	$( '#customize-control-prime2g_admin_access_capability' );
-	if ( newval ) { logPID.slideDown( 180 ); wplSlug.slideDown( 180 ); noAdmin.slideDown( 180 ); }
-	else { logPID.slideUp( 180 ); wplSlug.slideUp( 180 ); noAdmin.slideUp( 180 ); }
+		wplSlug	=	$( '#customize-control-prime2g_wp_login_page_slug' );
+	if ( newval ) { logPID.slideDown( 180 ); wplSlug.slideDown( 180 ); }
+	else { logPID.slideUp( 180 ); wplSlug.slideUp( 180 ); }
 } );
 } );
 

@@ -55,31 +55,6 @@ return $loop; # object if $get === null || array
 
 
 /**
- *	Disable WP Rich Text Editor for 'prime_template_part' post type *hardcoded
- *	@since 1.0.49
- */
-add_filter( 'user_can_richedit', function( $default ) {
-global $post;
-if ( ! is_object( $post ) ) return $default;
-
-# 1.0.57
-$net_home_extras	=	prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' );
-if ( $net_home_extras ) switch_to_blog( 1 );
-
-if ( ! get_theme_mod( 'prime2g_template_parts_richedit' ) ) {
-	if ( $post->post_type === 'prime_template_part' ||
-	$post->post_type === 'prime_template_parts' ) return false;
-}
-
-if ( $net_home_extras ) restore_current_blog();
-
-return $default;
-}
-);
-
-
-
-/**
  *	INSERT TEMPLATE PART
  *	Gets Theme "Template Parts" Post Type
  *	@since 1.0.50
@@ -248,4 +223,5 @@ if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
 wp_reset_postdata();
 return $output;
 }
+
 

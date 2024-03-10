@@ -9,6 +9,13 @@
 if ( ! function_exists( 'prime2g_customizer_theme_extras' ) ) {
 function prime2g_customizer_theme_extras( $wp_customize ) {
 
+$get	=	[ 'index' => 'ID', 'value' => 'post_title', 'emptyoption' => true ];
+$args	=	[ 'post_type' => 'page', 'posts_per_page' => -1, 'post_status' => 'publish' ];
+$option	=	[ 'cache_name' => 'getpages', 'get' => 'posts' ];
+$pages	=	prime2g_get_postsdata_array( $get, $args, $option );
+
+$postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
+
 	/**
 	 *	PAGE PRELOADER
 	 */
@@ -65,34 +72,65 @@ function prime2g_customizer_theme_extras( $wp_customize ) {
 		)
 	) );
 
+if ( prime_child_min_version( '2.3' ) ) {
 	/**
-	 *	ADD "TEMPLATE PARTS" CUSTOM POST TYPE
-	 *	@since ToongeePrime Theme 1.0.50
+	 *	404 ERROR PAGE
+	 *	@since @ 1.0.55
 	 */
-	$wp_customize->add_setting( 'prime2g_cpt_template_parts',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 ]
-	);
-	$wp_customize->add_control( 'prime2g_cpt_template_parts', array(
-		'label'		=>	__( 'Add Template Parts to Theme', PRIME2G_TEXTDOM ),
+	$wp_customize->add_setting( 'prime2g_use_page_for404', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_use_page_for404', array(
+		'label'		=>	__( 'Use Custom 404 Error Page', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
-		'settings'	=>	'prime2g_cpt_template_parts',
+		'settings'	=>	'prime2g_use_page_for404',
+		'section'	=>	'prime2g_theme_extras_section'
+	) );
+
+	$wp_customize->add_setting( 'prime2g_404error_page_id', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_404error_page_id', array(
+		'label'		=>	__( 'Select 404 Error Page', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_404error_page_id',
 		'section'	=>	'prime2g_theme_extras_section',
+		'choices'	=>	$pages,
+		'active_callback'	=> function() { return ! empty( get_theme_mod( 'prime2g_use_page_for404' ) ); }
 	) );
 
 	/**
-	 *	@since ToongeePrime Theme 1.0.55
+	 *	LOGIN PAGE
+	 *	@since @ 1.0.73
 	 */
-	$wp_customize->add_setting( 'prime2g_template_parts_richedit',
-		[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 ]
-	);
-	$wp_customize->add_control( 'prime2g_template_parts_richedit', array(
-		'label'		=>	__( 'Rich Edit Template Parts?', PRIME2G_TEXTDOM ),
+	function p2g_useCLogin() { return ! empty( get_theme_mod( 'prime2g_use_custom_login_page' ) ); }
+
+	$wp_customize->add_setting( 'prime2g_use_custom_login_page', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_use_custom_login_page', array(
+		'label'		=>	__( 'Use Custom Login Page', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
-		'settings'	=>	'prime2g_template_parts_richedit',
-		'section'	=>	'prime2g_theme_extras_section',
-		'active_callback'	=>	function() { return ! empty( get_theme_mod( 'prime2g_cpt_template_parts' ) ); },
+		'settings'	=>	'prime2g_use_custom_login_page',
+		'section'	=>	'prime2g_theme_extras_section'
 	) );
+
+	$wp_customize->add_setting( 'prime2g_custom_login_page_id', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_custom_login_page_id', array(
+		'label'		=>	__( 'Select Custom Login Page "Content"', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_custom_login_page_id',
+		'section'	=>	'prime2g_theme_extras_section',
+		'choices'	=>	$pages,
+		'active_callback'	=> 'p2g_useCLogin'
+	) );
+
+	$wp_customize->add_setting( 'prime2g_wp_login_page_slug', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_wp_login_page_slug', array(
+		'label'		=>	__( 'Custom Login Page Slug', PRIME2G_TEXTDOM ),
+		'type'		=>	'text',
+		'settings'	=>	'prime2g_wp_login_page_slug',
+		'section'	=>	'prime2g_theme_extras_section',
+		'active_callback'	=> 'p2g_useCLogin',
+		'input_attrs'	=>	[ 'placeholder' => 'Example: login-page or dashboard' ]
+	) );
+}
 
 }
 }
+
 
