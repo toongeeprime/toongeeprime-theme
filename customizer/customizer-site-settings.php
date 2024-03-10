@@ -96,7 +96,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 
 	$wp_customize->add_setting( 'prime2g_use_custom_login_page', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_use_custom_login_page', array(
-		'label'		=>	__( 'LOGIN: Use Page for Site Login', PRIME2G_TEXTDOM ),
+		'label'		=>	__( 'Use Custom Login Page', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_use_custom_login_page',
 		'section'	=>	'prime2g_site_settings_section'
@@ -104,7 +104,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 
 	$wp_customize->add_setting( 'prime2g_custom_login_page_id', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_custom_login_page_id', array(
-		'label'		=>	__( 'Select Custom Login Page Content', PRIME2G_TEXTDOM ),
+		'label'		=>	__( 'Select Custom Login Page "Content"', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_custom_login_page_id',
 		'section'	=>	'prime2g_site_settings_section',
@@ -119,7 +119,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 		'settings'	=>	'prime2g_wp_login_page_slug',
 		'section'	=>	'prime2g_site_settings_section',
 		'active_callback'	=> 'p2g_useCLogin',
-		'input_attrs'	=>	[ 'placeholder' => 'Example: login-page' ]
+		'input_attrs'	=>	[ 'placeholder' => 'Example: login-page or dashboard' ]
 	) );
 
 	$wp_customize->add_setting( 'prime2g_admin_access_capability', $postMsg_text );
@@ -157,5 +157,6 @@ if ( prime_child_min_version( '2.3' ) ) {
 }
 
 }
+
 
 

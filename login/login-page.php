@@ -7,7 +7,7 @@
  *	Placed in dir and upgraded @since 1.0.73
  */
 
-// add_action( 'login_init' ); // Fires when the login form is initialized
+// add_action( 'login_init' );	# Fires when the login form is initialized
 // add_action( 'login_footer', '', 15 );
 
 $prime_custom_login_class	=	Prime2gLoginPage::get_instance();
@@ -16,10 +16,18 @@ $prime_custom_login_class	=	Prime2gLoginPage::get_instance();
 add_filter( 'login_headerurl', 'prime2g_loginpage_url' );
 add_filter( 'login_headertext', 'prime2g_loginpage_title' );
 #	ACTIONS
-add_action( 'login_enqueue_scripts', 'prime2g_login_enqueues' );
-add_action( 'login_enqueue_scripts', 'prime2g_enqueue_parent_css_login', 5 );	#	@since 1.0.73
-add_action( 'login_head', 'prime2g_theme_styles_at_login_page' );	#	@since 1.0.73
-add_action( 'login_head', 'prime2g_load_theme_fonts' );	#	@since 1.0.73
+add_action( 'login_enqueue_scripts', 'prime2g_login_enqueues', 15 );
+add_action( 'login_head', 'prime2g_theme_styles_at_login_page' );
+
+/**
+ *	@since 1.0.73
+ *	@since 1.0.74 condition added
+ *	To make login page look more like theme when using custom login page
+ */
+if ( $prime_custom_login_class->run() ) {
+	add_action( 'login_enqueue_scripts', 'prime2g_enqueue_parent_css_login', 5 );
+	add_action( 'login_head', 'prime2g_load_theme_fonts' );
+}
 
 #	change the logo link
 function prime2g_loginpage_url() {  return home_url(); }
