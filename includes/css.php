@@ -189,7 +189,7 @@ return $css;
 
 /**
  *	Remove from theme.css/child.css to make code style optional
- *	this does not need to be pluggable
+ *	Does not need to be pluggable
  */
 function prime2g_animations_css() {
 $entrance	=	'.inUp{transform:translateY(50px);opacity:0;}

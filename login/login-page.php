@@ -7,9 +7,6 @@
  *	Placed in dir and upgraded @since 1.0.73
  */
 
-// add_action( 'login_init' );	# Fires when the login form is initialized
-// add_action( 'login_footer', '', 15 );
-
 $prime_custom_login_class	=	Prime2gLoginPage::get_instance();
 
 #	FILTERS
@@ -25,7 +22,7 @@ add_action( 'login_head', 'prime2g_theme_styles_at_login_page' );
  *	To make login page look more like theme when using custom login page
  */
 if ( $prime_custom_login_class->run() ) {
-	add_action( 'login_enqueue_scripts', 'prime2g_enqueue_parent_css_login', 5 );
+	add_action( 'login_enqueue_scripts', 'prime2g_parent_enqueues_at_login', 5 );
 	add_action( 'login_head', 'prime2g_load_theme_fonts' );
 }
 
@@ -53,7 +50,15 @@ function prime2g_theme_styles_at_login_page() {
 }
 }
 
-function prime2g_enqueue_parent_css_login() {
+function prime2g_parent_enqueues_at_login() {
 	wp_register_style( 'prime2g_css', get_theme_file_uri( '/files/theme.css' ), [], PRIME2G_VERSION );
     wp_enqueue_style( 'prime2g_css' );
+
+	# @since 1.0.75
+	wp_register_script( 'prime2g_js', get_theme_file_uri( '/files/theme-min.js' ), [], PRIME2G_VERSION );
+	wp_enqueue_script( 'prime2g_js' );
 }
+
+
+
+

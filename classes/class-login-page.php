@@ -76,6 +76,7 @@ class Prime2gLoginPage {
 		add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
 
 		add_action( 'login_header', [ $this, 'login_page_content' ] );
+		add_action( 'login_footer', [ $this, 'login_footer' ], 100 );	# @since 1.0.75
 
 		add_filter( 'login_url', [ $this, 'login_url' ], 10, 3 );
 		add_filter( 'retrieve_password_message', [ $this, 'password_reset_message' ], 20, 2 );
@@ -184,12 +185,26 @@ class Prime2gLoginPage {
 	}
 
 
-	public function login_page_content() {
+	protected function get_login_page() {
 		if ( $pageID = get_theme_mod( 'prime2g_custom_login_page_id', 0 ) ) {
 			if ( ! $pageID ) return;
 			$pageID		=	(int) $pageID;
-			$the_page	=	get_post( $pageID );
+			return get_post( $pageID );
+		}
+	}
+
+
+	public function login_page_content() {
+		if ( $the_page = $this->get_login_page() )
 			echo apply_filters( 'the_content', $the_page->post_content );
+	}
+
+
+	#	@since 1.0.75
+	public function login_footer() {
+		if ( $the_page = $this->get_login_page() ) {
+			if ( $the_page->prime_page_js )
+				echo '<script id="prime2g_pageJS">'. $the_page->prime_page_js .'</script>';
 		}
 	}
 
@@ -253,4 +268,5 @@ class Prime2gLoginPage {
 }
 
 }
+
 

@@ -6,7 +6,6 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-
 /**
  *	DETERMINE POST TYPES FOR CUSTOM FIELDS
  *	@since ToongeePrime Theme 1.0.70
@@ -23,7 +22,9 @@ return (object) [
 }
 
 
-/* DISPLAY SUBTITLE */
+/**
+ *	DO OUTPUTS
+ */
 add_action( 'prime2g_after_title', 'prime2g_post_subtitle', 2 );
 if ( ! function_exists( 'prime2g_post_subtitle' ) ) {
 function prime2g_post_subtitle( $post = null ) {
@@ -33,6 +34,15 @@ if ( $postSubtitle )
 	echo "<h3 class=\"post-subtitle\">$postSubtitle</h3>";
 }
 }
+
+add_action( 'wp_footer', 'prime2g_pageJS', 100 );
+function prime2g_pageJS() {
+$script	=	post_custom( 'prime_page_js' );
+if ( $script ) { echo '<script id="prime2g_pageJS">'. $script .'</script>'; }
+}
+
+
+
 
 
 /**
@@ -72,7 +82,7 @@ if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
 	$post_id	=	$parent_id;
 }
 $fields	=	[
-	'post_subtitle', 'remove_sidebar', 'remove_header', 'page_width', 'video_url',
+	'post_subtitle', 'remove_sidebar', 'remove_header', 'page_width', 'video_url', 'prime_page_js',
 	'disable_autop', 'use_main_nav_location', 'prevent_caching', 'font_url', 'enqueue_jquery'
 ];
 foreach( $fields as $field ) {
@@ -95,14 +105,14 @@ if ( ! function_exists( 'prime2g_meta_fieldset_1' ) ) {
 function prime2g_meta_fieldset_1() {
 	add_meta_box(
 		'prime2g_prime_fields1', __( 'Page Options', PRIME2G_TEXTDOM ),
-		'prime2g_cFields_metadivs', prime2g_fields_in_post_types()->prime_fields1, 'side', 'high'
+		'prime2g_fields_side_box', prime2g_fields_in_post_types()->prime_fields1, 'side', 'high'
 	);
 }
 }
 
 
 #	Custom Fieldset 1
-function prime2g_cFields_metadivs( $post ) { ?>
+function prime2g_fields_side_box( $post ) { ?>
 <div class="prime2g_meta_box">
 <?php prime2g_custom_mbox_css(); ?>
 
@@ -110,7 +120,7 @@ function prime2g_cFields_metadivs( $post ) { ?>
 
 	<div class="meta-options prime2g_field">
 		<label for="post_subtitle">Post Subtitle</label>
-<input id="post_subtitle" type="text" class="prime2g_admintext" name="post_subtitle" placeholder="A Subtitle for this Entry" 
+<input id="post_subtitle" type="text" class="prime2g_text" name="post_subtitle" placeholder="A Subtitle for this Entry" 
 value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 />
 	</div>
@@ -208,7 +218,6 @@ $nav_menus	=	get_registered_nav_menus(); ?>
 
 </div>
 <?php
-
 }
 
 
@@ -222,8 +231,8 @@ $nav_menus	=	get_registered_nav_menus(); ?>
  *
  *	@since 1.0.50
  */
-add_action( 'add_meta_boxes', 'prime2g_template_part_boxes' );
-function prime2g_template_part_boxes() {
+add_action( 'add_meta_boxes', 'prime2g_postdata_metaboxes' );
+function prime2g_postdata_metaboxes() {
 $obj	=	get_post_type_object( get_post_type() );
 $name	=	$obj->labels->singular_name;
 add_meta_box(
@@ -330,6 +339,14 @@ function prime2g_field_extras_callback( $post ) { ?>
 	<input type="url" id="font_url" name="font_url" value="<?php echo esc_url( $post->font_url ); ?>">
 </div>
 
+<div class="meta-options prime2g_field">
+	<label for="prime_page_js">JavaScript</label>
+<textarea id="prime_page_js" class="prime2g_textarea" name="prime_page_js" rows="5" placeholder="Do not include <script> tags">
+<?php echo $post->prime_page_js; ?>
+</textarea>
+</div>
+
 </div>
 <?php
 }
+

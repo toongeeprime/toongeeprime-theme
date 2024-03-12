@@ -26,7 +26,6 @@ $text_above	=	$text_above === 'default' ? 'Log into your account or '. $signup_t
 $text_below	=	$text_below === 'default' ? 'Not a member yet? '. $signup_text : $text_below;
 
 $redirect_to=	$redirect_to ?: wp_get_referer();
-// $redirect_to	=	$redirect_to ?: prime2g_get_current_url();
 $wrapper_id	=	$wrapper_id ? ' id="' . $wrapper_id . '"' : '';
 $classes	=	$classes ? $classes . ' ' : '';
 
@@ -53,7 +52,8 @@ if ( $echo ) echo $form;
 else return $form;
 }
 else {
-	return __( '<h3>You are logged in. <a href="'. wp_logout_url() .'" title="Log out now">Log out</a>.</h3>', PRIME2G_TEXTDOM );
+	return function_exists( 'p2g_form_note_user_is_loggedin' ) ? p2g_form_note_user_is_loggedin() :
+	__( '<h3>You are logged in. <a href="'. wp_logout_url() .'" title="Log out now">Log out</a>.</h3>', PRIME2G_TEXTDOM );
 }
 
 }
