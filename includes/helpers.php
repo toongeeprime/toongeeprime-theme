@@ -238,3 +238,12 @@ $args	=	explode( '?', $url );
 return  isset( $args[1] );
 }
 
+
+/* @since 1.0.76 */
+function prime_strip_url_end( string $url ) {
+$path	=	trim( parse_url( $url, PHP_URL_PATH ), '/' );
+$parts	=	explode( '/', $path );
+return end( $parts );
+}
+
+

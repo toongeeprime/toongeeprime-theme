@@ -31,7 +31,7 @@ class Prime2gLoginPage {
 	public function new_login_slug() {
 		// To Do: network logic
 		$slug	=	get_theme_mod( 'prime2g_wp_login_page_slug', 'login' );
-		if ( ! in_array( $slug, self::forbidden_slugs() ) ) {
+		if ( ! in_array( $slug, prime_wp_forbidden_slugs() ) ) {
 			return $slug;
 		}
 	return 'login';
@@ -161,7 +161,7 @@ class Prime2gLoginPage {
 
 		$this->wp_template_loader();
 		}
-		elseif ( str_contains( prime2g_get_current_url(), $this->new_login_slug() ) ) {
+		elseif ( prime_strip_url_end( prime2g_get_current_url() ) === $this->new_login_slug() ) {
 			global $error, $interim_login, $action, $user_login;
 			@require_once ABSPATH . 'wp-login.php';
 		die;
@@ -260,11 +260,6 @@ class Prime2gLoginPage {
 	return $msg;
 	}
 
-
-	public static function forbidden_slugs() {
-		$wp	=	new WP;
-		return array_merge( $wp->public_query_vars, $wp->private_query_vars );
-	}
 }
 
 }

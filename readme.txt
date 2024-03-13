@@ -16,6 +16,9 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.76 =
+* Custom login url bug fix
+
 = 1.0.75 =
 * Work JS by custom field at custom login page, hence restored legacy custom JS field
 
