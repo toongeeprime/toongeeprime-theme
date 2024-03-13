@@ -30,10 +30,23 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		'section'	=>	'prime2g_site_settings_section',
 		'choices'	=>	array(
 			''		=>	__( '-- No Redirects --', PRIME2G_TEXTDOM ),
-			'edit_posts'			=>	__( 'Redirect if user is not an Author', PRIME2G_TEXTDOM ),
-			'edit_others_posts'		=>	__( 'Redirect if user is not an Editor', PRIME2G_TEXTDOM ),
-			'edit_theme_options'	=>	__( 'Redirect if user is not an Administrator', PRIME2G_TEXTDOM )
+			'edit_posts'			=>	__( 'Redirect non Authors', PRIME2G_TEXTDOM ),
+			'edit_others_posts'		=>	__( 'Redirect non Editors', PRIME2G_TEXTDOM ),
+			'edit_theme_options'	=>	__( 'Redirect non Administrators', PRIME2G_TEXTDOM ),
+			'custom_capability'		=>	__( 'Redirect by Custom Capability', PRIME2G_TEXTDOM )
 		)
+	) );
+
+	$wp_customize->add_setting( 'prime2g_admin_access_custom_capability', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_admin_access_custom_capability', array(
+		'label'		=>	__( 'Define Custom Capability', PRIME2G_TEXTDOM ),
+		'type'		=>	'text',
+		'settings'	=>	'prime2g_admin_access_custom_capability',
+		'section'	=>	'prime2g_site_settings_section',
+		'input_attrs'	=>	array(
+			'placeholder'	=>	__( 'custom_user_capability', PRIME2G_TEXTDOM )
+		),
+		'active_callback'	=>	function() { return 'custom_capability' === get_theme_mod( 'prime2g_admin_access_capability' ); },
 	) );
 
 	/**

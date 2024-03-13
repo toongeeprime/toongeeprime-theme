@@ -112,8 +112,7 @@ api( 'prime2g_use_theme_google_fonts', function( value ) {
 value.bind( function( newval ) {
 	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),
 		bFont	=	$( '#customize-control-prime2g_site_body_font' );
-	if ( newval ) { hFont.slideDown( 180 ); bFont.slideDown( 180 ); }
-	else { hFont.slideUp( 180 ); bFont.slideUp( 180 ); }
+	if ( newval ) { hFont.slideDown( 180 ); bFont.slideDown( 180 ); } else { hFont.slideUp( 180 ); bFont.slideUp( 180 ); }
 } );
 } );
 
@@ -174,8 +173,15 @@ api( 'prime2g_use_custom_login_page', function( value ) {
 value.bind( function( newval ) {
 	let logPID	=	$( '#customize-control-prime2g_custom_login_page_id' ),
 		wplSlug	=	$( '#customize-control-prime2g_wp_login_page_slug' );
-	if ( newval ) { logPID.slideDown( 180 ); wplSlug.slideDown( 180 ); }
-	else { logPID.slideUp( 180 ); wplSlug.slideUp( 180 ); }
+	if ( newval ) { logPID.slideDown( 180 ); wplSlug.slideDown( 180 ); } else { logPID.slideUp( 180 ); wplSlug.slideUp( 180 ); }
+} );
+} );
+
+/* @since 1.0.76 */
+api( 'prime2g_admin_access_capability', function( value ) {
+value.bind( function( newval ) {
+	let cstmCap	=	$( '#customize-control-prime2g_admin_access_custom_capability' );
+	if ( newval === 'custom_capability' ) { cstmCap.slideDown( 180 ); } else { cstmCap.slideUp( 180 ); }
 } );
 } );
 

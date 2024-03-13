@@ -93,14 +93,18 @@ Prime2gJSBits::copy_to_clipboard(true);
  */
 add_action( 'admin_init', 'prime2g_admin_access_control', 100 );
 function prime2g_admin_access_control() {
-if ( is_admin() &&  ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
-$capability	=	get_theme_mod( 'prime2g_admin_access_capability' );
+#	run for non-admins/super-admins only
+if ( is_admin() &&  ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) && ! current_user_can( 'update_core' ) ) {
+
+$capability	=	'custom_capability' === get_theme_mod( 'prime2g_admin_access_capability' ) ?
+get_theme_mod( 'prime2g_admin_access_custom_capability' ) : get_theme_mod( 'prime2g_admin_access_capability' );
 
 if ( ! empty( $capability ) && ! current_user_can( $capability ) ) {
 $wp_get_referer	=	wp_get_referer();
+$custom_login	=	Prime2gLoginPage::get_instance();
 
-	if ( $wp_get_referer ) {
+	if ( $wp_get_referer && prime_strip_url_end( $wp_get_referer ) !== $custom_login->new_login_slug() ) {
 		#	if referer is an admin page
 		if ( str_contains( $wp_get_referer, 'wp-admin' ) ) {
 			wp_safe_redirect( site_url( '404' ) );
