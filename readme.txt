@@ -18,6 +18,8 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.77 =
 * File: single-prime_template_parts.php because of Elementor
+* Template Parts template restricted to HTML blocks
+* Functions: prime_post_types_group() & prime_taxonomies_group()
 
 = 1.0.76 =
 * Custom login url bug fix
