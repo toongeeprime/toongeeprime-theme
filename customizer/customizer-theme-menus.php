@@ -169,6 +169,19 @@ if ( prime_child_min_version( '2.3' ) ) {
 		'active_callback'	=>	function() { return 'togglers' === get_theme_mod( 'prime2g_main_menu_type' ); }
 	) );
 
+	#	Theme 1.0.78
+	function p2IsmegMenu() { return 'mega_menu' === get_theme_mod( 'prime2g_main_menu_type' ); }
+
+	$wp_customize->add_setting( 'prime2g_use_fullwidth_mega_menu', $simple_text );
+	$wp_customize->add_control( 'prime2g_use_fullwidth_mega_menu', array(
+		'label'		=>	__( 'Full-width Menu (Desktop)', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_use_fullwidth_mega_menu',
+		'section'	=>	'prime2g_theme_menus_section',
+		'active_callback'	=>	'p2IsmegMenu'
+	) );
+	#	Theme 1.0.78 End
+
 	#	Theme 1.0.76
 	$wp_customize->add_setting( 'prime2g_mega_menu_template_part_id', $simple_text );
 	$wp_customize->add_control( 'prime2g_mega_menu_template_part_id', array(
@@ -177,7 +190,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 		'settings'	=>	'prime2g_mega_menu_template_part_id',
 		'section'	=>	'prime2g_theme_menus_section',
 		'input_attrs'	=>	[ 'placeholder'	=>	'12345' ],
-		'active_callback'	=>	function() { return 'mega_menu' === get_theme_mod( 'prime2g_main_menu_type' ); }
+		'active_callback'	=>	'p2IsmegMenu'
 	) );
 
 	$wp_customize->add_setting( 'prime2g_mobile_menu_template_part_id', $simple_text );
@@ -187,7 +200,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 		'settings'	=>	'prime2g_mobile_menu_template_part_id',
 		'section'	=>	'prime2g_theme_menus_section',
 		'input_attrs'	=>	[ 'placeholder'	=>	'12345' ],
-		'active_callback'	=>	function() { return 'mega_menu' === get_theme_mod( 'prime2g_main_menu_type' ); }
+		'active_callback'	=>	'p2IsmegMenu'
 	) );
 }
 

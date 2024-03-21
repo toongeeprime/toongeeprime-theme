@@ -42,11 +42,11 @@ if ( ! empty( $users ) ) {
 
 
 elseif ( ! empty( $device ) ) {
-$isMobile		=	wp_is_mobile();
-$mobile_devices	=	[ 'mobile', 'mobiles', 'phone', 'phones', 'tablet', 'tablets' ];
+$isMobile	=	wp_is_mobile();
+$devices	=	prime2g_devices_array();
 
-if ( $isMobile && in_array( $device, $mobile_devices ) ) return $output;
-elseif ( ! $isMobile && ! in_array( $device, $mobile_devices ) ) return $output;
+if ( in_array( $device, $devices->mobiles ) && $isMobile ) return $output;
+if ( in_array( $device, $devices->desktops ) && ! $isMobile ) return $output;
 }
 
 

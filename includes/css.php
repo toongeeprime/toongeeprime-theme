@@ -67,6 +67,11 @@ $mainMenu	=	'.main_menu_wrap{z-index:99990;}';
 if ( $mainMenuType === 'togglers' ) {
 	$mainMenu	.=	'';
 }
+elseif ( $mainMenuType === 'mega_menu' ) {
+	$mainMenu	.=	'';
+
+	$menuMin821	=	prime2g_mega_menu_css();	// mega menu does not appear on mobile
+}
 else {
 	$mainMenu	.=	prime2g_menu_main_css();
 
@@ -210,8 +215,6 @@ return (object)[
 'spin'		=>	$spin
 ];
 }
-
-/** @since 1.0.57 End **/
 
 
 /**
@@ -408,7 +411,6 @@ return '#container{top:46px;}
 /** @since 1.0.70 End **/
 
 
-
 /**
  *	@since 1.0.73
  */
@@ -434,5 +436,24 @@ function prime2g_login_page_css() {
 }
 
 /** @since 1.0.73 End **/
+
+
+/**
+ *	@since 1.0.78
+ */
+if ( ! function_exists( 'prime2g_mega_menu_css' ) ) {
+function prime2g_mega_menu_css() {
+$css	=	'
+#megaMenuWrap{color:var(--content-text);z-index:99999;}
+#megaMenuWrap a{color:var(--content-text);}
+#megaMenuLinks{display:flex;padding:0;margin:0;}
+#megaMenuWrap,#megaMenu li{position: relative;}
+#megaMenu li{list-style:none;margin:0 5px;padding:5px 20px;}
+.megamenuContents{opacity:0;visibility:hidden;max-height:75vh;overflow-y:auto;position:absolute;min-width:max-content;
+background:var(--content-background);transition:0.2s;box-shadow:0 20px 15px 5px rgba(0,0,0,0.2);padding:var(--min-pad);}
+#megaMenu li:hover .megamenuContents{visibility:visible;opacity:1;transition:0.3s;}';
+return $css;
+}
+}
 
 

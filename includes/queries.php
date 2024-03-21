@@ -125,8 +125,9 @@ $params
 extract( $process );
 
 $isMobile	=	wp_is_mobile();
-if ( in_array( $device, prime2g_devices_array()->desktops ) && $isMobile ) return;
-if ( in_array( $device, prime2g_devices_array()->mobiles ) && ! $isMobile ) return;
+$devices	=	prime2g_devices_array();
+if ( in_array( $device, $devices->desktops ) && $isMobile ) return;
+if ( in_array( $device, $devices->mobiles ) && ! $isMobile ) return;
 
 $termsArray	=	explode( ',', $terms );
 if ( count( $termsArray ) > 1 ) {

@@ -32,10 +32,10 @@ $atts	=	shortcode_atts( [ 'id' => '1', 'device' => '' ], $atts );
 extract( $atts );
 
 $isMobile	=	wp_is_mobile();
+$devices	=	prime2g_devices_array();
 
-if ( in_array( $device, prime2g_devices_array()->desktops ) && $isMobile ) return;
-if ( in_array( $device, prime2g_devices_array()->mobiles ) && ! $isMobile ) return;
-
+if ( in_array( $device, $devices->desktops ) && $isMobile ) return;
+if ( in_array( $device, $devices->mobiles ) && ! $isMobile ) return;
 
 $part	=	prime2g_insert_template_part( $id, false );
 
@@ -192,8 +192,10 @@ $atts
 extract( $atts );
 
 $isMobile	=	wp_is_mobile();
-if ( in_array( $device, prime2g_devices_array()->desktops ) && $isMobile ) return;
-if ( in_array( $device, prime2g_devices_array()->mobiles ) && ! $isMobile ) return;
+$devices	=	prime2g_devices_array();
+
+if ( in_array( $device, $devices->desktops ) && $isMobile ) return;
+if ( in_array( $device, $devices->mobiles ) && ! $isMobile ) return;
 
 $id		=	$id ? ' id="'. $id .'"' : '';
 $title_attrs	=	( $title_attrs === 'yes' ) ? true : false;

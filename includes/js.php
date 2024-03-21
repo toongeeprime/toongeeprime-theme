@@ -167,3 +167,44 @@ function prime2g_custom_login_js() {}
 }
 
 
+/**
+ *	Placeholder function
+ *	@since 1.0.78
+ */
+if ( ! function_exists( 'prime2g_mobile_mega_menu_js' ) ) {
+function prime2g_mobile_mega_menu_js() {}
+}
+
+/**
+ *	Template function for full-width mega menu
+ */
+if ( ! function_exists( 'prime2g_mega_menu_js' ) ) {
+function prime2g_mega_menu_js() {
+$fullwidth	=	get_theme_mod( 'prime2g_use_fullwidth_mega_menu' ) ? 'true' : 'false';
+
+$js	=	'<script id="prime_mega_menuJS">
+const mmConts	=	p2getAll( "#megaMenu.desktop .megamenuContents" ),
+		fullwidth	=	'. $fullwidth .';
+
+function prime_megaMenuActions() {
+mmConts.forEach( mc=>{
+	rect	=	mc.getBoundingClientRect();
+	for ( const key in rect ) {
+		if ( typeof rect[key] !== "function" && key === "left" ) {
+			mc.style.width	=	"98.75vw";
+			mc.style.left	=	((-1 * rect[key]) + 20) + "px";
+		}
+	}
+} );
+}
+
+if ( fullwidth ) {
+window.onload	=	prime_megaMenuActions;
+window.onresize	=	prime_megaMenuActions;
+}
+</script>';
+echo $js;
+}
+}
+
+

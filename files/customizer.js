@@ -151,10 +151,17 @@ api( 'prime2g_main_menu_type', (value)=>{
 value.bind( function( newval ) {
 	let tmenuSC	=	$( '#customize-control-prime2g_toggle_menu_template_part_id' ),
 		mmenuSC	=	$( '#customize-control-prime2g_mega_menu_template_part_id' ),
+		mmenuFW	=	$( '#customize-control-prime2g_use_fullwidth_mega_menu' ),
 		mobCount	=	$( '#customize-control-prime2g_mobile_menu_template_part_id' );
-	if ( newval === '' ) { mmenuSC.slideUp( 180 ); tmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); }
-	if ( newval === 'togglers' ) { tmenuSC.slideDown( 180 ); mmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); }
-	if ( newval === 'mega_menu' ) { mmenuSC.slideDown( 180 ); mobCount.slideDown( 180 ); tmenuSC.slideUp( 180 ); }
+	if ( newval === '' ) {
+		mmenuSC.slideUp( 180 ); tmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); mmenuFW.slideUp( 180 );
+	}
+	if ( newval === 'togglers' ) {
+		tmenuSC.slideDown( 180 ); mmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); mmenuFW.slideUp( 180 );
+	}
+	if ( newval === 'mega_menu' ) {
+		mmenuSC.slideDown( 180 ); mobCount.slideDown( 180 ); mmenuFW.slideDown( 180 ); tmenuSC.slideUp( 180 );
+	}
 } );
 } );
 

@@ -52,15 +52,20 @@ echo	'<div id="'. $id .'" class="togs main_menu_wrap'. $lwm_class .'">
 <div class="w100pc flexnw site_width">';
 
 if ( $min_v23 && 'togglers' === $styles->menu_type ) {
+
 	if ( $incLogo ) echo '<div>' . $theLogo . '</div>';
 	prime2g_toggler_menu_type_elements();
+
 }
 #	@since 1.0.76 / 1.0.77
 elseif ( ! $isMobile && $min_v23 && 'mega_menu' === $styles->menu_type ) {
+
 	if ( $incLogo ) echo '<div>' . $theLogo . '</div>';
 
 	$partID	=	get_theme_mod( 'prime2g_mega_menu_template_part_id', '' );
 	echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
+	add_action( 'wp_footer', 'prime2g_mega_menu_js' );
+
 }
 else {
 
@@ -76,13 +81,19 @@ prime2g_menu_togglers( [ 'incLogo'=>$incLogo, 'theLogo'=>$theLogo, 'class'=>'mob
  aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
 
 <?php
-#	@since 1.0.77
+#	Conditions added @since 1.0.77
 if ( $isMobile ) {
-	if ( 'mega_menu' !== $styles->menu_type ) prime2g_site_top_menu();
-	if ( $min_v23 && 'mega_menu' === $styles->menu_type ) {
-		$partID	=	get_theme_mod( 'prime2g_mobile_menu_template_part_id', '' );
-		echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
-	}
+
+if ( 'mega_menu' !== $styles->menu_type ) prime2g_site_top_menu();
+
+if ( $min_v23 && 'mega_menu' === $styles->menu_type ) {
+
+	$partID	=	get_theme_mod( 'prime2g_mobile_menu_template_part_id', '' );
+	echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
+	add_action( 'wp_footer', 'prime2g_mobile_mega_menu_js' );
+
+}
+
 }
 
 #	@since 1.0.77
@@ -249,38 +260,30 @@ return (object) [
 }
 
 
-/**
- *	MEGAMENU HTML STRUCTURE
+/***
+ *	DESKTOP MEGAMENU HTML STRUCTURE
  *	@since 1.0.76
 
-<nav id="megaMenu" class="menu-main-container">
+<nav id="megaMenu" class="desktop menu-main-container">
 <ul id="megaMenuLinks" class="menu">
  	<li class="megaMenuContents1"><a href="#" class="megamenu_link">Item 1</a>
-	<div id="megaMenuContents1" class="megamenuContents">[prime_insert_template_part id="123"]</div>
+	<div id="megaMenuContents1" class="megamenuContents">
+	<div class="mmcontent">[prime_insert_template_part id="123" device="desktop"]</div>
+	</div>
 	</li>
 
  	<li class="megaMenuContents2"><a href="#" class="megamenu_link">Item 2</a>
-	<div id="megaMenuContents2" class="megamenuContents">[prime_insert_template_part id="234"]</div>
+	<div id="megaMenuContents2" class="megamenuContents">
+	<div class="mmcontent">[prime_insert_template_part id="234" device="mobile"]</div>
+	</div>
 	</li>
 
  	<li class="megaMenuContents3"><a href="#" class="megamenu_link">Item 3</a>
-	<div id="megaMenuContents3" class="megamenuContents">[prime_insert_template_part id="345"]</div>
+	<div id="megaMenuContents3" class="megamenuContents">
+	<div class="mmcontent">[prime_insert_template_part id="345" device="desktop"]</div>
+	</div>
 	</li>
 </ul>
 </nav>
-
-<style id="megaMenuCSS">
-@media(min-width:821px){
-#megaMenuLinks{display:flex;}
-#megaMenuWrap,#megaMenu li{position: relative;}
-.megamenuContents{grid-area:1/1;opacity:0;visibility:hidden;max-height:75vh;overflow-y:auto;position:absolute;width:100vw;background:#fff;transition:0.2s;box-shadow:0 20px 15px 5px rgba(0,0,0,0.2);}
-#megaMenu li:hover .megamenuContents{visibility:visible;opacity:1;transition:0.3s;}
-}
-
-@media(max-width:820px){
-#megaMenuWrap{display:none;}
-}
-</style>
- */
-
+ **/
 
