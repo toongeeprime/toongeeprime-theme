@@ -37,7 +37,7 @@ class Prime2gMailer {
 	$domain		=	prime2g_get_site_domain();
 
 	return (object) [
-		'domain'	=>	prime2g_get_site_domain(),
+		'domain'	=>	$domain,
 		'sender_name'	=>	$siteName,
 		'sender_email'	=>	get_option( 'admin_email' ),
 		'closing_remark'=>	'<p>'. __( 'Kind Regards', PRIME2G_TEXTDOM ) .',</p><p>'. esc_html( $siteName ) .'.</p>',

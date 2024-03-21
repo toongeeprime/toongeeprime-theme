@@ -89,7 +89,7 @@ echo $js;
 /**
  *	@since 1.0.73
  *
- *	Password Toggler
+ *	Password Toggler, for use with custom login form
  */
 if ( ! function_exists( 'prime2g_view_password_toggler' ) ) {
 function prime2g_view_password_toggler() {
@@ -156,5 +156,14 @@ if ( box ) { box.classList.add( 'prime2g_postbox' ); }
 }
 
 /*	@since 1.0.73 End	*/
+
+
+/**
+ *	Placeholder function
+ *	@since 1.0.77
+ */
+if ( ! function_exists( 'prime2g_custom_login_js' ) ) {
+function prime2g_custom_login_js() {}
+}
 
 

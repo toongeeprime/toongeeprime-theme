@@ -55,6 +55,13 @@ if ( $min_v23 && 'togglers' === $styles->menu_type ) {
 	if ( $incLogo ) echo '<div>' . $theLogo . '</div>';
 	prime2g_toggler_menu_type_elements();
 }
+#	@since 1.0.76 / 1.0.77
+elseif ( ! $isMobile && $min_v23 && 'mega_menu' === $styles->menu_type ) {
+	if ( $incLogo ) echo '<div>' . $theLogo . '</div>';
+
+	$partID	=	get_theme_mod( 'prime2g_mega_menu_template_part_id', '' );
+	echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
+}
 else {
 
 $cta_menu	=	get_theme_mod( 'prime2g_set_cta_menu_item' );	# Theme 1.0.55
@@ -69,7 +76,17 @@ prime2g_menu_togglers( [ 'incLogo'=>$incLogo, 'theLogo'=>$theLogo, 'class'=>'mob
  aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
 
 <?php
-if ( $isMobile ) prime2g_site_top_menu();
+#	@since 1.0.77
+if ( $isMobile ) {
+	if ( 'mega_menu' !== $styles->menu_type ) prime2g_site_top_menu();
+	if ( $min_v23 && 'mega_menu' === $styles->menu_type ) {
+		$partID	=	get_theme_mod( 'prime2g_mobile_menu_template_part_id', '' );
+		echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
+	}
+}
+
+#	@since 1.0.77
+if ( 'mega_menu' !== $styles->menu_type ) {
 
 $main_menu	=	'main-menu';
 if ( is_singular() && get_theme_mod( 'prime2g_extra_menu_locations' ) ) {
@@ -86,6 +103,8 @@ wp_nav_menu(
 		'fallback_cb'		=>	false,
 	)
 );
+
+}
 ?>
 
 <div id="prime_cta_menu" class="prime_cta_menu"><?php if ( $cta_menu ) echo prime2g_cta_menu(); ?></div>
@@ -204,7 +223,7 @@ prime2g_menu_togglers( [ 'class' => $tog_class, 'togTargets' => $togTargets ] );
 
 add_action( 'wp_footer', function() use( $wrap_class, $div_class ) {
 
-$partID	=	get_theme_mod( 'prime2g_menu_template_part_id', '' );
+$partID	=	get_theme_mod( 'prime2g_toggle_menu_template_part_id', '' );
 
 echo	'<section id="tog_menu_target" class="tog_menu_target '. $wrap_class .'" style="z-index:99999;">
 <div class="in_menu_target prel slimscrollbar '. $div_class .'">';
@@ -228,4 +247,40 @@ return (object) [
 ];
 }
 }
+
+
+/**
+ *	MEGAMENU HTML STRUCTURE
+ *	@since 1.0.76
+
+<nav id="megaMenu" class="menu-main-container">
+<ul id="megaMenuLinks" class="menu">
+ 	<li class="megaMenuContents1"><a href="#" class="megamenu_link">Item 1</a>
+	<div id="megaMenuContents1" class="megamenuContents">[prime_insert_template_part id="123"]</div>
+	</li>
+
+ 	<li class="megaMenuContents2"><a href="#" class="megamenu_link">Item 2</a>
+	<div id="megaMenuContents2" class="megamenuContents">[prime_insert_template_part id="234"]</div>
+	</li>
+
+ 	<li class="megaMenuContents3"><a href="#" class="megamenu_link">Item 3</a>
+	<div id="megaMenuContents3" class="megamenuContents">[prime_insert_template_part id="345"]</div>
+	</li>
+</ul>
+</nav>
+
+<style id="megaMenuCSS">
+@media(min-width:821px){
+#megaMenuLinks{display:flex;}
+#megaMenuWrap,#megaMenu li{position: relative;}
+.megamenuContents{grid-area:1/1;opacity:0;visibility:hidden;max-height:75vh;overflow-y:auto;position:absolute;width:100vw;background:#fff;transition:0.2s;box-shadow:0 20px 15px 5px rgba(0,0,0,0.2);}
+#megaMenu li:hover .megamenuContents{visibility:visible;opacity:1;transition:0.3s;}
+}
+
+@media(max-width:820px){
+#megaMenuWrap{display:none;}
+}
+</style>
+ */
+
 

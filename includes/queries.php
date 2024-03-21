@@ -72,10 +72,12 @@ $options	=	[ 'cache_name' => 'prime2g_template_parts' ];
 
 $parts	=	prime2g_wp_query( $args, $options );
 
+$id	=	(int)$id;
+
 if ( $parts->have_posts() ) {
 	while ( $parts->have_posts() ) {
 	$parts->the_post();
-	if ( $id != get_the_ID() ) continue;
+	if ( $id !== get_the_ID() ) continue;
 
 		if ( $echo )
 			$part	=	the_content();

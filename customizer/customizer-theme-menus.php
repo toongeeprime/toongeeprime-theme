@@ -155,20 +155,42 @@ if ( prime_child_min_version( '2.3' ) ) {
 		'choices'	=>	array(
 			''		=>	__( 'Default', PRIME2G_TEXTDOM ),
 			'togglers'	=>	__( 'Togglers', PRIME2G_TEXTDOM ),
-			// 'mega_menu'	=>	__( 'Mega Menu', PRIME2G_TEXTDOM )
+			'mega_menu'	=>	__( 'Mega Menu', PRIME2G_TEXTDOM )	# Theme 1.0.76
 		),
 	) );
 
-	$wp_customize->add_setting( 'prime2g_menu_template_part_id', $simple_text );
-	$wp_customize->add_control( 'prime2g_menu_template_part_id', array(
-		'label'		=>	__( 'Menu Template Part ID', PRIME2G_TEXTDOM ),
+	$wp_customize->add_setting( 'prime2g_toggle_menu_template_part_id', $simple_text );
+	$wp_customize->add_control( 'prime2g_toggle_menu_template_part_id', array(
+		'label'		=>	__( 'Toggle Menu Template Part ID', PRIME2G_TEXTDOM ),
 		'type'		=>	'number',
-		'settings'	=>	'prime2g_menu_template_part_id',
+		'settings'	=>	'prime2g_toggle_menu_template_part_id',
 		'section'	=>	'prime2g_theme_menus_section',
 		'input_attrs'	=>	[ 'placeholder'	=>	'12345' ],
-		'active_callback'	=>	function() { return ! empty( get_theme_mod( 'prime2g_main_menu_type' ) ); }
+		'active_callback'	=>	function() { return 'togglers' === get_theme_mod( 'prime2g_main_menu_type' ); }
+	) );
+
+	#	Theme 1.0.76
+	$wp_customize->add_setting( 'prime2g_mega_menu_template_part_id', $simple_text );
+	$wp_customize->add_control( 'prime2g_mega_menu_template_part_id', array(
+		'label'		=>	__( 'Mega Menu Template Part ID', PRIME2G_TEXTDOM ),
+		'type'		=>	'number',
+		'settings'	=>	'prime2g_mega_menu_template_part_id',
+		'section'	=>	'prime2g_theme_menus_section',
+		'input_attrs'	=>	[ 'placeholder'	=>	'12345' ],
+		'active_callback'	=>	function() { return 'mega_menu' === get_theme_mod( 'prime2g_main_menu_type' ); }
+	) );
+
+	$wp_customize->add_setting( 'prime2g_mobile_menu_template_part_id', $simple_text );
+	$wp_customize->add_control( 'prime2g_mobile_menu_template_part_id', array(
+		'label'		=>	__( 'Mobile Menu Template Part ID', PRIME2G_TEXTDOM ),
+		'type'		=>	'number',
+		'settings'	=>	'prime2g_mobile_menu_template_part_id',
+		'section'	=>	'prime2g_theme_menus_section',
+		'input_attrs'	=>	[ 'placeholder'	=>	'12345' ],
+		'active_callback'	=>	function() { return 'mega_menu' === get_theme_mod( 'prime2g_main_menu_type' ); }
 	) );
 }
 
 }
 }
+

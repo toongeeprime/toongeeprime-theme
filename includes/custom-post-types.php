@@ -13,7 +13,10 @@ if ( ! function_exists( 'prime2g_register_custom_post_types' ) ) {
 add_action( 'init', 'prime2g_register_custom_post_types', 0 );
 
 function prime2g_register_custom_post_types() {
+
 # 1.0.74: condition is now only prime2g_use_extras()
+# 1.0.77: made public because of Elementor
+
 if ( prime2g_use_extras() ) {
 #	Template Parts
 $labels	=	array(
@@ -39,7 +42,7 @@ $args	=	array(
 	'supports'			=>	array( 'title', 'editor', 'author' ),
 	'taxonomies'		=>	array( 'template_parts_section' ),
 	'hierarchical'		=>	true,
-	'public'			=>	false,
+	'public'			=>	true,
 	'show_ui'			=>	true,
 	'show_in_menu'		=>	'themes.php',
 	'show_in_nav_menus'	=>	false,
@@ -49,9 +52,14 @@ $args	=	array(
 	'has_archive'		=>	false,
 	'exclude_from_search'	=>	true,
 	'publicly_queryable'	=>	true,
-	'query_var'			=>	false,
+	'query_var'			=>	true,
 	'capability_type'	=>	'page',
 	'show_in_rest'		=>	true,
+	'rewrite'		=>	array(
+		'slug'		=>	'template_part',
+		'feeds'		=>	false,
+		'with_front'=>	true
+	),
 	'insert_into_item'		=>	_x( 'Insert into this Template Part', 'prime_template_parts', PRIME2G_TEXTDOM ),
 );
 

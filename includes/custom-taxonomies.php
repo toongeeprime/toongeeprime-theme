@@ -46,6 +46,39 @@ $args	=	array(
 register_taxonomy( 'template_parts_section', 'prime_template_parts', $args );
 }
 
+
+if ( class_exists( 'woocommerce' ) ) {
+#	Brands for WooCommerce
+$labels	=	array(
+	'name'			=>	_x( 'Brands', 'taxonomy general name', PRIME2G_TEXTDOM ),
+	'singular_name'	=>	__( 'Brand', PRIME2G_TEXTDOM ),
+	'search_items'	=>	__( 'Search Brands', PRIME2G_TEXTDOM ),
+	'all_items'		=>	__( 'All Brands', PRIME2G_TEXTDOM ),
+	'parent_item'	=>	__( 'Parent Brand', PRIME2G_TEXTDOM ),
+	'parent_item_colon'	=>	__( 'Parent Brand:', PRIME2G_TEXTDOM ),
+	'edit_item'		=>	__( 'Edit Brand', PRIME2G_TEXTDOM ),
+	'update_item'	=>	__( 'Update Brand', PRIME2G_TEXTDOM ),
+	'add_new_item'	=>	__( 'Add New Brand', PRIME2G_TEXTDOM ),
+	'new_item_name'	=>	__( 'New Brand', PRIME2G_TEXTDOM ),
+	'menu_name'		=>	__( 'Brands', PRIME2G_TEXTDOM ),
+	'not_found'		=>	__( 'No Brands Found', PRIME2G_TEXTDOM ),
+);
+$args	=	array(
+	'label'			=>	__( 'Brands', PRIME2G_TEXTDOM ),
+	'labels'		=>	$labels,
+	'query_var'		=>	false,
+	'public'		=>	false,
+	'hierarchical'	=>	true,
+	'show_ui'		=>	true,
+	'show_in_rest'	=>	true,
+	'show_in_quick_edit'	=>	true,
+	'show_admin_column'	=>	true,
+	'show_in_menu'	=>	true,
+);
+
+register_taxonomy( 'brand', prime_post_types_group()->has_brand, $args );
+}
+
 }
 
 }

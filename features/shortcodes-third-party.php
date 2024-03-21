@@ -43,9 +43,10 @@ $direction	=	in_array( $direction, [ 'back', 'backward', 'backwards', '-1' ] ) ?
 $playmode	=	$playmode === 'bounce' ? 'bounce' : 'normal';
 $id     	=	$id ? ' id="'. $id .'"' : '';
 
+$hook	=	is_login() ? 'login_footer' : 'wp_footer';
 
 if ( ! defined( 'P2G_LOTTIESCRIPT' ) ) {
-add_action( 'wp_footer', function() {
+add_action( $hook, function() {
 echo '<script defer src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>';
 }, 100 );
 define( 'P2G_LOTTIESCRIPT', true );

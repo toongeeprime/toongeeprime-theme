@@ -50,6 +50,17 @@ foreach( $parts as $part ) { require_once PRIME2G_PART . $part . '.php'; }
 
 
 /**
+ *	FLUSH REWRITE RULES
+ */
+add_action( 'after_switch_theme', 'prime_init_rewrite_flush' );
+function prime_init_rewrite_flush() {
+prime2g_register_custom_post_types();
+// prime2g_register_custom_taxonomies();
+flush_rewrite_rules();
+}
+
+
+/**
  *	UPDATER
  */
 new Prime2gThemeUpdater( PRIME2G_TEXTDOM, 'https://dev.akawey.com/wp/themes/toongeeprime-theme/theme.json' );

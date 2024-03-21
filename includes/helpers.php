@@ -247,3 +247,20 @@ return end( $parts );
 }
 
 
+/* @since 1.0.77 */
+if ( ! function_exists( 'prime_post_types_group' ) ) {
+function prime_post_types_group() {
+return (object) [
+	'has_brand'	=>	[ 'product' ],
+];
+}
+}
+
+if ( ! function_exists( 'prime_taxonomies_group' ) ) {
+function prime_taxonomies_group() {
+return (object) [
+	'has_archive_image'	=>	[ 'post_tag', 'category', 'brand' ]
+];
+}
+}
+

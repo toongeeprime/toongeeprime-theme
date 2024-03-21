@@ -1,24 +1,27 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	TAXONOMY IMAGE FIELD CLASS
- *	@ https://pluginrepublic.com/adding-an-image-upload-field-to-categories/
+ *	CLASS: TAXONOMY IMAGE FIELD
+ *
+ *	File must be in this dir due to helper dependencies
+ *	***			Class called @ theme-extras.php
+ *	@https://pluginrepublic.com/adding-an-image-upload-field-to-categories
  */
-class PRIME_TAXO_IMAGE_FLD {
-public function __construct() {}
 
+if ( ! class_exists( 'Prime2g_TaxonomyImageField' ) ) {
 
-public function init() {
-$taxonz	=	prime2g_taxonomies_with_archive_image();
+class Prime2g_TaxonomyImageField {
 
+public function __construct() {
+$taxonz	=	prime_taxonomies_group()->has_archive_image;
 	foreach( $taxonz as $taxx ) {
-		add_action( $taxx . '_add_form_fields', array( $this, 'add_taxon_image' ), 10, 2 );
-		add_action( 'created_' . $taxx, array( $this, 'save_taxon_image' ), 10, 2 );
-		add_action( 'edited_' . $taxx, array( $this, 'updated_taxon_image' ), 10, 2 );
-		add_action( $taxx . '_edit_form_fields', array( $this, 'update_taxon_image' ), 10, 2 );
+		add_action( $taxx . '_add_form_fields', [ $this, 'add_taxon_image' ], 10, 2 );
+		add_action( 'created_' . $taxx, [ $this, 'save_taxon_image' ], 10, 2 );
+		add_action( 'edited_' . $taxx, [ $this, 'updated_taxon_image' ], 10, 2 );
+		add_action( $taxx . '_edit_form_fields', [ $this, 'update_taxon_image' ], 10, 2 );
 	}
-	add_action( 'admin_enqueue_scripts', array( $this, 'load_media' ) );
-	add_action( 'admin_footer', array( $this, 'add_script' ) );
+	add_action( 'admin_enqueue_scripts', [ $this, 'load_media' ] );
+	add_action( 'admin_footer', [ $this, 'add_script' ] );
 }
 
 
@@ -40,8 +43,8 @@ public function add_taxon_image( $taxonomy ) { ?>
 
 
 public function save_taxon_image( $term_id, $tt_id ) {
-	if ( isset( $_POST['thumbnail_id'] ) && '' !== $_POST['thumbnail_id'] ) {
-		$image	=	$_POST['thumbnail_id'];
+	if ( isset( $_POST[ 'thumbnail_id' ] ) && '' !== $_POST[ 'thumbnail_id' ] ) {
+		$image	=	$_POST[ 'thumbnail_id' ];
 		add_term_meta( $term_id, 'thumbnail_id', $image, true );
 	}
 }
@@ -69,8 +72,8 @@ public function update_taxon_image( $term, $taxonomy ) { ?>
 
 
 public function updated_taxon_image( $term_id, $tt_id ) {
-if ( isset( $_POST['thumbnail_id'] ) && '' !== $_POST['thumbnail_id'] ) {
-	$image	=	$_POST['thumbnail_id'];
+if ( isset( $_POST[ 'thumbnail_id' ] ) && '' !== $_POST[ 'thumbnail_id' ] ) {
+	$image	=	$_POST[ 'thumbnail_id' ];
 	update_term_meta( $term_id, 'thumbnail_id', $image );
 } else {
 	update_term_meta( $term_id, 'thumbnail_id', '' );
@@ -116,7 +119,7 @@ var queryStringArr = settings.data.split('&');
 	$response = $(xml).find('term_id').text();
 		if ($response!=""){
 		// Clear the thumb image
-			$('#taxon-image-wrapper').html('');
+		$('#taxon-image-wrapper').html('');
 		}
 	}
 });
@@ -127,5 +130,5 @@ var queryStringArr = settings.data.split('&');
 
 }
 
-$PRIME_TAXO_IMAGE_FLD	=	new PRIME_TAXO_IMAGE_FLD();
-$PRIME_TAXO_IMAGE_FLD->init();
+}
+

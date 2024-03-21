@@ -11,7 +11,6 @@ add_action( 'wp_enqueue_scripts', 'prime2g_theme_enqueues' );
 if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
 global $post;
-
 $version	=	PRIME2G_VERSION;
 
 #	STYLES
@@ -114,3 +113,4 @@ function prime2g_customizer_preview_enqueues() {
 	);
 }
 /* @since 1.0.50 End */
+

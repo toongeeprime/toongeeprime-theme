@@ -16,4 +16,7 @@ foreach( $files as $file ) {
 	if ( is_file( $path ) && pathinfo( $path )[ 'extension' ] === 'php' ) require_once $path;
 }
 
+new Prime2g_TaxonomyImageField;
+
 }
+

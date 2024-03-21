@@ -102,9 +102,9 @@ get_theme_mod( 'prime2g_admin_access_custom_capability' ) : get_theme_mod( 'prim
 
 if ( ! empty( $capability ) && ! current_user_can( $capability ) ) {
 $wp_get_referer	=	wp_get_referer();
-$custom_login	=	Prime2gLoginPage::get_instance();
+$login_page	=	Prime2gLoginPage::get_instance();
 
-	if ( $wp_get_referer && prime_strip_url_end( $wp_get_referer ) !== $custom_login->new_login_slug() ) {
+	if ( $wp_get_referer && prime_strip_url_end( $wp_get_referer ) !== $login_page->new_login_slug() ) {
 		#	if referer is an admin page
 		if ( str_contains( $wp_get_referer, 'wp-admin' ) ) {
 			wp_safe_redirect( site_url( '404' ) );
@@ -118,5 +118,14 @@ exit;
 }
 }
 
+
+
+/**
+ *	Hide Front-end Admin Bar
+ */
+add_filter( 'show_admin_bar', 'akawey_remove_admin_bar' );
+function akawey_remove_admin_bar( $show_admin_bar ) {
+	return ( current_user_can( 'edit_others_posts' ) ) ? $show_admin_bar : false;
+}
 
 

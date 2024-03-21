@@ -7,7 +7,7 @@
  *	Placed in dir and upgraded @since 1.0.73
  */
 
-$prime_custom_login_class	=	Prime2gLoginPage::get_instance();
+$prime_custom_login_page	=	Prime2gLoginPage::get_instance();
 
 #	FILTERS
 add_filter( 'login_headerurl', 'prime2g_loginpage_url' );
@@ -21,7 +21,7 @@ add_action( 'login_head', 'prime2g_theme_styles_at_login_page' );
  *	@since 1.0.74 condition added
  *	To make login page look more like theme when using custom login page
  */
-if ( $prime_custom_login_class->run() ) {
+if ( $prime_custom_login_page->run() ) {
 	add_action( 'login_enqueue_scripts', 'prime2g_parent_enqueues_at_login', 5 );
 	add_action( 'login_head', 'prime2g_load_theme_fonts' );
 }

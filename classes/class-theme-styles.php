@@ -190,7 +190,7 @@ class ToongeePrime_Styles {
 
 	$fImgHeight	=	$cache->ftImgHeight .'em';
 	$fImgCSS	=	'.posts_loop .thumbnail,.posts_loop .video iframe{height:'. $fImgHeight .';}
-	.mejs-container{height:'. $fImgHeight .'!important;}';
+	.mejs-container,.mejs-mediaelement video.wp-video-shortcode{height:'. $fImgHeight .'!important;}';
 	$fImgCSS	=	( ! is_singular() ) ? $fImgCSS : '';
 
 	$css	=	"

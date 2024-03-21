@@ -16,10 +16,14 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.77 =
+* File: single-prime_template_parts.php because of Elementor
+
 = 1.0.76 =
 * Custom login url bug fix
 * Custom capability @ admin access control
 * Function: prime_strip_url_end()
+* Menu: Allow for Mega Menu HTML
 
 = 1.0.75 =
 * Work JS by custom field at custom login page, hence restored legacy custom JS field

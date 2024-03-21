@@ -175,7 +175,7 @@ if ( 'togglers' === $menu_type ) {
 $css	.=	'#tog_menu_target{position:fixed;transition:0.4s;background:var(--content-background);
 color:var(--content-text);top:var(--min-pad);bottom:var(--min-pad);right:var(--min-pad);left:var(--min-pad);
 box-shadow:0 10px 20px 10px rgba(0,0,0,0.3);margin:auto;max-width:700px;}
-#menu_toggbar{position:fixed;z-index:100500;top:50px;right:10px;}
+#menu_toggbar{position:fixed;z-index:100500;top:5px;right:10px;}
 @media(min-width:821px){
 #menu_toggbar{top:100px;right:30px;}
 }';
@@ -422,14 +422,14 @@ return $css;
 }
 }
 
-
+#	css for prime2g_view_password_toggler()
 if ( ! function_exists( 'prime2g_login_page_css' ) ) {
 function prime2g_login_page_css() {
-return '.login-password,.password{position:relative;}
-#page .pwTogg .bi{font-size:1.2rem;margin:0;}
-.pwTogg{bottom:0;height:56%;right:10px;}
-.pwTogg .bi-eye-slash,.pwTogg.visible .bi-eye{display:none;}
-.pwTogg.visible .bi-eye-slash,.pwTogg .bi-eye{display:inline;}';
+// return '.login-password,.password{position:relative;}
+// #page .pwTogg .bi{font-size:1.2rem;margin:0;}
+// .pwTogg{bottom:0;height:56%;right:10px;}
+// .pwTogg .bi-eye-slash,.pwTogg.visible .bi-eye{display:none;}
+// .pwTogg.visible .bi-eye-slash,.pwTogg .bi-eye{display:inline;}';
 }
 }
 

@@ -10,7 +10,6 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 jQuery( document ).ready( function() {
-
 setTimeout( ()=>{
 let useGFonts	=	jQuery( '#_customize-input-prime2g_use_theme_google_fonts' );
 if ( useGFonts && useGFonts.is( ":checked" ) ) {
@@ -21,8 +20,7 @@ if ( useGFonts && useGFonts.is( ":checked" ) ) {
 
 
 ( function( $, api ) { 'use strict';
-
-api( 'prime2g_theme_news_reel', function( value ) {
+api( 'prime2g_theme_news_reel', (value)=>{
 value.bind( function( newval ) {
 	let nrPostType	=	$( '#customize-control-prime2g_theme_news_reel_post_type' ),
 		nrTitle		=	$( '#customize-control-prime2g_theme_news_reel_title' ),
@@ -32,7 +30,6 @@ value.bind( function( newval ) {
 		nrCount		=	$( '#customize-control-prime2g_theme_news_reel_posts_count' ),
 		nrWidth		=	$( '#customize-control-prime2g_news_reel_width' );
 	nrTaxonomy.slideUp( 180 ); nrTaxTerm.slideUp( 180 ); nrCategory.slideUp( 180 );
-
 	if ( newval ) {
 		nrPostType.slideDown( 180 ); nrTitle.slideDown( 180 ); nrCount.slideDown( 180 ); nrWidth.slideDown( 180 );
 	}
@@ -43,7 +40,7 @@ value.bind( function( newval ) {
 } );
 } );
 
-api( 'prime2g_theme_news_reel_post_type', function( value ) {
+api( 'prime2g_theme_news_reel_post_type', (value)=>{
 value.bind( function( newval ) {
 	let nrTaxonomy	=	$( '#customize-control-prime2g_theme_news_reel_taxonomy' ),
 		nrTaxTerm	=	$( '#customize-control-prime2g_theme_news_reel_tax_term_id' ),
@@ -74,7 +71,7 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 /**
  *	@since 1.0.55
  */
-api( 'prime2g_website_shutdown', function( value ) {
+api( 'prime2g_website_shutdown', (value)=>{
 value.bind( function( newval ) {
 	let sdDisplay	=	$( '#customize-control-prime2g_shutdown_display' ),
 		sddSelect	=	$( '#_customize-input-prime2g_shutdown_display' ),
@@ -87,28 +84,28 @@ value.bind( function( newval ) {
 } );
 } );
 
-api( 'prime2g_shutdown_display', function( value ) {
+api( 'prime2g_shutdown_display', (value)=>{
 value.bind( function( newval ) {
 	let sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
 	if ( newval ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
 } );
 } );
 
-api( 'prime2g_cpt_template_parts', function( value ) {
+api( 'prime2g_cpt_template_parts', (value)=>{
 value.bind( function( newval ) {
 	let tpRich	=	$( '#customize-control-prime2g_template_parts_richedit' );
 	if ( newval ) tpRich.slideDown( 180 ); else tpRich.slideUp( 180 );
 } );
 } );
 
-api( 'prime2g_use_page_preloader', function( value ) {
+api( 'prime2g_use_page_preloader', (value)=>{
 value.bind( function( newval ) {
 	let imgUrl	=	$( '#customize-control-prime2g_custom_preloader_img_url' );
 	if ( newval === 'custom_url' ) imgUrl.slideDown( 180 ); else imgUrl.slideUp( 180 );
 } );
 } );
 
-api( 'prime2g_use_theme_google_fonts', function( value ) {
+api( 'prime2g_use_theme_google_fonts', (value)=>{
 value.bind( function( newval ) {
 	let hFont	=	$( '#customize-control-prime2g_site_headings_font' ),
 		bFont	=	$( '#customize-control-prime2g_site_body_font' );
@@ -116,14 +113,14 @@ value.bind( function( newval ) {
 } );
 } );
 
-api( 'prime2g_use_page_for404', function( value ) {
+api( 'prime2g_use_page_for404', (value)=>{
 value.bind( function( newval ) {
 	let ePageID	=	$( '#customize-control-prime2g_404error_page_id' );
 	if ( newval ) { ePageID.slideDown( 180 ); } else { ePageID.slideUp( 180 ); }
 } );
 } );
 
-api( 'prime2g_set_cta_menu_item', function( value ) {
+api( 'prime2g_set_cta_menu_item', (value)=>{
 value.bind( function( newval ) {
 	let ctaURL	=	$( '#customize-control-prime2g_cta_menu_url' ),
 		ctaText	=	$( '#customize-control-prime2g_cta_button_text' ),
@@ -135,7 +132,7 @@ value.bind( function( newval ) {
 } );
 
 /* @since 1.0.56 */
-api( 'prime2g_activate_chache_controls', function( value ) {
+api( 'prime2g_activate_chache_controls', (value)=>{
 value.bind( function( newval ) {
 	let ctimeS	=	$( '#customize-control-prime2g_chache_time_singular' ),
 		cunitS	=	$( '#customize-control-prime2g_chache_seconds_singular' ),
@@ -150,15 +147,19 @@ value.bind( function( newval ) {
 } );
 
 /* @since 1.0.57 */
-api( 'prime2g_main_menu_type', function( value ) {
+api( 'prime2g_main_menu_type', (value)=>{
 value.bind( function( newval ) {
-	let mmenuSC	=	$( '#customize-control-prime2g_menu_template_part_id' );
-	if ( newval !== '' ) { mmenuSC.slideDown( 180 ); } else { mmenuSC.slideUp( 180 ); }
+	let tmenuSC	=	$( '#customize-control-prime2g_toggle_menu_template_part_id' ),
+		mmenuSC	=	$( '#customize-control-prime2g_mega_menu_template_part_id' ),
+		mobCount	=	$( '#customize-control-prime2g_mobile_menu_template_part_id' );
+	if ( newval === '' ) { mmenuSC.slideUp( 180 ); tmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); }
+	if ( newval === 'togglers' ) { tmenuSC.slideDown( 180 ); mmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); }
+	if ( newval === 'mega_menu' ) { mmenuSC.slideDown( 180 ); mobCount.slideDown( 180 ); tmenuSC.slideUp( 180 ); }
 } );
 } );
 
 /* @since 1.0.60 */
-api( 'prime2g_theme_show_stickies', function( value ) {
+api( 'prime2g_theme_show_stickies', (value)=>{
 value.bind( function( newval ) {
 	let stHead	=	$( '#customize-control-prime2g_theme_sticky_heading' ),
 		stPType	=	$( '#customize-control-prime2g_theme_stickies_post_type' ),
@@ -169,7 +170,7 @@ value.bind( function( newval ) {
 } );
 
 /* @since 1.0.73 */
-api( 'prime2g_use_custom_login_page', function( value ) {
+api( 'prime2g_use_custom_login_page', (value)=>{
 value.bind( function( newval ) {
 	let logPID	=	$( '#customize-control-prime2g_custom_login_page_id' ),
 		wplSlug	=	$( '#customize-control-prime2g_wp_login_page_slug' );
@@ -178,7 +179,7 @@ value.bind( function( newval ) {
 } );
 
 /* @since 1.0.76 */
-api( 'prime2g_admin_access_capability', function( value ) {
+api( 'prime2g_admin_access_capability', (value)=>{
 value.bind( function( newval ) {
 	let cstmCap	=	$( '#customize-control-prime2g_admin_access_custom_capability' );
 	if ( newval === 'custom_capability' ) { cstmCap.slideDown( 180 ); } else { cstmCap.slideUp( 180 ); }
@@ -186,7 +187,7 @@ value.bind( function( newval ) {
 } );
 
 wp.customize.bind( 'ready', function() {
-wp.customize.previewer.bind( 'ready', function( message ) {
+wp.customize.previewer.bind( 'ready', function( message ){
 	let cta_text	=	$( "#_customize-input-prime2g_cta_button_text" );
 	cta_text.keyup( function() {
 		let new_val	=	cta_text.val();
@@ -196,5 +197,3 @@ wp.customize.previewer.bind( 'ready', function( message ) {
 } );
 
 } )( jQuery, wp.customize );
-
-
