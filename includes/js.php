@@ -255,7 +255,7 @@ formData	=	{
 	"find" : tInput'. $id .'.value,
 	"template" : "prime2g_get_post_object_template",
 	"count" : "20",
-	"template_args" : '. json_encode( [ 'size' => 'thumbnail' ] ) .',
+	"template_args" : '. json_encode( [ 'size' => 'thumbnail', 'tag' => 'span' ] ) .',
 	"_prime-nonce" : "'. $nOnce .'"
 };
 ajaxSuccess	=	function( response ) {

@@ -147,15 +147,21 @@ echo prime2g_get_post_object_template( $options );
 /**
  *	Return Post Object Template
  *	@since 1.0.70
+ *	$force_post arg added @since 1.0.78, because of scenarios where $post is not properly passed
  */
 if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
-function prime2g_get_post_object_template( array $options ) {	// required so $post is defined
+function prime2g_get_post_object_template( array $options, object $force_post = null ) { // $options required to define $post
 $post	=	$excerpt = $metas = $readmore = null;
 $size	=	'large';
 $length	=	25;
-$title_tag	=	'h2';
+$tag	=	'h2';
 
 extract( $options );
+
+// @since 1.0.78
+if ( null !== $force_post ) {
+	$post	=	$force_post;
+}
 
 if ( ! is_object( $post ) ) return 'No post';
 
@@ -186,7 +192,7 @@ else {
 $template	.=	'</a></div>
 <div class="entry_text">';
 if ( $metas ) $template	.=	prime2g_archive_post_top_filter_part( $post );
-$template	.=	'<a href="'. $link .'" title="Read this entry"><'. $title_tag .' class="entry_title">'. $title .'</'. $title_tag .'></a>';
+$template	.=	'<a href="'. $link .'" title="Read this entry"><'. $tag .' class="entry_title">'. $title .'</'. $tag .'></a>';
 if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post, $readmore );
 $template	.=	prime2g_archive_post_footer_filter_part();
 $template	.=	'</div>
@@ -345,9 +351,10 @@ return $ftimg;
  *	Archive Post Template by post object
  *	@since 1.0.50
  *	Media field logic @since 1.0.55
+ *	$force_post arg added @since 1.0.78, because of scenarios where $post is not properly passed
  */
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
-function prime2g_get_archive_loop_post_object( array $args ) {
+function prime2g_get_archive_loop_post_object( array $args, object $force_post = null ) {
 $post	=	null;
 $size	=	'large';
 $excerpt=	true;
@@ -364,6 +371,11 @@ $loop_post_header_template	=	$loop_post_footer_template	=	null;
 extract( $args );
 
 if ( ! $post ) { global $post; }
+
+// @since 1.0.78
+if ( null !== $force_post ) {
+	$post	=	$force_post;
+}
 
 if ( $switch_img_vid && prime2g_post_has_media_field( $post ) ) {
 
@@ -441,5 +453,6 @@ $div	=	'<div class="'. $class .'">
 return $div;
 }
 }
+
 
 

@@ -50,25 +50,24 @@ if ( $doAjax === 'get_logo' ) {
 if ( $doAjax === 'ajax_search' ) {
 $template		=	$_POST[ 'template' ];
 $template_args	=	$_POST[ 'template_args' ];
-$searchQuery	=	new WP_Query( array( 's' => $_POST[ 'find' ], 'posts_per_page' => $_POST[ 'count' ] ) );
-$output	=	'';
-$posts	=	$searchQuery->posts;
-$number	=	$_POST[ 'count' ];
+$count			=	$_POST[ 'count' ];
+
+$searchQuery	=	new WP_Query( array( 's' => $_POST[ 'find' ], 'posts_per_page' => $count ) );
 $found	=	$searchQuery->found_posts;
+$output	=	'';
 
-$results_num	=	$found < $number ? $found : $number;
-
-if ( $found ) {
-	for ( $p = 0; $p < $results_num; $p++ ) {
-		$template_args	=	array_merge( [ 'post' => $posts[ $p ], 'title_tag' => 'span' ], $template_args );
-		$output	.=	$template( $template_args );
+if ( $searchQuery->have_posts() ) {
+	while ( $searchQuery->have_posts() ) {
+		$searchQuery->the_post();
+		global $post;
+		$output	.=	$template( $template_args, $post );
 	}
+wp_reset_postdata();
 }
+
 else {
 	$output	.=	'<p class="centered">'. __( 'Nothing found', PRIME2G_TEXTDOM ) .'</p>';
 }
-
-wp_reset_postdata();
 
 $response	=	[ 'posts' => $output, 'number' => $found ];
 }
@@ -78,4 +77,6 @@ wp_send_json( $response );
 
 wp_die();
 }
+
+
 
