@@ -11,7 +11,7 @@
 add_shortcode( 'prime_show_content_to', 'prime2g_showcontent_to' );
 function prime2g_showcontent_to( $atts, $content, $tag ) {
 
-global $current_user;
+$current_user	=	wp_get_current_user();
 
 $loggedin	=	is_user_logged_in();
 $content	=	do_shortcode( $content );

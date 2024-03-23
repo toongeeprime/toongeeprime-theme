@@ -1,4 +1,5 @@
 <?php defined( 'ABSPATH' ) || exit;
+
 /**
  *	PARTS IN A LOOP
  *
@@ -14,12 +15,13 @@
 add_action( 'prime2g_after_header', 'prime2g_show_sticky_posts' );
 if ( ! function_exists( 'prime2g_show_sticky_posts' ) ) {
 function prime2g_show_sticky_posts() {
-	#	if sticky posts should be shown
+	//	if sticky posts should be shown
 	if ( get_theme_mod( 'prime2g_theme_show_stickies' ) && ( is_home() || is_category() || is_tag() || is_tax() ) ) {
 		echo prime2g_get_stickies_by_customizer();
 	}
 }
 }
+
 
 
 add_shortcode( 'prime2g_customizer_stickies', 'prime2g_get_stickies_by_customizer' );
@@ -151,6 +153,7 @@ function prime2g_get_post_object_template( array $options ) {	// required so $po
 $post	=	$excerpt = $metas = $readmore = null;
 $size	=	'large';
 $length	=	25;
+$title_tag	=	'h2';
 
 extract( $options );
 
@@ -183,7 +186,7 @@ else {
 $template	.=	'</a></div>
 <div class="entry_text">';
 if ( $metas ) $template	.=	prime2g_archive_post_top_filter_part( $post );
-$template	.=	'<a href="'. $link .'" title="Read this entry"><h2 class="entry_title">'. $title .'</h2></a>';
+$template	.=	'<a href="'. $link .'" title="Read this entry"><'. $title_tag .' class="entry_title">'. $title .'</'. $title_tag .'></a>';
 if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post, $readmore );
 $template	.=	prime2g_archive_post_footer_filter_part();
 $template	.=	'</div>
@@ -231,7 +234,6 @@ $link	=	get_permalink();
 <?php
 }
 }
-
 
 
 
@@ -339,7 +341,6 @@ return $ftimg;
 
 
 
-
 /**
  *	Archive Post Template by post object
  *	@since 1.0.50
@@ -416,7 +417,6 @@ return $entry;
 
 
 
-
 /**
  *	Entry Titles-only Template
  *	@since 1.0.50
@@ -441,4 +441,5 @@ $div	=	'<div class="'. $class .'">
 return $div;
 }
 }
+
 

@@ -69,10 +69,12 @@ add_shortcode( 'prime_search_form', 'prime2g_searchform_shortcode' );
 function prime2g_searchform_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
 	'placeholder'=>	'Keywords',
-	'required'	=>	'',
-	'buttontext'=>	html_entity_decode( 'Go' ),
+	'required'	=>	'yes',
+	'buttontext'=>	'Go',		//*** USE SINGLE QUOTE IN HTML
 	'label'		=>	'Search here',
-	'echo'		=>	false
+	'echo'		=>	'',
+	'id'		=>	'',	// @since 1.0.78
+	'livesearch'=>	''
 ], $atts );
 
 return prime2g_wp_block_search_form( $atts );
@@ -302,5 +304,4 @@ add_action( 'wp_footer', function() {
 
 return prime2g_login_form( $atts );
 }
-
 

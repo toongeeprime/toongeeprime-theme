@@ -175,8 +175,9 @@ if ( ! function_exists( 'prime2g_mobile_mega_menu_js' ) ) {
 function prime2g_mobile_mega_menu_js() {}
 }
 
+
 /**
- *	Template function for full-width mega menu
+ *	For full-width mega menu: echo'ed
  */
 if ( ! function_exists( 'prime2g_mega_menu_js' ) ) {
 function prime2g_mega_menu_js() {
@@ -207,4 +208,83 @@ echo $js;
 }
 }
 
+
+/**
+ *	LIVE SEARCH v AJAX
+ */
+if ( ! function_exists( 'prime2g_ajax_search_js' ) ) {
+function prime2g_ajax_search_js( string $id = '' ) {
+$nOnce	=	wp_create_nonce( 'prime_nonce_action' );
+
+$js	=	'<script id="prime_livesearchJS'. $id .'">
+let fID'. $id .'	=	"'. $id .'",
+	idID'. $id .'	=	fID'. $id .' ? "#'. $id .'" : "",
+	tForm'. $id .'	=	p2getEl( idID'. $id .' + ".liveSearchFormWrap" ),
+	tSBox'. $id .'	=	tForm'. $id .'.querySelector( ".liveSearchBox" ),
+	tSRes'. $id .'	=	tForm'. $id .'.querySelector( ".liveSearchResults" ),
+	tInput'. $id .'	=	tForm'. $id .'.querySelector( "input" );
+
+var counter	=	[];
+
+console.log(tInput'. $id .');
+
+function prime_runAjaxSearch( e ) {
+
+//	return on Spacebar
+if ( e.key === " " || e.code === "Space" || e.keyCode === 32 ) return;
+
+//	Limit inputs executing this function
+let now	=	new Date();
+counter.push( now );
+if ( counter.length > 2 ) {		// start at the third event
+counter		=	counter.slice(-2);	// get last two events to compare
+let keytime	=	counter[1] - counter[0];
+
+if ( keytime < 300 ) { return; }
+}
+
+setTimeout( ()=>{
+if ( tInput'. $id .'.value.length > 1 ) {
+
+tSBox'. $id .'.classList.remove( "hidden" );
+tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">Searching</p>";
+
+formData	=	{
+	action : "prime2g_doing_ajax_nopriv",
+	"prime_do_ajax" : "ajax_search",
+	"find" : tInput'. $id .'.value,
+	"template" : "prime2g_get_post_object_template",
+	"count" : "20",
+	"template_args" : '. json_encode( [ 'size' => 'thumbnail' ] ) .',
+	"_prime-nonce" : "'. $nOnce .'"
+};
+ajaxSuccess	=	function( response ) {
+	if ( response && ! response.hasOwnProperty( "error" ) ) {
+		if ( response.note === "Good" ) {}
+		console.log( "Search sent" );
+		console.log( response );
+		tSRes'. $id .'.innerHTML	=	response.posts;
+	}
+	else {
+		console.log( "Search Response Failed: " + JSON.stringify( response ) );
+	}
+}
+ajaxError	=	function( response ) {
+	console.log( "Server Error: " + response.statusText + " status: " + response.status + " - Error Info: " + JSON.stringify( response ) );
+}
+
+return prime2g_run_ajax( formData, ajaxSuccess, ajaxError );
+}
+}, 500 );
+
+}
+
+tInput'. $id .'.addEventListener( "keyup", ( e )=>{ prime_runAjaxSearch( e ); } );
+
+</script>';
+return $js;
+}
+}
+
+// tInput'. $id .'.addEventListener( "input", ()=>{ setTimeout( prime_runAjaxSearch, 200 ); } );
 

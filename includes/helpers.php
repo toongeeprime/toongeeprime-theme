@@ -16,7 +16,7 @@ function prime2g_removeSidebar() { if ( ! function_exists( 'define_2gRMVSidebar'
  *	nonce verifier
  *	@since 1.0.46
  */
-function prime2g_verify_nonce( $actionName = 'prime_ajaxnonce' ) {
+function prime2g_verify_nonce( $actionName = 'prime_nonce_action' ) {
 	if ( ! isset( $_REQUEST[ '_prime-nonce' ] ) || ! wp_verify_nonce( $_POST[ '_prime-nonce' ], $actionName ) ) {
 		$msg	=	__( 'Failed security verification!', PRIME2G_TEXTDOM ); wp_die( $msg );
 	}

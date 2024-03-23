@@ -22,21 +22,45 @@ function prime2g_toTop() { ?>
 
 /**
  *	Search form based on WP Blocks
- *	@since ToongeePrime Theme 1.0.49
- *	Added get_search_query() and pluggable, @since ToongeePrime Theme 1.0.51
- *	First arg optionally as array @since ToongeePrime Theme 1.0.55
+ *	@since 1.0.49
+ *	Added get_search_query() and pluggable, @since 1.0.51
+ *	First arg preferrably as array @since 1.0.55
+ *	Live Search Feature & refactored @since 1.0.78
  */
 if ( ! function_exists( 'prime2g_wp_block_search_form' ) ) {
 function prime2g_wp_block_search_form( $echo = true, $label = 'Search', $buttontext = null ) {
-$placeholder	=	$required	=	'';
+$placeholder	=	$required = $form = $id = '';
+$livesearch		=	false;
 
 if ( is_array( $echo ) ) {
 extract( $echo );
 }
 
+$echo			=	'yes' === $echo ? true : false;
+$livesearch		=	'yes' === $livesearch ? true : false;
+$liveClass		=	$livesearch ? 'livesearch ' : '';
+$required		=	in_array( $required, [ 'yes', 'required', 'true', '1' ] ) ? ' required' : '';
+$formID			=	empty( $id ) ? '' : $id;
+$id				=	empty( $id ) ? '' : ' id="'. $id .'"';
 $button_text	=	$buttontext ?: $label;
 
-$form	=	'<form role="search" method="get" action="' . get_home_url() . '" class="searchform wp-block-search__button-outside wp-block-search__text-button wp-block-search"><label for="wp-block-search__input-1" class="wp-block-search__label">' . $label . '</label><div class="wp-block-search__inside-wrapper "><input type="search" id="wp-block-search__input-1" class="wp-block-search__input wp-block-search__input" name="s" value="' . get_search_query() . '" placeholder="'. $placeholder .'" required="'. $required .'"><button type="submit" class="wp-block-search__button wp-element-button">' . $button_text . '</button></div></form>';
+$form	.=	$livesearch ? '<div'. $id .' class="liveSearchFormWrap formWrap prel">' : '<div'. $id .' class="formWrap">';
+
+$form	.=	'<form role="search" method="get" action="' . get_home_url() . '" class="'. $liveClass .'searchform wp-block-search__button-outside wp-block-search__text-button wp-block-search">
+<label for="wp-block-search__input'. $formID .'" class="wp-block-search__label">' . $label . '</label>
+<div class="wp-block-search__inside-wrapper ">
+<input type="search" id="wp-block-search__input'. $formID .'" class="wp-block-search__input wp-block-search__input" name="s" value="' . get_search_query() . '" placeholder="'. $placeholder .'"'. $required .'>
+<button type="submit" class="wp-block-search__button wp-element-button">' . $button_text . '</button>
+</div>';
+
+// Non-ajax:
+// $form	.=	$livesearch ? '<input type="hidden" name="prime_do_ajax" value="ajax_search">' . wp_nonce_field( 'prime_search_action', '_prime-nonce' ) : '';
+
+$form	.=	'</form>';
+
+$form	.=	$livesearch ? '<div class="liveSearchBox hidden"><div class="liveSearchResults"></div></div>
+</div>' . prime2g_ajax_search_js( $formID )
+: '</div>';
 
 if ( $echo ) echo $form;
 else return $form;
@@ -47,7 +71,7 @@ else return $form;
 /**
  *	Class Remover Sheet
  *	Background div to remove class from elements on click
- *	@since ToongeePrime Theme 1.0.57
+ *	@since 1.0.57
  */
 if ( ! function_exists( 'prime2g_class_remover_sheet' ) ) {
 add_action( 'wp_footer', 'prime2g_class_remover_sheet', 10, 2 );

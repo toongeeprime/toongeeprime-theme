@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.3
 Tested up to: 6.4
-Stable tag: 1.0.71
+Stable tag: 1.0.78
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,11 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.78 =
+* Functions: prime2g_mega_menu_css() & prime2g_mega_menu_js()
+* Readme.txt goes online @ https://dev.akawey.com/wp/themes/toongeeprime-theme/readme.txt
+* Live search added to prime2g_wp_block_search_form() & shortcode
 
 = 1.0.77 =
 * File: single-prime_template_parts.php because of Elementor
