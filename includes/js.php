@@ -226,8 +226,6 @@ let fID'. $id .'	=	"'. $id .'",
 
 var counter	=	[];
 
-console.log(tInput'. $id .');
-
 function prime_runAjaxSearch( e ) {
 let tValue'. $id .'	=	tInput'. $id .'.value;
 
@@ -237,7 +235,23 @@ if ( ! tValue'. $id .' || tValue'. $id .' == " " ) {
 return;
 }
 
-if ( tValue'. $id .'.length <= 2 ) {
+
+/**
+ *	Control execution
+ */
+let now	=	e.timeStamp;
+counter.push( now );
+
+// Delay before third event
+if ( counter.length < 3 ) {
+	tSBox'. $id .'.classList.remove( "hidden" );
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">3 characters</p>";
+	return;
+}
+
+
+// After third event
+if ( tValue'. $id .'.length < 3 ) {
 	tSBox'. $id .'.classList.remove( "hidden" );
 	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">3 characters</p>";
 return;
@@ -246,33 +260,30 @@ return;
 
 /**
  *	Keys to ignore
+ *	//	" " == spacebar
  */
 if ( e.type === "input" ) {
-	if ( [ " " ].includes( e.data ) ) return;	//	=== spacebar
+	// if ( [ " " ].includes( e.data ) ) return;
 }
 else {
-	if ( [ " ", "Tab", "CapsLock", "Shift", "Control", "Alt", "ArrowUp", "ArrowDown",
-	"ArrowLeft", "ArrowRight", "PageDown", "PageUp" ].includes( e.key )
-	|| e.code === "Space" || e.keyCode === 32 ) return;
+	if ( [ "Tab", "CapsLock", "Shift", "Control", "Alt", "ArrowUp", "ArrowDown",
+	"ArrowLeft", "ArrowRight", "PageDown", "PageUp" ].includes( e.key ) ) return;
 }
+
 
 
 /**
- *	Limit inputs executing this function
+ *	Control input speed
  */
-let now	=	e.timeStamp;
-counter.push( now );
-
-if ( counter.length < 3 ) {	// start at the third event
-return;
-}
-
-counter		=	counter.slice(-2);	// get last two events to compare
+counter		=	counter.slice(-2);	// get last two events to compare timeStamps
 let keytime	=	counter[1] - counter[0];
 
 if ( keytime < 275 ) return;
 
 
+/**
+ *	Execute
+ */
 setTimeout( ()=>{
 if ( tValue'. $id .'.length > 2 ) {
 
@@ -314,6 +325,5 @@ tInput'. $id .'.addEventListener( "input", ( e )=>{ prime_runAjaxSearch( e ); } 
 return $js;
 }
 }
-
 
 
