@@ -50,10 +50,8 @@ if ( $doAjax === 'get_logo' ) {
 if ( $doAjax === 'ajax_search' ) {
 $template		=	$_POST[ 'template' ];
 $template_args	=	$_POST[ 'template_args' ];
-$count			=	$_POST[ 'count' ];
 
-$searchQuery	=	new WP_Query( array( 's' => $_POST[ 'find' ], 'posts_per_page' => $count ) );
-$found	=	$searchQuery->found_posts;
+$searchQuery	=	new WP_Query( array( 's' => $_POST[ 'find' ], 'posts_per_page' => $_POST[ 'count' ] ) );
 $output	=	'';
 
 if ( $searchQuery->have_posts() ) {
@@ -64,19 +62,18 @@ if ( $searchQuery->have_posts() ) {
 	}
 wp_reset_postdata();
 }
-
 else {
 	$output	.=	'<p class="centered">'. __( 'Nothing found', PRIME2G_TEXTDOM ) .'</p>';
 }
 
-$response	=	[ 'posts' => $output, 'number' => $found ];
+$response	=	[ 'posts' => $output, 'number' => $searchQuery->found_posts ];
 }
+
 
 
 wp_send_json( $response );
 
 wp_die();
 }
-
 
 

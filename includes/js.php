@@ -229,22 +229,52 @@ var counter	=	[];
 console.log(tInput'. $id .');
 
 function prime_runAjaxSearch( e ) {
+let tValue'. $id .'	=	tInput'. $id .'.value;
 
-//	return on Spacebar
-if ( e.key === " " || e.code === "Space" || e.keyCode === 32 ) return;
+if ( ! tValue'. $id .' || tValue'. $id .' == " " ) {
+	tSRes'. $id .'.innerHTML	=	"";
+	tSBox'. $id .'.classList.add( "hidden" );
+return;
+}
 
-//	Limit inputs executing this function
-let now	=	new Date();
+if ( tValue'. $id .'.length <= 2 ) {
+	tSBox'. $id .'.classList.remove( "hidden" );
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">3 characters</p>";
+return;
+}
+
+
+/**
+ *	Keys to ignore
+ */
+if ( e.type === "input" ) {
+	if ( [ " " ].includes( e.data ) ) return;	//	=== spacebar
+}
+else {
+	if ( [ " ", "Tab", "CapsLock", "Shift", "Control", "Alt", "ArrowUp", "ArrowDown",
+	"ArrowLeft", "ArrowRight", "PageDown", "PageUp" ].includes( e.key )
+	|| e.code === "Space" || e.keyCode === 32 ) return;
+}
+
+
+/**
+ *	Limit inputs executing this function
+ */
+let now	=	e.timeStamp;
 counter.push( now );
-if ( counter.length > 2 ) {		// start at the third event
+
+if ( counter.length < 3 ) {	// start at the third event
+return;
+}
+
 counter		=	counter.slice(-2);	// get last two events to compare
 let keytime	=	counter[1] - counter[0];
 
-if ( keytime < 300 ) { return; }
-}
+if ( keytime < 275 ) return;
+
 
 setTimeout( ()=>{
-if ( tInput'. $id .'.value.length > 1 ) {
+if ( tValue'. $id .'.length > 2 ) {
 
 tSBox'. $id .'.classList.remove( "hidden" );
 tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">Searching</p>";
@@ -253,8 +283,8 @@ formData	=	{
 	action : "prime2g_doing_ajax_nopriv",
 	"prime_do_ajax" : "ajax_search",
 	"find" : tInput'. $id .'.value,
-	"template" : "prime2g_get_post_object_template",
 	"count" : "20",
+	"template" : "prime2g_get_post_object_template",
 	"template_args" : '. json_encode( [ 'size' => 'thumbnail', 'tag' => 'span' ] ) .',
 	"_prime-nonce" : "'. $nOnce .'"
 };
@@ -279,12 +309,11 @@ return prime2g_run_ajax( formData, ajaxSuccess, ajaxError );
 
 }
 
-tInput'. $id .'.addEventListener( "keyup", ( e )=>{ prime_runAjaxSearch( e ); } );
-
+tInput'. $id .'.addEventListener( "input", ( e )=>{ prime_runAjaxSearch( e ); } );
 </script>';
 return $js;
 }
 }
 
-// tInput'. $id .'.addEventListener( "input", ()=>{ setTimeout( prime_runAjaxSearch, 200 ); } );
+
 
