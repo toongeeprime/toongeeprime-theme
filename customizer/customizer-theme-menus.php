@@ -156,7 +156,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 			''		=>	__( 'Default', PRIME2G_TEXTDOM ),
 			'togglers'	=>	__( 'Togglers', PRIME2G_TEXTDOM ),
 			'mega_menu'	=>	__( 'Mega Menu', PRIME2G_TEXTDOM )	# Theme 1.0.76
-		),
+		)
 	) );
 
 	$wp_customize->add_setting( 'prime2g_toggle_menu_template_part_id', $simple_text );
@@ -172,13 +172,18 @@ if ( prime_child_min_version( '2.3' ) ) {
 	#	Theme 1.0.78
 	function p2IsmegMenu() { return 'mega_menu' === get_theme_mod( 'prime2g_main_menu_type' ); }
 
-	$wp_customize->add_setting( 'prime2g_use_fullwidth_mega_menu', $simple_text );
-	$wp_customize->add_control( 'prime2g_use_fullwidth_mega_menu', array(
-		'label'		=>	__( 'Full-width Menu (Desktop)', PRIME2G_TEXTDOM ),
-		'type'		=>	'checkbox',
-		'settings'	=>	'prime2g_use_fullwidth_mega_menu',
+	$wp_customize->add_setting( 'prime2g_mega_menu_width', $simple_text );
+	$wp_customize->add_control( 'prime2g_mega_menu_width', array(
+		'label'		=>	__( 'Mega Menu Width (on Desktop)', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_mega_menu_width',
 		'section'	=>	'prime2g_theme_menus_section',
-		'active_callback'	=>	'p2IsmegMenu'
+		'active_callback'	=>	'p2IsmegMenu',
+		'choices'	=>	array(
+			''		=>	__( 'Default', PRIME2G_TEXTDOM ),
+			'page_width'	=>	__( 'Page Width', PRIME2G_TEXTDOM ),
+			'full_width'	=>	__( 'Full Width', PRIME2G_TEXTDOM )
+		)
 	) );
 	#	Theme 1.0.78 End
 

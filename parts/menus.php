@@ -266,19 +266,19 @@ return (object) [
 
 <nav id="megaMenu" class="desktop menu-main-container">
 <ul id="megaMenuLinks" class="menu">
- 	<li class="megaMenuContents1"><a href="#" class="megamenu_link">Item 1</a>
+ 	<li class="megamenuLi megaMenuContents1"><a href="#" class="megamenu_link">Item 1</a>
 	<div id="megaMenuContents1" class="megamenuContents">
 	<div class="mmcontent">[prime_insert_template_part id="123" device="desktop"]</div>
 	</div>
 	</li>
 
- 	<li class="megaMenuContents2"><a href="#" class="megamenu_link">Item 2</a>
+ 	<li class="megamenuLi megaMenuContents2"><a href="#" class="megamenu_link">Item 2</a>
 	<div id="megaMenuContents2" class="megamenuContents">
 	<div class="mmcontent">[prime_insert_template_part id="234" device="mobile"]</div>
 	</div>
 	</li>
 
- 	<li class="megaMenuContents3"><a href="#" class="megamenu_link">Item 3</a>
+ 	<li class="megamenuLi megaMenuContents3"><a href="#" class="megamenu_link">Item 3</a>
 	<div id="megaMenuContents3" class="megamenuContents">
 	<div class="mmcontent">[prime_insert_template_part id="345" device="desktop"]</div>
 	</div>

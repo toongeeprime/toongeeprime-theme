@@ -151,7 +151,7 @@ api( 'prime2g_main_menu_type', (value)=>{
 value.bind( function( newval ) {
 	let tmenuSC	=	$( '#customize-control-prime2g_toggle_menu_template_part_id' ),
 		mmenuSC	=	$( '#customize-control-prime2g_mega_menu_template_part_id' ),
-		mmenuFW	=	$( '#customize-control-prime2g_use_fullwidth_mega_menu' ),
+		mmenuFW	=	$( '#customize-control-prime2g_mega_menu_width' ),
 		mobCount	=	$( '#customize-control-prime2g_mobile_menu_template_part_id' );
 	if ( newval === '' ) {
 		mmenuSC.slideUp( 180 ); tmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); mmenuFW.slideUp( 180 );

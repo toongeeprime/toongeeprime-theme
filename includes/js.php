@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CONDITIONAL THEME JS
+ *	THEME FEATURES & CONDITIONAL JS
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
@@ -177,31 +177,51 @@ function prime2g_mobile_mega_menu_js() {}
 
 
 /**
- *	For full-width mega menu: echo'ed
+ *	For mega menu width: echo'ed
  */
 if ( ! function_exists( 'prime2g_mega_menu_js' ) ) {
 function prime2g_mega_menu_js() {
-$fullwidth	=	get_theme_mod( 'prime2g_use_fullwidth_mega_menu' ) ? 'true' : 'false';
+$styles		=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.78
+$menu_width	=	$styles->megamenu_width;
+
+$fullwidth	=	'full_width' === $menu_width ? 'true' : 'false';
+$pagewidth	=	'page_width' === $menu_width ? 'true' : 'false';
 
 $js	=	'<script id="prime_mega_menuJS">
-const mmConts	=	p2getAll( "#megaMenu.desktop .megamenuContents" ),
-		fullwidth	=	'. $fullwidth .';
+const 	fullwidth	=	'. $fullwidth .',
+		pagewidth	=	'. $pagewidth .';
 
-function prime_megaMenuActions() {
-mmConts.forEach( mc=>{
-	rect	=	mc.getBoundingClientRect();
-	for ( const key in rect ) {
-		if ( typeof rect[key] !== "function" && key === "left" ) {
-			mc.style.width	=	"98.75vw";
-			mc.style.left	=	((-1 * rect[key]) + 20) + "px";
-		}
+if ( fullwidth || pagewidth ) {
+const mmConts	=	p2getAll( "#megaMenu.desktop .megamenuContents" ),
+	mmLIitems	=	p2getAll( "#megaMenu.desktop .megamenuLi" ),
+	pageBody	=	p2getEl( "#container" );
+
+function prime_megaMenuWidth_delayed() {
+setTimeout( ()=>{
+	let	pageBounding=	pageBody.getBoundingClientRect(),
+	widthOfPage	=	pageBounding.width,
+	leftOfPage	=	pageBounding.left;
+
+mmLIitems.forEach( li => {
+li_rect	=	li.getBoundingClientRect();
+mc		=	li.querySelector( ".megamenuContents" );
+mc_rect	=	mc.getBoundingClientRect();
+
+	if ( fullwidth ) {
+		mc.style.width	=	"98.75vw";
+		leftAmount		=	li_rect.left > 0 ? (-1 * li_rect.left) : li_rect.left;
+		mc.style.left	=	leftAmount + "px";
+	}
+	else if ( pagewidth ) {
+		mc.style.width	=	widthOfPage + "px";
+		mc.style.left	=	(-1 * (li_rect.left - leftOfPage)) + "px";
 	}
 } );
+}, 300 );
 }
 
-if ( fullwidth ) {
-window.onload	=	prime_megaMenuActions;
-window.onresize	=	prime_megaMenuActions;
+window.onload	=	prime_megaMenuWidth_delayed;
+window.onresize	=	prime_megaMenuWidth_delayed;
 }
 </script>';
 echo $js;
@@ -209,13 +229,12 @@ echo $js;
 }
 
 
+
 /**
- *	LIVE SEARCH v AJAX
+ *	LIVE SEARCH: AJAX
  */
 if ( ! function_exists( 'prime2g_ajax_search_js' ) ) {
 function prime2g_ajax_search_js( string $id = '' ) {
-$nOnce	=	wp_create_nonce( 'prime_nonce_action' );
-
 $js	=	'<script id="prime_livesearchJS'. $id .'">
 let fID'. $id .'	=	"'. $id .'",
 	idID'. $id .'	=	fID'. $id .' ? "#'. $id .'" : "",
@@ -297,7 +316,7 @@ formData	=	{
 	"count" : "20",
 	"template" : "prime2g_get_post_object_template",
 	"template_args" : '. json_encode( [ 'size' => 'thumbnail', 'tag' => 'span' ] ) .',
-	"_prime-nonce" : "'. $nOnce .'"
+	"_prime-nonce" : "'. wp_create_nonce( 'prime_nonce_action' ) .'"
 };
 ajaxSuccess	=	function( response ) {
 	if ( response && ! response.hasOwnProperty( "error" ) ) {

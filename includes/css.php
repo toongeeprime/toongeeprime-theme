@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CONDITIONAL THEME CSS
  *
@@ -455,5 +454,20 @@ background:var(--content-background);transition:0.2s;box-shadow:0 20px 15px 5px 
 return $css;
 }
 }
+
+
+
+if ( ! function_exists( 'prime2g_ajax_search_css' ) ) {
+function prime2g_ajax_search_css() {
+if ( defined( 'PRIME_AJX_SEARCHCSS' ) ) return;
+define( 'PRIME_AJX_SEARCHCSS', true );
+
+$css	=	'<style id="prime_livesearchCSS">
+
+</style>';
+return $css;
+}
+}
+
 
 
