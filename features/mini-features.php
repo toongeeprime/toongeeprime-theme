@@ -44,7 +44,8 @@ $formID			=	empty( $id ) ? '' : $id;
 $id				=	empty( $id ) ? '' : ' id="'. $id .'"';
 $button_text	=	$buttontext ?: $label;
 
-$form	.=	$livesearch ? '<div'. $id .' class="liveSearchFormWrap formWrap prel">' : '<div'. $id .' class="formWrap">';
+$form	.=	$livesearch ? prime2g_ajax_search_css() . '<div'. $id .' class="liveSearchFormWrap formWrap prel">'
+: '<div'. $id .' class="formWrap">';
 
 $form	.=	'<form role="search" method="get" action="' . get_home_url() . '" class="'. $liveClass .'searchform wp-block-search__button-outside wp-block-search__text-button wp-block-search">
 <label for="wp-block-search__input'. $formID .'" class="wp-block-search__label">' . $label . '</label>
@@ -55,10 +56,9 @@ $form	.=	'<form role="search" method="get" action="' . get_home_url() . '" class
 
 // Non-ajax:
 // $form	.=	$livesearch ? '<input type="hidden" name="prime_do_ajax" value="ajax_search">' . wp_nonce_field( 'prime_search_action', '_prime-nonce' ) : '';
-
 $form	.=	'</form>';
 
-$form	.=	$livesearch ? '<div class="liveSearchBox hidden"><div class="liveSearchResults"></div></div>
+$form	.=	$livesearch ? '<div class="liveSearchBox hidden p-abso"><div class="liveSearchResults"></div></div>
 </div>' . prime2g_ajax_search_js( $formID )
 : '</div>';
 
@@ -87,4 +87,3 @@ echo	'<div id="prime_class_remover" class="hidden p-fix" style="top:0;bottom:0;r
 
 }
 }
-

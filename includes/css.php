@@ -463,7 +463,12 @@ if ( defined( 'PRIME_AJX_SEARCHCSS' ) ) return;
 define( 'PRIME_AJX_SEARCHCSS', true );
 
 $css	=	'<style id="prime_livesearchCSS">
-
+.liveSearchBox{left:0;right:0;background:var(--content-background);z-index:99990;border:5px solid #f8f8f8;padding:20px;
+border-radius:5px;}
+.liveSearchBox article{display:grid;grid-template-columns:60px 1fr;gap:10px;margin-bottom:0;}
+.liveSearchResults{display:grid;gap:10px;}
+.liveSearchResults .entry_img{height:40px;overflow:hidden;}
+.liveSearchResults .thumbnail{height:40px;}
 </style>';
 return $css;
 }

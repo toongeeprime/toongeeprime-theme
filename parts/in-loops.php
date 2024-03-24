@@ -155,6 +155,7 @@ $post	=	$excerpt = $metas = $readmore = null;
 $size	=	'large';
 $length	=	25;
 $tag	=	'h2';
+$footer	=	true;	//	true for backwards compatibility-use NULL to remove it
 
 extract( $options );
 
@@ -194,7 +195,7 @@ $template	.=	'</a></div>
 if ( $metas ) $template	.=	prime2g_archive_post_top_filter_part( $post );
 $template	.=	'<a href="'. $link .'" title="Read this entry"><'. $tag .' class="entry_title">'. $title .'</'. $tag .'></a>';
 if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post, $readmore );
-$template	.=	prime2g_archive_post_footer_filter_part();
+if ( $footer ) $template	.=	prime2g_archive_post_footer_filter_part();
 $template	.=	'</div>
 </article>';
 

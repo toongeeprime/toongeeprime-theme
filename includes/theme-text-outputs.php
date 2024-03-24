@@ -75,7 +75,9 @@ if ( is_singular() ) {
 		$taxonomy	=	get_taxonomy( $taxon_1 );
 		if ( ! is_object( $taxonomy ) ) return;
 		$taxName	=	$taxonomy->labels->singular_name;
-		$term		=	wp_get_post_terms( get_the_ID(), $taxon_1 )[0];
+		$has_terms	=	wp_get_post_terms( get_the_ID(), $taxon_1 );
+		$term		=	$has_terms ? $has_terms[0] : null;
+		if ( ! $term ) return;
 		$termurl	=	get_term_link( $term->term_id, $term->taxonomy );
 		$termAncs	=	get_ancestors( $term->term_id, $term->taxonomy );
 	}

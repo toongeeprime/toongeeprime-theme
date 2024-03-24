@@ -297,7 +297,7 @@ else {
 counter		=	counter.slice(-2);	// get last two events to compare timeStamps
 let keytime	=	counter[1] - counter[0];
 
-if ( keytime < 275 ) return;
+if ( keytime < 250 ) return;
 
 
 /**
@@ -313,9 +313,9 @@ formData	=	{
 	action : "prime2g_doing_ajax_nopriv",
 	"prime_do_ajax" : "ajax_search",
 	"find" : tInput'. $id .'.value,
-	"count" : "20",
+	"count" : "10",
 	"template" : "prime2g_get_post_object_template",
-	"template_args" : '. json_encode( [ 'size' => 'thumbnail', 'tag' => 'span' ] ) .',
+	"template_args" : '. json_encode( [ 'size' => 'thumbnail', 'tag' => 'span', 'footer' => null ] ) .',
 	"_prime-nonce" : "'. wp_create_nonce( 'prime_nonce_action' ) .'"
 };
 ajaxSuccess	=	function( response ) {
