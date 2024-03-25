@@ -196,7 +196,7 @@ const mmConts	=	p2getAll( "#megaMenu.desktop .megamenuContents" ),
 	mmLIitems	=	p2getAll( "#megaMenu.desktop .megamenuLi" ),
 	pageBody	=	p2getEl( "#container" );
 
-function prime_megaMenuWidth_delayed() {
+function prime_setMegaMenu() {
 setTimeout( ()=>{
 	let	pageBounding=	pageBody.getBoundingClientRect(),
 	widthOfPage	=	pageBounding.width,
@@ -220,8 +220,8 @@ mc_rect	=	mc.getBoundingClientRect();
 }, 300 );
 }
 
-window.onload	=	prime_megaMenuWidth_delayed;
-window.onresize	=	prime_megaMenuWidth_delayed;
+window.onload	=	prime_setMegaMenu;
+window.onresize	=	prime_setMegaMenu;
 }
 </script>';
 echo $js;
@@ -344,5 +344,6 @@ tInput'. $id .'.addEventListener( "input", ( e )=>{ prime_runAjaxSearch( e ); } 
 return $js;
 }
 }
+
 
 
