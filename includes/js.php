@@ -177,7 +177,7 @@ function prime2g_mobile_mega_menu_js() {}
 
 
 /**
- *	For mega menu width: echo'ed
+ *	Set mega menu: echo'ed
  */
 if ( ! function_exists( 'prime2g_mega_menu_js' ) ) {
 function prime2g_mega_menu_js() {
@@ -264,7 +264,7 @@ counter.push( now );
 // Delay before third event
 if ( counter.length < 3 ) {
 	tSBox'. $id .'.classList.remove( "hidden" );
-	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">3 characters</p>";
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>3 characters &amp; slow down a little</small></p>";
 	return;
 }
 
@@ -272,7 +272,7 @@ if ( counter.length < 3 ) {
 // After third event
 if ( tValue'. $id .'.length < 3 ) {
 	tSBox'. $id .'.classList.remove( "hidden" );
-	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">3 characters</p>";
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>3 characters</small></p>";
 return;
 }
 
@@ -297,7 +297,11 @@ else {
 counter		=	counter.slice(-2);	// get last two events to compare timeStamps
 let keytime	=	counter[1] - counter[0];
 
-if ( keytime < 250 ) return;
+if ( keytime < 300 ) {
+	tSBox'. $id .'.classList.remove( "hidden" );
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>Slow down a little</small></p>";
+	return;
+}
 
 
 /**
