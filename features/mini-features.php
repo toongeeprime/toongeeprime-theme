@@ -37,7 +37,7 @@ extract( $echo );
 }
 
 $echo			=	'yes' === $echo ? true : false;
-$livesearch		=	'yes' === $livesearch ? true : false;
+$livesearch		=	'yes' === $livesearch && prime2g_use_extras() ? true : false;
 $liveClass		=	$livesearch ? 'livesearch ' : '';
 $required		=	in_array( $required, [ 'yes', 'required', 'true', '1' ] ) ? ' required' : '';
 $formID			=	empty( $id ) ? '' : $id;

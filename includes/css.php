@@ -67,9 +67,9 @@ if ( $mainMenuType === 'togglers' ) {
 	$mainMenu	.=	'';
 }
 elseif ( $mainMenuType === 'mega_menu' ) {
-	$mainMenu	.=	'';
-
 	$menuMin821	=	prime2g_mega_menu_css();	// mega menu does not appear on mobile
+
+	$menuMax820	=	prime2g_menu_max820_css();
 }
 else {
 	$mainMenu	.=	prime2g_menu_main_css();
@@ -391,9 +391,8 @@ return '#container{top:46px;}
 }
 .main-menu, .menu_toggbar{box-shadow:0 0 12px rgba(0,0,0,0.25);}
 .main-menu{
-	background:var(--content-background);right:var(--min-pad);position:fixed;
-	left:0;bottom:0;padding-bottom:var(--min-pad);
-	transition:0.4s;transform:translateX(-200%);overflow-y:auto;
+background:var(--content-background);right:var(--min-pad);position:fixed;left:0;
+bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200%);overflow-y:auto;
 }
 .admin-bar .main-menu{top:46px;}
 .pop.admin-bar .main-menu{top:0;}

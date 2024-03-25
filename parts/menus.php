@@ -82,7 +82,6 @@ prime2g_menu_togglers( [ 'incLogo'=>$incLogo, 'theLogo'=>$theLogo, 'class'=>'mob
 
 <?php
 #	Conditions added @since 1.0.77
-if ( $isMobile ) {
 
 if ( 'mega_menu' !== $styles->menu_type ) prime2g_site_top_menu();
 
@@ -91,8 +90,6 @@ if ( $min_v23 && 'mega_menu' === $styles->menu_type ) {
 	$partID	=	get_theme_mod( 'prime2g_mobile_menu_template_part_id', '' );
 	echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
 	add_action( 'wp_footer', 'prime2g_mobile_mega_menu_js' );
-
-}
 
 }
 
