@@ -44,6 +44,8 @@ code{background-color:#eee;border:1px solid #999;display:block;padding:var(--min
 body{display:block;background-color:var(--body-background);color:var(--body-text);font-family:var(--body-font);}
 h1, h2, h3{font-family:var(--headings-font);}
 
+.slimscrollbar table{width:max-content; max-width:none;}
+
 #header{background-color:var(--header-background);color:var(--header-text);}
 .site_header a{color:var(--header-text);}
 
@@ -54,10 +56,9 @@ background-color:var(--content-background);color:var(--content-text);
 /**********
 RESPONSIVE
 ***********/
-@media(min-width:681px){.grid4, .grid5, .grid6{grid-template-columns:1fr 1fr;}}
+@media(min-width:681px){.grid2, .grid4, .grid5, .grid6{grid-template-columns:1fr 1fr;}}
 
-@media(min-width:783px){
-.grid2{grid-template-columns:1fr 1fr;}
+@media(min-width:729px){
 .grid3, .grid6{grid-template-columns:1fr 1fr 1fr;}
 }
 

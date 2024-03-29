@@ -147,7 +147,7 @@ echo prime2g_get_post_object_template( $options );
 /**
  *	Return Post Object Template
  *	@since 1.0.70
- *	$force_post arg added @since 1.0.78, because of scenarios where $post is not properly passed
+ *	$force_post arg added @since 1.0.78, because of scenarios where $post object is not properly passed
  */
 if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
 function prime2g_get_post_object_template( array $options, object $force_post = null ) { // $options required to define $post
@@ -456,4 +456,74 @@ return $div;
 }
 
 
+
+/**
+ *	Theme's HTML Slider Based Template: wrapping HTML must be used
+ *	@since 1.0.79
+ */
+if ( ! function_exists( 'prime2g_html_slider_post_template' ) ) {
+function prime2g_html_slider_post_template( array $args = [], object $force_post = null ) {
+$post	=	$texts = $excerpt = $multi = null;
+$tag	=	'h3';
+$class	=	'entry';
+$length	=	20;
+$size	=	'mdeium';
+$link_article	=	true;
+
+extract( $args );
+if ( ! $post ) { global $post; }
+
+$slideboxClass	=	$multi ? 'mSlidebox' : 'slidebox';
+
+if ( null !== $force_post ) {
+	$post	=	$force_post;
+}
+
+$title	=	$post->post_title;
+$link	=	get_permalink( $post );
+
+if ( has_post_thumbnail( $post ) ) {
+	$thumb_url	=	get_the_post_thumbnail_url( $post, $size );
+}
+else {
+	if ( child2g_has_placeholder() ) {
+		$thumb_url	=	child2g_placeholder_url( true );
+	}
+	else {
+		$thumb_url	=	'<div class="thumbnail">'. $title .'</div>';
+	}
+}
+
+$div	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( [ $slideboxClass ], $post ) ) . '"
+ style="background-image:url('. $thumb_url .');">';
+$div	.=	$link_article ? '<a href="'. $link .'" class="link_article" title="'. $title .'">' : '';
+$div	.=	'<div class="inslide prel">';
+
+if ( $texts ) {
+$div	.=	'<div class="entry_text">
+<a href="'. $link .'" title="'. $title .'"><'. $tag .' class="'. $class2 .'">'. $title .'</'. $tag .'></a>';
+if ( $excerpt ) $div	.=	prime2g_post_excerpt( $length, $post, $readmore );
+$div	.=	'</div>';
+}
+
+$div	.=	'</div>';
+$div	.=	$link_article ? '</a>' : '';
+$div	.=	'</article>';
+
+return $div;
+}
+}
+
+
+
+/**
+ *	Content Body Template
+ *	@since 1.0.79
+ */
+if ( ! function_exists( 'prime2g_content_body_template' ) ) {
+function prime2g_content_body_template( object $post = null ) {
+if ( ! $post ) { global $post; }
+	return do_shortcode( get_the_content( $post ) );
+}
+}
 

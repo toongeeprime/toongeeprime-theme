@@ -49,9 +49,12 @@ if ( $doAjax === 'get_logo' ) {
 
 if ( $doAjax === 'ajax_search' ) {
 $template		=	$_POST[ 'template' ];
+$post_type		=	! empty( $_POST[ 'post_type' ] ) ? explode( ',', $_POST[ 'post_type' ] ) : [ 'post','page','product' ];
 $template_args	=	$_POST[ 'template_args' ];
 
-$searchQuery	=	new WP_Query( array( 's' => $_POST[ 'find' ], 'posts_per_page' => $_POST[ 'count' ] ) );
+$searchQuery	=	new WP_Query(
+array( 's' => $_POST[ 'find' ], 'posts_per_page' => $_POST[ 'count' ], 'status' => 'publish', 'post_type' => $post_type )
+);
 $output	=	'';
 
 if ( $searchQuery->have_posts() ) {

@@ -33,7 +33,8 @@ array(
 	'image_to_video'=>	'',
 	'site_id'	=>	null,
 	'randomize_sites'	=>	'',
-	'no_result'	=>	'No entries found for this shortcode request'	#	@since 1.0.71
+	'no_result'	=>	'No entries found for this shortcode request',	#	@since 1.0.71
+	'post_ids'	=>	''	#	@since 1.0.79
 ),
 $atts
 );

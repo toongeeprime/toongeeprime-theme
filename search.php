@@ -32,7 +32,7 @@ if ( have_posts() ) { ?>
 	</div>
 	<?php
 
-	prime2g_wp_block_search_form();
+	prime2g_wp_block_search_form( [ 'echo' => 'yes' ] );
 
 	// Start the Loop
 	while ( have_posts() ) {
@@ -49,7 +49,7 @@ if ( have_posts() ) { ?>
 else {
 
 	echo '<h3 style="text-align:center;margin:90px 30px;">' . __( 'No results found for your search', PRIME2G_TEXTDOM ) . '</h3>';
-	prime2g_wp_block_search_form();
+	prime2g_wp_block_search_form( [ 'echo' => 'yes' ] );
 
 }
 

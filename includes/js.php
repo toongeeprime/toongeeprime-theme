@@ -187,13 +187,12 @@ $menu_width	=	$styles->megamenu_width;
 $fullwidth	=	'full_width' === $menu_width ? 'true' : 'false';
 $pagewidth	=	'page_width' === $menu_width ? 'true' : 'false';
 
-$js	=	'<script id="prime_mega_menuJS">
+$js	=	'<script id="prime_mega_menuJS" defer>
 const 	fullwidth	=	'. $fullwidth .',
 		pagewidth	=	'. $pagewidth .';
 
 if ( fullwidth || pagewidth ) {
-const mmConts	=	p2getAll( "#megaMenu.desktop .megamenuContents" ),
-	mmLIitems	=	p2getAll( "#megaMenu.desktop .megamenuLi" ),
+const mmLIitems	=	p2getAll( "#megaMenu.desktop .megamenuLi" ),
 	pageBody	=	p2getEl( "#container" );
 
 function prime_setMegaMenu() {
@@ -204,9 +203,10 @@ setTimeout( ()=>{
 
 mmLIitems.forEach( li => {
 li_rect	=	li.getBoundingClientRect();
-mc		=	li.querySelector( ".megamenuContents" );
+mc		=	li.querySelector( ".ctrlw" );
+if ( mc ) {
 mc_rect	=	mc.getBoundingClientRect();
-
+console.log(mc);
 	if ( fullwidth ) {
 		mc.style.width	=	"98.75vw";
 		leftAmount		=	li_rect.left > 0 ? (-1 * li_rect.left) : li_rect.left;
@@ -216,6 +216,7 @@ mc_rect	=	mc.getBoundingClientRect();
 		mc.style.width	=	widthOfPage + "px";
 		mc.style.left	=	(-1 * (li_rect.left - leftOfPage)) + "px";
 	}
+}
 } );
 }, 300 );
 }
@@ -234,7 +235,12 @@ echo $js;
  *	LIVE SEARCH: AJAX
  */
 if ( ! function_exists( 'prime2g_ajax_search_js' ) ) {
-function prime2g_ajax_search_js( string $id = '' ) {
+function prime2g_ajax_search_js( array $options = [] ) {
+$id			=	'';
+$post_type	=	'';
+
+extract( $options );
+
 $js	=	'<script id="prime_livesearchJS'. $id .'">
 let fID'. $id .'	=	"'. $id .'",
 	idID'. $id .'	=	fID'. $id .' ? "#'. $id .'" : "",
@@ -243,43 +249,20 @@ let fID'. $id .'	=	"'. $id .'",
 	tSRes'. $id .'	=	tForm'. $id .'.querySelector( ".liveSearchResults" ),
 	tInput'. $id .'	=	tForm'. $id .'.querySelector( "input" );
 
-var counter	=	[];
+var counter	=	[],
+	input_time	=	0;
 
-function prime_runAjaxSearch( e ) {
-let tValue'. $id .'	=	tInput'. $id .'.value;
-
-if ( ! tValue'. $id .' || tValue'. $id .' == " " ) {
+tForm'. $id .'.addEventListener( "mouseleave", ()=>{ setTimeout( ()=>{
 	tSRes'. $id .'.innerHTML	=	"";
 	tSBox'. $id .'.classList.add( "hidden" );
-return;
-}
+}, 500 );
+} );
 
-
-/**
- *	Control execution
- */
-let now	=	e.timeStamp;
-counter.push( now );
-
-// Delay before third event
-if ( counter.length < 3 ) {
-	tSBox'. $id .'.classList.remove( "hidden" );
-	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>3 characters &amp; slow down a little</small></p>";
-	return;
-}
-
-
-// After third event
-if ( tValue'. $id .'.length < 3 ) {
-	tSBox'. $id .'.classList.remove( "hidden" );
-	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>3 characters</small></p>";
-return;
-}
-
+function prime_runAjaxSearch( e ) {
 
 /**
  *	Keys to ignore
- *	//	" " == spacebar
+ *	" " === spacebar
  */
 if ( e.type === "input" ) {
 	// if ( [ " " ].includes( e.data ) ) return;
@@ -290,18 +273,46 @@ else {
 }
 
 
+/**
+ *	Control execution
+ */
+function p2gajmsO() { tSBox'. $id .'.classList.remove( "hidden" ) }
+
+var	tValue'. $id .'	=	tInput'. $id .'.value;
+
+if ( ! tValue'. $id .' || tValue'. $id .' == " " ) {
+	tSRes'. $id .'.innerHTML	=	"";
+	tSBox'. $id .'.classList.add( "hidden" );
+return;
+}
+
 
 /**
  *	Control input speed
  */
+let now	=	e.timeStamp;
+counter.push( now );
+all_inputs	=	counter;
+last_input	=	counter.slice(-1);
 counter		=	counter.slice(-2);	// get last two events to compare timeStamps
-let keytime	=	counter[1] - counter[0];
+var input_time	=	last_input[0] - all_inputs[0],
+	keytime	=	counter[1] - counter[0];
 
-if ( keytime < 300 ) {
-	tSBox'. $id .'.classList.remove( "hidden" );
-	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>Slow down a little</small></p>";
-	return;
+if ( input_time && tValue'. $id .'.length < 3 ) {
+p2gajmsO();
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>3 characters</small></p>";
+return;
 }
+
+if ( input_time > 1000 ) input_time = 0;
+
+if ( keytime < 150 ) {
+p2gajmsO();
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>Slow down a little</small></p>";
+return;
+}
+
+if ( input_time < 500 && keytime < 200 ) return;
 
 
 /**
@@ -317,6 +328,7 @@ formData	=	{
 	action : "prime2g_doing_ajax_nopriv",
 	"prime_do_ajax" : "ajax_search",
 	"find" : tInput'. $id .'.value,
+	"post_type" : "'. $post_type .'",
 	"count" : "10",
 	"template" : "prime2g_get_post_object_template",
 	"template_args" : '. json_encode( [ 'size' => 'thumbnail', 'tag' => 'span', 'footer' => null ] ) .',
@@ -324,9 +336,7 @@ formData	=	{
 };
 ajaxSuccess	=	function( response ) {
 	if ( response && ! response.hasOwnProperty( "error" ) ) {
-		if ( response.note === "Good" ) {}
-		console.log( "Search sent" );
-		console.log( response );
+		// console.log( response );
 		tSRes'. $id .'.innerHTML	=	response.posts;
 	}
 	else {
@@ -348,6 +358,4 @@ tInput'. $id .'.addEventListener( "input", ( e )=>{ prime_runAjaxSearch( e ); } 
 return $js;
 }
 }
-
-
 

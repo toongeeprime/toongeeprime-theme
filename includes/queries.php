@@ -85,6 +85,8 @@ if ( $parts->have_posts() ) {
 			$part	=	do_shortcode( get_the_content() );
 	}
 }
+
+wp_reset_postdata();
 return $part;
 }
 
@@ -116,8 +118,9 @@ $process	=	array_merge(
 	'image_size'	=>	'medium',
 	'image_to_video'=>	'',
 	'site_id'	=>	null,
-	'randomize_sites'	=>	'',
-	'no_result'	=>	'Nothing found for this query!'
+	'randomize_sites'=>	'',
+	'no_result'	=>	'Nothing found for this query!',
+	'post_ids'	=>	''	// @since 1.0.79
 ],
 $params
 );
@@ -136,9 +139,11 @@ if ( count( $termsArray ) > 1 ) {
 
 $pagedNum	=	basename( prime2g_get_current_url() );
 $paged		=	is_numeric( $pagedNum ) ? (int) $pagedNum : 1;
+$postIDs	=	empty( $post_ids ) ? null : explode( ',', $post_ids );
 
 $args	=	array(
 'post_type'	=>	$post_type,
+'post__in'	=>	$postIDs,
 'order'		=>	$order,
 'orderby'	=>	$pagination ? 'date' : $orderby,
 'paged'		=>	$paged,

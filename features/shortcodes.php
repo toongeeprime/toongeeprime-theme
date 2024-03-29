@@ -74,7 +74,8 @@ $atts	=	shortcode_atts( [
 	'label'		=>	'Search here',
 	'echo'		=>	'',
 	'id'		=>	'',	// @since 1.0.78
-	'livesearch'=>	''
+	'livesearch'=>	'',
+	'post_type'	=>	''	// @since 1.0.79
 ], $atts );
 
 return prime2g_wp_block_search_form( $atts );
@@ -143,45 +144,6 @@ $title	.=	( $descOnly || $desc ) ? '<p id="site_description">'. get_bloginfo( 'd
 $title	.=	"</div>";
 
 return $title;
-}
-
-
-add_shortcode( 'prime_map', 'prime2g_map_shortcode' );
-function prime2g_map_shortcode( $atts ) {
-$atts	=	shortcode_atts( [
-'address'	=>	'',
-'map'		=>	'google',
-'height'	=>	'400px',
-'zoom'		=>	'15',
-'maptype'	=>	'roadmap',
-'id'		=>	'google-maps-display'
-], $atts );
-extract( $atts );
-
-$address	=	str_replace( ' ', '+', $address );
-
-if ( $address ) {
-
-$embed	=	'<div id="'. $id .'" class="prime_map" style="max-width:100%;overflow:hidden;color:red;width:100%;height:'. $height .';">
-<div style="height:100%;width:100%;max-width:100%;">';
-
-if ( $map === 'google' ) {
-$embed	.=	'<iframe style="height:100%;width:100%;border:0;" frameborder="0"
-src="https://www.google.com/maps/embed/v1/place?q='. $address .'&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&zoom='. $zoom .'&maptype='. $maptype .'">
-</iframe>
-<a class="auth-map-data embed-ded-maphtml" rel="nofollow" href="https://www.bootstrapskins.com/themes">premium bootstrap themes</a>
-<style>#'. $id .' img.text-marker{max-width:none!important;background:none!important;}#'. $id .' img{max-width:none}</style>';
-}
-
-$embed	.=	'</div>
-</div><!-- .prime_map -->';
-
-}
-else {
-$embed	=	'<strong><p>NO ADDRESS FOR MAP</p></strong>';
-}
-
-return $embed;
 }
 
 

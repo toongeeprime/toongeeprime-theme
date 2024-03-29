@@ -16,6 +16,10 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.79 =
+* Function: prime2g_html_slider_post_template(), prime2g_content_body_template()
+* post_ids parameter added to prime2g_get_posts_output() and prime2g_posts_shortcode()
+
 = 1.0.78 =
 * Live search added to prime2g_wp_block_search_form() & shortcode
 * Functions: prime2g_mega_menu_css() & prime2g_mega_menu_js(), prime2g_ajax_search_js() & prime2g_ajax_search_css()
@@ -392,3 +396,4 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
+

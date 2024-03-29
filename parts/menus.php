@@ -259,28 +259,28 @@ return (object) [
 
 /***
  *	DESKTOP MEGAMENU HTML STRUCTURE
+ *	ctrlw class is for JS width adjustment
  *	@since 1.0.76
 
 <nav id="megaMenu" class="desktop menu-main-container">
 <ul id="megaMenuLinks" class="menu">
  	<li class="megamenuLi megaMenuContents1"><a href="#" class="megamenu_link">Item 1</a>
-	<div id="megaMenuContents1" class="megamenuContents">
+	<div id="megaMenuContents1" class="megamenuContents ctrlw">
 	<div class="mmcontent">[prime_insert_template_part id="123" device="desktop"]</div>
 	</div>
 	</li>
 
  	<li class="megamenuLi megaMenuContents2"><a href="#" class="megamenu_link">Item 2</a>
-	<div id="megaMenuContents2" class="megamenuContents">
+	<div id="megaMenuContents2" class="megamenuContents ctrlw">
 	<div class="mmcontent">[prime_insert_template_part id="234" device="mobile"]</div>
 	</div>
 	</li>
 
  	<li class="megamenuLi megaMenuContents3"><a href="#" class="megamenu_link">Item 3</a>
-	<div id="megaMenuContents3" class="megamenuContents">
+	<div id="megaMenuContents3" class="megamenuContents ctrlw">
 	<div class="mmcontent">[prime_insert_template_part id="345" device="desktop"]</div>
 	</div>
 	</li>
 </ul>
 </nav>
  **/
-
