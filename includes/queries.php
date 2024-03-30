@@ -206,8 +206,7 @@ $post	=	$loop->the_post();
 		'edit_link'	=>	false,
 		'switch_img_vid'	=>	$image_to_video === 'yes' ? true : false
 	];
-	$output	.=	$looptemplate ?
-	( function_exists( $looptemplate ) ? $looptemplate() : prime2g_get_archive_loop_post_object( $postArgs ) )
+	$output	.=	$looptemplate && function_exists( $looptemplate ) ? $looptemplate()
 	: prime2g_get_archive_loop_post_object( $postArgs );
 }
 
@@ -231,5 +230,4 @@ if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
 wp_reset_postdata();
 return $output;
 }
-
 

@@ -28,9 +28,10 @@ $taxonz	=	prime_taxonomies_group()->has_archive_image;
 public function load_media() { wp_enqueue_media(); }
 
 
-public function add_taxon_image( $taxonomy ) { ?>
+public function add_taxon_image( $taxonomy ) {
+$taxo_name	=	get_taxonomy( $taxonomy )->labels->singular_name;	?>
 <div class="form-field term-group">
-	<label for="thumbnail_id"><?php _e( 'Term Image', PRIME2G_TEXTDOM ); ?></label>
+	<label for="thumbnail_id"><?php _e( $taxo_name . ' Image', PRIME2G_TEXTDOM ); ?></label>
 	<input type="hidden" id="thumbnail_id" name="thumbnail_id" class="custom_media_url" value="">
 <div id="taxon-image-wrapper"></div>
 	<p>
