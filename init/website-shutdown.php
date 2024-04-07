@@ -23,7 +23,7 @@ $add_css	=	function_exists( 'prime2g_add_shutdown_css' ) ? prime2g_add_shutdown_
 $add_js		=	function_exists( 'prime2g_add_shutdown_js' ) ? prime2g_add_shutdown_js() : '';
 
 /**
- *	OPTION TO USE A SHUTDOWN PAGE
+ *	USE A SHUTDOWN PAGE?
  *	@since @ 1.0.55
  */
 if ( 'use_page' === get_theme_mod( 'prime2g_shutdown_display' ) ) {

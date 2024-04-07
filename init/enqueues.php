@@ -66,6 +66,8 @@ if ( ! prime_child_min_version( '2.3' ) ) {
 	wp_enqueue_script( 'prime2g_deprecated_js', get_theme_file_uri( '/files/deprecated.js' ), [], $version );
 }
 
+// wp_deregister_script( 'jquery-migrate' );
+
 }
 }
 

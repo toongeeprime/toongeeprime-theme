@@ -87,7 +87,7 @@ $fields	=	[
 ];
 foreach( $fields as $field ) {
 	if ( array_key_exists( $field, $_POST ) ) {
-	update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+		update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
 	}
 }
 

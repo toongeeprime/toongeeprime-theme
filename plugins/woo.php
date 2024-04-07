@@ -50,9 +50,37 @@ return $fragments;
 
 
 /**
- *	Remove WooCommerce breadcrumbs for Theme's
+ *	WooCommerce Breadcrumbs
+ *	Updated @ since 1.0.80
  */
+// Remove WooCommerce breadcrumbs from default position:
 remove_action( 'woocommerce_before_main_content' , 'woocommerce_breadcrumb' , 20, 0 );
+
+
+if ( ! function_exists( 'prime2g_woo_breadrumb_home_url' ) ) {
+
+add_filter( 'woocommerce_breadcrumb_home_url', 'prime2g_woo_breadrumb_home_url' );
+function prime2g_woo_breadrumb_home_url() {
+	return esc_url( wc_get_page_permalink( 'shop' ) );
+}
+}
+
+
+if ( ! function_exists( 'prime2g_woo_breadcrumb_defaults' ) ) {
+
+add_filter( 'woocommerce_breadcrumb_defaults', 'prime2g_woo_breadcrumb_defaults' );
+function prime2g_woo_breadcrumb_defaults() {
+return array(
+	'delimiter'		=>	' &#187; ',
+	'wrap_before'	=>	'<nav id="breadCrumbs" class="woocommerce-breadcrumb breadCrumbs" itemprop="breadcrumb">' . prime2g_home_breadcrumb_span(),
+	'wrap_after'	=>	'</nav>',
+	// 'before'		=>	__( prime2g_do_woo_texts( 'category_title' ) . ': ', 'woocommerce' ),
+	'before'		=>	'',
+	'after'			=>	'',
+	'home'			=>	_x( prime2g_do_woo_texts( 'shop_title' ), 'breadcrumb', 'woocommerce' ),
+);
+}
+}
 
 
 /**
@@ -120,9 +148,13 @@ function prime2g_woo_wp_title( $title ) {
  *	Changing WooCommerce Texts
  */
 function prime2g_do_woo_texts( $get ) {
-if ( $get == 'shop title' ) {
-	$text	=	get_theme_mod( 'prime2g_shop_page_title' );
-	if ( empty( $text ) ) $text = 'Shop Homepage';
+if ( $get === 'shop_title' ) {
+	$text	=	get_theme_mod( 'prime2g_shop_page_title' ); // mod fallback doesn't work here
+	if ( empty( $text ) )
+		$text	=	'Shop Homepage';
+}
+if ( $get === 'category_title' ) {
+	$text	=	'Category';
 }
 return $text;
 }
@@ -134,10 +166,10 @@ function prime2g_change_woocommerce_texts( $translated_text, $text, $domain ) {
 
 switch ( $translated_text ) {
 	case 'Return to shop' :
-		$translated_text = __( 'Return to ' . prime2g_do_woo_texts( 'shop title' ), 'woocommerce' );
+		$translated_text = __( 'Return to ' . prime2g_do_woo_texts( 'shop_title' ), 'woocommerce' );
 		break;
 	case 'Browse products' :
-		$translated_text = __( 'Browse ' . prime2g_do_woo_texts( 'shop title' ), 'woocommerce' );
+		$translated_text = __( 'Browse ' . prime2g_do_woo_texts( 'shop_title' ), 'woocommerce' );
 		break;
 	case 'Related products' :
 		$translated_text = __( 'More items like this...', 'woocommerce' );

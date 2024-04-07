@@ -22,6 +22,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_home_main_headline_type',
 		'section'	=>	'prime2g_theme_archives_section',
+		'active_callback'	=>	'is_home',
 		'choices'	=>	array(
 			''		=>	__( 'Default', PRIME2G_TEXTDOM ),
 			'slideshow'	=>	__( 'Slideshow', PRIME2G_TEXTDOM )

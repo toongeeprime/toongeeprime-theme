@@ -35,7 +35,7 @@ jQuery( document.body ).on( 'updated_checkout', function() {
 
 let pay_meths	=	document.querySelectorAll( '.wc_payment_method .input-radio' );
 if ( pay_meths ) {
-	pay_meths[0].parentElement.classList.add( 'prime_active' );
+	if ( pay_meths[0] ) pay_meths[0].parentElement.classList.add( 'prime_active' );
 	pay_meths.forEach( ( method )=>{
 		method.addEventListener( 'change', ()=>{
 			pay_meths.forEach( ( li )=>{

@@ -44,11 +44,9 @@ $args	=	array(
 );
 
 register_taxonomy( 'template_parts_section', 'prime_template_parts', $args );
-}
 
 
-if ( class_exists( 'woocommerce' ) ) {
-#	Brands for WooCommerce
+#	Brands for Defined Post Types
 $labels	=	array(
 	'name'			=>	_x( 'Brands', 'taxonomy general name', PRIME2G_TEXTDOM ),
 	'singular_name'	=>	__( 'Brand', PRIME2G_TEXTDOM ),
@@ -66,8 +64,8 @@ $labels	=	array(
 $args	=	array(
 	'label'			=>	__( 'Brands', PRIME2G_TEXTDOM ),
 	'labels'		=>	$labels,
-	'query_var'		=>	false,
-	'public'		=>	false,
+	'query_var'		=>	true,
+	'public'		=>	true,
 	'hierarchical'	=>	true,
 	'show_ui'		=>	true,
 	'show_in_rest'	=>	true,

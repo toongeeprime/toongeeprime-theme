@@ -26,50 +26,46 @@ wp_link_pages(
 
 
 /**
+ *	Home Breadcrumb Element
+ *	@since 1.0.80
+ */
+function prime2g_home_breadcrumb_span() {
+	if ( is_front_page() ) return;
+	return '<span class="home"><a href="'. get_home_url() .'/" title="'. __( 'Site\'s Homepage', PRIME2G_TEXTDOM ) .'">'. __( 'Home', PRIME2G_TEXTDOM ) .'</a> &#187; </span>';
+}
+
+/**
  *	Breadcrumbs
  *	Hooked to prime2g_after_header
+ *	Reviewed @since 1.0.80
  */
 add_action( 'prime2g_after_header', 'prime2g_breadcrumbs', 5 );
 if ( ! function_exists( 'prime2g_breadcrumbs' ) ) {
 function prime2g_breadcrumbs() {
 
-if ( is_front_page() || empty( get_theme_mod( 'prime2g_theme_breadcrumbs' ) ) ) return;
+if ( empty( get_theme_mod( 'prime2g_theme_breadcrumbs' ) ) ) return;
 
-function prime2g_shopCrumb() {
-if ( ! class_exists( 'woocommerce' ) ) return;
-if ( is_woocommerce() ) {
-	$shopTitle	=	__( get_theme_mod( 'prime2g_shop_page_title' ), PRIME2G_TEXTDOM );
-	// This must remain because shop title would be empty if not set in customizer:
-	if ( $shopTitle === '' ) $shopTitle	=	__( 'Shop Homepage', PRIME2G_TEXTDOM );
-	return '<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="' . $shopTitle . '">' . $shopTitle . '</a> &#187; </span>';
-}
-}
+if ( class_exists( 'woocommerce' ) && is_woocommerce() ) { return woocommerce_breadcrumb(); }
+
+if ( is_front_page() ) return;
 
 
-$crumbs	=	'<div id="breadCrumbs" class="breadCrumbs">';
+$crumbs	=	'<nav id="breadCrumbs" class="breadCrumbs" itemprop="breadcrumb">';
 
-$home	=	'<span class="home"><a href="'. get_home_url() .'/" title="'. __( 'Site\'s Homepage', PRIME2G_TEXTDOM ) .'">'. __( 'Home', PRIME2G_TEXTDOM ) .'</a> &#187; </span>';
-
-$crumbs	.=	$home;
+$crumbs	.=	prime2g_home_breadcrumb_span();
 
 if ( is_singular() ) {
 	$postTaxs	=	get_post_taxonomies();
 
 	if ( $postTaxs ) {
-		if ( class_exists( 'woocommerce' ) && is_product() ) {
+		if ( $postTaxs[1] == 'post_format' ) {
 			$taxon_1	=	$postTaxs[2];
-			$crumbs		.=	prime2g_shopCrumb();
+		}
+		elseif ( $postTaxs[0] == 'post_tag' ) {
+			$taxon_1	=	$postTaxs[1];
 		}
 		else {
-			if ( $postTaxs[1] == 'post_format' ) {
-				$taxon_1	=	$postTaxs[2];
-			}
-			elseif ( $postTaxs[0] == 'post_tag' ) {
-				$taxon_1	=	$postTaxs[1];
-			}
-			else {
-				$taxon_1	=	$postTaxs[0];
-			}
+			$taxon_1	=	$postTaxs[0];
 		}
 
 		$taxonomy	=	get_taxonomy( $taxon_1 );
@@ -126,8 +122,6 @@ if ( is_archive() || is_tax() ) {
 		}
 	}
 
-	$crumbs	.=	prime2g_shopCrumb();
-
 	if ( $termAncs ) {
 		foreach( array_reverse( $termAncs ) as $id ) {
 			$tName	=	__( get_term_by( 'term_id', $id, $object->taxonomy )->name, PRIME2G_TEXTDOM );
@@ -138,6 +132,8 @@ if ( is_archive() || is_tax() ) {
 	$crumbs	.=	'<span class="crumb_page_title" title="This Archive">' . get_the_archive_title() .'</span>';
 }
 
+
+// **DO AUTHOR && DATE ARCHIVES
 
 # DO NOT use get_the_title() for these:
 if ( is_home() ) {
@@ -153,7 +149,7 @@ if ( is_404() ) {
 	$crumbs	.=	'<span class="crumb_page_title" title="'. $title .'">'. $title .'</span>';
 }
 
-	$crumbs	.=	'</div>';
+	$crumbs	.=	'</nav>';
 
 echo $crumbs;
 }
@@ -618,4 +614,5 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 <?php
 }
 }
+
 
