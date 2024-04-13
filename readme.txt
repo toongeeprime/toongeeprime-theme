@@ -16,6 +16,12 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.80 =
+* File: video-fields-hooks-and-functions.php changed to media-fields-hooks-and-functions.php
+* Functions: prime2g_media_urls_by_ids(), prime2g_media_gallery_css(), prime2g_media_gallery_js(),
+prime2g_get_posts_output_default_options(), prime2g_media_or_posts_gallery()
+* Shortcode: prime2g_media_gallery
+
 = 1.0.79 =
 * Function: prime2g_html_slider_post_template(), prime2g_content_body_template()
 * post_ids parameter added to prime2g_get_posts_output() and prime2g_posts_shortcode()

@@ -1,10 +1,31 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	VIDEO AFFAIRS
+ *	MEDIA MATTERS
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
+ *	File name changed video to media @since 1.0.80
+ */
+
+function prime2g_media_urls_by_ids( $ids, $size = 'large' ) : array {
+if ( is_string( $ids ) ) {
+	$ids	=	chop( $ids, ',' );
+	$ids	=	explode( ',', $ids );
+}
+
+$urls	=	[];
+foreach ( $ids as $id ) {
+	$urls[]	=	wp_get_attachment_image_url( $id, $size );	// allow possible falses for conditional use
+}
+
+return $urls;
+}
+
+
+
+/**
+ *	VIDEO MATTERS
  */
 function prime2g_video_features_active() {
 	return ( prime2g_use_extras() && get_theme_mod( 'prime2g_enable_video_features' ) );
@@ -82,13 +103,13 @@ $type	=	$media ?: 'video';
 
 	switch( $type ) {
 		case 'audio':	$url	=	$post->audio_url; break;
-		default		:	$url	=	$post->video_url; break;
+		default		:	$url	=	$post->video_url . '&origin=' . get_home_url(); break;
 	}
 
 if ( empty( $url ) ) return;
 
 $parsed	=	parse_url( $url );
-$media_host	=	$parsed[ 'host' ];
+$media_host	=	isset( $parsed[ 'host' ] ) ? $parsed[ 'host' ] : null;
 
 if ( in_array( $media_host, [ 'www.youtube.com', 'youtube.com', 'youtu.be', 'm.youtube.com', 'www.vimeo.com', 'vimeo.com' ] ) ) {
 	$embedded	=	$wp_embed->autoembed( $url );

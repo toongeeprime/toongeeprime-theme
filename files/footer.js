@@ -12,9 +12,9 @@ window.addEventListener( "scroll", ()=>{
 let primetoTop	=	p2getEl( '#prime2g_toTop' ),
 popEl	=	p2getAll( '.popEl' );
 
-if ( window.pageYOffset > 500 ) { theBody.classList.add( 'pop' ); }
+if ( window.pageYOffset > 350 ) { theBody.classList.add( 'pop' ); }
 else { theBody.classList.remove( 'pop' ); }
-if ( window.pageYOffset > 800 ) { primetoTop.classList.add( 'show' ); }
+if ( window.pageYOffset > 700 ) { primetoTop.classList.add( 'show' ); }
 else { primetoTop.classList.remove( 'show' ); }
 if ( popEl ) { popEl.forEach( ( pop )=>{ if ( prime2g_inViewport( pop ) ) { pop.classList.add( 'inview' ); } } ); }
 }, false );

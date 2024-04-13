@@ -11,20 +11,20 @@ if ( ! class_exists( 'Prime2gMailer' ) ) {
 class Prime2gMailer {
 
 	/**
-	 *	Variables
+	 *	Properties
 	 */
-	public $content_type	=	'text/html';
-	public $domain;
-	public $sender_name;
-	public $sender_email;
-	public $default_css	=	'yes';
-	public $css			=	'';
-	public $headers		=	'';	// string|string[]
-	public $subject		=	'MAILER CLASS TEST';
-	public $recipients;		// string|string[]
-	public $mail_content	=	'<h3>ToongeePrime Theme Mailer Test</h3><p>Testing theme\'s mailer class.</p>';
-	public $attachments	=	[];	// string|string[]
-	public $closing_remark;
+	public	$content_type	=	'text/html',
+			$domain,
+			$sender_name,
+			$sender_email,
+			$default_css	=	'yes',
+			$css			=	'',
+			$headers		=	'',	// string|string[]
+			$subject		=	'MAILER CLASS TEST',
+			$recipients,		// string|string[]
+			$mail_content	=	'<h3>ToongeePrime Theme Mailer Test</h3><p>Testing theme\'s mailer class.</p>',
+			$attachments	=	[],	// string|string[]
+			$closing_remark;
 
 // $headers[]	=	'Reply-To: Person Name <person.name@akawey.com>';
 // $headers[]	=	'Cc: John <john@akawey.com>';

@@ -21,9 +21,11 @@ $set_cache	=	$use_cache	=	false;
 if ( is_array( $options ) ) {
 	$get		=	null;
 	$cache_name	=	'prime2g_wp_query';
-	$cacheTime	=	PRIME2G_CACHE_EXPIRES;	# @since 1.0.61
+	$cache_time	=	1;	# @since 1.0.61
 extract( $options );
 }
+
+$cachTime	=	(int) $cache_time * HOUR_IN_SECONDS;	# @since 1.0.80
 
 /**
  *	The cache-setting call should not "use" cache
@@ -38,18 +40,18 @@ if ( $use_cache ) {
 	else {
 		$loop	=	new WP_Query( $args );
 		$loop	=	$get === 'posts' ? $loop->posts : $loop;
-		wp_cache_set( $cache_name, $loop, PRIME2G_POSTSCACHE, $cacheTime );
+		wp_cache_set( $cache_name, $loop, PRIME2G_POSTSCACHE, $cachTime );
 	}
 }
 else {
 	$loop	=	new WP_Query( $args );
 	$loop	=	$get === 'posts' ? $loop->posts : $loop;
-	if ( $set_cache ) wp_cache_set( $cache_name, $loop, PRIME2G_POSTSCACHE, $cacheTime );
+	if ( $set_cache ) wp_cache_set( $cache_name, $loop, PRIME2G_POSTSCACHE, $cachTime );
 }
 
 wp_reset_postdata();
 
-return $loop; # object if $get === null || array
+return $loop;	# object if $get === null || array
 }
 
 
@@ -65,7 +67,7 @@ $part	=	null;
 $args	=	array(
 	'post_type'	=>	'prime_template_parts',
 	'offset'	=>	0,
-	'posts_per_page'	=>	-1
+	'posts_per_page'=>	-1
 );
 
 $options	=	[ 'cache_name' => 'prime2g_template_parts' ];
@@ -93,12 +95,11 @@ return $part;
 
 
 /**
- *	GET TEMPLATED POSTS QUERY OUTPUT
- *	@since 1.0.71
+ *	DEFAULT OPTIONS FOR prime2g_get_posts_output() and other functions that use it
+ *	@since 1.0.80
  */
-function prime2g_get_posts_output( array $params = [] ) {
-$process	=	array_merge(
-[
+function prime2g_get_posts_output_default_options() : array {
+return [
 	'count'	=>	5,
 	'words'	=>	10,
 	'order'	=>	'DESC',
@@ -120,10 +121,20 @@ $process	=	array_merge(
 	'site_id'	=>	null,
 	'randomize_sites'=>	'',
 	'no_result'	=>	'Nothing found for this query!',
-	'post_ids'	=>	''	// @since 1.0.79
-],
-$params
-);
+	'post_ids'	=>	'',	#	@since 1.0.79
+	'cache_time'=>	'',	#	@since 1.0.80
+	'get'		=>	''
+];
+}
+
+
+
+/**
+ *	GET TEMPLATED POSTS QUERY OUTPUT
+ *	@since 1.0.71
+ */
+function prime2g_get_posts_output( array $params = [] ) {
+$process	=	array_merge( prime2g_get_posts_output_default_options(), $params );
 
 extract( $process );
 
@@ -159,13 +170,13 @@ $args	=	array(
 ] )
 );
 
-if ( $set_cache === 'yes' ) $set_cache = true;
-if ( $use_cache === 'yes' ) $use_cache = true;
 
 $options	=	array(
-	'set_cache'	=>	$set_cache,
-	'use_cache'	=>	$use_cache,
-	'cache_name'	=>	$cache_name
+	'set_cache'	=>	$set_cache === 'yes' ? true : false,
+	'use_cache'	=>	$use_cache === 'yes' ? true : false,
+	'cache_name'=>	$cache_name,
+	'cache_time'=>	$cache_time,
+	'get'		=>	$get === 'posts' ? 'posts' : null	#	@since 1.0.80
 );
 
 $output	=	$set_cache ? '<div class="hide query-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
@@ -190,6 +201,11 @@ if ( $site_id ) switch_to_blog( $site_id );
 }
 
 $loop	=	prime2g_wp_query( $args, $options );
+
+if ( $get === 'posts' ) {
+	if ( $isNetwork && $site_id ) restore_current_blog();
+	return $loop;
+}
 
 if ( $loop->have_posts() ) {
 

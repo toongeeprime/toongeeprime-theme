@@ -32,16 +32,19 @@ if ( wpVids ) { wpVids.forEach( wpv => { wpv.style.width = "auto"; } ); }
 if ( $singular && 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) {
 if ( has_header_video() && is_header_video_active() ) {
 $js	.=	'var ww_timer	=	setTimeout( function ww_video() {
-if ( wp.customHeader.handlers.youtube.player == null ) {
-	ww_timer	=	setTimeout( ww_video, 1000 );
+if ( typeof wp.customHeader !== "undefined" ) {
+if ( wp.customHeader.handlers.youtube.player === null ) {
+	ww_timer	=	setTimeout( ww_video, 500 );
 } else {
 	if ( typeof wp.customHeader.handlers.youtube.player.unMute === "function" ) {
 		wp.customHeader.handlers.youtube.player.unMute();
 		wp.customHeader.handlers.youtube.player.stopVideo();
 	} else {
-		ww_timer	=	setTimeout( ww_video, 1000 );
+		ww_timer	=	setTimeout( ww_video, 500 );
 	}
-} }, 1000 );
+}
+}
+}, 500 );
 ';
 }
 }
@@ -358,4 +361,89 @@ tInput'. $id .'.addEventListener( "input", ( e )=>{ prime_runAjaxSearch( e ); } 
 return $js;
 }
 }
+
+
+/**	@since 1.0.78 End	**/
+
+
+/**
+ *	@since 1.0.80
+ */
+if ( ! function_exists( 'prime2g_media_gallery_js' ) ) {
+function prime2g_media_gallery_js() {
+$js	=	'<script id="prime2g_gallery_js">
+let mgWrap	=	p2getEl( ".p2_media_gallery_wrap" ),
+	gPrevThumbs	=	p2getAll( ".preview_thumb" ),
+	gGalThumbs	=	p2getAll( ".gallery_thumb" ),
+	itemsNum	=	gGalThumbs.length;
+
+p2getEl( "#allNum" ).innerText	=	itemsNum;
+
+p2getEl( ".preview_thumb" ).classList.add( "live" );
+p2getEl( ".gallery_media" ).classList.add( "live" );
+p2getEl( ".gallery_thumb" ).classList.add( "live" );
+
+gGalThumbs.forEach( gt => { gt.addEventListener( "click", (e) => { doGalleryItems( gt ); } ); } );
+gPrevThumbs.forEach( gt => { gt.addEventListener( "click", (e) => { doGalleryItems( gt ); p2DoGallery( "on" ); } ); } );
+
+function doGalleryItems( el ) {
+p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
+	classes	=	Object.values( el.classList );
+	classes.forEach( c => { if ( c.includes( "item_" ) ) classI = c; } );
+	var currentItems	=	p2getAll( "." + classI );
+	currentItems.forEach( ci => {
+		p2getEl( "#elNum" ).innerText	=	classI.replace( "item_", "" );
+		ci.classList.add( "live" ); p2GallThumbScroll( ci );
+	} );
+}
+
+function p2DoGallery( toDo ) {
+	if ( toDo === "on" ) return mgWrap.classList.remove( "hidden" );
+	if ( toDo === "off" ) return mgWrap.classList.add( "hidden" );
+}
+
+function p2GalleryOff() {
+	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
+	p2DoGallery( "off" );
+}
+
+document.addEventListener( "keyup", function( e ) {
+if ( e.defaultPrevented ) { return; }
+let key = e.key || e.keyCode;
+
+if ( key === "Escape" || key === "Esc" || key === 27 ) { p2GalleryOff(); }
+if ( key === "ArrowRight" || key === "Right" || key === 39 ) { p2SwipeGallery( "right" ); }
+if ( key === "ArrowLeft" || key === "Left" || key === 37 ) { p2SwipeGallery( "left" ); }
+} );
+
+function p2SwipeGallery( dir ) {
+	isLive	=	p2getAll( ".gItem.live" )[0];
+	classes	=	Object.values( isLive.classList );
+	classes.forEach( c => { if ( c.includes( "item_" ) ) { currNum = c.replace( "item_", "" ); } } );
+	if ( dir === "right" ) { num = Number(currNum) + 1; }
+	if ( dir === "left" ) { num = Number(currNum) - 1; }
+	toClass	=	"item_" + num;
+	toEls	=	p2getAll( "." + toClass );
+	if ( 0 === toEls.length ) return;
+	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
+	toEls.forEach( el => { el.classList.add( "live" );p2GallThumbScroll( el ); } );
+}
+
+function p2GallThumbScroll( el ) {
+if ( el.classList.contains( "gallery_thumb" ) ) {
+	classes	=	Object.values( el.classList );
+	classes.forEach( c => { if ( c.includes( "item_" ) ) classI = c; } );
+	p2getEl( "#elNum" ).innerText	=	classI.replace( "item_", "" );
+
+	width	=	el.getBoundingClientRect().width;
+	for ( var i = 0, len = itemsNum; i < len; i++ ) { if ( gGalThumbs[i] === el ) { index = i; break; } }
+	if ( ! prime2g_inViewport_get( el ) ) { p2getEl( ".thumbsScroll" ).scroll( { top:0, left: index * width, behavior:"smooth" } ); }
+}
+}
+</script>';
+return $js;
+}
+}
+
+
 

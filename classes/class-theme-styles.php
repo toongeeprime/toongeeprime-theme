@@ -12,16 +12,16 @@ if ( ! class_exists( 'ToongeePrime_Styles' ) ) {
 class ToongeePrime_Styles {
 
 	/**
-	 *	Defaults
+	 *	Properties
 	 *	Public for defaults' usage in customizer and other theme files
 	 */
-	public $siteWidth	=	'1100px';
-	public $headFont	=	'Oxygen';
-	public $bodyFont	=	'Open+Sans';
-	public $headingsAltFont	=	'Geneva, Verdana, sans-serif'; # 1.0.55
-	public $bodyAltFont	=	'Arial, Helvetica, sans-serif';
-	public $titlesF_Weight	=	'500';
-	public $arch_ftImgHeight=	'17';
+	public	$siteWidth	=	'1100px',
+			$headFont	=	'Oxygen',
+			$bodyFont	=	'Open+Sans',
+			$headingsAltFont	=	'Geneva, Verdana, sans-serif', # 1.0.55
+			$bodyAltFont	=	'Arial, Helvetica, sans-serif',
+			$titlesF_Weight	=	'500',
+			$arch_ftImgHeight=	'17';
 
 
 	/**

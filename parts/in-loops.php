@@ -147,7 +147,7 @@ echo prime2g_get_post_object_template( $options );
 /**
  *	Return Post Object Template
  *	@since 1.0.70
- *	$force_post arg added @since 1.0.78, because of scenarios where $post object is not properly passed
+ *	REMOVE: $force_post
  */
 if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
 function prime2g_get_post_object_template( array $options, object $force_post = null ) { // $options required to define $post
@@ -269,8 +269,12 @@ $metas		=	true;
 $footer		=	true;
 $tag		=	'h2';
 $readmore	=	' - Read more';
+$post		=	null;	//	added @since 1.0.80
+$entryClasses	=	'';	# string|string[]
 
 extract( $size );
+if ( ! $post ) { global $post; }	//	added @since 1.0.80
+
 }
 else {
 	$imgSize	=	$size;
@@ -278,7 +282,7 @@ else {
 }
 #	@since 1.0.55 end
 
-$entry	=	'<article id="entry-' . $post->ID . '" class="' . implode( ' ', get_post_class() ) . '">';
+$entry	=	'<article id="entry-' . $post->ID . '" class="' . implode( ' ', get_post_class( $entryClasses ) ) . '">';
 $entry	.=	'<div class="entry_img">';
 
 $entry	.=	prime2g_ft_image_in_loop( $title, $imgSize, $link, $post );
@@ -352,7 +356,7 @@ return $ftimg;
  *	Archive Post Template by post object
  *	@since 1.0.50
  *	Media field logic @since 1.0.55
- *	$force_post arg added @since 1.0.78, because of scenarios where $post is not properly passed
+ *	REMOVE: $force_post
  */
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
 function prime2g_get_archive_loop_post_object( array $args, object $force_post = null ) {
@@ -417,7 +421,7 @@ $entry	.=	'</article>';
 else {
 $data	=	[
 	'imgSize' => $size, 'excerpt' => $excerpt, 'length' => $length, 'edit_link' => $edit_link,
-	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'readmore' => $readmore,
+	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'readmore' => $readmore, 'post' => $post, 'entryClasses' => $entryClasses,
 	'loop_post_header_template' => $loop_post_header_template, 'loop_post_footer_template' => $loop_post_footer_template,
 ];
 	$entry	=	prime2g_get_archive_loop( $data );

@@ -31,7 +31,7 @@ if ( $hasHeader ) {
 }
 
 
-if ( 'mega_menu' !== $styles->menu_type && ! wp_is_mobile() ) prime2g_site_top_menu(); # 1.0.55
+if ( ! wp_is_mobile() ) prime2g_site_top_menu(); # 1.0.55
 
 prime2g_before_header();
 

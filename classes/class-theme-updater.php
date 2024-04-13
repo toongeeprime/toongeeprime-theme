@@ -9,8 +9,8 @@
  */
 
 class Prime2gThemeUpdater {
-	public $theme;
-	public $metadataUrl;
+	public	$theme,
+			$metadataUrl;
 
 	/**
 	 *	@param string $theme Theme slug

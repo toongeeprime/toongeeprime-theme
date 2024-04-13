@@ -17,8 +17,8 @@ let rect = el.getBoundingClientRect();
 	);
 }
 
-function prime2g_inViewport_get( elmt ) { // Get the element in-function
-el	=	p2getEl( elmt );
+function prime2g_inViewport_get( elmt ) {
+el	=	typeof elmt === 'object' ? elmt : p2getEl( elmt );
 let rect	=	el.getBoundingClientRect();
 	return (
 		rect.top >= 0 && rect.left >= 0 &&
@@ -149,13 +149,14 @@ elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.toggle( cl
 /**
  *	COOKIES
  *	You can delete a cookie by updating its expiration time to zero
+ *	@since 1.0.80: added encodeURIComponent & Secure;SameSite=
  */
-function primeSetCookie( cName, cValue, expDays, setdomain = null ) {
+function primeSetCookie( cName, cValue, expDays, setdomain = null, samesite = "Lax" ) {
 	let date	=	new Date();
 	date.setTime( date.getTime() + ( expDays * 24 * 60 * 60 * 1000 ) );
 	let expires	=	"expires=" + date.toUTCString();
 	let thedomain	=	setdomain ? '; domain='+ setdomain: null;
-	document.cookie	=	cName + "=" + cValue + "; " + expires + "; path=/" + thedomain;
+	document.cookie	=	encodeURIComponent( cName ) + "=" + encodeURIComponent( cValue ) + "; " + expires + ";Secure;SameSite="+ samesite +"; path=/" + thedomain;
 }
 
 function primeHasCookie( cName ) {
@@ -163,16 +164,8 @@ function primeHasCookie( cName ) {
 }
 
 function primeGetCookieValue( cName ) {
-let	name	=	cName + "=",
-	ca		=	document.cookie.split( ";" ),
-	cNum	=	ca.length;
-
-for ( var i = 0; i < cNum; i++ ) {
-	var c	=	ca[i].trim();
-	if ( ( c.indexOf( name ) ) == 0 ) { return c.substr( name.length ); }
-}
-
-return "undefined";
+	let cValue	=	document.cookie.split( "; " ).find( (row) => row.startsWith( cName+"=" ) )?.split( "=" )[1];
+return cValue ? cValue : "undefined";
 }
 
 function primeCookieIsDefined( cName ) {
