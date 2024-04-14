@@ -225,8 +225,9 @@ $post	=	$loop->the_post();
 	$output	.=	$looptemplate && function_exists( $looptemplate ) ? $looptemplate()
 	: prime2g_get_archive_loop_post_object( $postArgs );
 }
-
 }
+
+wp_reset_postdata();
 
 }
 else {
@@ -243,7 +244,6 @@ if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
 	$output	.=	prime2g_pagination_nums( $loop, false );
 }
 
-wp_reset_postdata();
 return $output;
 }
 

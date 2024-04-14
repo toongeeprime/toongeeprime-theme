@@ -36,7 +36,8 @@ if ( typeof wp.customHeader !== "undefined" ) {
 if ( wp.customHeader.handlers.youtube.player === null ) {
 	ww_timer	=	setTimeout( ww_video, 500 );
 } else {
-	if ( typeof wp.customHeader.handlers.youtube.player.unMute === "function" ) {
+	if ( typeof wp.customHeader.handlers.youtube.player !== "undefined" &&
+	typeof wp.customHeader.handlers.youtube.player.unMute === "function" ) {
 		wp.customHeader.handlers.youtube.player.unMute();
 		wp.customHeader.handlers.youtube.player.stopVideo();
 	} else {

@@ -139,11 +139,11 @@ $lightbox	.=	'</div><!-- .thumbs_strip --></div>
 
 </div>';
 
+wp_reset_postdata();	// leave at the end of this function!
+
 if ( $default_gallery_css === 'yes' ) echo prime2g_media_gallery_css( $gallery_template );
-
-echo '<section id="gallery_box" class="prel">' . $prevw . $lightbox . '</section>';
 add_action( 'wp_footer', function() { echo prime2g_media_gallery_js(); } );
+
+return '<section id="gallery_box" class="prel">' . $prevw . $lightbox . '</section>';
 }
-
-
 
