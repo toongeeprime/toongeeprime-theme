@@ -36,7 +36,7 @@ $atts	=	array_merge( prime2g_get_posts_output_default_options(),
 'gallery_title'	=>	'Media Gallery',
 'gallery_image_ids'	=>	'',
 'gallery_template'	=>	'1',
-'default_gallery_css'	=>	'yes'
+'default_gallery_css'	=>	'yes',
 ],
 $atts
 );
@@ -57,18 +57,30 @@ else {
 	}
 	$urls	=	[];
 	foreach ( $query as $post ) {
-		$urls[]	=	wp_get_attachment_image_url( get_post_thumbnail_id( $post ), $image_size );
+		$urls[]	=	wp_get_attachment_image_url( get_post_thumbnail_id( $post ), $image_size ) ?: prime2g_get_placeholder_url();
 	}
 	$num	=	$count;
 }
 
-$prevw	=	'<div class="slimscrollbar scrollX" style="padding:var(--min-pad) 0;">
-<div class="p2_media_gallery_btns grid grid5">';
+$prevw	=	'<div class="previewScroll slimscrollbar scrollX" style="padding:var(--min-pad) 0;">
+<div class="p2_media_gallery_btns">';
 
 for ( $p = 0; $p < $num; $p++ ) {
 	if ( isset( $urls[$p] ) ) {
 		$pp	=	$p+1;
-		$prevw	.=	'<div class="gItem centered preview_thumb thumb_'. $pp .' item_'. $pp .'" style="background-image:url('. $urls[$p] .');"></div>';
+		$media_item_div2	=	'<div class="gItem centered preview_thumb thumb_'. $pp .' item_'. $pp .'" style="background-image:url('. $urls[$p] .');"></div>';
+
+		if ( $gallery_template === '2' ) {
+			if ( $use_img_ids ) {
+				$prevw	.=	$media_item_div2;
+			}
+			else {
+				$prevw	.=	prime2g_gallery_post_template( $query[$p], $looptemplate, $urls[$p], $pp, [ 'gItem', 'preview_thumb', 'thumb_'. $pp ] );
+			}
+		}
+		else {
+			$prevw	.=	$media_item_div2;
+		}
 	}
 }
 
@@ -109,23 +121,30 @@ for ( $g = 0; $g < $num; $g++ ) {
 $lightbox	.=	'</div><!-- .gallery_screen -->';
 
 
-$lightbox	.=	'<div id="dataStrip" class="flex w100pc justifC">
+$lightbox	.=	'<div id="dataStrip" class="flex w100pc">
 <div>
 <span id="elNum" class="dataCounts">1</span> of <span id="allNum" class="dataCounts"></span>
 </div>
 </div>';
 
 
-$lightbox	.=	'<div class="thumbsScroll slimscrollbar scrollX"><div class="thumbs_strip flex prel justifC">';
+$lightbox	.=	'<div class="thumbsScroll slimscrollbar scrollX"><div class="thumbs_strip flex prel">';
 
 for ( $u = 0; $u < $num; $u++ ) {
 	if ( isset( $urls[$u] ) ) {
 		$uu	=	$u+1;
-		if ( $gallery_template === '2' ) {
-			$lightbox	.=	prime2g_gallery_post_template( $query[$u], $looptemplate, $urls[$u], $uu, [ 'gItem', 'gallery_thumb', 'thumb_'. $uu ] );
+		$media_item_div3	=	'<div class="gItem gallery_thumb thumb_'. $uu .' item_'. $uu .'" style="background-image:url('. $urls[$u] .');"></div>';
+
+		if ( $gallery_template === '3' ) {
+			if ( $use_img_ids ) {
+				$lightbox	.=	$media_item_div3;
+			}
+			else {
+				$lightbox	.=	prime2g_gallery_post_template( $query[$u], $looptemplate, $urls[$u], $uu, [ 'gItem', 'gallery_thumb', 'thumb_'. $uu ] );
+			}
 		}
 		else {
-			$lightbox	.=	'<div class="gItem gallery_thumb thumb_'. $uu .' item_'. $uu .'" style="background-image:url('. $urls[$u] .');"></div>';
+			$lightbox	.=	$media_item_div3;
 		}
 	}
 }
@@ -142,8 +161,14 @@ $lightbox	.=	'</div><!-- .thumbs_strip --></div>
 wp_reset_postdata();	// leave at the end of this function!
 
 if ( $default_gallery_css === 'yes' ) echo prime2g_media_gallery_css( $gallery_template );
+
 add_action( 'wp_footer', function() { echo prime2g_media_gallery_js(); } );
 
-return '<section id="gallery_box" class="prel">' . $prevw . $lightbox . '</section>';
+$imgIDsClass	=	$use_img_ids ? 'imageIDs' : '';
+
+return '<section id="" class="gallery_box prel template_'. $gallery_template .' '. $imgIDsClass .'">'
+. $prevw . $lightbox .
+'</section>';
 }
+
 

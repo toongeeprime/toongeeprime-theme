@@ -27,10 +27,7 @@ return $css;
 
 if ( ! function_exists( 'prime2g_news_reel' ) ) {
 
-add_action( 'prime2g_sub_header', function() {
-	echo '<div id="prime2g_news_reel_frame">' . prime2g_news_reel() . '</div>';
-}, 3 );
-
+add_action( 'prime2g_sub_header', 'prime2g_news_reel', 3 );
 
 function prime2g_news_reel() {
 
@@ -81,8 +78,8 @@ $loop	=	prime2g_wp_query( $query, $options );
 
 
 $reel	=	prime2g_news_reel_css();
-$reel	.=
-'<div id="prime2g_news_reel" class="' . $rWidth . '">
+$reel	.=	'<div id="prime2g_news_reel_frame">
+<div id="prime2g_news_reel" class="' . $rWidth . '">
 	<div class="reelHead"><h3 id="newsreelHeading">'. __( $title, PRIME2G_TEXTDOM ) .'</h3></div>
 	<div class="reelPosts prel">';
 
@@ -107,7 +104,9 @@ $reel	.=
 			$reel	.=	__( 'No entries found for the reel', PRIME2G_TEXTDOM );
 	}
 
-$reel	.=	'</div></div>';
+$reel	.=	'</div><!-- .reelPosts -->
+</div>
+</div>';
 
 
 add_action( 'wp_footer', function() { ?>
@@ -131,7 +130,7 @@ if ( nrIndex > nrReels.length ) { nrIndex = 1 }
 <?php
 } );
 
-return $reel;
+echo $reel;
 }
 
 }

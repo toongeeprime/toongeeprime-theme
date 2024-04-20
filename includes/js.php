@@ -363,7 +363,6 @@ return $js;
 }
 }
 
-
 /**	@since 1.0.78 End	**/
 
 
@@ -378,34 +377,49 @@ let mgWrap	=	p2getEl( ".p2_media_gallery_wrap" ),
 	gGalThumbs	=	p2getAll( ".gallery_thumb" ),
 	itemsNum	=	gGalThumbs.length;
 
-p2getEl( "#allNum" ).innerText	=	itemsNum;
 
-p2getEl( ".preview_thumb" ).classList.add( "live" );
-p2getEl( ".gallery_media" ).classList.add( "live" );
-p2getEl( ".gallery_thumb" ).classList.add( "live" );
+/**
+ *	Set Gallery Width
+ */
+p2g_mGalleryWidth();
+window.onresize	=	p2g_mGalleryWidth;
 
-gGalThumbs.forEach( gt => { gt.addEventListener( "click", (e) => { doGalleryItems( gt ); } ); } );
-gPrevThumbs.forEach( gt => { gt.addEventListener( "click", (e) => { doGalleryItems( gt ); p2DoGallery( "on" ); } ); } );
-
-function doGalleryItems( el ) {
-p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
-	classes	=	Object.values( el.classList );
-	classes.forEach( c => { if ( c.includes( "item_" ) ) classI = c; } );
-	var currentItems	=	p2getAll( "." + classI );
-	currentItems.forEach( ci => {
-		p2getEl( "#elNum" ).innerText	=	classI.replace( "item_", "" );
-		ci.classList.add( "live" ); p2GallThumbScroll( ci );
-	} );
+function p2g_mGalleryWidth() {
+let	pGallery	=	p2getEl( ".gallery_box" ),
+	pgalParent	=	pGallery.parentElement,
+	parentWidth	=	pgalParent.getBoundingClientRect().width;
+pGallery.style.maxWidth	=	parentWidth + "px";
+pGallery.style.width	=	"max-content";
 }
 
+
+p2getEl( "#allNum" ).innerText	=	itemsNum;
+[ ".preview_thumb", ".gallery_media", ".gallery_thumb" ].forEach( g=>{ p2getEl( g ).classList.add( "live" ); } );
+
+gGalThumbs.forEach( ( val, i )=>{
+	val.addEventListener( "click", ()=>{ doGalleryItems( i + 1 ); } );
+} );
+gPrevThumbs.forEach( ( val, i )=>{
+	val.addEventListener( "click", ()=>{ doGalleryItems( i + 1 ); p2DoGallery( "on" ); } );
+} );
+
+
+function doGalleryItems( index ) {
+	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
+	p2getEl( "#elNum" ).innerText	=	index;
+	p2GallThumbScroll( index );
+	p2getAll( ".item_" + index ).forEach( ci => { ci.classList.add( "live" ); } );
+}
+
+
+//	class to show/hide main gallery media screen
 function p2DoGallery( toDo ) {
-	if ( toDo === "on" ) return mgWrap.classList.remove( "hidden" );
-	if ( toDo === "off" ) return mgWrap.classList.add( "hidden" );
+	if ( toDo === "on" ) return mgWrap.classList.remove( "g_hide" );
+	if ( toDo === "off" ) return mgWrap.classList.add( "g_hide" );
 }
 
 function p2GalleryOff() {
-	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
-	p2DoGallery( "off" );
+	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } ); p2DoGallery( "off" );
 }
 
 document.addEventListener( "keyup", function( e ) {
@@ -418,33 +432,35 @@ if ( key === "ArrowLeft" || key === "Left" || key === 37 ) { p2SwipeGallery( "le
 } );
 
 function p2SwipeGallery( dir ) {
-	isLive	=	p2getAll( ".gItem.live" )[0];
-	classes	=	Object.values( isLive.classList );
+	isLive	=	p2getEl( ".gItem.live" );
+	classes	=	isLive.className.split( " " );
 	classes.forEach( c => { if ( c.includes( "item_" ) ) { currNum = c.replace( "item_", "" ); } } );
+
 	if ( dir === "right" ) { num = Number(currNum) + 1; }
 	if ( dir === "left" ) { num = Number(currNum) - 1; }
-	toClass	=	"item_" + num;
-	toEls	=	p2getAll( "." + toClass );
+
+	toEls	=	p2getAll( ".item_" + num );
 	if ( 0 === toEls.length ) return;
 	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
-	toEls.forEach( el => { el.classList.add( "live" );p2GallThumbScroll( el ); } );
+	toEls.forEach( el => { el.classList.add( "live" ); p2GallThumbScroll( num ); } );
 }
 
-function p2GallThumbScroll( el ) {
-if ( el.classList.contains( "gallery_thumb" ) ) {
-	classes	=	Object.values( el.classList );
-	classes.forEach( c => { if ( c.includes( "item_" ) ) classI = c; } );
-	p2getEl( "#elNum" ).innerText	=	classI.replace( "item_", "" );
 
-	width	=	el.getBoundingClientRect().width;
-	for ( var i = 0, len = itemsNum; i < len; i++ ) { if ( gGalThumbs[i] === el ) { index = i; break; } }
-	if ( ! prime2g_inViewport_get( el ) ) { p2getEl( ".thumbsScroll" ).scroll( { top:0, left: index * width, behavior:"smooth" } ); }
+function p2GallThumbScroll( toNum ) {
+	prevw	=	p2getEl( ".preview_thumb.item_" + toNum );
+	thumb	=	p2getEl( ".gallery_thumb.item_" + toNum );
+	p2getEl( "#elNum" ).innerText	=	toNum;
+
+	pwidth	=	(toNum-1) * prevw.getBoundingClientRect().width;
+	twidth	=	(toNum-1) * thumb.getBoundingClientRect().width;
+
+	if ( ! prime2g_inViewport_get( prevw ) ) { p2getEl( ".previewScroll" ).scroll( { top:0, left: pwidth, behavior:"smooth" } ); }
+	if ( ! prime2g_inViewport_get( thumb ) ) { p2getEl( ".thumbsScroll" ).scroll( { top:0, left: twidth, behavior:"smooth" } ); }
 }
-}
+
 </script>';
 return $js;
 }
 }
-
 
 

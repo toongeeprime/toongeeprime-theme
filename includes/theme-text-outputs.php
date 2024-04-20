@@ -36,8 +36,11 @@ function prime2g_home_breadcrumb_span() {
 
 /**
  *	Breadcrumbs
+ *	@ prime2g_breadcrumbs & prime2g_woo_breadcrumb_defaults
  *	Hooked to prime2g_after_header
  *	Reviewed @since 1.0.80
+ *
+ *	Use echo... DO NOT concatenate output!
  */
 add_action( 'prime2g_after_header', 'prime2g_breadcrumbs', 5 );
 if ( ! function_exists( 'prime2g_breadcrumbs' ) ) {
@@ -52,7 +55,7 @@ if ( is_front_page() ) return;
 
 $crumbs	=	'<nav id="breadCrumbs" class="breadCrumbs" itemprop="breadcrumb">';
 
-$crumbs	.=	prime2g_home_breadcrumb_span();
+echo	prime2g_home_breadcrumb_span();
 
 if ( is_singular() ) {
 	$postTaxs	=	get_post_taxonomies();
@@ -83,20 +86,32 @@ if ( is_singular() ) {
 
 	if ( is_object( $taxonomy ) ) {
 
-		$crumbs	.=	'<span class="taxonomy">In '. __( $taxName, PRIME2G_TEXTDOM ) .': </span>';
+		echo	'<span class="taxonomy">In '. __( $taxName, PRIME2G_TEXTDOM ) .': </span>';
 
 		if ( $termAncs ) {
 			foreach( array_reverse( $termAncs ) as $id ) {
 				$tName	=	__( get_term_by( 'term_id', $id, $term->taxonomy )->name, PRIME2G_TEXTDOM );
-				$crumbs	.=	'<span class="term"><a href="'. get_term_link( $id, $term->taxonomy ) .'" title="'. $tName .'">'. $tName .'</a> &#187; </span>';
+				echo	'<span class="term"><a href="'. get_term_link( $id, $term->taxonomy ) .'" title="'. $tName .'">'. $tName .'</a> &#187; </span>';
 			}
 		}
 
-		$crumbs	.=	'<span class="term"><a href="'. $termurl .'" title="'. $term->name .'">'. __( $term->name, PRIME2G_TEXTDOM ) .'</a> &#187; </span>';
+		echo	'<span class="term"><a href="'. $termurl .'" title="'. $term->name .'">'. __( $term->name, PRIME2G_TEXTDOM ) .'</a> &#187; </span>';
 
 	}
 
-	$crumbs	.=	'<span class="crumb_page_title" title="Title">'. get_the_title() .'</span>';
+	echo	'<span class="crumb_page_title" title="Title">'. get_the_title() .'</span>';
+}
+
+if ( is_author() ) {
+	echo	'<span class="crumb_page_title" title="'. __( 'Author archive', PRIME2G_TEXTDOM ) .'">'. __( 'Entries by ', PRIME2G_TEXTDOM ) . get_the_author() .'</span>';
+}
+
+if ( is_date() ) {
+	$year	=	is_year() ? get_the_date( 'Y' ) : '';
+	$month	=	is_month() ? get_the_date( 'F, Y' ) : '';
+	$day	=	is_day() ? get_the_date( 'F j, Y' ) : '';
+
+	echo	'<span class="crumb_page_title" title="'. __( 'Date archive', PRIME2G_TEXTDOM ) .'">'. __( 'Entries for ', PRIME2G_TEXTDOM ) . $year . $month . $day .'</span>';
 }
 
 if ( is_archive() || is_tax() ) {
@@ -109,7 +124,7 @@ if ( is_archive() || is_tax() ) {
 	if ( $object && $object->name == 'product' && function_exists( 'wc_get_page_id' ) ) {
 		$s_title	=	__( get_theme_mod( 'prime2g_shop_page_title' ), PRIME2G_TEXTDOM );
 		if ( $s_title == '' ) $s_title = __( 'Shop Homepage', PRIME2G_TEXTDOM );
-		$crumbs	.=	'<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="'. $s_title .'">'. $s_title .'</a></span>';
+		echo	'<span class="archive"><a href="'. wc_get_page_permalink( 'shop' ) .'" title="'. $s_title .'">'. $s_title .'</a></span>';
 		echo $crumbs;
 		return;
 	}
@@ -125,35 +140,31 @@ if ( is_archive() || is_tax() ) {
 	if ( $termAncs ) {
 		foreach( array_reverse( $termAncs ) as $id ) {
 			$tName	=	__( get_term_by( 'term_id', $id, $object->taxonomy )->name, PRIME2G_TEXTDOM );
-			$crumbs	.=	'<span class="term"><a href="'. get_term_link( $id, $object->taxonomy ) .'" title="'. $tName .'">'. $tName .'</a> &#187; </span>';
+			echo	'<span class="term"><a href="'. get_term_link( $id, $object->taxonomy ) .'" title="'. $tName .'">'. $tName .'</a> &#187; </span>';
 		}
 	}
 
-	$crumbs	.=	'<span class="crumb_page_title" title="This Archive">' . get_the_archive_title() .'</span>';
+	echo	'<span class="crumb_page_title" title="This Archive">' . get_the_archive_title() .'</span>';
 }
 
-
-// **DO AUTHOR && DATE ARCHIVES
 
 # DO NOT use get_the_title() for these:
 if ( is_home() ) {
-	$crumbs	.=	'<span class="crumb_page_title" title="'. __( 'Homepage', PRIME2G_TEXTDOM ) .'">'. __( 'Posts', PRIME2G_TEXTDOM ) .'</span>';
+	echo	'<span class="crumb_page_title" title="'. __( 'Homepage', PRIME2G_TEXTDOM ) .'">'. __( 'Posts', PRIME2G_TEXTDOM ) .'</span>';
 }
 
 if ( is_search() ) {
-	$crumbs	.=	'<span class="crumb_page_title" title="'. __( 'Search results', PRIME2G_TEXTDOM ) .'">'. __( 'Search results for "'. get_search_query() .'"', PRIME2G_TEXTDOM ) .'</span>';
+	echo	'<span class="crumb_page_title" title="'. __( 'Search results', PRIME2G_TEXTDOM ) .'">'. __( 'Search results for "'. get_search_query() .'"', PRIME2G_TEXTDOM ) .'</span>';
 }
 
 if ( is_404() ) {
-	$title	=	__( 'Nothing found', PRIME2G_TEXTDOM );
-	$crumbs	.=	'<span class="crumb_page_title" title="'. $title .'">'. $title .'</span>';
+	echo	'<span class="crumb_page_title" title="'. __( 'Request not found', PRIME2G_TEXTDOM ) .'">'. __( 'Nothing found', PRIME2G_TEXTDOM ) .'</span>';
 }
 
-	$crumbs	.=	'</nav>';
+	echo	'</nav>';
+}
+}
 
-echo $crumbs;
-}
-}
 
 
 /**

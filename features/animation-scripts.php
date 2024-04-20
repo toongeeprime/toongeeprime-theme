@@ -92,12 +92,12 @@ $jq	=	'
 function prime2g_element_observerJQ() {
 	let jqObserverOptions = {
 		root: null,
-		rootMargin: \'0px\',
+		rootMargin: "0px",
 		threshold: ';
 	$jq	.=	$threshold;
 	$jq	.=	'};
 
-	jqAllAnimElms	=	\'.inUp, .inDown, .inLeft, .inRight, .inAction\';
+	jqAllAnimElms	=	".inUp, .inDown, .inLeft, .inRight, .inAction";
 
 	const entries	=	Object.values( jQuery( jqAllAnimElms ).get() );
 	let jqEntryObserver	=	new IntersectionObserver( onIntersection, jqObserverOptions );
@@ -108,13 +108,12 @@ function prime2g_element_observerJQ() {
 		entries.forEach( entry => {
 			elTgt	=	entry.target;
 			if ( entry.isIntersecting ) {
-				elTgt.classList.add( \'enter\' );
-				if ( ! elTgt.classList.contains( \'repeat\' ) )
+				elTgt.classList.add( "enter" );
+				if ( ! elTgt.classList.contains( "repeat" ) )
 					jqEntryObserver.unobserve( elTgt );
 			}
-			else {
-				if ( elTgt.classList.contains( \'repeat\' ) )
-					elTgt.classList.remove( \'enter\' );
+			else if ( elTgt.classList.contains( "repeat" ) ) {
+					elTgt.classList.remove( "enter" );
 			}
 		} );
 	}
@@ -122,5 +121,4 @@ function prime2g_element_observerJQ() {
 
 return $jq;
 }
-
 

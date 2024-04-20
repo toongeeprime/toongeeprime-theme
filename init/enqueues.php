@@ -1,12 +1,13 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	ADD FILES TO QUEUE
+ *	ENQUEUE FILES
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49
+ *	Contents moved to this file being new @since 1.0.49
  */
+
 add_action( 'wp_enqueue_scripts', 'prime2g_theme_enqueues' );
 if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
@@ -29,6 +30,8 @@ if ( prime_child_min_version( '2.3' ) ) {
 			get_theme_file_uri( '/files/prime_woocommerce.css' ),
 			array( 'prime2g_css' ), $version
 		);
+
+		// if not using mini cart: wp_dequeue_script( 'wc-cart-fragments' );
 	}
 
 if ( isset( $post ) && $post->font_url ) {
@@ -82,7 +85,7 @@ if ( class_exists( 'woocommerce' ) ) { add_filter( 'woocommerce_enqueue_styles',
  *	@since 1.0.50
  */
 add_action( 'admin_enqueue_scripts', 'prime2g_admin_enqueues' );
-if ( !function_exists( 'prime2g_admin_enqueues' ) ) {
+if ( ! function_exists( 'prime2g_admin_enqueues' ) ) {
 function prime2g_admin_enqueues() {
 	wp_register_script(
 		'prime2g_js',

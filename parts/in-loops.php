@@ -97,9 +97,10 @@ $nextText	=	__( $next, PRIME2G_TEXTDOM );
 
 /**
  *	Previous and Next Archive Page
+ *	$spepr is deprecated @since 1.0.80
  */
 if ( ! function_exists( 'prime2g_prev_next' ) ) {
-function prime2g_prev_next( $spepr = ' ', $prev = '&laquo; Previous Page', $next = 'Next Page &raquo;' ) {
+function prime2g_prev_next( $prev = '&laquo; Previous Page', $next = 'Next Page &raquo;' ) {
 
 if ( get_theme_mod( 'prime2g_archive_pagination_type' ) === 'numbers' ) {	#	@since 1.0.55
 	global $wp_query;
@@ -109,9 +110,15 @@ else {
 
 $prev	=	__( $prev, PRIME2G_TEXTDOM );
 $next	=	__( $next, PRIME2G_TEXTDOM );
-echo '<nav class="navigation archive prev_next">';
-	posts_nav_link( $spepr, '<p class="nav-previous">' . $prev . '</p>', '<p class="nav-next">' . $next . '</p>' );
-echo '</nav>';
+
+echo '<nav class="navigation archive prev_next">
+<div class="alignleft">'
+	. get_previous_posts_link( '<p class="nav-previous" title="'. $prev .'">'. $prev .'</p>' ) .
+'</div>
+<div class="alignright">'
+	. get_next_posts_link( '<p class="nav-next" title="'. $next .'">'. $next .'</p>' ) .
+'</div>
+</nav>';
 
 }
 

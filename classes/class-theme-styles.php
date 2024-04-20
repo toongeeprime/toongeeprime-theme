@@ -229,15 +229,15 @@ return $css;
 
 	/**
 	 *	Theme Mods Cached
-	 *	Since $this->get_mod() computes single/network values, prevent repeated checks
-	 *	@since ToongeePrime Theme 1.0.57
+	 *	Since $this->get_mod() computes site/network values, reduce repeats
+	 *	@since 1.0.57
 	 */
 	public static function mods_cache() {
 		if ( is_customize_preview() ) return self::mods_object();
 
 		if ( $modsCache = wp_cache_get( 'theme_mods', PRIME2G_CACHEGROUP ) ) { return $modsCache; }
 		else {
-			wp_cache_set( 'theme_mods', self::mods_object(), PRIME2G_CACHEGROUP, DAY_IN_SECONDS + 11 );
+			wp_cache_set( 'theme_mods', self::mods_object(), PRIME2G_CACHEGROUP, HOUR_IN_SECONDS + 11 );
 			return wp_cache_get( 'theme_mods', PRIME2G_CACHEGROUP );
 		}
 	}
@@ -283,5 +283,4 @@ return $css;
 }
 
 }
-
 

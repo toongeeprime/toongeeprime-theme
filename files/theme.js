@@ -84,7 +84,7 @@ runCount();
 }
 
 /**
- *	Counter
+ *	Get Sibling
  *	@since 1.0.49
  */
 function prime2g_get_sibling( get, elem, sibClass = '' ) {
@@ -117,10 +117,8 @@ function prime2g_isTouchDevice() {
 }
 
 function prime2g_screenIsSmaller( screenSize = 481 ) {
-
-let windowWidth = window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth;
-return ( windowWidth < screenSize );
-
+	let windowWidth = window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth;
+	return ( windowWidth < screenSize );
 }
 
 /**

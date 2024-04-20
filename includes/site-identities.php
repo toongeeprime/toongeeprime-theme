@@ -60,7 +60,10 @@ function prime2g_get_dark_logo_url() {
 /**
  *	Theme's Placeholder Image
  */
-function prime2g_get_placeholder_url() { return PRIME2G_THEMEURL. 'images/placeholder.gif'; }
+function prime2g_get_placeholder_url() {
+	if ( is_child_theme() ) return child2g_placeholder_url( true );
+	return PRIME2G_THEMEURL. 'images/placeholder.gif';
+}
 
 
 

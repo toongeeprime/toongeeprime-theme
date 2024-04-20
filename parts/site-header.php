@@ -20,7 +20,7 @@ $isSingular		=	is_singular();
 $keepHeader		=	$isSingular ? ! in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) : true;
 
 $titleOverVideo	=	get_theme_mod( 'prime2g_pagetitle_over_headervideo' );
-$tov_class	=	( $titleOverVideo && ( $post->video_url || $videoActive || ! $isSingular ) ) ?
+$tov_class	=	( $titleOverVideo && ( $post && $post->video_url || $videoActive || ! $isSingular ) ) ?
 ' title_over_video' : '';
 
 $headerBackground	=	'';
@@ -44,7 +44,7 @@ if ( ! $isSingular || $isSingular && $keepHeader ) { ?>
 <?php
 if ( $hasHeader ) { echo '<div class="shader"></div>'; }
 
-echo '<div class="site_width title_wrap grid prel">';
+echo '<div class="site_width title_wrap grid prel w100pc">';
 
 do_action( 'prime2g_before_header_title' );	# 1.0.55
 

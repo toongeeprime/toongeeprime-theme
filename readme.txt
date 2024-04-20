@@ -1,4 +1,4 @@
-Plugin Name: ToongeePrime Theme
+Theme Name: ToongeePrime Theme
 Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.3
@@ -21,6 +21,7 @@ A WordPress theme with options for customization, design and development flexibi
 * Functions: prime2g_media_urls_by_ids(), prime2g_media_gallery_css(), prime2g_media_gallery_js(),
 prime2g_get_posts_output_default_options(), prime2g_media_or_posts_gallery()
 * Shortcode: prime2g_media_gallery
+* WooCommerce: updated file: toongeeprime-theme/woocommerce/archive-product.php to v8.6.0
 
 = 1.0.79 =
 * Function: prime2g_html_slider_post_template(), prime2g_content_body_template()
@@ -402,4 +403,5 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
+
 

@@ -2,27 +2,28 @@
 
 /**
  *	MULTI-HTML SLIDER FRAME SCRIPTS
- *
  *	@since ToongeePrime Theme 1.0.51
  */
 
-/*
+/**
  *****	MULTI-HTML SLIDER FRAME TEMPLATE	*****
 <section class="prime2g_multi_slider mslidernum">
 <div class="parameters" data-p2g-columns="4"></div>
+
 	<div class="prime2g_multislides_container">
 		<div class="prime2g_multislide_wrap prel">
 			<div class="prime2g_mslides_flex prel">
 
-<div class="mSlidebox"><div class="inslide"></div></div><!-- a html block -->
+			<div class="mSlidebox"><div class="inslide"></div></div><!-- a html block -->
 
 			</div>
 		</div>
 	</div><!-- .prime2g_multislides_container -->
+
 	<div class="msPrev mslide_pn"><span></span></div>
 	<div class="msNext mslide_pn"><span></span></div>
 </section><!-- .prime2g_multi_slider -->
-*/
+ */
 
 add_shortcode( 'prime2g_multislider_css', 'prime2g_multi_html_slider_frame_css' );
 

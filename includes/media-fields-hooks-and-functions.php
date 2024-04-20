@@ -103,7 +103,7 @@ $type	=	$media ?: 'video';
 
 	switch( $type ) {
 		case 'audio':	$url	=	$post->audio_url; break;
-		default		:	$url	=	$post->video_url . '&origin=' . get_home_url(); break;
+		default		:	$url	=	$post->video_url; break;
 	}
 
 if ( empty( $url ) ) return;
@@ -112,7 +112,7 @@ $parsed	=	parse_url( $url );
 $media_host	=	isset( $parsed[ 'host' ] ) ? $parsed[ 'host' ] : null;
 
 if ( in_array( $media_host, [ 'www.youtube.com', 'youtube.com', 'youtu.be', 'm.youtube.com', 'www.vimeo.com', 'vimeo.com' ] ) ) {
-	$embedded	=	$wp_embed->autoembed( $url );
+	$embedded	=	$wp_embed->autoembed( $url . '&origin=' . get_home_url() );
 }
 else {
 	$embedded	=	do_shortcode( '[video src="'. $url .'" /]' );
