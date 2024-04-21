@@ -9,6 +9,7 @@ function p2getAll( els ) { return document.querySelectorAll( els ); }
 
 // Element in viewport checker
 function prime2g_inViewport( el ) {
+el	=	typeof elmt === 'object' ? elmt : p2getEl( elmt );
 let rect = el.getBoundingClientRect();
 	return (
 		rect.top >= 0 && rect.left >= 0 &&
@@ -59,6 +60,7 @@ if ( elmt ) {
 
 /**
  *	Counter
+ *	Attributes: countto & speed
  *	@since 1.0.48.50
  */
 function prime2g_count_to( speedNum = 100, clss = '.countEl' ) {
@@ -169,3 +171,4 @@ return cValue ? cValue : "undefined";
 function primeCookieIsDefined( cName ) {
 	return primeHasCookie( cName ) && "undefined" !== primeGetCookieValue( cName );
 }
+

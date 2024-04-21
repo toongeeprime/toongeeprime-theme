@@ -50,8 +50,9 @@ $styles		=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 	}
 	?>
 
-	<div id="content" class="site_content grid site_width">
+	<div id="content" class="site_content content grid site_width">
 
 		<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 
 		<?php if ( $isSingular ) echo '<article id="primary" class="primary_area">'; ?>
+

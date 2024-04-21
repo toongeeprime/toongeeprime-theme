@@ -178,9 +178,9 @@ if ( class_exists( 'woocommerce' ) ) {
 	 *	@since 1.0.59
 	 */
 	$wp_customize->add_section( 'prime2g_site_performance_section', array(
-		'title'		=>	__( 'Site Performance', PRIME2G_TEXTDOM ),
+		'title'		=>	__( 'SEO &amp; Site Performance', PRIME2G_TEXTDOM ),
 		'panel'		=>	'prime2g_customizer_panel',
-		'description'	=>	__( 'Site Performance Settings', PRIME2G_TEXTDOM ),
+		'description'	=>	__( 'SEO &amp; Site Performance Settings', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	function() use( $network, $is_site1 ) {
 		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME' );

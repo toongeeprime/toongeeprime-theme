@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.3
 Tested up to: 6.5
-Stable tag: 1.0.80
+Stable tag: 1.0.81
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,9 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.81 =
+* SEO: seo-open-graph.php & Customizer: prime2g_use_theme_seo
 
 = 1.0.80 =
 * File: video-fields-hooks-and-functions.php changed to media-fields-hooks-and-functions.php
@@ -403,5 +406,4 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
-
 

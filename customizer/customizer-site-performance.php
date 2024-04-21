@@ -15,7 +15,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 
 	/**
 	 *	CACHE CONTROLS
-	 *	@since ToongeePrime Theme 1.0.56
+	 *	@since 1.0.56
 	 */
 function prime2g_a_c_ctrls() { return ( ! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ); }
 
@@ -42,6 +42,20 @@ if ( $network && get_current_blog_id() === 1 ) {
 
 
 if ( ! $network || $network && ( empty( $route ) || $route && get_current_blog_id() === 1 ) ) {
+
+	/**
+	 *	THEME SEO
+	 *	@since 1.0.81
+	 */
+	$wp_customize->add_setting( 'prime2g_use_theme_seo', array_merge( $postMsg_text, [ 'default' => 1 ] ) );
+	$wp_customize->add_control( 'prime2g_use_theme_seo', array(
+			'label'		=>	__( "Use Theme's SEO Settings", PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_use_theme_seo',
+			'section'	=>	'prime2g_site_performance_section'
+		)
+	);
+
 
 $time_units	=	[ MINUTE_IN_SECONDS => __( 'Minutes', PRIME2G_TEXTDOM ), HOUR_IN_SECONDS => __( 'Hours', PRIME2G_TEXTDOM ),
 DAY_IN_SECONDS => __( 'Days', PRIME2G_TEXTDOM ), WEEK_IN_SECONDS => __( 'Weeks', PRIME2G_TEXTDOM ),
@@ -115,5 +129,4 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 }
 
 }
-
 
