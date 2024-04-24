@@ -190,6 +190,23 @@ return $css;
 }
 
 
+
+/**
+ *	STICKY MENU CSS
+ *	@since 1.0.83
+ */
+if ( ! function_exists( 'prime2g_sticky_menu_css' ) ) {
+function prime2g_sticky_menu_css() {
+if ( ToongeePrime_Styles::mods_cache()->sticky_menu ) {
+return	'#sticky_nav{position:fixed;left:0;right:0;top:0;z-index:99991;transform:translateY(-200%);}
+.pop #sticky_nav{transform:translate(0);}
+.admin-bar #sticky_nav{top:32px;}';
+}
+}
+}
+
+
+
 /**
  *	Remove from theme.css/child.css to make code style optional
  *	Does not need to be pluggable
@@ -373,7 +390,8 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{opacity:1;visibility:visible;}
 .sub-menu li, .collapsible-navs .sub-menu a{display:block;}
 .logo_with_menu{display:flex;}
 .logo_with_menu .custom-logo{margin-left:var(--min-pad);}
-.logo_with_menu .main-menu{margin:auto var(--min-pad);}';
+.logo_with_menu .main-menu{margin:auto var(--min-pad);}'
+. prime2g_sticky_menu_css();
 }
 }
 

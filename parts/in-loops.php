@@ -154,10 +154,9 @@ echo prime2g_get_post_object_template( $options );
 /**
  *	Return Post Object Template
  *	@since 1.0.70
- *	REMOVE: $force_post
  */
 if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
-function prime2g_get_post_object_template( array $options, object $force_post = null ) { // $options required to define $post
+function prime2g_get_post_object_template( array $options ) { // $options required to define $post
 $post	=	$excerpt = $metas = $readmore = null;
 $size	=	'large';
 $length	=	25;
@@ -165,11 +164,6 @@ $tag	=	'h2';
 $footer	=	true;	//	true for backwards compatibility-use NULL to remove it
 
 extract( $options );
-
-// @since 1.0.78
-if ( null !== $force_post ) {
-	$post	=	$force_post;
-}
 
 if ( ! is_object( $post ) ) return 'No post';
 
@@ -363,10 +357,9 @@ return $ftimg;
  *	Archive Post Template by post object
  *	@since 1.0.50
  *	Media field logic @since 1.0.55
- *	REMOVE: $force_post
  */
 if ( ! function_exists( 'prime2g_get_archive_loop_post_object' ) ) {
-function prime2g_get_archive_loop_post_object( array $args, object $force_post = null ) {
+function prime2g_get_archive_loop_post_object( array $args ) {
 $post	=	null;
 $size	=	'large';
 $excerpt=	true;
@@ -383,11 +376,6 @@ $loop_post_header_template	=	$loop_post_footer_template	=	null;
 extract( $args );
 
 if ( ! $post ) { global $post; }
-
-// @since 1.0.78
-if ( null !== $force_post ) {
-	$post	=	$force_post;
-}
 
 if ( $switch_img_vid && prime2g_post_has_media_field( $post ) ) {
 
@@ -473,7 +461,7 @@ return $div;
  *	@since 1.0.79
  */
 if ( ! function_exists( 'prime2g_html_slider_post_template' ) ) {
-function prime2g_html_slider_post_template( array $args = [], object $force_post = null ) {
+function prime2g_html_slider_post_template( array $args = [] ) {
 $post	=	$texts = $excerpt = $multi = null;
 $tag	=	'h3';
 $class	=	'entry';
@@ -485,10 +473,6 @@ extract( $args );
 if ( ! $post ) { global $post; }
 
 $slideboxClass	=	$multi ? 'mSlidebox' : 'slidebox';
-
-if ( null !== $force_post ) {
-	$post	=	$force_post;
-}
 
 $title	=	$post->post_title;
 $link	=	get_permalink( $post );

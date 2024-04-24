@@ -31,7 +31,12 @@ if ( $hasHeader ) {
 }
 
 
-if ( ! wp_is_mobile() ) prime2g_site_top_menu(); # 1.0.55
+if ( ! wp_is_mobile() ) {
+	prime2g_site_top_menu();	# 1.0.55
+	if ( $styles->sticky_menu && $styles->menu_place !== 'fixed' )
+		prime2g_main_menu( 'sticky_nav', 'sticky_menu_items' );	# 1.0.83
+}
+
 
 prime2g_before_header();
 
@@ -75,5 +80,6 @@ if ( 'bottom' === $menuPlace ) prime2g_main_menu();
 prime2g_sub_header();
 
 if ( $keepHeader ) { prime2g_after_header(); }
+
 
 

@@ -9,6 +9,7 @@
 if ( ! function_exists( 'prime2g_customizer_theme_menus' ) ) {
 function prime2g_customizer_theme_menus( $wp_customize ) {
 
+$child_is23		=	prime_child_min_version( '2.3' );
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
 $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ];
 
@@ -63,6 +64,19 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'settings'	=>	'prime2g_theme_add_footer_menu',
 		'section'	=>	'prime2g_theme_menus_section'
 	) );
+
+if ( $child_is23 ) {
+	/**
+	 *	STICKY MENU
+	 */
+	$wp_customize->add_setting( 'prime2g_use_sticky_menu', $simple_text );
+	$wp_customize->add_control( 'prime2g_use_sticky_menu', array(
+		'label'		=>	__( 'Add Pop-in Sticky Menu (Desktop)', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_use_sticky_menu',
+		'section'	=>	'prime2g_theme_menus_section'
+	) );
+}
 
 if ( prime_child_min_version( '2.1' ) ) {
 	/**
@@ -142,7 +156,7 @@ if ( prime_child_min_version( '2.2' ) ) {
 /**
  *	@since ToongeePrime Theme 1.0.57
  */
-if ( prime_child_min_version( '2.3' ) ) {
+if ( $child_is23 ) {
 	/**
 	 *	MAIN MENU TYPE
 	 */
@@ -159,6 +173,9 @@ if ( prime_child_min_version( '2.3' ) ) {
 		)
 	) );
 
+	/**
+	 *	TOGGLE MENU
+	 */
 	$wp_customize->add_setting( 'prime2g_toggle_menu_template_part_id', $simple_text );
 	$wp_customize->add_control( 'prime2g_toggle_menu_template_part_id', array(
 		'label'		=>	__( 'Toggle Menu Template Part ID', PRIME2G_TEXTDOM ),
@@ -169,6 +186,9 @@ if ( prime_child_min_version( '2.3' ) ) {
 		'active_callback'	=>	function() { return 'togglers' === get_theme_mod( 'prime2g_main_menu_type' ); }
 	) );
 
+	/**
+	 *	MEGA MENU
+	 */
 	#	Theme 1.0.78
 	function p2IsmegMenu() { return 'mega_menu' === get_theme_mod( 'prime2g_main_menu_type' ); }
 

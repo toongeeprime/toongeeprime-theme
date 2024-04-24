@@ -93,6 +93,8 @@ class ToongeePrime_Styles {
 			case 'm_menu_width' : $mod = get_theme_mod( 'prime2g_mega_menu_width' ); break;
 			# @since 1.0.81
 			case 'theme_seo' : $mod = get_theme_mod( 'prime2g_use_theme_seo', 1 ); break;
+			# @since 1.0.83
+			case 'sticky_menu' : $mod = get_theme_mod( 'prime2g_use_sticky_menu', 0 ); break;
 		}
 
 	if ( $by_net_home ) restore_current_blog();
@@ -279,11 +281,14 @@ return $css;
 		'logo_with_menu'=>	$mods->get_mod( 'logo_with_menu' ),
 		'top_menu'		=>	$mods->get_mod( 'top_menu' ),
 		'megamenu_width'=>	$mods->get_mod( 'm_menu_width' ),
-		'theme_seo'		=>	$mods->get_mod( 'theme_seo' )
+		'theme_seo'		=>	$mods->get_mod( 'theme_seo' ),
+		'sticky_menu'	=>	$mods->get_mod( 'sticky_menu' )
 	];
 	}
 
 }
 
 }
+
+
 

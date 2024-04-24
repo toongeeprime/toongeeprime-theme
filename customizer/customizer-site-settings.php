@@ -97,6 +97,8 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	) );
 
 	/**
+	 **		WP
+	 *
 	 *	STOP WP HEARTBEAT
 	 *	@since 1.0.49
 	 */
@@ -109,6 +111,21 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		'choices'	=>	array(
 			''	=>	__( 'Leave Running', PRIME2G_TEXTDOM ),
 			'stop'	=>	__( 'Stop', PRIME2G_TEXTDOM )
+		)
+	) );
+
+	/**
+	 *	@since 1.0.83
+	 */
+	$wp_customize->add_setting( 'prime2g_use_classic_widgets', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_use_classic_widgets', array(
+		'label'		=>	__( 'WP Widgets to Use', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_use_classic_widgets',
+		'section'	=>	'prime2g_site_settings_section',
+		'choices'	=>	array(
+			''	=>	__( 'Use Block Widgets', PRIME2G_TEXTDOM ),
+			'classic'	=>	__( 'Use Classic Widgets', PRIME2G_TEXTDOM )
 		)
 	) );
 
