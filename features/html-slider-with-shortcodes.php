@@ -27,7 +27,7 @@
 add_shortcode( 'prime2g_slider_css', 'prime2g_auto_html_slider_frame_css' );
 
 function prime2g_auto_html_slider_frame_css() { ?>
-<style id="prime2g_html_sliderCSS">
+<style id="prime2g_posts_sliderCSS">
 .prime2g_slides_wrap{display:grid;}
 .prime2g_posts_slider .media_post{margin:0;}
 .prime2g_posts_slider .slidebox{grid-area:1/1;opacity:0;visibility:hidden;position:relative;
@@ -79,7 +79,7 @@ add_action( 'wp_footer', function() use( $timer, $multislides, $slider_ids ) {
 
 
 function prime2g_auto_html_slider_frame_js( $timer = 4000 ) { ?>
-<script id="prime2g_html_sliderJS">
+<script id="prime2g_posts_sliderJS">
 const wrapr	=	p2getEl( '#prime2g_posts_slider' ),
 	slCtrlr	=	p2getEl( '#sContrlz' ),
 	i_timer	=	<?php echo $timer; ?>;

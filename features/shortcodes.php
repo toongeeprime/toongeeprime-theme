@@ -259,10 +259,11 @@ $atts	=	shortcode_atts( [
 ],
 $atts );
 
-add_action( 'wp_footer', function() {
+add_action( 'wp_head', function() {
 	echo '<style id="loginFormCSS">' . prime2g_login_page_css() . '</style>';
-	echo prime2g_custom_login_js();
 } );
+
+add_action( 'wp_footer', 'prime2g_custom_login_js' );
 
 return prime2g_login_form( $atts );
 }

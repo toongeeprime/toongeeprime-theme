@@ -158,7 +158,6 @@ if ( box ) { box.classList.add( 'prime2g_postbox' ); }
 <?php
 }
 }
-
 /*	@since 1.0.73 End	*/
 
 
@@ -362,7 +361,6 @@ tInput'. $id .'.addEventListener( "input", ( e )=>{ prime_runAjaxSearch( e ); } 
 return $js;
 }
 }
-
 /**	@since 1.0.78 End	**/
 
 
@@ -454,8 +452,8 @@ function p2GallThumbScroll( toNum ) {
 	pwidth	=	(toNum-1) * prevw.getBoundingClientRect().width;
 	twidth	=	(toNum-1) * thumb.getBoundingClientRect().width;
 
-	if ( ! prime2g_inViewport_get( prevw ) ) { p2getEl( ".previewScroll" ).scroll( { top:0, left: pwidth, behavior:"smooth" } ); }
-	if ( ! prime2g_inViewport_get( thumb ) ) { p2getEl( ".thumbsScroll" ).scroll( { top:0, left: twidth, behavior:"smooth" } ); }
+	if ( ! prime2g_inViewport( prevw ) ) { p2getEl( ".previewScroll" ).scroll( { top:0, left: pwidth, behavior:"smooth" } ); }
+	if ( ! prime2g_inViewport( thumb ) ) { p2getEl( ".thumbsScroll" ).scroll( { top:0, left: twidth, behavior:"smooth" } ); }
 }
 
 </script>';

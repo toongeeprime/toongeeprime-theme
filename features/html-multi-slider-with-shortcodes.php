@@ -6,7 +6,7 @@
  */
 
 /**
- *****	MULTI-HTML SLIDER FRAME TEMPLATE	*****
+ *****	MULTI-HTML SLIDER FRAME TEMPLATE *No Dots	*****
 <section class="prime2g_multi_slider mslidernum">
 <div class="parameters" data-p2g-columns="4"></div>
 
@@ -48,7 +48,6 @@ function prime2g_multi_html_slider_frame_css() { ?>
 
 
 
-
 add_shortcode( 'prime2g_multislider_js', 'prime2g_multi_html_slider_frame_js_shortcode' );
 function prime2g_multi_html_slider_frame_js_shortcode() {
 	add_action( 'wp_footer', function() { prime2g_multi_html_slider_frame_js(); }, 20 );
@@ -68,9 +67,10 @@ asID = psID = nsID = 1;
 // Get number of slider columns
 function p2g_mslideCols( slider ) {
 sData	=	slider.querySelector( '.parameters' );
-dataCol	=	sData.dataset.p2gColumns ? sData.dataset.p2gColumns : null;
+dataCol	=	sData.dataset.p2gColumns || null;
 
-return ( dataCol ? dataCol : 4 );
+// return ( dataCol ? dataCol : 4 );
+return dataCol || 4;
 }
 
 
@@ -83,14 +83,13 @@ if ( prime2g_screenIsSmaller( 821 ) && ( dataCol > 3 ) ) { cols = 3; }
 if ( prime2g_screenIsSmaller() ) { cols = 2; }
 
 if ( wrap === true ) {
-
 	if ( tsNum <= cols ) {
 		ww	=	100;
-	} else {
+	}
+	else {
 		ww	=	( 100 / cols ) * tsNum;
 	}
-
-	return ww + '%';
+return ww + '%';
 }
 
 return ( 100 / cols ) + '%';
@@ -98,9 +97,7 @@ return ( 100 / cols ) + '%';
 
 
 // Identify each slider on a page with a unique class
-allmSliderz.forEach(
-
-(s)=>{
+allmSliderz.forEach( (s)=>{
 	ssID	=	asID++;
 	tClass	=	sClass + ssID;
 
@@ -112,37 +109,31 @@ allmSliderz.forEach(
 
 	// set widths
 	tWrap.style.width	=	p2g_msWidth( s, true, tsNum );
-	tSlides.forEach( t=>{
+	tSlides.forEach( t => {
 		t.style.width		=	p2g_msWidth(s);
 		t.style.maxWidth	=	p2g_msWidth(s);
 	} );
 }
-
 );
 
 
 
 // Activate all previous & next buttons per slider
-allmPrevz.forEach(
-	(p)=>{
-		pID		=	psID++;
-		pClass	=	sClass + pID;
-		p.addEventListener( 'click', function(event) { p2g_multi_prevnext( p, 'left' ); } );
-	}
-);
+allmPrevz.forEach( (p)=>{
+	pID		=	psID++;
+	pClass	=	sClass + pID;
+	p.addEventListener( 'click', ()=>{ p2g_multi_prevnext( p, 'left' ); } );
+} );
 
-allmNextz.forEach(
-	(n)=>{
-		nID		=	nsID++;
-		nClass	=	sClass + nID;
-		n.addEventListener( 'click', function(event) { p2g_multi_prevnext( n, 'right' ); } );
-	}
-);
+allmNextz.forEach( (n)=>{
+	nID		=	nsID++;
+	nClass	=	sClass + nID;
+	n.addEventListener( 'click', ()=>{ p2g_multi_prevnext( n, 'right' ); } );
+} );
 
 
 // slider previous-next function
 function p2g_multi_prevnext( div, direction ) {
-
 parentDiv	=	div.parentElement;
 slidesFlex	=	parentDiv.querySelector( '.prime2g_mslides_flex' );
 
@@ -160,7 +151,6 @@ lastDiv		=	slidesFlex.lastElementChild;
 		firstDiv.before( lastClone );
 		p2g_movemSlide( lastDiv, lastClone );
 	}
-
 }
 
 
@@ -170,12 +160,9 @@ function p2g_movemSlide( div, cloned ) {
 	cloned.style.width	=	cloned.style.opacity	=	'0';
 
 	msWidth		=	p2g_msWidth( parentDiv );
-
-	setTimeout( function() { cloned.style.width		=	msWidth; }, 100 );
-
-	setTimeout( function() { cloned.style.opacity	=	'1'; }, 300 );
-
-	setTimeout( function() { div.remove(); }, 500 );
+	setTimeout( ()=>{ cloned.style.width	=	msWidth; }, 100 );
+	setTimeout( ()=>{ cloned.style.opacity	=	'1'; }, 300 );
+	setTimeout( ()=>{ div.remove(); }, 500 );
 }
 </script>
 <?php
