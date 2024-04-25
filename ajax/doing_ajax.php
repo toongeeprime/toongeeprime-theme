@@ -48,6 +48,13 @@ if ( $doAjax === 'get_logo' ) {
 
 
 if ( $doAjax === 'ajax_search' ) {
+
+$cache_name	=	str_replace( ' ', '-', $_POST[ 'find' ] );
+
+if ( $searchCache = wp_cache_get( $cache_name, PRIME2G_POSTSCACHE ) ) {
+	$response	=	$searchCache;
+}
+else {
 $template		=	$_POST[ 'template' ];
 $post_type		=	! empty( $_POST[ 'post_type' ] ) ? explode( ',', $_POST[ 'post_type' ] ) : [ 'post','page','product' ];
 $template_args	=	$_POST[ 'template_args' ];
@@ -61,6 +68,7 @@ if ( $searchQuery->have_posts() ) {
 	while ( $searchQuery->have_posts() ) {
 		$searchQuery->the_post();
 		global $post;
+		$template_args	=	array_merge( $template_args, [ 'post' => $post ] );
 		$output	.=	$template( $template_args, $post );
 	}
 wp_reset_postdata();
@@ -70,6 +78,9 @@ else {
 }
 
 $response	=	[ 'posts' => $output, 'number' => $searchQuery->found_posts ];
+wp_cache_set( $cache_name, $response, PRIME2G_POSTSCACHE, HOUR_IN_SECONDS + 17 );
+}
+
 }
 
 

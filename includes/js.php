@@ -256,9 +256,11 @@ var counter	=	[],
 	input_time	=	0;
 
 tForm'. $id .'.addEventListener( "mouseleave", ()=>{ setTimeout( ()=>{
+if ( ! tSRes'. $id .'.matches( ":hover" ) ) {
 	tSRes'. $id .'.innerHTML	=	"";
 	tSBox'. $id .'.classList.add( "hidden" );
-}, 500 );
+}
+}, 3000 );
 } );
 
 function prime_runAjaxSearch( e ) {
@@ -368,7 +370,7 @@ return $js;
  *	@since 1.0.80
  */
 if ( ! function_exists( 'prime2g_media_gallery_js' ) ) {
-function prime2g_media_gallery_js() {
+function prime2g_media_gallery_js( string $init_hide = 'false' ) {
 $js	=	'<script id="prime2g_gallery_js">
 let mgWrap	=	p2getEl( ".p2_media_gallery_wrap" ),
 	gPrevThumbs	=	p2getAll( ".preview_thumb" ),
@@ -456,6 +458,8 @@ function p2GallThumbScroll( toNum ) {
 	if ( ! prime2g_inViewport( thumb ) ) { p2getEl( ".thumbsScroll" ).scroll( { top:0, left: twidth, behavior:"smooth" } ); }
 }
 
+
+if ( '. $init_hide .' ) mgWrap.classList.add( "g_hide" );
 </script>';
 return $js;
 }

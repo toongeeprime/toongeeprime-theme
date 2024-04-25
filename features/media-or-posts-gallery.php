@@ -37,11 +37,15 @@ $atts	=	array_merge( prime2g_get_posts_output_default_options(),
 'gallery_image_ids'	=>	'',
 'gallery_template'	=>	'1',
 'default_gallery_css'	=>	'yes',
+'hide_gallery'	=>	'',
 ],
 $atts
 );
 
 extract( $atts );
+
+$hide_gallery	=	$hide_gallery === 'yes' ? true : false;
+$hide_galleryJS	=	$hide_gallery ? 'true' : 'false';	// string for js
 
 //	Providing Image IDs will override the use of posts
 $use_img_ids	=	! empty( $gallery_image_ids );
@@ -93,8 +97,10 @@ $lightbox	=	'<div class="p2_media_gallery_wrap">
 
 $lightbox	.=	$gallery_title ? '<h2 id="p2_gallery_title">'. $gallery_title .'</h2>' : '';
 
-$lightbox	.=	'<div class="p-abso hide" onclick="p2GalleryOff();" style="display:inline-block;top:10px;right:10px;z-index:1000;">
+if ( $hide_gallery ) {
+$lightbox	.=	'<div class="p-abso" onclick="p2GalleryOff();" style="display:inline-block;top:10px;right:10px;z-index:1000;">
 <i class="bi bi-x-lg" style="font-size:1.5rem;"></i></div>';
+}
 
 $lightbox	.=	'<div class="gallery_screen prel slimscrollbar">';
 
@@ -162,7 +168,7 @@ wp_reset_postdata();	// leave at the end of this function!
 
 if ( $default_gallery_css === 'yes' ) echo prime2g_media_gallery_css( $gallery_template );
 
-add_action( 'wp_footer', function() { echo prime2g_media_gallery_js(); } );
+add_action( 'wp_footer', function() use( $hide_galleryJS ) { echo prime2g_media_gallery_js( $hide_galleryJS ); } );
 
 $imgIDsClass	=	$use_img_ids ? 'imageIDs' : '';
 

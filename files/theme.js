@@ -122,17 +122,17 @@ function prime2g_screenIsSmaller( screenSize = 481 ) {
 function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newNode, refNode.nextSibling ); }
 
 function prime2g_addClass( elems, clss = 'prime', prevD = true ) {
-if ( prevD ) event.preventDefault();
+if ( prevD && event ) event.preventDefault();
 elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.add( clss ); } );
 }
 
 function prime2g_remClass( elems, clss = 'prime', prevD = true ) {
-if ( prevD ) event.preventDefault();
+if ( prevD && event ) event.preventDefault();
 elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.remove( clss ); } );
 }
 
 function prime2g_toggClass( elems, clss = 'prime', prevD = true ) {
-if ( prevD ) event.preventDefault();
+if ( prevD && event ) event.preventDefault();
 elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.toggle( clss ); } );
 }
 

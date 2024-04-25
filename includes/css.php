@@ -1,9 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	CONDITIONAL THEME CSS
+ *	CONDITIONAL CSS
  *
- *	Aimed at limiting the theme.css file footprint
+ *	Aimed at limiting the theme.css file size
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -16,7 +16,7 @@ $styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
  */
 $sidebar821	=	'.mainsidebar{padding-right:var(--min-pad);}';
 $sidebar901	=	'.has-sidebar .site_content,.has-sidebar.width_960px .site_content{grid-template-columns:2.5fr 1fr;}';
-$sidebar1101	=	'.has-sidebar .site_content{grid-template-columns:1fr minmax(200px, 300px);}';
+$sidebar1101=	'.has-sidebar .site_content{grid-template-columns:1fr minmax(200px, 300px);}';
 
 if ( $styles->sidebar_place === 'left' ) {
 $sidebar821	=	'.mainsidebar{padding-left:var(--min-pad);}';
@@ -25,7 +25,7 @@ $sidebar901	=
 #sidebar{grid-area:sbSide;}
 .has-sidebar .site_content,.has-sidebar.width_960px .site_content{grid-template-columns:1fr 2.5fr;grid-template-areas:\'sbSide sbMain\';}
 ';
-$sidebar1101	=	'.has-sidebar .site_content{grid-template-columns:minmax(200px, 300px) 1fr;}';
+$sidebar1101=	'.has-sidebar .site_content{grid-template-columns:minmax(200px, 300px) 1fr;}';
 }
 
 
@@ -61,7 +61,7 @@ if ( is_404() ) {
  */
 $mainMenuType	=	$styles->menu_type;
 
-$mainMenu	=	'.main_menu_wrap{z-index:99990;}';
+$mainMenu		=	'.main_menu_wrap{z-index:99990;}';
 
 if ( $mainMenuType === 'togglers' ) {
 	$mainMenu	.=	'';
@@ -74,7 +74,7 @@ elseif ( $mainMenuType === 'mega_menu' ) {
 else {
 	$mainMenu	.=	prime2g_menu_main_css();
 
-	$menuMin821	=	prime2g_menu_min821_css();
+	$menuMin821	=	prime2g_menu_min821_css() . prime2g_sticky_menu_css();
 
 	$menuMax820	=	prime2g_menu_max820_css();
 }
@@ -150,7 +150,7 @@ em.comment-awaiting-moderation{display:block;margin:var(--min-pad);}
 
 
 
-if ( ! function_exists( 'prime2g_main_menu_css' ) ) {
+if ( ! function_exists( 'prime2g_main_menu_css' ) ) { // note also prime2g_menu_main_css()
 function prime2g_main_menu_css() {
 $styles	=	ToongeePrime_Styles::mods_cache();
 
@@ -390,8 +390,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{opacity:1;visibility:visible;}
 .sub-menu li, .collapsible-navs .sub-menu a{display:block;}
 .logo_with_menu{display:flex;}
 .logo_with_menu .custom-logo{margin-left:var(--min-pad);}
-.logo_with_menu .main-menu{margin:auto var(--min-pad);}'
-. prime2g_sticky_menu_css();
+.logo_with_menu .main-menu{margin:auto var(--min-pad);}';
 }
 }
 
@@ -408,7 +407,7 @@ return '#container{top:46px;}
 }
 .main-menu, .menu_toggbar{box-shadow:0 0 12px rgba(0,0,0,0.25);}
 .main-menu{
-background:var(--content-background);right:var(--min-pad);position:fixed;left:0;
+background:var(--content-background);left:0;right:var(--min-pad);position:fixed;
 bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200%);overflow-y:auto;
 }
 .admin-bar .main-menu{top:46px;}
@@ -422,7 +421,6 @@ bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200
 .collapsible-navs a:hover{border-color:var(--content-background);}';
 }
 }
-
 /** @since 1.0.70 End **/
 
 
@@ -449,7 +447,6 @@ function prime2g_login_page_css() {
 // .pwTogg.visible .bi-eye-slash,.pwTogg .bi-eye{display:inline;}';
 }
 }
-
 /** @since 1.0.73 End **/
 
 
@@ -478,18 +475,16 @@ function prime2g_ajax_search_css() {
 if ( defined( 'PRIME_AJX_SEARCHCSS' ) ) return;
 define( 'PRIME_AJX_SEARCHCSS', true );
 
-$css	=	'<style id="prime_livesearchCSS">
-.liveSearchBox{left:0;right:0;background:var(--content-background);z-index:99990;border:5px solid #f8f8f8;padding:20px;
+return	'<style id="prime_livesearchCSS">
+.liveSearchBox{left:0;right:0;background:var(--content-background);z-index:99999;border:5px solid #f8f8f8;padding:20px;
 border-radius:5px;max-height:350px;}
 .liveSearchBox article{display:grid;grid-template-columns:60px 1fr;gap:10px;margin-bottom:0;}
 .liveSearchResults{display:grid;gap:10px;}
 .liveSearchResults .entry_img{height:40px;overflow:hidden;}
 .liveSearchResults .thumbnail{height:40px;}
 </style>';
-return $css;
 }
 }
-
 /**	@since 1.0.78 End	**/
 
 
@@ -501,6 +496,8 @@ if ( ! function_exists( 'prime2g_media_gallery_css' ) ) {
 function prime2g_media_gallery_css( string $template = '1' ) {
 $css	=	'<style id="prime2g_gallery_css">
 .gallery_box{background:#000;color:#fff;width:200px;margin:auto;}
+.p2_media_gallery_wrap.g_hide,.g_hide .gallery_screen,.g_hide .gallery_screen img{visibility:hidden;opacity:0;}
+.g_hide .gallery_screen img{display:none;}
 .p2_media_gallery_wrap{overflow:hidden;width:max-content;max-width:100%;margin:auto;}
 .gallery_screen{top:0;left:0;right:0;max-height:550px;
 display:grid;grid-template-columns:1fr;grid-template-rows:1fr;}
