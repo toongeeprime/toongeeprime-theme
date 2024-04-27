@@ -34,9 +34,9 @@ if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
 }
 
 
-#	@since ToongeePrime Theme 1.0.55:	#
-
 /**
+ *	@since 1.0.55
+ *
  *	WIDGETS SET ABOVE SITE HEADER
  */
 add_action( 'prime2g_before_header', 'prime2g_widgets_above_header' );
@@ -135,8 +135,7 @@ if ( is_active_sidebar( 'aboveposts-widgets' ) ) { ?>
 }
 }
 }
-
-#	@since ToongeePrime Theme 1.0.55 - end	#
+#	@since 1.0.55 - end	#
 
 
 /**
@@ -162,7 +161,6 @@ if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 
 /**
  *	FOOTER-TOP WIDGETS
- *	Widgets at the top of the Site's Footer
  */
 if ( ! function_exists( 'prime2g_footer_top_widgets' ) ) {
 function prime2g_footer_top_widgets() {
@@ -183,7 +181,7 @@ if ( is_active_sidebar( 'footer-top' ) ) { ?>
 
 /**
  *	FOOTER WIDGETS
- *	Updated for customizer columns @since ToongeePrime Theme 1.0.55
+ *	Updated for customizer columns @since 1.0.55
  */
 if ( ! function_exists( 'prime2g_footer_widgets' ) ) {
 function prime2g_footer_widgets() {
@@ -223,3 +221,44 @@ echo	'</div>';
 }
 }
 }
+
+
+/**
+ *	@since 1.0.84
+ *
+ *	MOBILE MENU WIDGETS
+ */
+add_action( 'prime2g_mobile_menu_top', 'prime2g_mobile_menu_top_widgets' );
+if ( ! function_exists( 'prime2g_mobile_menu_top_widgets' ) ) {
+function prime2g_mobile_menu_top_widgets() {
+
+if ( is_active_sidebar( 'mobilemenutop-widgets' ) ) { ?>
+	<aside id="mobilemenu_top_widgets" class="mobilemenu asides clear">
+		<div class="widgets-box grid">
+			<?php dynamic_sidebar( 'mobilemenutop-widgets' ); ?>
+		</div>
+	</aside>
+<?php
+}
+
+}
+}
+
+
+add_action( 'prime2g_mobile_menu_bottom', 'prime2g_mobile_menu_bottom_widgets' );
+if ( ! function_exists( 'prime2g_mobile_menu_bottom_widgets' ) ) {
+function prime2g_mobile_menu_bottom_widgets() {
+
+if ( is_active_sidebar( 'mobilemenubottom-widgets' ) ) { ?>
+	<aside id="mobilemenu_bottom_widgets" class="mobilemenu asides clear">
+		<div class="widgets-box grid">
+			<?php dynamic_sidebar( 'mobilemenubottom-widgets' ); ?>
+		</div>
+	</aside>
+<?php
+}
+
+}
+}
+
+

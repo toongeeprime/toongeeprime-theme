@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.3
 Tested up to: 6.5
-Stable tag: 1.0.83
+Stable tag: 1.0.84
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,10 @@ A WordPress theme with options for customization, design and development flexibi
 
 
 == Changelog ==
+
+= 1.0.84 =
+* Actions: prime2g_mobile_menu_top, prime2g_mobile_menu_bottom
+* Widgets: Mobile Menu - Top, Mobile Menu - Bottom
 
 = 1.0.83 =
 * Feature:	Pop-in Sticky Menu on desktop
@@ -413,4 +417,3 @@ Hooked to woocommerce_after_single_product_summary:
 
 Removed:
 	woocommerce_breadcrumb
-

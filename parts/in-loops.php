@@ -295,7 +295,7 @@ $entry	.=	$loop_post_header_template ? $loop_post_header_template() : '';
 $entry	.=	'<div class="entry_text">';
 
 if ( $metas )
-	$entry	.=	prime2g_archive_post_top_filter_part();
+	$entry	.=	prime2g_archive_post_top_filter_part( $post );
 
 $entry	.=	'<a href="' . $link . '" title="Read this entry"><' . $tag . ' class="entry_title">' . $title . '</' . $tag . '></a>';
 

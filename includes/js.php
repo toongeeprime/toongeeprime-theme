@@ -239,6 +239,12 @@ echo $js;
  */
 if ( ! function_exists( 'prime2g_ajax_search_js' ) ) {
 function prime2g_ajax_search_js( array $options = [] ) {
+
+add_action( 'wp_footer', function() use( $options ) {
+
+if ( defined( 'P2GAJAXSEARCHJS' ) ) return;
+define( 'P2GAJAXSEARCHJS', true );
+
 $id			=	'';
 $post_type	=	'';
 
@@ -360,7 +366,10 @@ return prime2g_run_ajax( formData, ajaxSuccess, ajaxError );
 
 tInput'. $id .'.addEventListener( "input", ( e )=>{ prime_runAjaxSearch( e ); } );
 </script>';
-return $js;
+echo $js;
+
+} );
+
 }
 }
 /**	@since 1.0.78 End	**/
@@ -460,6 +469,7 @@ function p2GallThumbScroll( toNum ) {
 
 
 if ( '. $init_hide .' ) mgWrap.classList.add( "g_hide" );
+else mgWrap.classList.remove( "g_hide" );
 </script>';
 return $js;
 }

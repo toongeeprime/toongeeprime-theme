@@ -47,6 +47,7 @@ $incLogo	=	$styles->logo_with_menu;
 $lwm_class	=	$incLogo ? ' logo_with_menu' : '';
 $theLogo	=	prime2g_siteLogo();
 $isMobile	=	wp_is_mobile();
+$at_customizer	=	is_customize_preview();	# Theme 1.0.84
 
 echo	'<div id="'. $id .'" class="togs main_menu_wrap'. $lwm_class .'">
 <div class="w100pc flexnw site_width">';
@@ -75,12 +76,21 @@ if ( has_nav_menu( 'main-menu' ) ) {
 
 if ( ! $isMobile && $incLogo ) echo '<div class="desktop">' . $theLogo . '</div>';
 
-prime2g_menu_togglers( [ 'incLogo'=>$incLogo, 'theLogo'=>$theLogo, 'class'=>'mobiles' ] ); ?>
+prime2g_menu_togglers( [ 'incLogo' => $incLogo, 'theLogo' => $theLogo, 'class' => 'mobiles' ] ); ?>
 
 <nav class="main-menu collapsible-navs site-menus<?php if ( $cta_menu ) echo ' cta'; ?>"
  aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
 
 <?php
+#	@since 1.0.84
+if ( $isMobile || $at_customizer ) {
+
+echo '<section id="prime2g_mobile_menu_top" class="mobiles">';
+	do_action( 'prime2g_mobile_menu_top' );
+echo '</section>';
+
+}
+
 #	Conditions added @since 1.0.77
 if ( $min_v23 && 'mega_menu' === $styles->menu_type ) {
 
@@ -105,14 +115,28 @@ wp_nav_menu(
 		'menu_class'		=>	'main-menu-wrapper',
 		'container_class'	=>	'main-menu-container',
 		'items_wrap'		=>	'<ul id="'. $ul_id .'" class="%2$s">%3$s</ul>',
-		'fallback_cb'		=>	false,
+		'fallback_cb'		=>	false
 	)
 );
 
 }
-?>
 
-<div id="prime_cta_menu" class="prime_cta_menu"><?php if ( $cta_menu ) echo prime2g_cta_menu(); ?></div>
+#	@since 1.0.84
+if ( $isMobile || $at_customizer ) {
+
+echo '<section id="prime2g_mobile_menu_bottom" class="mobiles">';
+	do_action( 'prime2g_mobile_menu_bottom' );
+echo '</section>';
+
+}
+
+
+if ( $cta_menu ) { ?>
+
+<div id="prime_cta_menu" class="prime_cta_menu"><?php echo prime2g_cta_menu(); ?></div>
+
+<?php } ?>
+
 
 </nav><!-- .main-menu -->
 <?php
@@ -193,7 +217,7 @@ if ( get_theme_mod( 'prime2g_theme_add_footer_menu' ) )	{ ?>
 				'depth'				=>	1,
 				'link_before'		=>	'<span>',
 				'link_after'		=>	'</span>',
-				'fallback_cb'		=>	false,
+				'fallback_cb'		=>	false
 			)
 		);
 		?>
@@ -281,3 +305,4 @@ return (object) [
 </ul>
 </nav>
  **/
+

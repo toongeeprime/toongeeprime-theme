@@ -48,13 +48,23 @@ extract( $atts );
 if ( $css === 'yes' ) { ?>
 <style id="primeCarouselCSS">
 .carousel_wrap{opacity:0;}
-.screen{overflow:hidden;position:relative;width:700px;height:350px;max-width:100%;margin:auto;perspective:5000px;}
+.screen{overflow:hidden;position:relative;width:250px;height:200px;max-width:100%;margin:auto;perspective:5000px;}
 .carousel{width:100%;height:100%;position:absolute;transform-style:preserve-3d;transition:transform 1s;}
 .cell{position:absolute;left:0;right:0;top:0;height:100%;background:#aaa;backface-visibility:hidden;
 transition:transform 1s, opacity 1s;background-size:cover;background-position:center;}
 .c_dot{display:inline-block;width:10px;height:10px;border:2px solid;background:#fff;cursor:pointer;margin:7px;}
 .c_dot.on,.c_dot:hover{background:#333;}
 .carousel_wrap:not(.play) .pause,.carousel_wrap.play .play{display:none;}
+
+@media(min-width:681px){
+.screen{width:480px;height:350px;}
+}
+@media(min-width:821px){
+.screen{width:800px;}
+}
+@media(min-width:1201px){
+.screen{width:1000px;height:400px;}
+}
 </style>
 <?php
 }

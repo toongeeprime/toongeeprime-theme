@@ -49,6 +49,7 @@ global $pagenow;
 
 /**
  *	USE CLASSIC WIDGETS
+ *	Forked: WP Classic Widgets plugin
  *	@since 1.0.83
  */
 if ( get_theme_mod( 'prime2g_use_classic_widgets' ) ) {
@@ -109,7 +110,7 @@ add_action( 'admin_init', 'prime2g_admin_access_control', 100 );
 function prime2g_admin_access_control() {
 
 #	run for non-admins/super-admins only
-if ( is_admin() &&  ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) && ! current_user_can( 'update_core' ) ) {
+if ( is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) && ! current_user_can( 'update_core' ) ) {
 
 $capability	=	'custom_capability' === get_theme_mod( 'prime2g_admin_access_capability' ) ?
 get_theme_mod( 'prime2g_admin_access_custom_capability' ) : get_theme_mod( 'prime2g_admin_access_capability' );
@@ -139,7 +140,7 @@ exit;
  */
 add_filter( 'show_admin_bar', 'akawey_remove_admin_bar' );
 function akawey_remove_admin_bar( $show_admin_bar ) {
-	return ( current_user_can( 'edit_others_posts' ) ) ? $show_admin_bar : false;
+return current_user_can( 'edit_others_posts' ) ? $show_admin_bar : false;
 }
 
 

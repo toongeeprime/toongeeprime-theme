@@ -5,21 +5,32 @@
  *	@since ToongeePrime Theme 1.0.80
  */
 
-function prime2g_gallery_post_template( $post, $looptemplate, $img_url, $snum, array $classes = [ 'gItem', 'gallery_media' ] ) {
+/**
+ *	@since 1.0.84
+ *		If using a content source other than posts or $gallery_image_ids,
+ *		set shortcode param $gallery_content to 'other'
+ *		then use $looptemplate to provide the content
+ */
+function prime2g_gallery_post_template( $entry, $looptemplate, $img_url, $snum, array $classes = [ 'gItem', 'gallery_media' ] ) {
 	$classes[]	=	'item_'. $snum;
 
-	if ( !$looptemplate ) {
-		$link	=	get_permalink( $post );
-		$template	=	'<div class="'. implode( ' ', $classes ) .'">
-		<a href="'. $link .'" title="'. $post->post_title .'"><img src="'. $img_url .'" /></a>
-		</div>';
+	if ( $entry instanceof WP_Post ) {
+		if ( ! $looptemplate ) {
+			$link	=	get_permalink( $entry );
+			$template	=	'<div class="'. implode( ' ', $classes ) .'">
+			<a href="'. $link .'" title="'. $entry->post_title .'"><img src="'. $img_url .'" /></a>
+			</div>';
+		}
+		else {
+			$template	=	function_exists( 'looptemplate' ) ? $looptemplate :
+			prime2g_get_archive_loop_post_object( [
+				'post' => $entry, 'entryClasses' => $classes,
+				'footer' => false, 'metas' => false, 'excerpt' => false, 'edit_link' => false
+			] );
+		}
 	}
 	else {
-		$template	=	function_exists( 'looptemplate' ) ? $looptemplate :
-		prime2g_get_archive_loop_post_object( [
-			'post' => $post, 'entryClasses' => $classes,
-			'footer' => false, 'metas' => false, 'excerpt' => false, 'edit_link' => false
-		] );
+		$template	=	$looptemplate ? $looptemplate( [ 'entry' => $entry, 'entryClasses' => $classes ] ) : __( '<p class="gallery_media gallery_thumb item_1">No template provided</p>', PRIME2G_TEXTDOM );
 	}
 return $template;
 }
@@ -37,7 +48,8 @@ $atts	=	array_merge( prime2g_get_posts_output_default_options(),
 'gallery_image_ids'	=>	'',
 'gallery_template'	=>	'1',
 'default_gallery_css'	=>	'yes',
-'hide_gallery'	=>	'',
+'hide_gallery'		=>	'',		//	@since 1.0.83
+'gallery_content'	=>	''		//	@since 1.0.84
 ],
 $atts
 );
@@ -45,17 +57,30 @@ $atts
 extract( $atts );
 
 $hide_gallery	=	$hide_gallery === 'yes' ? true : false;
-$hide_galleryJS	=	$hide_gallery ? 'true' : 'false';	// string for js
+$hide_galleryJS	=	$hide_gallery ? 'true' : 'false';	//	string for js
 
-//	Providing Image IDs will override the use of posts
+//	Providing Image IDs will supersede
 $use_img_ids	=	! empty( $gallery_image_ids );
+$otherContentSource	=	$gallery_content === 'other' ?: false;
 
 if ( $use_img_ids ) {
+
 	$urls	=	prime2g_media_urls_by_ids( $gallery_image_ids, $image_size );
 	$num	=	count( $urls );
+
+}
+else if ( $otherContentSource ) {
+
+	//	:array @$looptemplate required if $otherContentSource
+	//	must return urls array using param 'get' => 'image_urls'
+	$urls	=	$looptemplate ? $looptemplate( [ 'get' => 'image_urls', 'size' => $image_size ] ) :
+				__( '<p>No template for images</p>', PRIME2G_TEXTDOM );
+	$num	=	is_array( $urls ) ? count( $urls ) : 1;
+
 }
 else {
-	$query	=	prime2g_get_posts_output( $atts );	//	$get === 'posts' (array)
+
+	$query	=	prime2g_get_posts_output( $atts );	//	$get === 'posts' :array
 	if ( ! is_array( $query ) ) {
 		return current_user_can( 'edit_posts' ) ? __( 'Cannot display posts, please review shortcode', PRIME2G_TEXTDOM ) : '';
 	}
@@ -64,6 +89,7 @@ else {
 		$urls[]	=	wp_get_attachment_image_url( get_post_thumbnail_id( $post ), $image_size ) ?: prime2g_get_placeholder_url();
 	}
 	$num	=	$count;
+
 }
 
 $prevw	=	'<div class="previewScroll slimscrollbar scrollX" style="padding:var(--min-pad) 0;">
@@ -79,7 +105,8 @@ for ( $p = 0; $p < $num; $p++ ) {
 				$prevw	.=	$media_item_div2;
 			}
 			else {
-				$prevw	.=	prime2g_gallery_post_template( $query[$p], $looptemplate, $urls[$p], $pp, [ 'gItem', 'preview_thumb', 'thumb_'. $pp ] );
+				$post	=	$otherContentSource ? $p : $query[$p];
+				$prevw	.=	prime2g_gallery_post_template( $post, $looptemplate, $urls[$p], $pp, [ 'gItem', 'preview_thumb', 'thumb_'. $pp ] );
 			}
 		}
 		else {
@@ -92,7 +119,7 @@ $prevw	.=	'</div>
 </div><!-- .scrollX -->';
 
 
-$lightbox	=	'<div class="p2_media_gallery_wrap">
+$lightbox	=	'<div class="p2_media_gallery_wrap g_hide">
 <div class="p2_media_gallery prel">';
 
 $lightbox	.=	$gallery_title ? '<h2 id="p2_gallery_title">'. $gallery_title .'</h2>' : '';
@@ -115,7 +142,8 @@ for ( $g = 0; $g < $num; $g++ ) {
 				$lightbox	.=	$media_item_div;
 			}
 			else {
-				$lightbox	.=	prime2g_gallery_post_template( $query[$g], $looptemplate, $urls[$g], $gg );
+				$post	=	$otherContentSource ? $g : $query[$g];
+				$lightbox	.=	prime2g_gallery_post_template( $post, $looptemplate, $urls[$g], $gg );
 			}
 		}
 		else {
@@ -146,7 +174,8 @@ for ( $u = 0; $u < $num; $u++ ) {
 				$lightbox	.=	$media_item_div3;
 			}
 			else {
-				$lightbox	.=	prime2g_gallery_post_template( $query[$u], $looptemplate, $urls[$u], $uu, [ 'gItem', 'gallery_thumb', 'thumb_'. $uu ] );
+				$post	=	$otherContentSource ? $u : $query[$u];
+				$lightbox	.=	prime2g_gallery_post_template( $post, $looptemplate, $urls[$u], $uu, [ 'gItem', 'gallery_thumb', 'thumb_'. $uu ] );
 			}
 		}
 		else {
@@ -164,7 +193,7 @@ $lightbox	.=	'</div><!-- .thumbs_strip --></div>
 
 </div>';
 
-wp_reset_postdata();	// leave at the end of this function!
+wp_reset_postdata();	// leave here at the end!
 
 if ( $default_gallery_css === 'yes' ) echo prime2g_media_gallery_css( $gallery_template );
 

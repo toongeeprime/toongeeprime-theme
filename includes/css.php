@@ -93,7 +93,8 @@ $css	.=	prime_custom_theme_classes_styles();
 #	Video Media
 if ( get_theme_mod( 'prime2g_enable_video_features' ) ) {
 $css	.=	'#header.title_over_video iframe{min-height:75vh;}
-.title_over_video .page_title{position:absolute;width:max-content;bottom:0;}';
+.title_over_video .page_title{position:absolute;width:max-content;bottom:0;}
+.title_wrap{height:100%;}';
 }
 
 $css	.=
@@ -504,7 +505,8 @@ display:grid;grid-template-columns:1fr;grid-template-rows:1fr;}
 .previewScroll{scrollbar-width:none;}
 .previewScroll::-webkit-scrollbar{display:none;}
 .p2_media_gallery_btns{display:flex;width:max-content;}
-.preview_thumb,.gallery_thumb{opacity:0.6;}
+.preview_thumb,.gallery_thumb{opacity:0.6;background-size:cover;background-position:center;}
+.p2_media_gallery .thumbnail{background-size:cover;background-position:center;}
 .preview_thumb:hover,.preview_thumb.live{opacity:1;}
 .gallery_media{opacity:0;visibility:hidden;margin:auto;grid-area:1/1;}
 .gallery_media.live{opacity:1;visibility:visible;transition:0.5s;}

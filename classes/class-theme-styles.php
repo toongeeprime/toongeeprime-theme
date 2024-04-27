@@ -182,8 +182,7 @@ class ToongeePrime_Styles {
 	$titleOnHeader	=	$cache->titleOnHeader ? '.title_over_video ' : '';
 
 	$videoActive	=	( has_header_video() && is_header_video_active() ) ?
-	".site_width.title_wrap{max-width:none;width:100%;height:100%;}
-	.title_over_video .page_title{position:absolute;}" : '';
+	".site_width.title_wrap{max-width:none;width:100%;height:100%;}" : '';
 	$videoFeatures	=	prime2g_video_features_active();
 	$headerVidCSS	=	$videoFeatures ?
 	"#header iframe{height:{$hHeight};}{$videoActive}#header.grid{display:grid;}

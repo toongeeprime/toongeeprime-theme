@@ -14,9 +14,7 @@
  */
 add_action( 'prime2g_after_post', 'prime2g_comments' );
 function prime2g_comments() {
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
+	if ( comments_open() || get_comments_number() ) { comments_template(); }
 }
 
 
@@ -24,7 +22,6 @@ function prime2g_comments() {
  *		Add Edit post link to archive entries
  */
 add_action( 'prime2g_archive_post_footer', 'prime2g_edit_entry', 5 );
-
 
 
 /**
@@ -59,7 +56,7 @@ echo '</section>';
 
 /**
  *	Is set Before Single entry Titles
- *	@since ToongeePrime Theme 1.0.50
+ *	@since 1.0.50
  */
 function prime2g_before_title() {
 echo '<section id="prime2g_before_title">';
@@ -101,7 +98,7 @@ echo '</section>';
 
 
 /**
- *	@since ToongeePrime Theme 1.0.55 direct hooks: prime2g_before_head, prime2g_before_body
+ *	@since 1.0.55 direct hooks: prime2g_before_head, prime2g_before_body
  *	And:
  */
 function prime2g_after_archive_title() {
@@ -145,8 +142,8 @@ echo '</section>';
 
 /**
  *	Set Before post title in Archive
- *	@since ToongeePrime Theme 1.0.45
- *	Added $post ToongeePrime Theme 1.0.50
+ *	@since 1.0.45
+ *	Added $post 1.0.50
  */
 function prime2g_archive_post_top_filter_part( $post = null ) {
 $start	=	'';
@@ -161,7 +158,7 @@ return $div;
 
 /**
  *	Is set at Footer of Archive post entries
- *	@since ToongeePrime Theme 1.0.45
+ *	@since 1.0.45
  */
 function prime2g_archive_post_footer_filter_part() {
 if ( is_attachment() ) return;
@@ -178,7 +175,7 @@ return $div;
 
 /**
  *	FUNCTIONS HOOKED TO FILTERS
- *	Filters added and hooked @since ToongeePrime Theme 1.0.45
+ *	Filters added and hooked @since 1.0.45
  */
 add_filter( 'prime2g_archive_post_top_filter', 'prime2g_archive_postmeta_hooked', 10, 2 );
 add_filter( 'prime2g_archive_post_footer_filter', 'prime2g_edit_entry_get_hooked', 5, 1 );

@@ -147,6 +147,29 @@ register_sidebar(
 		'after_title'   =>	'</div>'
 	)
 );
+#	@since 1.0.84
+register_sidebar(
+	array(
+		'name'          =>	__( 'Mobile Menu - Top', PRIME2G_TEXTDOM ),
+		'id'            =>	'mobilemenutop-widgets',
+		'description'   =>	__( 'Widgets above the Mobile menu', PRIME2G_TEXTDOM ),
+		'before_widget' =>	'<div id="%1$s" class="abovemobilemenuwidget %2$s"><div class="widget">',
+		'after_widget'  =>	'</div></div>',
+		'before_title'	=>	'<div class="w-headers"><h3 class="widget-title mobilemenu">',
+		'after_title'	=>	'</h3></div>'
+	)
+);
+register_sidebar(
+	array(
+		'name'          =>	__( 'Mobile Menu - Bottom', PRIME2G_TEXTDOM ),
+		'id'            =>	'mobilemenubottom-widgets',
+		'description'   =>	__( 'Widgets below the Mobile menu', PRIME2G_TEXTDOM ),
+		'before_widget' =>	'<div id="%1$s" class="belowmobilemenuwidget %2$s"><div class="widget">',
+		'after_widget'  =>	'</div></div>',
+		'before_title'	=>	'<div class="w-headers"><h3 class="widget-title mobilemenu">',
+		'after_title'	=>	'</h3></div>'
+	)
+);
 #	@since 1.0.55
 register_sidebar(
 	array(
