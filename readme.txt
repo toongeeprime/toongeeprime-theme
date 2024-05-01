@@ -16,6 +16,9 @@ A WordPress theme with options for customization, design and development flexibi
 
 == Changelog ==
 
+= 1.0.85 =
+* Optimization: Option to remove blocks, WC blocks, JetPack CSS.
+
 = 1.0.84 =
 * Actions: prime2g_mobile_menu_top, prime2g_mobile_menu_bottom
 * Widgets: Mobile Menu - Top, Mobile Menu - Bottom

@@ -52,7 +52,7 @@ if ( wp.customHeader.handlers.youtube.player === null ) {
 /*
 let ytHeader	=	p2getEl( "#wp-custom-header" );
 ytHeader.classList.add( "unclicked" );
-ytHeader.onclick	=	()=>{ ytHeader.classList.remove( "unclicked" ); };
+ytHeader.onclick=	()=>{ ytHeader.classList.remove( "unclicked" ); };
 */
 $js	.=	'</script>';
 
@@ -67,9 +67,11 @@ $scriptName	=	basename( $_SERVER[ 'PHP_SELF' ] );
 if ( $scriptName === 'customize.php' ) {
 if ( prime2g_design_by_network_home() && get_current_blog_id() !== 1 ) {
 
-$js	=	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" id="jQueryTmp"></script>
+$js	=	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" id="jQueryCtm"></script>
 <script id="prime2g_conditional_customizer_js">
 jQuery( document ).ready( function() {';
+
+// concat'ed in case more code would be added
 
 $js	.=	'
 setTimeout( ()=>{
@@ -209,7 +211,6 @@ li_rect	=	li.getBoundingClientRect();
 mc		=	li.querySelector( ".ctrlw" );
 if ( mc ) {
 mc_rect	=	mc.getBoundingClientRect();
-console.log(mc);
 	if ( fullwidth ) {
 		mc.style.width	=	"98.75vw";
 		leftAmount		=	li_rect.left > 0 ? (-1 * li_rect.left) : li_rect.left;
@@ -347,7 +348,6 @@ formData	=	{
 };
 ajaxSuccess	=	function( response ) {
 	if ( response && ! response.hasOwnProperty( "error" ) ) {
-		// console.log( response );
 		tSRes'. $id .'.innerHTML	=	response.posts;
 	}
 	else {
@@ -474,5 +474,6 @@ else mgWrap.classList.remove( "g_hide" );
 return $js;
 }
 }
+
 
 

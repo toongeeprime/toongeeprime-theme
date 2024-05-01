@@ -20,7 +20,6 @@ function prime2g_moreJP_related_posts( $options ) {
 }
 
 
-
 /**
  *	Remove JetPack related posts to add them to theme
  */
@@ -32,7 +31,6 @@ function prime2g_removeJP_related_posts() {
 		remove_filter( 'the_content', $callback, 40 );
 	}
 }
-
 
 
 /**
@@ -49,7 +47,6 @@ function prime2g_add_jp_related_posts() {
 }
 
 
-
 /**
  *	JP Infifite Scroll Footer Credit
  */
@@ -60,7 +57,6 @@ function prime2g_infiniteScroll_credit() {
 return $text;
 }
 }
-
 
 
 /**
@@ -120,6 +116,10 @@ if ( ! function_exists( 'prime2g_jp_relatedPosts_count' ) ) {
 }
 
 
+if ( get_theme_mod( 'prime2g_disable_jetpack_css' ) ) {
+	add_filter( 'jetpack_implode_frontend_css', '__return_false', 99 );
+	add_filter( 'jetpack_sharing_counts', '__return_false', 99 );
+}
 
 
 endif;

@@ -32,9 +32,11 @@ return $args;
  *	STOP WP HEARTBEAT
  *	@since 1.0.49
  */
-add_action( 'init', 'prime2g_stop_wp_heartbeat', 1 );
-add_action( 'admin_enqueue_scripts', 'prime2g_stop_wp_heartbeat' );
 if ( ! function_exists( 'prime2g_stop_wp_heartbeat' ) ) {
+
+add_action( 'admin_init', 'prime2g_stop_wp_heartbeat', 1 );
+add_action( 'admin_enqueue_scripts', 'prime2g_stop_wp_heartbeat' );
+
 function prime2g_stop_wp_heartbeat() {
 if ( 'stop' === get_theme_mod( 'prime2g_stop_wp_heartbeat' ) ) {
 global $pagenow;
@@ -49,16 +51,14 @@ global $pagenow;
 
 /**
  *	USE CLASSIC WIDGETS
- *	Forked: WP Classic Widgets plugin
+ *	@WP Classic Widgets plugin
  *	@since 1.0.83
  */
 if ( get_theme_mod( 'prime2g_use_classic_widgets' ) ) {
-
-// Disables the block editor from managing widgets in the Gutenberg plugin.
-add_filter( 'gutenberg_use_widgets_block_editor', '__return_false' );
-// Disables the block editor from managing widgets.
-add_filter( 'use_widgets_block_editor', '__return_false' );
-
+	// Disables the block editor from managing widgets in the Gutenberg plugin.
+	add_filter( 'gutenberg_use_widgets_block_editor', '__return_false' );
+	// Disables the block editor from managing widgets.
+	add_filter( 'use_widgets_block_editor', '__return_false' );
 }
 
 
@@ -134,13 +134,63 @@ exit;
 }
 
 
-
 /**
- *	Hide Front-end Admin Bar
+ *	Hide Front-end Admin Bar:: add control for this
  */
 add_filter( 'show_admin_bar', 'akawey_remove_admin_bar' );
 function akawey_remove_admin_bar( $show_admin_bar ) {
 return current_user_can( 'edit_others_posts' ) ? $show_admin_bar : false;
 }
+
+
+/*
+add_filter( 'use_block_editor_for_post_type', '__return_false' );
+*/
+
+/**
+ *	@since 1.0.85
+ *
+ *	Hardcoded: Edit Theme's Template Parts only at Block Editor
+ */
+add_action( 'admin_init', function() {
+if ( ! class_exists( 'Classic_Editor' ) ||
+	! isset( $_GET[ 'action' ], $_GET[ 'post' ] ) || $_GET[ 'action' ] !== 'edit' ) return;
+
+$post	=	get_post( $_GET[ 'post' ] );
+if ( $post->post_type !== 'prime_template_parts' ) return;
+
+if ( 'classic-editor' !== get_post_meta( $_GET[ 'post' ], 'classic-editor-remember' )[0] ) return;
+
+$edit_link	=	prime2g_get_current_url();
+
+if ( isset( $_GET[ 'classic-editor' ] ) ) {
+	$edit_link	=	str_replace( [ '&classic-editor__forget', 'classic-editor' ], '', $edit_link );
+	$edit_link	=	$edit_link . '&classic-editor__forget';
+}
+
+update_post_meta( $post->ID, 'classic-editor-remember', 'block-editor' );
+wp_safe_redirect( $edit_link );
+exit;
+} );
+
+
+/**
+ *	Hardcoded: Remove linking to Classic editor for Theme Template Parts @ edit.php
+ */
+add_action( 'admin_footer', function() {
+if ( ! class_exists( 'Classic_Editor' ) ) return;
+global $pagenow;
+
+if ( $pagenow === 'edit.php' && isset( $_GET[ 'post_type' ] ) && $_GET[ 'post_type' ] === 'prime_template_parts' ) {
+echo	'<script id="prime_remove_classic_edit_link">
+document.querySelectorAll( "a.row-title" ).forEach( a => {
+	initLink	=	a.href;
+	a.href		=	initLink.replace( "&classic-editor", "" );
+} );
+
+document.querySelectorAll( "[class=\"1\"]" ).forEach( s => { s.remove(); } );
+</script>';
+}
+}, 999 );
 
 

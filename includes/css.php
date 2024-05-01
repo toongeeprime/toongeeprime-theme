@@ -93,7 +93,7 @@ $css	.=	prime_custom_theme_classes_styles();
 #	Video Media
 if ( get_theme_mod( 'prime2g_enable_video_features' ) ) {
 $css	.=	'#header.title_over_video iframe{min-height:75vh;}
-.title_over_video .page_title{position:absolute;width:max-content;bottom:0;}
+.title_over_video .page_title{width:max-content;}
 .title_wrap{height:100%;}';
 }
 

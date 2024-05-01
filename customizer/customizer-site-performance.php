@@ -12,12 +12,13 @@ if ( ! function_exists( 'prime2g_customizer_site_performance' ) ) {
 function prime2g_customizer_site_performance( $wp_customize ) {
 
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
+$postMsgChecked	=	array_merge( $postMsg_text, [ 'default' => 1 ] );
 
 	/**
 	 *	CACHE CONTROLS
 	 *	@since 1.0.56
 	 */
-function prime2g_a_c_ctrls() { return ( ! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ); }
+function prime2g_a_c_ctrls() { return ! empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ); }
 
 $network	=	is_multisite();
 $route		=	'';
@@ -47,7 +48,7 @@ if ( ! $network || $network && ( empty( $route ) || $route && get_current_blog_i
 	 *	THEME SEO
 	 *	@since 1.0.81
 	 */
-	$wp_customize->add_setting( 'prime2g_use_theme_seo', array_merge( $postMsg_text, [ 'default' => 1 ] ) );
+	$wp_customize->add_setting( 'prime2g_use_theme_seo', $postMsgChecked );
 	$wp_customize->add_control( 'prime2g_use_theme_seo', array(
 			'label'		=>	__( "Use Theme's SEO Settings", PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
@@ -55,6 +56,41 @@ if ( ! $network || $network && ( empty( $route ) || $route && get_current_blog_i
 			'section'	=>	'prime2g_site_performance_section'
 		)
 	);
+
+	/**
+	 *	DISABLING CSS
+	 *	@since 1.0.85
+	 */
+	$wp_customize->add_setting( 'prime2g_disable_blocks_css', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_disable_blocks_css', array(
+			'label'		=>	__( "Disbale Blocks CSS (if not using Blocks)", PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_disable_blocks_css',
+			'section'	=>	'prime2g_site_performance_section'
+		)
+	);
+
+if ( class_exists( 'Jetpack' ) ) {
+	$wp_customize->add_setting( 'prime2g_disable_jetpack_css', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_disable_jetpack_css', array(
+			'label'		=>	__( "Disbale Jetpack CSS", PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_disable_jetpack_css',
+			'section'	=>	'prime2g_site_performance_section'
+		)
+	);
+}
+
+if ( class_exists( 'woocommerce' ) ) {
+	$wp_customize->add_setting( 'prime2g_disable_wc_blocks_css', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_disable_wc_blocks_css', array(
+			'label'		=>	__( "Disbale WooCommerce Blocks CSS", PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_disable_wc_blocks_css',
+			'section'	=>	'prime2g_site_performance_section'
+		)
+	);
+}
 
 
 $time_units	=	[ MINUTE_IN_SECONDS => __( 'Minutes', PRIME2G_TEXTDOM ), HOUR_IN_SECONDS => __( 'Hours', PRIME2G_TEXTDOM ),

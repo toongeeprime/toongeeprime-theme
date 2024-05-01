@@ -12,7 +12,7 @@ window.addEventListener( "scroll", ()=>{
 let primetoTop	=	p2getEl( '#prime2g_toTop' ),
 popEl	=	p2getAll( '.popEl' );
 
-if ( window.pageYOffset > 350 ) { theBody.classList.add( 'pop' ); }
+if ( window.pageYOffset > 300 ) { theBody.classList.add( 'pop' ); }
 else { theBody.classList.remove( 'pop' ); }
 if ( window.pageYOffset > 700 ) { primetoTop.classList.add( 'show' ); }
 else { primetoTop.classList.remove( 'show' ); }

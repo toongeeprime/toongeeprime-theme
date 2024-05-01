@@ -16,9 +16,9 @@ function prime2g_register_custom_taxonomies() {
 # 1.0.74: condition is now only prime2g_use_extras()
 if ( prime2g_use_extras() ) {
 #	Template Part Sections
-$labels	=	array(
-	'name'			=>	_x( 'Template Parts Sections', 'taxonomy general name', PRIME2G_TEXTDOM ),
-	'singular_name'	=>	__( 'Template Parts Section', PRIME2G_TEXTDOM ),
+$parts_labels	=	array(
+	'name'			=>	_x( 'Template Sections', 'taxonomy general name', PRIME2G_TEXTDOM ),
+	'singular_name'	=>	__( 'Template Section', PRIME2G_TEXTDOM ),
 	'search_items'	=>	__( 'Search Sections', PRIME2G_TEXTDOM ),
 	'all_items'		=>	__( 'All Sections', PRIME2G_TEXTDOM ),
 	'parent_item'	=>	__( 'Parent Section', PRIME2G_TEXTDOM ),
@@ -27,12 +27,12 @@ $labels	=	array(
 	'update_item'	=>	__( 'Update Section', PRIME2G_TEXTDOM ),
 	'add_new_item'	=>	__( 'Add New Section', PRIME2G_TEXTDOM ),
 	'new_item_name'	=>	__( 'New Template Parts Section', PRIME2G_TEXTDOM ),
-	'menu_name'		=>	__( 'Template Parts Sections', PRIME2G_TEXTDOM ),
+	'menu_name'		=>	__( 'Template Sections', PRIME2G_TEXTDOM ),
 	'not_found'		=>	__( 'No Sections Found', PRIME2G_TEXTDOM ),
 );
-$args	=	array(
+$parts_args	=	array(
 	'label'			=>	__( 'Template Parts Sections', PRIME2G_TEXTDOM ),
-	'labels'		=>	$labels,
+	'labels'		=>	$parts_labels,
 	'query_var'		=>	false,
 	'public'		=>	false,
 	'hierarchical'	=>	true,
@@ -43,11 +43,11 @@ $args	=	array(
 	'show_in_menu'	=>	true,
 );
 
-register_taxonomy( 'template_parts_section', 'prime_template_parts', $args );
+register_taxonomy( 'template_parts_section', 'prime_template_parts', $parts_args );
 
 
 #	Brands for Defined Post Types
-$labels	=	array(
+$brand_labels	=	array(
 	'name'			=>	_x( 'Brands', 'taxonomy general name', PRIME2G_TEXTDOM ),
 	'singular_name'	=>	__( 'Brand', PRIME2G_TEXTDOM ),
 	'search_items'	=>	__( 'Search Brands', PRIME2G_TEXTDOM ),
@@ -61,9 +61,9 @@ $labels	=	array(
 	'menu_name'		=>	__( 'Brands', PRIME2G_TEXTDOM ),
 	'not_found'		=>	__( 'No Brands Found', PRIME2G_TEXTDOM ),
 );
-$args	=	array(
+$brand_args	=	array(
 	'label'			=>	__( 'Brands', PRIME2G_TEXTDOM ),
-	'labels'		=>	$labels,
+	'labels'		=>	$brand_labels,
 	'query_var'		=>	true,
 	'public'		=>	true,
 	'hierarchical'	=>	true,
@@ -71,10 +71,10 @@ $args	=	array(
 	'show_in_rest'	=>	true,
 	'show_in_quick_edit'	=>	true,
 	'show_admin_column'	=>	true,
-	'show_in_menu'	=>	true,
+	'show_in_menu'	=>	true
 );
 
-register_taxonomy( 'brand', prime_post_types_group()->has_brand, $args );
+register_taxonomy( 'brand', prime_post_types_group()->has_brand, $brand_args );
 }
 
 }
