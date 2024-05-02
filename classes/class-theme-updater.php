@@ -29,23 +29,18 @@ class Prime2gThemeUpdater {
 		$this->theme			=	wp_get_theme( $this->slug );
 		$this->current_version	=	$this->theme->get( 'Version' );
 
+		$this->maybe_force_reset_transients();
+
 		$this->set_this_theme_transient();
 
-		add_filter( 'site_transient_update_themes', [ $this,'theme_update_site_transient' ] );
-		add_action( 'admin_notices', [ $this, 'add_admin_notice' ] );
+		$this->admin_notices();
 
-		$this->maybe_force_reset_transients();
-	}
+		add_filter( 'pre_set_site_transient_update_themes', [ $this,'prepare_theme_update_body' ] );
+		add_filter( 'site_transient_update_themes', [ $this,'set_update_notification' ] );
 
+		$this->upgrade_processing();
 
-	function add_admin_notice() {
-	global $pagenow;
-	if ( $this->update_available() && ! in_array( $pagenow, [ 'update-core.php', 'themes.php' ] ) && current_user_can( 'edit_others_posts' ) ) {
-		echo '<div class="notice notice-warning notice-alt is-dismissible">
-		<p>'. __( 'New ToongeePrime Theme Update is available, please update now ', $this->slug ) .'
-		<a href="'. admin_url( 'update-core.php?source='. $this->slug ) .'" title="Update the theme here">'. __( 'here', $this->slug ) .'</a>!
-		</p></div>';
-	}
+		add_action( 'deleted_site_transient', [ $this, 'delete_transient_if' ], 10, 1 );
 	}
 
 
@@ -71,9 +66,8 @@ class Prime2gThemeUpdater {
 
 		$remote_body	=	wp_remote_retrieve_body( $remote );
 
-		if (
-		is_wp_error( $remote ) || 200 !== wp_remote_retrieve_response_code( $remote ) || empty( $remote_body )
-		) {
+		if ( is_wp_error( $remote ) || 200 !== wp_remote_retrieve_response_code( $remote )
+			|| empty( $remote_body ) ) {
 			return (object) [ 'error' => true, 'message' => 'Failed remote request' ];
 		}
 
@@ -82,7 +76,7 @@ class Prime2gThemeUpdater {
 
 
 	/**
-	 *	For workings within this class
+	 *	Establish workings within this class
 	 */
 	private function set_this_theme_transient() {
 		if ( $remote_to_transient = get_site_transient( $this->transient_name ) ) {
@@ -133,36 +127,103 @@ class Prime2gThemeUpdater {
 	}
 
 
-
 	/**
-	 *	Callback @ site_transient_update_themes
+	 *	Callback @ pre_set_site_transient_update_themes
 	 */
-	function theme_update_site_transient( $transient ) {
-		if ( is_object( $transient ) ) {
-			$item_data	=	$this->transient_item_data();
+	function prepare_theme_update_body( $transient ) {
+	$item_data	=	$this->transient_item_data();
 
-			if ( $this->update_available() && $this->update_qualified() ) {
-				$transient->response[ $this->slug ]	=	$item_data;
-			}
-			else {
-				$transient->no_update[ $this->slug ]=	$item_data;
-			}
+		if ( $this->update_available() && $this->update_qualified() ) {
+			$transient->response[ $this->slug ]	=	$item_data;
+		}
+		else {
+			$transient->no_update[ $this->slug ]=	$item_data;
 		}
 
 	return $transient;
 	}
 
 
+	/**
+	 *	Callback @ site_transient_update_themes
+	 */
+	function set_update_notification( $transient_read, $transient_name = 'update_themes' ) {
+	if ( is_object( $transient_read ) ) {
+		$item_data	=	$this->transient_item_data();
+
+		if ( $this->update_available() ) {
+			$transient_read->response[ $this->slug ]	=	$item_data;
+		}
+		else {
+			$transient_read->no_update[ $this->slug ]=	$item_data;
+		}
+	}
+
+	return $transient_read;
+	}
+
+
+	function upgrade_processing() {
+		add_filter( 'upgrader_pre_install', function() {
+			remove_filter( 'pre_set_site_transient_update_themes', [ $this, 'prepare_theme_update_body' ] );
+			remove_filter( 'site_transient_update_themes', [ $this, 'set_update_notification' ], 20, 2 );
+		} );
+
+		add_action( 'upgrader_process_complete', function( $upgrader_object, $options ) {
+			if ( $options['action'] === 'update'
+			&& $options['type'] === 'theme' && isset( $options['themes'] ) ) {
+				foreach( $options['themes'] as $theme ) {
+					if ( $theme === $this->slug ) { set_site_transient( 'p2gtheme_updated', 1 ); }
+				}
+			}
+		}, 10, 2 );
+	}
+
+
+	function admin_notices() {
+	add_action( 'admin_notices', function() {
+	global $pagenow;
+
+		if ( $this->update_available() && ! in_array( $pagenow, [ 'update-core.php', 'themes.php' ] ) && current_user_can( 'edit_others_posts' ) ) {
+			echo '<div class="notice notice-warning notice-alt is-dismissible">
+			<p>'. __( 'New ToongeePrime Theme Update is available, please update now ', $this->slug ) .'
+			<a href="'. admin_url( 'update-core.php?source='. $this->slug ) .'" title="Update the theme here">'. __( 'here', $this->slug ) .'</a>!
+			</p></div>';
+		}
+
+		if ( get_site_transient( 'p2gtheme_updated' ) ) {
+			echo '<div class="notice notice-success notice-alt is-dismissible"><p>'
+			. __( 'Thanks for updating the Theme, ToongeePrime!', $this->slug ) .
+			'</p></div>';
+			delete_site_transient( 'p2gtheme_updated' );
+		}
+
+	} );
+	}
+
+
 	function maybe_force_reset_transients() {
 		if ( wp_doing_ajax() ) return;
-		if ( is_admin()
+		if ( is_admin() && current_user_can( 'update_themes' )
 			&& isset( $_GET[ 'prime-update' ] ) && $_GET[ 'prime-update' ] === 'recheck-theme' ) {
 
 			if ( get_site_transient( $this->transient_name ) ) {
-				delete_site_transient( $this->transient_name );
-				// set_site_transient( 'update_themes', null );
+				$deleted	=	delete_site_transient( $this->transient_name );
+				wp_clean_themes_cache();
+				if ( $deleted ) {
+					add_action( 'admin_notices', function() {
+					echo '<div class="notice notice-warning notice-alt is-dismissible">
+					<p>'. __( 'Themes updates transients have been cleared!', $this->slug ) .'</p></div>';
+					} );
+				}
 			}
 		}
+	}
+
+
+	function delete_transient_if( $deleted_transient ) {
+	if ( $deleted_transient === 'update_themes' )
+		delete_site_transient( $this->transient_name );
 	}
 
 }
@@ -179,6 +240,4 @@ function prime2g_theme_updater() {
 }
 
 }
-
-
 

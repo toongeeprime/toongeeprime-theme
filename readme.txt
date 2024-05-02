@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.3
 Tested up to: 6.5
-Stable tag: 1.0.84
+Stable tag: 1.0.85
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +17,8 @@ A WordPress theme with options for customization, design and development flexibi
 == Changelog ==
 
 = 1.0.85 =
-* Optimization: Option to remove blocks, WC blocks, JetPack CSS.
+* Theme Updater: Admin notices added
+* Optimization: Option to remove blocks, WC blocks, JetPack CSS
 
 = 1.0.84 =
 * Actions: prime2g_mobile_menu_top, prime2g_mobile_menu_bottom
@@ -25,7 +26,7 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.83 =
 * Feature:	Pop-in Sticky Menu on desktop
-* Customizer: Use Classic Widgets... forked WP Classic Widgets plugin.
+* Customizer: Use Classic Widgets... forked WP Classic Widgets plugin
 
 = 1.0.82 =
 * Feature: carousel.php
