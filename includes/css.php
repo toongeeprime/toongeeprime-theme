@@ -33,7 +33,7 @@ $themeV2css	=	$mainMenu = $menuMin821 = $menuMax820 = '';
 
 
 /**
- *	@since ToongeePrime Theme 1.0.56
+ *	@since 1.0.56
  *	Introduced file theme-old.css for child themes below version 2.3
  */
 if ( prime_child_min_version( '2.3' ) ) {
@@ -125,7 +125,7 @@ echo $css;
 
 /**
  *	FUNCTIONS
- *	@since ToongeePrime Theme 1.0.57
+ *	@since 1.0.57
  */
 if ( ! function_exists( 'prime2g_comments_css' ) ) {
 function prime2g_comments_css() {
@@ -182,6 +182,15 @@ box-shadow:0 10px 20px 10px rgba(0,0,0,0.3);margin:auto;max-width:700px;}
 #menu_toggbar{position:fixed;z-index:100500;top:5px;right:10px;}
 @media(min-width:821px){
 #menu_toggbar{top:100px;right:30px;}
+}';
+
+}
+
+if ( $styles->mob_submenu_open ) {
+
+$css	.=	'@media(max-width:820px){
+nav.main-menu ul.sub-menu,nav.main-menu li.open .sub-menu .sub-menu{overflow:hidden;max-height:0;transition:all 0.2s;}
+nav.main-menu li.open .sub-menu,nav.main-menu li.open li.open .sub-menu{max-height:100vh;transition:all 0.5s;}
 }';
 
 }

@@ -131,7 +131,7 @@ if ( prime_child_min_version( '2.1' ) ) {
 }
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 if ( prime_child_min_version( '2.2' ) ) {
 	$wp_customize->add_setting( 'prime2g_use_site_top_menu', $simple_text );
@@ -154,9 +154,23 @@ if ( prime_child_min_version( '2.2' ) ) {
 }
 
 /**
- *	@since ToongeePrime Theme 1.0.57
+ *	@since 1.0.57
  */
 if ( $child_is23 ) {
+	# Theme 1.0.86
+	$wp_customize->add_setting( 'prime2g_mobile_submenu_collapsing', array_merge( $simple_text, [ 'default' => 'click' ] ) );
+	$wp_customize->add_control( 'prime2g_mobile_submenu_collapsing', array(
+		'label'		=>	__( 'Mobile Sub-menu Opening', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_mobile_submenu_collapsing',
+		'section'	=>	'prime2g_theme_menus_section',
+		'choices'	=>	array(
+			''		=>	__( 'Open Flat', PRIME2G_TEXTDOM ),
+			'click'	=>	__( 'Click/Tap to Open', PRIME2G_TEXTDOM ),
+			// 'hover'	=>	__( 'Hover to Open', PRIME2G_TEXTDOM )	//	similar+confusing effect on mobile!
+		)
+	) );
+
 	/**
 	 *	MAIN MENU TYPE
 	 */
@@ -231,4 +245,5 @@ if ( $child_is23 ) {
 
 }
 }
+
 

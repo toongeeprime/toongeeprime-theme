@@ -50,6 +50,24 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	) );
 
 	/**
+	 *	ADMIN BAR ACCESS
+	 *	@since @ 1.0.86
+	 */
+	$wp_customize->add_setting( 'prime2g_admin_bar_access', array_merge( $postMsg_text, [ 'default' => 'edit_posts' ] ) );
+	$wp_customize->add_control( 'prime2g_admin_bar_access', array(
+		'label'		=>	__( 'Who can see the Admin Bar?', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_admin_bar_access',
+		'section'	=>	'prime2g_site_settings_section',
+		'choices'	=>	array(
+			''		=>	__( 'All logged in users', PRIME2G_TEXTDOM ),
+			'edit_posts'			=>	__( 'Authors and above', PRIME2G_TEXTDOM ),
+			'edit_others_posts'		=>	__( 'Editors and Admins', PRIME2G_TEXTDOM ),
+			'edit_theme_options'	=>	__( 'Administrators Only', PRIME2G_TEXTDOM )
+		)
+	) );
+
+	/**
 	 *	SHUT DOWN WEBSITE
 	 */
 	$wp_customize->add_setting( 'prime2g_website_shutdown', $postMsg_text );

@@ -135,11 +135,12 @@ exit;
 
 
 /**
- *	Hide Front-end Admin Bar:: add control for this
+ *	Front-end Admin Bar
  */
 add_filter( 'show_admin_bar', 'akawey_remove_admin_bar' );
 function akawey_remove_admin_bar( $show_admin_bar ) {
-return current_user_can( 'edit_others_posts' ) ? $show_admin_bar : false;
+$has_access	=	get_theme_mod( 'prime2g_admin_bar_access', 'edit_posts' );
+return ! empty( $has_access ) && current_user_can( $has_access ) ? true : false;
 }
 
 

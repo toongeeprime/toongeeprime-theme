@@ -9,12 +9,34 @@
 
 add_action( 'wp_footer', 'prime2g_conditional_js', 990 );
 function prime2g_conditional_js() {
+$styles	=	ToongeePrime_Styles::mods_cache();	// @since 1.0.86
+
 $singular	=	is_singular();
 $jsSingular	=	$singular ? 'true' : 'false';
 
 $js	=	'<script async defer id="prime2g_conditional_js">
 const	singular	=	'. $jsSingular .';
+menuLItems	=	p2getAll( "nav.main-menu li" );
 ';
+
+if ( $styles->mob_submenu_open === 'click' ) {
+$js	.=	'menuLItems?.forEach( li => {
+li.addEventListener( "click", (e)=>{
+	e.stopPropagation(); li.classList.toggle( "open" );
+} );
+} );';
+}
+
+if ( $styles->mob_submenu_open === 'hover' ) {
+$js	.=	'menuLItems?.forEach( li => {
+li.addEventListener( "mouseenter", (e)=>{
+	e.stopPropagation(); li.classList.add( "open" );
+} );
+li.addEventListener( "mouseleave", (e)=>{
+	e.stopPropagation(); li.classList.remove( "open" );
+} );
+} );';
+}
 
 if ( prime2g_video_features_active() ) {
 $js	.=

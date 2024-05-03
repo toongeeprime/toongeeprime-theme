@@ -2,11 +2,12 @@
 
 /**
  *	CAROUSEL
- *	Supports multiple instances
- *	Autoplay only works with the first carousel for now
  *	@since ToongeePrime Theme 1.0.82
+ *
+ *	Supports multiple instances
+ *	Autoplay only works with the first carousel instance for now
+ *	Autoplay is best compatible with Dot navs for now
  */
-
 
 /**
 	HTML Structure:
@@ -109,6 +110,7 @@ children	=	carousel.childNodes;
 children.forEach( c => {
 cln	=	c.cloneNode( true );
 carousel.appendChild( cln );
+wrapper.classList.add( 'cloned' );
 } );
 
 cells	=	carousel.querySelectorAll( '.cell' );
@@ -198,9 +200,14 @@ p2g_manage_carousel_classes( options );
 
 slot	=	options.index;
 radius	=	options.radius;
+wrapper	=	options.wrapper;
 
 angleY	=	options.theta * slot * -1;
 options.carousel.style.transform	=	'translateZ(' + -radius + 'px) ' + 'rotateY(' + angleY + 'deg)';
+
+if ( wrapper.classList.contains( 'cloned' ) ) {
+	wrapper.dataset.clonedCellNumber	=	slot + 1;
+}
 }
 
 
@@ -230,6 +237,20 @@ for ( i = 0; i < cellCount; i++ ) {
 	cellAngle	=	theta * i;
 	cell.style.transform=	'rotateY(' + cellAngle + 'deg) translateZ(' + options.radius + 'px)';
 }
+}
+
+
+function p2g_carousel_indexes( options ) {
+wrapper		=	options.wrapper;
+cloneIndex	=	wrapper.dataset.clonedCellNumber ? parseInt( wrapper.dataset.clonedCellNumber ) : null;
+cellSlot	=	parseInt( wrapper.dataset.cellNumber );
+cellIndex	=	cellSlot - 1;
+
+return	{
+'index':	cloneIndex ?? cellIndex,
+'cellIndex':	cellIndex,
+'cloneIndex':	cloneIndex
+};
 }
 
 
@@ -272,21 +293,22 @@ wrapper.classList.toggle( 'play' );
 
 
 <?php if ( $autoplay === '1' ) {
-//	Use a button with onclick="p2g_toggle_carouselplay( btnID )" ?>
-p2g_autoplay_carousel_1();
+//	Use a button with onclick="p2g_toggle_carouselplay( btnID );" ?>
+p2g_autoplay_carousel();
 
-function p2g_autoplay_carousel_1( interval = <?php echo $interval ?> ) {
+function p2g_autoplay_carousel( interval = <?php echo $interval ?> ) {
 wrapper		=	carousels[0];
-index		=	0;
+index		=	parseInt( wrapper.dataset.cellNumber ) - 1;
 options		=	p2g_prepare_carousel( wrapper, index );
 radius		=	options.radius;
 wrapper.classList.add( 'play' );
 
 setInterval( ()=>{
+options.index	=	wrapper.classList.contains( 'play' ) ? options.index : p2g_carousel_indexes( options ).index;
+
 if ( wrapper.classList.contains( 'play' ) ) {
-options.index	=	index;
 p2g_rotate_carousel( options );
-index++;
+options.index++;
 }
 }, interval * 1000 );
 }
