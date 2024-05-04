@@ -143,18 +143,15 @@ class Prime2gThemeUpdater {
 	 *	Callback @ site_transient_update_themes
 	 */
 	function set_update_notice( $transient ) {
-	//	Only concerned with $theme_transient->response to log update notice
-	$theme_transient	=	get_site_transient( $this->transient_name );
-	if ( ! is_object( $theme_transient ) || ! isset( $theme_transient->response ) ) return $transient;
-
-	// Fix for warning messages on Dashboard / Updates page
-	if ( ! is_object( $transient ) ) {
-		$transient	=	new stdClass();
+	if ( is_object( $transient ) ) {
+		$transient	=	$this->set_theme_status_response( $transient );
 	}
-
-	$initial_response		=	empty( $transient->response ) ? [] : $transient->response;
-	$transient->response	=	array_merge( $initial_response, $theme_transient->response );
-
+	else {
+		//	Fix for warning messages on Dashboard / Updates page
+		$transient	=	new stdClass();
+		$initial_response		=	empty( $transient->response ) ? [] : $transient->response;
+		$transient->response	=	array_merge( $initial_response, $theme_transient->response );
+	}
 	return $transient;
 	}
 
