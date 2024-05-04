@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0.81
  */
 
-if ( ! function_exists( 'prime_seo_meta_tags_setter' ) ) :
+if ( ! function_exists( 'prime_seo_meta_tags_setter' ) ) {
 
 add_action( 'wp_head', 'prime_seo_meta_tags_setter', 1 );
 function prime_seo_meta_tags_setter() {
@@ -125,7 +125,8 @@ $tags	.=
 // '<meta name="twitter:text:card" content="'. $aReallyCoolImage .'" />
 '<meta name="twitter:title" content="'. $title .'" />
 <meta name="twitter:url" content="'. $url .'" />
-<meta name="twitter:image" content="'. $image .'" />';
+<meta name="twitter:image" content="'. $image .'" />
+<meta name="twitter:card" content="summary" />';
 
 $tags	.=	$descr ? '<meta property="twitter:description" content="'. $descr .'" />' : '';
 
@@ -133,7 +134,6 @@ echo	'<!-- Meta tags by ToongeePrime Theme -->' . $tags . $post_tags_og_array . 
 }
 
 
-
-endif;	//	function_exists ?
+}
 
 

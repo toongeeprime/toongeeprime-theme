@@ -74,7 +74,8 @@ if ( $child_is23 ) {
 		'label'		=>	__( 'Add Pop-in Sticky Menu (Desktop)', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_use_sticky_menu',
-		'section'	=>	'prime2g_theme_menus_section'
+		'section'	=>	'prime2g_theme_menus_section',
+		'active_callback'	=>	function() { return '' === get_theme_mod( 'prime2g_main_menu_type' ); }
 	) );
 }
 

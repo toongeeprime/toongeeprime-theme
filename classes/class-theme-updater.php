@@ -149,8 +149,10 @@ class Prime2gThemeUpdater {
 	else {
 		//	Fix for warning messages on Dashboard / Updates page
 		$transient	=	new stdClass();
-		$initial_response		=	empty( $transient->response ) ? [] : $transient->response;
-		$transient->response	=	array_merge( $initial_response, $theme_transient->response );
+		$item_data	=	$this->transient_item_data();
+		$transient->response	=	$transient->no_update	=	[];
+		$transient->response[ $this->slug ]		=	$item_data;
+		$transient->no_update[ $this->slug ]	=	$item_data;
 	}
 	return $transient;
 	}

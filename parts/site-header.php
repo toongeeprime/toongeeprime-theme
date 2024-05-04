@@ -33,7 +33,7 @@ if ( $hasHeader ) {
 
 if ( !wp_is_mobile() ) {
 	prime2g_site_top_menu();	# 1.0.55
-	if ( $styles->sticky_menu && $styles->menu_place !== 'fixed' )
+	if ( $styles->sticky_menu && $styles->menu_place !== 'fixed' && empty( $styles->menu_type ) )
 		prime2g_main_menu( 'sticky_nav', 'sticky_menu_items' );	# 1.0.83
 }
 
