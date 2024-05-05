@@ -34,6 +34,29 @@ function prime2g_video_features_active() {
 
 
 /**
+ *	@since 1.0.87
+ */
+// add_filter( 'is_header_video_active', 'prime2g_is_header_video_active' );
+// function prime2g_is_header_video_active( $show_video ) {}
+function prime2g_is_header_video_active() {
+if ( prime2g_video_features_active() && has_header_video() ) {
+global $post;
+
+$placement	=	get_theme_mod( 'prime2g_video_header_placements' );
+$front_n_archs	=	'prime2g_video_header_front_and_archives';
+
+	if ( in_array( $placement, [ 'is_front_page', $front_n_archs ] ) && is_front_page() ) return true;
+	if ( in_array( $placement, [ 'is_archive', $front_n_archs ] ) && is_archive() ) return true;
+	if ( $placement === 'is_singular' && is_singular() ) return true;
+	if ( $placement === '' ) return true;
+
+}
+
+return false;
+}
+
+
+/**
  *	WP Header Video Settings Filter
  */
 add_filter( 'header_video_settings', 'prime2g_header_video_settings' );
@@ -41,15 +64,14 @@ if ( ! function_exists( 'prime2g_header_video_settings' ) ) {
 function prime2g_header_video_settings( $settings ) {
 
 $video_url	=	get_header_video_url();
-
-$height		=	wp_is_mobile() ? 280 : 500;
+$mobile		=	wp_is_mobile();
 
 	$settings[ 'videoUrl' ]		=	$video_url;
 	$settings[ 'posterUrl' ]	=	false;
-	$settings[ 'width' ]		=	1750;
-	$settings[ 'height' ]		=	$height;
-	$settings[ 'minWidth' ]		=	280;
-	$settings[ 'minHeight' ]	=	250;
+	$settings[ 'width' ]		=	$mobile ? 800 : 1750;
+	$settings[ 'height' ]		=	$mobile ? 250 : 550;
+	$settings[ 'minWidth' ]		=	$mobile ? 280 : 400;
+	$settings[ 'minHeight' ]	=	$mobile ? 200 : 250;
 	$settings[ 'l10n' ]		=	array(
 		'pause'		=>	__( 'Pause Video', PRIME2G_TEXTDOM ),
 		'play'		=>	__( 'Play Video', PRIME2G_TEXTDOM ),
@@ -64,9 +86,9 @@ return $settings;
 
 
 #	callbacks for video-active-callback @ custom-header theme support:
-function prime2g_video_header_front_and_archives() { return ( is_front_page() || is_archive() ); }
+function prime2g_video_header_front_and_archives() { return is_front_page() || is_archive(); }
 function prime2g_video_header_use_postvideo() {
-	global $post; return ( is_singular() && ( $post->video_url ) );
+	global $post; return is_singular() && $post->video_url;
 }
 
 
@@ -96,7 +118,6 @@ function prime2g_get_post_media_embed( $media = 'video', $post = null ) {
 if ( ! prime2g_video_features_active() ) return;
 
 global $wp_embed;
-
 if ( ! $post ) { global $post; }
 
 $type	=	$media ?: 'video';
@@ -122,3 +143,4 @@ return '<div class="prime2g_embedded_media '. $type .'">'. $embedded .'</div>';
 }
 
 }
+

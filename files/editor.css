@@ -16,6 +16,7 @@ margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 .centered{margin:auto;text-align:center;display:block;}
 .p-abso{position:absolute;}
 .prel{position:relative;}
+.fit_abso{position:absolute;top:0;bottom:0;left:0;right:0;}
 .p-fix{position:fixed;}
 .grid{display:grid;gap:var(--min-pad);}
 .flex{display:flex;flex-wrap:wrap;}

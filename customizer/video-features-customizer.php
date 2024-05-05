@@ -4,7 +4,7 @@
  *	VIDEO FEATURES
  *
  *	@package WordPress
- *	@since ToongeePrime Theme Theme 1.0.55
+ *	@since ToongeePrime Theme 1.0.55
  */
 
 function p2gvfactive() { return get_theme_mod( 'prime2g_enable_video_features' ); }
@@ -35,15 +35,13 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'input_attrs'	=>	[ 'placeholder' => 'post, page' ]
 	) );
 
-	$wp_customize->add_setting( 'prime2g_video_embed_location',
-	[ 'type' => 'theme_mod', 'default' => 'prime2g_after_title', 'sanitize_callback' => 'sanitize_text_field' ]
-	);
+	$wp_customize->add_setting( 'prime2g_video_embed_location', array_merge( $simple_text, [ 'default' => 'prime2g_after_title' ] ) );
 	$wp_customize->add_control( 'prime2g_video_embed_location', array(
 		'type'		=>	'select',
 		'label'		=>	__( 'Video Embed Location on Post', PRIME2G_TEXTDOM ),
 		'settings'	=>	'prime2g_video_embed_location',
 		'section'	=>	'prime2g_media_features_section',
-		'active_callback'	=>	function() { return ( p2gvfactive() && is_singular() ); },
+		'active_callback'	=>	function() { return p2gvfactive() && is_singular(); },
 		'choices'	=>	array(
 			'prime2g_before_title'	=>	__( 'Before Post Title', PRIME2G_TEXTDOM ),	# values === hook names
 			'prime2g_after_title'	=>	__( 'After Post Title', PRIME2G_TEXTDOM ),
@@ -60,8 +58,9 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_replace_ftimage_with_video',
 		'section'	=>	'prime2g_media_features_section',
-		'active_callback'	=>	function() { return ( p2gvfactive() && is_archive() ); }
+		'active_callback'	=>	function() { return p2gvfactive() && is_archive(); }
 	) );
 
 }
 }
+

@@ -1,4 +1,5 @@
 <?php defined( 'ABSPATH' ) || exit;
+
 /**
  *	SITE HEADER
  *
@@ -11,15 +12,15 @@
 global $post;	# @since 1.0.55
 $styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 
+$isSingular		=	is_singular();
 $title_in_headr	=	( 'header' === $styles->title_place );
 $hasHeader		=	has_custom_header();
 $menuPlace		=	$styles->menu_place;
-$videoActive	=	is_header_video_active();
+$videoActive	=	prime2g_is_header_video_active();
 $pid			=	get_the_ID();
-$isSingular		=	is_singular();
-$keepHeader		=	$isSingular ? ! in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) : true;
+$keepHeader		=	$isSingular ? !in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) : true;
 
-$titleOverVideo	=	get_theme_mod( 'prime2g_pagetitle_over_headervideo' );
+$titleOverVideo	=	$styles->titleOnHeader;
 $tov_class		=	$titleOverVideo && ( $post && $post->video_url || $videoActive || ! $isSingular ) ?
 ' title_over_video' : '';
 
@@ -49,7 +50,7 @@ if ( ! $isSingular || $isSingular && $keepHeader ) { ?>
 <?php
 if ( $hasHeader ) { echo '<div class="shader"></div>'; }
 
-echo '<div class="site_width title_wrap grid prel w100pc">';
+echo '<div class="site_width title_wrap prel grid w100pc">';
 
 do_action( 'prime2g_before_header_title' );	# 1.0.55
 
@@ -59,7 +60,7 @@ do_action( 'prime2g_before_header_title' );	# 1.0.55
 		if ( $titleOverVideo )
 			do_action( 'prime2g_page_title_hook', $title_in_headr );
 	}
-	elseif ( has_header_video() && $videoActive ) {
+	elseif ( $videoActive ) {
 		the_custom_header_markup();
 		if ( $titleOverVideo )
 			do_action( 'prime2g_page_title_hook', $title_in_headr );
@@ -80,5 +81,4 @@ if ( 'bottom' === $menuPlace ) prime2g_main_menu();
 prime2g_sub_header();
 
 if ( $keepHeader ) { prime2g_after_header(); }
-
 

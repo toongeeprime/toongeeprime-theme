@@ -545,9 +545,15 @@ if ( function_exists( 'define_2gRMVTitle' ) ) return;
 
 $is_singular	=	is_singular();
 $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
+
+#	1.0.87
+$child_is23		=	prime_child_min_version( '2.3' );
 ?>
 <div class="page_title site_width prel<?php echo $header_classes . $hClass; ?>">
 <?php
+
+if ( $child_is23 ) echo '<div id="page_title_content">';
+
 	#	Theme Hook @since 1.0.50
 	#	Moved outside $is_singular 1.0.51
 	prime2g_before_title();
@@ -620,10 +626,12 @@ $hClass			=	$is_singular ? ' entry-header' : ' archive-header';
 
 	#	Theme Hook: @since 1.0.55
 	if ( is_archive() ) prime2g_after_archive_title();
+
+if ( $child_is23 ) echo '</div><!-- #page_title_content -->';
+
 ?>
 </div><!-- .page_title -->
 <?php
 }
 }
-
 

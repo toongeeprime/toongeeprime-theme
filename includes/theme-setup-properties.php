@@ -28,23 +28,19 @@ add_theme_support(
 $styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 
 #	@since ToongeePrime Theme 1.0.55
-$enableVideo	=	prime2g_video_features_active() ?: false;
-$videoActive	=	get_theme_mod( 'prime2g_video_header_placements', 'is_front_page' );
 
 #	Custom Header
-$header_width	=	2000;
-$header_height	=	900;
 add_theme_support(
 	'custom-header',
 	array(
 		'header-text'			=>	true,
 		'default-text-color'	=>	'000',
-		'width'					=>	$header_width,
-		'height'				=>	$header_height,
+		'width'					=>	2000,
+		'height'				=>	900,
 		'flex-height'			=>	true,
 		'flex-width'			=>	true,
-		'video'					=>	$enableVideo,
-		'video-active-callback'	=>	$videoActive
+		'video'					=>	prime2g_video_features_active() ?: false,
+		'video-active-callback'	=>	'prime2g_is_header_video_active'
 	)
 );
 
@@ -226,7 +222,6 @@ register_sidebars( $cols,
 		'after_title'	=>	'</h3></div>'
 	)
 );
-
 }
 
 }

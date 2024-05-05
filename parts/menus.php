@@ -48,6 +48,7 @@ $lwm_class	=	$incLogo ? ' logo_with_menu' : '';
 $theLogo	=	prime2g_siteLogo();
 $isMobile	=	wp_is_mobile();
 $at_customizer	=	is_customize_preview();	# Theme 1.0.84
+$collapsing	=	$styles->mob_submenu_open;	# Theme 1.0.87
 
 echo	'<div id="'. $id .'" class="togs main_menu_wrap'. $lwm_class .'">
 <div class="w100pc flexnw site_width">';
@@ -78,7 +79,7 @@ if ( ! $isMobile && $incLogo ) echo '<div class="desktop">' . $theLogo . '</div>
 
 prime2g_menu_togglers( [ 'incLogo' => $incLogo, 'theLogo' => $theLogo, 'class' => 'mobiles' ] ); ?>
 
-<nav class="main-menu collapsible-navs site-menus<?php if ( $cta_menu ) echo ' cta'; ?>"
+<nav class="main-menu collapsible-navs site-menus<?php if ( $collapsing ) echo ' collapsing'; if ( $cta_menu ) echo ' cta'; ?>"
  aria-label="<?php esc_attr_e( 'Main Menu', PRIME2G_TEXTDOM ); ?>">
 
 <?php

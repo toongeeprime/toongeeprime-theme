@@ -144,6 +144,7 @@ class Prime2gThemeUpdater {
 	 */
 	function set_update_notice( $transient ) {
 	if ( is_object( $transient ) ) {
+		//	The Notice
 		$transient	=	$this->set_theme_status_response( $transient );
 	}
 	else {
@@ -201,30 +202,31 @@ class Prime2gThemeUpdater {
 
 	private function maybe_clear_transients() {
 	if ( wp_doing_ajax() ) return;
-	if ( is_admin() && current_user_can( 'update_themes' ) && isset( $_GET[ 'prime-update' ] ) ) {
-	$action		=	$_GET[ 'prime-update' ];
+	if ( is_admin() && current_user_can( 'update_themes' ) ) {
+	global $pagenow;
 
-		if ( in_array( $action, [ 'clear-caches', 'clear-transients' ] ) ) {
+	if ( $pagenow === 'update-core.php' && ! isset( $_GET[ 'action' ] ) ) {
+		if ( isset( $_GET[ 'force-check' ] ) && $_GET[ 'force-check' ] === '1' ) {
 			if ( get_site_transient( $this->transient_name ) ) {
 				$deleted	=	delete_site_transient( $this->transient_name );
 				wp_clean_themes_cache();
 				if ( $deleted ) {
 					add_action( 'admin_notices', function() {
 					echo '<div class="notice notice-warning notice-alt is-dismissible">
-					<p>'. __( 'Themes updates transients have been cleared!', $this->slug ) .'</p></div>';
+					<p>'. __( 'Updates transients have been cleared!', $this->slug ) .'</p></div>';
 					} );
 				}
 			}
 		}
-
-		if ( $action === 'theme' ) {
+		else if ( $this->update_available() ) {
 			add_action( 'admin_notices', function() {
 			echo '<div class="notice notice-warning notice-alt is-dismissible">
-			<p>'. __( 'To Clear transients and Re-check update availability, ', $this->slug ) .'
-			<a href="'. admin_url( 'update-core.php?prime-update=clear-caches' ) .'" title="Check again">'. __( 'click here', $this->slug ) .'</a>.
+			<p>
+			'. __( 'To Clear transients and Re-check update availability, click the "Check again" link below!', $this->slug ) .'
 			</p></div>';
 			} );
 		}
+	}
 
 	}
 	}

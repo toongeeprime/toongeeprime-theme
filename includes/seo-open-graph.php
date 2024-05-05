@@ -44,21 +44,22 @@ $image	=	$thumb ?: $siteIcon;
 $postTaxs	=	get_post_taxonomies( $post );
 if ( $postTaxs ) {
 	if ( class_exists( 'woocommerce' ) && is_product() ) {
-		$taxon	=	$postTaxs[2];
+		$taxon	=	$postTaxs[2] ?: '';
 	}
 	else {
-		if ( $postTaxs[1] === 'post_format' ) {
-			$taxon	=	$postTaxs[2];
+		if ( isset( $postTaxs[1] ) && $postTaxs[1] === 'post_format' ) {
+			$taxon	=	$postTaxs[2] ?: '';
 		}
 		elseif ( $postTaxs[0] === 'post_tag' ) {
-			$taxon	=	$postTaxs[1];
+			$taxon	=	$postTaxs[1] ?: '';
 		}
 		else {
-			$taxon	=	$postTaxs[0];
+			$taxon	=	$postTaxs[0] ?: '';
 		}
 	}
 
-	$section		=	wp_get_post_terms( $post->ID, $taxon )[0];	// gets the first term
+	$page_terms		=	wp_get_post_terms( $post->ID, $taxon ) ?: null;
+	$section		=	$page_terms ? $page_terms[0] : null;	// get the first term
 }
 
 
@@ -86,19 +87,15 @@ $post_tags_og_array	=	implode( '', $post_tags_array );
 else {
 
 	if ( is_archive() ) {
-
 		$descr	=	wp_trim_words( get_the_archive_description(), $excerpt_length, '' );
-		$image	=	prime2g_get_term_archive_image_url( 'full' );
-		$title	=	get_the_archive_title();
-
+		$image	=	prime2g_get_term_archive_image_url( 'large' );
+		$title	=	is_author() ? __( get_the_author() . '\'s Posts', PRIME2G_TEXTDOM ) : get_the_archive_title();
 	}
 	else {
-
 		$descr	=	wp_trim_words( get_bloginfo( 'description' ), $excerpt_length, '' );
 		$headerImg	=	get_header_image();
 		$image	=	$headerImg ? $headerImg : $siteIcon;
 		$title	=	$sitename;
-
 	}
 
 }
