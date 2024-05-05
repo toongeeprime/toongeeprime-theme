@@ -21,6 +21,7 @@ const done	=	jQuery.ajax( {
 		error: ajaxError,
 	} );
 
+// Just learnt ajax is already async... gosh!
 return new Promise( ( resolve, reject ) => {
 resolve( done );
 } );

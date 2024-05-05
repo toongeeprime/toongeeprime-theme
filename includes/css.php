@@ -186,15 +186,6 @@ box-shadow:0 10px 20px 10px rgba(0,0,0,0.3);margin:auto;max-width:700px;}
 
 }
 
-if ( $styles->mob_submenu_open ) {
-
-$css	.=	'@media(max-width:820px){
-nav.main-menu ul.sub-menu,nav.main-menu li.open .sub-menu .sub-menu{overflow:hidden;max-height:0;transition:all 0.2s;}
-nav.main-menu li.open .sub-menu,nav.main-menu li.open li.open .sub-menu{max-height:100vh;transition:all 0.5s;}
-}';
-
-}
-
 return $css;
 }
 }
@@ -407,7 +398,7 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{opacity:1;visibility:visible;}
 
 if ( ! function_exists( 'prime2g_menu_max820_css' ) ) {
 function prime2g_menu_max820_css() {
-return '#container{top:46px;}
+$css	=	'#container{top:46px;}
 .main_menu_wrap{background:none;}
 .menu_toggbar{
 	position:fixed;background:var(--content-background);padding:5px;
@@ -429,6 +420,14 @@ bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200
 .collapsible-navs .sub-menu a{margin-left:var(--min-pad);}
 .collapsible-navs a{border-left:3px solid transparent;display:inline-block;}
 .collapsible-navs a:hover{border-color:var(--content-background);}';
+
+// @since 1.0.86
+if ( ToongeePrime_Styles::mods_cache()->mob_submenu_open ) {
+$css	.=	'nav.main-menu ul.sub-menu,nav.main-menu li.open .sub-menu .sub-menu{overflow:hidden;max-height:0;transition:all 0.2s;}
+nav.main-menu li.open .sub-menu,nav.main-menu li.open li.open .sub-menu{max-height:100vh;transition:all 0.5s;}';
+}
+
+return $css;
 }
 }
 /** @since 1.0.70 End **/

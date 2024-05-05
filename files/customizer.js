@@ -153,7 +153,7 @@ value.bind( function( newval ) {
 		mmenuSC	=	$( '#customize-control-prime2g_mega_menu_template_part_id' ),
 		mmenuFW	=	$( '#customize-control-prime2g_mega_menu_width' ),
 		mobCount=	$( '#customize-control-prime2g_mobile_menu_template_part_id' ),
-		stckyM	=	$( '#customize-control-prime2g_use_sticky_menu' );
+		stckyM	=	$( '#customize-control-prime2g_use_sticky_menu' ); // @since 1.0.86
 	if ( newval === '' ) {
 		mmenuSC.slideUp( 180 ); tmenuSC.slideUp( 180 ); mobCount.slideUp( 180 ); mmenuFW.slideUp( 180 );
 		stckyM.slideDown( 180 );
