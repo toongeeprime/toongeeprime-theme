@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0.55
  */
 
-function p2gvfactive() { return get_theme_mod( 'prime2g_enable_video_features' ); }
+function p2gvfactive() { return ! empty( get_theme_mod( 'prime2g_enable_video_features' ) ); }
 
 if ( ! function_exists( 'prime2g_theme_video_features' ) ) {
 function prime2g_theme_video_features( $wp_customize ) {

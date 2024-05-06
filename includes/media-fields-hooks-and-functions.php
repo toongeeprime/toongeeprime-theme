@@ -103,17 +103,14 @@ function prime2g_posttypes_with_video_features() : array {
 
 
 if ( ! function_exists( 'prime2g_post_has_media_field' ) ) {
-
 function prime2g_post_has_media_field( $post ) {
 	if ( $post->video_url || $post->audio_url ) return true;
 }
-
 }
 
 
 
 if ( ! function_exists( 'prime2g_get_post_media_embed' ) ) {
-
 function prime2g_get_post_media_embed( $media = 'video', $post = null ) {
 if ( ! prime2g_video_features_active() ) return;
 
@@ -141,6 +138,5 @@ else {
 
 return '<div class="prime2g_embedded_media '. $type .'">'. $embedded .'</div>';
 }
-
 }
 

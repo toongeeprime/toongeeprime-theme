@@ -11,6 +11,17 @@
 if ( class_exists( 'Jetpack' ) ) :
 
 /**
+ *	@since 1.0.87
+ */
+add_action( 'wp_head', 'prime2g_jetpack_css' );
+function prime2g_jetpack_css() {
+echo	'<style id="prime2g_jetpackCSS">
+#page #jp-relatedposts .jp-relatedposts-items{display:flex;flex-wrap:wrap;}
+</style>';
+}
+
+
+/**
  *	Set JetPack related posts count
  */
 add_filter( 'jetpack_relatedposts_filter_options', 'prime2g_moreJP_related_posts' );
@@ -35,7 +46,7 @@ function prime2g_removeJP_related_posts() {
 
 /**
  *	Add JetPack related posts to theme
- *	@since ToongeePrime Theme 1.0.48
+ *	@since 1.0.48
  */
 add_action( 'prime2g_after_post', 'prime2g_add_jp_related_posts', 8 );
 if ( ! function_exists( 'prime2g_add_jp_related_posts' ) ) {
@@ -94,7 +105,7 @@ if ( function_exists( 'is_shop' ) && is_woocommerce() ) return;
 
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.50
+ *	@since Theme 1.0.50
  */
 add_filter( 'infinite_scroll_settings', 'prime2g_infinite_scroll_settings' );
 function prime2g_infinite_scroll_settings( $args ) {
@@ -109,7 +120,7 @@ if ( ! function_exists( 'prime2g_jp_infiniteScroll_count' ) ) {
 }
 
 /**
- *	@since ToongeePrime Theme Theme 1.0.51
+ *	@since Theme 1.0.51
  */
 if ( ! function_exists( 'prime2g_jp_relatedPosts_count' ) ) {
 	function prime2g_jp_relatedPosts_count() { return 6; }
