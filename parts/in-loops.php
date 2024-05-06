@@ -516,7 +516,11 @@ return $div;
  *	@since 1.0.79
  */
 if ( ! function_exists( 'prime2g_content_body_template' ) ) {
-function prime2g_content_body_template( object $post = null ) {
+function prime2g_content_body_template( $post = null ) {
+// Because other template functions send arrays, so for consistency:
+if ( is_array( $post ) ) {
+	$post	=	$post[ 'post' ];
+}
 if ( ! $post ) { global $post; }
 	return do_shortcode( get_the_content( $post ) );
 }
