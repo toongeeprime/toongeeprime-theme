@@ -420,8 +420,6 @@ $css	=	'#container{top:46px;}
 background:var(--content-background);left:0;right:var(--min-pad);position:fixed;
 bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200%);overflow-y:auto;
 }
-.admin-bar .main-menu{top:46px;}
-.pop.admin-bar .main-menu{top:0;}
 .main-menu::-webkit-scrollbar{width:12px;background:silver;}
 .main-menu::-webkit-scrollbar-thumb{background:var(--content-text);border-radius:10px;}
 .main-menu::-webkit-scrollbar-thumb:hover{background:steelblue;}
@@ -487,7 +485,6 @@ background:var(--content-background);transition:0.2s;box-shadow:0 20px 15px 5px 
 return $css;
 }
 }
-
 
 
 if ( ! function_exists( 'prime2g_ajax_search_css' ) ) {

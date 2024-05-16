@@ -16,15 +16,15 @@ if ( ! ToongeePrime_Styles::mods_cache()->theme_seo ) return;
 
 $url		=	prime2g_get_current_url();
 $siteIcon	=	get_site_icon_url();
-
 $sitename	=	get_bloginfo( 'name' );
+$is_singular=	is_singular();
 $type		=	'website';
 $excerpt_length	=	30;
-$extra_tags	=	$section = $title = $post_tags_og_array = $video_url = '';
+
+$extra_tags	=	$section = $title = $post_tags_og_array = $og_video = $tags = $p_date = $post_twitters = '';
 $image		=	$siteIcon;
 
-
-if ( is_singular() ) {
+if ( $is_singular ) {
 
 $title	=	$descr	=	$fName	=	$lName	=	'';
 $type	=	'article';
@@ -35,11 +35,19 @@ if ( has_post_format( [ 'image', 'video' ] ) ) {
 
 global $post;
 
+$author	=	get_user_by( 'ID', $post->post_author );
 $title	=	$post->post_title;
 $descr	=	wp_trim_words( get_the_excerpt( $post ), $excerpt_length, '' );
 $thumb	=	get_the_post_thumbnail_url( $post );
 $image	=	$thumb ?: $siteIcon;
+$p_date	=	'<meta property="article:published_time" content="'. get_the_date( 'c' ) .'" />
+';
 
+$tags	.=	'<meta name="author" content="'. $author->display_name .'" />
+';
+
+$post_twitters	.=	'<meta name="twitter:label1" content="Written by" />
+<meta name="twitter:data1" content="'. $author->display_name .'" />';	// no line break here
 
 $postTaxs	=	get_post_taxonomies( $post );
 if ( $postTaxs ) {
@@ -62,22 +70,19 @@ if ( $postTaxs ) {
 	$section		=	$page_terms ? $page_terms[0] : null;	// get the first term
 }
 
-
 if ( $section ) {
-$author		=	get_user_by( 'ID', $post->post_author );
-$extra_tags	=	'<meta property="article:author" content="'. $author->display_name .'" />
-<meta property="article:section" content="'. $section->name .'" />';
+$tags	.=	'<meta property="article:section" content="'. $section->name .'" />
+';
 }
 
-$video_url	=	$post->video_url ? '<meta property="og:video" content="'. $post->video_url .'" />' : '';
-
-#	<meta property="og:audio" content="'. $audio_url .'" />
-#	music,video,book etc: https://ogp.me/ == <meta property="og:type" content="book" />
+$og_video	=	$post->video_url ? '<meta property="og:video" content="'. $post->video_url .'" />
+' : '';
 
 $posttags	=	get_the_tags();
 if ( $posttags ) {
 foreach ( $posttags as $tag ) {
-	$post_tags_array[]	=	'<meta property="article:tag" content="'. $tag->name .'" />'; 
+	$post_tags_array[]	=	'<meta property="article:tag" content="'. $tag->name .'" />
+'; 
 }
 
 $post_tags_og_array	=	implode( '', $post_tags_array );
@@ -94,42 +99,55 @@ else {
 	else {
 		$descr	=	wp_trim_words( get_bloginfo( 'description' ), $excerpt_length, '' );
 		$headerImg	=	get_header_image();
-		$image	=	$headerImg ? $headerImg : $siteIcon;
+		$image	=	$headerImg ?: $siteIcon;
 		$title	=	$sitename;
 	}
 
 }
 
 
-$tags	=
+$tags	.=
 '<meta property="og:title" content="'. $title .'" />
 <meta property="og:site_name" content="'. $sitename .'" />
 <meta property="og:type" content="'. $type .'" />
-<meta property="og:image" content="'. $image .'" />';
+<meta property="og:image" content="'. $image .'" />
+';
 
-$tags	.=	$descr ? '<meta property="og:description" content="'. $descr .'" />' : '';
+$tags	.=	$descr ? '<meta property="og:description" content="'. $descr .'" />
+' : '';
 
-$tags	.=	'
-<meta property="og:url" content="'. $url .'" />
-<meta property="og:locale" content="'. get_locale() .'" />';
+$tags	.=	'<meta property="og:url" content="'. $url .'" />
+<meta property="og:locale" content="'. get_locale() .'" />
+';
 
-$tags	.=	$extra_tags . $video_url;
+$tags	.=	$p_date . $og_video;
 
 #	Twitter
+/**	
+ *	Reviewed @since 1.0.89
+ *	NOTE: Twitter falls back to og where they have similar name/property parameters
+ *	=== title, description, url, image
+ *	@https://developer.x.com/en/docs/twitter-for-websites/cards/guides/getting-started
+ */
 
-$tags	.=
-// '<meta name="twitter:text:title" content="'. $title .'" />
-// '<meta name="twitter:text:card" content="'. $aReallyCoolImage .'" />
-'<meta name="twitter:title" content="'. $title .'" />
-<meta name="twitter:url" content="'. $url .'" />
-<meta name="twitter:image" content="'. $image .'" />
-<meta name="twitter:card" content="summary" />';
+$tags	.=	'<meta name="twitter:card" content="summary" />
+';
 
-$tags	.=	$descr ? '<meta property="twitter:description" content="'. $descr .'" />' : '';
+#	To Do's:
+#	<meta property="article:author" content="https://facebook.com/author-FB-profile-url" />
+#	<meta property="article:publisher" content="https://facebook.com/author-FB-page-url" />
+#	<meta property="og:audio" content="'. $audio_url .'" />
+#	music,video,book etc: https://ogp.me/ == <meta property="og:type" content="book" />
+#	<meta name="twitter:site" content="@x_siteusername" />
+#	<meta name="twitter:creator" content="@x_authorusername" />
+#	<meta name="twitter:card" content="summary_large_image" /> @https://developer.x.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
 
-echo	'<!-- Meta tags by ToongeePrime Theme -->' . $tags . $post_tags_og_array . '<!-- /Meta tags by ToongeePrime Theme -->';
+echo	'
+<!-- Meta tags by ToongeePrime Theme -->
+'. $tags . $post_twitters . $post_tags_og_array .'
+<!-- /Meta tags by ToongeePrime Theme -->
+';
 }
-
 
 }
 

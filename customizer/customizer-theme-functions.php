@@ -17,7 +17,7 @@ $net_home_socials	=	prime2g_constant_is_true( 'PRIME2G_SOCIALS_BY_NETWORK_HOME' 
 if ( $net_home_socials ) switch_to_blog( 1 );
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 $siteName	=	esc_html( get_bloginfo( 'name' ) );
 $facebook	=	get_theme_mod( 'prime2g_facebook_url' );
@@ -94,14 +94,14 @@ return $footerCred;
 
 /**
  *	Split from prime2g_theme_mod_footer_credit() for Customizer control & shortcode
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 if ( ! function_exists( 'prime2g_theme_footer_credit' ) ) {
 function prime2g_theme_footer_credit() {
 $power	=	get_theme_mod( 'prime2g_footer_credit_power', 'Powered by' );
 $name	=	get_theme_mod( 'prime2g_footer_credit_name', 'ToongeePrime Theme' );
 $url	=	get_theme_mod( 'prime2g_footer_credit_url', 'https://akawey.com/' );
-$append	=	get_theme_mod( 'prime2g_footer_credit_append', '' ); # @since ToongeePrime Theme 1.0.48.50
+$append	=	get_theme_mod( 'prime2g_footer_credit_append', '' ); # @since 1.0.48.50
 
 $attrs	=	' target="_blank" rel="noopener noreferrer nofollow"';
 $cRight	=	'<span id="copyright_date"> &copy; ' . date( 'Y' ) . '.</span> ';

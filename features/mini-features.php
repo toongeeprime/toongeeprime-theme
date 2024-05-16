@@ -31,6 +31,7 @@ if ( ! function_exists( 'prime2g_wp_block_search_form' ) ) {
 function prime2g_wp_block_search_form( $echo = true, $label = 'Search', $buttontext = null ) {
 $placeholder	=	$required = $form = $id = $post_type = '';
 $livesearch		=	false;
+$template		=	'prime2g_get_post_object_template';
 
 if ( is_array( $echo ) ) {
 extract( $echo );
@@ -52,14 +53,11 @@ $form	.=	'<form role="search" method="get" action="' . get_home_url() . '" class
 <div class="wp-block-search__inside-wrapper ">
 <input type="search" id="wp-block-search__input'. $formID .'" class="wp-block-search__input wp-block-search__input" name="s" value="' . get_search_query() . '" placeholder="'. $placeholder .'"'. $required .'>
 <button type="submit" class="wp-block-search__button wp-element-button">' . $button_text . '</button>
-</div>';
-
-// Non-ajax:
-// $form	.=	$livesearch ? '<input type="hidden" name="prime_do_ajax" value="ajax_search">' . wp_nonce_field( 'prime_search_action', '_prime-nonce' ) : '';
-$form	.=	'</form>';
+</div>
+</form>';
 
 $form	.=	$livesearch ? '<div class="liveSearchBox hidden p-abso slimscrollbar"><div class="liveSearchResults"></div></div>
-</div>' . prime2g_ajax_search_js( [ 'id' => $formID, 'post_type' => $post_type ] )
+</div>' . prime2g_ajax_search_js( [ 'id' => $formID, 'post_type' => $post_type, 'template' => $template ] )
 : '</div>';
 
 if ( $echo ) echo $form;

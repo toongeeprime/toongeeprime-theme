@@ -8,7 +8,7 @@
  */
 /**
  *	DETERMINE POST TYPES FOR CUSTOM FIELDS
- *	@since ToongeePrime Theme 1.0.70
+ *	@since 1.0.70
  */
 if ( ! function_exists( 'prime2g_fields_in_post_types' ) ) {
 function prime2g_fields_in_post_types() {
@@ -81,9 +81,10 @@ if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
 	$post_id	=	$parent_id;
 }
+
 $fields	=	[
-	'post_subtitle', 'remove_sidebar', 'remove_header', 'page_width', 'video_url', 'prime_page_js',
-	'disable_autop', 'use_main_nav_location', 'prevent_caching', 'font_url', 'enqueue_jquery'
+	'post_subtitle', 'remove_sidebar', 'remove_header', 'page_width', 'video_url', 'prime_page_js', 'font_url',
+	'use_main_nav_location'
 ];
 foreach( $fields as $field ) {
 	if ( array_key_exists( $field, $_POST ) ) {
@@ -91,8 +92,23 @@ foreach( $fields as $field ) {
 	}
 }
 
+/**
+ *	Fixed Select Field issues with JS and below code
+ *	Changed some fields to checkboxes
+ *	@since 1.0.89
+ */
+$select_fields	=	[
+	'exclude_from_search', 'disable_autop', 'prevent_caching', 'enqueue_jquery'
+];
+foreach( $select_fields as $field ) {
+	delete_post_meta( $post_id, $field );
+	if ( isset( $_POST[ $field ] ) ) { add_post_meta( $post_id, $field, $_POST[ $field ] ); }
+	// else { delete_post_meta( $post_id, $field ); }
+}
+
 }
 }
+
 
 
 
@@ -129,7 +145,7 @@ value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 
 <div class="meta-options prime2g_field">
 	<label for="page_width">Page Width</label>
-	<select id="page_width" class="prime2g_options" name="page_width">
+	<select id="page_width" class="prime2g_input" name="page_width">
 		<option value="default_post_width">Default Width</option>
 		<option value="post_narrow" <?php if ( $post->page_width === 'post_narrow' ) echo 'selected'; ?>>Narrow</option>
 		<option value="post_wide" <?php if ( $post->page_width === 'post_wide' ) echo 'selected'; ?>>Wide</option>
@@ -145,7 +161,7 @@ if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type
 
 <div class="meta-options prime2g_field">
 	<label for="remove_sidebar">Remove Sidebar?</label>
-	<select id="remove_sidebar" class="prime2g_options" name="remove_sidebar">
+	<select id="remove_sidebar" class="prime2g_input" name="remove_sidebar">
 		<option>--- Keep Sidebar ---</option>
 		<option value="remove" <?php if ( $post->remove_sidebar === 'remove' ) echo 'selected'; ?>>Remove Sidebar</option>
 	</select>
@@ -166,7 +182,7 @@ $post->post_type === 'page' && $post->ID != get_option('page_on_front') && $post
 else { ?>
 <div class="meta-options prime2g_field">
 	<label for="remove_header">Remove Default Header?</label>
-	<select id="remove_header" class="prime2g_options" name="remove_header">
+	<select id="remove_header" class="prime2g_input" name="remove_header">
 		<option>--- Keep Header ---</option>
 		<option value="remove" <?php if ( $post->remove_header === 'remove' ) echo 'selected'; ?>>Remove Header Completely</option>
 		<option value="header_image_css" <?php if ( $post->remove_header === 'header_image_css' ) echo 'selected'; ?>>Use Header Image CSS</option>
@@ -178,22 +194,30 @@ else { ?>
 
 <h3>Advanced</h3>
 
-<div class="meta-options prime2g_field">
-	<label for="disable_autop">Content Auto P</label>
-	<select id="disable_autop" class="prime2g_options" name="disable_autop">
-		<option>--- Leave Active ---</option>
-		<option value="disable" <?php if ( $post->disable_autop === 'disable' ) echo 'selected'; ?>>Disable</option>
-	</select>
+<div class="meta-options prime2g_field select">
+	<label for="disable_autop">
+	<input type="checkbox" id="disable_autop" class="prime2g_input" name="disable_autop" value="<?php echo $post->disable_autop; ?>" <?php echo '1' === $post->disable_autop ? ' checked="checked"' : ''; ?> />
+	Disable Content Auto P?</label>
 </div>
 
 <!-- @since 1.0.70 -->
-<div class="meta-options prime2g_field">
-	<label for="enqueue_jquery">Enqueue jQuery?</label>
-	<select id="enqueue_jquery" class="prime2g_options" name="enqueue_jquery">
-		<option>--- No ---</option>
-		<option value="yes" <?php if ( $post->enqueue_jquery === 'yes' ) echo 'selected'; ?>>Yes</option>
-	</select>
+<div class="meta-options prime2g_field select">
+	<label for="enqueue_jquery">
+	<input type="checkbox" id="enqueue_jquery" class="prime2g_input" name="enqueue_jquery" value="<?php echo $post->enqueue_jquery; ?>" <?php echo '1' === $post->enqueue_jquery ? ' checked="checked"' : ''; ?> />
+	Enqueue jQuery?</label>
 </div>
+
+<?php
+//	@since 1.0.89
+if ( ! in_array( $post->ID, prime_exclude_ids_from_search() ) ) { ?>
+
+<div class="meta-options prime2g_field select">
+	<label for="exclude_from_search">
+	<input type="checkbox" id="exclude_from_search" class="prime2g_input" name="exclude_from_search" value="<?php echo $post->exclude_from_search; ?>" <?php echo '1' === $post->exclude_from_search ? ' checked="checked"' : ''; ?> />
+	Exclude this from Search?</label>
+</div>
+
+<?php } ?>
 
 <?php
 /**
@@ -204,7 +228,7 @@ $nav_menus	=	get_registered_nav_menus(); ?>
 
 <div class="meta-options prime2g_field">
 	<label for="use_main_nav_location">Select Menu Location</label>
-	<select id="use_main_nav_location" class="prime2g_options" name="use_main_nav_location">
+	<select id="use_main_nav_location" class="prime2g_input" name="use_main_nav_location">
 		<option value="">--- Leave Default ---</option>
 		<?php foreach ( $nav_menus as $slug => $name ) { ?>
 		<option value="<?php echo $slug; ?>"
@@ -242,15 +266,6 @@ add_meta_box(
 }
 
 function prime2g_post_data_metabox( $post ) {
-
-/*
-if ( $post->post_type === 'page' && $post->ID == get_theme_mod( 'prime2g_custom_login_page_id' ) ) { ?>
-	<div class="meta-options">
-		<h3>Use the Login Form Shortcode in this page:</h3>
-		<p class="p2gClipCopyThis">[prime_login_form]</p>
-	</div>
-<?php
-}*/
 
 if ( $post->post_type === 'prime_template_parts' ) {
 if ( $post->post_status === 'publish' ) { ?>
@@ -301,12 +316,10 @@ $pType_name	=	$pType_obj->labels->singular_name;
 <div class="prime2g_meta_box">
 <?php prime2g_custom_mbox_css(); ?>
 
-<div class="meta-options prime2g_field">
-	<label for="prevent_caching">Cache This <?php echo $pType_name; ?></label>
-	<select id="prevent_caching" name="prevent_caching">
-		<option>-- Yes, Keep Cache System --</option>
-		<option value="prevent" <?php if ( $post->prevent_caching === 'prevent' ) echo 'selected'; ?>>Prevent Caching</option>
-	</select>
+<div class="meta-options prime2g_field select">
+	<label for="prevent_caching">
+	<input type="checkbox" id="prevent_caching" class="prime2g_input" name="prevent_caching" value="<?php echo $post->prevent_caching; ?>" <?php echo '1' === $post->prevent_caching ? ' checked="checked"' : ''; ?> />
+	Cache This <?php echo $pType_name; ?>?</label>
 </div>
 
 </div>

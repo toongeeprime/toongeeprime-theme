@@ -168,9 +168,19 @@ if ( in_array( $pagenow, [ 'post-new.php', 'post.php' ] ) ) { ?>
 let p2gBoxIDs	=	[
 '#prime2g_prime_fields1', '#prime2g_postdata_box', '#prime2g_settings_fields', '#prime2g_extras_fields', '#prime2g_media_cfields'
 ];
+
 p2gBoxIDs.forEach( pb => {
 box	=	p2getEl( pb );
 if ( box ) { box.classList.add( 'prime2g_postbox' ); }
+} );
+
+//	@since 1.0.89
+let primeInputs	=	document.querySelectorAll( '.prime2g_field input' );
+
+primeInputs.forEach( i => {
+	if ( i.type === 'checkbox' ) {
+		i.addEventListener( 'click', ()=>{ i.value === '1' ? i.value = '0' : i.value = 1; } );
+	}
 } );
 </script>
 <?php
@@ -264,6 +274,7 @@ define( 'P2GAJAXSEARCHJS', true );
 
 $id			=	'';
 $post_type	=	'';
+$template	=	'';	//	@since 1.0.88
 
 extract( $options );
 
@@ -283,7 +294,7 @@ if ( ! tSRes'. $id .'.matches( ":hover" ) ) {
 	tSRes'. $id .'.innerHTML	=	"";
 	tSBox'. $id .'.classList.add( "hidden" );
 }
-}, 3000 );
+}, 2000 );
 } );
 
 function prime_runAjaxSearch( e ) {
@@ -328,7 +339,7 @@ var input_time	=	last_input[0] - all_inputs[0],
 
 if ( input_time && tValue'. $id .'.length < 3 ) {
 p2gajmsO();
-	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>3 characters</small></p>";
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>'. __( '3 characters', PRIME2G_TEXTDOM ) .'</small></p>";
 return;
 }
 
@@ -336,7 +347,7 @@ if ( input_time > 1000 ) input_time = 0;
 
 if ( keytime < 150 ) {
 p2gajmsO();
-	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>Slow down a little</small></p>";
+	tSRes'. $id .'.innerHTML	=	"<p class=\"centered\"><small>'. __( 'Slow down a little', PRIME2G_TEXTDOM ) .'</small></p>";
 return;
 }
 
@@ -350,7 +361,7 @@ setTimeout( ()=>{
 if ( tValue'. $id .'.length > 2 ) {
 
 tSBox'. $id .'.classList.remove( "hidden" );
-tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">Searching</p>";
+tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">'. __( 'Searching...', PRIME2G_TEXTDOM ) .'</p>";
 
 formData	=	{
 	action : "prime2g_doing_ajax_nopriv",
@@ -358,7 +369,7 @@ formData	=	{
 	"find" : tInput'. $id .'.value,
 	"post_type" : "'. $post_type .'",
 	"count" : "10",
-	"template" : "prime2g_get_post_object_template",
+	"template" : "'. $template .'",
 	"template_args" : '. json_encode( [ 'size' => 'thumbnail', 'tag' => 'span', 'footer' => null ] ) .',
 	"_prime-nonce" : "'. wp_create_nonce( 'prime_nonce_action' ) .'"
 };

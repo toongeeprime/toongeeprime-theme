@@ -42,7 +42,7 @@ function prime2g_is_header_video_active() {
 if ( prime2g_video_features_active() && has_header_video() ) {
 global $post;
 
-$placement	=	get_theme_mod( 'prime2g_video_header_placements' );
+$placement		=	ToongeePrime_Styles::mods_cache()->header_vid_places;
 $front_n_archs	=	'prime2g_video_header_front_and_archives';
 
 	if ( in_array( $placement, [ 'is_front_page', $front_n_archs ] ) && is_front_page() ) return true;

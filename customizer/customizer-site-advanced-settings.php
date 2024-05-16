@@ -36,6 +36,18 @@ return wp_kses( $text, array(
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'prime_c_a_s_sanitizer' ];
 
 	/**
+	 *	SEARCH CUSTOM FIELDS
+	 *	@since 1.0.88
+	 */
+	$wp_customize->add_setting( 'prime2g_search_in_custom_fields', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_search_in_custom_fields', array(
+		'label'		=>	__( 'Allow Searching in Custom Fields', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_search_in_custom_fields',
+		'section'	=>	'prime2g_site_advanced_section'
+	) );
+
+	/**
 	 *	ADD SCRIPTS TO THEME
 	 *	@since 1.0.70
 	 */

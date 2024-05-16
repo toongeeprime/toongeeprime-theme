@@ -51,7 +51,7 @@ $at_customizer	=	is_customize_preview();	# Theme 1.0.84
 $collapsing	=	$styles->mob_submenu_open;	# Theme 1.0.87
 
 echo	'<div id="'. $id .'" class="togs main_menu_wrap'. $lwm_class .'">
-<div class="w100pc flexnw site_width">';
+<div class="w100pc flexnw site_width alignC">';
 
 if ( $min_v23 && 'togglers' === $styles->menu_type ) {
 
@@ -72,6 +72,15 @@ elseif ( ! $isMobile && $min_v23 && 'mega_menu' === $styles->menu_type ) {
 else {
 
 $cta_menu	=	get_theme_mod( 'prime2g_set_cta_menu_item' );	# Theme 1.0.55
+
+#	@since 1.0.89
+if ( ! $isMobile ) {
+
+echo '<div class="prime2g_pre_main_menu desktop">';
+	do_action( 'prime2g_pre_main_menu' );
+echo '</div>';
+
+}
 
 if ( has_nav_menu( 'main-menu' ) ) {
 
@@ -143,6 +152,15 @@ if ( $cta_menu ) { ?>
 <?php
 }
 else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Main Menu', PRIME2G_TEXTDOM ); }
+}
+
+#	@since 1.0.89
+if ( ! $isMobile ) {
+
+echo '<div class="prime2g_post_main_menu desktop">';
+	do_action( 'prime2g_post_main_menu' );
+echo '</div>';
+
 }
 
 echo	'</div></div><!-- #'. $id .' -->';

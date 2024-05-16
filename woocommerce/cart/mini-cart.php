@@ -26,7 +26,6 @@
 
 <div class="minicartdiv">
 <div class="in_minicart slimscrollbar prel">
-<h3 id="cart-heading" class="cart-title"><i class="fas fa-shopping-cart"></i>Your Cart</h3>
 
 <?php do_action( 'woocommerce_before_mini_cart' ); ?>
 

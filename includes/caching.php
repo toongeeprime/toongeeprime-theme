@@ -11,6 +11,8 @@ add_action( 'template_redirect', 'prime2g_cache_control_headers' );
 if ( ! function_exists( 'prime2g_cache_control_headers' ) ) {
 function prime2g_cache_control_headers() {
 if ( empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ) return;
+if ( defined( 'WP_CACHE' ) && WP_CACHE === false ) return;	// @since 1.0.70
+
 
 /* @since ToongeePrime Theme 1.0.58 */
 if ( is_multisite() ) {
@@ -38,14 +40,12 @@ return;
 /* @since 1.0.58 End */
 
 
-if ( defined( 'WP_CACHE' ) && WP_CACHE === false ) return;	// @since 1.0.70
-
 global $post;
 
 	if (
 	is_admin() || current_user_can( 'edit_others_posts' ) || false !== strpos( $_SERVER[ 'REQUEST_URI' ], '?' ) ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] ) ||
-	isset( $post ) && $post->prevent_caching === 'prevent'
+	isset( $post ) && $post->prevent_caching === '1'
 	) {
 		header( 'Cache-Control: max-age=0,no-cache,no-store,must-revalidate' );
 	}

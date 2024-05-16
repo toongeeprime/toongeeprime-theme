@@ -247,3 +247,65 @@ if ( is_object( $loop ) && $pagination === 'yes' && is_page() ) {
 return $output;
 }
 
+
+
+
+/**
+ *	Allow searching of custom fields
+ *	@since 1.0.88
+ *	@ https://gist.github.com/coffeepostal/e3bb164658781a962cf21d37dd3aaf63
+ */
+if ( ToongeePrime_Styles::mods_cache()->search_in_cf ) {
+
+//	Join for searching metadata
+add_filter( 'posts_join', 'prime2g_filter_wp_posts_join' );
+function prime2g_filter_wp_posts_join( $join ) {
+global $wpdb, $wp_query;
+// if ( is_search() ) {
+if ( ! empty( $wp_query->query_vars['s'] ) ) {
+	$join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+}
+return $join;
+}
+
+
+add_filter( 'posts_where', 'prime2g_filter_wp_posts_where', 10 );
+function prime2g_filter_wp_posts_where( $where ) {
+global $wpdb, $wp_query;
+if ( ! empty( $wp_query->query_vars['s'] ) ) {
+	$where	=	preg_replace(
+	"/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+	"(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
+}
+return $where;
+}
+
+
+//	Prevent duplicate results
+add_filter( 'posts_distinct', 'prime2g_search_distinct_filter' );
+function prime2g_search_distinct_filter( $where ) {
+global $wpdb, $wp_query;
+if ( ! empty( $wp_query->query_vars['s'] ) ) {
+	return "DISTINCT";
+}
+return $where;
+}
+
+}
+
+
+
+/**
+ *	Theme's WP Search Filtering
+ *	@since 1.0.89
+ */
+add_filter( 'pre_get_posts', 'prime2g_theme_pre_get_posts' );
+function prime2g_theme_pre_get_posts( $query ) {
+
+if ( $query->is_search && ! is_admin() ) {
+	$query->set( 'post__not_in', prime_exclude_ids_from_search() );
+}
+
+return $query;
+}
+

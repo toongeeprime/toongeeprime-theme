@@ -69,7 +69,7 @@ if ( get_theme_mod( 'prime2g_use_classic_widgets' ) ) {
 add_filter( 'the_content', 'prime2g_disable_wpautop', 0 );
 function prime2g_disable_wpautop( $content ) {
 global $post;
-	if ( $post && $post->disable_autop === 'disable' ) {
+	if ( $post && $post->disable_autop === '1' ) {
 		remove_filter( 'the_content', 'wpautop' );
 		remove_filter( 'the_excerpt', 'wpautop' );
 	}

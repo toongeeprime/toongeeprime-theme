@@ -59,22 +59,27 @@ $template		=	$_POST[ 'template' ];
 $post_type		=	! empty( $_POST[ 'post_type' ] ) ? explode( ',', $_POST[ 'post_type' ] ) : [ 'post','page','product' ];
 $template_args	=	$_POST[ 'template_args' ];
 
-$searchQuery	=	new WP_Query(
-array( 's' => $_POST[ 'find' ], 'posts_per_page' => $_POST[ 'count' ], 'status' => 'publish', 'post_type' => $post_type )
-);
-$output	=	'';
+$searchQuery	=	new WP_Query( array(
+'s' => $_POST[ 'find' ], 'posts_per_page' => $_POST[ 'count' ], 'post_type' => $post_type, 'post_status' => 'publish',
+'post__not_in' => prime_exclude_ids_from_search()
+) );
+
+$output		=	'';
+$nothing	=	'<p class="centered">'. __( 'Nothing found.<br>Try the search button or "Enter".', PRIME2G_TEXTDOM ) .'</p>';
 
 if ( $searchQuery->have_posts() ) {
 	while ( $searchQuery->have_posts() ) {
 		$searchQuery->the_post();
 		global $post;
+		if ( $post->exclude_from_search === '1' ) continue;
 		$template_args	=	array_merge( $template_args, [ 'post' => $post ] );
 		$output	.=	$template( $template_args, $post );
 	}
+	if ( empty( $output ) ) $output	.=	$nothing;
 wp_reset_postdata();
 }
 else {
-	$output	.=	'<p class="centered">'. __( 'Nothing found', PRIME2G_TEXTDOM ) .'</p>';
+	$output	.=	$nothing;
 }
 
 $response	=	[ 'posts' => $output, 'number' => $searchQuery->found_posts ];

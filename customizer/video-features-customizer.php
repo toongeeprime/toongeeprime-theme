@@ -38,7 +38,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 	$wp_customize->add_setting( 'prime2g_video_embed_location', array_merge( $simple_text, [ 'default' => 'prime2g_after_title' ] ) );
 	$wp_customize->add_control( 'prime2g_video_embed_location', array(
 		'type'		=>	'select',
-		'label'		=>	__( 'Video Embed Location on Post', PRIME2G_TEXTDOM ),
+		'label'		=>	__( "Post's Video Display Location", PRIME2G_TEXTDOM ),
 		'settings'	=>	'prime2g_video_embed_location',
 		'section'	=>	'prime2g_media_features_section',
 		'active_callback'	=>	function() { return p2gvfactive() && is_singular(); },
@@ -48,7 +48,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 			'prime2g_before_post'	=>	__( 'Before Post Content', PRIME2G_TEXTDOM ),
 			'prime2g_after_post'	=>	__( 'After Post Content', PRIME2G_TEXTDOM ),
 			'replace_header'	=>	__( 'Replace Header', PRIME2G_TEXTDOM ),	# values !== hook name
-			''					=>	__( 'Do Not Show Video', PRIME2G_TEXTDOM )
+			''					=>	__( "Do Not Display Post's Video", PRIME2G_TEXTDOM )
 		)
 	) );
 
