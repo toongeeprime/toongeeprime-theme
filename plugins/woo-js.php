@@ -17,7 +17,10 @@ if ( ! function_exists( 'prime2g_woocommerceJS' ) ) {
 function prime2g_woocommerceJS() { ?>
 
 <script id="prime2g_woocommerce_js">
-jQuery( document ).ready( ()=>{
+( ($)=>{
+$( document ).ready( ()=>{
+
+$( 'body' ).on( 'added_to_cart', ()=>{ $( 'body' ).addClass( 'added_to_cart' ); } );
 
 <?php
 /**
@@ -25,7 +28,7 @@ jQuery( document ).ready( ()=>{
  */
 if ( is_checkout() ) { ?>
 
-jQuery( document.body ).on( 'updated_checkout', ()=>{
+$( document.body ).on( 'updated_checkout', ()=>{
 
 let pay_meths	=	p2getAll( '.wc_payment_method .input-radio' );
 if ( pay_meths ) {
@@ -43,6 +46,7 @@ if ( pay_meths ) {
 <?php } ?>
 
 } );
+} )( jQuery );
 </script>
 <?php
 
