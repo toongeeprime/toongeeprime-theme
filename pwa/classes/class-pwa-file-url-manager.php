@@ -151,7 +151,7 @@ class Prime2g_PWA_File_Url_Manager {
 		'appcss'	=>	$appFile . "app.css",
 		'appjs'		=>	$appFile . "app.js",
 		'scripts'	=>	$virtual_dir . "scripts.js",
-		'icons'		=>	prime2g_icons_file_url(),	# === Bootstrap icons
+		'icons'		=>	prime2g_theme_icons_info()->url,	# === Bootstrap icons
 		'childcss'	=>	$childCss,
 		'childlogin'=>	$childLogin,
 		'childjs'	=>	$childJs
@@ -172,7 +172,7 @@ class Prime2g_PWA_File_Url_Manager {
 		'appcss'	=>	$appFile . "app.css" . $ver,
 		'appjs'		=>	$appFile . "app.js" . $ver,
 		'scripts'	=>	$virtual_dir . "scripts.js" . $ver,
-		'icons'		=>	prime2g_icons_file_url() . $ver,
+		'icons'		=>	prime2g_theme_icons_info()->url . $ver,
 		'childcss'	=>	$childCss . $cVer,
 		'childlogin'=>	$childLogin . $cVer,
 		'childjs'	=>	$childJs . $cVer

@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME'S STYLES AND FONTS
  *
@@ -13,19 +12,20 @@
 add_action( 'wp_head', 'prime2g_theme_root_styles', 1 );
 if ( ! function_exists( 'prime2g_theme_root_styles' ) ) {
 function prime2g_theme_root_styles() {
-
 	echo ToongeePrime_ThemeCSS::root_css();
-
 }
 }
 
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
-if ( ! function_exists( 'prime2g_icons_file_url' ) ) {
-function prime2g_icons_file_url() {
-	return 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css';
+if ( ! function_exists( 'prime2g_theme_icons_info' ) ) {
+function prime2g_theme_icons_info() {
+return (object)[
+	'url'		=>	'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css',
+	'version'	=>	'1.11.1'
+];
 }
 }
 
@@ -54,7 +54,7 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 
 /**
  *	Get Google Fonts
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 if ( ! function_exists( 'prime2g_get_google_fonts_remote' ) ) {
 function prime2g_get_google_fonts_remote() {
@@ -100,7 +100,7 @@ return $font_sets;
 
 /**
  *	Theme (Google) Fonts
- *	Overhauled @since ToongeePrime Theme 1.0.55
+ *	Overhauled @since 1.0.55
  */
 if ( ! function_exists( 'prime2g_theme_fonts' ) ) {
 function prime2g_theme_fonts() {

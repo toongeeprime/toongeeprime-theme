@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	OF WOOCOMMERCE
+ *	WOOCOMMERCE WORKINGS
  *
  *	@package WordPress
  *	@package WooCommerce
@@ -9,61 +9,9 @@
  */
 
 /**
- *	File active if WooCommerce is active
+ *	Active if WooCommerce is
  */
 if ( class_exists( 'WooCommerce' ) ) :
-
-
-/**
- *	@since 1.0.89
- */
-add_shortcode( 'prime_mini_cart', 'prime2g_woo_mini_cart_shortcode' );
-function prime2g_woo_mini_cart_shortcode() {
-ob_start();
-	$cart	=	prime2g_get_woo_mini_cart();
-	$cart	=	ob_get_clean();
-return $cart;
-}
-
-
-/**
- *	Get WooCommerce Mini Cart
- *	@since 1.0.45.50
- */
-if ( ! function_exists( 'prime2g_get_woo_mini_cart' ) ) {
-function prime2g_get_woo_mini_cart() {
-
-echo	'<div class="prime_mini_cart">
-<h3 id="cart-heading" class="cart-title"><i class="bi bi-cart3"></i> '. __( 'Your Cart', PRIME2G_TEXTDOM ) .'</h3>';
-include PRIME2G_THEME . 'woocommerce/cart/mini-cart.php';
-echo	'</div>';
-
-}
-}
-
-
-/**
- *	Add to Cart Fragments: SET CART IN A CONTAINER
- *	@since 1.0.44
- */
-add_filter( 'woocommerce_add_to_cart_fragments', 'prime2g_add_to_cart_fragments', 10, 1 );
-if ( ! function_exists( 'prime2g_add_to_cart_fragments' ) ) {
-function prime2g_add_to_cart_fragments( $fragments ) {
-	$count	=	WC()->cart->get_cart_contents_count();
-	ob_start(); ?>
-
-	<div class="widget_shopping_cart_content">
-		<?php woocommerce_mini_cart(); ?>
-	</div>
-
-<?php
-	$fragments[ 'span.cart_items_count' ]	=	'<span class="cart_items_count p-abso">' . $count . '</span>';
-	$fragments[ 'div.minicartdiv' ]	=	ob_get_clean();
-
-return $fragments;
-}
-}
-
 
 /**
  *	WooCommerce Breadcrumbs
@@ -71,7 +19,6 @@ return $fragments;
  */
 #	Remove WooCommerce breadcrumbs from default position:
 remove_action( 'woocommerce_before_main_content' , 'woocommerce_breadcrumb' , 20, 0 );
-
 
 if ( ! function_exists( 'prime2g_woo_breadrumb_home_url' ) ) {
 
@@ -112,6 +59,17 @@ remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wra
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
 add_filter( 'woocommerce_page_title', 'prime2g_remove_woo_page_title' );
 function prime2g_remove_woo_page_title( $page_title ) { return ''; }
+
+/**
+ *	Restroring Single Product Title
+ *	@since 1.0.89
+ */
+add_action( 'woocommerce_single_product_summary', function() {
+if ( 'header' === ToongeePrime_Styles::mods_cache()->title_place &&
+get_theme_mod( 'prime2g_remove_header_in_products', 0 ) ) {
+	prime2g_title_header( prime2g_title_header_classes() );
+}
+}, 5 );
 
 
 /**

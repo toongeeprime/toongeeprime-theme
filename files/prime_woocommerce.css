@@ -49,6 +49,8 @@ p.stars a:hover~a::before, p.stars.selected a.active~a::before{content:"\F588";}
 	font-family:bootstrap-icons;content:"\F26B";position:absolute;left:10px;top:5px;color:lightgreen;font-size:25px;}
 .woocommerce-error::after{content:"\F623";color:tomato;}
 .woocommerce-info::after{content:"\F431";color:skyblue;}
+.demo_store{position:fixed;left:0;right:0;color:#fff;background:var(--brand-color);text-align:center;margin:0;bottom:0;z-index:1;}
+.demo_store a{color:#fff;}
 
 /** FORMS **/
 .woocommerce label{display:block;line-height:2;}

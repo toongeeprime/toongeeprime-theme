@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	MEDIA MATTERS
  *
@@ -13,12 +12,10 @@ if ( is_string( $ids ) ) {
 	$ids	=	chop( $ids, ',' );
 	$ids	=	explode( ',', $ids );
 }
-
 $urls	=	[];
 foreach ( $ids as $id ) {
 	$urls[]	=	wp_get_attachment_image_url( $id, $size );	// allow possible falses for conditional use
 }
-
 return $urls;
 }
 
@@ -49,7 +46,6 @@ $front_n_archs	=	'prime2g_video_header_front_and_archives';
 	if ( in_array( $placement, [ 'is_archive', $front_n_archs ] ) && is_archive() ) return true;
 	if ( $placement === 'is_singular' && is_singular() ) return true;
 	if ( $placement === '' ) return true;
-
 }
 
 return false;
@@ -62,7 +58,6 @@ return false;
 add_filter( 'header_video_settings', 'prime2g_header_video_settings' );
 if ( ! function_exists( 'prime2g_header_video_settings' ) ) {
 function prime2g_header_video_settings( $settings ) {
-
 $video_url	=	get_header_video_url();
 $mobile		=	wp_is_mobile();
 

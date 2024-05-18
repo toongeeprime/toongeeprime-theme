@@ -572,3 +572,28 @@ return $css;
 }
 }
 
+
+
+/**
+ *	@since 1.0.89:
+ */
+if ( ! function_exists( 'prime2g_woo_mini_cart_css' ) ) {
+function prime2g_woo_mini_cart_css() {
+if ( defined( 'PRIME_MINICARTCSS' ) ) return;
+define( 'PRIME_MINICARTCSS', true );
+
+return	'<style id="prime_minicart_CSS">
+.widget_shopping_cart_content{position:relative;z-index:0;}
+.widget_shopping_cart_content .woocommerce-mini-cart{padding-left:5px;}
+li.mini_cart_item{position:relative;}
+.remove_from_cart_button{position:absolute;background:red;width:15px;height:15px;border-radius:25px;color:#fff;display:grid;place-content:center;}
+.remove_from_cart_button:hover{transform:scale(1.2);}
+.cart_item_grid{display:grid;grid-template-columns:50px 1fr;gap:15px;}
+.minicart_product_title{margin:0;}
+.woocommerce-mini-cart__buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;}
+</style>';
+}
+}
+
+
+

@@ -28,7 +28,7 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 	$classes[]	=	'no-js';
 
 	#	Add a body class if sidebar is set
-	if ( ! function_exists( 'define_2gRMVSidebar' ) && get_post_type() !== 'product' ) {
+	if ( ! function_exists( 'define_2gRMVSidebar' ) ) {
 		$classes[]	=	'has-sidebar';
 	}
 

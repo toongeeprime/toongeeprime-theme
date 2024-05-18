@@ -20,8 +20,7 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.89 =
 * Hooks: prime2g_pre_main_menu, prime2g_post_main_menu
-* Functions: prime_exclude_ids_from_search(), prime2g_theme_pre_get_posts()
+* Functions: prime_exclude_ids_from_search(), prime2g_theme_pre_get_posts(), prime2g_remove_header(), prime2g_estimated_reading_time()
 * Converted some custom fields to checkboxes
-* Reworked theme's WooCommerce mini cart system, added shortcode
-
+* WooCommerce: Reworked theme's mini cart and cart fragments systems; added shortcode and woo-mini-cart-and-fragments.php @ /plugins
 

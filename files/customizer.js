@@ -199,13 +199,30 @@ value.bind( function( newval ) {
 } );
 } );
 
-wp.customize.bind( 'ready', function() {
-wp.customize.previewer.bind( 'ready', function( message ){
-	let cta_text	=	$( "#_customize-input-prime2g_cta_button_text" );
-	cta_text.keyup( function() {
+/* @since 1.0.89 */
+api( 'prime2g_show_est_read_time', (value)=>{
+value.bind( function( newval ) {
+	let ertPlace	=	$( '#customize-control-prime2g_est_read_time_placement' ),
+		ertPrepend	=	$( '#customize-control-prime2g_est_read_time_prepend' );
+	if ( newval ) { ertPlace.slideDown( 180 ); ertPrepend.slideDown( 180 ); } else { ertPlace.slideUp( 180 ); ertPrepend.slideUp( 180 ); }
+} );
+} );
+
+wp.customize.bind( 'ready', ()=>{
+wp.customize.previewer.bind( 'ready', ( message )=>{
+	let cta_text	=	$( "#_customize-input-prime2g_cta_button_text" ),
+		est_rt_text	=	$( "#_customize-input-prime2g_est_read_time_prepend" );
+
+	cta_text.keyup( ()=>{
 		let new_val	=	cta_text.val();
 		$( '#customize-preview iframe' ).contents().find( '#prime_cta_menu .cta1' ).html( new_val );
 	} );
+
+	est_rt_text.keyup( ()=>{
+		let new_rtval	=	est_rt_text.val();
+		$( '#customize-preview iframe' ).contents().find( '.prime.est_read_time .pre' ).text( new_rtval );
+	} );
+
 } );
 } );
 

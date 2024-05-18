@@ -266,16 +266,36 @@ return (object) [
 
 
 /* @since 1.0.89 */
-if ( ! function_exists( 'prime_exclude_ids_from_search' ) ) {
-function prime_exclude_ids_from_search() : array {
-if ( $idsCache = wp_cache_get( 'exclude_ids_in_search', PRIME2G_CACHEGROUP ) ) { return $idsCache; }
-else {
-$idsCache	=	[
+function prime2g_customizer_pages_ids() {
+return [
 	(int) get_theme_mod( 'prime2g_404error_page_id' ),
 	(int) get_theme_mod( 'prime2g_custom_login_page_id' ),
 	(int) get_theme_mod( 'prime2g_shutdown_page_id' )
 ];
+}
 
+
+if ( !function_exists( 'prime_exclude_ids_from_search' ) ) {
+function prime_exclude_ids_from_search() : array {
+if ( $idsCache = wp_cache_get( 'exclude_ids_in_search', PRIME2G_CACHEGROUP ) ) { return $idsCache; }
+else {
+
+$query	=	new WP_Query( [
+'posts_per_page'=>	-1,
+'meta_key'		=>	'exclude_from_search',
+'meta_value'	=>	'1'
+] );
+
+$ids	=	[];
+if ( $query->have_posts ) {
+$posts	=	$query->posts;
+foreach ( $posts as $post ) {
+	$ids[]	=	$post->ID;
+}
+}
+wp_reset_postdata();
+
+$idsCache	=	array_merge( $ids, prime2g_customizer_pages_ids() );
 wp_cache_set( 'exclude_ids_in_search', $idsCache, PRIME2G_CACHEGROUP, HOUR_IN_SECONDS + 8 );
 return $idsCache;
 }

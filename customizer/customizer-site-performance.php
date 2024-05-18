@@ -91,6 +91,18 @@ if ( class_exists( 'woocommerce' ) ) {
 		)
 	);
 }
+else {
+	//	WooCommerce Adds jQuery Migrate
+	//	@since 1.0.89
+	$wp_customize->add_setting( 'prime2g_deregister_jq_migrate', $postMsgChecked );
+	$wp_customize->add_control( 'prime2g_deregister_jq_migrate', array(
+			'label'		=>	__( "Deregister jQuery Migrate", PRIME2G_TEXTDOM ),
+			'type'		=>	'checkbox',
+			'settings'	=>	'prime2g_deregister_jq_migrate',
+			'section'	=>	'prime2g_site_performance_section'
+		)
+	);
+}
 
 
 $time_units	=	[ MINUTE_IN_SECONDS => __( 'Minutes', PRIME2G_TEXTDOM ), HOUR_IN_SECONDS => __( 'Hours', PRIME2G_TEXTDOM ),

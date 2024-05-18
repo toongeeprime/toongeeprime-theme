@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	DO THINGS FOR TEMPLATES
  *
@@ -8,7 +7,6 @@
  */
 
 function prime2g_get_header_image_url( bool $hasHeader = false, $size = 'large' ) {
-
 $headerUrl	=	$hasHeader ?: has_custom_header();
 
 if ( $hasHeader ) {
@@ -24,7 +22,6 @@ if ( $hasHeader ) {
 }
 return $headerUrl;
 }
-
 
 
 /***		Moved here @since 1.0.77	***/
@@ -52,7 +49,7 @@ if ( ! prime2g_use_extras() )
 }
 
 /**
- *	Get Term Image Url: in a loop
+ *	Get Term Image Url
  */
 if ( ! function_exists( 'prime2g_get_term_image_url' ) ) {
 function prime2g_get_term_image_url( $termID, $size = 'large' ) {
@@ -67,3 +64,25 @@ if ( ! prime2g_use_extras() )
 		return get_header_image();
 }
 }
+
+
+
+/**
+ *	@since 1.0.89
+ */
+function prime2g_remove_header() {
+if ( is_singular() ) {
+global $post;
+
+if ( in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) ) return true;
+
+if ( class_exists( 'WooCommerce' ) && is_product()
+	&& get_theme_mod( 'prime2g_remove_header_in_products', 0 ) ) return true;
+
+return false;
+}
+
+return false;
+}
+
+

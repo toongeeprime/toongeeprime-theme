@@ -85,3 +85,45 @@ echo	'<div id="prime_class_remover" class="hidden p-fix" style="top:0;bottom:0;r
 
 }
 }
+
+
+/**
+ *	@since 1.0.89
+ */
+if ( get_theme_mod( 'prime2g_show_est_read_time', 0 ) ) {
+	$hook	=	get_theme_mod( 'prime2g_est_read_time_placement', 'prime2g_after_title' );
+	add_action( $hook, 'prime2g_estimated_reading_time', 10, 0 );
+}
+
+
+function prime2g_estimated_reading_time( array $options = [] ) {
+if ( ! is_singular() ) return;
+
+$sep	=	', ';
+$include_sec	=	$plain = false;
+$echo	=	true;
+
+extract( $options );
+global $post;
+
+$content	=	$post->post_content;
+$words		=	str_word_count( strip_tags( $content ) );
+$min		=	ceil( $words / 200 );
+$sec		=	ceil( $words % 200 / (200 / 60) );
+$minutes	=	$min . ' minute' . ( $min == 1 ? '' : 's' );
+$seconds	=	$sec . ' second' . ( $sec == 1 ? '' : 's' );
+
+$raw		=	__( $minutes . ( $include_sec ? $sep . $seconds : '' ), PRIME2G_TEXTDOM );
+if ( $plain ) return $raw;
+
+$prepend	=	get_theme_mod( 'prime2g_est_read_time_prepend', 'Est. read time: ' );
+$estimate	=	'<p class="prel prime est_read_time">
+<span class="pre">'. $prepend .'</span> <span class="est">'. $raw .'</span></p>';
+
+if ( $echo )
+	echo $estimate;
+else 
+	return $estimate;
+}
+
+

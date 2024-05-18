@@ -18,7 +18,7 @@ $hasHeader		=	has_custom_header();
 $menuPlace		=	$styles->menu_place;
 $videoActive	=	prime2g_is_header_video_active();
 $pid			=	get_the_ID();
-$keepHeader		=	$isSingular ? !in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) : true;
+$keepHeader		=	false === prime2g_remove_header();
 
 $titleOverVideo	=	$styles->titleOnHeader;
 $tov_class		=	$titleOverVideo && ( $post && $post->video_url || $videoActive || ! $isSingular ) ?
@@ -32,7 +32,7 @@ if ( $hasHeader ) {
 }
 
 
-if ( !wp_is_mobile() ) {
+if ( ! wp_is_mobile() ) {
 	prime2g_site_top_menu();	# 1.0.55
 	if ( $styles->sticky_menu && $styles->menu_place !== 'fixed' && empty( $styles->menu_type ) )
 		prime2g_main_menu( 'sticky_nav', 'sticky_menu_items' );	# 1.0.83
@@ -44,7 +44,7 @@ prime2g_before_header();
 if ( 'bottom' !== $menuPlace ) prime2g_main_menu();
 
 
-if ( ! $isSingular || $isSingular && $keepHeader ) { ?>
+if ( $keepHeader ) { ?>
 <header id="header" class="site_header prel<?php echo $tov_class; ?>"<?php echo $headerBackground; ?>>
 
 <?php
@@ -55,7 +55,7 @@ echo '<div class="site_width title_wrap prel grid w100pc">';
 do_action( 'prime2g_before_header_title' );	# 1.0.55
 
 	if ( $isSingular && $post->video_url &&
-	( 'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) ) {
+	'replace_header' === get_theme_mod( 'prime2g_video_embed_location' ) ) {
 		echo prime2g_get_post_media_embed();
 		if ( $titleOverVideo )
 			do_action( 'prime2g_page_title_hook', $title_in_headr );

@@ -46,8 +46,12 @@ $p_date	=	'<meta property="article:published_time" content="'. get_the_date( 'c'
 $tags	.=	'<meta name="author" content="'. $author->display_name .'" />
 ';
 
+$read_time	=	$post->post_type === 'post' ? '
+<meta name="twitter:label2" content="Est. reading time" />
+<meta name="twitter:data2" content="'. prime2g_estimated_reading_time( [ 'echo'=>false, 'plain'=>true ] ) .'" />' : '';
+
 $post_twitters	.=	'<meta name="twitter:label1" content="Written by" />
-<meta name="twitter:data1" content="'. $author->display_name .'" />';	// no line break here
+<meta name="twitter:data1" content="'. $author->display_name .'" />' . $read_time;	// no line break here
 
 $postTaxs	=	get_post_taxonomies( $post );
 if ( $postTaxs ) {

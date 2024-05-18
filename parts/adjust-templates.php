@@ -24,10 +24,9 @@ if ( ! empty( prime2g_get_post_media_embed() ) ) {
 global $post;
 $removeSidebar	=	get_theme_mod( 'prime2g_remove_sidebar_in_singular', '' );
 
-if ( $post->remove_sidebar === 'remove' ||
-	'and_pages' === $removeSidebar ||
-	! is_page() && ( 'posts' === $removeSidebar ) ||
-	is_page() && ( 'pages_only' === $removeSidebar )
+if ( $post->remove_sidebar === 'remove' || 'and_pages' === $removeSidebar ||
+	! is_page() && 'posts' === $removeSidebar || is_page() && 'pages_only' === $removeSidebar
+	|| function_exists( 'is_product' ) && is_product() && 'products_only' === $removeSidebar
 	)
 	prime2g_removeSidebar();
 
@@ -45,12 +44,21 @@ header#header{background-image:url('. prime2g_get_header_image_url( true ) .');}
 
 /**
  *	Archive Templates
+ *	Updated for WooCommerce archives @since 1.0.89
  */
 if ( is_home() || is_archive() ) {
 
-if ( get_theme_mod( 'prime2g_remove_sidebar_in_archives', '0' ) ) prime2g_removeSidebar();
+	if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+		if ( get_theme_mod( 'prime2g_remove_sidebar_in_product_archives', '0' ) ) prime2g_removeSidebar();
+	}
+	else {
+		if ( get_theme_mod( 'prime2g_remove_sidebar_in_archives', '0' ) ) prime2g_removeSidebar();
+	}
 
 }
 
 }
 }
+
+
+

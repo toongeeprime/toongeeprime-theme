@@ -31,7 +31,15 @@ if ( prime_child_min_version( '2.3' ) ) {
 			array( 'prime2g_css' ), $version
 		);
 
-		// if not using mini cart: wp_dequeue_script( 'wc-cart-fragments' );
+		//	if not using mini cart: wp_dequeue_script( 'wc-cart-fragments' );
+	}
+	else {
+		//	WooCommerce Adds jQuery Migrate, so do if jQ is registered & Woo absent
+		//	@since 1.0.89
+		if ( get_theme_mod( 'prime2g_deregister_jq_migrate', 1 ) ) {
+			if ( wp_script_is( 'jquery-migrate', 'registered' ) )
+				wp_deregister_script( 'jquery-migrate' );
+		}
 	}
 
 if ( isset( $post ) && $post->font_url ) {
@@ -65,15 +73,16 @@ wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' 
  *	ICONS
  *	@since 1.0.60
  */
-# echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-wp_enqueue_style( PRIME2G_ICONS_HANDLE, prime2g_icons_file_url(), [], '1.11.1' );
+#	echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
+$fonts	=	prime2g_theme_icons_info();	//	@since 1.0.89
+wp_enqueue_style( PRIME2G_ICONS_HANDLE, $fonts->url, [], $fonts->version );
 
 
 if ( ! prime_child_min_version( '2.3' ) ) {
 	wp_enqueue_script( 'prime2g_deprecated_js', get_theme_file_uri( '/files/deprecated.js' ), [], $version );
 }
 
-// wp_deregister_script( 'jquery-migrate' );
+
 
 /**
  *	DISBLING CSS
@@ -136,6 +145,5 @@ function prime2g_customizer_preview_enqueues() {
 	);
 }
 /* @since 1.0.50 End */
-
 
 

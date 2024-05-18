@@ -17,8 +17,10 @@
  * @version 7.9.0
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /*
-	*	Added <div> wrappers
+	*	Added <div> wrappers and grouped text separately from product thumbnail @ div.cart_item_text
 	*	Restructured the image and text elements
 	*	Updated for WooCommerce @version 7.9.0 @since ToongeePrime Theme 1.0.55
 */

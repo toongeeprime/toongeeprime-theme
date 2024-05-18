@@ -209,7 +209,7 @@ else { ?>
 
 <?php
 //	@since 1.0.89
-if ( ! in_array( $post->ID, prime_exclude_ids_from_search() ) ) { ?>
+if ( ! in_array( $post->ID, prime2g_customizer_pages_ids() ) ) { ?>
 
 <div class="meta-options prime2g_field select">
 	<label for="exclude_from_search">
