@@ -8,7 +8,13 @@
  */
 
 add_action( 'wp_head', 'prime2g_ajax_head', 3 );
-function prime2g_ajax_head() { ?>
+function prime2g_ajax_head() {
+/*	@since 1.0.89	*/
+if ( ! wp_script_is( 'jquery-migrate', 'registered' ) && ! wp_script_is( 'prime2g_jQuery' ) ) {
+	wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', true );
+}
+
+?>
 <script id="prime2g_ajax_base">
 const prime2g_ajaxurl	=	"<?php echo admin_url( 'admin-ajax.php' ); ?>";
 

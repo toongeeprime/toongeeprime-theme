@@ -14,17 +14,25 @@ function prime2g_close_down_website() {
 /* NOTE: WordPress still preloads frontpage object */
 $shutDown	=	get_theme_mod( 'prime2g_website_shutdown' );
 
-#	Return conditions
-if ( empty( $shutDown ) || is_admin() || is_user_logged_in() ||
+//	Return conditions
+$administrator	=	current_user_can( 'edit_theme_options' );
+if ( empty( $shutDown ) || is_admin() || $administrator ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
 ) return;
+
+
+/*	@since 1.0.90	*/
+status_header( 503 );
+nocache_headers();
+/*	1.0.90 End	*/
+
 
 $add_css	=	function_exists( 'prime2g_add_shutdown_css' ) ? prime2g_add_shutdown_css() : '';
 $add_js		=	function_exists( 'prime2g_add_shutdown_js' ) ? prime2g_add_shutdown_js() : '';
 
 /**
  *	USE A SHUTDOWN PAGE?
- *	@since @ 1.0.55
+ *	@since 1.0.55
  */
 if ( 'use_page' === get_theme_mod( 'prime2g_shutdown_display' ) ) {
 
@@ -101,7 +109,7 @@ background-size:cover;background-position:center;background-image:url('. $backgr
 
 	wp_body_open();
 
-	if ( current_user_can( 'edit_theme_options' ) && empty( $background_image ) )
+	if ( $administrator && empty( $background_image ) )
 		echo '<p style="position:fixed;top:0;left:0;">* You can add a background image in Customizer</p>';
 
 	prime2g_close_down_template( $shutDown );
@@ -138,5 +146,4 @@ $msg	=	'maintenance' === $shutDown ? '... and will be back soon' : 'Thank you fo
 	echo '</main>';
 }
 }
-
 

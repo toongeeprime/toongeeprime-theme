@@ -268,14 +268,14 @@ return (object) [
 /* @since 1.0.89 */
 function prime2g_customizer_pages_ids() {
 return [
-	(int) get_theme_mod( 'prime2g_404error_page_id' ),
-	(int) get_theme_mod( 'prime2g_custom_login_page_id' ),
-	(int) get_theme_mod( 'prime2g_shutdown_page_id' )
+	(int) get_theme_mod( 'prime2g_404error_page_id', 0 ),
+	(int) get_theme_mod( 'prime2g_custom_login_page_id', 0 ),
+	(int) get_theme_mod( 'prime2g_shutdown_page_id', 0 )
 ];
 }
 
 
-if ( !function_exists( 'prime_exclude_ids_from_search' ) ) {
+if ( ! function_exists( 'prime_exclude_ids_from_search' ) ) {
 function prime_exclude_ids_from_search() : array {
 if ( $idsCache = wp_cache_get( 'exclude_ids_in_search', PRIME2G_CACHEGROUP ) ) { return $idsCache; }
 else {

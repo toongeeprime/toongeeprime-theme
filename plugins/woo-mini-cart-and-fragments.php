@@ -16,7 +16,8 @@ add_shortcode( 'prime_mini_cart', 'prime2g_woo_mini_cart_shortcode' );
  */
 if ( ! function_exists( 'prime2g_woo_mini_cart_shortcode' ) ) {
 function prime2g_woo_mini_cart_shortcode( $atts = [] ) {
-if ( is_cart() ) return '';
+//	woocommerce_mini_cart() creates critical errors in admin post edit screen
+if ( is_cart() || is_admin() ) return '';
 
 $atts	=	shortcode_atts( [ 'title' => 'Your Cart' ], $atts );
 extract( $atts );
@@ -48,8 +49,8 @@ global $woocommerce;
 
 $class	=	'cart_count_fragmt';
 $count	=	$woocommerce->cart->cart_contents_count;
-$items	=	sprintf( _n( '%d item', '%d items', $count, PRIME2G_TEXTDOM ), $count );
-$total	=	$woocommerce->cart->get_cart_total();
+$items	=	'<span class="items">'. sprintf( _n( '%d item', '%d items', $count, PRIME2G_TEXTDOM ), $count ) .'</span>';
+$total	=	'<span class="total">'. $woocommerce->cart->get_cart_total() .'</span>';
 
 $link_open	=	'<a class="'. $class .'" href="'. esc_url( wc_get_cart_url() ) .'" title="'. __( 'View your shopping cart', PRIME2G_TEXTDOM ) .'">';
 $link_close	=	'</a>';
@@ -57,8 +58,8 @@ $link_close	=	'</a>';
 $span_open	=	'<span class="'. $class .'">';
 $span_close	=	'</span>';
 
-$link_fragments	=	$link_open . $items . ' - ' . $total . $link_close;
-$span_fragments	=	$span_open . $items . ' - ' . $total . $span_close;
+$link_fragments	=	$link_open . $items . '<span class="sep"> - </span>' . $total . $link_close;
+$span_fragments	=	$span_open . $items . '<span class="sep"> - </span>' . $total . $span_close;
 
 
 if ( $get === 'span' ) { echo $span_fragments; }
@@ -76,7 +77,6 @@ return (object) [
 ];
 }
 }
-
 
 
 /**

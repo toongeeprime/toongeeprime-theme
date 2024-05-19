@@ -11,6 +11,14 @@
 add_action( 'wp_enqueue_scripts', 'prime2g_theme_enqueues' );
 if ( ! function_exists( 'prime2g_theme_enqueues' ) ) {
 function prime2g_theme_enqueues() {
+
+/*	@since 1.0.89	*/
+global $compress_scripts, $concatenate_scripts;
+$compress_scripts		=	1;
+$concatenate_scripts	=	1;
+define( 'ENFORCE_GZIP', true );
+
+
 global $post;
 $version	=	PRIME2G_VERSION;
 

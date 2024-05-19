@@ -21,7 +21,7 @@ function prime2g_woocommerceJS() { ?>
 $( document ).ready( ()=>{
 
 $( 'body' ).on( 'added_to_cart', ()=>{ $( 'body' ).addClass( 'added_to_cart' ); } );
-
+// review jQ hooks: removed_from_cart, wc_cart_emptied
 <?php
 /**
  *	@ Woo checkout page

@@ -12,7 +12,7 @@ if ( ! function_exists( 'prime_seo_meta_tags_setter' ) ) {
 add_action( 'wp_head', 'prime_seo_meta_tags_setter', 1 );
 function prime_seo_meta_tags_setter() {
 
-if ( ! ToongeePrime_Styles::mods_cache()->theme_seo ) return;
+if ( is_admin() || ! ToongeePrime_Styles::mods_cache()->theme_seo ) return;
 
 $url		=	prime2g_get_current_url();
 $siteIcon	=	get_site_icon_url();
@@ -51,7 +51,8 @@ $read_time	=	$post->post_type === 'post' ? '
 <meta name="twitter:data2" content="'. prime2g_estimated_reading_time( [ 'echo'=>false, 'plain'=>true ] ) .'" />' : '';
 
 $post_twitters	.=	'<meta name="twitter:label1" content="Written by" />
-<meta name="twitter:data1" content="'. $author->display_name .'" />' . $read_time;	// no line break here
+<meta name="twitter:data1" content="'. $author->display_name .'" />'. $read_time .'
+';
 
 $postTaxs	=	get_post_taxonomies( $post );
 if ( $postTaxs ) {
@@ -148,8 +149,8 @@ $tags	.=	'<meta name="twitter:card" content="summary" />
 
 echo	'
 <!-- Meta tags by ToongeePrime Theme -->
-'. $tags . $post_twitters . $post_tags_og_array .'
-<!-- /Meta tags by ToongeePrime Theme -->
+'. $tags . $post_twitters . $post_tags_og_array .'<!-- /Meta tags by ToongeePrime Theme -->
+
 ';
 }
 

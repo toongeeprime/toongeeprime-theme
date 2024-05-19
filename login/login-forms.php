@@ -61,8 +61,8 @@ else {
 
 
 function prime2g_login_action_text( $loginTxt = 'Please Log In', $signTxt = 'Sign Up', $refr = '' ) {
-$login	=	( ! empty( $loginTxt ) );
-$signup	=	( ! empty( $signTxt ) );
+$login	=	! empty( $loginTxt );
+$signup	=	! empty( $signTxt );
 $loginHtm	= '';
 
 if ( $login )

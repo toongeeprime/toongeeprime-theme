@@ -70,19 +70,20 @@ if ( ! prime2g_use_extras() )
 /**
  *	@since 1.0.89
  */
-function prime2g_remove_header() {
+function prime2g_remove_header(): bool {
+$remove	=	false;
+
 if ( is_singular() ) {
 global $post;
 
-if ( in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) ) return true;
+if ( in_array( $post->remove_header, [ 'remove', 'header_image_css' ] ) ) $remove	=	true;
 
 if ( class_exists( 'WooCommerce' ) && is_product()
-	&& get_theme_mod( 'prime2g_remove_header_in_products', 0 ) ) return true;
-
-return false;
+	&& get_theme_mod( 'prime2g_remove_header_in_products', 0 ) ) $remove	=	true;
 }
 
-return false;
-}
+if ( function_exists( 'prime_child_remove_header' ) ) $remove	=	prime_child_remove_header(); // bool
 
+return $remove;
+}
 
