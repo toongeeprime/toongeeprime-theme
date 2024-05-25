@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	ARCHIVES' - EMPTY TEMPLATE
+ *	ARCHIVES' EMPTY TEMPLATE
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
@@ -11,7 +11,6 @@ prime2g_removeSidebar();
 
 get_header();
 
-
 	echo '<div style="text-align:center;margin:90px 30px;">';
 	echo '<h3>Sorry, nothing to display here!</h3>';
 
@@ -20,7 +19,6 @@ get_header();
 	}
 
 	echo '</div>';
-
 
 get_footer();
 

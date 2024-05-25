@@ -349,7 +349,7 @@ function prime2g_field_extras_callback( $post ) { ?>
 
 <div class="meta-options prime2g_field">
 	<label for="font_url">Google Font URL</label>
-	<input type="url" id="font_url" name="font_url" value="<?php echo esc_url( $post->font_url ); ?>">
+	<input type="url" id="font_url" name="font_url" value="<?php echo esc_url( $post->font_url ); ?>" placeholder="https://fonts.googleapis.com/css?family=Nerko+One:300,400,500&display=swap">
 </div>
 
 <div class="meta-options prime2g_field">

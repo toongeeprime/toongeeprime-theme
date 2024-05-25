@@ -26,6 +26,7 @@ function prime2g_toTop() { ?>
  *	Added get_search_query() and pluggable, @since 1.0.51
  *	First arg preferrably as array @since 1.0.55
  *	Live Search Feature & refactored @since 1.0.78
+ *	Live Search set to work with one form on webpage... target with $id
  */
 if ( ! function_exists( 'prime2g_wp_block_search_form' ) ) {
 function prime2g_wp_block_search_form( $echo = true, $label = 'Search', $buttontext = null ) {
@@ -56,14 +57,38 @@ $form	.=	'<form role="search" method="get" action="' . get_home_url() . '" class
 </div>
 </form>';
 
-$form	.=	$livesearch ? '<div class="liveSearchBox hidden p-abso slimscrollbar"><div class="liveSearchResults"></div></div>
-</div>' . prime2g_ajax_search_js( [ 'id' => $formID, 'post_type' => $post_type, 'template' => $template ] )
-: '</div>';
+//	Added filters @since 1.0.90
+$searchbox	=	'<div class="liveSearchBox hidden p-abso">
+<span class="close_lsearch pointer p-abso" title="Close">x</span>';
+$searchbox	.=	apply_filters( 'prime2g_livesearchform_top', '' );
+$searchbox	.=	'<div class="slimscrollbar"><div class="liveSearchResults"></div></div>';
+$searchbox	.=	apply_filters( 'prime2g_livesearchform_base', '' );
+$searchbox	.=	'</div>' . prime2g_ajax_search_js( [ 'id' => $formID, 'post_type' => $post_type, 'template' => $template ] );
+
+$form	.=	$livesearch ? $searchbox : '';
+
+$form	.=	'</div><!-- .formWrap -->';
 
 if ( $echo ) echo $form;
 else return $form;
 }
 }
+
+
+/**
+ *	@since 1.0.90
+ */
+add_filter( 'prime2g_livesearchform_top', 'prime_do_livesearchform_top' );
+add_filter( 'prime2g_livesearchform_base', 'prime_do_livesearchform_base' );
+
+function prime_do_livesearchform_top() {
+	return function_exists( 'prime_livesearchform_top' ) ? prime_livesearchform_top() : '';
+}
+
+function prime_do_livesearchform_base() {
+	return function_exists( 'prime_livesearchform_base' ) ? prime_livesearchform_base() : '';
+}
+
 
 
 /**
@@ -96,6 +121,7 @@ if ( get_theme_mod( 'prime2g_show_est_read_time', 0 ) ) {
 }
 
 
+if ( ! function_exists( 'prime2g_estimated_reading_time' ) ) {
 function prime2g_estimated_reading_time( array $options = [] ) {
 if ( ! is_singular() ) return;
 
@@ -124,6 +150,7 @@ if ( $echo )
 	echo $estimate;
 else 
 	return $estimate;
+}
 }
 
 

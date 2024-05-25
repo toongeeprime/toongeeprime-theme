@@ -106,7 +106,7 @@ $append	=	get_theme_mod( 'prime2g_footer_credit_append', '' ); # @since 1.0.48.5
 $attrs	=	' target="_blank" rel="noopener noreferrer nofollow"';
 $cRight	=	'<span id="copyright_date"> &copy; ' . date( 'Y' ) . '.</span> ';
 
-$footerCred	=	'<div class="site_footer_credits site_width">';
+$footerCred	=	'<div class="site_footer_credits"><div class="site_width">';
 
 if ( $name ) {
 	if( $url && $name ) {
@@ -127,7 +127,7 @@ $footerCred	.=	'<span id="appended_credit" title="Site Credits">';
 if ( '' !== $append ) { $footerCred	.=	$append; }
 $footerCred	.=	'</span>';
 
-$footerCred	.=	'</div>';
+$footerCred	.=	'</div></div>';
 
 return $footerCred;
 }

@@ -24,12 +24,33 @@ return prime2g_theme_mod_social_and_contacts( $address );
 
 /**
  *	Insert a Template Part
- *	@since ToongeePrime Theme 1.0.50
+ *	@since 1.0.50
  */
 add_shortcode( 'prime_insert_template_part', 'prime2g_insert_template_part_shortcode' );
 function prime2g_insert_template_part_shortcode( $atts ) {
-$atts	=	shortcode_atts( [ 'id' => '1', 'device' => '' ], $atts );
+$atts	=	shortcode_atts( [
+'id'		=>	'1',
+'device'	=>	'',
+'hide_in_tags'	=>	'',		//	@since 1.0.90
+'show_in_tags'	=>	''
+], $atts );
 extract( $atts );
+
+if ( ! empty( $hide_in_tags ) ) {
+	$tags	=	explode( ',', $hide_in_tags );
+	foreach ( $tags as $tag ) {
+		if ( function_exists( 'tag' ) && true === $tag() ) return;
+	}
+}
+
+if ( ! empty( $show_in_tags ) ) {
+	$bools	=	[];
+	$tags	=	explode( ',', $show_in_tags );
+	foreach ( $tags as $tag ) {
+		$bools[]	=	function_exists( 'tag' ) && true === $tag();
+	}
+	if ( ! in_array( true, $bools ) ) return;
+}
 
 $isMobile	=	wp_is_mobile();
 $devices	=	prime2g_devices_array();
@@ -48,7 +69,7 @@ return $part;
 
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 add_shortcode( 'prime_site_footer_credits', 'prime2g_theme_footer_credit' );
 
@@ -207,12 +228,12 @@ if ( $place === 'footer' ) $hook	=	'wp_footer';
 add_action( $hook, function() use( $output ) { echo $output; }, (int) $priority );
 }
 
-/* @since ToongeePrime Theme 1.0.55 END */
+/* @since 1.0.55 END */
 
 
 /**
  *	In-post Redirection by JavaScript
- *	@since ToongeePrime Theme 1.0.51
+ *	@since 1.0.51
  */
 add_shortcode( 'prime_redirect_to', 'prime2g_redirect_shortcode' );
 function prime2g_redirect_shortcode( $atts ) {

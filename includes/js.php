@@ -286,15 +286,21 @@ let fID'. $id .'	=	"'. $id .'",
 	tSRes'. $id .'	=	tForm'. $id .'.querySelector( ".liveSearchResults" ),
 	tInput'. $id .'	=	tForm'. $id .'.querySelector( "input" );
 
+p2getAll( ".close_lsearch" ).forEach( c => {
+	c.addEventListener( "click", ()=>{ tSBox'. $id .'.classList.add( "hidden", "del" ); } )
+} );
+
 var counter	=	[],
 	input_time	=	0;
 
-tForm'. $id .'.addEventListener( "mouseleave", ()=>{ setTimeout( ()=>{
+tForm'. $id .'.addEventListener( "mouseleave", ()=>{
+if ( tSBox'. $id .'.classList.contains( "del" ) ) return;
+setTimeout( ()=>{
 if ( ! tSRes'. $id .'.matches( ":hover" ) ) {
 	tSRes'. $id .'.innerHTML	=	"";
 	tSBox'. $id .'.classList.add( "hidden" );
 }
-}, 2000 );
+}, 3000 );
 } );
 
 function prime_runAjaxSearch( e ) {
@@ -315,7 +321,7 @@ else {
 /**
  *	Control execution
  */
-function p2gajmsO() { tSBox'. $id .'.classList.remove( "hidden" ) }
+function p2gajmsO() { tSBox'. $id .'.classList.remove( "hidden", "del" ) }
 
 var	tValue'. $id .'	=	tInput'. $id .'.value;
 
@@ -360,7 +366,7 @@ if ( input_time < 500 && keytime < 200 ) return;
 setTimeout( ()=>{
 if ( tValue'. $id .'.length > 2 ) {
 
-tSBox'. $id .'.classList.remove( "hidden" );
+tSBox'. $id .'.classList.remove( "hidden", "del" );
 tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">'. __( 'Searching...', PRIME2G_TEXTDOM ) .'</p>";
 
 formData	=	{

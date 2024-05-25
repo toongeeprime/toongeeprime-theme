@@ -369,7 +369,6 @@ return '.main_menu_wrap{position:relative;}
 .collapsible-navs li{position:relative;}
 .collapsible-navs li a{padding:7px 15px;margin:3px;}
 .collapsible-navs a:hover, .collapsible-navs a:focus{color:var(--content-text);background:var(--content-background);}
-.logo_with_menu .custom-logo{margin-top:5px;}
 .current-menu-item a{position:relative;}
 .current-menu-item a::after{
 	/* This approach bypasses a border-radius */
@@ -399,7 +398,6 @@ li:hover .sub-menu, .sub-menu li:hover .sub-menu{opacity:1;visibility:visible;}
 .sub-menu .sub-menu{left:100%;top:0;}
 .sub-menu li, .collapsible-navs .sub-menu a{display:block;}
 .logo_with_menu{display:flex;}
-.logo_with_menu .custom-logo{margin-left:var(--min-pad);}
 .logo_with_menu .main-menu{margin:auto var(--min-pad);}';
 }
 }
@@ -494,11 +492,14 @@ define( 'PRIME_AJX_SEARCHCSS', true );
 
 return	'<style id="prime_livesearchCSS">
 .liveSearchBox{left:0;right:0;background:var(--content-background);z-index:99999;border:5px solid #f8f8f8;padding:20px;
-border-radius:5px;max-height:350px;}
+border-radius:5px;}
+.liveSearchBox .slimscrollbar{max-height:350px;}
 .liveSearchBox article{display:grid;grid-template-columns:60px 1fr;gap:10px;margin-bottom:0;}
 .liveSearchResults{display:grid;gap:10px;}
 .liveSearchResults .entry_img{height:40px;overflow:hidden;}
 .liveSearchResults .thumbnail{height:40px;}
+.close_lsearch{display:grid;place-content:center;width:17px;height:17px;color:#fff;background:red;
+border-radius:50px;top:0;right:0;}
 </style>';
 }
 }
@@ -575,7 +576,7 @@ return $css;
 
 
 /**
- *	@since 1.0.89:
+ *	@since 1.0.89
  */
 if ( ! function_exists( 'prime2g_woo_mini_cart_css' ) ) {
 function prime2g_woo_mini_cart_css() {
@@ -596,4 +597,14 @@ li.mini_cart_item{position:relative;}
 }
 
 
+/**
+ *	@since 1.0.90
+ */
+if ( ! function_exists( 'prime2g_prod_categ_imgs_css' ) ) {
+function prime2g_prod_categ_imgs_css() {
+return	'
+#prime_prod_categ_img_links{gap:50px;text-align:center;}
+.prime_prod_cat_img span{display:block;height:150px;width:150px;background-size:cover;background-position:center;}';
+}
+}
 
