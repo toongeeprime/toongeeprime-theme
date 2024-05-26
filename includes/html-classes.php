@@ -28,7 +28,7 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 	$classes[]	=	'no-js';
 
 	#	Add a body class if sidebar is set
-	if ( ! function_exists( 'define_2gRMVSidebar' ) ) {
+	if ( false === prime2g_remove_sidebar() ) {
 		$classes[]	=	'has-sidebar';
 	}
 
@@ -115,6 +115,12 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 			$classes[]	=	'product-cat-' . $cat->slug;
 		break;
 		}
+	}
+
+	#	@since 1.0.90
+	if ( defined( 'PRIME2G_ALT_POST_OBJ' ) ) {
+		$classes[]	=	'prime_alt_post';
+		$classes[]	=	PRIME2G_ALT_POST_OBJ->page_width ?: '';
 	}
 
 return $classes;

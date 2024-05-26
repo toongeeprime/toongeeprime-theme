@@ -46,7 +46,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		'input_attrs'	=>	array(
 			'placeholder'	=>	__( 'custom_user_capability', PRIME2G_TEXTDOM )
 		),
-		'active_callback'	=>	function() { return 'custom_capability' === get_theme_mod( 'prime2g_admin_access_capability' ); },
+		'active_callback'	=>	function() { return 'custom_capability' === get_theme_mod( 'prime2g_admin_access_capability' ); }
 	) );
 
 	/**
@@ -145,6 +145,29 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 			''	=>	__( 'Use Block Widgets', PRIME2G_TEXTDOM ),
 			'classic'	=>	__( 'Use Classic Widgets', PRIME2G_TEXTDOM )
 		)
+	) );
+
+	/**
+	 *	MEMBERS ONLY STATE
+	 *	@since @ 1.0.90
+	 */
+	$wp_customize->add_setting( 'prime2g_site_is_members_only', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_site_is_members_only', array(
+		'label'		=>	__( 'Activate Members-Only State', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_site_is_members_only',
+		'section'	=>	'prime2g_site_settings_section',
+		'active_callback'	=>	function() { return prime2g_constant_is_true( 'PRIME2G_MEMBERSONLY_SITE', false ); }
+	) );
+
+	$wp_customize->add_setting( 'prime2g_membersonly_page_id', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_membersonly_page_id', array(
+		'label'		=>	__( 'Select Non-members Public Page', PRIME2G_TEXTDOM ),
+		'type'		=>	'select',
+		'settings'	=>	'prime2g_membersonly_page_id',
+		'section'	=>	'prime2g_site_settings_section',
+		'choices'	=>	$pages,
+		'active_callback'	=> function() { return ! empty( get_theme_mod( 'prime2g_site_is_members_only' ) ); }
 	) );
 
 }

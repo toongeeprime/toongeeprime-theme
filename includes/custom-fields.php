@@ -83,8 +83,8 @@ if ( $parent_id	=	wp_is_post_revision( $post_id ) ) {
 }
 
 $fields	=	[
-	'post_subtitle', 'remove_sidebar', 'remove_header', 'page_width', 'video_url', 'prime_page_js', 'font_url',
-	'use_main_nav_location'
+	'post_subtitle', 'remove_sidebar', 'remove_header', 'remove_footer', 'page_width', 'video_url',
+	'prime_page_js', 'font_url', 'use_main_nav_location'
 ];
 foreach( $fields as $field ) {
 	if ( array_key_exists( $field, $_POST ) ) {
@@ -169,17 +169,6 @@ if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type
 
 <?php } ?>
 
-<?php
-/* Condition added @since 1.0.73 */
-if (
-$post->post_type === 'page' && $post->ID != get_option('page_on_front') && $post->ID == get_theme_mod( 'prime2g_shutdown_page_id' )
-&& ! empty( get_theme_mod( 'prime2g_website_shutdown' ) )
-) {
-	echo '<div class="prime2gMetaboxNotice">
-	<h3>Header controls are at the page set as Static Homepage</h3>
-	</div>';
-}
-else { ?>
 <div class="meta-options prime2g_field">
 	<label for="remove_header">Remove Default Header?</label>
 	<select id="remove_header" class="prime2g_input" name="remove_header">
@@ -188,7 +177,33 @@ else { ?>
 		<option value="header_image_css" <?php if ( $post->remove_header === 'header_image_css' ) echo 'selected'; ?>>Use Header Image CSS</option>
 	</select>
 </div>
+
+<?php //	@since 1.0.90
+if ( prime_child_min_version( '2.4' ) ) { ?>
+
+<div class="meta-options prime2g_field">
+	<label for="remove_footer">Remove Site Footer?</label>
+	<select id="remove_footer" class="prime2g_input" name="remove_footer">
+		<option>--- Keep Footer ---</option>
+		<option value="remove" <?php if ( $post->remove_footer === 'remove' ) echo 'selected'; ?>>Remove Site Footer</option>
+	</select>
+</div>
+
 <?php } ?>
+
+
+<?php
+//	@since 1.0.89
+if ( ! in_array( $post->ID, prime2g_customizer_pages_ids() ) ) { ?>
+
+<div class="meta-options prime2g_field select">
+	<label for="exclude_from_search">
+	<input type="checkbox" id="exclude_from_search" class="prime2g_input" name="exclude_from_search" value="<?php echo $post->exclude_from_search; ?>" <?php echo '1' === $post->exclude_from_search ? ' checked="checked"' : ''; ?> />
+	Exclude this from Search?</label>
+</div>
+
+<?php } ?>
+
 
 <hr class="hr" />
 
@@ -206,18 +221,6 @@ else { ?>
 	<input type="checkbox" id="enqueue_jquery" class="prime2g_input" name="enqueue_jquery" value="<?php echo $post->enqueue_jquery; ?>" <?php echo '1' === $post->enqueue_jquery ? ' checked="checked"' : ''; ?> />
 	Enqueue jQuery?</label>
 </div>
-
-<?php
-//	@since 1.0.89
-if ( ! in_array( $post->ID, prime2g_customizer_pages_ids() ) ) { ?>
-
-<div class="meta-options prime2g_field select">
-	<label for="exclude_from_search">
-	<input type="checkbox" id="exclude_from_search" class="prime2g_input" name="exclude_from_search" value="<?php echo $post->exclude_from_search; ?>" <?php echo '1' === $post->exclude_from_search ? ' checked="checked"' : ''; ?> />
-	Exclude this from Search?</label>
-</div>
-
-<?php } ?>
 
 <?php
 /**

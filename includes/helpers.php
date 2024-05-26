@@ -8,7 +8,7 @@
  */
 
 /**
- *	Use prime2g_removeSidebar() to remove sidebar areas from a template
+ *	To remove main sidebar from a template
  */
 function prime2g_removeSidebar() { if ( ! function_exists( 'define_2gRMVSidebar' ) ) { function define_2gRMVSidebar(){} } }
 

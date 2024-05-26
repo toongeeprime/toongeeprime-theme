@@ -36,20 +36,23 @@ $atts	=	shortcode_atts( [
 ], $atts );
 extract( $atts );
 
+$show_hide	=	[];
 if ( ! empty( $hide_in_tags ) ) {
+	$hide_in_tags	=	str_replace( ' ', '', $hide_in_tags );
 	$tags	=	explode( ',', $hide_in_tags );
 	foreach ( $tags as $tag ) {
-		if ( function_exists( 'tag' ) && true === $tag() ) return;
+		$show_hide[]	=	function_exists( $tag ) && true === $tag();
 	}
+	if ( in_array( true, $show_hide ) ) return;
 }
 
 if ( ! empty( $show_in_tags ) ) {
-	$bools	=	[];
+	$show_in_tags	=	str_replace( ' ', '', $show_in_tags );
 	$tags	=	explode( ',', $show_in_tags );
 	foreach ( $tags as $tag ) {
-		$bools[]	=	function_exists( 'tag' ) && true === $tag();
+		$show_hide[]	=	function_exists( $tag ) && true === $tag();
 	}
-	if ( ! in_array( true, $bools ) ) return;
+	if ( ! in_array( true, $show_hide ) ) return;
 }
 
 $isMobile	=	wp_is_mobile();

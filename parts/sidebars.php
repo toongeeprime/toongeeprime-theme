@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	SITE'S SIDEBARS AND WIDGET AREAS
  *
@@ -12,11 +11,8 @@
  */
 if ( ! function_exists( 'prime2g_sidebar' ) ) {
 function prime2g_sidebar() {
-/**
- *	return, if prime2g_removeSidebar() is called === where the function is defined
- */
 
-if ( function_exists( 'define_2gRMVSidebar' ) ) return;
+if ( prime2g_remove_sidebar() ) return;
 
 if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
 
@@ -43,7 +39,7 @@ add_action( 'prime2g_before_header', 'prime2g_widgets_above_header' );
 if ( ! function_exists( 'prime2g_widgets_above_header' ) ) {
 function prime2g_widgets_above_header() {
 
-if ( function_exists( 'define_2gPlainPage' ) ) return;
+if ( prime2g_is_plain_page_template() ) return;
 
 if ( is_active_sidebar( 'aboveheader-widgets' ) ) { ?>
 	<aside id="above_headerWidgets" class="header asides clear">
@@ -64,7 +60,7 @@ add_action( 'prime2g_sub_header', 'prime2g_widgets_below_header' );
 if ( ! function_exists( 'prime2g_widgets_below_header' ) ) {
 function prime2g_widgets_below_header() {
 
-if ( function_exists( 'define_2gPlainPage' ) ) return;
+if ( prime2g_is_plain_page_template() ) return;
 
 if ( is_active_sidebar( 'belowheader-widgets' ) ) { ?>
 	<aside id="below_headerWidgets" class="header asides clear">
@@ -123,7 +119,7 @@ add_action( 'prime2g_before_post', 'prime2g_widgets_above_post' );
 if ( ! function_exists( 'prime2g_widgets_above_post' ) ) {
 function prime2g_widgets_above_post() {
 
-if ( function_exists( 'define_2gPlainPage' ) ) return;
+if ( prime2g_is_plain_page_template() ) return;
 
 if ( is_active_sidebar( 'aboveposts-widgets' ) ) { ?>
 	<aside id="above_postsWidgets" class="asides clear">
@@ -145,7 +141,7 @@ add_action( 'prime2g_after_post', 'prime2g_below_posts_widgets', 20 );
 if ( ! function_exists( 'prime2g_below_posts_widgets' ) ) {
 function prime2g_below_posts_widgets() {
 
-if ( function_exists( 'define_2gPlainPage' ) ) return;
+if ( prime2g_is_plain_page_template() ) return;
 
 if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 	<aside id="below_postsWidgets" class="asides clear">
@@ -165,11 +161,11 @@ if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 if ( ! function_exists( 'prime2g_footer_top_widgets' ) ) {
 function prime2g_footer_top_widgets() {
 
-if ( function_exists( 'define_2gPlainPage' ) ) return;
+if ( prime2g_is_plain_page_template() ) return;
 
 if ( is_active_sidebar( 'footer-top' ) ) { ?>
-	<aside id="footer_topWidgets" class="footer_topWidgets asides site_width clear">
-		<div class="widgets-box grid">
+	<aside id="footer_topWidgets" class="footer_topWidgets asides clear">
+		<div class="widgets-box site_width grid">
 			<?php dynamic_sidebar( 'footer-top' ); ?>
 		</div>
 	</aside>
@@ -260,5 +256,4 @@ if ( is_active_sidebar( 'mobilemenubottom-widgets' ) ) { ?>
 
 }
 }
-
 

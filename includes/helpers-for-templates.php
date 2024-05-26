@@ -82,8 +82,66 @@ if ( class_exists( 'WooCommerce' ) && is_product()
 	&& get_theme_mod( 'prime2g_remove_header_in_products', 0 ) ) $remove	=	true;
 }
 
+//	@since 1.0.90
+if ( defined( 'PRIME2G_ALT_POST_OBJ' ) ) {
+	if ( in_array( PRIME2G_ALT_POST_OBJ->remove_header, [ 'remove', 'header_image_css' ] ) ) $remove	=	true;
+}
+
 if ( function_exists( 'prime_child_remove_header' ) ) $remove	=	prime_child_remove_header(); // bool
 
 return $remove;
 }
+
+
+
+/**
+ *	@since 1.0.90
+ */
+function prime2g_remove_sidebar(): bool {
+$remove	=	false;
+
+if ( function_exists( 'define_2gRMVSidebar' ) ) return true;
+
+if ( defined( 'PRIME2G_ALT_POST_OBJ' ) ) $remove	=	PRIME2G_ALT_POST_OBJ->remove_sidebar === 'remove';
+
+if ( function_exists( 'prime_child_remove_sidebar' ) ) $remove	=	prime_child_remove_sidebar(); // bool
+
+return $remove;
+}
+
+
+
+function prime2g_is_plain_page_template(): bool {
+$plain	=	false;
+
+if ( function_exists( 'define_2gPlainPage' ) ) return true;
+
+if ( defined( 'PRIME2G_ALT_POST_OBJ' ) )
+	$plain	=	get_post_meta( PRIME2G_ALT_POST_OBJ->ID, '_wp_page_template', true ) === 'templates/empty-page.php';
+
+if ( function_exists( 'prime_child_is_plain_page_template' ) ) $plain	=	prime_child_is_plain_page_template(); // bool
+
+return $plain;
+}
+
+
+
+function prime2g_remove_footer(): bool {
+if ( ! prime_child_min_version( '2.4' ) ) return false;
+$remove	=	false;
+
+if ( is_singular() ) {
+global $post;
+
+$remove	=	$post->remove_footer === 'remove';
+}
+
+if ( defined( 'PRIME2G_ALT_POST_OBJ' ) ) $remove	=	PRIME2G_ALT_POST_OBJ->remove_footer === 'remove';
+
+if ( function_exists( 'prime_child_remove_footer' ) ) $remove	=	prime_child_remove_footer(); // bool
+
+return $remove;
+}
+
+
 

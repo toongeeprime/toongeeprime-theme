@@ -79,3 +79,63 @@ $images	.=	'</div></section>';
 if ( $categories ) return '<style>'. prime2g_prod_categ_imgs_css() . '</style>' . $images;
 }
 
+
+
+
+/**
+ *	For some consistency in using these icons
+ *	Use JavaScript in Child theme for whatever manipulations
+ */
+add_shortcode( 'prime_shopping_icons', 'prime2g_woo_icons_template' );
+function prime2g_woo_icons_template( $atts = [] ) {
+if ( ! function_exists( 'is_shop' ) ) return;
+
+$atts	=	shortcode_atts( array(
+'show'	=>	'cart, account, checkout',
+'wrap'	=>	'yes',
+'cart_count'	=>	'yes',
+), $atts );
+extract( $atts );
+
+$show	=	str_replace( ' ', '', $show );
+$to_show=	explode( ',', $show );
+$wrap	=	$wrap === 'yes' ? true : false;
+
+$icons	=	'';
+$icons	.=	$wrap ? '<span class="prime_shopping_icons">' :'';
+
+if ( in_array( 'cart', $to_show ) ) {
+
+	// CSS to hide excess cart data
+	$x_css	=	'<style>
+	.prime_si.cart .total,.prime_si.cart .ii,.prime_si.cart .sep{display:none!important;}
+	</style>';
+	$cart_count	=	$cart_count === 'yes' ? $x_css . '<span class="cart_count">'. prime2g_woo_cart_contents_fragments( 'count', false ) .'</span>' : '';
+	$icons	.=	'<span class="prime_si cart prel">'. $cart_count .'
+	<a href="'. esc_url( wc_get_cart_url() ) .'" title="'. __( 'Shopping cart', PRIME2G_TEXTDOM ) .'">
+	<i class="bi bi-cart3"></i>
+	</a>
+	</span>';
+}
+
+if ( in_array( 'account', $to_show ) ) {
+	$icons	.=	'<span class="prime_si account">
+	<a href="'. esc_url( get_permalink( wc_get_page_id( 'myaccount' ) ) ) .'" title="'. __( 'Account Page', PRIME2G_TEXTDOM ) .'">
+	<i class="bi bi-person"></i>
+	</a>
+	</span>';
+}
+
+if ( in_array( 'checkout', $to_show ) ) {
+	$icons	.=	'<span class="prime_si checkout">
+	<a href="'. esc_url( wc_get_checkout_url() ) .'" title="'. __( 'Checkout', PRIME2G_TEXTDOM ) .'">
+	<i class="bi bi-credit-card"></i>
+	</a>
+	</span>';
+}
+
+$icons	.=	$wrap ? '</span>' : '';
+
+return $icons;
+}
+

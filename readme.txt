@@ -21,3 +21,9 @@ A WordPress theme with options for customization, design and development flexibi
 = 1.0.90 =
 * /woocommerce/archive.product.php added
 * /plugins/woo-templates.php added
+* prime_insert_template_part shortcode, parameters: show_in_tags & hide_in_tags
+* Customizer: WooCommerce shop page template override using page
+* /init/members-only-site.php + accompanying Customizer settings
+* Introduced prime2g_remove_sidebar(), prime_child_remove_footer() and prime2g_is_plain_page_template()
+* Introduced usage of PRIME2G_ALT_POST_OBJ constant
+

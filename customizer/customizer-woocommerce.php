@@ -93,7 +93,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 
 	$wp_customize->add_setting( 'prime2g_retain_woo_archive_action_hooks', array_merge( ['default'=>'1'], $simple_text ) );
 	$wp_customize->add_control( 'prime2g_retain_woo_archive_action_hooks', array(
-			'label'		=>	__( 'Retain Archive Template Hooks', PRIME2G_TEXTDOM ),
+			'label'		=>	__( 'Retain WC Archive Template Hooks', PRIME2G_TEXTDOM ),
 			'type'		=>	'checkbox',
 			'settings'	=>	'prime2g_retain_woo_archive_action_hooks',
 			'section'	=>	'prime2g_woocommerce_edits_section',

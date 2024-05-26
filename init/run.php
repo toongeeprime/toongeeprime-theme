@@ -11,6 +11,7 @@
 require_once 'constants.php';
 
 require_once 'website-shutdown.php';
+require_once 'members-only-site.php';	// @since 1.0.90
 
 /* @since 1.0.55 */
 require_once 'smtp.php';
@@ -54,6 +55,7 @@ foreach( $parts as $part ) { require_once PRIME2G_PART . $part . '.php'; }
  */
 add_action( 'after_switch_theme', 'prime_init_rewrite_flush' );
 function prime_init_rewrite_flush() {
-prime2g_register_custom_post_types();
+	prime2g_register_custom_post_types();
 	flush_rewrite_rules();
 }
+

@@ -7,7 +7,7 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-add_action( 'template_redirect', 'prime2g_close_down_website' );
+add_action( 'template_redirect', 'prime2g_close_down_website', 5 );
 
 function prime2g_close_down_website() {
 
@@ -20,15 +20,10 @@ if ( empty( $shutDown ) || is_admin() || $administrator ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
 ) return;
 
-
 /*	@since 1.0.90	*/
 status_header( 503 );
 nocache_headers();
-/*	1.0.90 End	*/
 
-
-$add_css	=	function_exists( 'prime2g_add_shutdown_css' ) ? prime2g_add_shutdown_css() : '';
-$add_js		=	function_exists( 'prime2g_add_shutdown_js' ) ? prime2g_add_shutdown_js() : '';
 
 /**
  *	USE A SHUTDOWN PAGE?
@@ -41,7 +36,7 @@ if ( is_singular() && ! is_front_page() || is_archive() && ! is_home() ) { wp_sa
 $page_id	=	get_theme_mod( 'prime2g_shutdown_page_id' );
 
 if ( empty( $page_id ) || is_front_page() && is_home() ) {
-	prime2g_close_down_template( $shutDown );	#	use raw template
+	prime2g_close_down_template( $shutDown );	//	use raw template *no header & footer
 	exit;
 }
 
@@ -49,15 +44,13 @@ $pageID	=	(int) $page_id;
 $page	=	new WP_Query( [ 'post_type' => 'page', 'p' => $pageID ] );
 
 if ( $page->have_posts() ) {
+
+define( 'PRIME2G_ALT_POST_OBJ', $page->posts[0] );
+
 get_header();
 
 	while ( $page->have_posts() ) {
 	$page->the_post();
-
-if ( get_post_meta( get_the_ID(), 'remove_sidebar', true ) === 'remove' ) {
-	prime2g_removeSidebar();
-	echo '<style>#content{display:block;}</style>';
-}
 
 	prime2g_before_post();
 
@@ -95,6 +88,8 @@ echo '<!DOCTYPE html><html '. get_language_attributes() .' '. prime2g_theme_html
 wp_head();
 
 $background_image	=	get_background_image();
+$add_css	=	function_exists( 'prime2g_add_shutdown_css' ) ? prime2g_add_shutdown_css() : '';
+$add_js		=	function_exists( 'prime2g_add_shutdown_js' ) ? prime2g_add_shutdown_js() : '';
 
 echo '<style id="comingSoonCSS">
 body{display:grid;place-content:center;text-align:center;min-height:100vh;padding:var(--min-pad);

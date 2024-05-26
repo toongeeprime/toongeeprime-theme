@@ -13,28 +13,17 @@ if ( prime2g_activate_theme_pwa() ) {
 $version	=	PRIME2G_VERSION;
 
 wp_enqueue_style(
-	'prime2g_pwa_css',
-	PRIME2G_PWA_URL . 'files/app.css',
-	array( 'prime2g_css' ),
-	$version
+	'prime2g_pwa_css', PRIME2G_PWA_URL . 'files/app.css', array( 'prime2g_css' ), $version
 );
 
 wp_register_script(
-	'prime2g_pwa_js',
-	PRIME2G_PWA_URL . 'files/app.js',
-	[ 'prime2g_js' ],
-	$version,
-	true
+	'prime2g_pwa_js', PRIME2G_PWA_URL . 'files/app.js', [ 'prime2g_js' ], $version, true
 );
 
 wp_enqueue_script( 'prime2g_pwa_js' );
 
 wp_enqueue_script(
-	'prime2g_pwa_scripts',
-	PRIME2G_PWA_VIRTUAL_DIR . 'scripts.js',
-	[ 'prime2g_pwa_js' ],
-	$version,
-	true
+	'prime2g_pwa_scripts', PRIME2G_PWA_VIRTUAL_DIR . 'scripts.js', [ 'prime2g_pwa_js' ], $version, true
 );
 
 }

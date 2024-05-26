@@ -21,6 +21,9 @@
 <?php prime2g_footer_top_widgets(); ?>
 
 
+<?php	#@since 1.0.90
+if ( false === prime2g_remove_footer() ) { ?>
+
 <div id="footerWrap" class="footerWrap">
 
 <footer id="site_footer" class="site_footer site_width">
@@ -52,6 +55,8 @@ if ( get_theme_mod( 'prime2g_show_socials_and_contacts', 1 ) ) {
 	<?php echo prime2g_theme_mod_footer_credit(); ?>
 
 </div><!-- #footerWrap -->
+
+<?php } ?>
 
 
 </div><!-- #page -->

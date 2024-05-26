@@ -84,9 +84,7 @@ class Prime2g_PWA_File_Url_Manager {
 	}
 
 
-	public static function startURL() {
-		return PRIME2G_PWA_HOMEURL;
-	}
+	static function startURL() { return PRIME2G_PWA_HOMEURL; }
 
 
 	public static function manifest_url( $ext = '' ) {
@@ -144,9 +142,8 @@ class Prime2g_PWA_File_Url_Manager {
 	// parent login.css not included
 
 	$array	=	[
-		'resetcss'	=>	$filesDir . "reset-and-wp.css",
 		'themecss'	=>	$filesDir . "theme.css",
-		'themejs'	=>	$filesDir . "theme.js",
+		'themejs'	=>	$filesDir . "theme-min.js",
 		'footerjs'	=>	$filesDir . "footer.js",
 		'appcss'	=>	$appFile . "app.css",
 		'appjs'		=>	$appFile . "app.js",
@@ -165,9 +162,8 @@ class Prime2g_PWA_File_Url_Manager {
 	$cVer	=	$childDir ? '?ver=' . CHILD2G_VERSION : '';
 
 	$versioned	=	[
-		'resetcss'	=>	$filesDir . "reset-and-wp.css" . $ver,
 		'themecss'	=>	$filesDir . "theme.css" . $ver,
-		'themejs'	=>	$filesDir . "theme.js" . $ver,
+		'themejs'	=>	$filesDir . "theme-min.js" . $ver,
 		'footerjs'	=>	$filesDir . "footer.js" . $ver,
 		'appcss'	=>	$appFile . "app.css" . $ver,
 		'appjs'		=>	$appFile . "app.js" . $ver,
