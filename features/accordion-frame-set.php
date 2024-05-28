@@ -28,6 +28,9 @@
 
 
 function prime2g_accordion_frames_css() {
+if ( defined( 'PRIME_ACCORDNSCSS' ) ) return;
+define( 'PRIME_ACCORDNSCSS' );
+
 echo	'<style id="prime2g_accordion_baseCSS">
 .prime2g_accordion_wrap{margin:0 auto var(--min-pad);}
 .acc_toggle{cursor:pointer;display:inline-block;}

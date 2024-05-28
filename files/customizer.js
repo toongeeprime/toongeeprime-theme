@@ -140,11 +140,16 @@ value.bind( ( newval )=>{
 		cunitS	=	$( '#customize-control-prime2g_chache_seconds_singular' ),
 		ctimeF	=	$( '#customize-control-prime2g_chache_time_feeds' ),
 		cunitF	=	$( '#customize-control-prime2g_chache_seconds_feeds' ),
-		cData	=	$( '#customize-control-prime2g_allow_chache_data_clearing' ); // 1.0.58
+		cData	=	$( '#customize-control-prime2g_allow_chache_data_clearing' ), // 1.0.58
+		htAccess	=	$( '#customize-control-prime2g_write_htaccess_chache_rules' ); // 1.0.91
 	if ( newval ) {
-		ctimeS.slideDown( 180 ); cunitS.slideDown( 180 ); ctimeF.slideDown( 180 ); cunitF.slideDown( 180 ); cData.slideDown( 180 );
+		ctimeS.slideDown( 180 ); cunitS.slideDown( 180 ); ctimeF.slideDown( 180 );
+		cunitF.slideDown( 180 ); cData.slideDown( 180 ); htAccess.slideDown( 180 );
 	}
-	else { ctimeS.slideUp( 180 ); cunitS.slideUp( 180 ); ctimeF.slideUp( 180 ); cunitF.slideUp( 180 ); cData.slideUp( 180 ); }
+	else {
+		ctimeS.slideUp( 180 ); cunitS.slideUp( 180 ); ctimeF.slideUp( 180 );
+		cunitF.slideUp( 180 ); cData.slideUp( 180 ); htAccess.slideUp( 180 );
+	}
 } );
 } );
 
@@ -235,3 +240,4 @@ wp.customize.previewer.bind( 'ready', ( message )=>{
 } );
 
 } )( jQuery, wp.customize );
+

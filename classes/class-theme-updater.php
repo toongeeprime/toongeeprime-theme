@@ -213,7 +213,7 @@ class Prime2gThemeUpdater {
 				if ( $deleted ) {
 					add_action( 'admin_notices', function() {
 					echo '<div class="notice notice-warning notice-alt is-dismissible">
-					<p>'. __( 'Updates transients have been cleared!', $this->slug ) .'</p></div>';
+					<p>'. __( 'Updates data has been refreshed!', $this->slug ) .'</p></div>';
 					} );
 				}
 			}
@@ -222,7 +222,7 @@ class Prime2gThemeUpdater {
 			add_action( 'admin_notices', function() {
 			echo '<div class="notice notice-warning notice-alt is-dismissible">
 			<p>
-			'. __( 'To Clear transients and Re-check update availability, click the "Check again" link below!', $this->slug ) .'
+			'. __( 'To re-check update availability, click the "Check again" link below!', $this->slug ) .'
 			</p></div>';
 			} );
 		}
@@ -240,7 +240,6 @@ class Prime2gThemeUpdater {
 }
 
 
-
 /**
  *		ACTIVATE
  */
@@ -248,7 +247,7 @@ if ( ! function_exists( 'prime2g_theme_updater' ) ) {
 
 add_action( 'admin_init', 'prime2g_theme_updater' );
 function prime2g_theme_updater() {
-	new Prime2gThemeUpdater();
+	new Prime2gThemeUpdater;
 }
 
 }

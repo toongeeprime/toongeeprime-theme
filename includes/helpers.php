@@ -188,7 +188,8 @@ return array_combine( $indexes, $values );
  *	@since 1.0.56
  */
 function prime_child_min_version( string $version ) {
-if ( is_child_theme() ) return version_compare( CHILD2G_VERSION, $version, '>=' );
+if ( defined( 'CHILD2G_VERSION' ) ) // removed use of is_child_theme()
+	return version_compare( CHILD2G_VERSION, $version, '>=' );
 return true;	// features should work in parent
 }
 
