@@ -102,12 +102,37 @@ function prime2g_class_remover_sheet( string $items, string $class = 'prime' ) {
 if ( ! function_exists( 'prime_remover_sheet_items' ) ) return; #	activator function
 
 $function	=	prime_remover_sheet_items();
-
-$items	=	$function->items;	#	$items must be escaped
-$class  =   $function->class;
+#	escaped:
+$items		=	$function->items;
+$class		=	$function->class;
+$items_add	=	$function->items_add;
+$class_add	=	$function->class_add;
 echo	'<div id="prime_class_remover" class="hidden p-fix" style="top:0;bottom:0;right:0;left:0;z-index:90000;"
- onclick="prime2g_remClass( ['. $items .', \'#prime_class_remover\'], \''. $class .'\' );"></div>';
+ onclick="prime_sheet_remover();"></div>
+<script id="primeRemovrSheetJS">
+function prime_sheet_remover() {
+	if ( "'. $items_add .'" ) prime2g_addClass( ['. $items_add .'], [\''. $class_add .'\'] );
+	prime2g_remClass( ['. $items .', \'#prime_class_remover\'], [\''. $class .'\'] );
+}
+</script>';
 
+}
+}
+
+
+/**
+ *	Activate prime2g_class_remover_sheet()
+ *	@since 1.0.60
+ */
+if ( ! function_exists( 'prime_remover_sheet_items' ) ) {
+function prime_remover_sheet_items() {
+return (object) [
+#	comma separated escapes:
+   'items'	=>	"'#tog_menu_target', '.togs'",
+   'class'	=>	"prime",
+   'items_add'	=>	"'.liveSearchBox'",
+   'class_add'	=>	"hidden"
+];
 }
 }
 
@@ -152,5 +177,4 @@ else
 	return $estimate;
 }
 }
-
 

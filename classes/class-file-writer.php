@@ -97,7 +97,7 @@ function delete( string $delete_content, array $options = [] ) {
 
 	$new_contents	=	str_replace( $delete_content,  '', $initial_contents );
 	fopen( $this->file_name, 'w' );	// empty file before adding new contents
-
+	
 	if ( false === fwrite( $f, $new_contents ) ) {
 		$this->response	=	__( 'Cannot write to file', PRIME2G_TEXTDOM );
 		return;

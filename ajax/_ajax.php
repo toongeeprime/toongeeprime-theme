@@ -9,7 +9,8 @@
 
 add_action( 'wp_head', 'prime2g_ajax_head', 3 );
 function prime2g_ajax_head() {
-/*	@since 1.0.89	*/
+/*	@since 1.0.89 / 91	*/
+if ( ! defined( 'PRIME2G_ENQ_JQUERY' ) ) return;	// whatever must use ajax must define PRIME2G_ENQ_JQUERY
 if ( ! wp_script_is( 'jquery-migrate', 'registered' ) && ! wp_script_is( 'prime2g_jQuery' ) ) {
 	wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', true );
 }
@@ -34,8 +35,8 @@ resolve( done );
 
 }
 
-/*
-// Calling Sample:
+/**
+//	Calling Sample:
 @ var formData, action:'callbackFunction'
 jQuery( document.body ).on( 'click', function() {
 	prime2g_run_ajax( formData, ajaxSuccess, ajaxError );

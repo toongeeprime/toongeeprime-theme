@@ -21,4 +21,4 @@ A WordPress theme with options for customization, design and development flexibi
 = 1.0.91 =
 * Class: Prime2gFileWriter
 * Major caching system overhaul @ caching.php
-
+* Added class-caching.php

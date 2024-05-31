@@ -272,6 +272,8 @@ add_action( 'wp_footer', function() use( $options ) {
 if ( defined( 'P2GAJAXSEARCHJS' ) ) return;
 define( 'P2GAJAXSEARCHJS', true );
 
+if ( ! defined( 'PRIME2G_ENQ_JQUERY' ) ) define( 'PRIME2G_ENQ_JQUERY', true );
+
 $id			=	'';
 $post_type	=	'';
 $template	=	'';	//	@since 1.0.88
@@ -293,6 +295,7 @@ p2getAll( ".close_lsearch" ).forEach( c => {
 var counter	=	[],
 	input_time	=	0;
 
+/***
 tForm'. $id .'.addEventListener( "mouseleave", ()=>{
 if ( tSBox'. $id .'.classList.contains( "del" ) ) return;
 setTimeout( ()=>{
@@ -302,6 +305,7 @@ if ( ! tSRes'. $id .'.matches( ":hover" ) ) {
 }
 }, 3000 );
 } );
+*/
 
 function prime_runAjaxSearch( e ) {
 
@@ -365,7 +369,7 @@ if ( input_time < 500 && keytime < 200 ) return;
  */
 setTimeout( ()=>{
 if ( tValue'. $id .'.length > 2 ) {
-
+prime2g_addClass( ["#prime_class_remover"] );
 tSBox'. $id .'.classList.remove( "hidden", "del" );
 tSRes'. $id .'.innerHTML	=	"<p class=\"centered\">'. __( 'Searching...', PRIME2G_TEXTDOM ) .'</p>";
 

@@ -30,7 +30,7 @@ wp_reset_postdata();
 add_shortcode( 'prime_product_categories_images', 'prime2g_woo_product_categories_images' );
 function prime2g_woo_product_categories_images( $atts = [] ) {
 
-if ( ! function_exists( 'is_shop' ) ) return;
+if ( ! function_exists( 'is_shop' ) ) return __( 'Shopping inactive on this site!', PRIME2G_TEXTDOM );
 
 $atts	=	shortcode_atts( array(
 'shuffle'	=>	'',
@@ -109,6 +109,8 @@ if ( in_array( 'cart', $to_show ) ) {
 	// CSS to hide excess cart data
 	$x_css	=	'<style>
 	.prime_si.cart .total,.prime_si.cart .ii,.prime_si.cart .sep{display:none!important;}
+	.prime_si.cart .number{position:absolute;width:15px;height:15px;top:-100%;right:0;font-size:80%;background:red;color:#fff;display:grid;place-content:center;border-radius:50px;}
+	.prime_si .empty .number{display:none;}
 	</style>';
 	$cart_count	=	$cart_count === 'yes' ? $x_css . '<span class="cart_count">'. prime2g_woo_cart_contents_fragments( 'count', false ) .'</span>' : '';
 	$icons	.=	'<span class="prime_si cart prel">'. $cart_count .'

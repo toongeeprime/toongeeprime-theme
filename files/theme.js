@@ -123,17 +123,27 @@ function insertAfter( newNode, refNode ) { refNode.parentNode.insertBefore( newN
 
 function prime2g_addClass( elems, clss = 'prime', prevD = true ) {
 if ( prevD && event ) event.preventDefault();
-elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.add( clss ); } );
+elems.forEach( el=>{
+	elmt	=	p2getEl( el );
+	typeof clss === 'array' ? clss.forEach( cl=>{ elmt?.classList.add( cl ); } ) : elmt?.classList.add( clss );
+} );
 }
 
 function prime2g_remClass( elems, clss = 'prime', prevD = true ) {
 if ( prevD && event ) event.preventDefault();
-elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.remove( clss ); } );
+elems.forEach( el=>{
+	elmt	=	p2getEl( el );
+	typeof clss === 'array' ? clss.forEach( cl=>{ elmt?.classList.remove( cl ); } ) : elmt?.classList.remove( clss );
+} );
 }
 
 function prime2g_toggClass( elems, clss = 'prime', prevD = true ) {
 if ( prevD && event ) event.preventDefault();
-elems.forEach( el=>{ elmt = p2getEl( el ); if ( elmt ) elmt.classList.toggle( clss ); } );
+elems.forEach( el=>{
+	elmt	=	p2getEl( el );
+	if ( typeof clss === 'array' ) { clss.forEach( cl=>{ elmt?.classList.toggle( cl ); } ); }
+	else { elmt?.classList.toggle( clss ); }
+} );
 }
 
 /**

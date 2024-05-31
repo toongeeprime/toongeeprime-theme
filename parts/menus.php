@@ -283,20 +283,6 @@ echo	'</div></section>';
 }
 
 
-/**
- *	Activate prime2g_class_remover_sheet() mini feature
- *	@since 1.0.60
- */
-if ( ! function_exists( 'prime_remover_sheet_items' ) ) {
-function prime_remover_sheet_items() {
-return (object) [
-   'items' => "'#tog_menu_target', '.togs'",
-   'class' => "prime"
-];
-}
-}
-
-
 /***
  *	DESKTOP MEGAMENU HTML STRUCTURE
  *	ctrlw class is for JS width adjustment

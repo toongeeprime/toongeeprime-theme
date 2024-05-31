@@ -151,7 +151,7 @@ em.comment-awaiting-moderation{display:block;margin:var(--min-pad);}
 if ( ! function_exists( 'prime2g_header_video_css' ) ) {
 function prime2g_header_video_css() {
 if ( get_theme_mod( 'prime2g_enable_video_features' ) ) {
-return	'#header iframe,#header .title_wrap,#header .page_title{position:absolute;left:0;bottom:0;width:100%;}
+return	'#header iframe,.video_as_header #header .title_wrap,.video_as_header #header .page_title{position:absolute;left:0;bottom:0;}
 #header .page_title{width:auto;}';
 }
 }
@@ -615,9 +615,6 @@ li.mini_cart_item{position:relative;}
 .cart_item_grid{display:grid;grid-template-columns:50px 1fr;gap:15px;}
 .minicart_product_title{margin:0;}
 .woocommerce-mini-cart__buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;}
-
-.prime_si.cart .number{position:absolute;width:15px;height:15px;top:-100%;right:0;font-size:80%;background:red;color:#fff;display:grid;place-content:center;border-radius:50px;}
-.prime_si .empty .number{display:none;}
 </style>';
 }
 }

@@ -153,7 +153,7 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 
 	$wp_customize->add_setting( 'prime2g_allow_chache_data_clearing', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_allow_chache_data_clearing', array(
-		'label'		=>	__( 'Allow Cache Data Clearing (Advanced)', PRIME2G_TEXTDOM ),
+		'label'		=>	__( 'Allow Cache Clearing Parameters (Advanced)', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_allow_chache_data_clearing',
 		'section'	=>	'prime2g_site_performance_section',
