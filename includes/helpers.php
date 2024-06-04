@@ -271,7 +271,8 @@ function prime2g_customizer_pages_ids() {
 return [
 	(int) get_theme_mod( 'prime2g_404error_page_id', 0 ),
 	(int) get_theme_mod( 'prime2g_custom_login_page_id', 0 ),
-	(int) get_theme_mod( 'prime2g_shutdown_page_id', 0 )
+	(int) get_theme_mod( 'prime2g_shutdown_page_id', 0 ),
+	(int) get_theme_mod( 'prime2g_privatesite_homepage_id', 0 )
 ];
 }
 

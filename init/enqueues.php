@@ -24,7 +24,7 @@ $version	=	PRIME2G_VERSION;
 
 #	STYLES
 if ( prime_child_min_version( '2.3' ) ) {
-	$themeCSS	=	'theme.css';
+	$themeCSS	=	'theme-min.css';
 } else {
 	$themeCSS	=	'theme-old.css';
 }
@@ -82,8 +82,8 @@ wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' 
  *	@since 1.0.60
  */
 #	echo '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
-$fonts	=	prime2g_theme_icons_info();	//	@since 1.0.89
-wp_enqueue_style( PRIME2G_ICONS_HANDLE, $fonts->url, [], $fonts->version );
+$icons	=	prime2g_theme_icons_info();	//	@since 1.0.89
+wp_enqueue_style( PRIME2G_ICONS_HANDLE, $icons->url, [], $icons->version );
 
 
 if ( ! prime_child_min_version( '2.3' ) ) {

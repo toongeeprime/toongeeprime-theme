@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	Template Name: Empty Page (No Theme Widgets)
+ *	Template Name: No Theme Widgets
  *	Template Post Type: post, page
  *
  *	@package WordPress

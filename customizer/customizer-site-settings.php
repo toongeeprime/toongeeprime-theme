@@ -148,30 +148,29 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	) );
 
 	/**
-	 *	MEMBERS ONLY STATE
-	 *	@since @ 1.0.90
+	 *	PRIVATE/MEMBER SITE
+	 *	@since @ 1.0.90/92
 	 */
-	$wp_customize->add_setting( 'prime2g_site_is_members_only', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_site_is_members_only', array(
-		'label'		=>	__( 'Activate Members-Only State', PRIME2G_TEXTDOM ),
+	$wp_customize->add_setting( 'prime2g_site_is_private', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_site_is_private', array(
+		'label'		=>	__( 'Set this Site as Private', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
-		'settings'	=>	'prime2g_site_is_members_only',
+		'settings'	=>	'prime2g_site_is_private',
 		'section'	=>	'prime2g_site_settings_section',
-		'active_callback'	=>	function() { return prime2g_constant_is_true( 'PRIME2G_MEMBERSONLY_SITE', false ); }
+		'active_callback'	=>	function() { return prime2g_constant_is_true( 'PRIME2G_PRIVATE_SITE', false ); }
 	) );
 
-	$wp_customize->add_setting( 'prime2g_membersonly_page_id', $postMsg_text );
-	$wp_customize->add_control( 'prime2g_membersonly_page_id', array(
-		'label'		=>	__( 'Select Non-members Public Page', PRIME2G_TEXTDOM ),
+	$wp_customize->add_setting( 'prime2g_privatesite_homepage_id', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_privatesite_homepage_id', array(
+		'label'		=>	__( 'Select Public Homepage', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
-		'settings'	=>	'prime2g_membersonly_page_id',
+		'settings'	=>	'prime2g_privatesite_homepage_id',
 		'section'	=>	'prime2g_site_settings_section',
 		'choices'	=>	$pages,
-		'active_callback'	=> function() { return ! empty( get_theme_mod( 'prime2g_site_is_members_only' ) ); }
+		'active_callback'	=> function() { return ! empty( get_theme_mod( 'prime2g_site_is_private' ) ); }
 	) );
 
 }
 
 }
-
 

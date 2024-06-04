@@ -13,7 +13,7 @@
 if ( ! function_exists( 'prime2g_fields_in_post_types' ) ) {
 function prime2g_fields_in_post_types() {
 return (object) [
-	'prime_fields1'		=>	[ 'post', 'page' ],
+	'prime_fields1'		=>	[ 'post', 'page', 'landing_page' ],
 	'settings_fields'	=>	[ 'post', 'page' ],
 	'extras_fields'		=>	[ 'post', 'page', 'prime_template_parts' ],
 	'fields1_excludes'	=>	[ 'page' ]
@@ -97,10 +97,10 @@ foreach( $fields as $field ) {
  *	Changed some fields to checkboxes
  *	@since 1.0.89
  */
-$select_fields	=	[
-	'exclude_from_search', 'disable_autop', 'prevent_caching', 'enqueue_jquery'
+$checkboxes	=	[
+	'exclude_from_search', 'disable_autop', 'prevent_caching', 'enqueue_jquery', 'page_is_public'
 ];
-foreach( $select_fields as $field ) {
+foreach( $checkboxes as $field ) {
 	delete_post_meta( $post_id, $field );
 	if ( isset( $_POST[ $field ] ) ) { add_post_meta( $post_id, $field, $_POST[ $field ] ); }
 	// else { delete_post_meta( $post_id, $field ); }
@@ -128,14 +128,17 @@ function prime2g_meta_fieldset_1() {
 
 
 #	Custom Fieldset 1
-function prime2g_fields_side_box( $post ) { ?>
+function prime2g_fields_side_box( $post ) {
+$obj	=	get_post_type_object( $post->post_type );
+$pType	=	$obj->labels->singular_name;
+?>
 <div class="prime2g_meta_box">
 <?php prime2g_custom_mbox_css(); ?>
 
 <?php if ( prime2g_fields_in_post_types()->fields1_excludes ) { ?>
 
 	<div class="meta-options prime2g_field">
-		<label for="post_subtitle">Post Subtitle</label>
+		<label for="post_subtitle"><?php _e( $pType . ' Subtitle', PRIME2G_TEXTDOM ); ?></label>
 <input id="post_subtitle" type="text" class="prime2g_text" name="post_subtitle" placeholder="A Subtitle for this Entry" 
 value="<?php echo esc_attr( $post->post_subtitle ); ?>"
 />
@@ -172,7 +175,7 @@ if ( ( ! $removeSidebar || $removeSidebar === 'pages_only' ) && $post->post_type
 <div class="meta-options prime2g_field">
 	<label for="remove_header">Remove Default Header?</label>
 	<select id="remove_header" class="prime2g_input" name="remove_header">
-		<option>--- Keep Header ---</option>
+		<option value="">--- Keep Header ---</option>
 		<option value="remove" <?php if ( $post->remove_header === 'remove' ) echo 'selected'; ?>>Remove Header Completely</option>
 		<option value="header_image_css" <?php if ( $post->remove_header === 'header_image_css' ) echo 'selected'; ?>>Use Header Image CSS</option>
 	</select>
@@ -193,7 +196,19 @@ if ( prime_child_min_version( '2.4' ) ) { ?>
 
 
 <?php
-//	@since 1.0.89
+# @since 1.0.92
+if ( get_theme_mod( 'prime2g_site_is_private' ) ) { ?>
+
+<div class="meta-options prime2g_field select">
+	<label for="page_is_public">
+	<input type="checkbox" id="page_is_public" class="prime2g_input" name="page_is_public" value="<?php echo $post->page_is_public; ?>" <?php echo '1' === $post->page_is_public ? ' checked="checked"' : ''; ?> />
+	<?php _e( 'Make this '. $pType .' public', PRIME2G_TEXTDOM ); ?>?</label>
+</div>
+
+<?php
+}
+
+#	@since 1.0.89
 if ( ! in_array( $post->ID, prime2g_customizer_pages_ids() ) ) { ?>
 
 <div class="meta-options prime2g_field select">
@@ -365,4 +380,5 @@ function prime2g_field_extras_callback( $post ) { ?>
 </div>
 <?php
 }
+
 

@@ -87,7 +87,7 @@ value.bind( ( newval )=>{
 api( 'prime2g_shutdown_display', (value)=>{
 value.bind( ( newval )=>{
 	let sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
-	if ( newval ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
+	newval ? sdPageID.slideDown( 180 ) : sdPageID.slideUp( 180 );
 } );
 } );
 
@@ -103,7 +103,7 @@ value.bind( ( newval )=>{
 api( 'prime2g_use_page_preloader', (value)=>{
 value.bind( ( newval )=>{
 	let imgUrl	=	$( '#customize-control-prime2g_custom_preloader_img_url' );
-	if ( newval === 'custom_url' ) imgUrl.slideDown( 180 ); else imgUrl.slideUp( 180 );
+	newval === 'custom_url' ? imgUrl.slideDown( 180 ) : imgUrl.slideUp( 180 );
 } );
 } );
 
@@ -118,7 +118,7 @@ value.bind( ( newval )=>{
 api( 'prime2g_use_page_for404', (value)=>{
 value.bind( ( newval )=>{
 	let ePageID	=	$( '#customize-control-prime2g_404error_page_id' );
-	if ( newval ) { ePageID.slideDown( 180 ); } else { ePageID.slideUp( 180 ); }
+	newval ? ePageID.slideDown( 180 ) : ePageID.slideUp( 180 );
 } );
 } );
 
@@ -200,7 +200,7 @@ value.bind( ( newval )=>{
 api( 'prime2g_admin_access_capability', (value)=>{
 value.bind( ( newval )=>{
 	let cstmCap	=	$( '#customize-control-prime2g_admin_access_custom_capability' );
-	if ( newval === 'custom_capability' ) { cstmCap.slideDown( 180 ); } else { cstmCap.slideUp( 180 ); }
+	newval === 'custom_capability' ? cstmCap.slideDown( 180 ) : cstmCap.slideUp( 180 );
 } );
 } );
 
@@ -214,10 +214,10 @@ value.bind( ( newval )=>{
 } );
 
 /* @since 1.0.90 */
-api( 'prime2g_site_is_members_only', (value)=>{
+api( 'prime2g_site_is_private', (value)=>{
 value.bind( ( newval )=>{
-	let mo_pID	=	$( '#customize-control-prime2g_membersonly_page_id' );
-	if ( newval ) { mo_pID.slideDown( 180 ); } else { mo_pID.slideUp( 180 ); }
+	let pshpID	=	$( '#customize-control-prime2g_privatesite_homepage_id' );
+	newval ? pshpID.slideDown( 180 ) : pshpID.slideUp( 180 );
 } );
 } );
 

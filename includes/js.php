@@ -1,11 +1,38 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME FEATURES & CONDITIONAL JS
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
+
+#	@since 1.0.92
+add_action( 'prime2g_after_content', 'prime2g_after_content_js', 1 );
+function prime2g_after_content_js() {
+#	https://developer.mozilla.org/en-US/docs/Web/API/LargestContentfulPaint
+#	For now, do not async/defer:
+$js	=	'';
+
+if ( is_singular() || is_front_page() ) {
+$js	.=	'<script id="prime2gLCP_js">
+const pObserver1	=	new PerformanceObserver( (list)=>{
+const entries	=	list.getEntries();
+const lastEntry	=	entries[entries.length - 1]; // Use the latest LCP candidate
+theLCP	=	lastEntry.element;
+if ( theLCP instanceof HTMLImageElement ) {
+	theLCP.setAttribute( "rel", "preload" );
+	theLCP.setAttribute( "fetchpriority", "high" );
+	theLCP.removeAttribute( "loading" );
+}
+} );
+pObserver1.observe({ type: "largest-contentful-paint", buffered: true });
+</script>';
+}
+
+echo $js;
+}
+
+
 
 add_action( 'wp_footer', 'prime2g_conditional_js', 990 );
 function prime2g_conditional_js() {
@@ -14,7 +41,7 @@ $styles		=	ToongeePrime_Styles::mods_cache();	// @since 1.0.86
 $singular	=	is_singular();
 $jsSingular	=	$singular ? 'true' : 'false';
 
-$js	=	'<script async defer id="prime2g_conditional_js">
+$js	=	'<script defer id="prime2g_conditional_js">
 const	singular	=	'. $jsSingular .';
 menuLItems	=	p2getAll( "nav.main-menu li" );
 ';
@@ -511,6 +538,7 @@ else mgWrap.classList.remove( "g_hide" );
 return $js;
 }
 }
+
 
 
 

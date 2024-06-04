@@ -3,7 +3,7 @@
  *	Theme URI: https://akawey.com/
  *	Author: Tunji, Akàwey Online Enterprises
  *	Author URI: https://akawey.com
- *	Version: 1.0.91
+ *	Version: 1.0.92
  *	Description: A simple theme with customizer options and styles, developed by @ToongeePrime
  *	Requires at least: 6.3
  *	Tested up to: 6.5
@@ -14,8 +14,7 @@
  */
 
 
-/**
-**	Theme-Set Variables **
+/***	Theme-Set Variables ***
 --brand-color
 --brand-color-2
 --site-width
@@ -35,5 +34,6 @@
 @version 1.0.55:
 --post-titlesize
 --arch-titlesize
-**/
+*/
+
 

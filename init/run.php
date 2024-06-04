@@ -10,7 +10,7 @@
 
 require_once 'constants.php';
 require_once 'website-shutdown.php';
-require_once 'members-only-site.php';	// @since 1.0.90
+require_once 'private-site.php';	// @since 1.0.90
 
 /* @since 1.0.55 */
 require_once 'smtp.php';

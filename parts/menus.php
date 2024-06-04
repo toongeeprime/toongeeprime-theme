@@ -51,7 +51,8 @@ $at_customizer	=	is_customize_preview();	# Theme 1.0.84
 $collapsing	=	$styles->mob_submenu_open;	# Theme 1.0.87
 
 echo	'<div id="'. $id .'" class="togs main_menu_wrap'. $lwm_class .'">
-<div class="w100pc flexnw site_width alignC">';
+<div class="site_width mainmenuwrap">
+<div class="w100pc flexnw alignC mainmenu">';
 
 if ( $min_v23 && 'togglers' === $styles->menu_type ) {
 
@@ -163,7 +164,8 @@ echo '</div>';
 
 }
 
-echo	'</div></div><!-- #'. $id .' -->';
+echo	'</div></div>
+</div><!-- #'. $id .' -->';
 
 }
 }

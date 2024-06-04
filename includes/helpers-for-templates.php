@@ -7,7 +7,7 @@
  */
 
 function prime2g_get_header_image_url( bool $hasHeader = false, $size = 'large' ) {
-$headerUrl	=	$hasHeader ?: has_custom_header();
+$headerUrl	=	'';
 
 if ( $hasHeader ) {
 	if ( is_singular() && has_post_thumbnail() && ( '' === get_theme_mod( 'prime2g_thumb_replace_header', '' ) ) ) {
@@ -142,6 +142,5 @@ if ( function_exists( 'prime_child_remove_footer' ) ) $remove	=	prime_child_remo
 
 return $remove;
 }
-
 
 

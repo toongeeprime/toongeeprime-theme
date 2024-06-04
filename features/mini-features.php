@@ -58,7 +58,7 @@ $form	.=	'<form role="search" method="get" action="' . get_home_url() . '" class
 </form>';
 
 //	Added filters @since 1.0.90
-$searchbox	=	'<div class="liveSearchBox hidden p-abso">
+$searchbox	=	'<div class="liveSearchBox hidden">
 <span class="close_lsearch pointer p-abso" title="Close">x</span>';
 $searchbox	.=	apply_filters( 'prime2g_livesearchform_top', '' );
 $searchbox	.=	'<div class="slimscrollbar"><div class="liveSearchResults"></div></div>';

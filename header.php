@@ -7,9 +7,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
+global $post;
 $isSingular	=	is_singular();
-$styles		=	ToongeePrime_Styles::mods_cache();	# 1.0.57
-?>
+$styles		=	ToongeePrime_Styles::mods_cache();	# 1.0.57 ?>
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> <?php prime2g_theme_html_classes(); ?>>
@@ -19,7 +19,17 @@ $styles		=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<?php wp_head(); ?>
+<?php
+wp_head();
+
+#	@since 1.0.92
+$hasHeader	=	has_custom_header();
+$lcp_link	=	'<link id="p2g_lcp_imglink" rel="preload" fetchpriority="high" as="image" href="'. prime2g_get_header_image_url( $hasHeader ) .'">';
+if ( $isSingular )
+	echo $hasHeader && $post->remove_header !== 'remove' ? $lcp_link : '';
+else
+	echo $hasHeader ? $lcp_link : '';
+?>
 </head>
 
 <?php do_action( 'prime2g_before_body' ); ?>
@@ -55,4 +65,5 @@ $styles		=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 		<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 
 		<?php if ( $isSingular ) echo '<article id="primary" class="primary_area">'; ?>
+
 

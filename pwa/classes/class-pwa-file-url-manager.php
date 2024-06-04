@@ -142,7 +142,7 @@ class Prime2g_PWA_File_Url_Manager {
 	// parent login.css not included
 
 	$array	=	[
-		'themecss'	=>	$filesDir . "theme.css",
+		'themecss'	=>	$filesDir . "theme-min.css",
 		'themejs'	=>	$filesDir . "theme-min.js",
 		'footerjs'	=>	$filesDir . "footer.js",
 		'appcss'	=>	$appFile . "app.css",
@@ -162,7 +162,7 @@ class Prime2g_PWA_File_Url_Manager {
 	$cVer	=	$childDir ? '?ver=' . CHILD2G_VERSION : '';
 
 	$versioned	=	[
-		'themecss'	=>	$filesDir . "theme.css" . $ver,
+		'themecss'	=>	$filesDir . "theme-min.css" . $ver,
 		'themejs'	=>	$filesDir . "theme-min.js" . $ver,
 		'footerjs'	=>	$filesDir . "footer.js" . $ver,
 		'appcss'	=>	$appFile . "app.css" . $ver,
@@ -203,3 +203,4 @@ class Prime2g_PWA_File_Url_Manager {
 	}
 
 }
+
