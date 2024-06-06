@@ -61,7 +61,7 @@ else
 	}
 	?>
 
-	<div id="content" class="site_content content grid site_width">
+	<div id="content" class="site_content content<?php if ( ! prime2g_remove_sidebar() ) echo ' grid'; ?> site_width">
 
 		<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 
