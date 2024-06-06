@@ -38,8 +38,9 @@ else
 
 <?php wp_body_open(); ?>
 
-<div id="container" class="site_container site_width prel">
+<div id="container" class="site_container">
 
+<div id="page_wrapper" class="page_wrapper site_width prel">
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', PRIME2G_TEXTDOM ); ?></a>
 
@@ -65,5 +66,4 @@ else
 		<main id="main" class="site_main<?php if ( is_archive() ) echo ' grid'; ?>" role="main">
 
 		<?php if ( $isSingular ) echo '<article id="primary" class="primary_area">'; ?>
-
 

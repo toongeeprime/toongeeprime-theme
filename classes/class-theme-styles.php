@@ -35,6 +35,7 @@ class ToongeePrime_Styles {
 	$contentbg	=	defined( 'CHILD_CONTENTBG' ) ? CHILD_CONTENTBG : '#ffffff';
 	$buttonbg	=	defined( 'CHILD_BUTTONBG' ) ? CHILD_BUTTONBG : '#777777';
 	$footerbg	=	defined( 'CHILD_FOOTERBG' ) ? CHILD_FOOTERBG : '#030303';
+	$sidebarbg	=	defined( 'CHILD_SIDEBARBG' ) ? CHILD_SIDEBARBG : '#ffffff';	#	@since 1.0.93
 
 	return (object) [
 		'brandcolor'	=>	$brandcolor,
@@ -43,7 +44,8 @@ class ToongeePrime_Styles {
 		'headerbg'	=>	$headerbg,
 		'contentbg'	=>	$contentbg,
 		'buttonbg'	=>	$buttonbg,
-		'footerbg'	=>	$footerbg
+		'footerbg'	=>	$footerbg,
+		'sidebarbg'	=>	$sidebarbg
 	];
 	}
 
@@ -96,6 +98,7 @@ class ToongeePrime_Styles {
 			case 'autoplay_header_vid' : $mod = get_theme_mod( 'prime2g_autoplay_header_video', '' ); break; # @since 1.0.87
 			case 'search_in_cf' : $mod = get_theme_mod( 'prime2g_search_in_custom_fields', '' ); break; # @since 1.0.88
 			case 'header_vid_places' : $mod = get_theme_mod( 'prime2g_video_header_placements', '' ); break; # @since 1.0.88
+			case 'sidebarbg' : $mod = defined( 'CHILD_SIDEBARBG' ) ? CHILD_SIDEBARBG : get_theme_mod( 'prime2g_sidebar_background', $defaults->sidebarbg ); break; # @since 1.0.93
 		}
 
 	if ( $by_net_home ) restore_current_blog();
@@ -157,6 +160,7 @@ class ToongeePrime_Styles {
 	--body-background:". $cache->background .";
 	--header-background:". $cache->header .";
 	--content-background:". $cache->content .";
+	--sidebar-bg:". $cache->sidebarbg .";
 	--footer-background:". $cache->footer .";
 	--body-font:'{$bodyGFont}';
 	--headings-font:'{$headGFont}';
@@ -174,11 +178,11 @@ class ToongeePrime_Styles {
 	$bodyFS	=	$cache->bodyFontSize .'px';
 	$bgSize	=	$cache->headerimgsize;
 	$t_weight	=	$cache->titlesWeight;
-	$bgSize		=	( '' == $bgSize ) ? 'cover' : $bgSize;
+	$bgSize		=	'' === $bgSize ? 'cover' : $bgSize;
 	$menuPlace	=	$cache->menu_place;
 
 	$hHeight	=	$cache->h_height;
-	$hHeight	=	( '' === $hHeight ) ? '' : $hHeight .'vh';
+	$hHeight	=	'' === $hHeight ? '' : $hHeight .'vh';
 
 	$titleOnHeader	=	$cache->titleOnHeader ? '.title_over_video ' : '';
 
@@ -205,6 +209,8 @@ h1.page-title{font-weight:{$t_weight};}
 .singular .entry-title{font-size:var(--post-titlesize);}
 body:not(.singular) .entry-title{font-size:var(--arch-titlesize);}
 body{font-size:{$bodyFS};}
+.mainsidebar{background-color:var(--sidebar-bg);color:var(--sidebar-text);}
+.mainsidebar a{color:var(--sidebar-text);}
 {$fImgCSS}
 {$headerVidCSS}
 
@@ -286,13 +292,13 @@ return $css;
 		'mob_submenu_open'	=>	$mods->get_mod( 'mob_submenu_open' ),
 		'autoplay_header_vid'	=>	$mods->get_mod( 'autoplay_header_vid' ),	// @since 1.0.87
 		'search_in_cf'		=>	$mods->get_mod( 'search_in_cf' ),	// @since 1.0.88
-		'header_vid_places'	=>	$mods->get_mod( 'header_vid_places' )
+		'header_vid_places'	=>	$mods->get_mod( 'header_vid_places' ),
+		'sidebarbg'		=>	$mods->get_mod( 'sidebarbg' )	// @since 1.0.93
 	];
 	}
 
 }
 
 }
-
 
 

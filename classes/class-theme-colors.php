@@ -37,6 +37,7 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	$cnt_color	=	$cache->content;
 	$ftr_color	=	$cache->footer;
 	$buttonbg	=	$cache->buttonbg;
+	$sbarText	=	$cache->sidebarbg;	//	@since 1.0.93
 	$btnText	=	defined( 'CHILD_BUTTONTEXT' ) ? CHILD_BUTTONTEXT : $this->get_readable_color( $buttonbg );
 
 	return "--body-text:". $this->get_readable_color( $bg_color ) .";
@@ -46,6 +47,7 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	--headline-color:". $this->get_readable_color( $bg_color ) .";
 	--button-bg:". $buttonbg .";
 	--button-text:". $btnText .";
+	--sidebar-text:". $this->get_readable_color( $sbarText ) .";
 ";
 	}
 

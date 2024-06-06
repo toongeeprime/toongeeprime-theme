@@ -28,9 +28,9 @@ add_action( 'prime2g_archive_post_footer', 'prime2g_edit_entry', 5 );
  *	Is set Before the Site's Header
  */
 function prime2g_before_header() {
-echo '<section id="prime2g_before_header">';
+echo '<section id="prime2g_before_header"><div class="site_width">';
 	do_action( 'prime2g_before_header' );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -38,9 +38,9 @@ echo '</section>';
  *	Is set After the Site's Header
  */
 function prime2g_sub_header() {
-echo '<section id="prime2g_sub_header">';
+echo '<section id="prime2g_sub_header"><div class="site_width">';
 	do_action( 'prime2g_sub_header' );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -48,9 +48,9 @@ echo '</section>';
  *	Is set After the Sub Header Section Above
  */
 function prime2g_after_header() {
-echo '<section id="prime2g_after_header" class="site_width">';
+echo '<section id="prime2g_after_header"><div class="site_width">';
 	do_action( 'prime2g_after_header' );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -59,9 +59,9 @@ echo '</section>';
  *	@since 1.0.50
  */
 function prime2g_before_title() {
-echo '<section id="prime2g_before_title">';
+echo '<section id="prime2g_before_title"><div class="site_width">';
 	do_action( 'prime2g_before_title' );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -69,9 +69,9 @@ echo '</section>';
  *	Is set After Single entry Titles
  */
 function prime2g_after_title() {
-echo '<section id="prime2g_after_title">';
+echo '<section id="prime2g_after_title"><div class="site_width">';
 	do_action( 'prime2g_after_title' );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -81,9 +81,9 @@ echo '</section>';
 function prime2g_before_post() {
 $par1 = $par2 = $par3 = '';
 
-echo '<section id="prime2g_before_post">';
+echo '<section id="prime2g_before_post"><div class="site_width">';
 	do_action( 'prime2g_before_post', $par1, $par2, $par3 );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -91,9 +91,9 @@ echo '</section>';
  *	Is set After Single entry
  */
 function prime2g_after_post() {
-echo '<section id="prime2g_after_post">';
+echo '<section id="prime2g_after_post"><div class="site_width">';
 	do_action( 'prime2g_after_post' );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -102,9 +102,9 @@ echo '</section>';
  *	And:
  */
 function prime2g_after_archive_title() {
-echo '<section id="prime2g_after_archive_title">';
+echo '<section id="prime2g_after_archive_title"><div class="site_width">';
 	do_action( 'prime2g_after_archive_title' );
-echo '</section>';
+echo '</div></section>';
 }
 
 
@@ -134,9 +134,9 @@ echo '</footer>';
  *	Is set Before Footer Credit
  */
 function prime2g_site_base_strip() {
-echo '<section id="site_base_strip">';
+echo '<section id="site_base_strip"><div class="site_width">';
 	do_action( 'prime2g_site_base_strip' );
-echo '</section>';
+echo '</div></section>';
 }
 
 

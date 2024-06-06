@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	SEARCH RESULTS PAGE
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -34,23 +32,18 @@ if ( have_posts() ) { ?>
 
 	prime2g_wp_block_search_form( [ 'echo' => 'yes', 'placeholder' => 'Type here...' ] );
 
-	// Start the Loop
+	#	The Loop
 	while ( have_posts() ) {
-
 		the_post();
 		prime2g_search_loop();
-
 	}
 
-	// Prev/next page navigation
+	#	Prev/next page navigation
 	prime2g_prev_next();
-
 }
 else {
-
 	echo '<h3 style="text-align:center;margin:90px 30px;">' . __( 'No results found for your search', PRIME2G_TEXTDOM ) . '</h3>';
 	prime2g_wp_block_search_form( [ 'echo' => 'yes', 'placeholder' => 'Type here...' ] );
-
 }
 
 prime2g_below_posts_widgets();

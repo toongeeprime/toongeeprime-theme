@@ -1,24 +1,25 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME FOOTER
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
+
+$styles			=	ToongeePrime_Styles::mods_cache();	# 1.0.93
+$sidebarBySite	=	! wp_is_mobile() && in_array( $styles->sidebar_place, [ 'site_right', 'site_left' ] );
 
 if ( is_singular() ) echo '</article><!-- #primary -->'; ?>
 
 		</main><!-- #main -->
 
-		<?php prime2g_sidebar(); ?>
+		<?php if ( ! $sidebarBySite ) prime2g_sidebar(); ?>
 
 	</div><!-- #content -->
 </div><!-- #contentWrap -->
 
 <?php
 prime2g_footer_top_widgets();
-do_action( 'prime2g_after_content' );	#	@since 1.0.92
+do_action( 'prime2g_after_content' );	# 1.0.92
 
 #	@since 1.0.90
 if ( false === prime2g_remove_footer() ) {
@@ -61,6 +62,10 @@ if ( get_theme_mod( 'prime2g_show_socials_and_contacts', 1 ) )
 <?php } ?>
 
 </div><!-- #page -->
+
+<?php if ( $sidebarBySite ) prime2g_sidebar(); ?>
+
+</div><!-- #page_wrapper -->
 </div><!-- #container -->
 
 <?php wp_footer(); ?>

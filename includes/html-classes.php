@@ -24,44 +24,42 @@ add_filter( 'body_class', 'prime2g_body_classes' );
 function prime2g_body_classes( $classes ) {
 $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 
-	#	Helps detect if JS is enabled or not
+	#	Detects if JS is enabled or not
 	$classes[]	=	'no-js';
 
-	#	Add a body class if sidebar is set
+	#	Add classes by sidebar status
 	if ( false === prime2g_remove_sidebar() ) {
 		$classes[]	=	'has-sidebar';
+		$classes[]	=	$styles->sidebar_place ? $styles->sidebar_place . '_sidebar' : ''; # @since 1.0.93
 	}
 
-	#	Add a body class if title is unset
+	#	Add class if title is unset
 	$classes[]	=	function_exists( 'define_2gRMVTitle' ) ? 'no_title' : '';
 
 	#	Site's Width and Extras
 	$classes[]	=	'width_' . $styles->width;
-	$classes[]	=	'ext_' . $styles->style_extras;
+	$classes[]	=	$styles->style_extras ? 'ext_' . $styles->style_extras : '';
 
 	#	If post title is in header
 	$classes[]	=	'header' === $styles->title_place ? 'title_in_header' : '';
 
 	#	By Main Menu Position
-	$classes[]	=	'menu_on_header' === $styles->menu_place ? 'menu_on_header' : '';
-	$classes[]	=	'fixed' === $styles->menu_place ? 'fixed_main_menu' : '';
-	$classes[]	=	'bottom' === $styles->menu_place ? 'bottom_main_menu' : '';
+	$classes[]	=	'menu_on_header' === $styles->menu_place ?
+	$styles->menu_place : $styles->menu_place . '_main_menu';
 
 	#	If Preloader feature is active
-	#	@since ToongeePrime Theme 1.0.48.50
+	#	@since 1.0.48.50
 	if ( ! empty( get_theme_mod( 'prime2g_use_page_preloader' ) ) ) {
 		$classes[]	=	'preloading';
 	}
 
 	#	If Video features active
-	#	@since ToongeePrime Theme 1.0.55
+	#	@since 1.0.55
 	if ( ! empty( get_theme_mod( 'prime2g_enable_video_features' ) ) ) {
 		$classes[]	=	'video_site';
 	}
 
 	$classes[]	=	isset( $GLOBALS[ 'pwa_css_class' ] ) ? $GLOBALS[ 'pwa_css_class' ] : '';
-
-	$classes[]	=	'left' === $styles->sidebar_place ? 'left_sidebar' : '';
 	$classes[]	=	is_header_video_active() ? 'video_header' :'';
 
 	#	With or without a header image

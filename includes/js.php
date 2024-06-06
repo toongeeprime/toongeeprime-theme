@@ -40,11 +40,64 @@ $styles		=	ToongeePrime_Styles::mods_cache();	// @since 1.0.86
 
 $singular	=	is_singular();
 $jsSingular	=	$singular ? 'true' : 'false';
+$isMobile	=	wp_is_mobile();
+$stickyNavs	=	in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] );
+$sideNavs	=	in_array( $styles->sidebar_place, [ 'site_right', 'site_left' ] );
+$stickyNJS	=	$stickyNavs ? 'true' : 'false';
 
 $js	=	'<script defer id="prime2g_conditional_js">
-const	singular	=	'. $jsSingular .';
-menuLItems	=	p2getAll( "nav.main-menu li" );
-';
+const	singular	=	'. $jsSingular .',
+menuLItems	=	p2getAll( "nav.main-menu li" );';
+
+#	@since 1.0.93
+if ( ! $isMobile && ( $sideNavs || $stickyNavs ) ) {
+$js	.=	'window.onload	=	p2g_containers_width_by_sidebar;
+window.onresize	=	p2g_containers_width_by_sidebar;
+
+function p2g_containers_width_by_sidebar() {
+windwWidth	=	window.innerWidth;
+isSticky	=	'. $stickyNJS .';
+
+if ( windwWidth > 901 ) {
+mainNav			=	p2getEl( "#main_nav" );
+stickyNav		=	p2getEl( "#sticky_nav" );
+siteContainer	=	p2getEl( ".has-sidebar #container" );
+sidebarWidth	=	p2getEl( "#sidebar" ).offsetWidth;
+containerWidth	=	windwWidth - sidebarWidth + "px";
+sbBodyClasses	=	p2getEl( "body.has-sidebar" ).classList;
+fixedMenu		=	sbBodyClasses.contains( "fixed_main_menu" );
+menuOnHeader	=	sbBodyClasses.contains( "menu_on_header" );
+
+if ( isSticky ) {
+	siteContainer.style.maxWidth=	containerWidth;
+	if ( menuOnHeader || fixedMenu ) mainNav.style.maxWidth	=	containerWidth;
+}
+
+if ( sbBodyClasses.contains( "sticky_right_sidebar" ) ) {
+	siteContainer.style.marginRight		=	sidebarWidth + "px";
+	stickyNav ? stickyNav.style.right	=	sidebarWidth + "px" : "";
+	if ( fixedMenu ) mainNav.style.right	=	sidebarWidth + "px";
+}
+else if ( sbBodyClasses.contains( "sticky_left_sidebar" ) )  {
+	siteContainer.style.marginLeft		=	sidebarWidth + "px";
+	stickyNav ? stickyNav.style.left	=	sidebarWidth + "px" : "";
+	if ( menuOnHeader || fixedMenu ) mainNav.style.left	=	sidebarWidth + "px";
+}
+else if ( sbBodyClasses.contains( "site_left_sidebar" ) ) {
+	if ( menuOnHeader ) {
+		mainmenu	=	p2getEl( "#main_nav .mainmenu" );
+		mainmenu.style.position	=	"relative";
+		mainmenu.style.left	=	sidebarWidth + "px";
+	}
+}
+
+}
+else if ( isSticky ) {
+	siteContainer.style.width	=	"auto";
+	siteContainer.style.maxWidth=	"none";
+}
+}';
+}
 
 if ( $styles->mob_submenu_open === 'click' ) {
 $js	.=	'menuLItems?.forEach( li => {
@@ -538,7 +591,6 @@ else mgWrap.classList.remove( "g_hide" );
 return $js;
 }
 }
-
 
 
 

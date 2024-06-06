@@ -30,18 +30,17 @@ return $defaults;
 
 
 /**
- *	SETUP THE THEME
+ *	SETUP THEME & SUPPORTS
+ *	https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-support/
  */
 add_action( 'after_setup_theme', 'toongeeprime_theme_setup' );
 if ( ! function_exists( 'toongeeprime_theme_setup' ) ) {
-
 function toongeeprime_theme_setup() {
 
-	$theStyles	=	new ToongeePrime_Styles();
-	$theStyles	=	$theStyles->defaults();
+	$style	=	ToongeePrime_Styles::mods_cache();
 
 		/**
-		 *	@since ToongeePrime Theme 1.0.50
+		 *	@since 1.0.50
 		 */
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
@@ -59,9 +58,8 @@ function toongeeprime_theme_setup() {
 		/**
 		 *	Custom background
 		 */
-		$bgcolor	=	$theStyles->bgcolor;
 		add_theme_support( 'custom-background',
-		array(
+		[
 			'default-image'			=>	'',
 			'default-preset'		=>	'custom',
 			'default-position-x'	=>	'center',
@@ -69,24 +67,20 @@ function toongeeprime_theme_setup() {
 			'default-size'			=>	'cover',
 			'default-repeat'		=>	'no-repeat',
 			'default-attachment'	=>	'fixed',
-			'default-color'			=>	$bgcolor,
-		)
+			'default-color'			=>	$style->background
+		]
 		);
 
 		/**
 		 *	Post-formats support
 		 */
 		add_theme_support( 'post-formats',
-			array( 'link', 'aside', 'gallery', 'image', 'quote', 'status', 'video', 'audio', 'chat', )
+			[ 'link', 'aside', 'gallery', 'image', 'quote', 'status', 'video', 'audio', 'chat' ]
 		);
 
-		/**
-		 *	Support Post Thumbnails
-		 *
-		 *	@link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		 */
+		#	Support Post Thumbnails
 		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 2000, 9999 );
+		set_post_thumbnail_size( 2500, 1500, [ 'center', 'center' ] );
 
 		/**
 		 *	Switch default core markup for search form, comment form, and comments to output valid HTML5
@@ -138,8 +132,14 @@ function toongeeprime_theme_setup() {
 			array(
 				'name'      => esc_html__( 'Extra large', PRIME2G_TEXTDOM ),
 				'shortName' => esc_html_x( 'XL', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 40,
+				'size'      => 48,
 				'slug'      => 'extra-large',
+			),
+			array(
+				'name'      => esc_html__( 'Really Big', PRIME2G_TEXTDOM ),
+				'shortName' => esc_html_x( 'RBig', 'Font size', PRIME2G_TEXTDOM ),
+				'size'      => 72,
+				'slug'      => 'really-big',
 			),
 			array(
 				'name'      => esc_html__( 'Huge', PRIME2G_TEXTDOM ),
@@ -170,6 +170,26 @@ function toongeeprime_theme_setup() {
 
 		add_theme_support( 'editor-color-palette',
 		array(
+			array(
+				'name'  => esc_html__( 'Brand Color', PRIME2G_TEXTDOM ),
+				'slug'  => 'brandcolor',
+				'color' => $style->brand,
+			),
+			array(
+				'name'  => esc_html__( 'Brand Color 2', PRIME2G_TEXTDOM ),
+				'slug'  => 'brandcolor2',
+				'color' => $style->brand2,
+			),
+			array(
+				'name'  => esc_html__( 'Site Background Color', PRIME2G_TEXTDOM ),
+				'slug'  => 'sitebackground',
+				'color' => $style->background,
+			),
+			array(
+				'name'  => esc_html__( 'Buttons Background Color', PRIME2G_TEXTDOM ),
+				'slug'  => 'buttonbg',
+				'color' => $style->buttonbg,
+			),
 			array(
 				'name'  => esc_html__( 'Black', PRIME2G_TEXTDOM ),
 				'slug'  => 'black',
@@ -279,10 +299,10 @@ function toongeeprime_theme_setup() {
 			'product_grid'			=>	array(
 				'default_rows'		=>	3,
 				'min_rows'			=>	2,
-				'max_rows'			=>	12,
+				'max_rows'			=>	15,
 				'default_columns'	=>	4,
-				'min_columns'		=>	2,
-				'max_columns'		=>	6,
+				'min_columns'		=>	1,
+				'max_columns'		=>	8,
 			)
 		)
 		);
@@ -297,12 +317,16 @@ function toongeeprime_theme_setup() {
 		#	Support custom line height controls
 		add_theme_support( 'custom-line-height' );
 
-		#	Support experimental link color control
-		add_theme_support( 'experimental-link-color' );
-
 		#	Support experimental cover block spacing
 		add_theme_support( 'custom-spacing' );
+
+		#	@since 1.0.93
+		add_theme_support( 'appearance-tools' );
+		add_theme_support( 'border' );
+		add_theme_support( 'link-color' );
+		#	@https://developer.wordpress.org/themes/templates/template-parts/
+		// add_theme_support( 'block-template-parts' );
+}
 }
 
-}
 

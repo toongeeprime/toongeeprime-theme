@@ -92,6 +92,19 @@ if ( ! defined( 'CHILD_CONTENTBG' ) ) {
 	) );
 }
 
+if ( ! defined( 'CHILD_SIDEBARBG' ) ) {
+	$wp_customize->add_setting( 'prime2g_sidebar_background',
+	[ 'capability' => 'edit_theme_options', 'default' => $contentbg, 'sanitize_callback' => 'sanitize_hex_color' ]
+	);
+	$wp_customize->add_control( new WP_Customize_Color_Control(
+	$wp_customize, 'prime2g_sidebar_background', array(
+			'label'		=>	__( 'Main Sidebar Background Color', PRIME2G_TEXTDOM ),
+			'section'	=>	'prime2g_theme_colors_section',
+			'settings'	=>	'prime2g_sidebar_background',
+		)
+	) );
+}
+
 if ( ! defined( 'CHILD_BUTTONBG' ) ) {
 	$wp_customize->add_setting( 'prime2g_button_background',
 	[ 'capability' => 'edit_theme_options', 'default' => $buttonbg, 'sanitize_callback' => 'sanitize_hex_color' ]

@@ -5,10 +5,10 @@
  */
 
 const	theBody = p2getEl( 'body' ), primetoTop = p2getEl( '#prime2g_toTop' );
-
+window.pageYOffset > 350 ? theBody.classList.add( 'pop' ) : null;
 /* On Page-scroll */
 window.addEventListener( "scroll", ()=>{
-window.pageYOffset > 300 ? theBody.classList.add( 'pop' ) : theBody.classList.remove( 'pop' );
+window.pageYOffset > 350 ? theBody.classList.add( 'pop' ) : theBody.classList.remove( 'pop' );
 window.pageYOffset > 700 ? primetoTop.classList.add( 'show' ) : primetoTop.classList.remove( 'show' );
 p2getAll( '.popEl' )?.forEach( pop=>{ prime2g_inViewport( pop ) ? pop.classList.add( 'inview' ) : null; } );
 }, false );

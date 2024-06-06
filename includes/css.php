@@ -14,18 +14,38 @@ $styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 /**
  *	THE SIDEBAR
  */
-$sidebar821	=	'.mainsidebar{padding-right:var(--min-pad);}';
+$sidebar821	=	'';
 $sidebar901	=	'.has-sidebar .site_content,.has-sidebar.width_960px .site_content{grid-template-columns:2.5fr 1fr;}';
 $sidebar1101=	'.has-sidebar .site_content{grid-template-columns:1fr minmax(200px, 300px);}';
 
 if ( $styles->sidebar_place === 'left' ) {
-$sidebar821	=	'.mainsidebar{padding-left:var(--min-pad);}';
 $sidebar901	=
 '#main{grid-area:sbMain;}
 #sidebar{grid-area:sbSide;}
 .has-sidebar .site_content,.has-sidebar.width_960px .site_content{grid-template-columns:1fr 2.5fr;grid-template-areas:\'sbSide sbMain\';}
 ';
 $sidebar1101=	'.has-sidebar .site_content{grid-template-columns:minmax(200px, 300px) 1fr;}';
+}
+
+#	@since 1.0.93
+if ( in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] ) ) {
+$sidebar901	=	'#container{margin:0;}
+.has-sidebar #page .site_content{display:block;}
+#sidebar{position:fixed;bottom:0;top:0;overflow-y:auto;z-index:99990;}
+.admin-bar #sidebar{top:32px;}';
+$sidebar901	.= $styles->sidebar_place === 'sticky_right' ? '#sidebar{right:0;}' : '#sidebar{left:0;}';
+$sidebar821	=	$sidebar1101 = '';
+}
+
+if ( in_array( $styles->sidebar_place, [ 'site_right', 'site_left' ] ) ) {
+$sidebar821	=	'.has-sidebar #page_wrapper{display:grid;}
+.has-sidebar #page .site_content{display:block;}
+#page{grid-area:sbPage;}
+#sidebar{grid-area:sbSide;}';
+$sidebar821	.= $styles->sidebar_place === 'site_right' ?
+'.has-sidebar #page_wrapper{grid-template-columns:2.5fr 1fr;grid-template-areas:\'sbPage sbSide\';}' :
+'.has-sidebar #page_wrapper{grid-template-columns:1fr 2.5fr;grid-template-areas:\'sbSide sbPage\';}';
+$sidebar901	=	$sidebar1101 = '';
 }
 
 
@@ -67,7 +87,7 @@ if ( $mainMenuType === 'togglers' ) {
 	$mainMenu	.=	'';
 }
 elseif ( $mainMenuType === 'mega_menu' ) {
-	$menuMin821	=	prime2g_mega_menu_css();	// mega menu does not appear on mobile
+	$menuMin821	=	prime2g_mega_menu_css();	# mega menu does not appear on mobile
 
 	$menuMax820	=	prime2g_menu_max820_css();
 }
@@ -199,10 +219,7 @@ return $css;
 
 
 
-/**
- *	STICKY MENU CSS
- *	@since 1.0.83
- */
+#	@since 1.0.83
 if ( ! function_exists( 'prime2g_sticky_menu_css' ) ) {
 function prime2g_sticky_menu_css() {
 if ( ToongeePrime_Styles::mods_cache()->sticky_menu ) {
@@ -252,15 +269,15 @@ $alts	=	'
 .prime_alt_post.post_wide{--site-width:1250px;}
 .prime_alt_post .right.sidebars, .prime_alt_post .site_main{padding:0;margin:0;}
 
-.prime_alt_post.post_w100vw .site_container, .prime_alt_post.post_wstretch .site_container,
+.prime_alt_post.post_w100vw .page_wrapper, .prime_alt_post.post_wstretch .page_wrapper,
 .prime_alt_post.post_w100vw .content, .prime_alt_post.post_wstretch .content{max-width:100vw;}';
 }
 
 return	'.site_width, .ext_stretch_head .footerWrap, .ext_stretch_foot .site_header{
 margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 }
-.ext_stretch_head .site_container,.ext_stretch_foot .site_container,.ext_stretch_foot .footerWrap,
-.ext_stretch_hf .site_container, .ext_stretch_hf .footerWrap{max-width:100vw;}
+.ext_stretch_head .page_wrapper,.ext_stretch_foot .page_wrapper,.ext_stretch_foot .footerWrap,
+.ext_stretch_hf .page_wrapper, .ext_stretch_hf .footerWrap{max-width:100vw;}
 .shader{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,0.5);}
 .hide, .logged-in .logged-out, .logged-out .logged-in{display:none!important;}
 .w100pc{width:100%;}
@@ -290,6 +307,8 @@ margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 .slimscrollbar{overflow:hidden;overflow-y:auto;}
 .scrollX{overflow:hidden;overflow-x:auto;}
 
+.mainsidebar{scrollbar-color:var(--sidebar-bg) var(--sidebar-text);scrollbar-width:thin;}
+.mainsidebar:hover{scrollbar-color:#000 #b0b0b0;}
 .searchform input{outline:0;}' . $alts;
 }
 
@@ -345,7 +364,7 @@ return '.prev_next{margin:var(--min-pad) 0;}
 .post_wstretch .right.sidebars, .post_wstretch .site_main{padding:0;margin:0;}
 .post_wstretch .page_title{padding:var(--med-pad) 0;}
 
-.singular.post_w100vw .site_container, .singular.post_wstretch .site_container,
+.singular.post_w100vw .page_wrapper, .singular.post_wstretch .page_wrapper,
 .singular.post_w100vw .content, .singular.post_wstretch .content{max-width:100vw;}';
 }
 }
@@ -447,7 +466,7 @@ bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200
 .collapsible-navs a{border-left:3px solid transparent;display:inline-block;}
 .collapsible-navs a:hover{border-color:var(--content-background);}';
 
-// @since 1.0.86
+/**	@since 1.0.86	**/
 if ( ToongeePrime_Styles::mods_cache()->mob_submenu_open ) {
 $css	.=	'nav.main-menu ul.sub-menu,nav.main-menu li.open .sub-menu .sub-menu{overflow:hidden;max-height:0;transition:all 0.2s;}
 nav.main-menu li.open .sub-menu,nav.main-menu li.open li.open .sub-menu{max-height:100vh;transition:all 0.5s;}
@@ -461,9 +480,7 @@ return $css;
 /** @since 1.0.70 End **/
 
 
-/**
- *	@since 1.0.73
- */
+/**	@since 1.0.73	**/
 if ( ! function_exists( 'prime2g_admin_metabox_css' ) ) {
 function prime2g_admin_metabox_css() {
 $css	=	'
@@ -477,19 +494,19 @@ return $css;
 #	css for prime2g_view_password_toggler()
 if ( ! function_exists( 'prime2g_login_page_css' ) ) {
 function prime2g_login_page_css() {
-// return '.login-password,.password{position:relative;}
-// #page .pwTogg .bi{font-size:1.2rem;margin:0;}
-// .pwTogg{bottom:0;height:56%;right:10px;}
-// .pwTogg .bi-eye-slash,.pwTogg.visible .bi-eye{display:none;}
-// .pwTogg.visible .bi-eye-slash,.pwTogg .bi-eye{display:inline;}';
+/*
+return '.login-password,.password{position:relative;}
+#page .pwTogg .bi{font-size:1.2rem;margin:0;}
+.pwTogg{bottom:0;height:56%;right:10px;}
+.pwTogg .bi-eye-slash,.pwTogg.visible .bi-eye{display:none;}
+.pwTogg.visible .bi-eye-slash,.pwTogg .bi-eye{display:inline;}';
+*/
 }
 }
 /** @since 1.0.73 End **/
 
 
-/**
- *	@since 1.0.78
- */
+/**	@since 1.0.78	**/
 if ( ! function_exists( 'prime2g_mega_menu_css' ) ) {
 function prime2g_mega_menu_css() {
 $css	=	'
@@ -512,8 +529,8 @@ if ( defined( 'PRIME_AJX_SEARCHCSS' ) ) return;
 define( 'PRIME_AJX_SEARCHCSS', true );
 
 return	'<style id="prime_livesearchCSS">
-.wp-block-search__inside-wrapper{position:relative;z-index:99999;}
-.liveSearchBox{position:absolute;left:0;right:0;background:var(--content-background);z-index:99999;border:5px solid #f8f8f8;
+.wp-block-search__inside-wrapper{position:relative;z-index:99980;}
+.liveSearchBox{position:absolute;left:0;right:0;background:var(--content-background);z-index:99985;border:5px solid #f8f8f8;
 border-radius:5px;padding:20px;box-shadow:0 5px 15px 5px rgba(0,0,0,0.2);}
 .liveSearchBox .slimscrollbar{max-height:300px;margin-right:-10px;margin-left:-10px;}
 .liveSearchBox article{display:grid;grid-template-columns:60px 1fr;gap:10px;margin-bottom:0;}
@@ -530,9 +547,7 @@ div.liveSearchFormWrap .searchform{margin:0;}
 
 
 
-/**
- *	@since 1.0.80
- */
+#	@since 1.0.80
 if ( ! function_exists( 'prime2g_media_gallery_css' ) ) {
 function prime2g_media_gallery_css( string $template = '1' ) {
 $css	=	'<style id="prime2g_gallery_css">
@@ -598,9 +613,7 @@ return $css;
 
 
 
-/**
- *	@since 1.0.89
- */
+#	@since 1.0.89
 if ( ! function_exists( 'prime2g_woo_mini_cart_css' ) ) {
 function prime2g_woo_mini_cart_css() {
 if ( defined( 'PRIME_MINICARTCSS' ) ) return;
@@ -620,9 +633,7 @@ li.mini_cart_item{position:relative;}
 }
 
 
-/**
- *	@since 1.0.90
- */
+#	@since 1.0.90
 if ( ! function_exists( 'prime2g_prod_categ_imgs_css' ) ) {
 function prime2g_prod_categ_imgs_css() {
 if ( defined( 'PRIME_CATEGIMGCSS' ) ) return;
