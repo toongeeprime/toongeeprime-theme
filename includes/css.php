@@ -33,7 +33,7 @@ $sidebar901	=	'#container{margin:0;}
 .has-sidebar #page .site_content{display:block;}
 #sidebar{position:fixed;bottom:0;top:0;overflow-y:auto;z-index:99990;}
 .admin-bar #sidebar{top:32px;}';
-$sidebar901	.= $styles->sidebar_place === 'sticky_right' ? '#sidebar{right:0;}' : '#sidebar{left:0;}';
+$sidebar901	.= $styles->sidebar_place === 'sticky_right' ? '#container{margin-right:317px;}#sidebar{right:0;}' : '#container{margin-left:317px;}#sidebar{left:0;}';
 $sidebar821	=	$sidebar1101 = '';
 }
 
@@ -434,6 +434,7 @@ return '.main_menu_wrap, .collapsible-navs .sub-menu{background:var(--content-ba
 .collapsible-navs .sub-menu, .collapsible-navs .sub-menu .sub-menu{
 opacity:0;visibility:hidden;position:absolute;
 }
+.fixed_main_menu .site_container{margin-top:50px;}
 li:hover .sub-menu, .sub-menu li:hover .sub-menu{opacity:1;visibility:visible;}
 .sub-menu .sub-menu{left:100%;top:0;}
 .sub-menu li, .collapsible-navs .sub-menu a{display:block;}

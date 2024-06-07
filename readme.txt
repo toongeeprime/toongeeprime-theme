@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.3
 Tested up to: 6.5
-Stable tag: 1.0.93
+Stable tag: 1.0.94
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,6 @@ A WordPress theme with options for customization, design and development flexibi
 
 * Read more @ https://dev.akawey.com/wp/themes/toongeeprime-theme/readme.txt
 
-= 1.0.93 =
-* More theme supports @ add_theme_support()
-* @Customizer: More Sidebar Positions, and Background color 
-* Several Markup updates
+= 1.0.94 =
+* Removed Template parts sections link under themes.php
+* Tweaked CSS for sidebar & menu positioning

@@ -208,8 +208,10 @@ value.bind( ( newval )=>{
 api( 'prime2g_show_est_read_time', (value)=>{
 value.bind( ( newval )=>{
 	let ertPlace	=	$( '#customize-control-prime2g_est_read_time_placement' ),
-		ertPrepend	=	$( '#customize-control-prime2g_est_read_time_prepend' );
-	if ( newval ) { ertPlace.slideDown( 180 ); ertPrepend.slideDown( 180 ); } else { ertPlace.slideUp( 180 ); ertPrepend.slideUp( 180 ); }
+		ertPrepend	=	$( '#customize-control-prime2g_est_read_time_prepend' ),
+		est_rt_pt	=	$( "#_customize-input-prime2g_est_read_time_posttypes" );
+	if ( newval ) { ertPlace.slideDown( 180 ); ertPrepend.slideDown( 180 ); est_rt_pt.slideDown( 180 ); }
+	else { ertPlace.slideUp( 180 ); ertPrepend.slideUp( 180 ); est_rt_pt.slideUp( 180 ); }
 } );
 } );
 

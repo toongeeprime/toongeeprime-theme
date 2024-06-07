@@ -61,12 +61,12 @@ $remove_sidebar_choices	=	array_merge( $remove_sidebar_choices,
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_show_est_read_time',
 		'section'	=>	'prime2g_singular_entries_section',
-		'active_callback'	=>	function() { return is_singular( 'post' ); }
+		'active_callback'	=>	function() { return is_singular(); }
 	) );
 
 	$wp_customize->add_setting( 'prime2g_est_read_time_placement', array_merge( $simple_text, [ 'default' => 'prime2g_after_title' ] ) );
 	$wp_customize->add_control( 'prime2g_est_read_time_placement', array(
-		'label'		=>	__( 'E.R.T. Placement', PRIME2G_TEXTDOM ),
+		'label'		=>	__( 'Est. Read Time Placement', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
 		'settings'	=>	'prime2g_est_read_time_placement',
 		'section'	=>	'prime2g_singular_entries_section',
@@ -89,6 +89,16 @@ $remove_sidebar_choices	=	array_merge( $remove_sidebar_choices,
 	) );
 	/** @since 1.0.89 End **/
 
+	/** @since 1.0.94 **/
+	$wp_customize->add_setting( 'prime2g_est_read_time_posttypes', array_merge( $simple_text, [ 'default' => 'post' ] ) );
+	$wp_customize->add_control( 'prime2g_est_read_time_posttypes', array(
+		'label'		=>	__( 'E.R.T. on Post Types (Separate post type slugs with comma)', PRIME2G_TEXTDOM ),
+		'settings'	=>	'prime2g_est_read_time_posttypes',
+		'section'	=>	'prime2g_singular_entries_section',
+		'active_callback'	=>	'p2g_s_ert',
+		'input_attrs'	=>	[ 'placeholder' => 'post' ]
+	) );
+
 	$wp_customize->add_setting( 'prime2g_use_theme_css_js_custom_fields', array_merge( $postMsg_text, [ 'default' => 0 ] ) );
 	$wp_customize->add_control( 'prime2g_use_theme_css_js_custom_fields', array(
 		'label'		=>	__( 'Use Legacy CSS Field', PRIME2G_TEXTDOM ),
@@ -100,3 +110,4 @@ $remove_sidebar_choices	=	array_merge( $remove_sidebar_choices,
 }
 
 }
+

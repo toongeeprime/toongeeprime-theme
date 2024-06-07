@@ -82,8 +82,8 @@ function prime2g_sitelogo_shortcode( $atts ) {
 $atts	=	shortcode_atts( array( 'dark_logo' => '', 'source' => '' ), $atts );
 extract( $atts );
 
-$darkLogo	=	( $dark_logo === 'yes' ) ? true : false;
-$src	=	( $source === 'yes' ) ? true : false;
+$darkLogo	=	$dark_logo === 'yes';
+$src	=	$source === 'yes';
 
 return prime2g_siteLogo( $darkLogo, $src );
 }

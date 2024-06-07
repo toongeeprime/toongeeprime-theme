@@ -149,13 +149,20 @@ if ( get_theme_mod( 'prime2g_show_est_read_time', 0 ) ) {
 if ( ! function_exists( 'prime2g_estimated_reading_time' ) ) {
 function prime2g_estimated_reading_time( array $options = [] ) {
 if ( ! is_singular() ) return;
+if ( ! empty( get_theme_mod( 'prime2g_show_est_read_time' ) ) ) {
 
+$post_types	=	get_theme_mod( 'prime2g_est_read_time_posttypes', 'post' );	#	@1.0.94
 $sep	=	', ';
 $include_sec	=	$plain = false;
 $echo	=	true;
 
 extract( $options );
+
+$post_types	=	explode( ',', str_replace( ' ', '', $post_types ) );
+
 global $post;
+
+if ( ! in_array( $post->post_type, $post_types ) ) return;
 
 $content	=	$post->post_content;
 $words		=	str_word_count( strip_tags( $content ) );
@@ -175,6 +182,7 @@ if ( $echo )
 	echo $estimate;
 else 
 	return $estimate;
+}
 }
 }
 

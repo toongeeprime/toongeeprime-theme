@@ -2,7 +2,6 @@
 
 /**
  *	ACCORDION FRAME & SCRIPTS
- *
  *	@since ToongeePrime Theme 1.0.55
  */
 
@@ -29,7 +28,7 @@
 
 function prime2g_accordion_frames_css() {
 if ( defined( 'PRIME_ACCORDNSCSS' ) ) return;
-define( 'PRIME_ACCORDNSCSS' );
+define( 'PRIME_ACCORDNSCSS', true );
 
 echo	'<style id="prime2g_accordion_baseCSS">
 .prime2g_accordion_wrap{margin:0 auto var(--min-pad);}

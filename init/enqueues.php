@@ -44,7 +44,7 @@ if ( prime_child_min_version( '2.3' ) ) {
 	else {
 		//	WooCommerce Adds jQuery Migrate, so do if jQ is registered & Woo absent
 		//	@since 1.0.89
-		if ( get_theme_mod( 'prime2g_deregister_jq_migrate', 1 ) ) {
+		if ( get_theme_mod( 'prime2g_deregister_jq_migrate', 0 ) ) {
 			if ( wp_script_is( 'jquery-migrate', 'registered' ) )
 				wp_deregister_script( 'jquery-migrate' );
 		}

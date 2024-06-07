@@ -89,7 +89,7 @@ if ( class_exists( 'woocommerce' ) ) {
 else {
 	//	WooCommerce Adds jQuery Migrate
 	//	@since 1.0.89
-	$wp_customize->add_setting( 'prime2g_deregister_jq_migrate', $postMsgChecked );
+	$wp_customize->add_setting( 'prime2g_deregister_jq_migrate', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_deregister_jq_migrate', array(
 		'label'		=>	__( "Deregister jQuery Migrate", PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',

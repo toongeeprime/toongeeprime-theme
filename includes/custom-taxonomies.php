@@ -8,9 +8,31 @@
  *	https://developer.wordpress.org/reference/functions/register_taxonomy/
  */
 
+#	@since 1.0.94
+add_action( 'admin_init', 'prime2g_remove_submenus', 1000 );
+function prime2g_remove_submenus() {
+    remove_submenu_page( 'themes.php', 'edit-tags.php?taxonomy=template_parts_section' );
+}
+
+add_action( 'admin_footer', function() {
+	if ( isset( $_GET[ 'post_type' ], $_GET[ 'taxonomy' ] ) &&
+	$_GET[ 'post_type' ] === 'prime_template_parts' && $_GET[ 'taxonomy' ] === 'template_parts_section' ) {
+	echo	'<script id="primeRefocusCurrentItem">
+	primetParts	=	document.querySelector( "#menu-posts-prime_template_parts" );
+	primetParts.classList.add( "wp-has-current-submenu", "wp-menu-open" );
+	primetParts.classList.remove( "wp-not-current-submenu" );
+	document.querySelector( "#menu-appearance" ).classList.remove( "wp-has-current-submenu", "wp-menu-open" );
+	document.querySelector( "#menu-appearance a" ).classList.remove( "wp-has-current-submenu" );
+	</script>';
+	}
+} );
+#	@since 1.0.94 End
+
+
+
 if ( ! function_exists( 'prime2g_register_custom_taxonomies' ) ) {
 
-add_action( 'init', 'prime2g_register_custom_taxonomies', 0 );
+add_action( 'init', 'prime2g_register_custom_taxonomies', 1 );
 
 function prime2g_register_custom_taxonomies() {
 # 1.0.74: condition is now only prime2g_use_extras()
@@ -28,7 +50,7 @@ $parts_labels	=	array(
 	'add_new_item'	=>	__( 'Add New Section', PRIME2G_TEXTDOM ),
 	'new_item_name'	=>	__( 'New Template Parts Section', PRIME2G_TEXTDOM ),
 	'menu_name'		=>	__( 'Template Sections', PRIME2G_TEXTDOM ),
-	'not_found'		=>	__( 'No Sections Found', PRIME2G_TEXTDOM ),
+	'not_found'		=>	__( 'No Sections Found', PRIME2G_TEXTDOM )
 );
 $parts_args	=	array(
 	'label'			=>	__( 'Template Parts Sections', PRIME2G_TEXTDOM ),
@@ -38,9 +60,9 @@ $parts_args	=	array(
 	'hierarchical'	=>	true,
 	'show_ui'		=>	true,
 	'show_in_rest'	=>	true,
-	'show_in_quick_edit'	=>	true,
+	'show_in_quick_edit'=>	true,
 	'show_admin_column'	=>	true,
-	'show_in_menu'	=>	true,
+	'show_in_menu'	=>	true
 );
 
 register_taxonomy( 'template_parts_section', 'prime_template_parts', $parts_args );
@@ -59,7 +81,7 @@ $brand_labels	=	array(
 	'add_new_item'	=>	__( 'Add New Brand', PRIME2G_TEXTDOM ),
 	'new_item_name'	=>	__( 'New Brand', PRIME2G_TEXTDOM ),
 	'menu_name'		=>	__( 'Brands', PRIME2G_TEXTDOM ),
-	'not_found'		=>	__( 'No Brands Found', PRIME2G_TEXTDOM ),
+	'not_found'		=>	__( 'No Brands Found', PRIME2G_TEXTDOM )
 );
 $brand_args	=	array(
 	'label'			=>	__( 'Brands', PRIME2G_TEXTDOM ),
@@ -69,7 +91,7 @@ $brand_args	=	array(
 	'hierarchical'	=>	true,
 	'show_ui'		=>	true,
 	'show_in_rest'	=>	true,
-	'show_in_quick_edit'	=>	true,
+	'show_in_quick_edit'=>	true,
 	'show_admin_column'	=>	true,
 	'show_in_menu'	=>	true
 );
@@ -80,4 +102,5 @@ register_taxonomy( 'brand', prime_post_types_group()->has_brand, $brand_args );
 }
 
 }
+
 
