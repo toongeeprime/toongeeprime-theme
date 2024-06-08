@@ -31,21 +31,13 @@ function prime2g_video_features_active() {
 
 
 /**
- *	@since 1.0.87
+ *	@since 1.0.87/94
  */
-// add_filter( 'is_header_video_active', 'prime2g_is_header_video_active' );
-// function prime2g_is_header_video_active( $show_video ) {}
-function prime2g_is_header_video_active() {
+add_filter( 'is_header_video_active', 'prime2g_is_header_video_active' );
+function prime2g_is_header_video_active(): bool {
 if ( prime2g_video_features_active() && has_header_video() ) {
-global $post;
-
-$placement		=	ToongeePrime_Styles::mods_cache()->header_vid_places;
-$front_n_archs	=	'prime2g_video_header_front_and_archives';
-
-	if ( in_array( $placement, [ 'is_front_page', $front_n_archs ] ) && is_front_page() ) return true;
-	if ( in_array( $placement, [ 'is_archive', $front_n_archs ] ) && is_archive() ) return true;
-	if ( $placement === 'is_singular' && is_singular() ) return true;
-	if ( $placement === '' ) return true;
+$placement	=	ToongeePrime_Styles::mods_cache()->header_vid_places;
+return $placement === '' ? true : $placement();
 }
 
 return false;

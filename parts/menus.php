@@ -67,7 +67,7 @@ elseif ( ! $isMobile && $min_v23 && 'mega_menu' === $styles->menu_type ) {
 
 	$partID	=	get_theme_mod( 'prime2g_mega_menu_template_part_id', '' );
 	echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
-	add_action( 'wp_footer', 'prime2g_mega_menu_js' );
+	add_action( 'wp_footer', 'prime2g_mega_menu_js', 999 );
 
 }
 else {

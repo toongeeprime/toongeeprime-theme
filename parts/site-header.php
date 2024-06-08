@@ -15,7 +15,7 @@ $isSingular		=	is_singular();
 $title_in_headr	=	( 'header' === $styles->title_place );
 $hasHeader		=	has_custom_header();
 $menuPlace		=	$styles->menu_place;
-$videoActive	=	prime2g_is_header_video_active();
+$videoActive	=	is_header_video_active();
 $keepHeader		=	false === prime2g_remove_header();
 $titleOverVideo	=	$styles->titleOnHeader;
 $tov_class		=	$titleOverVideo && ( $post && $post->video_url || $videoActive || ! $isSingular ) ?
@@ -74,4 +74,3 @@ if ( 'bottom' === $menuPlace ) prime2g_main_menu();
 prime2g_sub_header();
 
 if ( $keepHeader ) prime2g_after_header();
-

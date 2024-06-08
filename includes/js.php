@@ -34,7 +34,7 @@ echo $js;
 
 
 
-add_action( 'wp_footer', 'prime2g_conditional_js', 990 );
+add_action( 'wp_footer', 'prime2g_conditional_js', 800 );
 function prime2g_conditional_js() {
 $styles		=	ToongeePrime_Styles::mods_cache();	// @since 1.0.86
 
@@ -54,7 +54,7 @@ if ( ! $isMobile && ( $sideNavs || $stickyNavs ) ) {
 $js	.=	'window.onload	=	p2g_containers_width_by_sidebar;
 window.onresize	=	p2g_containers_width_by_sidebar;
 
-function p2g_containers_width_by_sidebar() {
+async function p2g_containers_width_by_sidebar() {
 windwWidth	=	window.innerWidth;
 isSticky	=	'. $stickyNJS .';
 
@@ -306,7 +306,11 @@ if ( fullwidth || pagewidth ) {
 const mmLIitems	=	p2getAll( "#megaMenu.desktop .megamenuLi" ),
 	pageBody	=	p2getEl( "#page" );
 
-function prime_setMegaMenu() {
+async function prime_setMegaMenu() {
+if ( typeof p2g_containers_width_by_sidebar === "function" ) {
+	await p2g_containers_width_by_sidebar();
+}
+
 setTimeout( ()=>{
 	let	pageBounding=	pageBody.getBoundingClientRect(),
 	widthOfPage	=	pageBounding.width,

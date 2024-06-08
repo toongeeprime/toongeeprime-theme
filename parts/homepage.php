@@ -56,15 +56,16 @@ $cat	=	null;
 		$term_name	=	$cat->name;
 	} else {
 		$slug		=	get_theme_mod( 'prime2g_slideshow_tax_term_slug' );
-		$term_name	=	get_term_by( 'slug', $slug, get_theme_mod( 'prime2g_slideshow_taxonomy', 'category' ) )->name ?: '*Check Slider Term';
+		$the_term	=	get_term_by( 'slug', $slug, get_theme_mod( 'prime2g_slideshow_taxonomy', 'category' ) );
+		$term_name	=	$the_term ? $the_term->name : '*Check Slider Term';
 	}
 
 $options	=	[ 'use_cache' => false, 'set_cache' => false ];
-$tax_query	=	[ 'taxonomy' => 'category', 'operator' => 'IN', 'terms' => $slug ];
+$tax_query	=	[ 'taxonomy' => 'category', 'field' => 'slug', 'operator' => 'IN', 'terms' => $slug ];
 
-$set_1	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
-$mid	=	$is_slider ? null : prime2g_wp_query( [ 'posts_per_page' => 1, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
-$set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 'date', 'tax_query' => $tax_query ], $options );
+$set_1	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 1, 'orderby' => 'date', 'no_found_rows' => true, 'tax_query' => [$tax_query] ], $options );
+$mid	=	$is_slider ? null : prime2g_wp_query( [ 'posts_per_page' => 1, 'orderby' => 'date', 'no_found_rows' => true, 'tax_query' => [$tax_query] ], $options );
+$set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 'date', 'no_found_rows' => true, 'tax_query' => [$tax_query] ], $options );
 
 
 	echo prime2g_headlines_css() . '<section class="home_headlines">
@@ -104,6 +105,7 @@ $set_2	=	prime2g_wp_query( [ 'posts_per_page' => 2, 'offset' => 3, 'orderby' => 
 		do_action( 'prime2g_after_home_headlines' );	# @since 1.0.55
 
 	echo '</section>';
+wp_reset_postdata();
 	}
 	else { echo '<h2>Select Category</h2>'; }
 }

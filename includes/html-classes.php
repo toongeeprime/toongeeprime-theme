@@ -40,14 +40,14 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 	$classes[]	=	'width_' . $styles->width;
 	$classes[]	=	$styles->style_extras ? 'ext_' . $styles->style_extras : '';
 
-	#	If post title is in header
+	#	Post title in header
 	$classes[]	=	'header' === $styles->title_place ? 'title_in_header' : '';
 
 	#	By Main Menu Position
 	$classes[]	=	'menu_on_header' === $styles->menu_place ?
 	$styles->menu_place : $styles->menu_place . '_main_menu';
 
-	#	If Preloader feature is active
+	#	Preloader feature
 	#	@since 1.0.48.50
 	if ( ! empty( get_theme_mod( 'prime2g_use_page_preloader' ) ) ) {
 		$classes[]	=	'preloading';
@@ -57,10 +57,11 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 	#	@since 1.0.55
 	if ( ! empty( get_theme_mod( 'prime2g_enable_video_features' ) ) ) {
 		$classes[]	=	'video_site';
+		$classes[]	=	is_header_video_active() ? 'video_active' : '';
+		$classes[]	=	'replace_header' === $styles->video_place ? 'video_as_header' : '';
 	}
 
 	$classes[]	=	isset( $GLOBALS[ 'pwa_css_class' ] ) ? $GLOBALS[ 'pwa_css_class' ] : '';
-	$classes[]	=	is_header_video_active() ? 'video_header' :'';
 
 	#	With or without a header image
 	$classes[]	=	has_header_image() ? 'has-header-image' : 'no-header-image';
@@ -74,7 +75,6 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 		global $post;
 
 		$classes[]	=	'singular';
-		$classes[]	=	'replace_header' === $styles->video_place ? 'video_as_header' : '';
 
 		#	Has featured image?
 		$classes[]	=	has_post_thumbnail() ? 'has-thumbnail' : 'no-thumbnail';
