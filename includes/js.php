@@ -304,7 +304,7 @@ const 	fullwidth	=	'. $fullwidth .',
 
 if ( fullwidth || pagewidth ) {
 const mmLIitems	=	p2getAll( "#megaMenu.desktop .megamenuLi" ),
-	pageBody	=	p2getEl( "#container" );
+	pageBody	=	p2getEl( "#page" );
 
 function prime_setMegaMenu() {
 setTimeout( ()=>{

@@ -54,7 +54,7 @@ RESPONSIVE
 @media(min-width:681px){.grid2, .grid4, .grid5, .grid6{grid-template-columns:1fr 1fr;}}
 
 @media(min-width:729px){
-.grid3, .grid6{grid-template-columns:1fr 1fr 1fr;}
+.grid3, .grid5, .grid6{grid-template-columns:1fr 1fr 1fr;}
 }
 
 @media(min-width:821px){

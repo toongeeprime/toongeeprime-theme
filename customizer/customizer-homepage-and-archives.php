@@ -56,9 +56,7 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 		'active_callback'	=>	'is_home'
 	) );
 
-/**
- *	@since 1.0.55
- */
+	/* @since 1.0.55 */
 	$wp_customize->add_setting( 'prime2g_archive_post_columns_num', $simple_text );
 	$wp_customize->add_control( 'prime2g_archive_post_columns_num', array(
 		'label'		=>	__( 'Archive Post Columns', PRIME2G_TEXTDOM ),
@@ -69,9 +67,22 @@ $simple_text	=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_fi
 			''		=>	'1',
 			'grid2'	=>	'2',
 			'grid3'	=>	'3',
-			'grid4'	=>	'4'
+			'grid4'	=>	'4',
+			'grid5'	=>	'5',
+			'grid6'	=>	'6'
 		],
 	) );
+
+/* @since 1.0.94 */
+if ( prime_child_min_version( '2.4' ) ) {
+	$wp_customize->add_setting( 'prime2g_archive_masonry_layout', $simple_text );
+	$wp_customize->add_control( 'prime2g_archive_masonry_layout', array(
+		'label'		=>	__( 'Use Masonry Layout', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_archive_masonry_layout',
+		'section'	=>	'prime2g_theme_archives_section'
+	) );
+}
 
 	$wp_customize->add_setting( 'prime2g_archive_pagination_type', $simple_text );
 	$wp_customize->add_control( 'prime2g_archive_pagination_type', array(

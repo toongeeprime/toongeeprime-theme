@@ -33,7 +33,8 @@ $sidebar901	=	'#container{margin:0;}
 .has-sidebar #page .site_content{display:block;}
 #sidebar{position:fixed;bottom:0;top:0;overflow-y:auto;z-index:99990;}
 .admin-bar #sidebar{top:32px;}';
-$sidebar901	.= $styles->sidebar_place === 'sticky_right' ? '#container{margin-right:317px;}#sidebar{right:0;}' : '#container{margin-left:317px;}#sidebar{left:0;}';
+$sidebar901	.= $styles->sidebar_place === 'sticky_right' ?
+'.has-sidebar #container{margin-right:317px;}#sidebar{right:0;}' : '.has-sidebar #container{margin-left:317px;}#sidebar{left:0;}';
 $sidebar821	=	$sidebar1101 = '';
 }
 
@@ -372,11 +373,26 @@ return '.prev_next{margin:var(--min-pad) 0;}
 
 if ( ! function_exists( 'prime2g_archives_css' ) ) {
 function prime2g_archives_css() {
-return '#archive_loop{height:max-content;}
+$css	=	'#archive_loop{height:max-content;}
 .infinite-scroll .archive.prev_next{display:none;}
 #page #infinite-handle span{display:inline-block;}
 .pagination .page-numbers{line-height:1;}
-.home_headlines{padding:1px var(--min-pad);}';
+.home_headlines{padding:1px var(--min-pad);}
+';
+
+#	@since 1.0.94
+if ( get_theme_mod( 'prime2g_archive_masonry_layout' ) ) {
+$cols	=	get_theme_mod( 'prime2g_archive_post_columns_num' );
+$cols	=	$cols ? str_replace( 'grid', '', $cols ) : '';
+$css	.=	'.posts_loop.masonry{display:block;column-fill:initial;columns:'. $cols .';}
+.posts_loop.masonry > * {break-inside:avoid;margin-bottom:var(--min-pad);}
+
+@supports (grid-template-columns: masonry) {
+.posts_loop.masonry{display:grid;grid-template-rows:masonry;align-tracks:stretch;}
+}';
+}
+
+return $css;
 }
 }
 

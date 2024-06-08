@@ -59,6 +59,7 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	$cache	=	self::mods_cache();
 	$bg_color	=	$cache->background;
 	$cnt_color	=	$cache->content;
+	$sidebarbg	=	$cache->sidebarbg;
 
 	$dBody	=	'';
 	if ( 'on_dbody' === $cache->dt_switch ) {
@@ -68,6 +69,8 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	--header-background:#000;
 	--footer-text:#efefef;
 	--footer-background:#000;
+	--sidebar-background:#090909;
+	--sidebar-text:#efefef;
 ";
 	}
 	return "--content-text:". $cache->content .";

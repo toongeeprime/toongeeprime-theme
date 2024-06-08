@@ -160,7 +160,7 @@ class ToongeePrime_Styles {
 	--body-background:". $cache->background .";
 	--header-background:". $cache->header .";
 	--content-background:". $cache->content .";
-	--sidebar-bg:". $cache->sidebarbg .";
+	--sidebar-background:". $cache->sidebarbg .";
 	--footer-background:". $cache->footer .";
 	--body-font:'{$bodyGFont}';
 	--headings-font:'{$headGFont}';
@@ -209,7 +209,7 @@ h1.page-title{font-weight:{$t_weight};}
 .singular .entry-title{font-size:var(--post-titlesize);}
 body:not(.singular) .entry-title{font-size:var(--arch-titlesize);}
 body{font-size:{$bodyFS};}
-.mainsidebar{background-color:var(--sidebar-bg);color:var(--sidebar-text);}
+.mainsidebar{background-color:var(--sidebar-background);color:var(--sidebar-text);}
 .mainsidebar a{color:var(--sidebar-text);}
 {$fImgCSS}
 {$headerVidCSS}

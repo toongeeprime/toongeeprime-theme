@@ -19,5 +19,6 @@ A WordPress theme with options for customization, design and development flexibi
 * Read more @ https://dev.akawey.com/wp/themes/toongeeprime-theme/readme.txt
 
 = 1.0.94 =
-* Removed Template parts sections link under themes.php
+* Removed annoying Template parts sections link under themes.php
 * Tweaked CSS for sidebar & menu positioning
+* Masonry archive layout

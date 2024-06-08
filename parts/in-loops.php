@@ -249,44 +249,35 @@ $link	=	get_permalink();
  *	Split from prime2g_archive_loop()
  *	Archive Post Entry Template: returned
  *	@since 1.0.45
+ *	@since 1.0.55 $size as array
  */
 if ( ! function_exists( 'prime2g_get_archive_loop' ) ) {
-function prime2g_get_archive_loop( $size = 'large', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
-global $post;
-$title	=	$post->post_title;
-$link	=	get_permalink();
+function prime2g_get_archive_loop( $size = 'medium', $excerpt = true, $length = 25, $metas = true, $footer = true, $tag = 'h2' ) {
+$post	=	null;
+$imgSize	=	$size;
 $edit_link	=	true;
+$readmore	=	' - Read more';
+$entryClasses	=	'';	#	string|string[]
+$ftimage_as_image	=	false;	#	@since 1.0.94
 
 #	@since 1.0.55
-
 $loop_post_header_template	=	$loop_post_footer_template	=	null;
 
 if ( is_array( $size ) ) {	#	Var name for backwards compatibility
-
-$imgSize	=	'large';
-$excerpt	=	true;
-$length		=	25;
-$metas		=	true;
-$footer		=	true;
-$tag		=	'h2';
-$readmore	=	' - Read more';
-$post		=	null;	//	added @since 1.0.80
-$entryClasses	=	'';	# string|string[]
-
+$imgSize	=	'medium';
 extract( $size );
-if ( ! $post ) { global $post; }	//	added @since 1.0.80
+}
 
-}
-else {
-	$imgSize	=	$size;
-	$readmore	=	'... Keep reading';
-}
-#	@since 1.0.55 end
+if ( ! $post ) { global $post; }	#	@since 1.0.80
+
+$title	=	$post->post_title;
+$link	=	get_permalink( $post );
 
 $entry	=	'<article id="entry-' . $post->ID . '" class="' . implode( ' ', get_post_class( $entryClasses ) ) . '">';
 $entry	.=	'<div class="entry_img">';
 
-$entry	.=	prime2g_ft_image_in_loop( $title, $imgSize, $link, $post );
+$entry	.=	prime2g_ft_image_in_loop( [ 'title'=>$title, 'ftimage_as_image'=>$ftimage_as_image ],
+$imgSize, $link, $post );
 
 $entry	.=	'</div>';
 
@@ -322,26 +313,39 @@ return $entry;
 
 /**
  *	@since 1.0.55
+ *	@since 1.0.94:
+ *		$ftimage_as_image => Featured Image as image instead of div background. Suitable for masonry layout
+ *		$title as array, to control params length
  */
 if ( ! function_exists( 'prime2g_ft_image_in_loop' ) ) {
-function prime2g_ft_image_in_loop( string $title, string $size, string $link, object $post = null ) {
+function prime2g_ft_image_in_loop( $title, string $size, string $link, object $post = null ) {
+$ftimage_as_image	=	false;
 
-$thepost	=	$post ?: null;
+#	@since 1.0.94
+if ( is_array( $title ) ) { extract( $title ); }	#	Var name for backwards compatibility
+
+if ( ! $post ) { global $post; }
+
+$title	=	$post->post_title;
+$div_class	=	$ftimage_as_image ? 'ftimage' : 'thumbnail';
+
 $ftimg	=	'<a href="' . $link . '" title="' . $title . '">';
 
-if ( has_post_thumbnail( $thepost ) ) {
-	$ftimg	.=	'<div class="thumbnail" style="background-image:url(';
-	$ftimg	.=	get_the_post_thumbnail_url( $thepost, $size );
-	$ftimg	.=	');"></div>';
+if ( has_post_thumbnail( $post ) ) {
+	if ( $ftimage_as_image )
+		$ftimg	.=	'<div class="'. $div_class .'">'. get_the_post_thumbnail( $post, $size ) .'</div>';
+	else
+		$ftimg	.=	'<div class="'. $div_class .'" style="background-image:url('. get_the_post_thumbnail_url( $post, $size ). ');"></div>';
 }
 else {
 	if ( child2g_has_placeholder() ) {
-		$ftimg	.=	'<div class="thumbnail" style="background-image:url(';
-		$ftimg	.=	child2g_placeholder_url( true );
-		$ftimg	.=	');"></div>';
+	if ( $ftimage_as_image )
+		$ftimg	.=	'<div class="'. $div_class .'"><img src="'. child2g_placeholder_url( true ) .'" alt /></div>';
+	else
+		$ftimg	.=	'<div class="'. $div_class .'" style="background-image:url('. child2g_placeholder_url( true ) .');"></div>';
 	}
 	else {
-		$ftimg	.=	'<div class="thumbnail">'. $title .'</div>';
+		$ftimg	.=	'<div class="'. $div_class .'">'. $title .'</div>';
 	}
 }
 
@@ -354,7 +358,7 @@ return $ftimg;
 
 
 /**
- *	Archive Post Template by post object
+ *	Archive Post Object Template
  *	@since 1.0.50
  *	Media field logic @since 1.0.55
  */
@@ -371,6 +375,7 @@ $readmore	=	' - Read more';
 $edit_link	=	true;
 $entryClasses	=	'';	# string|string[]
 $switch_img_vid	=	false;
+$ftimage_as_image	=	false;
 $loop_post_header_template	=	$loop_post_footer_template	=	null;
 
 extract( $args );
@@ -415,7 +420,7 @@ $entry	.=	'</article>';
 }
 else {
 $data	=	[
-	'imgSize' => $size, 'excerpt' => $excerpt, 'length' => $length, 'edit_link' => $edit_link,
+	'imgSize' => $size, 'excerpt' => $excerpt, 'length' => $length, 'edit_link' => $edit_link, 'ftimage_as_image' => $ftimage_as_image,
 	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'readmore' => $readmore, 'post' => $post, 'entryClasses' => $entryClasses,
 	'loop_post_header_template' => $loop_post_header_template, 'loop_post_footer_template' => $loop_post_footer_template,
 ];
@@ -525,4 +530,5 @@ if ( ! $post ) { global $post; }
 	return do_shortcode( get_the_content( $post ) );
 }
 }
+
 
