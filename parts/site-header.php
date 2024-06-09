@@ -37,7 +37,8 @@ prime2g_before_header();
 if ( 'bottom' !== $menuPlace ) prime2g_main_menu();
 
 
-if ( $keepHeader ) { ?>
+if ( $keepHeader ) {
+do_action( 'prime2g_header_top' );	# 1.0.95 ?>
 <header id="header" class="site_header prel<?php echo $tov_class; ?>"<?php echo $headerBackground; ?>>
 
 <?php
@@ -67,6 +68,7 @@ echo '</div>';
 
 </header>
 <?php
+do_action( 'prime2g_header_bottom' );	# 1.0.95
 }
 
 if ( 'bottom' === $menuPlace ) prime2g_main_menu();
@@ -74,3 +76,4 @@ if ( 'bottom' === $menuPlace ) prime2g_main_menu();
 prime2g_sub_header();
 
 if ( $keepHeader ) prime2g_after_header();
+
