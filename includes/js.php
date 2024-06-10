@@ -34,7 +34,7 @@ echo $js;
 
 
 
-add_action( 'wp_footer', 'prime2g_conditional_js', 800 );
+add_action( 'wp_footer', 'prime2g_conditional_js', 500 );
 function prime2g_conditional_js() {
 $styles		=	ToongeePrime_Styles::mods_cache();	// @since 1.0.86
 
@@ -54,6 +54,16 @@ if ( ! $isMobile && ( $sideNavs || $stickyNavs ) ) {
 $js	.=	'window.onload	=	p2g_containers_width_by_sidebar;
 window.onresize	=	p2g_containers_width_by_sidebar;
 
+function prime2g_clear_sidebarStickiness() {
+mainNav			=	p2getEl( "#main_nav" );
+siteContainer	=	p2getEl( ".has-sidebar #container" );
+	siteContainer.style.width	=	"auto";
+	siteContainer.style.margin	=	"auto";
+	siteContainer.style.maxWidth=	"none";
+	mainNav.style.maxWidth	=	"none";
+	p2getEl( "body.has-sidebar" ).classList.contains( "sticky_left_sidebar" ) ? mainNav.style.left = "0" : null;
+}
+
 async function p2g_containers_width_by_sidebar() {
 windwWidth	=	window.innerWidth;
 isSticky	=	'. $stickyNJS .';
@@ -68,6 +78,8 @@ sbBodyClasses	=	p2getEl( "body.has-sidebar" ).classList;
 fixedMenu		=	sbBodyClasses.contains( "fixed_main_menu" );
 menuOnHeader	=	sbBodyClasses.contains( "menu_on_header" );
 
+if ( sbBodyClasses.contains( "hide_sticky_sidebar" ) ) return;
+
 if ( isSticky ) {
 	siteContainer.style.maxWidth=	containerWidth;
 	if ( menuOnHeader || fixedMenu ) mainNav.style.maxWidth	=	containerWidth;
@@ -76,7 +88,7 @@ if ( isSticky ) {
 if ( sbBodyClasses.contains( "sticky_right_sidebar" ) ) {
 	siteContainer.style.marginRight		=	sidebarWidth + "px";
 	stickyNav ? stickyNav.style.right	=	sidebarWidth + "px" : "";
-	if ( fixedMenu ) mainNav.style.right	=	sidebarWidth + "px";
+	if ( fixedMenu ) mainNav.style.right=	sidebarWidth + "px";
 }
 else if ( sbBodyClasses.contains( "sticky_left_sidebar" ) )  {
 	siteContainer.style.marginLeft		=	sidebarWidth + "px";
@@ -85,16 +97,20 @@ else if ( sbBodyClasses.contains( "sticky_left_sidebar" ) )  {
 }
 else if ( sbBodyClasses.contains( "site_left_sidebar" ) ) {
 	if ( menuOnHeader ) {
-		mainmenu	=	p2getEl( "#main_nav .mainmenu" );
-		mainmenu.style.position	=	"relative";
-		mainmenu.style.left	=	sidebarWidth + "px";
+		sideRect	=	p2getEl( "#sidebar" ).getBoundingClientRect();
+		mainNav.style.left	=	(sideRect.left + sidebarWidth) + "px";
 	}
 }
 
 }
-else if ( isSticky ) {
-	siteContainer.style.width	=	"auto";
-	siteContainer.style.maxWidth=	"none";
+else {
+	if ( isSticky ) {
+		prime2g_clear_sidebarStickiness();
+	}
+	mainNav.style.right		=	"0";
+	mainNav.style.left		=	"0";
+	stickyNav.style.right	=	"0";
+	stickyNav.style.left	=	"0";
 }
 }';
 }
@@ -352,7 +368,6 @@ if ( ! function_exists( 'prime2g_ajax_search_js' ) ) {
 function prime2g_ajax_search_js( array $options = [] ) {
 
 add_action( 'wp_footer', function() use( $options ) {
-
 if ( defined( 'P2GAJAXSEARCHJS' ) ) return;
 define( 'P2GAJAXSEARCHJS', true );
 
@@ -597,4 +612,36 @@ return $js;
 }
 
 
+/**
+ *	@since 1.0.95
+ */
+function prime2g_sidebar_toggler_js() {
+$domain	=	prime2g_get_site_domain();
+echo	'<script id="ssbTogJS">
+stickyNav	=	p2getEl( "#sticky_nav" );
+
+if ( primeHasCookie( "hideStickySidebar" ) ) {
+	prime2g_sb_toggler_close_state();
+}
+
+function prime2g_sb_toggler_close_state() {
+	prime2g_clear_sidebarStickiness();
+	bHasSidebar	=	p2getEl( "body.has-sidebar" ).classList;
+	hideSticky	=	bHasSidebar.contains( "hide_sticky_sidebar" );
+	hideSticky ? bHasSidebar.remove( "hide_sticky_sidebar" ) : bHasSidebar.add( "hide_sticky_sidebar" );
+	if ( stickyNav ) {
+		stickyNav.style.right = "0"; stickyNav.style.left = "0";
+	}
+}
+
+p2getEl( "#stickySidebarToggler .pointer" ).addEventListener( "click", ()=>{
+	prime2g_sb_toggler_close_state();
+	p2getEl( "#stickySidebarToggler" ).classList.toggle( "open" );
+	p2g_containers_width_by_sidebar();
+	p2getEl( "body.has-sidebar" ).classList.contains( "hide_sticky_sidebar" ) ?
+	primeSetCookie( "hideStickySidebar", "true", 30, "'. $domain .'" ) :
+	primeSetCookie( "hideStickySidebar", "true", 0, "'. $domain .'" );
+} );
+</script>';
+}
 

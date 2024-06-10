@@ -44,7 +44,7 @@ h1, h2, h3{font-family:var(--headings-font);}
 #header{background-color:var(--header-background);color:var(--header-text);}
 .site_header a{color:var(--header-text);}
 
-.site_content, .contentWrap .page_title, .footer_topWidgets .site_width, #prime2g_sub_header .site_width, #prime2g_after_header .site_width{
+.site_content, .contentWrap .page_title, #prime2g_sub_header .site_width, #prime2g_after_header .site_width{
 background-color:var(--content-background);color:var(--content-text);
 }
 

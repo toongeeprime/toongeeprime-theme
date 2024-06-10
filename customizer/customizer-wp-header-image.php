@@ -19,7 +19,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	$wp_customize->add_setting( 'prime2g_video_header_placements',  array_merge( $simple_text, [ 'default' => 'is_front_page' ] ) );
 	$wp_customize->add_control( 'prime2g_video_header_placements', array(
 		'type'		=>	'select',
-		'label'		=>	__( 'Video Header Placement (Refresh Customizer)', PRIME2G_TEXTDOM ),
+		'label'		=>	__( 'Video Header Placement', PRIME2G_TEXTDOM ),
 		'settings'	=>	'prime2g_video_header_placements',
 		'section'	=>	'header_image',
 		'active_callback'	=>	'prime2g_video_features_active',

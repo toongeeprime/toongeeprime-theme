@@ -1,10 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	TEMPLATE PART TEMPLATE FILE
- *
  *	Added for compatibility with Elementor and any other plugin
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.77
  */

@@ -10,6 +10,24 @@
 if ( ! function_exists( 'prime2g_customizer_misc_wp_settings' ) ) {
 
 function prime2g_customizer_misc_wp_settings( $wp_customize ) {
+
+$simple_text=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ];
+
+/**
+ *	Dark Theme Logo
+ */
+if ( prime2g_use_extras() ) {
+	$wp_customize->add_setting( 'prime2g_dark_theme_logo', $simple_text );
+	$wp_customize->add_control( new WP_Customize_Media_Control(
+	$wp_customize, 'prime2g_dark_theme_logo', array(
+		'label'		=>	__( 'Dark Theme Logo', PRIME2G_TEXTDOM ),
+		'description'=>	__( 'Logo when theme is switched to dark mode', PRIME2G_TEXTDOM ),
+		'settings'	=>	'prime2g_dark_theme_logo',
+		'section'	=>	'title_tagline',
+		'mime_type' =>	'image'
+	) ) );
+}
+
 	/**
 	 *	LOGO HEIGHT
 	 */
@@ -26,4 +44,5 @@ function prime2g_customizer_misc_wp_settings( $wp_customize ) {
 }
 
 }
+
 

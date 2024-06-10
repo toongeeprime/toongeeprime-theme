@@ -14,10 +14,7 @@ add_shortcode( 'prime2g_social_and_contacts', 'prime2g_social_and_contacts_short
 function prime2g_social_and_contacts_shortcode( $atts ) {
 $atts	=	shortcode_atts( array( 'showaddress'	=>	'' ), $atts );
 extract( $atts );
-
-$address	=	false;
-if ( $showaddress === 'yes' )  $address = true;
-
+$address	=	$showaddress === 'yes' ? true : false;
 return prime2g_theme_mod_social_and_contacts( $address );
 }
 

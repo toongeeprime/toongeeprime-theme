@@ -223,6 +223,14 @@ value.bind( ( newval )=>{
 } );
 } );
 
+/* @since 1.0.95 */
+api( 'prime2g_sidebar_position', (value)=>{
+value.bind( ( newval )=>{
+	let stkTogg	=	$( '#customize-control-prime2g_sticky_sidebar_toggler' );
+	newval === 'sticky_right' || newval === 'sticky_left' ? stkTogg.slideDown( 180 ) : stkTogg.slideUp( 180 );
+} );
+} );
+
 wp.customize.bind( 'ready', ()=>{
 wp.customize.previewer.bind( 'ready', ( message )=>{
 	let cta_text	=	$( "#_customize-input-prime2g_cta_button_text" ),

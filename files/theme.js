@@ -109,13 +109,12 @@ function prime2g_isTouchDevice() {
 }
 
 function prime2g_screenIsSmaller( screenSize = 481 ) {
-	let windowWidth = window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth;
-	return ( windowWidth < screenSize );
+	let windowWidth	=	window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth;
+	return windowWidth < screenSize;
 }
 
 /**
  *	@since 1.0.55
- *
  **
  *	Leave name so it can easily be removed if ever JS makes it inbuilt
  */
@@ -148,7 +147,7 @@ elems.forEach( el=>{
 
 /**
  *	COOKIES
- *	You can delete a cookie by updating its expiration time to zero
+ *	You can delete a cookie by updating its expiration time to zero. *USE SAME VALUE
  *	@since 1.0.80: added encodeURIComponent & Secure;SameSite=
  */
 function primeSetCookie( cName, cValue, expDays, setdomain = null, samesite = "Lax" ) {

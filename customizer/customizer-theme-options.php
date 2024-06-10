@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
+
 /**
  *	Theme's Main Options
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -13,19 +13,6 @@ $styleHere	=	! is_multisite() || prime2g_designing_at_networkhome();
 $theStyles	=	new ToongeePrime_Styles();
 $simple_text=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ];
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
-
-	/**
-	 *	Dark Theme Logo
-	 */
-	$wp_customize->add_setting( 'prime2g_dark_theme_logo', $simple_text );
-	$wp_customize->add_control( new WP_Customize_Media_Control(
-	$wp_customize, 'prime2g_dark_theme_logo', array(
-			'label'		=>	__( 'Dark Theme Logo', PRIME2G_TEXTDOM ),
-			'settings'	=>	'prime2g_dark_theme_logo',
-			'section'	=>	'prime2g_theme_options_section',
-			'mime_type' =>	'image'
-		)
-	) );
 
 	/**
 	 *	THEME WIDTHS
@@ -93,7 +80,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	) );
 
 /**
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 	/**
 	 *	SIDEBAR IN SINGULAR
@@ -120,6 +107,17 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 		'section'	=>	'prime2g_theme_options_section',
 		'choices'	=>	$sidebarOptions,
 		'active_callback'	=>	function() use($styleHere) { return $styleHere; }
+	) );
+
+	$wp_customize->add_setting( 'prime2g_sticky_sidebar_toggler', $simple_text );
+	$wp_customize->add_control( 'prime2g_sticky_sidebar_toggler', array(
+		'label'		=>	__( 'Add Sidebar Toggler (Desktop)', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_sticky_sidebar_toggler',
+		'section'	=>	'prime2g_theme_options_section',
+		'active_callback'	=>	function() {
+			return in_array( get_theme_mod( 'prime2g_sidebar_position' ), [ 'sticky_right', 'sticky_left' ] );
+		}
 	) );
 
 	$wp_customize->add_setting( 'prime2g_theme_add_footer_credits', array_merge( $simple_text, [ 'default' => 1 ] ) );
@@ -165,7 +163,7 @@ if ( prime_child_min_version( '2.0' ) ) {
 	) );
 
 }
-#	@since ToongeePrime Theme 1.0.55 end	#
+#	@since 1.0.55 end	#
 
 	/**
 	 *	FOOTER CREDITS
@@ -209,7 +207,7 @@ if ( prime_child_min_version( '2.0' ) ) {
 	) );
 
 	/**
-	 *	@since ToongeePrime Theme 1.0.48.50
+	 *	@since 1.0.48.50
 	 */
 	$wp_customize->add_setting( 'prime2g_footer_credit_append', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_footer_credit_append', array(
@@ -225,3 +223,4 @@ if ( prime_child_min_version( '2.0' ) ) {
 
 }
 }
+

@@ -99,6 +99,7 @@ class ToongeePrime_Styles {
 			case 'search_in_cf' : $mod = get_theme_mod( 'prime2g_search_in_custom_fields', '' ); break; # @since 1.0.88
 			case 'header_vid_places' : $mod = get_theme_mod( 'prime2g_video_header_placements', '' ); break; # @since 1.0.88
 			case 'sidebarbg' : $mod = defined( 'CHILD_SIDEBARBG' ) ? CHILD_SIDEBARBG : get_theme_mod( 'prime2g_sidebar_background', $defaults->sidebarbg ); break; # @since 1.0.93
+			case 'sticky_sb_tog' : $mod = get_theme_mod( 'prime2g_sticky_sidebar_toggler', '' ); break; # @since 1.0.95
 		}
 
 	if ( $by_net_home ) restore_current_blog();
@@ -293,7 +294,8 @@ return $css;
 		'autoplay_header_vid'	=>	$mods->get_mod( 'autoplay_header_vid' ),	// @since 1.0.87
 		'search_in_cf'		=>	$mods->get_mod( 'search_in_cf' ),	// @since 1.0.88
 		'header_vid_places'	=>	$mods->get_mod( 'header_vid_places' ),
-		'sidebarbg'		=>	$mods->get_mod( 'sidebarbg' )	// @since 1.0.93
+		'sidebarbg'		=>	$mods->get_mod( 'sidebarbg' ),	// @since 1.0.93
+		'sticky_sb_tog'	=>	$mods->get_mod( 'sticky_sb_tog' )	// @since 1.0.95
 	];
 	}
 

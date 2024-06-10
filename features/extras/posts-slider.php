@@ -53,12 +53,14 @@ echo $entry;
 
 if ( ! function_exists( 'prime2g_posts_slider' ) ) {
 function prime2g_posts_slider( array $options = [] ) {
+if ( ! prime2g_use_extras() ) return;
+
 // for use in function state
-$posttype = $taxonomy = $slug = $css = $count = $timer = $template = null;
+$posttype = $taxonomy = $slug = $css = $count = $timer = $template = $orderby = null;
 
 extract( $options );
 
-// default use
+// default use @ is_home()
 $posttype	=	$posttype ?? get_theme_mod( 'prime2g_slideshow_post_type', 'post' );
 $taxonomy	=	$taxonomy ?? get_theme_mod( 'prime2g_slideshow_taxonomy', 'category' );
 $slug		=	$slug ?? get_theme_mod( 'prime2g_slideshow_tax_term_slug', 'headlines' );
@@ -66,8 +68,10 @@ $css		=	$css ?? prime2g_posts_slider_css();
 $count		=	$count ?? get_theme_mod( 'prime2g_slideshow_posts_count', 5 );
 $timer		=	$timer ?? get_theme_mod( 'prime2g_slideshow_timer_speed', '5' );
 $template	=	$template ?? 'prime2g_home_slideshow_template';
+$orderby	=	$orderby ?? 'date';
+
+echo '<style id="prime_posts_sliderCSS">'. $css .'</style>';
 ?>
-<style id="prime_posts_sliderCSS"><?php echo $css; ?></style>
 
 <section id="prime_posts_slider" class="prime_posts_slider">
 
@@ -76,7 +80,7 @@ $template	=	$template ?? 'prime2g_home_slideshow_template';
 <?php
 prime2g_get_posts_output( [
 'count'	=>	$count,
-'orderby'	=>	'date',
+'orderby'	=>	$orderby,
 'posts_type'=>	$posttype,
 'inornot'	=>	'IN',
 'taxonomy'	=>	$taxonomy,

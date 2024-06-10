@@ -6,17 +6,47 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-/**
- *	MAIN SIDEBAR
- */
+#	@since 1.0.95
+if ( ! function_exists( 'prime2g_sidebar_toggler' ) ) {
+function prime2g_sidebar_toggler() {
+return '<style id="ssbTogCSS">
+#stickySidebarToggler{top:100px;z-index:99999;background:var(--content-background);color:var(--content-text);padding:5px 10px;}
+#stickySidebarToggler.open .cl,#stickySidebarToggler .op{display:none;}
+#stickySidebarToggler span,#stickySidebarToggler.open .op{display:inline-block;}
+.sticky_right_sidebar #stickySidebarToggler{left:0;}
+.sticky_left_sidebar #stickySidebarToggler{right:0;}
+.sticky_left_sidebar #stickySidebarToggler span{transform:rotate(180deg);}
+</style>
+
+<div id="stickySidebarToggler" class="p-fix desktop">
+<div class="prel pointer">
+<span class="op" title="'. __( 'Open Sidebar', PRIME2G_TEXTDOM ) .'"><i class="bi bi-layout-sidebar-reverse"></i></span>
+<span class="cl" title="'. __( 'Close Sidebar', PRIME2G_TEXTDOM ) .'"><i class="bi bi-layout-sidebar-inset-reverse"></i></span>
+</div>
+</div>';
+}
+}
+
+
+#	MAIN SIDEBAR
 if ( ! function_exists( 'prime2g_sidebar' ) ) {
 function prime2g_sidebar() {
 
 if ( prime2g_remove_sidebar() ) return;
 
-if ( is_active_sidebar( 'primary-sidebar' ) ) { ?>
+if ( is_active_sidebar( 'primary-sidebar' ) ) {
+$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.95
+$addTogg	=	in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] ) && $styles->sticky_sb_tog;
+
+
+if ( $addTogg ) {
+	echo prime2g_sidebar_toggler();
+	add_action( 'wp_footer', 'prime2g_sidebar_toggler_js', 999 );
+}
+?>
 
 <aside id="sidebar" role="complementary" class="right mainsidebar sidebars asides">
+
 	<div id="primary_side" class="widgets-box grid">
 
 	<?php dynamic_sidebar( 'primary-sidebar' ); ?>
