@@ -31,9 +31,11 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 	if ( false === prime2g_remove_sidebar() ) {
 		$classes[]	=	'has-sidebar';
 		$classes[]	=	$styles->sidebar_place ? $styles->sidebar_place . '_sidebar' : ''; # @since 1.0.93
+		$classes[]	=	isset( $_COOKIE[ 'hideStickySidebar' ] ) && prime2g_has_sticky_sidebar_togg() ?
+		'hide_sticky_sidebar' : ''; # @since 1.0.95
 	}
 
-	#	Add class if title is unset
+	#	Add class if title is not set
 	$classes[]	=	function_exists( 'define_2gRMVTitle' ) ? 'no_title' : '';
 
 	#	Site's Width and Extras

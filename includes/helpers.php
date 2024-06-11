@@ -304,3 +304,11 @@ return $idsCache;
 }
 }
 
+
+/* @since 1.0.95 */
+function prime2g_has_sticky_sidebar_togg() {
+$styles	=	ToongeePrime_Styles::mods_cache();
+return in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] ) && $styles->sticky_sb_tog;
+}
+
+

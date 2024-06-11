@@ -20,5 +20,5 @@ A WordPress theme with options for customization, design and development flexibi
 
 = 1.0.95 =
 * Hooks: prime2g_header_top, prime2g_header_bottom
-* Function: prime2g_sidebar_toggler()
+* Function: prime2g_sidebar_toggler(), prime2g_has_sticky_sidebar_togg()
 

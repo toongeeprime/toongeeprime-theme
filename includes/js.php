@@ -616,32 +616,34 @@ return $js;
  *	@since 1.0.95
  */
 function prime2g_sidebar_toggler_js() {
-$domain	=	prime2g_get_site_domain();
+$site	=	is_multisite() && prime2g_design_by_network_home() ? 1 : null;
+$domain	=	prime2g_get_site_domain( $site );
 echo	'<script id="ssbTogJS">
-stickyNav	=	p2getEl( "#sticky_nav" );
-
 if ( primeHasCookie( "hideStickySidebar" ) ) {
 	prime2g_sb_toggler_close_state();
 }
 
 function prime2g_sb_toggler_close_state() {
 	prime2g_clear_sidebarStickiness();
-	bHasSidebar	=	p2getEl( "body.has-sidebar" ).classList;
-	hideSticky	=	bHasSidebar.contains( "hide_sticky_sidebar" );
-	hideSticky ? bHasSidebar.remove( "hide_sticky_sidebar" ) : bHasSidebar.add( "hide_sticky_sidebar" );
-	if ( stickyNav ) {
+	stickyNav	=	p2getEl( "#sticky_nav" );
+	if ( stickyNav )
 		stickyNav.style.right = "0"; stickyNav.style.left = "0";
-	}
 }
 
 p2getEl( "#stickySidebarToggler .pointer" ).addEventListener( "click", ()=>{
 	prime2g_sb_toggler_close_state();
 	p2getEl( "#stickySidebarToggler" ).classList.toggle( "open" );
+
+//	Maintain eveent sequence:
+	bHasSidebar	=	p2getEl( "body.has-sidebar" ).classList;
+	bHasSidebar.contains( "hide_sticky_sidebar" ) ?
+	bHasSidebar.remove( "hide_sticky_sidebar" ) : bHasSidebar.add( "hide_sticky_sidebar" );
 	p2g_containers_width_by_sidebar();
-	p2getEl( "body.has-sidebar" ).classList.contains( "hide_sticky_sidebar" ) ?
+	bHasSidebar.contains( "hide_sticky_sidebar" ) ?
 	primeSetCookie( "hideStickySidebar", "true", 30, "'. $domain .'" ) :
 	primeSetCookie( "hideStickySidebar", "true", 0, "'. $domain .'" );
 } );
 </script>';
 }
+
 

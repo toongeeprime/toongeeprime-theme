@@ -11,8 +11,8 @@ if ( ! function_exists( 'prime2g_sidebar_toggler' ) ) {
 function prime2g_sidebar_toggler() {
 return '<style id="ssbTogCSS">
 #stickySidebarToggler{top:100px;z-index:99999;background:var(--content-background);color:var(--content-text);padding:5px 10px;}
-#stickySidebarToggler.open .cl,#stickySidebarToggler .op{display:none;}
-#stickySidebarToggler span,#stickySidebarToggler.open .op{display:inline-block;}
+.hide_sticky_sidebar #stickySidebarToggler .cl,#stickySidebarToggler .op{display:none;}
+#stickySidebarToggler span,.hide_sticky_sidebar #stickySidebarToggler .op{display:inline-block;}
 .sticky_right_sidebar #stickySidebarToggler{left:0;}
 .sticky_left_sidebar #stickySidebarToggler{right:0;}
 .sticky_left_sidebar #stickySidebarToggler span{transform:rotate(180deg);}
@@ -29,19 +29,16 @@ return '<style id="ssbTogCSS">
 
 
 #	MAIN SIDEBAR
-if ( ! function_exists( 'prime2g_sidebar' ) ) {
+if ( !function_exists( 'prime2g_sidebar' ) ) {
 function prime2g_sidebar() {
 
 if ( prime2g_remove_sidebar() ) return;
 
 if ( is_active_sidebar( 'primary-sidebar' ) ) {
-$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.95
-$addTogg	=	in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] ) && $styles->sticky_sb_tog;
 
-
-if ( $addTogg ) {
+if ( prime2g_has_sticky_sidebar_togg() ) {
 	echo prime2g_sidebar_toggler();
-	add_action( 'wp_footer', 'prime2g_sidebar_toggler_js', 999 );
+	add_action( 'wp_footer', 'prime2g_sidebar_toggler_js', 900 );
 }
 ?>
 

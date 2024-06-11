@@ -34,12 +34,12 @@ $sidebar901	=	'#container{margin:0;}
 #sidebar{position:fixed;bottom:0;top:0;overflow-y:auto;z-index:99990;}
 .admin-bar #sidebar{top:32px;}';
 $sidebar901	.= $styles->sidebar_place === 'sticky_right' ?
-'.has-sidebar #container{margin-right:317px;}
+'.has-sidebar:not(.hide_sticky_sidebar) #container{margin-right:317px;}
 .has-sidebar.fixed_main_menu #main_nav{right:317px;}
 #sidebar{right:0;}
 .hide_sticky_sidebar #sidebar{transform:translateX(120%);}'
 :
-'.has-sidebar #container{margin-left:317px;}
+'.has-sidebar:not(.hide_sticky_sidebar) #container{margin-left:317px;}
 .has-sidebar.fixed_main_menu #main_nav,.has-sidebar.menu_on_header #main_nav{left:317px;}
 #sidebar{left:0;}
 .hide_sticky_sidebar #sidebar{transform:translateX(-120%);}';
