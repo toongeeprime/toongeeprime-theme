@@ -2,21 +2,28 @@
 
 /**
  *	SHUTTING DOWN THE WEBSITE
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
 
 add_action( 'template_redirect', 'prime2g_close_down_website', 5 );
-
 function prime2g_close_down_website() {
 
-/* NOTE: WordPress still preloads frontpage object */
+/* NOTE: WordPress still loads frontpage object */
 $shutDown	=	get_theme_mod( 'prime2g_website_shutdown' );
+$administrator	=	current_user_can( 'edit_theme_options' );
+$byPassKey	=	get_theme_mod( 'prime2g_shutdown_url_bypass_key' );	// @since 1.0.96
+$is_shutdown=	! empty( $shutDown );
+$bypassing	=	$is_shutdown && isset( $_GET[ $byPassKey ] );
+
+if ( $bypassing ) {
+echo '<div id="byPassingNote" class="p-fix" style="color:#fff;background:red;z-index:99999;left:0;right:0;">
+<p class="centered">'. __( 'Website is shut down', PRIME2G_TEXTDOM ) .'</p>
+</div>';
+}
 
 //	Return conditions
-$administrator	=	current_user_can( 'edit_theme_options' );
-if ( empty( $shutDown ) || is_admin() || $administrator ||
+if ( ! $is_shutdown || $bypassing || is_admin() || $administrator ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
 ) return;
 
@@ -109,9 +116,9 @@ background-size:cover;background-position:center;background-image:url('. $backgr
 
 	prime2g_close_down_template( $shutDown );
 
-	echo '<script id="comingSoonJS">'. $add_js .'</script>';
-
 	wp_footer();
+
+	echo '<script id="comingSoonJS">'. $add_js .'</script>';
 
 	echo '</body></html>';
 
@@ -141,4 +148,5 @@ $msg	=	'maintenance' === $shutDown ? '... and will be back soon' : 'Thank you fo
 	echo '</main>';
 }
 }
+
 

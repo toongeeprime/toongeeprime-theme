@@ -1,13 +1,12 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	WOOCOMMERCE MINI CART
- *
  *	@package WordPress
  *	@package WooCommerce
  *	@since ToongeePrime Theme 1.0.89
  */
 
-if ( class_exists( 'WooCommerce' ) ) :
+if ( class_exists( 'WooCommerce' ) ):
 
 add_shortcode( 'prime_mini_cart', 'prime2g_woo_mini_cart_shortcode' );
 
@@ -16,7 +15,7 @@ add_shortcode( 'prime_mini_cart', 'prime2g_woo_mini_cart_shortcode' );
  */
 if ( ! function_exists( 'prime2g_woo_mini_cart_shortcode' ) ) {
 function prime2g_woo_mini_cart_shortcode( $atts = [] ) {
-//	woocommerce_mini_cart() creates critical errors in admin post edit screen
+#	woocommerce_mini_cart() creates critical errors in admin post edit screen
 if ( is_cart() || is_admin() ) return '';
 
 $atts	=	shortcode_atts( [ 'title' => 'Your Cart' ], $atts );

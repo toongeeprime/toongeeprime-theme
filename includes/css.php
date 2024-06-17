@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CONDITIONAL CSS
- *
  *	Aimed at limiting the theme.css file size
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
@@ -180,7 +178,10 @@ em.comment-awaiting-moderation{display:block;margin:var(--min-pad);}
 if ( ! function_exists( 'prime2g_header_video_css' ) ) {
 function prime2g_header_video_css() {
 if ( get_theme_mod( 'prime2g_enable_video_features' ) ) {
-return	'#header iframe,.video_as_header #header .title_wrap,.video_as_header #header .page_title{position:absolute;left:0;bottom:0;}
+return	'.video_header.video_active #header,
+.video_as_header.video_active #header{padding:0;overflow:hidden;display:block;}
+#header iframe,.video_as_header.video_active #header .title_wrap,
+.video_as_header.video_active #header .page_title{position:absolute;left:0;bottom:0;}
 .video_as_header #wp-custom-header-video{width:100%}';
 }
 }
@@ -199,10 +200,8 @@ $css	=	'
 $menu_type	=	$styles->menu_type;
 
 $css	.=	'.menu_togs{width:50px; cursor:pointer;}
-.menu_togs span{
-width:80%;background:var(--content-text);height:4px;
-position:absolute;top:calc(50% - 5%);right:calc(50% - 30%);
-transition:0.3s;
+.menu_togs span{width:80%;background:var(--content-text);height:4px;
+position:absolute;top:calc(50% - 5%);right:calc(50% - 30%);transition:0.3s;
 }
 .menu_togs span:nth-child(1){transform:translateY(-12px) scale(0.8);}
 .menu_togs span:nth-child(3){transform:translateY(12px) scale(0.8);}

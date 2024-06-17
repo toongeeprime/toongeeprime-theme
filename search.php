@@ -5,7 +5,9 @@
  *	@since ToongeePrime Theme 1.0
  */
 
-if ( ! function_exists( 'define_2gRMVSidebar' ) ) prime2g_removeSidebar();
+$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.96
+if ( ! in_array( $styles->sidebar_place, [ 'site_right', 'site_left', 'sticky_right', 'sticky_left' ] ) )
+	define( 'PRIME2G_NOSIDEBAR', true );
 
 get_header();
 
@@ -20,10 +22,8 @@ if ( have_posts() ) { ?>
 				_n(
 					'We found %d result for your search.',
 					'We found %d results for your search.',
-					$found,
-					PRIME2G_TEXTDOM
-				)
-			),
+					$found, PRIME2G_TEXTDOM
+				) ),
 			$found
 		);
 	?>

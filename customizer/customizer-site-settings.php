@@ -115,8 +115,26 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	) );
 
 	/**
-	 **		WP
-	 *
+	 *	@since 1.0.96
+	 */
+	$wp_customize->add_setting( 'prime2g_shutdown_url_bypass_key', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_shutdown_url_bypass_key', array(
+		'label'		=>	__( 'Bypass Shutdown Key (Letters Only)', PRIME2G_TEXTDOM ),
+		'type'		=>	'text',
+		'description'=>	__( 'This will allow people see the website with '. trailingslashit( get_home_url() ) .'?randomletters', PRIME2G_TEXTDOM ),
+		'settings'	=>	'prime2g_shutdown_url_bypass_key',
+		'section'	=>	'prime2g_site_settings_section',
+		'choices'	=>	$pages,
+		'input_attrs'	=>	[
+			'placeholder'=>	__( 'randomletters', PRIME2G_TEXTDOM ),
+			'maxlength'	=>	'15',
+			'onkeydown'	=>	'return /[A-Za-z]/i.test(event.key)'
+		],
+		'active_callback'	=> 'prime2g_c_siteIsSD'
+	) );
+
+	/**
+	 *		WP
 	 *	STOP WP HEARTBEAT
 	 *	@since 1.0.49
 	 */

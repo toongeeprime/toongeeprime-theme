@@ -2,11 +2,17 @@
 
 /**
  *	POSTS QUERY
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *	Since 1.0.50: $get argument changed to $options
  */
+
+#	@since 1.0.96
+function prime2g_calc_query_offset( $count ) {
+$paged	=	get_query_var( 'paged' );
+return $paged ? $count * ( $paged - 1 ) : '';
+}
+
 
 function prime2g_wp_query( array $args, $options = 'posts' ) {
 /**
@@ -263,7 +269,8 @@ function prime2g_filter_wp_posts_join( $join ) {
 global $wpdb, $wp_query;
 // if ( is_search() ) {
 if ( ! empty( $wp_query->query_vars['s'] ) ) {
-	$join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+	// $join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+	$join .=' LEFT JOIN '.$wpdb->postmeta. ' cfmeta ON '. $wpdb->posts . '.ID = cfmeta.post_id ';
 }
 return $join;
 }
@@ -275,7 +282,8 @@ global $wpdb, $wp_query;
 if ( ! empty( $wp_query->query_vars['s'] ) ) {
 	$where	=	preg_replace(
 	"/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
-	"(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
+	// "(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
+	"(".$wpdb->posts.".post_title LIKE $1) OR (cfmeta.meta_value LIKE $1)", $where );
 }
 return $where;
 }

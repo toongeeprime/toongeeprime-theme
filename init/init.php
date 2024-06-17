@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /*
-//	REVIEW LATER: Seems to increase initial server response time
+//	REVIEW LATER: Seems to increase initial server response time && IT BREAKS UPGRADES @ update-core.php
 if ( ! is_admin() && ! ini_get( 'zlib.output_compression' ) ) {
 #	Theme constants are not yet defined
 if ( false === wp_cache_get( 'htaccess_writecacherules_PRIME2G_CACHEGROUP' ) ) {

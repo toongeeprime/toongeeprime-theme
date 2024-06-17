@@ -97,7 +97,7 @@ function prime_do_livesearchform_base() {
  *	@since 1.0.57
  */
 if ( ! function_exists( 'prime2g_class_remover_sheet' ) ) {
-add_action( 'wp_footer', 'prime2g_class_remover_sheet', 10, 2 );
+add_action( 'wp_footer', 'prime2g_class_remover_sheet', 10, 900 );
 function prime2g_class_remover_sheet( string $items, string $class = 'prime' ) {
 if ( ! function_exists( 'prime_remover_sheet_items' ) ) return; #	activator function
 
@@ -107,7 +107,7 @@ $items		=	$function->items;
 $class		=	$function->class;
 $items_add	=	$function->items_add;
 $class_add	=	$function->class_add;
-echo	'<div id="prime_class_remover" class="hidden p-fix" style="top:0;bottom:0;right:0;left:0;z-index:90000;"
+echo	'<div id="prime_class_remover" class="hidden p-fix" style="top:0;bottom:0;right:0;left:0;z-index:99990;"
  onclick="prime_sheet_remover();"></div>
 <script id="primeRemovrSheetJS">
 function prime_sheet_remover() {

@@ -145,7 +145,9 @@ return $classes;
 function prime2g_theme_html_classes( $echo = true ) {
 $addClass	=	ToongeePrime_Colors::theme_color_classes();
 
-if ( $echo ) { echo 'class="'. implode( ' ', $addClass ) .'"'; }
-else { return 'class="'. implode( ' ', $addClass ) .'"'; }
+if ( $echo ) echo 'class="'. implode( ' ', $addClass ) .'"';
+else return 'class="'. implode( ' ', $addClass ) .'"';
 }
+
+
 

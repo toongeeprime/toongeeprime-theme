@@ -9,8 +9,6 @@
  *	@since ToongeePrime Theme 1.0.70
  */
 
-if ( ! class_exists( 'Prime2gJSBits' ) ) {
-
 class Prime2gJSBits {
 
 	/**
@@ -191,5 +189,5 @@ $js	.=	$tags ? '</script>' : '';
 
 }
 
-}
+
 

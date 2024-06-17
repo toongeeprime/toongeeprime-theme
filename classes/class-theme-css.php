@@ -14,11 +14,8 @@ if ( ! class_exists( 'ToongeePrime_ThemeCSS' ) ) {
 class ToongeePrime_ThemeCSS extends ToongeePrime_Colors {
 	/**
 	 *	Return :root CSS
-	 *
-	 *	@static
 	 */
 	public static function root_css() {
-
 	$styles	=	new ToongeePrime_Styles();
 	$colors	=	new ToongeePrime_Colors();
 
@@ -35,10 +32,8 @@ $css	.=	$styles->theme_css();
 $css	.=	"</style>";
 
 return $css;
-
 	}
 
 }
 
 }
-

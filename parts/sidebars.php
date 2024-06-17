@@ -66,7 +66,7 @@ add_action( 'prime2g_before_header', 'prime2g_widgets_above_header' );
 if ( ! function_exists( 'prime2g_widgets_above_header' ) ) {
 function prime2g_widgets_above_header() {
 
-if ( prime2g_is_plain_page_template() ) return;
+if ( prime2g_no_widgets_template() ) return;
 
 if ( is_active_sidebar( 'aboveheader-widgets' ) ) { ?>
 	<aside id="above_headerWidgets" class="header asides clear">
@@ -87,7 +87,7 @@ add_action( 'prime2g_sub_header', 'prime2g_widgets_below_header' );
 if ( ! function_exists( 'prime2g_widgets_below_header' ) ) {
 function prime2g_widgets_below_header() {
 
-if ( prime2g_is_plain_page_template() ) return;
+if ( prime2g_no_widgets_template() ) return;
 
 if ( is_active_sidebar( 'belowheader-widgets' ) ) { ?>
 	<aside id="below_headerWidgets" class="header asides clear">
@@ -146,7 +146,7 @@ add_action( 'prime2g_before_post', 'prime2g_widgets_above_post' );
 if ( ! function_exists( 'prime2g_widgets_above_post' ) ) {
 function prime2g_widgets_above_post() {
 
-if ( prime2g_is_plain_page_template() ) return;
+if ( prime2g_no_widgets_template() ) return;
 
 if ( is_active_sidebar( 'aboveposts-widgets' ) ) { ?>
 	<aside id="above_postsWidgets" class="asides clear">
@@ -168,7 +168,7 @@ add_action( 'prime2g_after_post', 'prime2g_below_posts_widgets', 20 );
 if ( ! function_exists( 'prime2g_below_posts_widgets' ) ) {
 function prime2g_below_posts_widgets() {
 
-if ( prime2g_is_plain_page_template() ) return;
+if ( prime2g_no_widgets_template() ) return;
 
 if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 	<aside id="below_postsWidgets" class="asides clear">
@@ -188,7 +188,7 @@ if ( is_active_sidebar( 'belowposts-widgets' ) ) { ?>
 if ( ! function_exists( 'prime2g_footer_top_widgets' ) ) {
 function prime2g_footer_top_widgets() {
 
-if ( prime2g_is_plain_page_template() ) return;
+if ( prime2g_no_widgets_template() ) return;
 
 if ( is_active_sidebar( 'footer-top' ) ) { ?>
 	<aside id="footer_topWidgets" class="footer_topWidgets asides clear">
@@ -248,13 +248,11 @@ echo	'</div>';
 
 /**
  *	@since 1.0.84
- *
  *	MOBILE MENU WIDGETS
  */
 add_action( 'prime2g_mobile_menu_top', 'prime2g_mobile_menu_top_widgets' );
 if ( ! function_exists( 'prime2g_mobile_menu_top_widgets' ) ) {
 function prime2g_mobile_menu_top_widgets() {
-
 if ( is_active_sidebar( 'mobilemenutop-widgets' ) ) { ?>
 	<aside id="mobilemenu_top_widgets" class="mobilemenu asides clear">
 		<div class="widgets-box grid">
@@ -263,7 +261,6 @@ if ( is_active_sidebar( 'mobilemenutop-widgets' ) ) { ?>
 	</aside>
 <?php
 }
-
 }
 }
 
@@ -271,7 +268,6 @@ if ( is_active_sidebar( 'mobilemenutop-widgets' ) ) { ?>
 add_action( 'prime2g_mobile_menu_bottom', 'prime2g_mobile_menu_bottom_widgets' );
 if ( ! function_exists( 'prime2g_mobile_menu_bottom_widgets' ) ) {
 function prime2g_mobile_menu_bottom_widgets() {
-
 if ( is_active_sidebar( 'mobilemenubottom-widgets' ) ) { ?>
 	<aside id="mobilemenu_bottom_widgets" class="mobilemenu asides clear">
 		<div class="widgets-box grid">
@@ -280,7 +276,7 @@ if ( is_active_sidebar( 'mobilemenubottom-widgets' ) ) { ?>
 	</aside>
 <?php
 }
+}
+}
 
-}
-}
 

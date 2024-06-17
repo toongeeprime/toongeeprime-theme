@@ -268,15 +268,15 @@ if ( empty( $users ) ) {
 add_shortcode( 'prime_login_form', 'prime2g_login_form_shortcode' );
 function prime2g_login_form_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
-'redirect_to'	=>	'',
+'redirect_to'	=>	get_home_url(),
 'wrapper_id'=>	'',
 'classes'	=>	'',
 'form_id'	=>	'custom_login_page_form',
-'username_label'	=>	'Username/Email',
-'password_label'	=>	'Password',
+'username_label'=>	'Username/Email',
+'password_label'=>	'Password',
 'button_text'=>	'Log in',
-'text_above'=>	'',
-'text_below'=>	''
+'text_above'=>	'<p class="loginmsg">Log into your account.</p>',
+'text_below'=>	'<p class="signupmsg">Don\'t have an account? <a title="Register your account" href="'. get_home_url() .'/login/">Sign up here</a>.</p>'
 ],
 $atts );
 
@@ -288,4 +288,7 @@ add_action( 'wp_footer', 'prime2g_custom_login_js' );
 
 return prime2g_login_form( $atts );
 }
+
+
+
 

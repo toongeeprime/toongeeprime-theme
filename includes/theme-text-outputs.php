@@ -620,7 +620,8 @@ if ( $child_is23 ) echo '<div id="page_title_content">';
 	<?php
 	}
 	else {
-		the_archive_title( '<h1 class="entry-title page-title">', '</h1>' );
+		$paged	=	get_query_var( 'paged' ) ? apply_filters( 'prime2g_filter_paginated_archive_title', '<span id="title_pagenum">'. prime2g_extendPaginationTitle() .'</span>' ) : '';
+		echo '<h1 class="entry-title page-title">'. get_the_archive_title() . $paged .'</h1>';
 		prime2g_archive_description();
 	}
 

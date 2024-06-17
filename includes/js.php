@@ -41,13 +41,15 @@ $styles		=	ToongeePrime_Styles::mods_cache();	// @since 1.0.86
 $singular	=	is_singular();
 $jsSingular	=	$singular ? 'true' : 'false';
 $isMobile	=	wp_is_mobile();
-$stickyNavs	=	in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] );
-$sideNavs	=	in_array( $styles->sidebar_place, [ 'site_right', 'site_left' ] );
-$stickyNJS	=	$stickyNavs ? 'true' : 'false';
 
 $js	=	'<script defer id="prime2g_conditional_js">
 const	singular	=	'. $jsSingular .',
 menuLItems	=	p2getAll( "nav.main-menu li" );';
+
+if ( ! prime2g_remove_sidebar() ) {
+$stickyNavs	=	in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] );
+$sideNavs	=	in_array( $styles->sidebar_place, [ 'site_right', 'site_left' ] );
+$stickyNJS	=	$stickyNavs ? 'true' : 'false';
 
 #	@since 1.0.93
 if ( ! $isMobile && ( $sideNavs || $stickyNavs ) ) {
@@ -114,6 +116,8 @@ else {
 }
 }';
 }
+}
+
 
 if ( $styles->mob_submenu_open === 'click' ) {
 $js	.=	'menuLItems?.forEach( li => {
@@ -181,19 +185,13 @@ if ( prime2g_design_by_network_home() && get_current_blog_id() !== 1 ) {
 
 $js	=	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" id="jQueryCtm"></script>
 <script id="prime2g_conditional_customizer_js">
-jQuery( document ).ready( function() {';
-
-// concat'ed in case more code would be added
-
-$js	.=	'
+jQuery( document ).ready( function() {
 setTimeout( ()=>{
 let p2gPane	=	jQuery( "#sub-accordion-panel-prime2g_customizer_panel .customize-info" );
 p2gPane.append( \'<div style="background:#fff;padding:25px 15px 15px;text-align:center;"><h3>'. __( 'MAIN SITE DESIGNS ARE FROM THE NETWORK HOME', PRIME2G_TEXTDOM ) .'</h3></div>\' );
 }, 5000
 );
-';
-
-$js	.=	'} );
+} );
 </script>';
 echo $js;
 
@@ -206,8 +204,7 @@ echo $js;
 
 /**
  *	@since 1.0.73
- *
- *	Password Toggler, for use with custom login form
+ *	Password Toggler for custom login form
  */
 if ( ! function_exists( 'prime2g_view_password_toggler' ) ) {
 function prime2g_view_password_toggler() {
@@ -511,110 +508,7 @@ echo $js;
 /**	@since 1.0.78 End	**/
 
 
-/**
- *	@since 1.0.80
- */
-if ( ! function_exists( 'prime2g_media_gallery_js' ) ) {
-function prime2g_media_gallery_js( string $init_hide = 'false' ) {
-$js	=	'<script id="prime2g_gallery_js">
-let mgWrap	=	p2getEl( ".p2_media_gallery_wrap" ),
-	gPrevThumbs	=	p2getAll( ".preview_thumb" ),
-	gGalThumbs	=	p2getAll( ".gallery_thumb" ),
-	itemsNum	=	gGalThumbs.length;
-
-
-/**
- *	Set Gallery Width
- */
-p2g_mGalleryWidth();
-window.onresize	=	p2g_mGalleryWidth;
-
-function p2g_mGalleryWidth() {
-let	pGallery	=	p2getEl( ".gallery_box" ),
-	pgalParent	=	pGallery.parentElement,
-	parentWidth	=	pgalParent.getBoundingClientRect().width;
-pGallery.style.maxWidth	=	parentWidth + "px";
-pGallery.style.width	=	"max-content";
-}
-
-
-p2getEl( "#allNum" ).innerText	=	itemsNum;
-[ ".preview_thumb", ".gallery_media", ".gallery_thumb" ].forEach( g=>{ p2getEl( g ).classList.add( "live" ); } );
-
-gGalThumbs.forEach( ( val, i )=>{
-	val.addEventListener( "click", ()=>{ doGalleryItems( i + 1 ); } );
-} );
-gPrevThumbs.forEach( ( val, i )=>{
-	val.addEventListener( "click", ()=>{ doGalleryItems( i + 1 ); p2DoGallery( "on" ); } );
-} );
-
-
-function doGalleryItems( index ) {
-	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
-	p2getEl( "#elNum" ).innerText	=	index;
-	p2GallThumbScroll( index );
-	p2getAll( ".item_" + index ).forEach( ci => { ci.classList.add( "live" ); } );
-}
-
-
-//	class to show/hide main gallery media screen
-function p2DoGallery( toDo ) {
-	if ( toDo === "on" ) return mgWrap.classList.remove( "g_hide" );
-	if ( toDo === "off" ) return mgWrap.classList.add( "g_hide" );
-}
-
-function p2GalleryOff() {
-	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } ); p2DoGallery( "off" );
-}
-
-document.addEventListener( "keyup", function( e ) {
-if ( e.defaultPrevented ) { return; }
-let key = e.key || e.keyCode;
-
-if ( key === "Escape" || key === "Esc" || key === 27 ) { p2GalleryOff(); }
-if ( key === "ArrowRight" || key === "Right" || key === 39 ) { p2SwipeGallery( "right" ); }
-if ( key === "ArrowLeft" || key === "Left" || key === 37 ) { p2SwipeGallery( "left" ); }
-} );
-
-function p2SwipeGallery( dir ) {
-	isLive	=	p2getEl( ".gItem.live" );
-	classes	=	isLive.className.split( " " );
-	classes.forEach( c => { if ( c.includes( "item_" ) ) { currNum = c.replace( "item_", "" ); } } );
-
-	if ( dir === "right" ) { num = Number(currNum) + 1; }
-	if ( dir === "left" ) { num = Number(currNum) - 1; }
-
-	toEls	=	p2getAll( ".item_" + num );
-	if ( 0 === toEls.length ) return;
-	p2getAll( ".gItem" ).forEach( gi => { gi.classList.remove( "live" ); } );
-	toEls.forEach( el => { el.classList.add( "live" ); p2GallThumbScroll( num ); } );
-}
-
-
-function p2GallThumbScroll( toNum ) {
-	prevw	=	p2getEl( ".preview_thumb.item_" + toNum );
-	thumb	=	p2getEl( ".gallery_thumb.item_" + toNum );
-	p2getEl( "#elNum" ).innerText	=	toNum;
-
-	pwidth	=	(toNum-1) * prevw.getBoundingClientRect().width;
-	twidth	=	(toNum-1) * thumb.getBoundingClientRect().width;
-
-	if ( ! prime2g_inViewport( prevw ) ) { p2getEl( ".previewScroll" ).scroll( { top:0, left: pwidth, behavior:"smooth" } ); }
-	if ( ! prime2g_inViewport( thumb ) ) { p2getEl( ".thumbsScroll" ).scroll( { top:0, left: twidth, behavior:"smooth" } ); }
-}
-
-
-if ( '. $init_hide .' ) mgWrap.classList.add( "g_hide" );
-else mgWrap.classList.remove( "g_hide" );
-</script>';
-return $js;
-}
-}
-
-
-/**
- *	@since 1.0.95
- */
+/*	@since 1.0.95	*/
 function prime2g_sidebar_toggler_js() {
 $site	=	is_multisite() && prime2g_design_by_network_home() ? 1 : null;
 $domain	=	prime2g_get_site_domain( $site );
@@ -626,15 +520,17 @@ if ( primeHasCookie( "hideStickySidebar" ) ) {
 function prime2g_sb_toggler_close_state() {
 	prime2g_clear_sidebarStickiness();
 	stickyNav	=	p2getEl( "#sticky_nav" );
-	if ( stickyNav )
-		stickyNav.style.right = "0"; stickyNav.style.left = "0";
+	if ( stickyNav ) {
+		stickyNav.style.right = "0";
+		stickyNav.style.left = "0";
+	}
 }
 
 p2getEl( "#stickySidebarToggler .pointer" ).addEventListener( "click", ()=>{
 	prime2g_sb_toggler_close_state();
 	p2getEl( "#stickySidebarToggler" ).classList.toggle( "open" );
 
-//	Maintain eveent sequence:
+//	Maintain event sequence:
 	bHasSidebar	=	p2getEl( "body.has-sidebar" ).classList;
 	bHasSidebar.contains( "hide_sticky_sidebar" ) ?
 	bHasSidebar.remove( "hide_sticky_sidebar" ) : bHasSidebar.add( "hide_sticky_sidebar" );
@@ -645,5 +541,4 @@ p2getEl( "#stickySidebarToggler .pointer" ).addEventListener( "click", ()=>{
 } );
 </script>';
 }
-
 

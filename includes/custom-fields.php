@@ -197,7 +197,7 @@ if ( prime_child_min_version( '2.4' ) ) { ?>
 
 <?php
 # @since 1.0.92
-if ( get_theme_mod( 'prime2g_site_is_private' ) ) { ?>
+if ( get_theme_mod( 'prime2g_site_is_private' ) && $post->ID != get_theme_mod( 'prime2g_privatesite_homepage_id' ) ) { ?>
 
 <div class="meta-options prime2g_field select">
 	<label for="page_is_public">

@@ -1,10 +1,22 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	TOUCHING WP
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
+
+if ( ! prime_child_min_version( '2.3' ) ) {
+
+add_action( 'admin_notices', function() {
+echo '<div class="notice notice-warning notice-alt">
+<p style="font-size:125%;">
+'. __( 'Hello! *Your Theme needs to be Upgraded. Please contact your website developer soon.', PRIME2G_TEXTDOM ) .'
+</p></div>';
+} );
+
+}
+
+
 /**
  *	ADMIN FOOTER
  */

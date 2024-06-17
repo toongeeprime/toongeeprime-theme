@@ -192,7 +192,6 @@ class ToongeePrime_Styles {
 	$videoFeatures	=	prime2g_video_features_active();
 	$headerVidCSS	=	$videoFeatures ?
 	"#header iframe{height:{$hHeight};}{$videoActive}#header.grid{display:grid;}
-	.video_header #header,.video_as_header #header{padding:0;overflow:hidden;display:block;}
 	#wp-custom-header{position:relative;height:{$hHeight};}
 	#wp-custom-header-video{width:auto;height:{$hHeight};}" : '';
 	$headerVidCSSB	=	$videoFeatures ?
@@ -302,5 +301,4 @@ return $css;
 }
 
 }
-
 

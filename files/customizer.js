@@ -73,14 +73,15 @@ wp.customize.previewer.bind( 'ready', ( message )=>{
  */
 api( 'prime2g_website_shutdown', (value)=>{
 value.bind( ( newval )=>{
-	let sdDisplay	=	$( '#customize-control-prime2g_shutdown_display' ),
-		sddSelect	=	$( '#_customize-input-prime2g_shutdown_display' ),
-		sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' );
+	let sdDisplay	=	$( '#customize-control-prime2g_shutdown_display' ),	// li
+		sddSelect	=	$( '#_customize-input-prime2g_shutdown_display' ),	// li > select
+		sdPageID	=	$( '#customize-control-prime2g_shutdown_page_id' ),
+		sdBypass	=	$( '#customize-control-prime2g_shutdown_url_bypass_key' );	// @since 1.0.96
 	if ( newval ) {
-		sdDisplay.slideDown( 180 );
+		sdDisplay.slideDown( 180 ); sdBypass.slideDown( 180 );
 		if ( sddSelect.val() ) sdPageID.slideDown( 180 ); else sdPageID.slideUp( 180 );
 	}
-	else { sdDisplay.slideUp( 180 ); sdPageID.slideUp( 180 ); }
+	else { sdDisplay.slideUp( 180 ); sdPageID.slideUp( 180 ); sdBypass.slideUp( 180 ); }
 } );
 } );
 

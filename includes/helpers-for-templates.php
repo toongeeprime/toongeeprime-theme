@@ -87,7 +87,10 @@ if ( defined( 'PRIME2G_ALT_POST_OBJ' ) ) {
 	if ( in_array( PRIME2G_ALT_POST_OBJ->remove_header, [ 'remove', 'header_image_css' ] ) ) $remove	=	true;
 }
 
-if ( function_exists( 'prime_child_remove_header' ) ) $remove	=	prime_child_remove_header(); // bool
+//	@since 1.0.96
+if ( defined( 'PRIME2G_NOHEADER' ) ) $remove	=	true;
+
+if ( function_exists( 'prime_child_remove_header' ) ) $remove	=	prime_child_remove_header( $remove ); // bool
 
 return $remove;
 }
@@ -104,24 +107,30 @@ if ( function_exists( 'define_2gRMVSidebar' ) ) return true;
 
 if ( defined( 'PRIME2G_ALT_POST_OBJ' ) ) $remove	=	PRIME2G_ALT_POST_OBJ->remove_sidebar === 'remove';
 
-if ( function_exists( 'prime_child_remove_sidebar' ) ) $remove	=	prime_child_remove_sidebar(); // bool
+//	@since 1.0.96
+if ( defined( 'PRIME2G_NOSIDEBAR' ) ) $remove	=	true;
+
+if ( function_exists( 'prime_child_remove_sidebar' ) ) $remove	=	prime_child_remove_sidebar( $remove ); // bool
 
 return $remove;
 }
 
 
 
-function prime2g_is_plain_page_template(): bool {
-$plain	=	false;
+function prime2g_no_widgets_template(): bool {
+$remove	=	false;
 
 if ( function_exists( 'define_2gPlainPage' ) ) return true;
 
 if ( defined( 'PRIME2G_ALT_POST_OBJ' ) )
-	$plain	=	get_post_meta( PRIME2G_ALT_POST_OBJ->ID, '_wp_page_template', true ) === 'templates/empty-page.php';
+	$remove	=	get_post_meta( PRIME2G_ALT_POST_OBJ->ID, '_wp_page_template', true ) === 'templates/empty-page.php';
 
-if ( function_exists( 'prime_child_is_plain_page_template' ) ) $plain	=	prime_child_is_plain_page_template(); // bool
+//	@since 1.0.96
+if ( defined( 'PRIME2G_NOWIDGETS' ) ) $remove	=	true;
 
-return $plain;
+if ( function_exists( 'prime_child_remove_widgets' ) ) $remove	=	prime_child_remove_widgets( $remove ); // bool
+
+return $remove;
 }
 
 
@@ -138,7 +147,10 @@ $remove	=	$post->remove_footer === 'remove';
 
 if ( defined( 'PRIME2G_ALT_POST_OBJ' ) ) $remove	=	PRIME2G_ALT_POST_OBJ->remove_footer === 'remove';
 
-if ( function_exists( 'prime_child_remove_footer' ) ) $remove	=	prime_child_remove_footer(); // bool
+//	@since 1.0.96
+if ( defined( 'PRIME2G_NOFOOTER' ) ) $remove	=	true;
+
+if ( function_exists( 'prime_child_remove_footer' ) ) $remove	=	prime_child_remove_footer( $remove ); // bool
 
 return $remove;
 }

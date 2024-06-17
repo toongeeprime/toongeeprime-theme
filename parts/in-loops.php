@@ -442,8 +442,7 @@ if ( ! function_exists( 'prime2g_entry_titles_template' ) ) {
 function prime2g_entry_titles_template( array $args ) {
 $post	=	null;
 $tag	=	'h3';
-$class	=	'entry';
-$class2	=	'entry_title';
+$classes=	'entry title_only';
 
 extract( $args );
 if ( ! $post ) { global $post; }
@@ -451,9 +450,9 @@ if ( ! $post ) { global $post; }
 $title	=	$post->post_title;
 $link	=	get_permalink( $post );
 
-$div	=	'<div class="'. $class .'">
-<a href="'. $link .'" title="'. $title .'"><'. $tag .' class="'. $class2 .'">'. $title .'</'. $tag .'></a>
-</div>';
+$div	=	'<article id="entry-'. get_the_ID() .'" class="'. implode( ' ', get_post_class( $classes, $post ) ) .'">
+<a href="'. $link .'" title="'. $title .'"><'. $tag .' class="the_title">'. $title .'</'. $tag .'></a>
+</article>';
 
 return $div;
 }
@@ -494,7 +493,7 @@ else {
 	}
 }
 
-$div	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( [ $slideboxClass ], $post ) ) . '"
+$div	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( $slideboxClass, $post ) ) . '"
  style="background-image:url('. $thumb_url .');">';
 $div	.=	$link_article ? '<a href="'. $link .'" class="link_article" title="'. $title .'">' : '';
 $div	.=	'<div class="inslide prel">';

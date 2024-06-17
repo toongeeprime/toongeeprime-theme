@@ -4,28 +4,17 @@
  *	DARK THEME SWITCHER
  *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.49
+ *	@since ToongeePrime Theme 1.0.49/edited @1.0.96
  */
-add_action( 'wp_footer', 'prime2g_dark_theme_switch' );
-add_action( 'wp_footer', 'prime2g_dark_theme_set_logos', 99 );
 
 if ( ! function_exists( 'prime2g_dark_theme_switch' ) ) {
 
 function prime2g_dark_theme_switch() {
 
-$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
-$theme_switch	=	$styles->dt_switch;
-
-if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) {
-
-$id		=	( is_multisite() && ! prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' )
- && get_current_blog_id() !== 1 ) ? get_current_blog_id() : '';
-
-$domain	=	prime2g_get_site_domain();
-$domain	=	str_replace( '.', '', $domain ) . $id;
-
-$switch	=	'<div id="prime2g_dt_switch">
-<style id="dThemeSwitchCss">
+if ( in_array( ToongeePrime_Styles::mods_cache()->dt_switch, [ 'on', 'on_dbody' ] ) ) {
+//	CSS
+add_action( 'wp_head', function() {
+echo	'<style id="dThemeSwitchCSS">
 #prime2g_dt_switch{position:fixed;bottom:0;right:0;z-index:+99999;}
 #prime2g_dt_switch .bi::before{place-items:center;width:30px;height:30px;border-radius:30px;margin:1rem;
 background:var(--content-text);color:var(--content-background);display:grid;border:1px solid;}
@@ -36,35 +25,46 @@ background:var(--content-text);color:var(--content-background);display:grid;bord
 @media (display-mode: browser){
 body.has_pwa:not(.prompt_hidden) #prime2g_dt_switch{bottom:75px;}
 }
-</style>
+</style>';
+} );
 
-<div>
+
+//	JS
+add_action( 'wp_footer', function() {
+$id		=	( is_multisite() && ! prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' )
+ && get_current_blog_id() !== 1 ) ? get_current_blog_id() : '';
+
+$domain	=	prime2g_get_site_domain();
+$domain	=	str_replace( '.', '', $domain ) . $id;
+
+$switch	=	'<div id="prime2g_dt_switch">
+<div class="elmt">
 <i class="bi bi-brightness-high on switchOff" title="' . __( 'Light Theme', PRIME2G_TEXTDOM ) . '"></i>
 <i class="bi bi-moon switchOn" title="' . __( 'Dark Theme', PRIME2G_TEXTDOM ) . '"></i>
 </div>
 
-<script async id="prime2g_darkTheme_js">
+<script async id="prime2g_darkTheme_JS">
 let dtBody		=	p2getEl( "body" ),
 	llogoUrl	=	"'. prime2g_get_custom_logo_url() .'",
 	darklogoUrl	=	"'. prime2g_siteLogo( true, true ) .'",
 	locDLogoUrl	=	"' . $domain . '" + "_DTLogoUrl",
 	locDTState	=	"' . $domain . '" + "_DarkTheme";
 
-dlogoUrl	=	darklogoUrl ? darklogoUrl : llogoUrl;
+dlogoUrl	=	darklogoUrl || llogoUrl;
 
 function prime2gDarkThemeMedia() {
-let	isDarkTheme		=	window.matchMedia( "( prefers-color-scheme: dark )" ).matches,
-	p2gDarkLCStore	=	window.localStorage.getItem( locDTState );
+let	p2gDarkLCStore	=	window.localStorage.getItem( locDTState );
 
-	if ( "yes" === p2gDarkLCStore ) { isDarkTheme = true; }
-	else if ( "no" === p2gDarkLCStore ) { isDarkTheme = false; }
+	isDarkTheme		=	window.matchMedia( "( prefers-color-scheme: dark )" ).matches;
+	if ( "yes" === p2gDarkLCStore ) isDarkTheme = true;
+	else if ( "no" === p2gDarkLCStore ) isDarkTheme = false;
 return isDarkTheme;
 }
 
 
-// Set dark theme body class
+//	Set dark theme body class
 let p2gThemeIsDark	=	window.localStorage.getItem( locDTState );
-if ( p2gThemeIsDark == "yes" || prime2gDarkThemeMedia() === true ) {
+if ( p2gThemeIsDark === "yes" || prime2gDarkThemeMedia() ) {
 	dtBody.classList.add( "themeswitched_dark" );
 }
 
@@ -74,52 +74,34 @@ function prime2g_setDTlogos( useLogoUrl ) {
 	window.localStorage.setItem( locDLogoUrl, useLogoUrl );
 }
 
-let p2gDThemeOn		=	p2getEl( "#prime2g_dt_switch .switchOn" ),
-	p2gDThemeOff	=	p2getEl( "#prime2g_dt_switch .switchOff" );
-
-p2gDThemeOn.addEventListener( "click", ()=>{
+p2getEl( "#prime2g_dt_switch .switchOn" ).addEventListener( "click", ()=>{
 	dtBody.classList.add( "themeswitched_dark" );
 	window.localStorage.setItem( locDTState, "yes" );
 	prime2g_setDTlogos( dlogoUrl );
 } );
 
-p2gDThemeOff.addEventListener( "click", ()=>{
+p2getEl( "#prime2g_dt_switch .switchOff" ).addEventListener( "click", ()=>{
 	dtBody.classList.remove( "themeswitched_dark" );
-	window.localStorage.setItem( locDTState, "no" );
+	window.localStorage.setItem( locDTState, "no" );	// do not removeItem... value has control isDarkTheme
 	prime2g_setDTlogos( llogoUrl );
 } );
-</script>
-</div>';
 
-echo $switch;
-}
-
-}
-
-}
-
-
-
-if ( ! function_exists( 'prime2g_dark_theme_set_logos' ) ) {
-function prime2g_dark_theme_set_logos() {
-$styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
-$theme_switch	=	$styles->dt_switch;
-
-if ( in_array( $theme_switch, [ 'on', 'on_dbody' ] ) ) { ?>
-
-<script defer id="prime2g_dt_logos_setter">
 //	Set Custom Logo URL on page load
 p2getAll( "img.custom-logo" ).forEach( logo=>{
-	if ( p2gThemeIsDark === "yes" || prime2gDarkThemeMedia() === true )
+	if ( p2gThemeIsDark === "yes" || prime2gDarkThemeMedia() )
 		logo.src	=	dlogoUrl;
 	else
 		logo.src	=	llogoUrl;
 } );
 </script>
+</div>';
 
-<?php
-}
-}
+echo $switch;
+} );
 }
 
+}
+prime2g_dark_theme_switch();
+
+}
 

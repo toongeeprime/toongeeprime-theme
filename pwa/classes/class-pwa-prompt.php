@@ -6,7 +6,6 @@
  */
 
 class Prime2g_PWA_Prompt {
-
 	/**
 	 *	Instantiate
 	 */
@@ -31,11 +30,12 @@ class Prime2g_PWA_Prompt {
 		$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );
 
 echo '<style id="p2g_pwaBtnCss">
+#pwa_install{background:var(--content-background);}
 .p2g_pwaBtnWrap{position:fixed;bottom:0;right:0;overflow:hidden;padding:20px 0 0 20px;}
 .p2g_pwaBtnWrap.prime .in_pwaBtnWrap{transform:translate(0);visibility:visible;opacity:1;}
 .in_pwaBtnWrap{transform:translateX(150%);transition:0.5s;visibility:hidden;opacity:0;
-background-color:#fff;background:var(--content-background);box-shadow:0 0 15px 3px rgba(0,0,0,0.2);}
-.p2g_pwaBtnWrap .bi{top:-20px;left:-15px;font-size:1.75em;}
+color:var(--content-text);box-shadow:0 0 15px 3px rgba(0,0,0,0.2);}
+.p2g_pwaBtnWrap .bi{top:-20px;left:-15px;font-size:1.4em;}
 </style>
 <div id="p2g_pwaBtnWrap" class="p2g_pwaBtnWrap">
 <div id="in_pwaBtnWrap" class="in_pwaBtnWrap prel">
@@ -95,5 +95,5 @@ function stopPWAinstallPrompt() {
 
 echo $js;
 	}
-
 }
+

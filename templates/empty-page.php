@@ -1,16 +1,13 @@
 <?php defined( 'ABSPATH' ) || exit;
 
 /**
- *	Template Name: No Theme Widgets
+ *	Template Name: No In-Content Widgets
  *	Template Post Type: post, page
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-prime2g_removeSidebar();
-prime2g_remove_title();
-prime2g_is_plain_page();
 
+define( 'PRIME2G_NOWIDGETS', true );	// @since 1.0.96
 
 get_header();
 
@@ -27,3 +24,4 @@ get_header();
 	prime2g_after_post();
 
 get_footer();
+

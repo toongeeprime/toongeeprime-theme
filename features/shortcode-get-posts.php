@@ -1,12 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
- *	THEME SHORTCODE: GET & DISPLAY POSTS
- *
+ *	THEME SHORTCODE: DISPLAY POSTS
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
- *****
- *	Upgraded @since 1.0.45; Compressed @since 1.0.80
+ *	Upgraded @since 1.0.45; Made lean @since 1.0.80
  */
 
 add_shortcode( 'prime2g_display_posts', 'prime2g_posts_shortcode' );
@@ -21,9 +18,6 @@ prime2g_get_posts_output_default_options(),
 
 $atts	=	shortcode_atts( $options, $atts );
 
-/**
- *	@since 1.0.71
- */
+/*	@since 1.0.71	*/
 return prime2g_get_posts_output( $atts );
 }
-
