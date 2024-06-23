@@ -232,7 +232,7 @@ return $css;
 if ( ! function_exists( 'prime2g_sticky_menu_css' ) ) {
 function prime2g_sticky_menu_css() {
 if ( ToongeePrime_Styles::mods_cache()->sticky_menu ) {
-return	'#sticky_nav{position:fixed;left:0;right:0;top:0;z-index:99991;transform:translateY(-200%);}
+return	'#sticky_nav{position:fixed;left:0;right:0;top:0;z-index:99998;transform:translateY(-200%);}
 .pop #sticky_nav{transform:translate(0);}
 .admin-bar #sticky_nav{top:32px;}';
 }
@@ -539,8 +539,8 @@ $css	=	'
 #megaMenuLinks{display:flex;padding:0;margin:0;}
 #megaMenuWrap,#megaMenu li{position: relative;}
 #megaMenu li{list-style:none;margin:0 5px;padding:5px 20px;}
-.megamenuContents{opacity:0;visibility:hidden;max-height:75vh;overflow-y:auto;position:absolute;min-width:max-content;
-background:var(--content-background);transition:0.2s;box-shadow:0 20px 15px 5px rgba(0,0,0,0.2);padding:var(--min-pad);}
+.megamenuContents{opacity:0;visibility:hidden;max-height:85vh;position:absolute;padding:var(--min-pad);
+background:var(--content-background);transition:0.2s;box-shadow:0 20px 15px 5px rgba(0,0,0,0.2);}
 #megaMenu li:hover .megamenuContents{visibility:visible;opacity:1;transition:0.3s;}';
 return $css;
 }
@@ -553,8 +553,8 @@ if ( defined( 'PRIME_AJX_SEARCHCSS' ) ) return;
 define( 'PRIME_AJX_SEARCHCSS', true );
 
 return	'<style id="prime_livesearchCSS">
-.wp-block-search__inside-wrapper{position:relative;z-index:99980;}
-.liveSearchBox{position:absolute;left:0;right:0;background:var(--content-background);z-index:99985;border:5px solid #f8f8f8;
+.wp-block-search__inside-wrapper{position:relative;z-index:99991;}
+.liveSearchBox{position:absolute;left:0;right:0;background:var(--content-background);z-index:99992;border:5px solid #f8f8f8;
 border-radius:5px;padding:20px;box-shadow:0 5px 15px 5px rgba(0,0,0,0.2);}
 .liveSearchBox .slimscrollbar{max-height:300px;margin-right:-10px;margin-left:-10px;}
 .liveSearchBox article{display:grid;grid-template-columns:60px 1fr;gap:10px;margin-bottom:0;}

@@ -89,9 +89,8 @@ $reel	.=	'<div id="prime2g_news_reel_frame">
 	if ( ! isset( $loop[ $p ] ) ) continue;
 		$args	=	array(
 			'post'	=>	$loop[ $p ],
-			'tag'	=>	'p',
-			'class'	=>	'reel-entry',
-			'class2'=>	'reel-post-title',
+			'tag'	=>	'span',
+			'classes'	=>	'reel-entry reel-post-title title_only'
 		);
 		$reel	.=	prime2g_entry_titles_template( $args );
 	}

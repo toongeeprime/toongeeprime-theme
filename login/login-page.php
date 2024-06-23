@@ -1,13 +1,11 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	WP LOGIN PAGE
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *	Put in dir and upgraded @since 1.0.73
  */
-
-$prime_custom_login_page	=	Prime2gLoginPage::get_instance();
+$custom_login_page	=	Prime2gLoginPage::get_instance();
 
 #	FILTERS
 add_filter( 'login_headerurl', 'prime2g_loginpage_url' );
@@ -21,7 +19,7 @@ add_action( 'login_head', 'prime2g_theme_styles_at_login_page' );
  *	@since 1.0.74 condition added
  *		To make login page look more like theme when using custom login page
  */
-if ( $prime_custom_login_page->run() ) {
+if ( $custom_login_page->run() ) {
 	add_action( 'login_enqueue_scripts', 'prime2g_parent_enqueues_at_login', 5 );
 	add_action( 'login_head', 'prime2g_load_theme_fonts' );
 }
@@ -58,7 +56,4 @@ function prime2g_parent_enqueues_at_login() {
 	wp_register_script( 'prime2g_js', get_theme_file_uri( '/files/theme-min.js' ), [], PRIME2G_VERSION );
 	wp_enqueue_script( 'prime2g_js' );
 }
-
-
-
 

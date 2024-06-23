@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	OUTPUTTING TEXT TO THE THEME
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -213,8 +211,6 @@ return $link;
 
 
 /**
- *	Post Metas
- *
  *	Post meta at top of entries
  *	Hooked to prime2g_after_title
  */
@@ -255,7 +251,7 @@ echo '</div>';
 /**
  *	Post meta at top of archive entries
  *	Hooked to prime2g_archive_post_top
- *	Filter added and hooked @since ToongeePrime Theme 1.0.45
+ *	Filter added and hooked @since 1.0.45
  */
 add_action( 'prime2g_archive_post_top', 'prime2g_archive_postmeta', 5, 2 );
 if ( ! function_exists( 'prime2g_archive_postmeta' ) ) {
@@ -363,7 +359,6 @@ else return $info;
 
 /**
  *	Get Post Taxonomy(ies)
- *
  *	Gets post terms
  *	(required) $taxonomy
  *	To get first term only, set $count to (int) 1
@@ -398,7 +393,7 @@ else return $taxons;
 
 
 /**
- *	ARCHIVES TITLES
+ *	ARCHIVES' TITLES
  */
 add_filter( 'get_the_archive_title', 'prime2g_archives_title_filter' );
 if ( ! function_exists( 'prime2g_archives_title_filter' ) ) {
@@ -482,7 +477,7 @@ return $readMore;
 
 /**
  *	Filter the excerpt more link
- *	Added $text and $length @since ToongeePrime Theme 1.0.50
+ *	Added $text and $length @since 1.0.50
  */
 add_filter( 'excerpt_more', 'prime2g_read_more_excerpt_link' );
 if ( ! function_exists( 'prime2g_read_more_excerpt_link' ) ) {
@@ -521,7 +516,7 @@ function prime2g_post_no_title( $title ) {
 
 /**
  *	HOOK TITLE TO THEME
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 add_action( 'prime2g_page_title_hook', 'prime2g_hook_the_page_title', 10, 1 );
 if ( ! function_exists( 'prime2g_hook_the_page_title' ) ) {

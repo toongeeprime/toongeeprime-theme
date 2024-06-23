@@ -69,11 +69,11 @@ function prime2g_use_extras() { return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_
  */
 function prime2g_add_theme_pwa() { return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true ); }
 
-#	Preferred @ front-end matters
+#	Preferred @ front-end
 function prime2g_activate_theme_pwa() {
 	$activate	=	prime2g_add_theme_pwa();
 	if ( function_exists( 'prime2g_child_pwa_activator' ) ) return $activate;
-	return ( get_theme_mod( 'prime2g_use_theme_pwa', 0 ) && $activate );
+	return get_theme_mod( 'prime2g_use_theme_pwa', 0 ) && $activate;
 }
 
 /**
@@ -208,7 +208,7 @@ return (object) [
 }
 
 function prime_url_is_ok( string $url ) {
-$headers = get_headers( $url );
+$headers	=	get_headers( $url );
 return stripos( $headers[0],"200 OK" ) ? true : false;
 }
 

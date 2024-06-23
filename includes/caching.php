@@ -5,10 +5,13 @@
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.56
- *	Removed the business of using action hook @since 1.0.91 - it doesn't work in a hook
  */
 
+// Removed the business of using action hook @1.0.91 - it doesn't work in a hook
+// But had to return it @1.0.97 due to headers already sent issues... REVIEW
 
+add_action( 'template_redirect', 'prime2g_caching' );
+function prime2g_caching() {
 /*	START CACHING:	*/
 // if ( defined( 'WP_CACHE' ) && WP_CACHE === false ) return;	# always blocks file???	# @since 1.0.70
 if ( empty( get_theme_mod( 'prime2g_activate_chache_controls' ) ) ) return;
@@ -78,6 +81,6 @@ $feeds_age	=	$time_feeds * $seconds_feeds;
 	}
 }
 
-
+}
 
 

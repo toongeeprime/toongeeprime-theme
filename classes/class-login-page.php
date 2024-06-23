@@ -28,7 +28,7 @@ class Prime2gLoginPage {
 	}
 
 
-	public function new_login_slug() {
+	function new_login_slug() {
 		// To Do: network logic
 		$slug	=	get_theme_mod( 'prime2g_wp_login_page_slug', 'login' );
 		if ( ! in_array( $slug, prime_wp_forbidden_slugs() ) ) {
@@ -38,7 +38,7 @@ class Prime2gLoginPage {
 	}
 
 
-	public function new_login_url( $scheme = null ) {
+	function new_login_url( $scheme = null ) {
 		if ( get_option( 'permalink_structure' ) ) { // site is using pretty permalinks
 			return $this->user_trailingslashit( home_url( '/', $scheme ) . $this->new_login_slug() );
 		}
@@ -48,7 +48,7 @@ class Prime2gLoginPage {
 	}
 
 
-	public static function run() {
+	static function run() {
 	return ( ! empty( get_theme_mod( 'prime2g_use_custom_login_page' ) )
 		&& ! empty( get_theme_mod( 'prime2g_wp_login_page_slug' ) ) );
 	}
@@ -57,7 +57,7 @@ class Prime2gLoginPage {
 	 *	Return an instance of class
 	 *	@return object: A single instance of class
 	 */
-	public static function get_instance() {
+	static function get_instance() {
 		if ( null === self::$instance ) {
 			self::$instance	=	new self;
 		}
@@ -86,7 +86,7 @@ class Prime2gLoginPage {
 	}
 
 
-	public function plugins_loaded() {
+	function plugins_loaded() {
 		global $pagenow;
 
 		if ( ! is_multisite()
@@ -117,7 +117,7 @@ class Prime2gLoginPage {
 	}
 
 
-	public function wp_loaded() {
+	function wp_loaded() {
 	global $pagenow;
 
 		if ( ( ! is_user_logged_in() && ( is_admin() && ! defined( 'DOING_AJAX' ) ) )
@@ -185,23 +185,22 @@ class Prime2gLoginPage {
 	}
 
 
-	protected function get_login_page() {
+	function get_login_page() {
 		if ( $pageID = get_theme_mod( 'prime2g_custom_login_page_id', 0 ) ) {
-			if ( ! $pageID ) return;
-			$pageID		=	(int) $pageID;
-			return get_post( $pageID );
+			if ( !$pageID ) return null;
+			return get_post( (int) $pageID );
 		}
 	}
 
 
-	public function login_page_content() {
+	function login_page_content() {
 		if ( $the_page = $this->get_login_page() )
 			echo apply_filters( 'the_content', $the_page->post_content );
 	}
 
 
 	#	@since 1.0.75
-	public function login_footer() {
+	function login_footer() {
 		if ( $the_page = $this->get_login_page() ) {
 			if ( $the_page->prime_page_js )
 				echo '<script id="prime2g_pageJS">'. $the_page->prime_page_js .'</script>';
@@ -209,16 +208,16 @@ class Prime2gLoginPage {
 	}
 
 
-	public function login_url( $login_url, $redirect, $force_reauth ) { return $this->filter_wp_login_php( $login_url ); }
+	function login_url( $login_url, $redirect, $force_reauth ) { return $this->filter_wp_login_php( $login_url ); }
 
-	public function site_url( $url, $path, $scheme, $blog_id ) { return $this->filter_wp_login_php( $url, $scheme ); }
+	function site_url( $url, $path, $scheme, $blog_id ) { return $this->filter_wp_login_php( $url, $scheme ); }
 
-	public function network_site_url( $url, $path, $scheme ) { return $this->filter_wp_login_php( $url, $scheme ); }
+	function network_site_url( $url, $path, $scheme ) { return $this->filter_wp_login_php( $url, $scheme ); }
 
-	public function wp_redirect( $location, $status ) { return $this->filter_wp_login_php( $location ); }
+	function wp_redirect( $location, $status ) { return $this->filter_wp_login_php( $location ); }
 
 
-	public function filter_wp_login_php( $url, $scheme = null ) {
+	function filter_wp_login_php( $url, $scheme = null ) {
 		if ( strpos( $url, 'wp-login.php' ) !== false ) {
 
 			if ( is_ssl() ) { $scheme = 'https'; }

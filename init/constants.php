@@ -27,7 +27,6 @@ define( 'PRIME2G_FILESDIR', PRIME2G_THEME . 'files/' );
 define( 'PRIME2G_CACHEGROUP', 'prime2g_theme_cache_group' ); #	@1.0.57
 define( 'PRIME2G_ICONS_HANDLE', 'bootstrap-icons' ); #	@1.0.60
 defined( 'PRIME2G_ENQ_JQUERY' ) || define( 'PRIME2G_ENQ_JQUERY', false ); #	@1.0.70, enqueue theme' local jQuery?
-defined( 'PRIME2G_AJAXING' ) || define( 'PRIME2G_AJAXING', false ); #	@1.0.96, when using ajax
 
 /**
  *	Define-able Constants:

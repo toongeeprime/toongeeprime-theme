@@ -1,7 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	THEME FEATURES & CONDITIONAL JS
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -181,24 +180,22 @@ prime2g_conditional_customizer_js();
 function prime2g_conditional_customizer_js() {
 $scriptName	=	basename( $_SERVER[ 'PHP_SELF' ] );
 if ( $scriptName === 'customize.php' ) {
-if ( prime2g_design_by_network_home() && get_current_blog_id() !== 1 ) {
+$js	=	'<script src="'. get_theme_file_uri( '/files/jquery.min.js' ) .'" id="jQueryCtm"></script>
+<script id="prime2g_conditional_customizer_js" defer>
+jQuery( document ).ready( ()=>{';
 
-$js	=	'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" id="jQueryCtm"></script>
-<script id="prime2g_conditional_customizer_js">
-jQuery( document ).ready( function() {
-setTimeout( ()=>{
-let p2gPane	=	jQuery( "#sub-accordion-panel-prime2g_customizer_panel .customize-info" );
+if ( prime2g_design_by_network_home() && get_current_blog_id() !== 1 ) {
+$js	.=	'setTimeout( ()=>{
+let p2gPane		=	jQuery( "#sub-accordion-panel-prime2g_customizer_panel .customize-info" );
 p2gPane.append( \'<div style="background:#fff;padding:25px 15px 15px;text-align:center;"><h3>'. __( 'MAIN SITE DESIGNS ARE FROM THE NETWORK HOME', PRIME2G_TEXTDOM ) .'</h3></div>\' );
-}, 5000
-);
-} );
+}, 5000 );';
+}
+
+$js	.=	'} );
 </script>';
 echo $js;
-
 }
 }
-}
-
 
 
 

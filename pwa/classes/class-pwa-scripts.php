@@ -1,22 +1,15 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: PWA Scripts
- *	Contents for PWA script.js file and for selective usage around the PWA
+ *	Contents for PWA virtual script.js file and other selective uses
  *	No <script> tags
  *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
- */
-
-/**
- *	Create and use this Class to add code to the script.js file
  *
- *	class Prime2g_Add_PWA_Script {
- *		public static function add() { return 'string'; }
- *	}
+ **
+ *	Use filter: prime2g_filter_pwa_scripts to add code to pwa script.js file
  */
-
 
 class Prime2g_PWA_Scripts {
 
@@ -26,21 +19,34 @@ class Prime2g_PWA_Scripts {
 	public function __construct() {
 	if ( ! isset( self::$instance ) ) {
 		$this->scripts	=	"// PWA Scripts\n";
-	}
-
-	if ( class_exists( 'Prime2g_Add_PWA_Script' ) ) {
-		$this->scripts	.=	Prime2g_Add_PWA_Script::add();
+		$this->scripts	.=	$this->onlineMonitor();
+		$this->scripts	.=	apply_filters( 'prime2g_filter_pwa_scripts', '', $this->scripts );
 	}
 
 	return self::$instance;
 	}
 
 
-	public static function checkAndReload( string $btn = '', $interval = 60000 ) {
+	static function customizer() {
+	#	Gotta use jQuery
+$js	=	'jQuery( document ).ready( ()=>{';
+
+$js	.=	'
+jQuery( "#customize-control-prime2g_pwapp_primaryicon" )?.append( \'<div id="p2gSS_Head" style="margin-top:40px;"><h2>'. __( '- APP SCREENSHOTS -', PRIME2G_TEXTDOM ) .'</h2></div>\' );
+jQuery( "#customize-control-site_icon .attachment-media-view" )?.prepend( "<h3>'. __( 'Use a PNG/WEBP image for best results with your web app', PRIME2G_TEXTDOM ) .'.</h3>" );
+';
+
+$js	.=	'} );';
+
+return $js;
+	}
+
+
+	static function checkAndReload( string $btn = '', $interval = 60000 ) {
 $js	=	'';
 
 if ( $btn ) {
-	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", () => { window.location.reload(); } );';
+	$js	.=	'p2getEl( "'. $btn .'" ).addEventListener( "click", ()=>{ window.location.reload(); } );';
 }
 
 $js	.=	'
@@ -56,16 +62,16 @@ try {
 }
 }
 
-window.addEventListener( "online", () => { window.location.reload(); } );
+window.addEventListener( "online", ()=>{ window.location.reload(); } );
 window.setInterval( checkNetworkAndReload, '. $interval .' );
 ';
 return $js;
 	}
 
 
-	public static function getPageFromNetwork( string $btn = '' ) {
-	$offline	=	new Prime2g_PWA_File_Url_Manager();
-	$offlineUrl	=	$offline->get_file_url()[ 'offline' ];
+	static function getPageFromNetwork( string $btn = '' ) {
+	$fileUrls	=	new Prime2g_PWA_File_Url_Manager;
+	$offlineUrl	=	$fileUrls->get_file_url()[ 'offline' ];
 	$cacheNames	=	prime2g_pwa_cache_names();
 
 $js	=	'';
@@ -94,6 +100,71 @@ const DYNACACHE		=	"'. $cacheNames->dynamic .'";
 }
 ';
 return $js;
+	}
+
+
+	function onlineMonitor() {
+	return	"window.addEventListener( 'online', connectionMonitor );
+window.addEventListener( 'offline', connectionMonitor );
+
+function connectionMonitor() {
+const ooID	=	'#prime2g_offOnline_notif',
+	ooClass		=	'.oo_notif',
+	onClass		=	'.online.oo_notif',
+	connClass	=	'.connected.oo_notif',
+	offClass	=	'.offline.oo_notif';
+
+function p2gOffOONotif() {
+if ( p2getEl( '#prime2g_offOnline_notif' ) ) {
+	setTimeout( ()=>{ prime2g_addClass( [ '#prime2g_offOnline_notif' ], 'off', false ); }, 10000 );
+}
+}
+
+if ( navigator.onLine ) {
+	console.log( 'connected' );
+	prime2g_addClass( [ onClass, offClass ], 'off', false );
+	prime2g_remClass( [ ooID, connClass ], 'off', false );
+
+	reachToUrl( getServerUrl() ).then( ( online )=>{
+	if ( online ) {
+	console.log( 'online' );
+	prime2g_addClass( [ connClass, offClass ], 'off', false );
+	prime2g_remClass( [ ooID, onClass ], 'off', false );
+	p2gOffOONotif();
+	}
+	else {
+	console.log( 'no internet' );
+	prime2g_addClass( [ onClass, offClass ], 'off', false );
+	prime2g_remClass( [ ooID, connClass ], 'off', false );
+	p2gOffOONotif();
+	}
+	} );
+}
+else {
+	console.log( 'offline' );
+	prime2g_addClass( [ onClass, connClass ], 'off', false );
+	prime2g_remClass( [ ooID, offClass ], 'off', false );
+	p2gOffOONotif();
+}
+
+}
+
+function reachToUrl( url ) {
+return fetch( url, { method: 'HEAD', mode: 'no-cors' } )
+.then( resp => {
+	return resp && ( resp.ok || resp.type === 'opaque' );
+} )
+.catch( err => {
+	console.warn( '[conn test failure]:', err );
+} );
+}
+
+function getServerUrl() { return window.location.origin; }
+
+p2getEl( '#prime2g_offOnline_notif' ).onclick = ( event )=>{
+	prime2g_addClass( [ '#prime2g_offOnline_notif' ], 'off' );
+}
+";
 	}
 
 }

@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME UPDATER
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  *	https://make.wordpress.org/core/2020/07/30/recommended-usage-of-the-updates-api-to-support-the-auto-updates-ui-for-plugins-and-themes-in-wordpress-5-5
@@ -144,11 +142,11 @@ class Prime2gThemeUpdater {
 	 */
 	function set_update_notice( $transient ) {
 	if ( is_object( $transient ) ) {
-		//	The Notice
+		#	The Notice
 		$transient	=	$this->set_theme_status_response( $transient );
 	}
 	else {
-		//	Fix for warning messages on Dashboard / Updates page
+		#	Fix for warning messages on Dashboard / Updates page
 		$transient	=	new stdClass();
 		$item_data	=	$this->transient_item_data();
 		$transient->response	=	$transient->no_update	=	[];
@@ -162,16 +160,19 @@ class Prime2gThemeUpdater {
 	function upgrade_processing() {
 	if ( wp_doing_ajax() || ! is_admin() || ! current_user_can( 'update_themes' ) ) return;
 
-		add_action( 'after_setup_theme', function() {
-			remove_filter( 'pre_set_site_transient_update_themes', [ $this, 'set_theme_status_response' ] );
-			remove_filter( 'site_transient_update_themes', [ $this, 'set_update_notice' ] );
-		}, 11 );
+		// add_action( 'after_setup_theme', function() {
+			// remove_filter( 'pre_set_site_transient_update_themes', [ $this, 'set_theme_status_response' ] );
+			// remove_filter( 'site_transient_update_themes', [ $this, 'set_update_notice' ] );
+		// }, 11 );
 
 		add_action( 'upgrader_process_complete', function( $upgrader_object, $options ) {
 			if ( $options['action'] === 'update'
 			&& $options['type'] === 'theme' && isset( $options['themes'] ) ) {
 				foreach( $options['themes'] as $theme ) {
-					if ( $theme === $this->slug ) { set_site_transient( 'p2gtheme_updated', 1 ); }
+					if ( $theme === $this->slug ) {
+						flush_rewrite_rules();
+						set_site_transient( 'p2gtheme_updated', 1 );
+					}
 				}
 			}
 		}, 10, 2 );
@@ -240,15 +241,14 @@ class Prime2gThemeUpdater {
 }
 
 
+
 /**
  *		ACTIVATE
  */
 if ( ! function_exists( 'prime2g_theme_updater' ) ) {
-
 add_action( 'admin_init', 'prime2g_theme_updater' );
 function prime2g_theme_updater() {
 	new Prime2gThemeUpdater;
 }
-
 }
 

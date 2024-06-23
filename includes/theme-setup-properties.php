@@ -2,7 +2,6 @@
 
 /**
  *	SETTING UP THEME PROPERTIES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -27,9 +26,7 @@ add_theme_support(
 
 $styles	=	ToongeePrime_Styles::mods_cache();	# 1.0.57
 
-#	@since ToongeePrime Theme 1.0.55
-
-#	Custom Header
+#	Custom Header @since 1.0.55
 add_theme_support(
 	'custom-header',
 	array(
@@ -54,9 +51,6 @@ register_nav_menus(
 );
 
 
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
 if ( $styles->top_menu ) {
 register_nav_menus(
 	[ 'site-top-menu'	=>	esc_html__( 'Site-Top Menu', PRIME2G_TEXTDOM ) ]	# @ Theme 1.0.55
@@ -66,7 +60,7 @@ register_nav_menus(
 
 /**
  *	Extra Navigation Menu Locations
- *	@since ToongeePrime Theme 1.0.55
+ *	@since 1.0.55
  */
 if ( prime_child_min_version( '2.2' ) ) {
 $extras	=	get_theme_mod( 'prime2g_extra_menu_locations', 0 );
@@ -95,7 +89,7 @@ register_sidebar(
 		'after_title'	=>	'</h3></div>'
 	)
 );
-#	@since ToongeePrime Theme 1.0.55
+#	@since 1.0.55
 register_sidebar(
 	array(
 		'name'          =>	__( 'Above The Header', PRIME2G_TEXTDOM ),
@@ -201,9 +195,7 @@ register_sidebar(
 	)
 );
 
-/**
- *	@since ToongeePrime Theme 1.0.55
- */
+#	@since 1.0.55
 $cols	=	4;
 $num	=	' %d';
 $name	=	'Footer Widgets';

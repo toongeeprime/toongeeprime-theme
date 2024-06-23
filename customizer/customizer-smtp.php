@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	SMTP Settings
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -15,17 +13,13 @@ if ( $network ) {
 	switch_to_blog( 1 );
 	$route	=	get_theme_mod( 'prime2g_route_smtp_to_networkhome' );
 	restore_current_blog();
-
 	if ( $route && get_current_blog_id() !== 1 ) return;
 }
-
 
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
 $postMsg_email	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_email' ];
 
-	$wp_customize->add_setting( 'prime2g_use_theme_smtp',
-		[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 0, 'transport' => 'postMessage' ]
-	);
+	$wp_customize->add_setting( 'prime2g_use_theme_smtp', array_merge( $postMsg_text, [ 'default' => 0 ] ) );
 	$wp_customize->add_control( 'prime2g_use_theme_smtp', array(
 		'label'		=>	__( 'Activate SMTP', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
@@ -47,18 +41,13 @@ if ( $network && get_current_blog_id() === 1 ) {
 	$siteName	=	get_bloginfo( 'name' );
 	$adminEmail	=	get_bloginfo( 'admin_email' );
 
-	$wp_customize->add_setting( 'prime2g_smtp_sender_name',
-		[
-			'type' => 'theme_mod', 'transport' => 'postMessage',
-			'sanitize_callback' => 'sanitize_text_field', 'default' => $siteName
-		]
-	);
+	$wp_customize->add_setting( 'prime2g_smtp_sender_name', array_merge( $postMsg_text, [ 'default' => $siteName ] ) );
 	$wp_customize->add_control( 'prime2g_smtp_sender_name', array(
 		'label'		=>	__( 'Name of Mails Sender', PRIME2G_TEXTDOM ),
 		'settings'	=>	'prime2g_smtp_sender_name',
 		'section'	=>	'prime2g_theme_smtp_section',
 		'input_attrs'	=>	array(
-			'placeholder'	=>	$siteName,
+			'placeholder'	=>	$siteName
 		)
 	) );
 
@@ -98,7 +87,7 @@ if ( $network && get_current_blog_id() === 1 ) {
 		'settings'	=>	'prime2g_smtp_server',
 		'section'	=>	'prime2g_theme_smtp_section',
 		'input_attrs'	=>	array(
-			'placeholder'	=>	'Example: smtp.servername.com',
+			'placeholder'	=>	'Example: smtp.servername.com'
 		)
 	) );
 
@@ -109,14 +98,12 @@ if ( $network && get_current_blog_id() === 1 ) {
 		'settings'	=>	'prime2g_smtp_port',
 		'section'	=>	'prime2g_theme_smtp_section',
 		'input_attrs'	=>	array(
-			'max'	=>	'999',
-			'placeholder'	=>	'465',
+			'max'		=>	'999',
+			'placeholder'=>	'465'
 		)
 	) );
 
-	$wp_customize->add_setting( 'prime2g_smtp_security_type',
-		[ 'type' => 'theme_mod', 'default' => 'ssl', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ]
-	);
+	$wp_customize->add_setting( 'prime2g_smtp_security_type', array_merge( $postMsg_text, [ 'default' => 'ssl' ] ) );
 	$wp_customize->add_control( 'prime2g_smtp_security_type', array(
 		'label'		=>	__( 'Security', PRIME2G_TEXTDOM ),
 		'type'		=>	'select',
@@ -125,7 +112,7 @@ if ( $network && get_current_blog_id() === 1 ) {
 		'choices'	=>	array(
 			''		=>	__( 'None', PRIME2G_TEXTDOM ),
 			'ssl'	=>	__( 'SSL', PRIME2G_TEXTDOM ),
-			'tls'	=>	__( 'TLS', PRIME2G_TEXTDOM ),
+			'tls'	=>	__( 'TLS', PRIME2G_TEXTDOM )
 		)
 	) );
 

@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME MENUS
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -42,11 +40,11 @@ function prime2g_main_menu( $id = 'main_nav', $ul_id = 'main_menu_items' ) {
 # Theme 1.0.57
 $styles		=	ToongeePrime_Styles::mods_cache();
 $min_v23	=	prime_child_min_version( '2.3' );
+$isMobile	=	wp_is_mobile();
 
 $incLogo	=	$styles->logo_with_menu;
 $lwm_class	=	$incLogo ? ' logo_with_menu' : '';
 $theLogo	=	prime2g_siteLogo();
-$isMobile	=	wp_is_mobile();
 $at_customizer	=	is_customize_preview();	# Theme 1.0.84
 $collapsing	=	$styles->mob_submenu_open;	# Theme 1.0.87
 
@@ -174,7 +172,6 @@ echo	'</div></div>
 
 /**
  *	@since 1.0.55
- *
  *	Site Top Menu
  */
 if ( ! function_exists( 'prime2g_site_top_menu' ) ) {
@@ -285,7 +282,7 @@ echo	'</div></section>';
 }
 
 
-/***
+/**
  *	DESKTOP MEGAMENU HTML STRUCTURE
  *	ctrlw class is for JS width adjustment
  *	@since 1.0.76
@@ -293,22 +290,25 @@ echo	'</div></section>';
 <nav id="megaMenu" class="desktop menu-main-container">
 <ul id="megaMenuLinks" class="menu">
  	<li class="megamenuLi megaMenuContents1"><a href="#" class="megamenu_link">Item 1</a>
-	<div id="megaMenuContents1" class="megamenuContents ctrlw">
+	<div id="megaMenuContents1" class="megamenuContents ctrlw slimscrollbar">
 	<div class="mmcontent">[prime_insert_template_part id="123" device="desktop"]</div>
 	</div>
 	</li>
 
  	<li class="megamenuLi megaMenuContents2"><a href="#" class="megamenu_link">Item 2</a>
-	<div id="megaMenuContents2" class="megamenuContents ctrlw">
+	<div id="megaMenuContents2" class="megamenuContents ctrlw slimscrollbar">
 	<div class="mmcontent">[prime_insert_template_part id="234" device="mobile"]</div>
 	</div>
 	</li>
 
  	<li class="megamenuLi megaMenuContents3"><a href="#" class="megamenu_link">Item 3</a>
-	<div id="megaMenuContents3" class="megamenuContents ctrlw">
+	<div id="megaMenuContents3" class="megamenuContents ctrlw slimscrollbar">
 	<div class="mmcontent">[prime_insert_template_part id="345" device="desktop"]</div>
 	</div>
 	</li>
 </ul>
 </nav>
- **/
+*/
+
+
+

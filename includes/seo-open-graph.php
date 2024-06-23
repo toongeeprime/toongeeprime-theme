@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME SEO & OPEN GRAPH WORKINGS
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.81
  */

@@ -14,7 +14,7 @@ class Prime2gJSBits {
 	/**
 	 *	Elements to work with Class' code
 	 */
-	public static function elements( string $get ) {
+	static function elements( string $get ) {
 	$footerhook	=	is_admin() ? 'admin_footer' : 'wp_footer';
 
 	$css	=	'<style id="'. $get .'CSS">'. self::elements_css( $get ) .'</style>';
@@ -27,8 +27,8 @@ class Prime2gJSBits {
 	}
 
 
-	public static function elements_css( string $get ) {
-	//	$get must match elements() method args
+	static function elements_css( string $get ) {
+	//	$get value must match elements() method
 	if ( $get === 'copied_to_clip' ) {
 	return '#jsBit_copiedtoclip{position:fixed;bottom:5px;right:10px;transform:translateY(120%);transition:0.3s;z-index:99999;font-size:110%;font-weight:600;letter-spacing:1px;background:#f7f7f7;color:#000;padding:5px 10px;margin:0;line-height:1;border-radius:5px;box-shadow:0 3px 7px rgba(0,0,0,0.3);}
 	.prime#jsBit_copiedtoclip{transform:translate(0);}
@@ -41,7 +41,7 @@ class Prime2gJSBits {
 	/**
 	 *	JS CODES
 	 */
-	public static function copy_to_clipboard( bool $run = false, bool $tags = true ) {
+	static function copy_to_clipboard( bool $run = false, bool $tags = true ) {
 	if ( defined( 'P2GJSBIT_CTCLIPB' ) ) return;	//	Prevent multiple instances
 	define( 'P2GJSBIT_CTCLIPB', true );
 
@@ -104,7 +104,7 @@ $js	.=	$tags ? '</script>' : '';
 }
 
 
-	public static function class_by_timeout() {
+	static function class_by_timeout() {
 	if ( defined( 'P2GJSBIT_SCBTO' ) ) return;
 	define( 'P2GJSBIT_SCBTO', true );
 	return 'function p2gClassByTimeout( elmts, interval, classes = "prime", toDo = "add" ) {
@@ -113,7 +113,7 @@ $js	.=	$tags ? '</script>' : '';
 	}
 
 
-	public static function set_class() {
+	static function set_class() {
 	if ( defined( 'P2GJSBIT_SETC' ) ) return;
 	define( 'P2GJSBIT_SETC', true );
 
@@ -123,21 +123,19 @@ $js	.=	$tags ? '</script>' : '';
 		for ( e = 0; e < count; e++ ) {
 			var theEl	=	typeof elmts[e] === "object" ? elmts[e] : p2getEl( elmts[e] );
 			var theClass=	Array.isArray( classes ) ? classes[e] : classes;
-			if ( toDo === "add" ) theEl.classList.add( theClass );
-			if ( toDo === "remove" ) theEl.classList.remove( theClass );
+			toDo === "add" ? theEl.classList.add( theClass ) : theEl.classList.remove( theClass );
 		}
 	} else {
 		var theEl	=	typeof elmts === "object" ? elmts : p2getEl( elmts );
 		var theClass=	Array.isArray( classes ) ? classes[0] : classes;
-		if ( toDo === "add" ) theEl.classList.add( theClass );
-		if ( toDo === "remove" ) theEl.classList.remove( theClass );
+		toDo === "add" ? theEl.classList.add( theClass ) : theEl.classList.remove( theClass );
 	}
 	}';
 	}
 
 
 	// @since 1.0.73
-	public static function dom_create_and_insert( bool $tags = true, bool $hook = false ) {
+	static function dom_create_and_insert( bool $tags = true, bool $hook = false ) {
 	if ( defined( 'P2GJSBIT_DC_I' ) ) return;
 	define( 'P2GJSBIT_DC_I', true );
 

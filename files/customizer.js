@@ -142,14 +142,15 @@ value.bind( ( newval )=>{
 		ctimeF	=	$( '#customize-control-prime2g_chache_time_feeds' ),
 		cunitF	=	$( '#customize-control-prime2g_chache_seconds_feeds' ),
 		cData	=	$( '#customize-control-prime2g_allow_chache_data_clearing' ), // 1.0.58
-		htAccess	=	$( '#customize-control-prime2g_write_htaccess_chache_rules' ); // 1.0.91
+		htAccess	=	$( '#customize-control-prime2g_write_htaccess_chache_rules' ), // 1.0.91
+		themeFiles	=	$( '#customize-control-prime2g_optimize_theme_files' ); // 1.0.97
 	if ( newval ) {
-		ctimeS.slideDown( 180 ); cunitS.slideDown( 180 ); ctimeF.slideDown( 180 );
-		cunitF.slideDown( 180 ); cData.slideDown( 180 ); htAccess.slideDown( 180 );
+		ctimeS.slideDown( 180 ); cunitS.slideDown( 180 ); ctimeF.slideDown( 180 ); cunitF.slideDown( 180 );
+		cData.slideDown( 180 ); htAccess.slideDown( 180 ); themeFiles.slideDown( 180 );
 	}
 	else {
-		ctimeS.slideUp( 180 ); cunitS.slideUp( 180 ); ctimeF.slideUp( 180 );
-		cunitF.slideUp( 180 ); cData.slideUp( 180 ); htAccess.slideUp( 180 );
+		ctimeS.slideUp( 180 ); cunitS.slideUp( 180 ); ctimeF.slideUp( 180 ); cunitF.slideUp( 180 );
+		cData.slideUp( 180 ); htAccess.slideUp( 180 ); themeFiles.slideUp( 180 );
 	}
 } );
 } );

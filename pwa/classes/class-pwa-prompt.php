@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: Create PWA Prompt
  *	@https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
@@ -15,7 +14,7 @@ class Prime2g_PWA_Prompt {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance	=	new self();
 		}
-		return self::$instance;
+	return self::$instance;
 	}
 
 
@@ -48,7 +47,7 @@ style="grid-template-columns:50px 1fr;padding:5px;gap:5px;">
 </div>
 </div>';
 
-$js	=	'<script defer id="p2g_pwaPromptJS">
+$js	=	'<script id="p2g_pwaPromptJS" async defer>
 let p2g_pwaPrompt	=	null,
 	stopCookie		=	"'. $siteName .'_stopPrompt";
 const	p2g_pwabtnWrap=	p2getEl( "#p2g_pwaBtnWrap" ),
@@ -80,7 +79,7 @@ if ( installPWA ) {
 
 async function prime_install_app( event ) {
 event.preventDefault();
-if ( ! p2g_pwaPrompt ) { return; }
+if ( ! p2g_pwaPrompt ) return;
 	const result	=	await p2g_pwaPrompt.prompt();
 	console.log(`Install prompt was: ${result.outcome}`);
 	stopPWAinstallPrompt();

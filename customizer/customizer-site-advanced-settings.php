@@ -2,7 +2,6 @@
 
 /**
  *	Customizer Advanced Options & Settings
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.70
  */
@@ -80,7 +79,5 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 
 }
 }
-
-
 
 

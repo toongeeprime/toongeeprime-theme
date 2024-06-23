@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Customizer Site Performance
- *
  *	@package WordPress
  *	File created @since ToongeePrime Theme 1.0.59
  */
@@ -169,6 +167,18 @@ MONTH_IN_SECONDS => __( 'Months', PRIME2G_TEXTDOM ), YEAR_IN_SECONDS => __( 'Yea
 		'section'	=>	'prime2g_site_performance_section',
 		'active_callback'	=> 'prime2g_a_c_ctrls'
 	) );
+
+//	@since 1.0.97
+if ( prime_child_min_version( '2.3' ) ) {	//	when old theme files were deprecated
+	$wp_customize->add_setting( 'prime2g_optimize_theme_files', $postMsg_text );
+	$wp_customize->add_control( 'prime2g_optimize_theme_files', array(
+		'label'		=>	__( 'Optimize Theme Files (Advanced)', PRIME2G_TEXTDOM ),
+		'type'		=>	'checkbox',
+		'settings'	=>	'prime2g_optimize_theme_files',
+		'section'	=>	'prime2g_site_performance_section',
+		'active_callback'	=> 'prime2g_a_c_ctrls'
+	) );
+}
 
 }
 

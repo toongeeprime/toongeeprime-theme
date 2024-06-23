@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	ENQUEUE FILES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *	Contents moved to this file being new @since 1.0.49
@@ -18,25 +16,28 @@ $compress_scripts		=	1;
 $concatenate_scripts	=	1;
 define( 'ENFORCE_GZIP', true );
 
+$optimize_files	=	! empty( get_theme_mod( 'prime2g_optimize_theme_files' ) );
 
 global $post;
 $version	=	PRIME2G_VERSION;
 
 #	STYLES
+if ( ! $optimize_files ) {
 if ( prime_child_min_version( '2.3' ) ) {
-	$themeCSS	=	'theme-min.css';
-} else {
-	$themeCSS	=	'theme-old.css';
+	wp_register_style( 'prime2g_css', get_theme_file_uri( '/files/theme-min.css' ), [], $version );
 }
-	wp_register_style( 'prime2g_css', get_theme_file_uri( '/files/' . $themeCSS ), [], $version );
+else {
+	wp_register_style( 'prime2g_css', get_theme_file_uri( '/deprecated/theme-old.css' ), [], $version );
+}
+
     wp_enqueue_style( 'prime2g_css' );
+}
 
 	#	WooCommerce Styles
 	if ( class_exists( 'woocommerce' ) ) {
 		wp_enqueue_style(
-			'prime2g_woocommerce_css',
-			get_theme_file_uri( '/files/prime_woocommerce.css' ),
-			array( 'prime2g_css' ), $version
+			'prime2g_woocommerce_css', get_theme_file_uri( '/files/prime_woocommerce.css' ),
+			[ 'prime2g_css' ], $version
 		);
 
 		//	if not using mini cart: wp_dequeue_script( 'wc-cart-fragments' );
@@ -56,16 +57,17 @@ if ( isset( $post ) && $post->font_url ) {
 
 /**
  *	SCRIPTS
- *
- ** 
+ ***
  *	Theme's local jQuery?
  *	@since 1.0.59
  */
-if ( PRIME2G_ENQ_JQUERY || isset( $post ) && $post->enqueue_jquery === '1' ) {
-wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', true ); # do not async/defer
+if ( PRIME2G_ENQ_JQUERY || isset( $post ) && $post->enqueue_jquery === '1' ) {	# do not async/defer
+wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', true );
 }
 
-	wp_register_script( 'prime2g_js', get_theme_file_uri( '/files/theme-min.js' ), [], $version );
+#	@since 1.0.97
+if ( ! $optimize_files ) {
+	wp_register_script( 'prime2g_js', get_theme_file_uri( '/files/theme-min.js' ), [], $version, false );
 	wp_enqueue_script( 'prime2g_js' );
 
 	wp_register_script(
@@ -76,6 +78,7 @@ wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' 
 		[ 'in_footer' => true, 'strategy' => 'async' ]
 	);
 	wp_enqueue_script( 'prime2g_footer_js' );
+}
 
 /**
  *	ICONS
@@ -86,8 +89,9 @@ $icons	=	prime2g_theme_icons_info();	//	@since 1.0.89
 wp_enqueue_style( PRIME2G_ICONS_HANDLE, $icons->url, [], $icons->version );
 
 
+// Prepare to remove this completely
 if ( ! prime_child_min_version( '2.3' ) ) {
-	wp_enqueue_script( 'prime2g_deprecated_js', get_theme_file_uri( '/files/deprecated.js' ), [], $version );
+	wp_enqueue_script( 'prime2g_deprecated_js', get_theme_file_uri( '/deprecated/deprecated.js' ), [], $version );
 }
 
 
@@ -153,5 +157,4 @@ function prime2g_customizer_preview_enqueues() {
 	);
 }
 /* @since 1.0.50 End */
-
 

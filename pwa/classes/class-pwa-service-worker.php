@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: Register PWA Service Worker
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
@@ -10,104 +8,115 @@
 class Prime2g_PWA_Service_Worker {
 
 	private static $instance;
+	public $same_version;	# @since 1.0.97
 
 	public function __construct() {
 		if ( ! isset( self::$instance ) ) {
 			if ( is_admin() ) return;
-			add_action( 'wp_footer', array( $this, 'register_service_worker' ) );
+			$this->same_version	=	prime2g_app_option( 'worker_version' );
+			add_action( 'wp_footer', [ $this, 'register_service_worker' ] );
 		}
 	return self::$instance;
 	}
 
 
-	public function register_service_worker() {
-	if ( ! isset( self::$instance ) ) {
-		$offline	=	new Prime2g_PWA_File_Url_Manager();
-		$sw_url		=	$offline->get_file_url()[ 'service-worker' ];
+	function register_service_worker() {
+		$urls	=	new Prime2g_PWA_File_Url_Manager;
 
-		echo '<script id="p2g_regServiceWorker">
+		echo '<script id="p2g_regServiceWorker" async>
 		if ( typeof navigator.serviceWorker !== "undefined" ) {
-			navigator.serviceWorker.register( "'. esc_url( $sw_url ) .'" );
+			navigator.serviceWorker.register( "'. esc_url( $urls->get_file_url()[ 'service-worker' ] ) .'" );
 		}
 		</script>';
-	}
-	return self::$instance;
 	}
 
 
 	/**
-	 *	Core Service Worker (Scripts plugged in)
+	 *	Service Worker Content
 	 */
-	public static function content() {
-	$start		=	new self;
-	$sw_plugs	=	function_exists( 'p2g_child_service_worker_scripts' ) ? p2g_child_service_worker_scripts() : '';
+	static function content() {
+	$start	=	new self;
+	$core	=	$start->cached_content();
 
-	return $start->core() . $sw_plugs;
+	if ( ! $start->same_version )
+		prime2g_app_option( [ 'name'=>'worker_version', 'update'=>true ] );
+
+	return $core . apply_filters( 'prime2g_filter_pwa_service_worker', '', $core );
+	}
+
+	private function cached_content() {
+	$core	=	prime2g_app_option( 'service_worker' );
+
+	if ( false === $core || ! $this->same_version ) {
+		prime2g_app_option( [ 'name'=>'service_worker', 'update'=>true, 'value'=>$this->core() ] );
+		$core	=	prime2g_app_option( 'service_worker' );
+	}
+
+	return $core;
+	// return $this->core();	# debugging
 	}
 
 
-	public function get_caching() {
-	$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
-	$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
-	$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );	# String
-	$navPreload	=	get_theme_mod( 'prime2g_use_navigation_preload' ) ? 'true' : 'false';
-	$excludePaths	=	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' );
-	$endPoints	=	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' );
+	function get_caching() {
+	$mods	=	$this->mods();
 
 	if ( is_multisite() ) {
 		switch_to_blog( 1 );
 		if ( get_theme_mod( 'prime2g_route_apps_to_networkhome' ) ) {
-			$strategy	=	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST );
-			$addHome	=	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' );
-			$addToCache	=	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'false' );
-			$navPreload	=	get_theme_mod( 'prime2g_use_navigation_preload' ) ? 'true' : 'false';
-			$excludePaths	=	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' );
-			$endPoints	=	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' );
+			$mods	=	$this->mods();
 		}
 		restore_current_blog();
 	}
 
-	return [ 'strategy' => $strategy, 'addHome' => $addHome, 'addToCache' => $addToCache, 'navPreload' => $navPreload,
-	'excludePaths' => $excludePaths, 'endPoints' => $endPoints ];
+	return (object) [ 'strategy' => $mods->strategy, 'addHome' => $mods->addHome,
+	'addToCache' => $mods->addToCache, 'navPreload' => $mods->navPreload, 'login_slug' => $mods->login_slug,
+	'excludePaths' => $mods->excludePaths, 'endPoints' => $mods->endPoints ];
 	}
 
 
-	public function core() {
-	$fileURLs	=	new Prime2g_PWA_File_Url_Manager();
+	private function mods() {
+	$custom_login_page	=	Prime2gLoginPage::get_instance();
+
+	return (object) [
+		'login_slug'=>	$custom_login_page->get_login_page()->post_name ?: 'login',	# 1.0.97
+		'strategy'	=>	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST ),
+		'addHome'	=>	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' ),
+		'addToCache'=>	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'true' ),	# String
+		'navPreload'=>	get_theme_mod( 'prime2g_use_navigation_preload' ) ? 'true' : 'false',
+		'excludePaths'	=>	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' ),
+		'endPoints'	=>	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' )
+	];
+	}
+
+
+	private function core() {
+	$fileURLs	=	new Prime2g_PWA_File_Url_Manager;
 	$get_url	=	$fileURLs->get_file_url();
-	$icons		=	new Prime2g_PWA_Icons();
+	$images		=	new Prime2g_PWA_Images;
 	$caching	=	$this->get_caching();
-	$strategy	=	$caching[ 'strategy' ];
-	$addHome	=	$caching[ 'addHome' ] ?: '""';
-	$navPreload	=	$caching[ 'navPreload' ];
-	$excludePaths	=	$caching[ 'excludePaths' ] ?: null;
-	$endPoints	=	$caching[ 'endPoints' ] ?: null;
-	$addRequestToCache	=	$caching[ 'addToCache' ];
+	$addHome	=	$caching->addHome ?: '0';
+	$excludePaths=	$caching->excludePaths ?: 'avoidemptyplaceholder';
+	$endPoints	=	$caching->endPoints ?: 'avoidemptyplaceholder';
 	$cacheNames	=	prime2g_pwa_cache_names();
-	$addFileUrls	=	function_exists( 'child_add_to_pwa_precache' ) ? ' + ", " + "' . child_add_to_pwa_precache() . '"' : null;	# CSV
-	$overrideSW_fetch	=	function_exists( 'prime2g_override_service_worker_fetch' ) ? prime2g_override_service_worker_fetch() : 'false';
+	$addFileUrls=	prime2g_add_service_worker_precache_files();
 
 	$js	=
 'const PWACACHE		=	"'. $cacheNames->pwa_core .'";
 const SCRIPTSCACHE	=	"'. $cacheNames->scripts .'";
 const DYNACACHE		=	"'. $cacheNames->dynamic .'";
 const logoURL		=	"'. prime2g_siteLogo( false, true ) .'";
-const iconURL		=	"'. $icons->mainIcon()[ 'src' ] .'";
+const iconURL		=	"'. $images->mainIcon()->src .'";
 const themeFiles	=	"'. $fileURLs->theme_files( 'csv_versioned' ) .'";
-const addHome		=	'. $addHome .';
-const homeStartURL	=	"";
-if ( 0 != addHome ) {
-	const homeStartURL	=	"'. $get_url[ 'home' ] .'" + ", "; // for Concatenation
-}
+const homeStartURL	=	0 === '. $addHome .' ? "" : "'. $get_url[ 'home' ] .'" + ", ";
 const userIsOfflineURL	=	"'. $get_url[ 'offline' ] .'";
 const errorPageURL		=	"'. $get_url[ 'error' ] .'";
 const notCachedPageURL	=	"'. $get_url[ 'notcached' ] .'";
 const filesString		=	homeStartURL + logoURL + ", " + iconURL + ", " + themeFiles +
 ", " + userIsOfflineURL + ", " + errorPageURL + ", " + notCachedPageURL'. $addFileUrls .';
 const PRECACHE_ITEMS	=	filesString.split(", ");
-const addRequestToCache	=	'. $addRequestToCache .';
-const strategy			=	"'. $strategy .'";
-const navPreload		=	'. $navPreload .';
+const addRequestToCache	=	'. $caching->addToCache .';
+const strategy			=	"'. $caching->strategy .'";
+const navPreload		=	'. $caching->navPreload .';
 
 
 /**		HELPERS		**/
@@ -118,15 +127,14 @@ function addCachePermit() {
 function sw_donotcache_items( event ) {
 const urlObj	=	new URL( event.request.url );
 const urlPath	=	urlObj.pathname;
-const excl_paths=	"wp-admin, login, wp-login.php, '. $excludePaths .'";
+const excl_paths=	"wp-admin, '. $caching->login_slug .', wp-login.php, '. $excludePaths .'";
 const exclPaths	=	excl_paths.split(", ");
-const pathNum	=	exclPaths.length;
+const pathsNum	=	exclPaths.length;
 
 var doNot	=	false;
 
-for ( u = 0; u < pathNum; u++ ) {
-	startPath	=	"/" + exclPaths[u];
-	if ( urlPath.startsWith( startPath ) ) { doNot = true; break; }
+for ( u = 0; u < pathsNum; u++ ) {
+	if ( urlPath.startsWith( "/" + exclPaths[u] ) ) { doNot = true; break; }
 }
 
 return doNot;
@@ -134,13 +142,15 @@ return doNot;
 
 function requestFromNetworkOnly( event ) {
 const urlStr	=	event.request.url;
-const excl_ends		=	"login/, wp-login.php, admin-ajax.php, '. $endPoints .'";
+const excl_ends	=	"'. $caching->login_slug .'/, wp-login.php, admin-ajax.php, '. $endPoints .'";
 const exclEnds	=	excl_ends.split(", ");
 const urlNum	=	exclEnds.length;
 
 var toNet	=	false;
 
-for ( u = 0; u < urlNum; u++ ) { if ( urlStr.indexOf( exclEnds[u] ) > -1 ) { toNet = true; break; } }
+for ( u = 0; u < urlNum; u++ ) {
+	if ( urlStr.includes( exclEnds[u] ) ) { toNet = true; break; }
+}
 
 return toNet;
 }
@@ -156,7 +166,6 @@ event.waitUntil(
 ( async ()=>{
 	const cache1	=	await caches.open( PWACACHE );
 	await cache1.addAll( PRECACHE_ITEMS );
-	// await cache1.add( new Request( userIsOfflineURL, { cache:"reload" } ) );
 self.skipWaiting();
 } )()
 );
@@ -194,9 +203,7 @@ self.clients.claim();
  */
 self.addEventListener( "fetch", event => {
 
-if ( false !== '. $overrideSW_fetch .' ) return;	// ?? override code must therefore be added.
-
-var doNotCache	=	sw_donotcache_items( event );
+doNotCache	=	sw_donotcache_items( event );
 
 async function networkFetcher( returnCache ) {
 	try {
@@ -273,7 +280,11 @@ else { return event.respondWith( cacheFetcher() ); }
 } );
 ';
 
-	return $js;
+	return $js . '
+
+//	Extended Service Worker Capabilities
+
+' . apply_filters( 'prime2g_filter_service_worker', '', $js );	# @since 1.0.97
 	}
 
 }
@@ -281,8 +292,10 @@ else { return event.respondWith( cacheFetcher() ); }
 
 
 
+/*
+Use filter for:
+Background Sync, Periodic Background Sync, etc.
 
-/**
 Read more@
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#other-capabilities
 https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/service-workers#push-messages
@@ -290,4 +303,6 @@ const host_names	=	"'.$values->hostNames.'";
 const hostNames		=	host_names.split(", ");
 hostNames.forEach( xclh => { if ( reloaded && urlObj.hostname === xclh ) { serv_Worker.terminate(); } } );
 */
+
+# await cache1.add( new Request( userIsOfflineURL, { cache:"reload" } ) );
 

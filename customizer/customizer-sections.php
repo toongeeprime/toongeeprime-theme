@@ -119,9 +119,21 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 	 *	@since 1.0.55
 	 */
 	$wp_customize->add_section( 'prime2g_theme_pwa_section', array(
-		'title'		=>	__( 'Web App', PRIME2G_TEXTDOM ),
+		'title'		=>	__( 'Web App Settings', PRIME2G_TEXTDOM ),
 		'panel'		=>	'prime2g_customizer_panel',
-		'description'	=>	__( 'Theme\'s Web Application', PRIME2G_TEXTDOM ),
+		'description'	=>	__( 'Theme\'s Web Application settings', PRIME2G_TEXTDOM ),
+		'capability'	=>	'edit_theme_options',
+		'active_callback'	=>	'prime2g_add_theme_pwa'
+	) );
+
+	/**
+	 *	PWA Images
+	 *	@since 1.0.97
+	 */
+	$wp_customize->add_section( 'prime2g_theme_pwa_images_section', array(
+		'title'		=>	__( 'Web App Images', PRIME2G_TEXTDOM ),
+		'panel'		=>	'prime2g_customizer_panel',
+		'description'	=>	__( 'Web App Icon and Screenshots', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	'prime2g_add_theme_pwa'
 	) );

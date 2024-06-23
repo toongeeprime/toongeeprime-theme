@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME DOING AJAX
- *
  *	@package WordPress
  *	Essential formData fields: prime_ajaxnonce, prime_do_ajax: to select what to run
  *	@since ToongeePrime Theme 1.0.49.05
