@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	SHORTCODES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.49
  */
@@ -28,28 +26,24 @@ function prime2g_insert_template_part_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
 'id'		=>	'1',
 'device'	=>	'',
-'hide_in_tags'	=>	'',		//	@since 1.0.90
+'hide_in_tags'	=>	'',	#	@since 1.0.90
 'show_in_tags'	=>	''
 ], $atts );
 extract( $atts );
 
 $show_hide	=	[];
-if ( ! empty( $hide_in_tags ) ) {
-	$hide_in_tags	=	str_replace( ' ', '', $hide_in_tags );
-	$tags	=	explode( ',', $hide_in_tags );
-	foreach ( $tags as $tag ) {
-		$show_hide[]	=	function_exists( $tag ) && true === $tag();
-	}
-	if ( in_array( true, $show_hide ) ) return;
-}
+$hide_part	=	! empty( $hide_in_tags );
+$show_part	=	! empty( $show_in_tags );
 
-if ( ! empty( $show_in_tags ) ) {
-	$show_in_tags	=	str_replace( ' ', '', $show_in_tags );
-	$tags	=	explode( ',', $show_in_tags );
+if ( $hide_part || $show_part ) {
+	$sh_params	=	$hide_part ? $hide_in_tags : $show_in_tags;
+	$hiding	=	str_replace( ' ', '', $sh_params );
+	$tags	=	explode( ',', $hiding );
 	foreach ( $tags as $tag ) {
 		$show_hide[]	=	function_exists( $tag ) && true === $tag();
 	}
-	if ( ! in_array( true, $show_hide ) ) return;
+	if ( $hide_part && in_array( true, $show_hide ) ) return;
+	if ( $show_part && ! in_array( true, $show_hide ) ) return;
 }
 
 $isMobile	=	wp_is_mobile();
@@ -91,12 +85,12 @@ function prime2g_searchform_shortcode( $atts ) {
 $atts	=	shortcode_atts( [
 	'placeholder'=>	'Keywords',
 	'required'	=>	'yes',
-	'buttontext'=>	'Go',		//*** USE SINGLE QUOTE IN HTML
+	'buttontext'=>	'Go',		#*** Escape! USE SINGLE QUOTE IN HTML
 	'label'		=>	'Search here',
 	'echo'		=>	'',
-	'id'		=>	'',	// @since 1.0.78
+	'id'		=>	'',	# @since 1.0.78
 	'livesearch'=>	'',
-	'post_type'	=>	''	// @since 1.0.79
+	'post_type'	=>	''	# @since 1.0.79
 ], $atts );
 
 return prime2g_wp_block_search_form( $atts );
@@ -153,14 +147,14 @@ $atts	=	shortcode_atts( [
 ], $atts );
 extract( $atts );
 
-$desc		=	( $description === 'yes' ) ? true : false;
-$descOnly	=	( $descriptiononly === 'yes' ) ? true : false;
+$desc		=	$description === 'yes' ? true : false;
+$descOnly	=	$descriptiononly === 'yes' ? true : false;
 $el_start	=	$innerelement ? "<{$innerelement}>" : "";
 $el_end		=	$innerelement ? "</{$innerelement}>" : "";
 $name		=	get_bloginfo( 'name' );
 
 $title	=	"<div class=\"{$class}\">";
-$title	.=	( ! $descOnly ) ? "<h1 class=\"{$h1class}\" title=\"{$name}\">{$el_start}{$name}{$el_end}</h1>" : '';
+$title	.=	$descOnly ? '' : "<h1 class=\"{$h1class}\" title=\"{$name}\">{$el_start}{$name}{$el_end}</h1>";
 $title	.=	( $descOnly || $desc ) ? '<p id="site_description">'. get_bloginfo( 'description' ) .'</p>' : '';
 $title	.=	"</div>";
 
@@ -190,13 +184,12 @@ $menu_array	=	wp_get_nav_menu_items( $menu );
 
 if ( $menu_array ) {
 foreach ( $menu_array as $item ) {
-	$title_attrs	=	$title_attrs ? ' title="'. $item->title .'"' : '';
+	$title_attrs=	$title_attrs ? ' title="'. $item->title .'"' : '';
 	$items[]	=	'<li><a href="'. $item->url .'"'. $title_attrs .'>'. $item->title .'</a></li>';
 }
 }
 
-$none	=	current_user_can( 'edit_theme_options' ) ? 'No Menu Item Found' : '';
-
+$none	=	current_user_can( 'edit_theme_options' ) ? 'Menu Item Not Found' : '';
 $result	=	$items ? $items : $none;
 
 if ( is_array( $result ) ) {
@@ -288,7 +281,4 @@ add_action( 'wp_footer', 'prime2g_custom_login_js' );
 
 return prime2g_login_form( $atts );
 }
-
-
-
 

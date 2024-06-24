@@ -230,14 +230,16 @@ if ( ! in_array( $post->ID, prime2g_customizer_pages_ids() ) ) { ?>
 	Disable Content Auto P?</label>
 </div>
 
+<?php
+/*
 <!-- @since 1.0.70 -->
 <div class="meta-options prime2g_field select">
 	<label for="enqueue_jquery">
 	<input type="checkbox" id="enqueue_jquery" class="prime2g_input" name="enqueue_jquery" value="<?php echo $post->enqueue_jquery; ?>" <?php echo '1' === $post->enqueue_jquery ? ' checked="checked"' : ''; ?> />
 	Enqueue jQuery?</label>
 </div>
+*/
 
-<?php
 /**
  *	@since 1.0.55
  */

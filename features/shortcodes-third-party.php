@@ -1,15 +1,12 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	SHORTCODES FOR THIRD-PARTY FEATURES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */
 
 /**
  *	LOTTIE FILES
- *
  *	Though oEmbeds can simply be used, this is for more control in layouts
  */
 add_shortcode( 'prime2g_lottie', 'prime2g_lottie_player' );
@@ -33,7 +30,6 @@ $atts	=	shortcode_atts( [
 
 extract( $atts );
 
-
 $loop		=	$loop === 'yes' ? ' loop' : '';
 $hover		=	$playonhover === 'yes' ? ' hover' : '';
 $autoplay	=	$autoplay === 'yes' ? ' autoplay' : '';
@@ -52,13 +48,11 @@ echo '<script defer src="https://unpkg.com/@dotlottie/player-component@latest/di
 define( 'P2G_LOTTIESCRIPT', true );
 }
 
-
 return '<div class="lottie-div">
 <dotlottie-player'. $id .' src="'. $source .'" background="'. $background .'" speed="'. $speed .'" class="lottie-player '. $class .'" 
 style="width:'. $width .'; height:'. $height .'" direction="'. $direction .'" 
 playMode="'. $playmode .'"'. $loop . $hover . $autoplay . $controls . $disableSD .'></dotlottie-player>
 </div>';
-
 }
 
 
@@ -95,10 +89,11 @@ $embed	.=	'</div>
 
 }
 else {
-	$embed	=	'<strong><p>NO ADDRESS FOR MAP</p></strong>';
+$embed	=	'<strong><p>NO ADDRESS FOR MAP</p></strong>';
 }
 
 return $embed;
 }
+
 
 

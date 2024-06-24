@@ -3,7 +3,7 @@ Donate link: https://akawey.com/donate/
 Tags: form, post, frontend, add, edit
 Requires at least: 6.3
 Tested up to: 6.5
-Stable tag: 1.0.96
+Stable tag: 1.0.97
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,15 +18,14 @@ A WordPress theme with options for customization, design and development flexibi
 
 * Read more @ https://dev.akawey.com/wp/themes/toongeeprime-theme/readme.txt
 
-= 1.0.96 =
-* Deleted file: custom-admin-menu-actions.php
-* Refactored dark theme JS code
-* Changed function name from prime2g_is_plain_page_template to prime2g_no_widgets_template for clarity
-* Templates: Added page-content-only.php, edited empty-page.php
-* More template control Constants... NO->HEADER/FOOTER/SIDEBAR/WIDGETS
-* Function: prime2g_calc_query_offset()
-* Reviewed prime2g_ajax_head()
-* Constant: PRIME2G_AJAXING
-* Filter: prime2g_filter_paginated_archive_title @ prime2g_title_header()
-* @Customizer: Bypass shutdown
+= 1.0.97 =
+* MAJOR PWA UPDATE
+* Class Prime2g_PWA_Icons changed to Prime2g_PWA_Images
+* PWA Manifest: launch_handler, categories, screenshots
+* Filters: Several new ones across PWA and other functions
+* Functions: prime2g_app_option, prime2g_caching, prime2g_add_service_worker_precache_files
+* Customizer: prime2g_theme_pwa_images_section & prime2g_customizer_theme_pwa_images
+* Customizer option: prime2g_optimize_theme_files
+* Removed the need for PRIME2G_AJAXING : registered packaged jQuery @ footer
+* Transparent backgrounds CCS variables
 

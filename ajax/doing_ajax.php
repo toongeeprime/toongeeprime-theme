@@ -11,7 +11,7 @@ add_action( 'wp_ajax_prime2g_doing_ajax_nopriv', 'prime2g_doing_ajax_nopriv' );
 add_action( 'wp_ajax_nopriv_prime2g_doing_ajax_nopriv', 'prime2g_doing_ajax_nopriv' );
 
 function prime2g_doing_ajax() {
-if ( 'POST' != $_SERVER[ 'REQUEST_METHOD' ] || empty( $_POST[ 'action' ] ) ) return;
+if ( 'POST' !== $_SERVER[ 'REQUEST_METHOD' ] || empty( $_POST[ 'action' ] ) ) return;
 prime2g_verify_nonce( 'prime_nonce_action' );
 
 $doAjax	=	$_POST[ 'prime_do_ajax' ];
@@ -27,7 +27,7 @@ wp_die();
 
 
 function prime2g_doing_ajax_nopriv() {
-if ( 'POST' != $_SERVER[ 'REQUEST_METHOD' ] || empty( $_POST[ 'action' ] ) ) return;
+if ( 'POST' !== $_SERVER[ 'REQUEST_METHOD' ] || empty( $_POST[ 'action' ] ) ) return;
 prime2g_verify_nonce( 'prime_nonce_action' );
 
 $doAjax	=	$_POST[ 'prime_do_ajax' ];
@@ -64,6 +64,7 @@ $searchQuery	=	new WP_Query( array(
 
 $output		=	'';
 $nothing	=	'<p class="centered">'. __( 'Nothing found.<br>Try the search button or "Enter".', PRIME2G_TEXTDOM ) .'</p>';
+$nothing	=	apply_filters( 'prime2g_filter_livesearch_nothingfound', $nothing, $nothing );
 
 if ( $searchQuery->have_posts() ) {
 	while ( $searchQuery->have_posts() ) {
@@ -85,7 +86,6 @@ wp_cache_set( $cache_name, $response, PRIME2G_POSTSCACHE, HOUR_IN_SECONDS + 17 )
 }
 
 }
-
 
 
 wp_send_json( $response );

@@ -365,8 +365,6 @@ add_action( 'wp_footer', function() use( $options ) {
 if ( defined( 'P2GAJAXSEARCHJS' ) ) return;
 define( 'P2GAJAXSEARCHJS', true );
 
-if ( ! defined( 'PRIME2G_ENQ_JQUERY' ) ) define( 'PRIME2G_ENQ_JQUERY', true );
-
 $id			=	'';
 $post_type	=	'';
 $template	=	'';	//	@since 1.0.88

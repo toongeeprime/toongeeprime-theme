@@ -1,12 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	HELPER FUNCTIONS
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
-
 /**
  *	To remove main sidebar from a template
  */
@@ -32,13 +29,12 @@ function prime2g_is_post_author( $post, $userID = null ) {
 }
 
 /**
- *	Use prime2g_remove_title() to remove the title from a template
+ *	To remove the title from a template
  */
 function prime2g_remove_title() { function define_2gRMVTitle(){} }
 
 /**
- *	Use prime2g_is_plain_page() to declare a template as being plain.
- *	Thus, can be used to remove select features, widgets, etc.
+ *	Declare in template
  */
 function prime2g_is_plain_page() { function define_2gPlainPage(){} }
 
@@ -71,6 +67,7 @@ function prime2g_add_theme_pwa() { return ( defined( 'PRIME2G_ADD_PWA' ) && PRIM
 
 #	Preferred @ front-end
 function prime2g_activate_theme_pwa() {
+	if ( is_admin() ) return false;
 	$activate	=	prime2g_add_theme_pwa();
 	if ( function_exists( 'prime2g_child_pwa_activator' ) ) return $activate;
 	return get_theme_mod( 'prime2g_use_theme_pwa', 0 ) && $activate;
@@ -224,7 +221,7 @@ function p2g_str_contains( string $string, $contains ) {
 		}
 	return in_array( true, $result );
 	}
-return 'Needle type is neither string nor array';
+return 'Haystack type is neither string nor array';
 }
 
 

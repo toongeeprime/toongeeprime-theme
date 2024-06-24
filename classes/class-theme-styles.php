@@ -167,6 +167,12 @@ class ToongeePrime_Styles {
 	--headings-font:'{$headGFont}';
 	--post-titlesize:". $cache->post_titleSize ."rem;
 	--arch-titlesize:". $cache->arch_titleSize ."rem;
+	--transparent-light1:#ffffffcc;
+	--transparent-light2:#ffffffaa;
+	--transparent-light3:#ffffff55;
+	--transparent-dark1:#000000cc;
+	--transparent-dark2:#000000aa;
+	--transparent-dark3:#00000055;
 	";
 	}
 

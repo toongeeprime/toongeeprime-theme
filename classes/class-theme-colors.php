@@ -71,6 +71,12 @@ class ToongeePrime_Colors extends ToongeePrime_Styles {
 	--footer-background:#000;
 	--sidebar-background:#090909;
 	--sidebar-text:#efefef;
+	--transparent-light1:#000000cc;
+	--transparent-light2:#000000aa;
+	--transparent-light3:#00000055;
+	--transparent-dark1:#ffffffcc;
+	--transparent-dark2:#ffffffaa;
+	--transparent-dark3:#ffffff55;
 ";
 	}
 	return "--content-text:". $cache->content .";

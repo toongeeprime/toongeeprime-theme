@@ -57,13 +57,15 @@ if ( isset( $post ) && $post->font_url ) {
 
 /**
  *	SCRIPTS
+ *
  ***
  *	Theme's local jQuery?
  *	@since 1.0.59
  */
-if ( PRIME2G_ENQ_JQUERY || isset( $post ) && $post->enqueue_jquery === '1' ) {	# do not async/defer
-wp_enqueue_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', true );
-}
+# registration & unconditional @since 1.0.97, mainly for ajax
+# Let dependants async/defer
+wp_register_script( 'prime2g_jQuery', get_theme_file_uri( '/files/jquery.min.js' ), [], '3.7.1', true );
+wp_enqueue_script( 'prime2g_jQuery' );
 
 #	@since 1.0.97
 if ( ! $optimize_files ) {

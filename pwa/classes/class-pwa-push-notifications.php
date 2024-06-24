@@ -1,10 +1,8 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: PWA Push Notifications
- *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.55
+ *	@since ToongeePrime Theme 1.0.97
  */
 
 class Prime2g_Push_Notifications {

@@ -52,8 +52,8 @@ class Prime2g_PWA_Service_Worker {
 		$core	=	prime2g_app_option( 'service_worker' );
 	}
 
-	return $core;
-	// return $this->core();	# debugging
+	// return $core;
+	return $this->core();	# debugging
 	}
 
 
@@ -75,16 +75,18 @@ class Prime2g_PWA_Service_Worker {
 
 
 	private function mods() {
-	$custom_login_page	=	Prime2gLoginPage::get_instance();
+	$custom_login_page	=	Prime2gLoginPage::get_instance()->get_login_page();
+	$excludes	=	get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' );
+	$endpoints	=	get_theme_mod( 'prime2g_pwapp_endpoints_to_request' );
 
 	return (object) [
-		'login_slug'=>	$custom_login_page->get_login_page()->post_name ?: 'login',	# 1.0.97
+		'login_slug'=>	$custom_login_page ? $custom_login_page->post_name : 'login',	# 1.0.97
 		'strategy'	=>	get_theme_mod( 'prime2g_pwa_cache_strategy', PWA_NETWORKFIRST ),
 		'addHome'	=>	get_theme_mod( 'prime2g_add_homepage_to_cache', '0' ),
 		'addToCache'=>	get_theme_mod( 'prime2g_add_request_to_pwa_cache', 'true' ),	# String
 		'navPreload'=>	get_theme_mod( 'prime2g_use_navigation_preload' ) ? 'true' : 'false',
-		'excludePaths'	=>	defined( 'PWA_EXCLUDE_PATHS' ) ? PWA_EXCLUDE_PATHS : get_theme_mod( 'prime2g_pwapp_cache_exclude_paths' ),
-		'endPoints'	=>	defined( 'PWA_REQUEST_ENDPOINTS' ) ? PWA_REQUEST_ENDPOINTS : get_theme_mod( 'prime2g_pwapp_endpoints_to_request' )
+		'excludePaths'	=>	apply_filters( 'prime2g_filter_pwa_sw_cache_exclude_paths', '', $excludes ),
+		'endPoints'	=>	apply_filters( 'prime2g_filter_pwa_sw_endpoints_to_request', '', $endpoints )
 	];
 	}
 
@@ -142,7 +144,7 @@ return doNot;
 
 function requestFromNetworkOnly( event ) {
 const urlStr	=	event.request.url;
-const excl_ends	=	"'. $caching->login_slug .'/, wp-login.php, admin-ajax.php, '. $endPoints .'";
+const excl_ends	=	"'. $caching->login_slug .'/, wp-admin, wp-login.php, admin-ajax.php, '. $endPoints .'";
 const exclEnds	=	excl_ends.split(", ");
 const urlNum	=	exclEnds.length;
 
@@ -282,7 +284,7 @@ else { return event.respondWith( cacheFetcher() ); }
 
 	return $js . '
 
-//	Extended Service Worker Capabilities
+//	Extending Service Worker
 
 ' . apply_filters( 'prime2g_filter_service_worker', '', $js );	# @since 1.0.97
 	}
@@ -305,4 +307,5 @@ hostNames.forEach( xclh => { if ( reloaded && urlObj.hostname === xclh ) { serv_
 */
 
 # await cache1.add( new Request( userIsOfflineURL, { cache:"reload" } ) );
+
 

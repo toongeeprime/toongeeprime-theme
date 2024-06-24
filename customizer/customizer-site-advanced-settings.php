@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Customizer Advanced Options & Settings
  *	@package WordPress
@@ -79,5 +78,4 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 
 }
 }
-
 

@@ -149,6 +149,20 @@ if ( isset( $manifest[ 'splash_icon' ] ) && ! empty( $manifest[ 'splash_icon' ] 
 
 
 /*
+READ: https://web.dev/learn/pwa/detection/#detecting_related_installed_apps
+https://web.dev/learn/pwa/detection/#prefer_a_related_app
+{
+...
+"related_applications:" [
+{
+"platform": "play",
+"url": "https://play.google.com/..."
+}
+],
+"prefer_related_applications": true
+}
+
+
 function manifest_rule() {
 	global $wp;
 	$file	=	Prime2g_PWA_File_Url_Manager::manifest_url( 'file' );

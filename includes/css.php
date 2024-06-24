@@ -554,8 +554,8 @@ define( 'PRIME_AJX_SEARCHCSS', true );
 
 return	'<style id="prime_livesearchCSS">
 .wp-block-search__inside-wrapper{position:relative;z-index:99991;}
-.liveSearchBox{position:absolute;left:0;right:0;background:var(--content-background);z-index:99992;border:5px solid #f8f8f8;
-border-radius:5px;padding:20px;box-shadow:0 5px 15px 5px rgba(0,0,0,0.2);}
+.liveSearchBox{position:absolute;left:0;right:0;background:var(--content-background);color:var(--content-text);
+z-index:99992;border:5px solid #f8f8f8;border-radius:5px;padding:20px;box-shadow:0 5px 15px 5px rgba(0,0,0,0.2);}
 .liveSearchBox .slimscrollbar{max-height:300px;margin-right:-10px;margin-left:-10px;}
 .liveSearchBox article{display:grid;grid-template-columns:60px 1fr;gap:10px;margin-bottom:0;}
 .liveSearchResults{display:grid;gap:10px;}
