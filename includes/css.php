@@ -299,6 +299,7 @@ margin:auto;max-width:var(--site-width);	/* Don\'t use width:100% */
 .flex{display:flex;flex-wrap:wrap;}
 .flexnw{display:flex;}
 .hidden{opacity:0;visibility:hidden;z-index:0;}
+.ohidden{overflow:hidden;}
 .pointer{cursor:pointer;}
 .breakall{word-break:break-all;}
 .white, .white a{color:#fff;}

@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 
-/*
+/**** INTERRUPTS THEME UPDATE
 #	Seems to increase initial server response time ?? TEST AGAIN
 if ( ! is_admin() && ! ini_get( 'zlib.output_compression' ) ) {
 #	Compress HTML webpage

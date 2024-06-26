@@ -63,17 +63,17 @@ const accords	=	p2getAll( '.p2g_accordion' ),
 	closeOthers	=	'<?php echo $closeothers; ?>';
 
 accToggs.forEach( tog =>{
-	tog.onclick	=	()=>{
-		parent	=	tog.closest( '.p2g_accordion' );
-		if ( closeOthers === 'yes' ) {
-			if ( ! parent.classList.contains( 'on' ) ) {
-			accs	=	parent.closest( '.prime2g_accordion_wrap' ).querySelectorAll( '.p2g_accordion' );
-			accs.forEach( acc => { acc.classList.remove( 'on' ); } );
-			parent.classList.add( 'on' );
-			return; }
-		}
-		parent.classList.toggle( 'on' );
+tog.onclick	=	()=>{
+	parent	=	tog.closest( '.p2g_accordion' );
+	if ( closeOthers === 'yes' ) {
+		if ( ! parent.classList.contains( 'on' ) ) {
+		accs	=	parent.closest( '.prime2g_accordion_wrap' ).querySelectorAll( '.p2g_accordion' );
+		accs.forEach( acc => { acc.classList.remove( 'on' ); } );
+		parent.classList.add( 'on' );
+		return; }
 	}
+	parent.classList.toggle( 'on' );
+}
 } );
 </script>
 <?php

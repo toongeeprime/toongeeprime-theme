@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	MAIN THEME SETUP
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -39,9 +37,7 @@ function toongeeprime_theme_setup() {
 
 	$style	=	ToongeePrime_Styles::mods_cache();
 
-		/**
-		 *	@since 1.0.50
-		 */
+		#	@since 1.0.50
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
 		/**
@@ -55,9 +51,7 @@ function toongeeprime_theme_setup() {
 		#	Add default posts and comments RSS feed links to head
 		add_theme_support( 'automatic-feed-links' );
 
-		/**
-		 *	Custom background
-		 */
+		#	Custom background
 		add_theme_support( 'custom-background',
 		[
 			'default-image'			=>	'',
@@ -71,9 +65,7 @@ function toongeeprime_theme_setup() {
 		]
 		);
 
-		/**
-		 *	Post-formats support
-		 */
+		#	Post-formats support
 		add_theme_support( 'post-formats',
 			[ 'link', 'aside', 'gallery', 'image', 'quote', 'status', 'video', 'audio', 'chat' ]
 		);
@@ -95,12 +87,10 @@ function toongeeprime_theme_setup() {
 		#	Support full and wide align images
 		add_theme_support( 'align-wide' );
 
-		/**
-		 *	'editor-styles' @since 1.0.55
-		 */
+		#	'editor-styles' @since 1.0.55
 		add_theme_support( 'editor-styles' );
 		add_editor_style( get_theme_file_uri( '/files/editor.css' ) );	#	1.0.70
-		add_editor_style( get_theme_file_uri( '/files/theme.css' ) );
+		add_editor_style( get_theme_file_uri( '/files/theme-min.css' ) );
 
 		#	Add custom editor font sizes
 		add_theme_support( 'editor-font-sizes',
@@ -289,9 +279,7 @@ function toongeeprime_theme_setup() {
 		);
 
 
-		/**
-		 *	WooCommerce Support
-		 */
+		#	WooCommerce Support
 		add_theme_support( 'woocommerce',
 		array(
 			'thumbnail_image_width'	=>	250,
@@ -328,5 +316,4 @@ function toongeeprime_theme_setup() {
 		// add_theme_support( 'block-template-parts' );
 }
 }
-
 
