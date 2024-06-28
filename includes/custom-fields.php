@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	GENERAL CUSTOM FIELDS
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -40,7 +38,6 @@ function prime2g_pageJS() {
 $script	=	post_custom( 'prime_page_js' );
 if ( $script ) { echo '<script id="prime2g_pageJS">'. $script .'</script>'; }
 }
-
 
 
 
@@ -108,7 +105,6 @@ foreach( $checkboxes as $field ) {
 
 }
 }
-
 
 
 
@@ -266,13 +262,9 @@ $nav_menus	=	get_registered_nav_menus(); ?>
 
 
 
-
-
-
 /**
  *	FOR THEME'S TEMPLATE PARTS
  *	Add data about post in this box
- *
  *	@since 1.0.50
  */
 add_action( 'add_meta_boxes', 'prime2g_postdata_metaboxes' );
@@ -312,7 +304,7 @@ Prime2gJSBits::copy_to_clipboard(true);
 
 /**
  *	SETTINGS
- *	cache control, ++
+ *	cache control, ++?
  *	@since 1.0.58
  */
 add_action( 'add_meta_boxes', 'prime2g_mBox_for_settings' );
@@ -348,11 +340,7 @@ $pType_name	=	$pType_obj->labels->singular_name;
 
 
 
-
-
-/**
- *	@since 1.0.60
- */
+/*	@since 1.0.60	*/
 add_action( 'add_meta_boxes', 'prime2g_theme_extras_fieldset' );
 if ( ! function_exists( 'prime2g_theme_extras_fieldset' ) ) {
 function prime2g_theme_extras_fieldset() {

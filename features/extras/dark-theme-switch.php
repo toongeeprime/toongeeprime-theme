@@ -1,19 +1,26 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	DARK THEME SWITCHER
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.49/edited @1.0.96
  */
 
-if ( ! function_exists( 'prime2g_dark_theme_switch' ) ) {
+if ( !function_exists( 'prime2g_dark_theme_switch' ) ) {
 
 function prime2g_dark_theme_switch() {
-
 if ( in_array( ToongeePrime_Styles::mods_cache()->dt_switch, [ 'on', 'on_dbody' ] ) ) {
-//	CSS
-add_action( 'wp_head', function() {
+if ( defined( 'PRIMEDTSwitch' ) ) return;
+define( 'PRIMEDTSwitch', true );
+
+add_action( 'wp_head', 'prime2g_dt_headCSS' );
+add_action( 'wp_footer', 'prime2g_dt_footerJS' );
+}
+}
+
+
+
+#	CSS
+function prime2g_dt_headCSS() {
 echo	'<style id="dThemeSwitchCSS">
 #prime2g_dt_switch{position:fixed;bottom:0;right:0;z-index:+99999;}
 #prime2g_dt_switch .bi::before{place-items:center;width:30px;height:30px;border-radius:30px;margin:1rem;
@@ -26,11 +33,11 @@ background:var(--content-text);color:var(--content-background);display:grid;bord
 body.has_pwa:not(.prompt_hidden) #prime2g_dt_switch{bottom:75px;}
 }
 </style>';
-} );
+}
 
 
-//	JS
-add_action( 'wp_footer', function() {
+#	JS
+function prime2g_dt_footerJS() {
 $id		=	( is_multisite() && ! prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' )
  && get_current_blog_id() !== 1 ) ? get_current_blog_id() : '';
 
@@ -97,11 +104,7 @@ p2getAll( "img.custom-logo" ).forEach( logo=>{
 </div>';
 
 echo $switch;
-} );
 }
-
-}
-prime2g_dark_theme_switch();
 
 }
 

@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CUSTOM TAXONOMIES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.50
  *	https://developer.wordpress.org/reference/functions/register_taxonomy/
@@ -11,7 +9,6 @@
 if ( ! function_exists( 'prime2g_register_custom_taxonomies' ) ) {
 
 add_action( 'init', 'prime2g_register_custom_taxonomies', 1 );
-
 function prime2g_register_custom_taxonomies() {
 # 1.0.74: condition is now only prime2g_use_extras()
 if ( prime2g_use_extras() ) {
@@ -76,9 +73,7 @@ $brand_args	=	array(
 
 register_taxonomy( 'brand', prime_post_types_group()->has_brand, $brand_args );
 }
-
 }
 
 }
-
 

@@ -1,7 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	CUSTOM POST TYPES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.50
  *	https://developer.wordpress.org/reference/functions/register_post_type/
@@ -10,7 +9,6 @@
 if ( ! function_exists( 'prime2g_register_custom_post_types' ) ) {
 
 add_action( 'init', 'prime2g_register_custom_post_types', 0 );
-
 function prime2g_register_custom_post_types() {
 
 # 1.0.74: condition is now only prime2g_use_extras()
@@ -26,12 +24,12 @@ $labels	=	array(
 	'all_items'			=>	__( 'Theme Template Parts', PRIME2G_TEXTDOM ),
 	'view_item'			=>	__( 'View Template Part', PRIME2G_TEXTDOM ),
 	'add_new_item'		=>	__( 'Add New Template Part', PRIME2G_TEXTDOM ),
-	'add_new'			=>	_x( 'Add New', 'prime_template_parts', PRIME2G_TEXTDOM ),
+	'add_new'			=>	_x( 'Add New Part', 'prime_template_parts', PRIME2G_TEXTDOM ),
 	'edit_item'			=>	__( 'Edit Template Part', PRIME2G_TEXTDOM ),
 	'update_item'		=>	__( 'Update Template Part', PRIME2G_TEXTDOM ),
 	'search_items'		=>	__( 'Search Template Parts', PRIME2G_TEXTDOM ),
 	'not_found'			=>	__( 'No Template Part Found', PRIME2G_TEXTDOM ),
-	'not_found_in_trash'=>	__( 'No Template Parts in Trash', PRIME2G_TEXTDOM ),
+	'not_found_in_trash'=>	__( 'No Template Parts in Trash', PRIME2G_TEXTDOM )
 );
 
 $args	=	array(
@@ -62,12 +60,11 @@ $args	=	array(
 		'feeds'		=>	false,
 		'with_front'=>	true
 	),
-	'insert_into_item'		=>	_x( 'Insert into this Template Part', 'prime_template_parts', PRIME2G_TEXTDOM ),
+	'insert_into_item'		=>	_x( 'Insert into this Template Part', 'prime_template_parts', PRIME2G_TEXTDOM )
 );
 
 register_post_type( 'prime_template_parts', $args );
 }
-
 }
 
 }

@@ -52,8 +52,8 @@ class Prime2g_PWA_Service_Worker {
 		$core	=	prime2g_app_option( 'service_worker' );
 	}
 
-	// return $core;
-	return $this->core();	# debugging
+	return $core;
+	#	return $this->core();	# debugging
 	}
 
 

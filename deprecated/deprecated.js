@@ -1,8 +1,7 @@
 /**
  *	ToongeePrime Theme JS Deprecated code
- *
  *	@package WordPress
- *	@since ToongeePrime Theme 1.0.57
+ *	@since ToongeePrime Theme 1.0.57 ::prepare file removal @ 1.1.00
  */
 // Poor function naming
 function prime2gElems( elems, clss = 'prime' ) {

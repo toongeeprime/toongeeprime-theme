@@ -2,7 +2,6 @@
 /**
  *	CLASS: CUSTOM LOGIN PAGE
  *	Forked: https://github.com/wp-plugins/wps-hide-login/blob/master/wps-hide-login.php
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.73
  *
@@ -10,16 +9,10 @@
  */
 
 if ( ! class_exists( 'Prime2gLoginPage' ) ) {
-
 class Prime2gLoginPage {
 
 	private $wp_login_php;
-	/**
-	 *	Instance of this class
-	 *	@var object
-	 */
-	protected static $instance	=	null;
-
+	private static $instance;
 
 	private function use_trailing_slashes() { return ( '/' === substr( get_option( 'permalink_structure' ), -1, 1 ) ); }
 
@@ -248,7 +241,7 @@ class Prime2gLoginPage {
 	$user_login	=	$user_data->user_login;
 	$reset_link	=	network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' );
 	$reset_link	=	$this->filter_wp_login_php( $reset_link );
-	// network_site_url()
+	#	network_site_url()
 
 	$msg = __( 'A password reset for the following account has been requested at ' ) . get_bloginfo( 'name' ) . '...' . "\r\n\r\n";
 	$msg .= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
@@ -260,7 +253,7 @@ class Prime2gLoginPage {
 	}
 
 }
-
 }
+
 
 

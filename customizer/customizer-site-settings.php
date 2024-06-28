@@ -169,7 +169,7 @@ $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize
 	 */
 	$wp_customize->add_setting( 'prime2g_site_is_private', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_site_is_private', array(
-		'label'		=>	__( 'Set this Site as Private', PRIME2G_TEXTDOM ),
+		'label'		=>	__( 'Set this Site as Private/Member Based', PRIME2G_TEXTDOM ),
 		'type'		=>	'checkbox',
 		'settings'	=>	'prime2g_site_is_private',
 		'section'	=>	'prime2g_site_settings_section',

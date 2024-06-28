@@ -75,7 +75,7 @@ function prime2g_activate_theme_pwa() {
 
 /**
  *	Control Design from Network home on multisite installs?
- *	@since 1.0.55, updated with prime2g_constant_is_true() @since 1.0.57
+ *	@since 1.0.55
  */
 function prime2g_design_by_network_home() {
 	return prime2g_constant_is_true( 'PRIME2G_DESIGN_BY_NETWORK_HOME' );

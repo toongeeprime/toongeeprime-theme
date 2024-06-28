@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	RUN THEME
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *	File renamed from files-loader.php @since 1.0.60
@@ -21,7 +19,6 @@ require_once 'smtp.php';
  */
 $directories	=	[ 'classes', 'includes', 'customizer', 'plugins', 'ajax', 'features', 'login', 'pwa', 'deprecated' ];
 foreach( $directories as $dir ) {
-
 	$folder	=	PRIME2G_THEME . $dir . '/';
 	$files	=	scandir( $folder );
 	foreach( $files as $file ) {

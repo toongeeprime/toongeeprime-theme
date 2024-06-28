@@ -269,7 +269,7 @@ $atts	=	shortcode_atts( [
 'password_label'=>	'Password',
 'button_text'=>	'Log in',
 'text_above'=>	'<p class="loginmsg">Log into your account.</p>',
-'text_below'=>	'<p class="signupmsg">Don\'t have an account? <a title="Register your account" href="'. get_home_url() .'/login/">Sign up here</a>.</p>'
+'text_below'=>	'<p class="signupmsg">Don\'t have an account? <a title="Register your account" href="'. wp_registration_url() .'">Sign up here</a>.</p>'
 ],
 $atts );
 

@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
- *	DEPRECATED FUNCTIONS
- *
+ *	DEPRECATED FUNCTIONS ::Prepare file removal @1.1.00
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.43
  */

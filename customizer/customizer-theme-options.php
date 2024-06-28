@@ -9,7 +9,7 @@
 if ( ! function_exists( 'prime2g_customizer_theme_options' ) ) {
 function prime2g_customizer_theme_options( $wp_customize ) {
 
-$styleHere	=	! is_multisite() || prime2g_designing_at_networkhome();
+$styleHere	=	! is_multisite() || ! prime2g_designing_at_networkhome();
 $theStyles	=	new ToongeePrime_Styles();
 $simple_text=	[ 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field' ];
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];

@@ -201,7 +201,7 @@ echo $js;
 
 /**
  *	@since 1.0.73
- *	Password Toggler for custom login form
+ *	Password View Toggler for custom login form
  */
 if ( ! function_exists( 'prime2g_view_password_toggler' ) ) {
 function prime2g_view_password_toggler() {
@@ -215,7 +215,7 @@ let loginForm	=	p2getEl( "#custom_login_page_form" ),
 userName.setAttribute( "required", true );
 passWd.setAttribute( "required", true );
 
-// Password view toggle
+//	Password view toggle
 let formHasPW	=	p2getAll( ".form_has_pw_field form" );
 if ( formHasPW ) {
 pwFormNum	=	formHasPW.length;
@@ -386,7 +386,7 @@ p2getAll( ".close_lsearch" ).forEach( c => {
 var counter	=	[],
 	input_time	=	0;
 
-/***
+/*** DO NOT Auto-off
 tForm'. $id .'.addEventListener( "mouseleave", ()=>{
 if ( tSBox'. $id .'.classList.contains( "del" ) ) return;
 setTimeout( ()=>{
@@ -405,7 +405,7 @@ function prime_runAjaxSearch( e ) {
  *	" " === spacebar
  */
 if ( e.type === "input" ) {
-	// if ( [ " " ].includes( e.data ) ) return;
+	if ( [ " " ].includes( e.data ) ) return;
 }
 else {
 	if ( [ "Tab", "CapsLock", "Shift", "Control", "Alt", "ArrowUp", "ArrowDown",
