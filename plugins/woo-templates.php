@@ -1,15 +1,19 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	WOOCOMMERCE THEME TEMPLATES
- *
  *	@package WordPress
  *	@package WooCommerce
  *	@since ToongeePrime Theme 1.0.90
  */
 
-function prime2g_woo_shop_template_page_override() {
+#	@since 1.0.98
+#	Setup the shop override page object
+add_action( 'template_redirect', 'prime2g_setup_shop_override_page' );
+function prime2g_setup_shop_override_page() {
+if ( function_exists( 'is_shop' ) && is_shop() && ! empty( get_theme_mod( 'prime2g_woo_shop_override_template_page_id' ) ) ) {
 $pageID	=	get_theme_mod( 'prime2g_woo_shop_override_template_page_id' );
-if ( empty( $pageID ) ) return;
+$override	=	false;
+if ( empty( $pageID ) ) return false;
 
 $pageID	=	(int) $pageID;
 $page	=	new WP_Query( [ 'post_type' => 'page', 'p' => $pageID ] );
@@ -17,13 +21,16 @@ $page	=	new WP_Query( [ 'post_type' => 'page', 'p' => $pageID ] );
 if ( $page->have_posts() ) {
 	while ( $page->have_posts() ) {
 		$page->the_post();
-		the_content();
+		if ( get_post_meta( get_the_ID($page), 'remove_header', true ) !== '' )
+			define( 'PRIME2G_NOHEADER', true );
+		$override	=	do_shortcode( get_the_content( $page ) );
+		define( 'PRIME2G_SHOPPAGEOVERRIDER', $override );
 		break;
 	}
 }
 wp_reset_postdata();
 }
-
+}
 
 
 
@@ -36,8 +43,10 @@ $atts	=	shortcode_atts( array(
 'shuffle'	=>	'',
 'cat_ids'	=>	'',
 'hide_empty'=>	'1',
-'count'		=>	''
+'count'		=>	'',
+'classes'	=>	'flex justifC'	# @since 1.0.98
 ), $atts );
+
 extract( $atts );
 
 $categories	=	[];
@@ -62,7 +71,7 @@ if ( $shuffle === 'yes' ) shuffle( $categories );
 
 if ( is_numeric( $count ) ) $categories	=	array_slice( $categories, 0, (int) $count );
 
-$images	=	'<section id="prime_prod_categ_img_wrap"><div id="prime_prod_categ_img_links" class="flex justifC">';
+$images	=	'<section id="prime_prod_categ_img_wrap"><div id="prime_prod_categ_img_links" class="'. $classes .'">';
 
 foreach ( $categories as $cat ) {
 if ( ! $cat ) continue;

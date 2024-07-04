@@ -1,7 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	MINI THEME FEATURES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */

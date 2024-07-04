@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	HTML SLIDER FRAME SCRIPTS
- *
  *	@since ToongeePrime Theme 1.0.44
  */
 
@@ -15,7 +13,8 @@
 		<!-- put all html blocks within here @ parent class: slidebox -->
 
 		</div>
-		<div id="sContrlz"></div>
+		<!-- <div id="sContrlz"></div> -->
+		<div class="msCtrlz"></div>
 		<div class="psPrev pslide_pn"><span></span></div>
 		<div class="psNext pslide_pn"><span></span></div>
 		<div class="prel"><span class="ps_rzmr">Resume</span></div>
@@ -38,8 +37,8 @@ min-height:50vh;background-position:center;background-size:cover;}
 color:#fff;background:#111;font-size:14px;padding:5px 15px;}
 .pause .ps_rzmr{opacity:1;visibility:visible;}
 
-.msCtrlz{display:flex;justify-content:center;z-index:+1;margin-top:0;}
-#sContrlz{display:flex;justify-content:center;z-index:+1;margin-top:-40px;background:rgba(0,0,0,0.5);}
+.msCtrlz,#sContrlz{display:flex;justify-content:center;z-index:+1;margin-top:0;}
+#sContrlz{margin-top:-40px;background:rgba(0,0,0,0.5);}
 .slCtrl{height:15px;width:15px;margin:9px;border-radius:15px;background:#ccc;cursor:pointer;}
 .slCtrl:hover{background:#000;}
 .slCtrl.lit{background:#f0b417;}
@@ -61,7 +60,7 @@ add_shortcode( 'prime2g_slider_js', 'prime2g_auto_html_slider_frame_js_shortcode
 function prime2g_auto_html_slider_frame_js_shortcode( $atts ) {
 
 /**
- *	Multislider logic added
+ *	A SEPARATE Multislider logic added
  *	@since 1.0.55
  */
 $atts	=	shortcode_atts( array( 'timer' => 4000, 'multislides' => '', 'slider_ids' => '' ), $atts );
@@ -147,7 +146,7 @@ p2getAll( '.ps_rzmr' ).forEach( (sp)=>{
 
 
 /**
- *	Separated to be reuseable & upgraded for multi-instance use
+ *	Extracted & upgraded for multi-instance use
  *	@since 1.0.55
  */
 function prime2g_sliders_helper_funcs( $multislides = '' ) {
@@ -232,14 +231,14 @@ if ( direction == 'next' ) {
 
 
 /**
- *	Multislider Capability
+ *	Multislider Function
  *	@since 1.0.55
  */
 function prime2g_multi_instance_slider_js( $sliderIDs, $timer = 4000 ) { ?>
 <script async defer id="prime2g_multi_instance_slider">
 const i_timer	=	<?php echo $timer; ?>,
 	idsString	=	"<?php echo $sliderIDs; ?>",
-	slider_ids	=	idsString.split( /[ ,]+/ );
+	slider_ids	=	idsString.split( /[ ,]+/ );	// csv with #
 
 slider_ids.forEach( id=>{ prime2g_multi_instance_slider( id, i_timer ); } );
 

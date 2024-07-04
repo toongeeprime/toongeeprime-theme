@@ -25,8 +25,10 @@ return 'false';
 }
 
 
-#	@since 1.0.97
-#	Appends unique value of PRIME2G_APPCACHE to options
+/**
+ *	@since 1.0.97
+ *	Appends unique value of PRIME2G_APPCACHE to options
+ */
 function prime2g_app_option( $args ) {
 $value	=	PRIME2G_PWA_VERSION;
 $name	=	$args;
@@ -37,11 +39,7 @@ is_array( $args ) ? extract( $args ) : null;
 
 $group	=	PRIME2G_APPCACHE;
 
-if ( $name === 'same_version' ) {
-	return get_option( 'version' . $group ) === PRIME2G_PWA_VERSION;
-}
-
-if ( is_string( $args ) && str_contains( $name, 'version' ) && !$update ) {
+if ( is_string( $args ) && str_contains( $name, 'version' ) && ! $update ) {
 	return get_option( $name . $group ) === PRIME2G_PWA_VERSION;
 }
 
@@ -57,8 +55,10 @@ return $option;
 
 #	CSV
 function prime2g_add_service_worker_precache_files(): string {
-	$depr	=	function_exists( 'child_add_to_pwa_precache' ) ? ' + ", " + "' . child_add_to_pwa_precache() . '"' : '';
-return apply_filters( 'prime2g_filter_service_worker_precache_files', '', $depr );
+	$js_concat	=	' + ", " + "';
+	$depr	=	function_exists( 'child_add_to_pwa_precache' ) ? $js_concat . child_add_to_pwa_precache() . '"' : '';
+
+return apply_filters( 'prime2g_filter_service_worker_precache_files', '', $js_concat, $depr );
 }
 #	@since 1.0.97 End
 

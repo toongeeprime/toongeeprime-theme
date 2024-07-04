@@ -162,6 +162,7 @@ return $title;
 }
 
 
+#	Menu Output must be styled where necessary
 add_shortcode( 'prime_nav_menu', 'prime2g_get_nav_menu_shortcode' );
 function prime2g_get_nav_menu_shortcode( $atts ) {
 $atts	=	shortcode_atts(
@@ -281,4 +282,6 @@ add_action( 'wp_footer', 'prime2g_custom_login_js' );
 
 return prime2g_login_form( $atts );
 }
+
+
 

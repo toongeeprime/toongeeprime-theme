@@ -5,37 +5,26 @@
  *	@since ToongeePrime Theme 1.0
  */
 /**
- *	To remove main sidebar from a template
+ *	Remove main sidebar from template
  */
 function prime2g_removeSidebar() { if ( ! function_exists( 'define_2gRMVSidebar' ) ) { function define_2gRMVSidebar(){} } }
 
-/**
- *	nonce verifier
- *	@since 1.0.46
- */
+/*	@since 1.0.46	*/
 function prime2g_verify_nonce( $actionName = 'prime_nonce_action' ) {
 	if ( ! isset( $_REQUEST[ '_prime-nonce' ] ) || ! wp_verify_nonce( $_POST[ '_prime-nonce' ], $actionName ) ) {
 		$msg	=	__( 'Failed security verification!', PRIME2G_TEXTDOM ); wp_die( $msg );
 	}
 }
 
-/**
- *	If current user is post author
- *	@since 1.0.45
- */
+/*	@since 1.0.45	*/
 function prime2g_is_post_author( $post, $userID = null ) {
 	return ( $userID ) ? $post->post_author == $userID :
 	$post->post_author == get_current_user_id();
 }
 
-/**
- *	To remove the title from a template
- */
+/*	Template functions	*/
 function prime2g_remove_title() { function define_2gRMVTitle(){} }
 
-/**
- *	Declare in template
- */
 function prime2g_is_plain_page() { function define_2gPlainPage(){} }
 
 /**
@@ -57,15 +46,17 @@ function prime2g_get_country_by_code( $code ) {
  *	Use Theme Extras?
  *	@since 1.0.48
  */
-function prime2g_use_extras() { return ( defined( 'PRIME2G_EXTRAS' ) && PRIME2G_EXTRAS === true ); }
+function prime2g_use_extras() { return prime2g_constant_is_true( 'PRIME2G_EXTRAS' ); }
 
 /**
- *	Use PWA?
+ *	PWA
  *	@since 1.0.55
  */
-function prime2g_add_theme_pwa() { return ( defined( 'PRIME2G_ADD_PWA' ) && PRIME2G_ADD_PWA === true ); }
+function prime2g_add_theme_pwa() { return prime2g_constant_is_true( 'PRIME2G_ADD_PWA' ); }
 
-#	Preferred @ front-end
+function prime2g_run_pwa_push_notifs() { return prime2g_constant_is_true( 'PRIME2G_PWA_PUSHNOTIF' ); }
+
+#	@ front-end
 function prime2g_activate_theme_pwa() {
 	if ( is_admin() ) return false;
 	$activate	=	prime2g_add_theme_pwa();
@@ -74,14 +65,14 @@ function prime2g_activate_theme_pwa() {
 }
 
 /**
- *	Control Design from Network home on multisite installs?
+ *	Control Design from Network home? @multisite
  *	@since 1.0.55
  */
 function prime2g_design_by_network_home() {
-	return prime2g_constant_is_true( 'PRIME2G_DESIGN_BY_NETWORK_HOME' );
+	return prime2g_constant_is_true( 'PRIME2G_DESIGN_BY_NETWORK_HOME', true );
 }
 
-/* @since 1.0.57 */
+/*	@since 1.0.57	*/
 function prime2g_designing_at_networkhome() { return prime2g_design_by_network_home() && get_current_blog_id() === 1; }
 
 /**
@@ -99,9 +90,7 @@ $url	=	preg_replace( '/^www\./', '', $url['host'] );
 return $url;
 }
 
-/**
- *	@since Theme 1.0.50
- */
+/*	@since 1.0.50	*/
 function prime2g_categs_and_ids_array() {
 $categsArray	=	wp_cache_get( 'prime2g_categs_array' );
 if ( false !== $categsArray ) {
@@ -143,11 +132,9 @@ else {
 return $posttypesArray;
 }
 }
-/* @since 1.0.50 End */
+/*	@since 1.0.50 End	*/
 
-/**
- *	@since 1.0.55
- */
+/*	@since 1.0.55	*/
 function prime2g_get_current_url() {
 if ( isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] === 'on' ) $url	=	"https://";   
 else $url	=	"http://";   
@@ -178,25 +165,25 @@ foreach ( $getPosts as $post ) {
 
 return array_combine( $indexes, $values );
 }
-/* @since 1.0.55 End */
+/*	@since 1.0.55 End	*/
 
 /**
  *	Check Minimum Child Theme Version
  *	@since 1.0.56
  */
 function prime_child_min_version( string $version ) {
-if ( defined( 'CHILD2G_VERSION' ) ) // removed use of is_child_theme()
+if ( defined( 'CHILD2G_VERSION' ) )	// removed use of is_child_theme()
 	return version_compare( CHILD2G_VERSION, $version, '>=' );
-return true;	// features should work in parent
+return true;	#	features should work in parent
 }
 
-/* @since 1.0.57 */
-function prime2g_constant_is_true( string $constant, bool $for_network = true ) {
-	if ( $for_network !== false && ! is_multisite() ) return false;
+/*	@since 1.0.57	*/
+function prime2g_constant_is_true( string $constant, bool $network_based = false ) {
+	if ( $network_based && ! is_multisite() ) return false;
 	return ( defined( $constant ) && constant( $constant ) === true );
 }
 
-/* @since 1.0.70 */
+/*	@since 1.0.70	*/
 function prime2g_devices_array() {
 return (object) [
 'desktops'	=>	[ 'desktop', 'desktops', 'laptop', 'laptops', 'computer', 'computers' ],
@@ -209,7 +196,7 @@ $headers	=	get_headers( $url );
 return stripos( $headers[0],"200 OK" ) ? true : false;
 }
 
-/* @since 1.0.73 */
+/*	@since 1.0.73	*/
 function p2g_str_contains( string $string, $contains ) {
 	if ( is_string( $contains ) ) {
 		return str_contains( $string, $contains );
@@ -237,7 +224,7 @@ return  isset( $args[1] );
 }
 
 
-/* @since 1.0.76 */
+/*	@since 1.0.76	*/
 function prime_strip_url_end( string $url ) {
 $path	=	trim( parse_url( $url, PHP_URL_PATH ), '/' );
 $parts	=	explode( '/', $path );
@@ -245,7 +232,7 @@ return end( $parts );
 }
 
 
-/* @since 1.0.77 */
+/*	@since 1.0.77	*/
 if ( ! function_exists( 'prime_post_types_group' ) ) {
 function prime_post_types_group() {
 return (object) [
@@ -263,7 +250,7 @@ return (object) [
 }
 
 
-/* @since 1.0.89 */
+/*	@since 1.0.89	*/
 function prime2g_customizer_pages_ids() {
 return [
 	(int) get_theme_mod( 'prime2g_404error_page_id', 0 ),
@@ -302,10 +289,26 @@ return $idsCache;
 }
 
 
-/* @since 1.0.95 */
+/*	@since 1.0.95	*/
 function prime2g_has_sticky_sidebar_togg() {
 $styles	=	ToongeePrime_Styles::mods_cache();
 return in_array( $styles->sidebar_place, [ 'sticky_right', 'sticky_left' ] ) && $styles->sticky_sb_tog;
 }
+
+
+/**
+ &	base64 Encode/Decode. Later add other methods?
+ &	@since 1.0.98
+ */
+function prime2g_encode( string $string, $url = false ) {
+	$coded	=	base64_encode( $string );
+	return $url ? str_replace( ['+','/','='], ['-','_',''], $coded ) : $coded;
+}
+
+function prime2g_decode( string $string, $url = false ) {
+	return $url ? base64_decode( str_replace( ['-','_'], ['+','/'], $string ) ) : base64_decode( $string );
+}
+
+
 
 

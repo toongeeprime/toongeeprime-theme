@@ -449,20 +449,23 @@ if ( is_archive() && $descr ) {
  *	@ https://developer.wordpress.org/reference/hooks/get_the_excerpt/
  */
 if ( ! function_exists( 'prime2g_post_excerpt' ) ) {
-function prime2g_post_excerpt( $length = 25, $post = null, $readmore = '&hellip; Keep reading' ) {
-	$excerpt_length	=	apply_filters( 'excerpt_length', $length );
-	$text	=	wp_trim_words( get_the_excerpt( $post ), $excerpt_length, prime2g_read_more_excerpt_link( $readmore, $length ) );
+function prime2g_post_excerpt( $length = 25, $post = null, $readmore = '&hellip; Continue reading' ) {
+	$excerpt_length	=	(int) apply_filters( 'excerpt_length', $length );
+	$append	=	$excerpt_length ? prime2g_append_to_read_more( $readmore, $post ) : '';
+	$text	=	wp_trim_words( get_the_excerpt( $post ), $excerpt_length, $append );
 	$text	=	apply_filters( 'get_the_excerpt', $text );
 
 	if ( ! in_array( $text, array( '', ' ', '&nbsp;' ) ) )
-		return '<p class="excerpt">' . $text . '</p>';
+		return '<p class="excerpt">'. $text .'</p>';
 }
 }
 
+function prime2g_append_to_read_more( $text = '&hellip; Keep reading', $post = null ) {
+	return '<a class="more-link" href="'. esc_url( get_permalink( $post ) ) .'" title="'. get_the_title( $post ) .'">'. __( $text, PRIME2G_TEXTDOM ) .'</a>';
+}
 
-/**
- *	Read more text
- */
+
+/*	Read more text	*/
 if ( ! function_exists( 'prime2g_read_more_text' ) ) {
 function prime2g_read_more_text( $text = 'Read more' ) {
 $readMore	=	sprintf(
@@ -476,29 +479,23 @@ return $readMore;
 
 
 /**
- *	Filter the excerpt more link
- *	Added $text and $length @since 1.0.50
+ *	Filter the excerpt more link in loops
  */
-add_filter( 'excerpt_more', 'prime2g_read_more_excerpt_link' );
-if ( ! function_exists( 'prime2g_read_more_excerpt_link' ) ) {
-function prime2g_read_more_excerpt_link( $text = '&hellip; Keep reading', $length = 25 ) {
-if ( ! is_admin() && $length != 0 ) {
-	return ' <a class="more-link" href="' . esc_url( get_permalink() ) . '" title="' . get_the_title() . '">' . __( $text, PRIME2G_TEXTDOM ) . '</a>';
+// add_filter( 'excerpt_more', 'prime2g_read_more_excerpt_link' );
+function prime2g_read_more_excerpt_link( $excerpt, $text = '&hellip; Keep reading' ) {
+if ( ! is_admin() ) {
+	return '<a class="more-link" href="'. esc_url( get_permalink() ) .'" title="'. get_the_title() .'">'. __( $text, PRIME2G_TEXTDOM ) .'</a>';
 }
 }
-}
-
 
 /**
  *	Continue reading link
  *	Filter the excerpt more link
  */
-add_filter( 'the_content_more_link', 'prime2g_read_more_link' );
-if ( ! function_exists( 'prime2g_read_more_link' ) ) {
-function prime2g_read_more_link( $text = 'Read more' ) {
+// add_filter( 'the_content_more_link', 'prime2g_content_more_link' );	# find where this applies
+function prime2g_content_more_link( $text = '&hellip; Read more' ) {
 if ( ! is_admin() ) {
-	return '<div class="more-link-container"><a class="more-link" href="' . esc_url( get_permalink() ) . '#more-' . esc_attr( get_the_ID() ) . '">' . prime2g_read_more_text( $text ) . '</a></div>';
-}
+	return '<div class="more-link-container"><a class="more-link" href="'. esc_url( get_permalink() ) .'#more-'. esc_attr( get_the_ID() ) .'">'. prime2g_read_more_text( $text ) .'</a></div>';
 }
 }
 
@@ -512,6 +509,26 @@ function prime2g_post_no_title( $title ) {
 	return '' === $title ? esc_html_x( 'Not Titled', 'Added to posts and pages that are without titles', PRIME2G_TEXTDOM ) : $title;
 }
 }
+
+
+/**
+ *	@since 1.0.98
+ */
+add_filter( 'get_the_archive_description', 'prime2g_filtering_archive_description' );
+function prime2g_filtering_archive_description( $descr ) {
+	if ( function_exists( 'is_shop' ) && is_shop() )
+		return get_theme_mod( 'prime2g_shop_page_description', prime2g_woo_shop_description() );
+return $descr;
+}
+
+
+add_filter( 'wp_title', 'prime2g_filtering_wp_title' );
+function prime2g_filtering_wp_title( $title ) {
+if ( function_exists( 'is_shop' ) && is_shop() )
+	return get_theme_mod( 'prime2g_shop_page_title', 'Shop Homepage' ) . ' | ';
+return $title;
+}
+//	@since 1.0.98 end
 
 
 /**
@@ -630,4 +647,5 @@ if ( $child_is23 ) echo '</div><!-- #page_title_content -->';
 <?php
 }
 }
+
 

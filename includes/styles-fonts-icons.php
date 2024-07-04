@@ -1,7 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	THEME'S STYLES AND FONTS
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -17,22 +16,18 @@ function prime2g_theme_root_styles() {
 }
 
 
-/**
- *	@since 1.0.55
- */
+/*	@since 1.0.55	*/
 if ( ! function_exists( 'prime2g_theme_icons_info' ) ) {
 function prime2g_theme_icons_info() {
 return (object)[
-	'url'		=>	'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css',
-	'version'	=>	'1.11.1'
+	'url'		=>	'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css',
+	'version'	=>	'1.11.3'
 ];
 }
 }
 
 
-/**
- *	Load Theme Fonts
- */
+/*	Load Theme Fonts	*/
 add_action( 'wp_head', 'prime2g_load_theme_fonts' );
 if ( ! function_exists( 'prime2g_load_theme_fonts' ) ) {
 function prime2g_load_theme_fonts() {
@@ -46,7 +41,7 @@ $styles	=	ToongeePrime_Styles::mods_cache();	#	@since 1.0.57
 	$fonts_href	=	"https://fonts.googleapis.com/css?family=$bodyfont|$headings:300,400,500,600,700,800$display";
 	echo "<link rel=\"preload\" href=\"$fonts_href\" fetchpriority=\"low\" as=\"style\" onload=\"this.onload=null;this.rel='stylesheet'\" />
 <noscript><link rel=\"stylesheet\" href=\"$fonts_href\"></noscript>";
-// "<link rel=\"preload\" href=\"font-file.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>"
+#	"<link rel=\"preload\" href=\"font-file.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>"
 }
 
 }

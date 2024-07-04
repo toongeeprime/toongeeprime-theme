@@ -1,17 +1,16 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	MEMBERS-ONLY WEBSITE STATE
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.90
  */
 
 add_action( 'template_redirect', 'prime2g_members_only_website_state', 7 );
 function prime2g_members_only_website_state() {
-if ( ! prime2g_constant_is_true( 'PRIME2G_PRIVATE_SITE', false ) ) return;	// checking on single-sites
+if ( ! prime2g_constant_is_true( 'PRIME2G_PRIVATE_SITE' ) ) return;
 if ( empty( get_theme_mod( 'prime2g_site_is_private' ) ) ) return;
 
-//	This feature must favour website shutdown
+#	This feature must favour website shutdown
 $shutDown	=	! empty( get_theme_mod( 'prime2g_website_shutdown' ) );
 
 if ( is_singular() ) {
@@ -19,7 +18,7 @@ if ( is_singular() ) {
 	if ( $post->page_is_public ) return;
 }
 
-//	Return conditions
+#	Return conditions
 $logged_in	=	is_user_logged_in();
 if ( is_admin() || $logged_in || $shutDown ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
@@ -34,8 +33,7 @@ if ( is_admin() || $logged_in || $shutDown ||
 if ( ! $logged_in ) {
 
 $page_id	=	get_theme_mod( 'prime2g_privatesite_homepage_id' );
-
-$pageID	=	(int) $page_id;
+$pageID		=	(int) $page_id;
 
 if ( ! $pageID ) {
 	echo function_exists( 'prime2g_private_site_homepage' ) ? prime2g_private_site_homepage() :

@@ -8,7 +8,7 @@
 class Prime2g_Web_Manifest {
 
 	private static $instance;
-	public $same_version;	# @since 1.0.97
+	private $same_version;	# @since 1.0.97
 
 	public function __construct() {
 	if ( ! prime2g_activate_theme_pwa() ) return;
@@ -22,6 +22,7 @@ class Prime2g_Web_Manifest {
 		new Prime2g_PWA_File_Url_Manager;
 		new Prime2g_PWA_CSS;
 		new Prime2g_PWA_Service_Worker;
+		// new Prime2g_Push_Notifications( $this->get_manifest()['short_name'] );
 		Prime2g_PWA_Prompt::instance();
 
 		#	Flushing rewrite rules
@@ -148,32 +149,17 @@ if ( isset( $manifest[ 'splash_icon' ] ) && ! empty( $manifest[ 'splash_icon' ] 
 }
 
 
-/*
+/**
 READ: https://web.dev/learn/pwa/detection/#detecting_related_installed_apps
 https://web.dev/learn/pwa/detection/#prefer_a_related_app
 {
-...
 "related_applications:" [
 {
-"platform": "play",
-"url": "https://play.google.com/..."
+	"platform": "play",
+	"url": "https://play.google.com/..."
 }
 ],
 "prefer_related_applications": true
-}
-
-
-function manifest_rule() {
-	global $wp;
-	$file	=	Prime2g_PWA_File_Url_Manager::manifest_url( 'file' );
-	add_rewrite_rule( 'pwapp/\bmanifest.json\b', 'index.php?pwapp=manifest', 'top' );
-	// add_rewrite_rule( '/\b'. $file .'\b', 'index.php?pwapp=manifest', 'top' );
-	$wp->add_query_var( 'pwapp' );
-}
-function show_manifest() {
-	if ( empty( $GLOBALS[ 'wp' ]->query_vars[ 'pwapp' ] ) ) { return; }
-	$manifest	=	$this->get_manifest();
-	wp_send_json( $manifest );
 }
 */
 

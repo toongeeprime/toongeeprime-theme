@@ -115,8 +115,10 @@ foreach( $checkboxes as $field ) {
 add_action( 'add_meta_boxes', 'prime2g_meta_fieldset_1' );
 if ( ! function_exists( 'prime2g_meta_fieldset_1' ) ) {
 function prime2g_meta_fieldset_1() {
+$obj	=	get_post_type_object( get_post_type() );
+$name	=	$obj->labels->singular_name;
 	add_meta_box(
-		'prime2g_prime_fields1', __( 'Page Options', PRIME2G_TEXTDOM ),
+		'prime2g_prime_fields1', __( $name . ' Options', PRIME2G_TEXTDOM ),
 		'prime2g_fields_side_box', prime2g_fields_in_post_types()->prime_fields1, 'side', 'high'
 	);
 }

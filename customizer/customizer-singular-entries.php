@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Singular Entries
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  */

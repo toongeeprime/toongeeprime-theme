@@ -8,7 +8,7 @@
 class Prime2g_PWA_Service_Worker {
 
 	private static $instance;
-	public $same_version;	# @since 1.0.97
+	private $same_version;	# @since 1.0.97
 
 	public function __construct() {
 		if ( ! isset( self::$instance ) ) {
@@ -36,19 +36,21 @@ class Prime2g_PWA_Service_Worker {
 	 */
 	static function content() {
 	$start	=	new self;
-	$core	=	$start->cached_content();
+	$core	=	$start->cached();	#	get before updating option
 
 	if ( ! $start->same_version )
 		prime2g_app_option( [ 'name'=>'worker_version', 'update'=>true ] );
 
-	return $core . apply_filters( 'prime2g_filter_pwa_service_worker', '', $core );
+	return $core . apply_filters( 'prime2g_filter_service_worker', '', $core );	# bypass cache
 	}
 
-	private function cached_content() {
+	private function cached() {
 	$core	=	prime2g_app_option( 'service_worker' );
 
 	if ( false === $core || ! $this->same_version ) {
-		prime2g_app_option( [ 'name'=>'service_worker', 'update'=>true, 'value'=>$this->core() ] );
+		$js	=	$this->core();
+		$sw	=	$js . apply_filters( 'prime2g_filter_cached_service_worker', '', $js );	# @since 1.0.97
+		prime2g_app_option( [ 'name'=>'service_worker', 'update'=>true, 'value'=>$sw ] );
 		$core	=	prime2g_app_option( 'service_worker' );
 	}
 
@@ -286,7 +288,7 @@ else { return event.respondWith( cacheFetcher() ); }
 
 //	Extending Service Worker
 
-' . apply_filters( 'prime2g_filter_service_worker', '', $js );	# @since 1.0.97
+';
 	}
 
 }
@@ -307,5 +309,4 @@ hostNames.forEach( xclh => { if ( reloaded && urlObj.hostname === xclh ) { serv_
 */
 
 # await cache1.add( new Request( userIsOfflineURL, { cache:"reload" } ) );
-
 

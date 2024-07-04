@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	POSTS QUERY
  *	@package WordPress
@@ -76,11 +75,9 @@ $args	=	array(
 	'posts_per_page'=>	-1
 );
 
-$options	=	[ 'cache_name' => 'prime2g_template_parts' ];
-
+$options=	[ 'cache_name' => 'prime2g_template_parts' ];
 $parts	=	prime2g_wp_query( $args, $options );
-
-$id	=	(int)$id;
+$id		=	(int) $id;
 
 if ( $parts->have_posts() ) {
 	while ( $parts->have_posts() ) {
@@ -90,7 +87,7 @@ if ( $parts->have_posts() ) {
 		if ( $echo )
 			$part	=	the_content();
 		else
-			$part	=	do_shortcode( get_the_content() );
+			$part	=	apply_filters( 'the_content', get_the_content() );
 	}
 }
 
@@ -129,7 +126,9 @@ return [
 	'no_result'	=>	'Nothing found for this query!',
 	'post_ids'	=>	'',	#	@since 1.0.79
 	'cache_time'=>	'',	#	@since 1.0.80
-	'get'		=>	''
+	'get'		=>	'',
+	'classes'	=>	'widget_posts grid',	#	*** 'woocommerce' for products, @since 1.0.98
+	'product_classes'=>	'grid columns-4'
 ];
 }
 
@@ -149,6 +148,8 @@ $devices	=	prime2g_devices_array();
 if ( in_array( $device, $devices->desktops ) && $isMobile ) return;
 if ( in_array( $device, $devices->mobiles ) && ! $isMobile ) return;
 
+$is_product	=	$post_type === 'product';	# @since 1.0.98
+
 $termsArray	=	explode( ',', $terms );
 if ( count( $termsArray ) > 1 ) {
 	$terms	=	$termsArray;
@@ -167,7 +168,7 @@ $args	=	array(
 'page'		=>	$paged,
 'offset'	=>	$pagination ? null : $offset,
 'posts_per_page'	=>	(int) $count,
-'ignore_sticky_posts'	=>	true,
+'ignore_sticky_posts'=>	true,
 'tax_query'	=>	array( [
 	'taxonomy'	=>	$taxonomy,
 	'field'		=>	'slug',
@@ -178,14 +179,16 @@ $args	=	array(
 
 
 $options	=	array(
-	'set_cache'	=>	$set_cache === 'yes' ? true : false,
-	'use_cache'	=>	$use_cache === 'yes' ? true : false,
+	'set_cache'	=>	$set_cache === 'yes',
+	'use_cache'	=>	$use_cache === 'yes',
 	'cache_name'=>	$cache_name,
 	'cache_time'=>	$cache_time,
 	'get'		=>	$get === 'posts' ? 'posts' : null	#	@since 1.0.80
 );
 
-$output	=	$set_cache ? '<div class="hide query-startcache">Start ' . $cache_name : '<div class="widget_posts grid">';
+$output	=	$set_cache ? '<div class="hide query-startcache">Start ' . $cache_name : '<div class="'. $classes .'">';
+
+$output	.=	$is_product ? '<ul class="products '. $product_classes .'">' : '';
 
 #	@since 1.0.70
 $isNetwork	=	is_multisite();
@@ -215,11 +218,25 @@ if ( $get === 'posts' ) {
 
 if ( $loop->have_posts() ) {
 
-if ( $set_cache ) { $output	.=	''; }
+if ( $set_cache ) { $output	.=	''; }	#	cache setter must not output
 else {
+
+/**
+ *	WooCommerce echoes, so buffer is needed
+ *	Start buffer before loop to prevent repeat
+ */
+if ( $is_product ) ob_start();
+
 
 while ( $loop->have_posts() ) {
 $post	=	$loop->the_post();
+
+if ( $is_product ) {
+	#	args not needed in WooCommerce
+	$output	.=	$looptemplate && function_exists( $looptemplate ) ? $looptemplate()
+	: prime2g_archive_loop_product_template();
+}
+else {
 	$postArgs	=	[
 		'post'		=>	$post,
 		'length'	=>	$words,
@@ -233,7 +250,15 @@ $post	=	$loop->the_post();
 }
 }
 
+
+/*	End product buffer after loop	*/
+if ( $is_product ) {
+	$output	.=	ob_get_contents();
+	ob_end_clean();
+}
+
 wp_reset_postdata();
+}
 
 }
 else {
@@ -243,6 +268,8 @@ if ( current_user_can( 'edit_posts' ) )
 
 #	@since 1.0.70
 if ( $isNetwork && $site_id ) restore_current_blog();
+
+$output	.=	$is_product ? '</ul>' : '';
 
 $output	.=	'</div>';
 
@@ -316,4 +343,5 @@ if ( $query->is_search && ! is_admin() ) {
 
 return $query;
 }
+
 

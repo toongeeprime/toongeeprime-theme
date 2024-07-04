@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	PARTS IN A LOOP
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -21,7 +19,6 @@ function prime2g_show_sticky_posts() {
 	}
 }
 }
-
 
 
 add_shortcode( 'prime2g_customizer_stickies', 'prime2g_get_stickies_by_customizer' );
@@ -58,12 +55,11 @@ if ( $stickies->have_posts() ) {
 		}
 
 	$output	.=	'</div></section>';
-	return $output;
+return $output;
 }
 else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Results for Stickies', PRIME2G_TEXTDOM ); }
 }
 }
-
 
 
 /**
@@ -71,28 +67,24 @@ else { if ( current_user_can( 'edit_theme_options' ) ) esc_html_e( 'No Results f
  */
 add_action( 'prime2g_after_post', 'prime2g_prev_next_post', 7, 3 );
 if ( ! function_exists( 'prime2g_prev_next_post' ) ) {
-
 //	Empty argument was added coz somehow, it reads from the second var
 function prime2g_prev_next_post( $empty = '', $prev = 'Previous Entry ', $next = 'Next Entry ', $taxonomy = 'category' )
 {
-
 if ( is_page() || ! is_singular() ) return;
 
 $prevText	=	__( $prev, PRIME2G_TEXTDOM );
 $nextText	=	__( $next, PRIME2G_TEXTDOM );
 
-	the_post_navigation(
-		array(
-			'prev_text'	=>	'<p class="meta-nav">'. $prevText .'</p><p class="post-title">%title</p>',
-			'next_text'	=>	'<p class="meta-nav">'. $nextText .'</p><p class="post-title">%title</p>',
-			'taxonomy'	=>	$taxonomy,
-			'class'		=>	'prev_next'
-		)
-	);
-
+the_post_navigation(
+	array(
+		'prev_text'	=>	'<p class="meta-nav">'. $prevText .'</p><p class="post-title">%title</p>',
+		'next_text'	=>	'<p class="meta-nav">'. $nextText .'</p><p class="post-title">%title</p>',
+		'taxonomy'	=>	$taxonomy,
+		'class'		=>	'prev_next'
+	)
+);
 }
 }
-
 
 
 /**
@@ -101,13 +93,11 @@ $nextText	=	__( $next, PRIME2G_TEXTDOM );
  */
 if ( ! function_exists( 'prime2g_prev_next' ) ) {
 function prime2g_prev_next( $prev = '&laquo; Previous Page', $next = 'Next Page &raquo;' ) {
-
 if ( get_theme_mod( 'prime2g_archive_pagination_type' ) === 'numbers' ) {	#	@since 1.0.55
 	global $wp_query;
 	prime2g_pagination_nums( $wp_query );
 }
 else {
-
 $prev	=	__( $prev, PRIME2G_TEXTDOM );
 $next	=	__( $next, PRIME2G_TEXTDOM );
 
@@ -119,12 +109,9 @@ echo '<nav class="navigation archive prev_next">
 	. get_next_posts_link( '<p class="nav-next" title="'. $next .'">'. $next .'</p>' ) .
 '</div>
 </nav>';
-
-}
-
 }
 }
-
+}
 
 
 /**
@@ -135,7 +122,6 @@ function prime2g_archive_loop( $size = 'large', $excerpt = true, $length = 25, $
 	echo prime2g_get_archive_loop( $size, $excerpt, $length, $metas, $footer, $tag );
 }
 }
-
 
 
 /**
@@ -157,7 +143,7 @@ echo prime2g_get_post_object_template( $options );
  */
 if ( ! function_exists( 'prime2g_get_post_object_template' ) ) {
 function prime2g_get_post_object_template( array $options ) { // $options required to define $post
-$post	=	$excerpt = $metas = $readmore = null;
+$post	=	$excerpt = $metas = $read_more = null;
 $size	=	'large';
 $length	=	25;
 $tag	=	'h2';
@@ -173,7 +159,7 @@ $link	=	get_permalink( $id );
 
 $template	=	'<article id="entry-'. $id .'" class="'. implode( ' ', get_post_class( '', $id ) ) .'">
 <div class="entry_img">
-<a href="'. $link .'" title="'. $title .'">';
+<a href="'. $link .'" title="'. $title .'" rel="nofollow">';
 
 if ( has_post_thumbnail( $post ) ) {
 	$template	.=	'<div class="thumbnail" style="background-image:url(';
@@ -195,7 +181,7 @@ $template	.=	'</a></div>
 <div class="entry_text">';
 if ( $metas ) $template	.=	prime2g_archive_post_top_filter_part( $post );
 $template	.=	'<a href="'. $link .'" title="Read this entry"><'. $tag .' class="entry_title">'. $title .'</'. $tag .'></a>';
-if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post, $readmore );
+if ( $excerpt ) $template	.=	prime2g_post_excerpt( $length, $post, $read_more );
 if ( $footer ) $template	.=	prime2g_archive_post_footer_filter_part();
 $template	.=	'</div>
 </article>';
@@ -203,7 +189,6 @@ $template	.=	'</div>
 return $template;
 }
 }
-
 
 
 /**
@@ -235,14 +220,13 @@ $link	=	get_permalink();
 	</a>
 </div>
 <div class="entry_text">
-	<a href="<?php echo $link; ?>" title="Read this entry"><h3 class="search_result_title"><?php echo $title; ?></h3></a>
+	<a href="<?php echo $link; ?>" title="Read this entry" rel="nofollow"><h3 class="search_result_title"><?php echo $title; ?></h3></a>
 	<?php echo prime2g_post_excerpt(); ?>
 </div>
 </article>
 <?php
 }
 }
-
 
 
 /**
@@ -256,7 +240,7 @@ function prime2g_get_archive_loop( $size = 'medium', $excerpt = true, $length = 
 $post	=	null;
 $imgSize	=	$size;
 $edit_link	=	true;
-$readmore	=	' - Read more';
+$read_more	=	' - Read more';
 $entryClasses	=	'';	#	string|string[]
 $ftimage_as_image	=	false;	#	@since 1.0.94
 
@@ -288,10 +272,10 @@ $entry	.=	'<div class="entry_text">';
 if ( $metas )
 	$entry	.=	prime2g_archive_post_top_filter_part( $post );
 
-$entry	.=	'<a href="' . $link . '" title="Read this entry"><' . $tag . ' class="entry_title">' . $title . '</' . $tag . '></a>';
+$entry	.=	'<a href="' . $link . '" title="Read this entry" rel="nofollow"><' . $tag . ' class="entry_title">' . $title . '</' . $tag . '></a>';
 
 if ( $excerpt && ! is_attachment() )
-	$entry	.=	prime2g_post_excerpt( $length, $post, $readmore );
+	$entry	.=	prime2g_post_excerpt( $length, $post, $read_more );
 
 if ( $edit_link )
 	$entry	.=	prime2g_edit_entry_get( '<p class="edit-link edit-entry">', '</p>' );
@@ -310,12 +294,11 @@ return $entry;
 }
 
 
-
 /**
  *	@since 1.0.55
  *	@since 1.0.94:
  *		$ftimage_as_image => Featured Image as image instead of div background. Suitable for masonry layout
- *		$title as array, to control params length
+ *		$title as array, to limit params
  */
 if ( ! function_exists( 'prime2g_ft_image_in_loop' ) ) {
 function prime2g_ft_image_in_loop( $title, string $size, string $link, object $post = null ) {
@@ -329,7 +312,7 @@ if ( ! $post ) { global $post; }
 $title	=	$post->post_title;
 $div_class	=	$ftimage_as_image ? 'ftimage' : 'thumbnail';
 
-$ftimg	=	'<a href="' . $link . '" title="' . $title . '">';
+$ftimg	=	'<a href="' . $link . '" title="' . $title . '" rel="nofollow">';
 
 if ( has_post_thumbnail( $post ) ) {
 	if ( $ftimage_as_image )
@@ -356,7 +339,6 @@ return $ftimg;
 }
 
 
-
 /**
  *	Archive Post Object Template
  *	@since 1.0.50
@@ -371,7 +353,7 @@ $length	=	25;
 $metas	=	true;
 $footer	=	false;
 $tag	=	'h2';
-$readmore	=	' - Read more';
+$read_more	=	' - Read more';
 $edit_link	=	true;
 $entryClasses	=	'';	# string|string[]
 $switch_img_vid	=	false;
@@ -387,8 +369,9 @@ if ( $switch_img_vid && prime2g_post_has_media_field( $post ) ) {
 $title	=	$post->post_title;
 $link	=	get_permalink( $post );
 
-$entry	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( $entryClasses, $post ) ) . '">';
-$entry	.=	'<div class="entry_img">';
+$entry	=	'<article id="entry-' . $post->ID . '" class="'. implode( ' ', get_post_class( $entryClasses, $post ) ) . '">
+
+<div class="entry_img">';
 
 $entry	.=	prime2g_get_post_media_embed( '', $post );
 
@@ -401,10 +384,10 @@ $entry	.=	'<div class="entry_text">';
 if ( $metas )
 	$entry	.=	prime2g_archive_post_top_filter_part( $post );
 
-$entry	.=	'<a href="' . $link . '" title="Read this entry"><' . $tag . ' class="entry_title">' . $title . '</' . $tag . '></a>';
+$entry	.=	'<a href="' . $link . '" title="Read this entry" rel="nofollow"><' . $tag . ' class="entry_title">' . $title . '</' . $tag . '></a>';
 
 if ( $excerpt && ! is_attachment( $post->ID ) )
-	$entry	.=	prime2g_post_excerpt( $length, $post, $readmore );
+	$entry	.=	prime2g_post_excerpt( $length, $post, $read_more );
 
 if ( $footer )
 	$entry	.=	prime2g_archive_post_footer_filter_part();
@@ -414,24 +397,23 @@ if ( $edit_link )
 
 $entry	.=	$loop_post_footer_template ? $loop_post_footer_template() : '';
 
-$entry	.=	'</div>';
-$entry	.=	'</article>';
+$entry	.=	'</div>
+
+</article>';
 
 }
 else {
 $data	=	[
 	'imgSize' => $size, 'excerpt' => $excerpt, 'length' => $length, 'edit_link' => $edit_link, 'ftimage_as_image' => $ftimage_as_image,
-	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'readmore' => $readmore, 'post' => $post, 'entryClasses' => $entryClasses,
+	'metas' => $metas, 'footer' => $footer, 'tag' => $tag, 'read_more' => $read_more, 'post' => $post, 'entryClasses' => $entryClasses,
 	'loop_post_header_template' => $loop_post_header_template, 'loop_post_footer_template' => $loop_post_footer_template,
 ];
 	$entry	=	prime2g_get_archive_loop( $data );
 }
 
 return $entry;
-
 }
 }
-
 
 
 /**
@@ -451,13 +433,12 @@ $title	=	$post->post_title;
 $link	=	get_permalink( $post );
 
 $div	=	'<article id="entry-'. get_the_ID() .'" class="'. implode( ' ', get_post_class( $classes, $post ) ) .'">
-<a href="'. $link .'" title="'. $title .'"><'. $tag .' class="the_title">'. $title .'</'. $tag .'></a>
+<a href="'. $link .'" title="'. $title .'" rel="nofollow"><'. $tag .' class="the_title">'. $title .'</'. $tag .'></a>
 </article>';
 
 return $div;
 }
 }
-
 
 
 /**
@@ -500,8 +481,8 @@ $div	.=	'<div class="inslide prel">';
 
 if ( $texts ) {
 $div	.=	'<div class="entry_text">
-<a href="'. $link .'" title="'. $title .'"><'. $tag .' class="'. $class2 .'">'. $title .'</'. $tag .'></a>';
-if ( $excerpt ) $div	.=	prime2g_post_excerpt( $length, $post, $readmore );
+<a href="'. $link .'" title="'. $title .'" rel="nofollow"><'. $tag .' class="'. $class2 .'">'. $title .'</'. $tag .'></a>';
+if ( $excerpt ) $div	.=	prime2g_post_excerpt( $length, $post, $read_more );
 $div	.=	'</div>';
 }
 
@@ -514,20 +495,28 @@ return $div;
 }
 
 
-
 /**
  *	Content Body Template
  *	@since 1.0.79
  */
 if ( ! function_exists( 'prime2g_content_body_template' ) ) {
 function prime2g_content_body_template( $post = null ) {
-// Because other template functions send arrays, so for consistency:
+//	Because other template functions send arrays, so for consistency:
 if ( is_array( $post ) ) {
 	$post	=	$post[ 'post' ];
 }
 if ( ! $post ) { global $post; }
-	return do_shortcode( get_the_content( $post ) );
+	return apply_filters( 'the_content', get_the_content( null, false, $post ) );
 }
+}
+
+
+/**
+ *	Product
+ *	@since 1.0.98
+ */
+function prime2g_archive_loop_product_template() {
+get_template_part( 'woocommerce/content-product' );
 }
 
 

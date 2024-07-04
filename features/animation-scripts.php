@@ -1,32 +1,23 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	VIEWPORT ENTRY OBSERVER FOR ANIMATIONS
- *
  *	@since ToongeePrime Theme 1.0.44
- *	Added inAction class @since ToongeePrime Theme 1.0.50 for custom animations
+ *	Added inAction class @since 1.0.50 for custom animations
  */
 
-/**
- *	Use Shortcode to add scripts
- */
-
+/*	Scripts Shortcode	*/
 add_shortcode( 'prime2g_animation_script', 'prime2g_animations_observer_shortcode' );
 function prime2g_animations_observer_shortcode( $atts ) {
 $atts	=	shortcode_atts(
-array( 'threshold'	=>	0.25, 'use' => '' ),
+array( 'threshold' => 0.25, 'use' => '' ),
 $atts );
 extract( $atts );
 
 add_action( 'wp_footer', function() use( $threshold, $use ) {
-	if ( $use === 'jquery' ) {
-		echo '<script async defer id="prime2g_element_observerJQ">prime2g_element_observerJQ();';
+	if ( $use === 'jquery' )
 		echo prime2g_element_observerJQuery( $threshold );
-		echo '</script>';
-	}
-	else {
+	else
 		prime2g_element_observerJS( $threshold );
-	}
 }, 100 );
 }
 
@@ -52,73 +43,67 @@ let allAnimElems	=	[ inUps, inDwns, inLfts, inRgts, inActs ];
 run_prime_animations( allAnimElems );
 
 function run_prime_animations( allAnimElems ) {
-
-allAnimElems.forEach( ( animEls )=>{
+allAnimElems.forEach( animEls => {
 if ( ! animEls ) return;
 
 let prime2g_entryObserver	=	new IntersectionObserver( enterClassElements, observerOptions );
 
 if ( animEls ) {
-	animEls.forEach( ( itm )=>{
-		prime2g_entryObserver.observe( itm );
-	} );
+animEls.forEach( itm => {
+	prime2g_entryObserver.observe( itm );
+} );
 }
 
 function enterClassElements( animEls, prime2g_entryObserver ) {
-	animEls.forEach( ( itm )=>{
-		if ( itm.isIntersecting ) {
-			let elmt = itm.target;
-			elmt.classList.add( "enter" );
-			prime2g_entryObserver.unobserve( elmt );
-		}
-	} );
+animEls.forEach( itm => {
+	if ( itm.isIntersecting ) {
+		let elmt = itm.target;
+		elmt.classList.add( "enter" );
+		prime2g_entryObserver.unobserve( elmt );
+	}
+} );
 }
 } );
-
 }
 </script>
 <?php
 }
 
 
-
 /**
  *	USING JQUERY
- *	NOT wrapped in <script> tags
- *	@since ToongeePrime Theme 1.0.46
+ *	@since 1.0.46
  */
 function prime2g_element_observerJQuery( $threshold = 0.25 ) {
-$jq	=	'
+$jq	=	'<script async defer id="prime2gElementObserverJQ">
+prime2g_element_observerJQ();
 function prime2g_element_observerJQ() {
-	let jqObserverOptions = {
-		root: null,
-		rootMargin: "0px",
-		threshold: ';
-	$jq	.=	$threshold;
-	$jq	.=	'};
+let jqObserverOptions = {
+	root: null,
+	rootMargin: "0px",
+	threshold: '. $threshold .
+'};
 
-	jqAllAnimElms	=	".inUp, .inDown, .inLeft, .inRight, .inAction";
+jqAllAnimElms	=	".inUp, .inDown, .inLeft, .inRight, .inAction";
+const entries	=	Object.values( jQuery( jqAllAnimElms ).get() );
+let jqEntryObserver	=	new IntersectionObserver( onIntersection, jqObserverOptions );
+entries.forEach( el => { if ( ! el ) return; jqEntryObserver.observe( el ); } );
 
-	const entries	=	Object.values( jQuery( jqAllAnimElms ).get() );
-	let jqEntryObserver	=	new IntersectionObserver( onIntersection, jqObserverOptions );
-
-	entries.forEach( ( el )=> { if ( ! el ) return; jqEntryObserver.observe( el ); } );
-
-	function onIntersection( entries ) {
-		entries.forEach( entry => {
-			elTgt	=	entry.target;
-			if ( entry.isIntersecting ) {
-				elTgt.classList.add( "enter" );
-				if ( ! elTgt.classList.contains( "repeat" ) )
-					jqEntryObserver.unobserve( elTgt );
-			}
-			else if ( elTgt.classList.contains( "repeat" ) ) {
-					elTgt.classList.remove( "enter" );
-			}
-		} );
+function onIntersection( entries ) {
+entries.forEach( entry => {
+	elTgt	=	entry.target;
+	if ( entry.isIntersecting ) {
+		elTgt.classList.add( "enter" );
+		if ( ! elTgt.classList.contains( "repeat" ) )
+			jqEntryObserver.unobserve( elTgt );
 	}
-}';
-
+	else if ( elTgt.classList.contains( "repeat" ) ) {
+			elTgt.classList.remove( "enter" );
+	}
+} );
+}
+}
+</script>';
 return $jq;
 }
 

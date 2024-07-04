@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: FILE WRITER
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.91
  */

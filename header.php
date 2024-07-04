@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	THEME HEADER
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -48,18 +46,17 @@ else
 
 	<div id="contentWrap" class="contentWrap">
 
-	<?php
-	if ( 'header' !== $styles->title_place ) {
-		if ( $isSingular ) {
-			if ( ! function_exists( 'define_2gRMVTitle' ) ) {
-				prime2g_title_header( prime2g_title_header_classes() );
-			}
-		}
-		else {
+<?php
+if ( 'header' !== $styles->title_place ) {
+	if ( $isSingular ) {
+		if ( ! function_exists( 'define_2gRMVTitle' ) )
 			prime2g_title_header( prime2g_title_header_classes() );
-		}
 	}
-	?>
+	else {
+		prime2g_title_header( prime2g_title_header_classes() );
+	}
+}
+?>
 
 	<div id="content" class="site_content content<?php if ( ! prime2g_remove_sidebar() ) echo ' grid'; ?> site_width">
 

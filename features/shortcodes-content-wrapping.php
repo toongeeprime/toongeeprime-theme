@@ -1,18 +1,13 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CONTENT WRAPPING SHORTCODES
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.51
  */
 
-#	Show contents to:
 add_shortcode( 'prime_show_content_to', 'prime2g_showcontent_to' );
 function prime2g_showcontent_to( $atts, $content, $tag ) {
-
 $current_user	=	wp_get_current_user();
-
 $loggedin	=	is_user_logged_in();
 $content	=	do_shortcode( $content );
 
@@ -22,14 +17,12 @@ $atts	=	shortcode_atts(
 	'roles'		=>	'',
 	'userids'	=>	'',
 	'capability'=>	'',
-	'device'	=>	'',	#	@since 1.0.55
+	'device'	=>	''	#	@since 1.0.55
 	), $atts
 );
 extract( $atts );
 
-
 $output	=	'<div class="prime-showto-div">' . $content . '</div>';
-
 
 if ( ! empty( $users ) ) {
 	if ( $users === 'logged in' ) {
@@ -40,7 +33,6 @@ if ( ! empty( $users ) ) {
 	}
 }
 
-
 elseif ( ! empty( $device ) ) {
 $isMobile	=	wp_is_mobile();
 $devices	=	prime2g_devices_array();
@@ -49,31 +41,26 @@ if ( in_array( $device, $devices->mobiles ) && $isMobile ) return $output;
 if ( in_array( $device, $devices->desktops ) && ! $isMobile ) return $output;
 }
 
-
 elseif ( ! empty( $roles ) ) {
-$user_roles		=	$current_user->roles;
-$showtoRoles	=	explode( ',', $roles );
-$hasRoles		=	false;
+$user_roles	=	$current_user->roles;
+$showtoRoles=	explode( ',', $roles );
+$hasRoles	=	false;
 
 foreach ( $showtoRoles as $role ) {
 	if ( in_array( $role, $user_roles ) ) {
 		$hasRoles	=	true; break;
 	}
 }
-
 if ( $hasRoles ) return $output;
 }
 
-
 elseif ( ! empty( $userids ) ) {
-$userID		=	$current_user->ID;
-$userIDs	=	explode( ',', $userids );
-
-$hasID		=	in_array( $userID, $userIDs );
+$userID	=	$current_user->ID;
+$userIDs=	explode( ',', $userids );
+$hasID	=	in_array( $userID, $userIDs );
 
 if ( $hasID ) return $output;
 }
-
 
 elseif ( ! empty( $capability ) ) {
 $allcaps	=	$current_user->allcaps;
@@ -89,11 +76,9 @@ foreach ( $showtoCaps as $cap ) {
 if ( $hasCapabs ) return $output;
 }
 
-
 else {
 	return $output;
 }
-
 }
 
 

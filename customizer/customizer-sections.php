@@ -1,20 +1,18 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Theme's Customizer Sections
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
 
 /**
- *	ToongeePrime Theme Customizer Sections
+ *	Theme Customizer Sections
  */
 if ( ! function_exists( 'prime2g_customizer_sections' ) ) {
 
 function prime2g_customizer_sections( $wp_customize ) {
 /**
- *	@since ToongeePrime Theme 1.0.57
+ *	@since 1.0.57
  */
 $network	=	is_multisite();
 $is_site1	=	( $network && get_current_blog_id() === 1 );
@@ -30,7 +28,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 		'description'	=>	__( 'Set Theme Options', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	function() use( $network, $is_site1 ) {
-		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME' );
+		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME', true );
 		return ! $network || $homeOptions && $is_site1 || $network && ! $homeOptions; }
 	) );
 
@@ -73,7 +71,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 		'description'	=>	__( 'Menu Settings for the Theme', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	function() use( $network, $is_site1 ) {
-		$homeMenus	=	prime2g_constant_is_true( 'PRIME2G_MENUS_BY_NETWORK_HOME' );
+		$homeMenus	=	prime2g_constant_is_true( 'PRIME2G_MENUS_BY_NETWORK_HOME', true );
 		return ! $network || $homeMenus && $is_site1 || $network && ! $homeMenus; }
 	) );
 
@@ -99,7 +97,7 @@ return ! $network || prime2g_designing_at_networkhome() || $network && ! prime2g
 		'description'	=>	__( 'Social media links and contact details', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	function() use( $network, $is_site1 ) {
-		$homeSocials	=	prime2g_constant_is_true( 'PRIME2G_SOCIALS_BY_NETWORK_HOME' );
+		$homeSocials	=	prime2g_constant_is_true( 'PRIME2G_SOCIALS_BY_NETWORK_HOME', true );
 		return ! $network || $homeSocials && $is_site1 || $network && ! $homeSocials; }
 	) );
 
@@ -149,7 +147,7 @@ if ( prime2g_use_extras() ) {
 		'description'	=>	__( 'Extra features for the theme', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	function() use( $network, $is_site1 ) {
-		$homeExtras	=	prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME' );
+		$homeExtras	=	prime2g_constant_is_true( 'PRIME2G_EXTRAS_BY_NETWORK_HOME', true );
 		return ! $network || $homeExtras && $is_site1 || $network && ! $homeExtras; }
 	) );
 
@@ -195,7 +193,7 @@ if ( class_exists( 'woocommerce' ) ) {
 		'description'	=>	__( 'SEO &amp; Site Performance Settings', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	function() use( $network, $is_site1 ) {
-		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME' );
+		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME', true );
 		return ! $network || $homeOptions && $is_site1 || $network && ! $homeOptions; }
 	) );
 
@@ -209,7 +207,7 @@ if ( class_exists( 'woocommerce' ) ) {
 		'description'	=>	__( 'Advanced Settings - BE CAUTIOUS!', PRIME2G_TEXTDOM ),
 		'capability'	=>	'edit_theme_options',
 		'active_callback'	=>	function() use( $network, $is_site1 ) {
-		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME' );
+		$homeOptions	=	prime2g_constant_is_true( 'PRIME2G_OPTIONS_BY_NETWORK_HOME', true );
 		return ! $network || $homeOptions && $is_site1 || $network && ! $homeOptions; }
 	) );
 

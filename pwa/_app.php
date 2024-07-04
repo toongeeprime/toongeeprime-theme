@@ -3,11 +3,13 @@
  *	THEME PWA
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
- *
- **
+ */
+if ( ! prime2g_add_theme_pwa() ) return;
+
+/**
  *	REQUIRE 'PHP' FILES VIA DIRECTORIES ARRAY
  */
-$directories	=	[ 'classes', 'includes' ];
+$directories	=	[ 'classes', 'includes', 'push' ];
 
 foreach( $directories as $dir ) {
 	$folder	=	PRIME2G_PWA_PATH . $dir .'/';
@@ -19,31 +21,24 @@ foreach( $directories as $dir ) {
 }
 
 
-/**
- *	ACTIVATE
- */
+/*	ACTIVATE	*/
 if ( prime2g_activate_theme_pwa() ) {
 
 if ( function_exists( 'prime2g_child_pwa_activator' ) )
 	prime2g_child_pwa_activator();
 else
-	prime2g_pwa_activator();
+	new Prime2g_Web_Manifest;
 
 }
 
 
 
-function prime2g_pwa_activator() {
-if ( get_theme_mod( 'prime2g_use_theme_pwa' ) ) {
 /*
-Use with WP PWA plugin if active. **For later review
+// Use with WP PWA plugin. **For later review
 if ( class_exists( 'WP_Service_Workers' ) ) {
 Prime2g_Hook_WP_PWA::instance();
 }
 else {}
 */
-new Prime2g_Web_Manifest();
 
-}
-}
 

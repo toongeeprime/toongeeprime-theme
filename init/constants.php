@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
- *	THEME CONSTANTS:
- *
+ *	THEME CONSTANTS
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  *	Contents moved to this file being new @since ToongeePrime Theme 1.0.49
@@ -30,9 +28,10 @@ defined( 'PRIME2G_ENQ_JQUERY' ) || define( 'PRIME2G_ENQ_JQUERY', false ); #	@1.0
 
 /**
  *	Define-able Constants:
- *
+
 PRIME2G_EXTRAS
 PRIME2G_ADD_PWA
+PRIME2G_PWA_PUSHNOTIF
 PRIME2G_NOHEADER
 PRIME2G_NOFOOTER
 PRIME2G_NOSIDEBAR

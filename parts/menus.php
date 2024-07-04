@@ -101,7 +101,7 @@ echo '</section>';
 }
 
 #	Conditions added @since 1.0.77
-if ( $min_v23 && 'mega_menu' === $styles->menu_type ) {
+if ( $min_v23 && 'mega_menu' === $styles->menu_type ) {	#	@mobiles
 
 	$partID	=	get_theme_mod( 'prime2g_mobile_menu_template_part_id', '' );
 	echo '<div id="megaMenuWrap" class="prel">'. prime2g_insert_template_part( $partID, false ) .'</div>';
@@ -287,7 +287,7 @@ echo	'</div></section>';
  *	ctrlw class is for JS width adjustment
  *	@since 1.0.76
 
-<nav id="megaMenu" class="desktop menu-main-container">
+<nav id="megaMenu" class="desktop menu-main-container prel" style="z-index:+1;">
 <ul id="megaMenuLinks" class="menu">
  	<li class="megamenuLi megaMenuContents1"><a href="#" class="megamenu_link">Item 1</a>
 	<div id="megaMenuContents1" class="megamenuContents ctrlw slimscrollbar">

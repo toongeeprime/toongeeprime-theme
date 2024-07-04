@@ -11,7 +11,7 @@ if ( ! prime2g_add_theme_pwa() ) return;
 
 $postMsg_text	=	[ 'type' => 'theme_mod', 'transport' => 'postMessage', 'sanitize_callback' => 'sanitize_text_field' ];
 
-if ( is_multisite() ) {
+if ( $network = is_multisite() ) {
 	switch_to_blog( 1 );
 	$route	=	get_theme_mod( 'prime2g_route_apps_to_networkhome' );
 	restore_current_blog();
@@ -26,7 +26,7 @@ if ( is_multisite() ) {
 		'section'	=>	'prime2g_theme_pwa_section'
 	) );
 
-if ( is_multisite() && get_current_blog_id() === 1 ) {
+if ( $network && get_current_blog_id() === 1 ) {
 	$wp_customize->add_setting( 'prime2g_route_apps_to_networkhome', $postMsg_text );
 	$wp_customize->add_control( 'prime2g_route_apps_to_networkhome', array(
 		'label'		=>	__( 'Route All Sites\' Apps to Network Home?', PRIME2G_TEXTDOM ),

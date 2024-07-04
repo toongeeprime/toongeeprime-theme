@@ -52,8 +52,7 @@ function toongeeprime_theme_setup() {
 		add_theme_support( 'automatic-feed-links' );
 
 		#	Custom background
-		add_theme_support( 'custom-background',
-		[
+		add_theme_support( 'custom-background', [
 			'default-image'			=>	'',
 			'default-preset'		=>	'custom',
 			'default-position-x'	=>	'center',
@@ -62,8 +61,7 @@ function toongeeprime_theme_setup() {
 			'default-repeat'		=>	'no-repeat',
 			'default-attachment'	=>	'fixed',
 			'default-color'			=>	$style->background
-		]
-		);
+		] );
 
 		#	Post-formats support
 		add_theme_support( 'post-formats',
@@ -93,58 +91,56 @@ function toongeeprime_theme_setup() {
 		add_editor_style( get_theme_file_uri( '/files/theme-min.css' ) );
 
 		#	Add custom editor font sizes
-		add_theme_support( 'editor-font-sizes',
-		array(
+		add_theme_support( 'editor-font-sizes', [
 			array(
-				'name'      => esc_html__( 'Extra small', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'XS', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 16,
-				'slug'      => 'extra-small',
+				'name'		=>	esc_html__( 'Extra small', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'XS', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	16,
+				'slug'		=>	'extra-small'
 			),
 			array(
-				'name'      => esc_html__( 'Small', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'S', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 18,
-				'slug'      => 'small',
+				'name'		=>	esc_html__( 'Small', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'S', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	18,
+				'slug'		=>	'small'
 			),
 			array(
-				'name'      => esc_html__( 'Normal', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'M', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 20,
-				'slug'      => 'normal',
+				'name'		=>	esc_html__( 'Normal', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'M', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	20,
+				'slug'		=>	'normal'
 			),
 			array(
-				'name'      => esc_html__( 'Large', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'L', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 24,
-				'slug'      => 'large',
+				'name'		=>	esc_html__( 'Large', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'L', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	24,
+				'slug'		=>	'large'
 			),
 			array(
-				'name'      => esc_html__( 'Extra large', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'XL', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 48,
-				'slug'      => 'extra-large',
+				'name'		=>	esc_html__( 'Extra large', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'XL', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	48,
+				'slug'		=>	'extra-large'
 			),
 			array(
-				'name'      => esc_html__( 'Really Big', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'RBig', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 72,
-				'slug'      => 'really-big',
+				'name'		=>	esc_html__( 'Really Big', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'RBig', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	72,
+				'slug'		=>	'really-big'
 			),
 			array(
-				'name'      => esc_html__( 'Huge', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'XXL', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 96,
-				'slug'      => 'huge',
+				'name'		=>	esc_html__( 'Huge', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'XXL', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	96,
+				'slug'		=>	'huge'
 			),
 			array(
-				'name'      => esc_html__( 'Gigantic', PRIME2G_TEXTDOM ),
-				'shortName' => esc_html_x( 'XXXL', 'Font size', PRIME2G_TEXTDOM ),
-				'size'      => 144,
-				'slug'      => 'gigantic',
+				'name'		=>	esc_html__( 'Gigantic', PRIME2G_TEXTDOM ),
+				'shortName'	=>	esc_html_x( 'XXXL', 'Font size', PRIME2G_TEXTDOM ),
+				'size'		=>	144,
+				'slug'		=>	'gigantic'
 			),
-		)
-		);
+		] );
 
 		#	Editor color palette
 		$black     = '#000000';
@@ -158,130 +154,124 @@ function toongeeprime_theme_setup() {
 		$yellow    = '#EEEADD';
 		$white     = '#FFFFFF';
 
-		add_theme_support( 'editor-color-palette',
-		array(
+		add_theme_support( 'editor-color-palette', [
 			array(
-				'name'  => esc_html__( 'Brand Color', PRIME2G_TEXTDOM ),
-				'slug'  => 'brandcolor',
-				'color' => $style->brand,
+				'name'	=>	esc_html__( 'Brand Color', PRIME2G_TEXTDOM ),
+				'slug'	=>	'brandcolor',
+				'color'	=>	$style->brand
 			),
 			array(
-				'name'  => esc_html__( 'Brand Color 2', PRIME2G_TEXTDOM ),
-				'slug'  => 'brandcolor2',
-				'color' => $style->brand2,
+				'name'	=>	esc_html__( 'Brand Color 2', PRIME2G_TEXTDOM ),
+				'slug'	=>	'brandcolor2',
+				'color'	=>	$style->brand2
 			),
 			array(
-				'name'  => esc_html__( 'Site Background Color', PRIME2G_TEXTDOM ),
-				'slug'  => 'sitebackground',
-				'color' => $style->background,
+				'name'	=>	esc_html__( 'Site Background Color', PRIME2G_TEXTDOM ),
+				'slug'	=>	'sitebackground',
+				'color'	=>	$style->background
 			),
 			array(
-				'name'  => esc_html__( 'Buttons Background Color', PRIME2G_TEXTDOM ),
-				'slug'  => 'buttonbg',
-				'color' => $style->buttonbg,
+				'name'	=>	esc_html__( 'Buttons Background Color', PRIME2G_TEXTDOM ),
+				'slug'	=>	'buttonbg',
+				'color'	=>	$style->buttonbg
 			),
 			array(
-				'name'  => esc_html__( 'Black', PRIME2G_TEXTDOM ),
-				'slug'  => 'black',
-				'color' => $black,
+				'name'	=>	esc_html__( 'Black', PRIME2G_TEXTDOM ),
+				'slug'	=>	'black',
+				'color'	=>	$black
 			),
 			array(
-				'name'  => esc_html__( 'Dark gray', PRIME2G_TEXTDOM ),
-				'slug'  => 'dark-gray',
-				'color' => $dark_gray,
+				'name'	=>	esc_html__( 'Dark gray', PRIME2G_TEXTDOM ),
+				'slug'	=>	'dark-gray',
+				'color'	=>	$dark_gray
 			),
 			array(
-				'name'  => esc_html__( 'Gray', PRIME2G_TEXTDOM ),
-				'slug'  => 'gray',
-				'color' => $gray,
+				'name'	=>	esc_html__( 'Gray', PRIME2G_TEXTDOM ),
+				'slug'	=>	'gray',
+				'color'	=>	$gray
 			),
 			array(
-				'name'  => esc_html__( 'Green', PRIME2G_TEXTDOM ),
-				'slug'  => 'green',
-				'color' => $green,
+				'name'	=>	esc_html__( 'Green', PRIME2G_TEXTDOM ),
+				'slug'	=>	'green',
+				'color'	=>	$green
 			),
 			array(
-				'name'  => esc_html__( 'Blue', PRIME2G_TEXTDOM ),
-				'slug'  => 'blue',
-				'color' => $blue,
+				'name'	=>	esc_html__( 'Blue', PRIME2G_TEXTDOM ),
+				'slug'	=>	'blue',
+				'color'	=>	$blue
 			),
 			array(
-				'name'  => esc_html__( 'Purple', PRIME2G_TEXTDOM ),
-				'slug'  => 'purple',
-				'color' => $purple,
+				'name'	=>	esc_html__( 'Purple', PRIME2G_TEXTDOM ),
+				'slug'	=>	'purple',
+				'color'	=>	$purple
 			),
 			array(
-				'name'  => esc_html__( 'Red', PRIME2G_TEXTDOM ),
-				'slug'  => 'red',
-				'color' => $red,
+				'name'	=>	esc_html__( 'Red', PRIME2G_TEXTDOM ),
+				'slug'	=>	'red',
+				'color'	=>	$red
 			),
 			array(
-				'name'  => esc_html__( 'Orange', PRIME2G_TEXTDOM ),
-				'slug'  => 'orange',
-				'color' => $orange,
+				'name'	=>	esc_html__( 'Orange', PRIME2G_TEXTDOM ),
+				'slug'	=>	'orange',
+				'color'	=>	$orange
 			),
 			array(
-				'name'  => esc_html__( 'Yellow', PRIME2G_TEXTDOM ),
-				'slug'  => 'yellow',
-				'color' => $yellow,
+				'name'	=>	esc_html__( 'Yellow', PRIME2G_TEXTDOM ),
+				'slug'	=>	'yellow',
+				'color'	=>	$yellow
 			),
 			array(
-				'name'  => esc_html__( 'White', PRIME2G_TEXTDOM ),
-				'slug'  => 'white',
-				'color' => $white,
+				'name'	=>	esc_html__( 'White', PRIME2G_TEXTDOM ),
+				'slug'	=>	'white',
+				'color'	=>	$white
 			),
-		)
-		);
+		] );
 
-		add_theme_support( 'editor-gradient-presets',
-		array(
+		add_theme_support( 'editor-gradient-presets', [
 			array(
-				'name'     => esc_html__( 'Purple to yellow', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $purple . ' 0%, ' . $yellow . ' 100%)',
-				'slug'     => 'purple-to-yellow',
+				'name'		=>	esc_html__( 'Purple to yellow', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $purple . ' 0%, ' . $yellow . ' 100%)',
+				'slug'		=>	'purple-to-yellow'
 			),
 			array(
-				'name'     => esc_html__( 'Yellow to purple', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $yellow . ' 0%, ' . $purple . ' 100%)',
-				'slug'     => 'yellow-to-purple',
+				'name'		=>	esc_html__( 'Yellow to purple', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $yellow . ' 0%, ' . $purple . ' 100%)',
+				'slug'		=>	'yellow-to-purple'
 			),
 			array(
-				'name'     => esc_html__( 'Green to yellow', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $green . ' 0%, ' . $yellow . ' 100%)',
-				'slug'     => 'green-to-yellow',
+				'name'		=>	esc_html__( 'Green to yellow', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $green . ' 0%, ' . $yellow . ' 100%)',
+				'slug'		=>	'green-to-yellow'
 			),
 			array(
-				'name'     => esc_html__( 'Yellow to green', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $yellow . ' 0%, ' . $green . ' 100%)',
-				'slug'     => 'yellow-to-green',
+				'name'		=>	esc_html__( 'Yellow to green', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $yellow . ' 0%, ' . $green . ' 100%)',
+				'slug'		=>	'yellow-to-green'
 			),
 			array(
-				'name'     => esc_html__( 'Red to yellow', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $red . ' 0%, ' . $yellow . ' 100%)',
-				'slug'     => 'red-to-yellow',
+				'name'		=>	esc_html__( 'Red to yellow', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $red . ' 0%, ' . $yellow . ' 100%)',
+				'slug'		=>	'red-to-yellow'
 			),
 			array(
-				'name'     => esc_html__( 'Yellow to red', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $yellow . ' 0%, ' . $red . ' 100%)',
-				'slug'     => 'yellow-to-red',
+				'name'		=>	esc_html__( 'Yellow to red', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $yellow . ' 0%, ' . $red . ' 100%)',
+				'slug'		=>	'yellow-to-red'
 			),
 			array(
-				'name'     => esc_html__( 'Purple to red', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $purple . ' 0%, ' . $red . ' 100%)',
-				'slug'     => 'purple-to-red',
+				'name'		=>	esc_html__( 'Purple to red', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $purple . ' 0%, ' . $red . ' 100%)',
+				'slug'		=>	'purple-to-red'
 			),
 			array(
-				'name'     => esc_html__( 'Red to purple', PRIME2G_TEXTDOM ),
-				'gradient' => 'linear-gradient(160deg, ' . $red . ' 0%, ' . $purple . ' 100%)',
-				'slug'     => 'red-to-purple',
+				'name'		=>	esc_html__( 'Red to purple', PRIME2G_TEXTDOM ),
+				'gradient'	=>	'linear-gradient(160deg, ' . $red . ' 0%, ' . $purple . ' 100%)',
+				'slug'		=>	'red-to-purple'
 			),
-		)
-		);
-
+		] );
 
 		#	WooCommerce Support
-		add_theme_support( 'woocommerce',
-		array(
+		add_theme_support( 'woocommerce', array(
 			'thumbnail_image_width'	=>	250,
 			'single_image_width'	=>	750,
 			'product_grid'			=>	array(
@@ -290,10 +280,10 @@ function toongeeprime_theme_setup() {
 				'max_rows'			=>	15,
 				'default_columns'	=>	4,
 				'min_columns'		=>	1,
-				'max_columns'		=>	8,
+				'max_columns'		=>	8
 			)
-		)
-		);
+		) );
+
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-zoom' );
 		add_theme_support( 'wc-product-gallery-slider' );

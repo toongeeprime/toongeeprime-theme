@@ -1,11 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	ACCORDION FRAME & SCRIPTS
  *	@since ToongeePrime Theme 1.0.55
- */
-
-/*
+ *
+ *
  *****	ACCORDION FRAME TEMPLATE	*****
 <section class="prime2g_accordion_wrap">
 <div class="prime2g_accordion_set prel">

@@ -478,7 +478,7 @@ $css	=	'#container{top:46px;}
 	height:46px;display:flex;align-items:center;
 	justify-content:space-between;z-index:+1;
 }
-.main-menu, .menu_toggbar{box-shadow:0 0 12px rgba(0,0,0,0.25);z-index:2;}
+.main-menu, .menu_toggbar{box-shadow:0 0 12px rgba(0,0,0,0.25);z-index:999991;}
 .main-menu{
 background:var(--content-background);left:0;right:var(--min-pad);position:fixed;
 bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200%);overflow-y:auto;
@@ -486,7 +486,7 @@ bottom:0;padding-bottom:var(--min-pad);transition:0.4s;transform:translateX(-200
 .main-menu::-webkit-scrollbar{width:12px;background:silver;}
 .main-menu::-webkit-scrollbar-thumb{background:var(--content-text);border-radius:10px;}
 .main-menu::-webkit-scrollbar-thumb:hover{background:steelblue;}
-.prime .main-menu{transform:translate(0);z-index:1;}
+.prime .main-menu{transform:translate(0);z-index:999990;}
 .collapsible-navs .sub-menu a{margin-left:var(--min-pad);}
 .collapsible-navs a{border-left:3px solid transparent;display:inline-block;}
 .collapsible-navs a:hover{border-color:var(--content-background);}';

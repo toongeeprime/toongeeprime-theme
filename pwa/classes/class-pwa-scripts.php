@@ -7,23 +7,47 @@
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.55
  *
- **
- *	Use filter: prime2g_filter_pwa_scripts to add code to pwa script.js file
+ *	Use filter: prime2g_filter_pwa_scripts to add code to pwa script.js file @since 1.0.97
  */
 
 class Prime2g_PWA_Scripts {
 
 	public $scripts;
 	private static $instance;
+	#	Caching: @since 1.0.98
+	private $same_version;
 
 	public function __construct() {
 	if ( ! isset( self::$instance ) ) {
-		$this->scripts	=	"// PWA Scripts\n";
-		$this->scripts	.=	$this->onlineMonitor();
-		$this->scripts	.=	apply_filters( 'prime2g_filter_pwa_scripts', '', $this->scripts );
+		$this->same_version	=	prime2g_app_option( 'scripts_version' );
+		$this->scripts		=	$this->js();
+	}
+	return self::$instance;
 	}
 
-	return self::$instance;
+
+	function js() {
+	$js	=	$this->cached();
+
+	if ( ! $this->same_version )
+		prime2g_app_option( [ 'name'=>'scripts_version', 'update'=>true ] );
+
+	return $js . apply_filters( 'prime2g_filter_pwa_scripts', '', $js );
+	}
+
+
+	private function cached() {
+	$js	=	prime2g_app_option( 'app_scripts' );
+
+	if ( false === $js || ! $this->same_version ) {
+		$this->scripts	=	"// PWA Scripts\n";
+		$this->scripts	.=	$this->onlineMonitor();
+		$this->scripts	.=	apply_filters( 'prime2g_filter_cached_pwa_scripts', '', $this->scripts );
+		prime2g_app_option( [ 'name'=>'app_scripts', 'update'=>true, 'value'=>$this->scripts ] );
+		$js	=	prime2g_app_option( 'app_scripts' );
+	}
+
+	return $js;
 	}
 
 
@@ -114,12 +138,6 @@ const ooID	=	'#prime2g_offOnline_notif',
 	connClass	=	'.connected.oo_notif',
 	offClass	=	'.offline.oo_notif';
 
-function p2gOffOONotif() {
-if ( p2getEl( '#prime2g_offOnline_notif' ) ) {
-	setTimeout( ()=>{ prime2g_addClass( [ '#prime2g_offOnline_notif' ], 'off', false ); }, 10000 );
-}
-}
-
 if ( navigator.onLine ) {
 	console.log( 'connected' );
 	prime2g_addClass( [ onClass, offClass ], 'off', false );
@@ -146,7 +164,12 @@ else {
 	prime2g_remClass( [ ooID, offClass ], 'off', false );
 	p2gOffOONotif();
 }
+}
 
+function p2gOffOONotif() {
+if ( p2getEl( '#prime2g_offOnline_notif' ) ) {
+	setTimeout( ()=>{ prime2g_addClass( [ '#prime2g_offOnline_notif' ], 'off', false ); }, 10000 );
+}
 }
 
 function reachToUrl( url ) {

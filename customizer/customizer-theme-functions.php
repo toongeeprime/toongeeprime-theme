@@ -13,7 +13,7 @@
 if ( ! function_exists( 'prime2g_theme_mod_social_and_contacts' ) ) {
 function prime2g_theme_mod_social_and_contacts( $incAddress = true ) {
 # 1.0.57
-$net_home_socials	=	prime2g_constant_is_true( 'PRIME2G_SOCIALS_BY_NETWORK_HOME' );
+$net_home_socials	=	prime2g_constant_is_true( 'PRIME2G_SOCIALS_BY_NETWORK_HOME', true );
 if ( $net_home_socials ) switch_to_blog( 1 );
 
 /**

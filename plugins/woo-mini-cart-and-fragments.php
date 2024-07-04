@@ -38,7 +38,6 @@ echo prime2g_woo_mini_cart_css(); ?>
 }
 
 
-
 /**
  *	Show cart contents/total template
  */
@@ -46,14 +45,15 @@ function prime2g_woo_cart_contents_fragments( $get = 'span', $echo = true ) {
 if ( is_cart() || is_checkout() ) return '';
 global $woocommerce;
 
-$count	=	$woocommerce->cart->cart_contents_count;
+$count	=	$woocommerce->cart ? $woocommerce->cart->cart_contents_count : 0;
+$cart_total	=	$count ? $woocommerce->cart->get_cart_total() : '';
 $empty_class	=	$count == 0 ? ' empty' : '';
 $class	=	'cart_count_fragmt';
 
 // $items	=	'<span class="items">'. sprintf( _n( '%d item', '%d items', $count, PRIME2G_TEXTDOM ), $count ) .'</span>';
 $items	=	$count == 1 ? ' item' : ' items';
 $items	=	'<span class="items'. $empty_class .'"><span class="number">'. $count . '</span><span class="ii">' . __( $items, PRIME2G_TEXTDOM ) .'</span></span>';
-$total	=	'<span class="total'. $empty_class .'">'. $woocommerce->cart->get_cart_total() .'</span>';
+$total	=	'<span class="total'. $empty_class .'">'. $cart_total .'</span>';
 
 $link_open	=	'<a class="'. $class .'" href="'. esc_url( wc_get_cart_url() ) .'" title="'. __( 'View your shopping cart', PRIME2G_TEXTDOM ) .'">';
 $link_close	=	'</a>';

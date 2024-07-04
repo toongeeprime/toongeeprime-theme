@@ -1,7 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	Media Features "ACTIVATOR"
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0.50
  */

@@ -1,18 +1,14 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	OF JETPACK
- *
  *	@package WordPress
  *	@package JetPack
  *	@since ToongeePrime Theme 1.0.47
  */
 
-if ( class_exists( 'Jetpack' ) ) :
+if ( class_exists( 'Jetpack' ) ):
 
-/**
- *	@since 1.0.87
- */
+#	@since 1.0.87
 add_action( 'wp_head', 'prime2g_jetpack_css' );
 function prime2g_jetpack_css() {
 echo	'<style id="prime2g_jetpackCSS">
@@ -21,9 +17,7 @@ echo	'<style id="prime2g_jetpackCSS">
 }
 
 
-/**
- *	Set JetPack related posts count
- */
+#	Set JetPack related posts count
 add_filter( 'jetpack_relatedposts_filter_options', 'prime2g_moreJP_related_posts' );
 function prime2g_moreJP_related_posts( $options ) {
 	$options[ 'size' ]	=	prime2g_jp_relatedposts_count();
@@ -31,14 +25,12 @@ function prime2g_moreJP_related_posts( $options ) {
 }
 
 
-/**
- *	Remove JetPack related posts to add them to theme
- */
+#	Remove JetPack related posts to add them to theme
 add_action( 'wp', 'prime2g_removeJP_related_posts', 20 );
 function prime2g_removeJP_related_posts() {
-	if ( class_exists( 'Jetpack_RelatedPosts' ) ) { # retain
+	if ( class_exists( 'Jetpack_RelatedPosts' ) ) {	#	retain
 		$jprp		=	Jetpack_RelatedPosts::init();
-		$callback	=	array( $jprp, 'filter_add_target_to_dom' );
+		$callback	=	[ $jprp, 'filter_add_target_to_dom' ];
 		remove_filter( 'the_content', $callback, 40 );
 	}
 }
@@ -58,9 +50,7 @@ function prime2g_add_jp_related_posts() {
 }
 
 
-/**
- *	JP Infifite Scroll Footer Credit
- */
+#	JP Infifite Scroll Footer Credit
 add_filter( 'infinite_scroll_credit', 'prime2g_infiniteScroll_credit' );
 if ( ! function_exists( 'prime2g_infiniteScroll_credit' ) ) {
 function prime2g_infiniteScroll_credit() {
@@ -104,9 +94,7 @@ if ( function_exists( 'is_shop' ) && is_woocommerce() ) return;
 }
 
 
-/**
- *	@since Theme 1.0.50
- */
+#	@since Theme 1.0.50
 add_filter( 'infinite_scroll_settings', 'prime2g_infinite_scroll_settings' );
 function prime2g_infinite_scroll_settings( $args ) {
 if ( is_array( $args ) )
@@ -119,9 +107,7 @@ if ( ! function_exists( 'prime2g_jp_infiniteScroll_count' ) ) {
 	function prime2g_jp_infiniteScroll_count() { return 8; }
 }
 
-/**
- *	@since Theme 1.0.51
- */
+#	@since Theme 1.0.51
 if ( ! function_exists( 'prime2g_jp_relatedPosts_count' ) ) {
 	function prime2g_jp_relatedPosts_count() { return 6; }
 }

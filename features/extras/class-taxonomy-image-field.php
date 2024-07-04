@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: TAXONOMY IMAGE FIELD
- *
  *	File must be in this dir due to helper dependencies
  *	***			Class called @ theme-extras.php
  *	@https://pluginrepublic.com/adding-an-image-upload-field-to-categories
@@ -84,16 +82,16 @@ if ( isset( $_POST[ 'thumbnail_id' ] ) && '' !== $_POST[ 'thumbnail_id' ] ) {
 
 public function add_script() { ?>
 <script id="akawey_taxonomyImageField">
-jQuery(document).ready( function($){
+jQuery(document).ready( ($)=>{
 function ct_media_upload(button_class){
 var _custom_media = true,
 _orig_send_attachment = wp.media.editor.send.attachment;
-$('body').on('click', button_class, function(e){
+$('body').on('click', button_class, (e)=>{
 var button_id = '#'+$(this).attr('id');
 var send_attachment_bkp = wp.media.editor.send.attachment;
 var button = $(button_id);
 _custom_media = true;
-	wp.media.editor.send.attachment = function(props, attachment){
+	wp.media.editor.send.attachment = (props, attachment)=>{
 		if ( _custom_media ){
 			$('#thumbnail_id').val(attachment.id);
 			$('#taxon-image-wrapper').html('<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />');
@@ -108,12 +106,12 @@ return false;
 });
 }
 ct_media_upload('.akw_tax_media_button.button'); 
-$('body').on('click','.akw_tax_media_remove',function(){
+$('body').on('click','.akw_tax_media_remove',()=>{
 	$('#thumbnail_id').val('');
 	$('#taxon-image-wrapper').html('<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />');
 });
 // Thanks: http://stackoverflow.com/questions/15281995/wordpress-create-taxon-ajax-response
-$(document).ajaxComplete(function(event, xhr, settings){
+$(document).ajaxComplete((event, xhr, settings)=>{
 var queryStringArr = settings.data.split('&');
 	if ( $.inArray('action=add-tag', queryStringArr) !== -1 ){
 	var xml = xhr.responseXML;

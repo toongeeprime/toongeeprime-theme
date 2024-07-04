@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Customizer for Theme Archives
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */

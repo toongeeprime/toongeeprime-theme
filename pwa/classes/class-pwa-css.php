@@ -9,25 +9,50 @@ class Prime2g_PWA_CSS {
 
 	public	$styles;
 	private static $instance;
+	#	Caching: @since 1.0.98
+	private $same_version;
 
 	public function __construct() {
 	if ( ! isset( self::$instance ) ) {
-	add_action( 'wp_head', function() {
-		$start	=	new self();
-		$this->styles	=	$start->app();
-		$this->styles	.=	$start->sharerCSS();
-		$this->styles	.=	apply_filters( 'prime2g_filter_pwa_styles', '', $this->styles );
+		$this->same_version	=	prime2g_app_option( 'styles_version' );
+		$this->styles		=	$this->css();
 
-		echo '<style id="prime_AppCSS">'. $this->styles .'</style>';
-	}, 99 );
+	add_action( 'wp_head', function() {
+	$start	=	new self();
+	echo '<style id="prime_AppCSS">'. $start->styles .'</style>';
+	}, 100 );
 	}
 
 	return self::$instance;
 	}
 
 
+	function css() {
+	$css	=	$this->cached();
+
+	if ( ! $this->same_version )
+		prime2g_app_option( [ 'name'=>'styles_version', 'update'=>true ] );
+
+	return $css . apply_filters( 'prime2g_filter_pwa_styles', '', $css );
+	}
+
+
+	private function cached() {
+	$css	=	prime2g_app_option( 'app_styles' );
+
+	if ( false === $css || ! $this->same_version ) {
+		$this->styles	=	$this->app();
+		$this->styles	.=	apply_filters( 'prime2g_filter_cached_pwa_styles', '', $this->styles );
+		prime2g_app_option( [ 'name'=>'app_styles', 'update'=>true, 'value'=>$this->styles ] );
+		$css	=	prime2g_app_option( 'app_styles' );
+	}
+
+	return $css;
+	}
+
+
 	function app() {
-		return '#prime2g_offOnline_notif.off{transform:translateY(120%);}
+	return '#prime2g_offOnline_notif.off{transform:translateY(120%);}
 #prime2g_offOnline_notif{position:fixed;left:0;right:0;bottom:0;transition:0.2s;
 background:var(--content-text);color:var(--content-background);line-height:1;}
 .oo_notif.off{display:none;}
@@ -37,7 +62,8 @@ background:var(--content-text);color:var(--content-background);line-height:1;}
 .unselectable{user-select:none;}
 }';
 	}
-/*
+
+/**
 https://web.dev/learn/pwa/app-design/
 setting user-system fonts
 selector {
@@ -49,11 +75,5 @@ OTHER MEDIA QUERIES: prefers-colors-scheme, honoring prefers-reduced-motion
 Disable Pull to refresh
 body { overscroll-behavior-y: contain; }
 */
-
-
-	function sharerCSS() {
-		return '
-@media (display-mode:browser) { #'. PWA_SHARER_BTN_ID .'{display:none;} }';
-	}
 
 }

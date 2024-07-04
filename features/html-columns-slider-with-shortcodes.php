@@ -1,12 +1,11 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
- *	MULTI-HTML SLIDER FRAME SCRIPTS
+ *	MULTI-COLUMN HTML SLIDER SCRIPTS
  *	@since ToongeePrime Theme 1.0.51
  */
 
 /**
- *****	MULTI-HTML SLIDER FRAME TEMPLATE *No Dots	*****
+ *****	MULTI-COLUMN HTML SLIDER FRAME TEMPLATE *No Dots	*****
 <section class="prime2g_multi_slider mslidernum">
 <div class="parameters" data-p2g-columns="4"></div>
 
@@ -14,7 +13,7 @@
 		<div class="prime2g_multislide_wrap prel">
 			<div class="prime2g_mslides_flex prel">
 
-			<div class="mSlidebox"><div class="inslide"></div></div><!-- a html block -->
+		<div class="mSlidebox"><div class="inslide"></div></div><!-- a html block -->
 
 			</div>
 		</div>
@@ -62,18 +61,13 @@ let allmSliderz	=	p2getAll( '.mslidernum' ),
 const sClass	=	'mslide_';
 asID = psID = nsID = 1;
 
-
-
 // Get number of slider columns
 function p2g_mslideCols( slider ) {
 sData	=	slider.querySelector( '.parameters' );
 dataCol	=	sData.dataset.p2gColumns || null;
 
-// return ( dataCol ? dataCol : 4 );
 return dataCol || 4;
 }
-
-
 
 // Determine widths of slider wrapper and slides
 function p2g_msWidth( slider, wrap = false, tsNum = null ) {
@@ -95,7 +89,6 @@ return ww + '%';
 return ( 100 / cols ) + '%';
 }
 
-
 // Identify each slider on a page with a unique class
 allmSliderz.forEach( (s)=>{
 	ssID	=	asID++;
@@ -115,7 +108,6 @@ allmSliderz.forEach( (s)=>{
 	} );
 }
 );
-
 
 
 // Activate all previous & next buttons per slider
@@ -159,7 +151,7 @@ function p2g_movemSlide( div, cloned ) {
 	div.style.width		=	div.style.opacity	=	'0';
 	cloned.style.width	=	cloned.style.opacity	=	'0';
 
-	msWidth		=	p2g_msWidth( parentDiv );
+	msWidth	=	p2g_msWidth( parentDiv );
 	setTimeout( ()=>{ cloned.style.width	=	msWidth; }, 100 );
 	setTimeout( ()=>{ cloned.style.opacity	=	'1'; }, 300 );
 	setTimeout( ()=>{ div.remove(); }, 500 );

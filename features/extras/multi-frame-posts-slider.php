@@ -1,9 +1,7 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
- *	MULTI FRAME POSTS SLIDER
- *
- *	* MANUALLY ADD CSS AND JS: to prevent mulitple inserts
+ *	MULTI COLUMN POSTS SLIDER
+ *	* ADD CSS and JS when in use
  *	@since ToongeePrime Theme 1.0.51
  */
 
@@ -17,7 +15,7 @@ $atts	=	shortcode_atts(
 		'count'			=>	'7',
 		'columns'		=>	'4',
 		'set_name'		=>	'scode-mset1',
-		'posttemplate'	=>	'prime2g_get_archive_loop_post_object',
+		'posttemplate'	=>	'prime2g_get_archive_loop_post_object'
 	), $atts
 );
 extract( $atts );
@@ -35,7 +33,6 @@ if ( $taxonomy ) {
 		),
 	);
 }
-
 
 $args	=	[
 	'post_type'			=>	$post_type,
@@ -72,7 +69,7 @@ $postArgs	=	[
 	'post'	=>	$post,
 	'size'	=>	'medium',
 	'metas'	=>	false,
-	'excerpt'	=>	false,
+	'excerpt'	=>	false
 ];
 
 

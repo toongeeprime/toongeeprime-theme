@@ -1,8 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	Social Media Settings and Controls
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -10,7 +8,7 @@
 function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 
 	/**
-	 *	Selective refresh added @since ToongeePrime Theme 1.0.50
+	 *	Selective refresh added @since 1.0.50
 	 */
 	$wp_customize->selective_refresh->add_partial(
 		'prime2g_facebook_url', array(
@@ -26,7 +24,7 @@ function prime2g_customizer_socialmedia_and_contacts( $wp_customize ) {
 	);
 
 	/**
-	 *	Show? @since ToongeePrime Theme 1.0.55
+	 *	Show? @since 1.0.55
 	 */
 	$wp_customize->add_setting(
 		'prime2g_show_socials_and_contacts', array( 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field', 'default' => 1 )

@@ -10,7 +10,7 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see     https://docs.woocommerce.com/document/template-structure/
+ * @see     https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
  * @version 3.6.0
  */
@@ -41,7 +41,8 @@ if ( empty( $product ) || ! $product->is_visible() ) { return; }
 
 
 <div class="product_text">
-<?php	# Added wrapping div
+<?php	# ***Added wrapping div***
+
 	/**
 	 * Hook: woocommerce_shop_loop_item_title.
 	 *

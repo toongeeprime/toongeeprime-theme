@@ -2,7 +2,6 @@
 /**
  *	THEME DOING AJAX
  *	@package WordPress
- *	Essential formData fields: prime_ajaxnonce, prime_do_ajax: to select what to run
  *	@since ToongeePrime Theme 1.0.49.05
  */
 
@@ -15,7 +14,6 @@ if ( 'POST' !== $_SERVER[ 'REQUEST_METHOD' ] || empty( $_POST[ 'action' ] ) ) re
 prime2g_verify_nonce( 'prime_nonce_action' );
 
 $doAjax	=	$_POST[ 'prime_do_ajax' ];
-
 
 
 wp_send_json( $response );
@@ -45,8 +43,14 @@ if ( $doAjax === 'get_logo' ) {
 }
 
 
-if ( $doAjax === 'ajax_search' ) {
 
+if ( $doAjax === 'subscribe_pwa_notifications' ) {
+	$response	=	"GOTCHA! Again...";
+}
+
+
+
+if ( $doAjax === 'ajax_search' ) {
 $cache_name	=	str_replace( ' ', '-', $_POST[ 'find' ] );
 
 if ( $searchCache = wp_cache_get( $cache_name, PRIME2G_POSTSCACHE ) ) {

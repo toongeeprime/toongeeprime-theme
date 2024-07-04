@@ -8,7 +8,7 @@
 class Prime2g_PWA_Images {
 
 	private static $instance;
-	public $same_version;	# @since 1.0.97
+	private $same_version;	# @since 1.0.97
 
 	public function __construct() {
 		if ( ! isset( self::$instance ) ) {

@@ -10,7 +10,7 @@ class Prime2g_PWA_Prompt {
 	 */
 	private static $instance;
 
-	public static function instance() {
+	static function instance() {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance	=	new self();
 		}
@@ -23,7 +23,7 @@ class Prime2g_PWA_Prompt {
 	}
 
 
-	public function button() {
+	function button() {
 		$urls	=	wp_cache_get( 'pwa_urls', PRIME2G_APPCACHE );
 		$src	=	$urls[ 'appicon' ];
 		$siteName	=	str_replace( [ ' ', '\'', '.' ], '', PRIME2G_PWA_SITENAME );

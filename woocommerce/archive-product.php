@@ -40,14 +40,14 @@ do_action( 'woocommerce_shop_loop_header' );
 
 
 
-//	Added:
-if ( is_shop() && ! empty( get_theme_mod( 'prime2g_woo_shop_override_template_page_id' ) ) ) {
+#	Added:
+if ( defined( 'PRIME2G_SHOPPAGEOVERRIDER' ) ) {
 
 $retain_hooks	=	get_theme_mod( 'prime2g_retain_woo_archive_action_hooks', '1' );
 
 if ( $retain_hooks ) do_action( 'woocommerce_before_shop_loop' );
 
-prime2g_woo_shop_template_page_override();
+echo PRIME2G_SHOPPAGEOVERRIDER;
 
 if ( $retain_hooks ) do_action( 'woocommerce_after_shop_loop' );
 
@@ -104,7 +104,7 @@ else {
 
 
 
-} // Added
+} #	Added
 
 
 

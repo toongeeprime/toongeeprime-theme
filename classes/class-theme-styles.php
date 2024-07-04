@@ -1,9 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	CLASS: BUILD THEME STYLES
- *	Sets up theme styles
- *
  *	@package WordPress
  *	@since ToongeePrime Theme 1.0
  */
@@ -13,7 +10,7 @@ class ToongeePrime_Styles {
 
 	/**
 	 *	Properties
-	 *	Public for defaults' usage in customizer and other theme files
+	 *	Public for defaults' usage
 	 */
 	public	$siteWidth	=	'1100px',
 			$headFont	=	'Oxygen',
@@ -38,8 +35,8 @@ class ToongeePrime_Styles {
 	$sidebarbg	=	defined( 'CHILD_SIDEBARBG' ) ? CHILD_SIDEBARBG : '#ffffff';	#	@since 1.0.93
 
 	return (object) [
-		'brandcolor'	=>	$brandcolor,
-		'brandcolor2'	=>	$brandcolor2,
+		'brandcolor'=>	$brandcolor,
+		'brandcolor2'=>	$brandcolor2,
 		'bgcolor'	=>	$bgcolor,
 		'headerbg'	=>	$headerbg,
 		'contentbg'	=>	$contentbg,

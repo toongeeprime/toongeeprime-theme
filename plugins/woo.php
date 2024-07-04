@@ -1,14 +1,10 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	WOOCOMMERCE WORKINGS
- *
  *	@package WordPress
  *	@package WooCommerce
  *	@since ToongeePrime Theme 1.0
- */
-
-/**
+ *
  *	Active if WooCommerce is
  */
 if ( class_exists( 'WooCommerce' ) ) :
@@ -21,7 +17,6 @@ if ( class_exists( 'WooCommerce' ) ) :
 remove_action( 'woocommerce_before_main_content' , 'woocommerce_breadcrumb' , 20, 0 );
 
 if ( ! function_exists( 'prime2g_woo_breadrumb_home_url' ) ) {
-
 add_filter( 'woocommerce_breadcrumb_home_url', 'prime2g_woo_breadrumb_home_url' );
 function prime2g_woo_breadrumb_home_url() {
 	return esc_url( wc_get_page_permalink( 'shop' ) );
@@ -30,7 +25,6 @@ function prime2g_woo_breadrumb_home_url() {
 
 
 if ( ! function_exists( 'prime2g_woo_breadcrumb_defaults' ) ) {
-
 add_filter( 'woocommerce_breadcrumb_defaults', 'prime2g_woo_breadcrumb_defaults' );
 function prime2g_woo_breadcrumb_defaults() {
 return array(
@@ -105,25 +99,11 @@ return $classes;
 
 
 /**
- *	Add classes to body
- */
-add_filter( 'wp_title', 'prime2g_woo_wp_title' );
-function prime2g_woo_wp_title( $title ) {
-	if ( is_shop() ) {
-		return get_theme_mod( 'prime2g_shop_page_title', 'Shop Homepage' ) . ' | ';
-	}
-	else {
-		return $title;
-	}
-}
-
-
-/**
  *	Changing WooCommerce Texts
  */
 function prime2g_do_woo_texts( $get ) {
 if ( $get === 'shop_title' ) {
-	$text	=	get_theme_mod( 'prime2g_shop_page_title' ); // mod fallback doesn't work here
+	$text	=	get_theme_mod( 'prime2g_shop_page_title' );	//	mod fallback doesn't work here
 	if ( empty( $text ) )
 		$text	=	'Shop Homepage';
 }
@@ -153,7 +133,6 @@ switch ( $translated_text ) {
 return $translated_text;
 }
 }
-
 
 
 endif;

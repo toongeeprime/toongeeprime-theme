@@ -49,6 +49,7 @@ define( 'PRIME2G_PWA_VIRTUAL_URL', PRIME2G_PWA_HOMEURL . PRIME2G_PWA_SLUG . '/' 
 
 define( 'PRIME2G_APPCACHE', 'prime2g_pwa_app_cache' );
 defined( 'PWA_SHARER_BTN_ID' ) || define( 'PWA_SHARER_BTN_ID', 'sharerBTN' );
+defined( 'PWA_PUSHPERMIT_BTN_ID' ) || define( 'PWA_PUSHPERMIT_BTN_ID', 'getAppPushPermit' );	# @since 1.0.98
 
 #	Cache Strategies
 define( 'PWA_CACHEFIRST', 'CacheFirst' );

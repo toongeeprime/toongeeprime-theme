@@ -1,5 +1,4 @@
 <?php defined( 'ABSPATH' ) || exit;
-
 /**
  *	SHUTTING DOWN THE WEBSITE
  *	@package WordPress
@@ -12,9 +11,10 @@ function prime2g_close_down_website() {
 /* NOTE: WordPress still loads frontpage object */
 $shutDown	=	get_theme_mod( 'prime2g_website_shutdown' );
 $administrator	=	current_user_can( 'edit_theme_options' );
-$byPassKey	=	get_theme_mod( 'prime2g_shutdown_url_bypass_key' );	// @since 1.0.96
+$bypassKey	=	get_theme_mod( 'prime2g_shutdown_url_bypass_key' );	#	@since 1.0.96
 $is_shutdown=	! empty( $shutDown );
-$bypassing	=	$is_shutdown && isset( $_GET[ $byPassKey ] );
+$bypassing	=	$is_shutdown && isset( $_GET[ $bypassKey ] );
+$shoppinng	=	function_exists( 'is_woocommerce' );
 
 if ( $bypassing ) {
 echo '<div id="byPassingNote" class="p-fix" style="color:#fff;background:red;z-index:99999;left:0;right:0;">
@@ -22,7 +22,7 @@ echo '<div id="byPassingNote" class="p-fix" style="color:#fff;background:red;z-i
 </div>';
 }
 
-//	Return conditions
+#	Return conditions
 if ( ! $is_shutdown || $bypassing || is_admin() || $administrator ||
 	in_array( $GLOBALS[ 'pagenow' ], [ 'wp-login.php', 'wp-register.php' ] )
 ) return;
@@ -38,11 +38,20 @@ nocache_headers();
  */
 if ( 'use_page' === get_theme_mod( 'prime2g_shutdown_display' ) ) {
 
-if ( is_singular() && ! is_front_page() || is_archive() && ! is_home() ) { wp_safe_redirect( home_url() ); exit; }
+if ( $shoppinng )
+	$return_home	=	is_singular() && ! is_front_page() || ! is_shop() && is_archive() && ! is_home();
+else
+	$return_home	=	is_singular() && ! is_front_page() || is_archive() && ! is_home();
+
+if ( $return_home ) {
+	wp_safe_redirect( home_url() );
+exit;
+}
 
 $page_id	=	get_theme_mod( 'prime2g_shutdown_page_id' );
 
-if ( empty( $page_id ) || is_front_page() && is_home() ) {
+if ( empty( $page_id ) || $front_home = is_front_page() && is_home() ) {
+	echo $front_home ? 'Posts home is front page!' : 'No page selected for display!';
 	prime2g_close_down_template( $shutDown );	//	use raw template *no header & footer
 	exit;
 }
@@ -121,7 +130,6 @@ background-size:cover;background-position:center;background-image:url('. $backgr
 	echo '<script id="comingSoonJS">'. $add_js .'</script>';
 
 	echo '</body></html>';
-
 exit;
 }
 
@@ -148,5 +156,4 @@ $msg	=	'maintenance' === $shutDown ? '... and will be back soon' : 'Thank you fo
 	echo '</main>';
 }
 }
-
 

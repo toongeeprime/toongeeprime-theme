@@ -1,7 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 /**
  *	WOOCOMMERCE JS SCRIPTS
- *
  *	@package WordPress
  *	@package WooCommerce
  *	@since ToongeePrime Theme 1.0
