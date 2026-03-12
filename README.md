@@ -1,6 +1,6 @@
 # Toongeeprime Theme
 
-A WordPress theme with options for customization in the WordPress Customizer
+A classic PHP based WordPress theme with options for customization in the WordPress Customizer
 
 ### Customization options include:
 
